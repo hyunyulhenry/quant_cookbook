@@ -1,0 +1,35 @@
+<html>
+<body>
+
+<h2>Major Stock Indices and US ETF</h2>
+
+<table>
+  <tr>
+    <th>Country</th>
+    <th>Index</th>
+    <th>ETF</th>
+  </tr>
+  <tr>
+    <td>US</td>
+    <td>S&P 500</td>
+    <td>IVV</td>
+  </tr>
+  <tr>
+    <td>Europe</td>
+    <td>Euro Stoxx 50</td>
+    <td>IEV</td>
+  </tr>
+  <tr>
+    <td>Japan</td>
+    <td>Nikkei 225</td>
+    <td>EWJ</td>
+  </tr>
+  <tr>
+    <td>Korea</td>
+    <td>KOSPI 200</td>
+    <td>EWY</td>
+  </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+# 금융 데이터 수집하기 (기본)
+
+API와 크롤링을 이용한다면 비용을 지불하지 않고 얼마든지 금융 데이터를 수집할 수 있습니다. 본 장에서는 금융 데이터를 받기 위해 필요한 주식티커를 구하는 법, 그리고 섹터별 구성종목을 크롤링하는 법에 대해 알아보도록 하겠습니다. 
+
+## 한국거래소의 산업별 현황 및 개별지표 크롤링
+
+앞 장의 예제를 통해 [네이버 금융에서 주식티커 크롤링]을 하는 방법에 대해 살펴보았습니다. 그러나 해당 방법은 지나치게 복잡하기도 하며 시간이 오래 걸리기도 합니다. 반면 한국거래소에서 제공하는 산업별 현황과 개별종목 지표 데이터를 이용할 경우 훨씬 간단하게 해당 데이터를 수집할 수 있습니다.
+
+- 산업별 현황: http://marketdata.krx.co.kr/mdi#document=03030103
+- 개별지표: http://marketdata.krx.co.kr/mdi#document=13020401
+
+물론 해당 데이터들을 크롤링이 아닌  Excel 버튼을 눌러 엑셀로 받을수도 있습니다. 그러나 매번 엑셀을 다운받고 이를 R로 불러오는 작업은 상당히 비효율적이며, 크롤링을 이용한다면 해당 데이터를 효율적으로 불러올 수 있습니다.
+
+### 산업별 현황 크롤링
+
+먼저 산업별 현황에 해당하는 페이지에 접속한 후, 개발자도구 화면을 연 상태에서 Excel 버튼을 눌러줍니다. Network 탭에는 **GenerateOTP.jspx**와 **download.jspx** 총 두가지 항목이 존재합니다. 거래소에서 엑셀 데이터를 받는 과정은 다음과 같습니다.
+
+1. **GenerateOTP.jspx**: **http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx**에 원하는 항목을 쿼리로 발송하면 해당 쿼리에 해당하는 OTP를 받게 됩니다.
+
+2. **download.jspx**: 부여받은 OTP를 **http://file.krx.co.kr/download.jspx**에 제출하면 이에 해당하는 데이터를 다운로드 받게 됩니다.
+
+먼저 1번 단계를 살펴보도록 하겠습니다.
+
+```{r fig.cap='OTP 생성 부분', fig.align='center', out.width = '100%', echo = FALSE}
+knitr::include_graphics('images/crawl_practice_krx_sector.png')
+```
+
+General 항목의 Request URL의 앞부분이 원하는 항목을 제출할 주소이며, Query String Parameters에는 우리가 원하는 항목들이 적혀있습니다. 이를 통해 POST 방식으로 데이터를 요청함을 알 수 있습니다.
+
+다음으로 2번 단계를 살펴보도록 하겠습니다.
+
+```{r fig.cap='OTP 제출 부분', fig.align='center', out.width = '100%', echo = FALSE}
+knitr::include_graphics('images/crawl_practice_krx_sector2.png')
+```
+
+General 항목의 Request URL은 OTP를 제출할 주소이며, Form Data의 OTP는 1번 단계에서 부여받은 OTP에 해당합니다. 이 역시 POST 방식으로 데이터를 요청합니다. 
+
+이러한 과정을 코드로 나타내면 다음과 같습니다.
+
+```{r message = FALSE}
+library(httr)
+library(rvest)
+library(readr)
+
+gen_otp_url = 'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+gen_otp_data = list(name = 'fileDown',
+                    filetype = 'csv',
+                    url = 'MKD/03/0303/03030103/mkd03030103',
+                    tp_cd = 'ALL',
+                    date = '20190607',
+                    lang = 'ko',
+                    pagePath = '/contents/MKD/03/0303/03030103/MKD03030103.jsp')
+otp = POST(gen_otp_url, query = gen_otp_data) %>%
+  read_html() %>%
+  html_text()
+```
+
+1. gen_otp_url에 원하는 항목을 제출할 url을 입력합니다.
+2. 개발자도구 화면에 나타는 쿼리 내용들을 리스트 형태로 입력합니다. 단, filetype은 기존 xls이 아닌 csv로 변경하여 주며, 이는 csv 형태로 다운로드 받을 경우 데이터를 처리하기 훨씬 쉽기 때문입니다.
+3. `POST()` 함수를 통해 해당 url에 쿼리를 전송하면 이에 해당하는 데이터를 받게 됩니다.
+4. `read_html()`함수를 통해 html 내용을 읽어옵니다.
+5. `html_text()` 함수는 html 내에서 텍스트에 해당하는 부분만을 추출하며, 이를 통해 otp 값만을 추출하게 됩니다. 
+
+위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.
+
+```{r}
+print(otp)
+```
+
+이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.
+
+```{r}
+down_url = 'http://file.krx.co.kr/download.jspx'
+down_sector = POST(down_url, query = list(code = otp),
+            add_headers(referer = gen_otp_url)) %>%
+  read_html() %>%
+  html_text() %>%
+  read_csv()
+```
+
+1. OTP를 제출할 url을 down_url에 입력합니다.
+2. `POST()` 함수를 통해 해당 url에 위에서 부여받은 OTP 코드를 제출합니다. 
+3. `add_headers()` 구문을 통해 referer를 추가해 주어야 합니다. 리퍼러란 링크를 통해서 각각의 사이트로 방문시 남는 흔적입니다. 데이터를 다운로드 받는 과정을 살펴보면 첫번째 url에서 OTP를 부여 받고, 이를 다시 두번째 url에 제출하였습니다. 그런데 이러한 과정의 흔적이 없이 OTP를 바로 두번째 url에 제출하면 서버는 이를 로봇으로 인식하여 데이터를 반환하지 않습니다. 따라서 add_headers()를 통해 우리가 거쳐온 과정을 흔적으로 남겨야 사람이 데이터를 다운로드 받는 과정과 동일하게 인식하여 데이터를 반환하게 되며, 첫번째 url을 리퍼러로 지정해 줍니다.
+4. `read_html()`과 `html_text()` 함수를 통해 텍스트 데이터만 추출합니다.
+5. `read_csv` 함수는 csv 형태의 데이터를 불러옵니다. 위의 요청 쿼리에서 filetype을 csv로 지정했기에, 손쉽게 데이터를 읽어올 수 있습니다.
+
+```{r}
+print(down_sector)
+```
+
+위 과정을 통해 down_sector 변수에는 산업별 현황 데이터가 저장되었습니다. 이를 csv 파일로 다운로드 받도록 하겠습니다.
+
+```{r}
+ifelse(dir.exists('data'), FALSE, dir.create('data'))
+write.csv(down_sector, 'data/KOR_sector.csv')
+```
+
+먼저 `ifelse()` 함수를 통해 data라는 이름의 폴더가 존재할 시에는 FALSE를 반환, 존재하지 않을 시 해당 이름으로 폴더를 생성하여 줍니다. 그 후, 위에서 다운로드 받은 데이터를 'KOR_sector.csv' 이름으로 저장하여 줍니다. 해당 폴더를 확인해보면, 데이터가 csv 형태로 저장되어 있음이 확인할 수 있습니다.
+
+### 개별종목 지표 크롤링
+
+개별종목 데이터를 크롤링 하는 방법은 위와 거의 동일하며, 요청하는 쿼리 값에만 차이가 있습니다. 위와 동일하게  개발자도구 화면을 연 상태에서 csv 버튼을 눌러주어 어떠한 쿼리를 요청하는지 확인하도록 합니다.
+
+```{r fig.cap='개별지표 OTP 생성 부분', fig.align='center', out.width = '100%', echo = FALSE}
+knitr::include_graphics('images/crawl_practice_krx_ind.png')
+```
+
+이 중 isu_cdnm, isu_cd, isu_nm, isu_srt_cd, fromdate 항목은 종목구분의 개별탭에 해당하는 부분이므로 우리가 원하는 전체 데이터를 받을때에는 필요하지 않은 요청값입니다. 이를 제외한 요청값을 산업별 현황 예제에 적용하면 해당 데이터 역시 손쉽게 다운로드 받을 수 있습니다.
+
+```{r message = FALSE}
+library(httr)
+library(rvest)
+library(readr)
+
+gen_otp_url = 'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+gen_otp_data = list(name = 'fileDown',
+                    filetype = 'csv',
+                    url = "MKD/13/1302/13020401/mkd13020401",
+                    market_gubun = 'ALL',
+                    gubun = '1',
+                    schdate = '20190607',
+                    pagePath = "/contents/MKD/13/1302/13020401/MKD13020401.jsp")
+
+otp = POST(gen_otp_url, query = gen_otp_data) %>%
+  read_html() %>%
+  html_text()
+
+down_url = 'http://file.krx.co.kr/download.jspx'
+down_ind = POST(down_url, query = list(code = otp),
+            add_headers(referer = gen_otp_url)) %>%
+  read_html() %>%
+  html_text() %>%
+  read_csv()
+```
+
+```{r}
+print(down_ind)
+```
+
+위 과정을 통해 down_ind 변수에는 개별종목 지표 데이터가 저장되었습니다. 해당 데이터 역시 csv 파일로 다운로드 받도록 하겠습니다.
+
+```{r}
+write.csv(down_ind, 'data/KOR_ind.csv')
+```
+
+위 예제의 쿼리 항목 중 date와 schdate 부분만 원하는 일자로 입력할 경우(예: 20190104), 해당일의 데이터를 다운로드 받을 수 있습니다. 단, 휴장일을 입력할 경우 데이터를 받을 수 없습니다.
+
+### 데이터 정리하기
+
+위에서 다운받은 데이터는 중복된 열이 있으며, 불필요한 데이터 역시 존재합니다. 따라서 하나의 테이블로 합쳐준 후 정리를 할 필요가 있습니다. 먼저 다운로드 받은 csv 파일을 읽어오도록 합니다.
+
+```{r}
+down_sector = read.csv('data/KOR_sector.csv', row.names = 1, stringsAsFactors = FALSE)
+down_ind = read.csv('data/KOR_ind.csv',  row.names = 1, stringsAsFactors = FALSE)
+```
+
+`read.csv()` 함수를 이용하여 데이터를 읽어오며, `row.names = 1`를 통해 첫번째 열을 행이름으로, `stringsAsFactors = FALSE`를 통해 캐릭터 데이터가 팩터 형태로 변형되지 않게 합니다.
+
+```{r}
+intersect(names(down_sector), names(down_ind))
+```
+
+먼저 `intersect()` 함수를 통해 두 데이터간 중복되는 열이름을 상펴보면, 종목코드와 종목명이 동일하게 위치합니다.
+
+```{r}
+setdiff(down_sector[, '종목명'], down_ind[ ,'종목명'])
+```
+
+`setdiff()` 함수를 통해 두 데이터에 공통적으로 존재하지 않는 종목명, 즉 하나의 데이터에만 존재하는 종목을 살펴보면 위와 같습니다. 해당 종목들은 **선박펀드, 광물펀드, 해외종목** 등 일반적이지 않은 종목들이므로, 제외해주는 것이 좋습니다. 따라서 둘간에 공통적으로 존재하는 종목을 기준으로 데이터를 합쳐주도록 하겠습니다.
+
+```{r}
+KOR_ticker = merge(down_sector, down_ind,
+                   by = intersect(names(down_sector), names(down_ind)),
+                   all = FALSE
+    )
+```
+
+```merge()``` 함수는 by를 기준으로 하여 두 데이터를 하나로 합치게 되며, 그 기준은 공통으로 존재하는 열이름으로 합니다. 또한 all 값을 TRUE로 설정할 경우는 합집합을, FALSE로 설정할 경우 교집합을 반환하며, 공통적으로 존재하는 항목을 원하므로 FALSE를 선택해 주도록 합니다.
+
+```{r}
+KOR_ticker = KOR_ticker[order(-KOR_ticker['시가총액.원.']), ]
+print(head(KOR_ticker))
+```
+
+데이터를 시가총액 순으로 내림차순 해줄 필요도 있습니다. `order()` 함수를 통해 상대적인 순서를 구할 수 있으며, R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꾸어 주도록 합니다. 결과적으로 시가총액 기준 내림차순으로 해당 데이터가 정렬됩니다.
+
+마지막으로 **스팩, 우선주** 종목 역시 제외해 주어야 합니다.
+
+```{r}
+KOR_ticker[grepl('스팩', KOR_ticker[, '종목명']), '종목명']  # 스팩
+KOR_ticker[KOR_ticker[, '종목명'] == '골든브릿지이안5호', '종목명'] # 골든브릿지이안5호
+KOR_ticker[substr(KOR_ticker[, '종목명'],
+                  nchar(KOR_ticker[,'종목명']), nchar(KOR_ticker[,'종목명'])) == '우', '종목명']
+KOR_ticker[substr(KOR_ticker[, '종목명'],
+                  nchar(KOR_ticker[,'종목명']) -1, nchar(KOR_ticker[,'종목명'])) == '우B', '종목명'] 
+KOR_ticker[substr(KOR_ticker[, '종목명'],
+                  nchar(KOR_ticker[,'종목명']) -1, nchar(KOR_ticker[,'종목명'])) == '우C', '종목명'] 
+```
+
+`grepl()` 함수를 통해 종목명에 '스팩'이 들어가는 종목, 스팩 종목인 '골든브릿지이안5호', `substr()` 함수를 통해 종목명 끝이 '우', '우B', '우C'인 우선주 종목을 찾을 수 있습니다. 데이터 내에서 해당 데이터들을 제거^[해당 과정에서 미래에셋대우, 연우 등 의도치 않은 종목 역시 제거됩니다. 그러나 이러한 종목수가 그리 많지 않으므로 투자에 있어 중요하지는 않습니다.]해 주도록 하겠습니다.
+
+```{r}
+KOR_ticker = KOR_ticker[!grepl('스팩', KOR_ticker[, '종목명']), ]  # 스팩
+KOR_ticker = KOR_ticker[KOR_ticker[, '종목명'] != '골든브릿지이안5호', ] # 골든브릿지이안5호
+KOR_ticker = KOR_ticker[substr(KOR_ticker[, '종목명'],
+                               nchar(KOR_ticker[,'종목명']), nchar(KOR_ticker[,'종목명'])) != '우', ]
+KOR_ticker = KOR_ticker[substr(KOR_ticker[, '종목명'],
+                               nchar(KOR_ticker[,'종목명']) -1, nchar(KOR_ticker[,'종목명'])) != '우B', ] 
+KOR_ticker = KOR_ticker[substr(KOR_ticker[, '종목명'],
+                               nchar(KOR_ticker[,'종목명']) -1, nchar(KOR_ticker[,'종목명'])) != '우C', ] 
+```
+
+마지막으로 행이름을 초기화 한 후, 정리된 데이터를 csv 파일로 저장해주도록 합니다.
+
+```{r}
+rownames(KOR_ticker) = NULL
+write.csv(KOR_ticker, 'data/KOR_ticker.csv')
+```
+## WICS 기준 섹터정보 크롤링
+
+일반적으로 주식의 섹터를 나누는 기준은 MSCI와 S&P가 개발한 GICS^[https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard]를 가장 많이 사용합니다. 국내 종목의 GICS 기준 정보 역시 한국거래소에서 제공하고 있으나, 이는 독점적 지적재산으로 명시했기에 사용하는데 무리가 있습니다.
+
+그러나 지수제공업체인 와이즈인덱스^[http://www.wiseindex.com/]에서는 GICS와 비슷한 WICS 산업분류를 발표하고  있으므로, 이를 크롤링하여 필요한 정보를 수집해보도록 하겠습니다.
+
+먼저, 웹페이지에 접속하여 **Index → WISE SECTOR INDEX → WICS → 에너지**를 클릭합니다. 그 후 Components 탭을 클릭하면, 해당 섹터의 구성종목을 확인할 수 있습니다.
+
+```{r fig.cap='WICS 기준 구성종목', fig.align='center', out.width = '100%', echo = FALSE}
+knitr::include_graphics('images/crawl_practice_wics.png')
+```
+
+개발자도구 화면을 통해 해당 페이지의 데이터전송 과정을 살펴보도록 하겠습니다.
+
+```{r fig.cap='WICS 페이지 개발자도구 화면', fig.align='center', out.width = '100%', echo = FALSE}
+knitr::include_graphics('images/crawl_practice_wics2.png')
+```
+
+일자를 선택하면 Network 탭의 **GetIndexComponets** 항목을 통해 데이터 전송과정이 나타나며, Request URL의 주소를 살펴보면 다음과 같습니다.
+
+```
+http://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt=20190607&sec_cd=G10
+```
+
+1. http://www.wiseindex.com/Index/GetIndexComponets: 데이터를 요청하는 url 입니다.
+2. ceil_yn = 0: 실링여부를 나타내며, 0일 경우 비실링을 의미합니다.
+3. dt=20190607: 조회일자를 나타냅니다.
+4. sec_cd=G10: 섹터 코드를 나타냅니다.
+
+이번엔 위 주소의 페이지를 열어보도록 하겠습니다.
+
+```{r fig.cap='WICS 데이터 페이지', fig.align='center', out.width = '100%', echo = FALSE}
+knitr::include_graphics('images/crawl_practice_wics3.png')
+```
+
+글자들을 살펴보면 페이지에 출력된 내용임을 알 수 있지만, 매우 특이한 형태로 구성되어 있습니다. 이러한 형식이 데이터를 json 형식이라 합니다. 기존에 우리가 살펴보았던 대부분의 웹페이지는 XML 형식으로 표현되었으며, 이는 문법이 복잡하고 엄격한 표현규칙으로 인해 데이터의 용량이 커진다는 단점이 있습니다. 반면 JSON 형식은 문법이 단순하여 데이터의 용량이 작아, 빠른 속도로 데이터를 교환할 수 있습니다. R에서는 `jsonlite` 패키지의 `fromJSON()` 함수를 사용하여 매우 손쉽게 해당 형태의 데이터를 크롤링할 수 있습니다.
+
+```{r message = FALSE}
+library(jsonlite)
+
+url = 'http://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt=20190607&sec_cd=G10'
+data = fromJSON(url)
+print(data)
+```
+
+\$list 항목에는 해당 섹터의 구성종목 정보가 있으며, \$sector 항목을 통해 다른 섹터들의 코드도 확인할 수 있습니다. for loop 구문을 이용해 url의 sec_cd=에 해당하는 부분만 변경해주면, 모든 섹터의 구성종목을 매우 쉽게 얻을 수 있습니다.
+
+````{r}
+sector_code = c('G25', 'G35', 'G50', 'G40', 'G10', 'G20', 'G55', 'G30', 'G15', 'G45')
+data_sector = list()
+
+for (i in sector_code) {
+  
+  url = paste0(
+    'http://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt=20190607&sec_cd=',i)
+  data = fromJSON(url)
+  data = data$list
+  
+  data_sector[[i]] = data
+  
+  Sys.sleep(1)
+}
+
+data_sector = do.call(rbind, data_sector)
+```
+
+해당 데이터 역시 csv 파일로 저장해주도록 합니다.
+
+```{r}
+write.csv(data_sector, 'data/KOR_sector.csv')
+```
+
+

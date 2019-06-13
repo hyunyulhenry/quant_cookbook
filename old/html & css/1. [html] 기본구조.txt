@@ -1,0 +1,10 @@
+<html>
+<head>
+<title>Page Title</title>
+</head>
+
+<body>
+<h2> This is page heading </h2>
+<p> THis is first paragraph text </p>
+</body>
+</html>

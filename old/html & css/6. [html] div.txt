@@ -1,0 +1,20 @@
+<html>
+<body>
+
+<div style="background-color:black;color:white;padding:10px;">
+  <h2>First Div</h2>
+  <p>Black backgrond, White Color</p>
+</div> 
+
+<div style="background-color:yellow;color:red;padding:10px;">
+  <h2>Second Div</h2>
+  <p>Yellow backgrond, Red Color</p>
+</div> 
+
+<div style="background-color:green;color:purple;padding:10px;">
+  <h2>Second Div</h2>
+  <p>Green backgrond, Purple Color</p>
+</div> 
+
+</body>
+</html>
