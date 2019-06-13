@@ -201,6 +201,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.2" data-path="section-22.html"><a href="section-22.html#section-32"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="section-33.html"><a href="section-33.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-33.html"><a href="section-33.html#section-34"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-33.html"><a href="section-33.html#section-35"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -306,12 +310,12 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 ## 2007-01-09  12.35000  13.28286 12.16429   13.22429   837324600
 ## 2007-01-10  13.53571  13.97143 13.35000   13.85714   738220000
 ##            AAPL.Adjusted
-## 2007-01-03      10.48732
-## 2007-01-04      10.72009
-## 2007-01-05      10.64375
-## 2007-01-08      10.69631
-## 2007-01-09      11.58486
-## 2007-01-10      12.13926</code></pre>
+## 2007-01-03      7.951960
+## 2007-01-04      8.128461
+## 2007-01-05      8.070577
+## 2007-01-08      8.110430
+## 2007-01-09      8.784165
+## 2007-01-10      9.204537</code></pre>
 <p>다운로드 결과로써 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한, Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다. <code>Ad()</code> 함수는 <code>getSymbols()</code> 함수를 통해 다운로드 받은 데이터에서 수정주가만을 선택하여 줍니다. 시계열 그래프를 그려주는 <code>chart_Series()</code>와 함께 수정주가를 그리면 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chart_Series</span>(<span class="kw">Ad</span>(AAPL))</code></pre>
 <p><img src="03-api_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
@@ -327,12 +331,12 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 ## 2000-01-07  3.446429  3.607143 3.410714   3.553571   115183600
 ## 2000-01-10  3.642857  3.651786 3.383929   3.491071   126266000
 ##            AAPL.Adjusted
-## 2000-01-03      3.502161
-## 2000-01-04      3.206892
-## 2000-01-05      3.253822
-## 2000-01-06      2.972241
-## 2000-01-07      3.113032
-## 2000-01-10      3.058280</code></pre>
+## 2000-01-03      2.655498
+## 2000-01-04      2.431611
+## 2000-01-05      2.467196
+## 2000-01-06      2.253689
+## 2000-01-07      2.360442
+## 2000-01-10      2.318927</code></pre>
 <p>한번에 여러 종목의 주가를 다운로드 받을 수도 있습니다. 아래 예제와 같이 페이스북과 엔비디아의 티커인 FB와 NVDA를 ticker 변수에 입력하여 주고, <code>getSymbols()</code> 함수에 티커들을 입력한 변수를 넣어주면 두 종목의 주가가 동시에 다운로드 됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;FB&#39;</span>, <span class="st">&#39;NVDA&#39;</span>) 
 <span class="kw">getSymbols</span>(ticker)</code></pre>

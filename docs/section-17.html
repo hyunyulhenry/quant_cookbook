@@ -201,6 +201,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.2" data-path="section-22.html"><a href="section-22.html#section-32"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="section-33.html"><a href="section-33.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-33.html"><a href="section-33.html#section-34"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-33.html"><a href="section-33.html#section-35"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -280,7 +284,7 @@ otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span cl
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(otp)</code></pre>
-<pre><code>## [1] &quot;vDfqRc92OziMrxW4rOHJF/jg6G4fAfzQH4aDmO4HaEcu9e64NR9xm9ovqUFaeUjdm0U7b09IfoBuK4cLi8euBrtg25J9CvDeoh31X6LfKEIOjDllO1fJv1xaLH1NLzBKmo0YfmgMTbduCpHgoRt01UhlMaI9Y5TpqhFvF4Bw/5Z9cO/LxdGrolkPzomLjYMFpgr7uWt4HYcJcgEyiZlC1pEITHVy+AKDqOr3AsGNIjE7yLSs2cs+CgQTzgGyV/9FeNI3uyPu+rqglBrwbIKJgnM0vEx7J231XTsZVuZhFKQ=&quot;</code></pre>
+<pre><code>## [1] &quot;vDfqRc92OziMrxW4rOHJF/ESYC/TDZoj6d0Vg+c5ilkh1GMQN1k9D25XvYBQSwhIOsuiE0ew8pNhWnmku8DpOtiNmXIpso75g4vDUs372LCxSMG6cNImpk8TSE94DPgSk0y0oGVeNVTYiElqlCo8kj6hX+paILvW8fO6BRB+TonPXrmRfymE9VXKhSw4CDjHAznyQYaln6r2ySoQ/BbV3TVUqhmp2JI1uAF08/OmmGPibtwgIMlgnqg+R7erIyhJ78zBrLetbXXfoU6STkYVc9qyLzVHUVqH2/c5IwVxF04=&quot;</code></pre>
 <p>이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span>
 down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),
@@ -356,13 +360,13 @@ down_ind =<span class="st"> </span><span class="kw">POST</span>(down_url, <span 
 ##  1 2019-06-07 060300   레드로버~ -         1190 -     -     2,128 0.56 
 ##  2 2019-06-07 290650   엘앤씨바이~ -        22750 830   27.41 7,252 3.14 
 ##  3 2019-06-07 239340   미래에셋제~ -         5200 -     -     -     -    
-##  4 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
-##  5 2019-06-07 032500   케이엠더블~ -        41200 -     -     2,292 17.98
-##  6 2019-06-07 068240   다원시스~ -        14100 329   42.86 7,490 1.88 
-##  7 2019-06-07 192390   윈하이텍~ -         4590 669   6.86  5,803 0.79 
-##  8 2019-06-07 086060   진바이오텍~ -         6940 312   22.24 5,570 1.25 
-##  9 2019-06-07 263540   샘코   -        21000 -     -     4,982 4.22 
-## 10 2019-06-07 053950   경남제약~ 관리종목 17200 327   52.6  2,351 7.32 
+##  4 2019-06-07 086060   진바이오텍~ -         6940 312   22.24 5,570 1.25 
+##  5 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
+##  6 2019-06-07 038680   에스넷 -         9600 300   32    4,302 2.23 
+##  7 2019-06-07 214680   디알텍 -         2005 29    69.14 709   2.83 
+##  8 2019-06-07 242040   나무기술~ -         3345 -     -     462   7.24 
+##  9 2019-06-07 121890   에스디시스~ -         4980 -     -     1,912 2.6  
+## 10 2019-06-07 088800   에이스테크~ -        11500 97    118.~ 2,291 5.02 
 ## # ... with 2,194 more rows, and 4 more variables: 주당배당금 &lt;dbl&gt;,
 ## #   배당수익률 &lt;dbl&gt;, `게시물 일련번호` &lt;dbl&gt;, 총카운트 &lt;dbl&gt;</code></pre>
 <p>위 과정을 통해 down_ind 변수에는 개별종목 지표 데이터가 저장되었습니다. 해당 데이터 역시 csv 파일로 다운로드 받도록 하겠습니다.</p>

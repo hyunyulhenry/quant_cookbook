@@ -72,7 +72,7 @@ print(otp)
 ```
 
 ```
-## [1] "vDfqRc92OziMrxW4rOHJF/jg6G4fAfzQH4aDmO4HaEcu9e64NR9xm9ovqUFaeUjdm0U7b09IfoBuK4cLi8euBrtg25J9CvDeoh31X6LfKEIOjDllO1fJv1xaLH1NLzBKmo0YfmgMTbduCpHgoRt01UhlMaI9Y5TpqhFvF4Bw/5Z9cO/LxdGrolkPzomLjYMFpgr7uWt4HYcJcgEyiZlC1pEITHVy+AKDqOr3AsGNIjE7yLSs2cs+CgQTzgGyV/9FeNI3uyPu+rqglBrwbIKJgnM0vEx7J231XTsZVuZhFKQ="
+## [1] "vDfqRc92OziMrxW4rOHJF/ESYC/TDZoj6d0Vg+c5ilkh1GMQN1k9D25XvYBQSwhIOsuiE0ew8pNhWnmku8DpOtiNmXIpso75g4vDUs372LCxSMG6cNImpk8TSE94DPgSk0y0oGVeNVTYiElqlCo8kj6hX+paILvW8fO6BRB+TonPXrmRfymE9VXKhSw4CDjHAznyQYaln6r2ySoQ/BbV3TVUqhmp2JI1uAF08/OmmGPibtwgIMlgnqg+R7erIyhJ78zBrLetbXXfoU6STkYVc9qyLzVHUVqH2/c5IwVxF04="
 ```
 
 이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.
@@ -182,13 +182,13 @@ print(down_ind)
 ##  1 2019-06-07 060300   레드로버~ -         1190 -     -     2,128 0.56 
 ##  2 2019-06-07 290650   엘앤씨바이~ -        22750 830   27.41 7,252 3.14 
 ##  3 2019-06-07 239340   미래에셋제~ -         5200 -     -     -     -    
-##  4 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
-##  5 2019-06-07 032500   케이엠더블~ -        41200 -     -     2,292 17.98
-##  6 2019-06-07 068240   다원시스~ -        14100 329   42.86 7,490 1.88 
-##  7 2019-06-07 192390   윈하이텍~ -         4590 669   6.86  5,803 0.79 
-##  8 2019-06-07 086060   진바이오텍~ -         6940 312   22.24 5,570 1.25 
-##  9 2019-06-07 263540   샘코   -        21000 -     -     4,982 4.22 
-## 10 2019-06-07 053950   경남제약~ 관리종목 17200 327   52.6  2,351 7.32 
+##  4 2019-06-07 086060   진바이오텍~ -         6940 312   22.24 5,570 1.25 
+##  5 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
+##  6 2019-06-07 038680   에스넷 -         9600 300   32    4,302 2.23 
+##  7 2019-06-07 214680   디알텍 -         2005 29    69.14 709   2.83 
+##  8 2019-06-07 242040   나무기술~ -         3345 -     -     462   7.24 
+##  9 2019-06-07 121890   에스디시스~ -         4980 -     -     1,912 2.6  
+## 10 2019-06-07 088800   에이스테크~ -        11500 97    118.~ 2,291 5.02 
 ## # ... with 2,194 more rows, and 4 more variables: 주당배당금 <dbl>,
 ## #   배당수익률 <dbl>, `게시물 일련번호` <dbl>, 총카운트 <dbl>
 ```

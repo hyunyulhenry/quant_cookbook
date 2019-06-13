@@ -201,6 +201,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.2" data-path="section-22.html"><a href="section-22.html#section-32"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="section-33.html"><a href="section-33.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-33.html"><a href="section-33.html#section-34"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-33.html"><a href="section-33.html#section-35"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -306,10 +310,10 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 
 <span class="kw">print</span>(data)</code></pre>
 <pre><code>## Response [https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258]
-##   Date: 2019-06-13 09:43
+##   Date: 2019-06-13 13:28
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
-##   Size: 58.5 kB
+##   Size: 55.5 kB
 ## 
 ## 
 ## 
@@ -338,26 +342,26 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 </ol>
 <p>해당 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장되게 됩니다. 이처럼 개발자도구 화면을 통해 내가 추출하고자 하는 데이터가 html 중 어디에 위치하고 있는지 먼저 확인을 하면, 어렵지 않게 원하는 데이터를 읽어올 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(data_title)</code></pre>
-<pre><code>##  [1] &quot;13일, 코스닥 기관 순매도상위에 연구·개발 업종 3종목&quot;                             
-##  [2] &quot;13일, 거래소 외국인 순매도상위에 금융업 업종 5종목&quot;                               
-##  [3] &quot;13일, 외국인 코스닥에서 상상인(-0.23%), 셀트리온헬스케어(-0.34%) 등 순매수&quot;       
-##  [4] &quot;13일, 코스닥 기관 순매수상위에 소프트웨어 업종 4종목&quot;                             
-##  [5] &quot;13일, 코스닥 외국인 순매도상위에 제약 업종 4종목&quot;                                 
-##  [6] &quot;13일, 거래소 기관 순매도상위에 전기,전자 업종 6종목&quot;                              
-##  [7] &quot;13일, 외국인 거래소에서 현대차(0.00%), LG화학(+3.56%) 등 순매수&quot;                  
-##  [8] &quot;13일, 기관 거래소에서 휠라코리아(+0.12%), KODEX 200선물인버스2X(+1.46%) 등 순매수&quot;
-##  [9] &quot;에스티큐브, 최대주주 변경 수반 담보계약 체결&quot;                                     
-## [10] &quot;코오롱티슈진, 93억원 손해배상 소송 피소&quot;                                          
-## [11] &quot;코오롱티슈진, 강경석 외 293명에게 손해배상청구 피소&quot;                              
-## [12] &quot;빅4가 `1%p` 초격차 혈전, 초대형IB PBS `춘추전국`&quot;                                 
-## [13] &quot;초정밀 부품제조사 ‘KJ프리텍’ 매물로&quot;                                            
-## [14] &quot;KB증권, 국내 첫 해외 ELS 발행시장 진출&quot;                                           
-## [15] &quot;[표]투자주체별 매매동향(6월 13일-최종치)&quot;                                         
-## [16] &quot;[표]코스닥 기관·외국인·개인 순매수·도 상위종목(6월 13일-최종치)&quot;               
-## [17] &quot;[표]유가증권 기관·외국인·개인 순매수·도 상위종목(6월 13일-최종치)&quot;             
-## [18] &quot;큰 충격 없었던 ‘네마녀의 날’… 변동성은 컸다&quot;                                   
-## [19] &quot;기관 떠난 새내기株 ‘요동’&quot;                                                      
-## [20] &quot;\&quot;안전 제일\&quot; 고배당주 식지않는 인기&quot;</code></pre>
+<pre><code>##  [1] &quot;성동조선해양 3차 매각도 물거품&quot;                            
+##  [2] &quot;&#39;테러 드론&#39; 잡는 &#39;5G 가드 드론&#39;&quot;                           
+##  [3] &quot;&#39;비혼&#39; 인구 는다…\&quot;결혼하지 않는 것도 선택\&quot;&quot;             
+##  [4] &quot;\&quot;대기업 제휴돼 있다\&quot;…맘카페 통해 번지는 &#39;가전제품 사기&#39;&quot;
+##  [5] &quot;투자? 상거래?…정부는 &#39;떠넘기기&#39;&quot;                          
+##  [6] &quot;10만 원 투자하면 고급 이어폰 준다더니…&quot;                   
+##  [7] &quot;13일 장 마감 후 주요 종목 뉴스&quot;                            
+##  [8] &quot;거래소 &quot;                                                   
+##  [9] &quot;[유가증권시장 공시] KCC / 동부건설&quot;                        
+## [10] &quot;[표]아시아 주요 증시 동향(6월 13일)&quot;                       
+## [11] &quot;코오롱티슈진, 93억원 손해배상소송 피소&quot;                    
+## [12] &quot;에이치엘비, 1879억원 규모 3자배정 유상증자 결정&quot;           
+## [13] &quot;오늘의 재운[6월 14일]&quot;                                     
+## [14] &quot;재계 의결권 자문 기구 &#39;지배구조위원회&#39; 20일 출범&quot;          
+## [15] &quot;EMW, 상장폐지 개선계획 이행내역서 제출&quot;                    
+## [16] &quot;UCI, 전환사채 80억원치 발행&quot;                               
+## [17] &quot;코디, 내년 4월13일까지 상장폐지 개선기간&quot;                  
+## [18] &quot;장 마감 후 기업공시[6월 13일]&quot;                             
+## [19] &quot;코다코, 車부품업체 지코 지분 45만주 처분&quot;                  
+## [20] &quot;데일리블록체인, 4억원 규모 3자배정 유상증자&quot;</code></pre>
 </div>
 <div id="section-15" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -514,7 +518,7 @@ url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#
 <pre class="sourceCode r"><code class="sourceCode r">down_table =<span class="st"> </span><span class="kw">GET</span>(url)
 <span class="kw">print</span>(down_table)</code></pre>
 <pre><code>## Response [https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&amp;page=1]
-##   Date: 2019-06-13 09:43
+##   Date: 2019-06-13 13:28
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
 ##   Size: 95.1 kB
