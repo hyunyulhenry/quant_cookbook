@@ -72,7 +72,7 @@ print(otp)
 ```
 
 ```
-## [1] "vDfqRc92OziMrxW4rOHJF/ESYC/TDZoj6d0Vg+c5ilkh1GMQN1k9D25XvYBQSwhIOsuiE0ew8pNhWnmku8DpOtiNmXIpso75g4vDUs372LCxSMG6cNImpk8TSE94DPgSk0y0oGVeNVTYiElqlCo8kj6hX+paILvW8fO6BRB+TonPXrmRfymE9VXKhSw4CDjHAznyQYaln6r2ySoQ/BbV3TVUqhmp2JI1uAF08/OmmGPibtwgIMlgnqg+R7erIyhJ78zBrLetbXXfoU6STkYVc9qyLzVHUVqH2/c5IwVxF04="
+## [1] "vDfqRc92OziMrxW4rOHJFylq0qAqLXo/BxoHzurrjYinXxzg+lL/ksLTKfb01c4OAUZ2jdb94N4oBo81572UL+Wbx2HmxOIBq1eOPrwPQtcxrsJrp/dL4cjlp8NurBvPcRhrHIbsvxoMJKXO5EAcD/DaIkReKgPN9lqzNBjMdu8mPDkerMkc9GxNIhOCxkvuSNRY3InfvocIIBFHO/OBhqKamfg8GC2frlY1W5YyIikaTRvss60XJ9hIJyt0ITiS6vo9FDXg1/KMnIkh9TB/wYD6I7xjqkK4pxlg6VFx5Kk="
 ```
 
 이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.
@@ -182,8 +182,8 @@ print(down_ind)
 ##  1 2019-06-07 060300   레드로버~ -         1190 -     -     2,128 0.56 
 ##  2 2019-06-07 290650   엘앤씨바이~ -        22750 830   27.41 7,252 3.14 
 ##  3 2019-06-07 239340   미래에셋제~ -         5200 -     -     -     -    
-##  4 2019-06-07 086060   진바이오텍~ -         6940 312   22.24 5,570 1.25 
-##  5 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
+##  4 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
+##  5 2019-06-07 192390   윈하이텍~ -         4590 669   6.86  5,803 0.79 
 ##  6 2019-06-07 038680   에스넷 -         9600 300   32    4,302 2.23 
 ##  7 2019-06-07 214680   디알텍 -         2005 29    69.14 709   2.83 
 ##  8 2019-06-07 242040   나무기술~ -         3345 -     -     462   7.24 
@@ -283,7 +283,7 @@ print(head(KOR_ticker))
 ## 330        1416       3.20             1456       NA
 ## 45         1500       2.29             1408       NA
 ## 301        4000       2.86             1450       NA
-## 331        1417       3.91             2085       NA
+## 331        1417       3.91             2087       NA
 ## 1278          0       0.00             1595       NA
 ## 1082       6000       1.82             1536       NA
 ```
@@ -524,17 +524,17 @@ print(data)
 ## 23 100.00       1    G10     에너지  23     2     1556783
 ## 
 ## $sector
-##    SEC_CD     SEC_NM_KOR SEC_RATE IDX_RATE
-## 1     G25 경기관련소비재    16.05        0
-## 2     G35       건강관리     9.27        0
-## 3     G50 전기통신서비스     2.26        0
-## 4     G40           금융    10.31        0
-## 5     G10         에너지     2.37      100
-## 6     G20         산업재    12.68        0
-## 7     G55       유틸리티     1.70        0
-## 8     G30     필수소비재     3.75        0
-## 9     G15           소재     7.89        0
-## 10    G45             IT    33.73        0
+##    SEC_CD         SEC_NM_KOR SEC_RATE IDX_RATE
+## 1     G25     경기관련소비재    16.05        0
+## 2     G35           건강관리     9.27        0
+## 3     G50 커뮤니케이션서비스     2.26        0
+## 4     G40               금융    10.31        0
+## 5     G10             에너지     2.37      100
+## 6     G20             산업재    12.68        0
+## 7     G55           유틸리티     1.70        0
+## 8     G30         필수소비재     3.75        0
+## 9     G15               소재     7.89        0
+## 10    G45                 IT    33.73        0
 ## 
 ## $size
 ##   SEC_CD    SEC_NM_KOR SEC_RATE IDX_RATE

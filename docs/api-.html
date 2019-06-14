@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-13" />
+<meta name="date" content="2019-06-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -204,6 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="section-33.html"><a href="section-33.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
 <li class="chapter" data-level="7.1" data-path="section-33.html"><a href="section-33.html#section-34"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
 <li class="chapter" data-level="7.2" data-path="section-33.html"><a href="section-33.html#section-35"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="section-33.html"><a href="section-33.html#section-36"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -230,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>본 장과 다음 장에서는 본격적으로 데이터를 수집하는 방법에 대해 배우도록 하겠습니다. 그 중 해당 장에서는 API를 이용하여 데이터를 수집하는 방법에 대해 살펴보도록 합니다.</p>
 <p>API 제공자는 본인이 가진 데이터베이스를 다른 누군가가 쉽게 사용할 수 있는 형태로 가지고 있으며, 해당 데이터베이스에 접근할 수 있는 열쇠인 API 주소를 가진 사람은 이를 언제든지 사용할 수 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="images/api_api.png" alt="API 개념" width="294" />
+<img src="images/api_api.png" alt="API 개념"  />
 <p class="caption">
 Figure 1.1: API 개념
 </p>
@@ -310,12 +311,12 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 ## 2007-01-09  12.35000  13.28286 12.16429   13.22429   837324600
 ## 2007-01-10  13.53571  13.97143 13.35000   13.85714   738220000
 ##            AAPL.Adjusted
-## 2007-01-03      7.951960
-## 2007-01-04      8.128461
-## 2007-01-05      8.070577
-## 2007-01-08      8.110430
-## 2007-01-09      8.784165
-## 2007-01-10      9.204537</code></pre>
+## 2007-01-03      10.48732
+## 2007-01-04      10.72009
+## 2007-01-05      10.64375
+## 2007-01-08      10.69631
+## 2007-01-09      11.58486
+## 2007-01-10      12.13926</code></pre>
 <p>다운로드 결과로써 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한, Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다. <code>Ad()</code> 함수는 <code>getSymbols()</code> 함수를 통해 다운로드 받은 데이터에서 수정주가만을 선택하여 줍니다. 시계열 그래프를 그려주는 <code>chart_Series()</code>와 함께 수정주가를 그리면 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chart_Series</span>(<span class="kw">Ad</span>(AAPL))</code></pre>
 <p><img src="03-api_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
@@ -412,7 +413,7 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 <p>먼저 미 국채 10년물 금리에 해당하는 티커인 “DGS10”을 입력해 줍니다. 그 후, 데이터 소스에 해당하는 src에 “FRED”를 입력해 주면, 해당 데이터가 다운로드 됩니다. <code>chart_Series</code>를 통해 해당 데이터를 그래프로 나타내면 다음과 같습니다.</p>
 <p>각 항목 별 티커를 찾는 방법은 매우 간단합니다. 먼저 FRED의 홈페이지<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>에 접속하여, 원하는 데이터를 검색합니다. 예시로써 원/달러 환율에 해당하는 South Korea / U.S. Foreign Exchange Rate 를 검색하여 원하는 페이지에 접속합니다. 이 중 페이지 주소에서 /series/ 다음에 위치하는 DEXKOUS 가 해당 항목의 티커입니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
-<img src="images/api_fred.png" alt="FRED 사이트 내 원/달러 환율의 티커 확인" width="788" />
+<img src="images/api_fred.png" alt="FRED 사이트 내 원/달러 환율의 티커 확인"  />
 <p class="caption">
 Figure 3.1: FRED 사이트 내 원/달러 환율의 티커 확인
 </p>

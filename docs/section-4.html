@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-13" />
+<meta name="date" content="2019-06-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -204,6 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7" data-path="section-33.html"><a href="section-33.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
 <li class="chapter" data-level="7.1" data-path="section-33.html"><a href="section-33.html#section-34"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
 <li class="chapter" data-level="7.2" data-path="section-33.html"><a href="section-33.html#section-35"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="section-33.html"><a href="section-33.html#section-36"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -234,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>R에서 스크립트를 한글로 작성하여 저장한 후 이를 다시 불러올 때, 혹은 한글로된 데이터를 크롤링하면 오류가 뜨거나 읽을 수 없는 문자로 나타나는 경우가 종종 있습니다. 이는 한글 인코딩 때문에 발생하는 문제이며, 이러한 현상을 흔히 <strong>인코딩이 깨졌다</strong>고 표현합니다. 인코딩이란 사람이 사용하는 언어를 컴퓨터가 사용하는 0과 1로 변환하는 과정을 말하며, 이와 반대의 과정을 디코딩이라고 합니다.</p>
 <p>이러한 사람과 컴퓨터간의 번역을 위해 최초로 사용된 방식이 아스키(ASCII: American Standard Code for Information Interchange)입니다. 0부터 127까지 총 128개 바이트에 알파벳과 숫자, 그리고 자주 사용되는 특수문자 값을 부여하고, 글자가 입력되면 이에 대응되는 바이트가 저장됩니다. 그러나 아스키의 American이라는 이름에서 알 수 있듯이 이는 영어의 알파벳이 아닌 다른 언어를 표현하는데는 한계가 있으며, 이를 보완하기 위한 여러 방법들이 나오게 되었습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="images/ascii_code.jpg" alt="아스키 코드 표" width="438" />
+<img src="images/ascii_code.jpg" alt="아스키 코드 표"  />
 <p class="caption">
 Figure 1.1: 아스키 코드 표
 </p>
@@ -246,7 +247,7 @@ Figure 1.1: 아스키 코드 표
 <p>먼저 한글 인코딩 중 완성형으로 가장 대표적인 방법은 EUC-KR이며, 이는 현대 한글에서 많이 쓰이는 글자 2,350개에 번호를 붙인 방법입니다. 그러나 2,350개 글자로 모든 한글의 조합을 표현하기는 부족하였으며, 이를 보완하고자 마이크로소프트사가 도입한 방법이 CP949 입니다. CP949는 11,720개 한글에 번호를 붙인 방법으로 기존 EUC-KR보다 나타낼 수 있는 한글의 갯수가 훨씬 많아졌습니다. 윈도우의 경우 기본 인코딩이 CP949로 되어 있습니다.</p>
 <p>조합형의 대표적 방법으로는 UTF-8이 있습니다. 이는 모음과 자음 각각에 코드를 부여한 후 조합하여 한글을 나타냅니다. 조합형의 경우 한글뿐만이 아니라 다양한 언어에 적용할 수 있다는 장점으로 인해 전세계 웹페이지의 대부분이 UTF-8로 만들어 지고 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="images/encoding_ratio.jpg" alt="웹페이지에서 사용되는 인코딩 비율" width="690" />
+<img src="images/encoding_ratio.jpg" alt="웹페이지에서 사용되는 인코딩 비율"  />
 <p class="caption">
 Figure 1.2: 웹페이지에서 사용되는 인코딩 비율
 </p>
@@ -275,7 +276,7 @@ Figure 1.4: 인코딩 설정 항목
 <h2><span class="header-section-number">2.2</span> 웹의 동작 방식</h2>
 <p>크롤링은 웹사이트의 정보를 수집하는 과정이니 만큼, 웹이 어떻게 동작하는지 알아둘 필요가 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
-<img src="images/web_str.jpg" alt="웹 환경 구조" width="384" />
+<img src="images/web_str.jpg" alt="웹 환경 구조"  />
 <p class="caption">
 Figure 2.1: 웹 환경 구조
 </p>
@@ -691,8 +692,9 @@ x3 =<span class="st"> </span><span class="kw">exp</span>(x2)
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">exp</span>(<span class="kw">diff</span>(<span class="kw">log</span>(x))), <span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 0.84 2.14 0.10 8.31 1.03 1.68 0.46 1.48 0.31</code></pre>
 <p>두 번째는 괄호를 통해 감싸는 방법입니다. 앞선 방법에 비해 코드는 짧아졌지만, 계산 과정을 알아보기에는 매우 불편한 방법으로 코드가 짜여 있습니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">diff</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">exp</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">2</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)</code></pre>
+<pre><code>## Warning: 패키지 &#39;magrittr&#39;는 R 버전 3.5.3에서 작성되었습니다</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">diff</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">exp</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">2</span>)</code></pre>
 <pre><code>## [1] 0.84 2.14 0.10 8.31 1.03 1.68 0.46 1.48 0.31</code></pre>
 <p>마지막으로 파이프 오퍼레이터를 사용하는 방법입니다. 코드도 짧으며, 계산 과정을 한눈에 파악하기도 좋습니다. 맨 왼쪽에는 원하는 변수를 입력하며, <code>%&gt;%</code> 뒤에는 차례대로 계산하고자 하는 함수를 입력합니다. 변수의 입력값을 ()로 비워둘 경우, 오퍼레이터의 좌측에 있는 값이 입력변수가 됩니다. 반면 <code>round()</code>와 같이 입력값이 2개 이상 필요할 경우, 콤마(.)가 오퍼레이터의 좌측 값으로 입력됩니다.</p>
 <p>파이프 오퍼레이터는 크롤링 뿐만이 아닌, 모든 코드에 사용할 수 있습니다. 이를 통해 훨씬 깔끔하면서도 데이터 처리과정을 직관적으로 이해할 수 있습니다.</p>
