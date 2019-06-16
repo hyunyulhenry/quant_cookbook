@@ -143,5 +143,4 @@ knitr::include_graphics('images/api_fred.png')
 getSymbols('DEXKOUS', src='FRED')
 
 tail(DEXKOUS)
-chart_Series(DEXKOUS)
 ```

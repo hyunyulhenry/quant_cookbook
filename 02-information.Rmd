@@ -506,4 +506,3 @@ for (i in number) {
 ```
 
 `expr`부분은 `print(i^2)` 이며, `error-handler-code` 부분은 `print(paste('Error:', i))`, 즉 오류가 발생한 `i`를 출력하는 것입니다. 해당 코드를 실행할 경우 문자 **4**에서 오류가 발생함을 알려준 후, 루프가 멈추지 않고 다음으로 진행됩니다.
-

@@ -6,7 +6,7 @@ API 제공자는 본인이 가진 데이터베이스를 다른 누군가가 쉽�
 
 
 <div class="figure" style="text-align: center">
-<img src="images/api_api.png" alt="API 개념"  />
+<img src="images/api_api.png" alt="API 개념" width="294" />
 <p class="caption">(\#fig:unnamed-chunk-1)API 개념</p>
 </div>
 
@@ -121,12 +121,12 @@ head(AAPL)
 ## 2007-01-09  12.35000  13.28286 12.16429   13.22429   837324600
 ## 2007-01-10  13.53571  13.97143 13.35000   13.85714   738220000
 ##            AAPL.Adjusted
-## 2007-01-03      10.48732
-## 2007-01-04      10.72009
-## 2007-01-05      10.64375
-## 2007-01-08      10.69631
-## 2007-01-09      11.58486
-## 2007-01-10      12.13926
+## 2007-01-03      7.951960
+## 2007-01-04      8.128461
+## 2007-01-05      8.070577
+## 2007-01-08      8.110430
+## 2007-01-09      8.784165
+## 2007-01-10      9.204537
 ```
 
 다운로드 결과로써 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한, Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다. `Ad()` 함수는 `getSymbols()` 함수를 통해 다운로드 받은 데이터에서 수정주가만을 선택하여 줍니다. 시계열 그래프를 그려주는 `chart_Series()`와 함께 수정주가를 그리면 다음과 같습니다.
@@ -311,7 +311,7 @@ chart_Series(DGS10)
 각 항목 별 티커를 찾는 방법은 매우 간단합니다. 먼저 FRED의 홈페이지^[https://fred.stlouisfed.org/]에 접속하여, 원하는 데이터를 검색합니다. 예시로써 원/달러 환율에 해당하는 South Korea / U.S. Foreign Exchange Rate 를 검색하여 원하는 페이지에 접속합니다. 이 중 페이지 주소에서 /series/ 다음에 위치하는 DEXKOUS 가 해당 항목의 티커입니다.
 
 <div class="figure" style="text-align: center">
-<img src="images/api_fred.png" alt="FRED 사이트 내 원/달러 환율의 티커 확인"  />
+<img src="images/api_fred.png" alt="FRED 사이트 내 원/달러 환율의 티커 확인" width="788" />
 <p class="caption">(\#fig:unnamed-chunk-13)FRED 사이트 내 원/달러 환율의 티커 확인</p>
 </div>
 
@@ -339,9 +339,3 @@ tail(DEXKOUS)
 ## 2019-06-06 1179.51
 ## 2019-06-07 1181.27
 ```
-
-```r
-chart_Series(DEXKOUS)
-```
-
-<img src="03-api_files/figure-html/unnamed-chunk-14-1.png" width="672" />
