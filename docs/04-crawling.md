@@ -98,7 +98,7 @@ print(data)
 
 ```
 ## Response [https://finance.naver.com/news/news_list.nhn?mode=LSS2D&section_id=101&section_id2=258]
-##   Date: 2019-06-17 14:32
+##   Date: 2019-06-17 14:56
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
 ##   Size: 57 kB
@@ -375,7 +375,7 @@ print(down_table)
 
 ```
 ## Response [https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&page=1]
-##   Date: 2019-06-17 14:32
+##   Date: 2019-06-17 14:56
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
 ##   Size: 95.1 kB
