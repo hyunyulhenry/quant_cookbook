@@ -72,7 +72,7 @@ print(otp)
 ```
 
 ```
-## [1] "vDfqRc92OziMrxW4rOHJF91qiSvxB87bzNddplj4rW67ebN26uvCR1oXaE5Y16GwNirxGt2gFGG6sNKuBvXrC8BKrpi262UFCAIX/uRAdXYP7e3YYzamMDcyVpxsHeA/CWkYglydS+rY1gEQaNixApZcYUjSqlgO1cRbhYaU0qWu/bo2iQBQzAVX2zclx/Sy7LJQ44h2Ng+4u5H/rWHfXHZkqGYveis77o/S3gK2Q8LPeV42xXEHZA6okqcld8N/0aOMEWaxZvVkH54CXk+IDYB7L+77cBTcaDskkBv+E1w="
+## [1] "vDfqRc92OziMrxW4rOHJFxK2Cx1HtCjjYGtLt6PW8TE11/jsihM8Rnh9CjGk6pImNonOvmE5nTFMqh08STnCzYqzPJd/VfPxdNVlEskVFjKGi408HikpGQjB0kdeUcii56uuEc4dI3EU/8AKkHwWHfOSvYdvqbkAbkbFJwI2mzA9j43THencjCELgX0JNa5akXfc62Tenfz9IU67bOBKw061slfF9CwJvQ1yYp0Vz0wghdfCi1pvl1XtaU8On4/wB/OT+Ek7JSR1JnWzjgL02zvopex9FZC6RM//5yTcJxY="
 ```
 
 이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.
