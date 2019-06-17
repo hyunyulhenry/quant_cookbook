@@ -47,6 +47,60 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
+<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="libs/highcharts-7.0.1/highcharts.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
+<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
+<script src="libs/highcharts-7.0.1/modules/map.js"></script>
+<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
+<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
+<script src="libs/highcharts-7.0.1/modules/data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
+<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
+<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
+<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
+<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
+<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
+<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
+<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
+<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
+<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
+<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
+<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
+<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
+<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
+<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
+<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -222,27 +276,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.12" data-path="section-37.html"><a href="section-37.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶음</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="section-37.html"><a href="section-37.html#section-39"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a></li>
+<li class="chapter" data-level="8.3" data-path="section-37.html"><a href="section-37.html#section-40"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="section-37.html"><a href="section-37.html#section-41"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="section-37.html"><a href="section-37.html#section-42"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="section-37.html"><a href="section-37.html#section-43"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="section-40.html"><a href="section-40.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
-<li class="chapter" data-level="9.1" data-path="section-40.html"><a href="section-40.html#section-41"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="section-40.html"><a href="section-40.html#section-42"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
-<li class="chapter" data-level="9.1.2" data-path="section-40.html"><a href="section-40.html#section-43"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="section-40.html"><a href="section-40.html#section-44"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="section-40.html"><a href="section-40.html#section-45"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
-<li class="chapter" data-level="9.2.2" data-path="section-40.html"><a href="section-40.html#section-46"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+<li class="chapter" data-level="9" data-path="section-44.html"><a href="section-44.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-44.html"><a href="section-44.html#section-45"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section-44.html"><a href="section-44.html#section-46"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section-44.html"><a href="section-44.html#section-47"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="section-40.html"><a href="section-40.html#section-47"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="section-40.html"><a href="section-40.html#section-48"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
-<li class="chapter" data-level="9.3.2" data-path="section-40.html"><a href="section-40.html#section-49"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+<li class="chapter" data-level="9.2" data-path="section-44.html"><a href="section-44.html#section-48"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="section-44.html"><a href="section-44.html#section-49"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="section-44.html"><a href="section-44.html#section-50"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="section-40.html"><a href="section-40.html#section-50"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="section-40.html"><a href="section-40.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
-<li class="chapter" data-level="9.4.2" data-path="section-40.html"><a href="section-40.html#section-51"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
+<li class="chapter" data-level="9.3" data-path="section-44.html"><a href="section-44.html#section-51"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="section-44.html"><a href="section-44.html#section-52"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="section-44.html"><a href="section-44.html#section-53"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="section-40.html"><a href="section-40.html#section-52"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="section-40.html"><a href="section-40.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
-<li class="chapter" data-level="9.5.2" data-path="section-40.html"><a href="section-40.html#section-53"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+<li class="chapter" data-level="9.4" data-path="section-44.html"><a href="section-44.html#section-54"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="section-44.html"><a href="section-44.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="section-44.html"><a href="section-44.html#section-55"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="section-44.html"><a href="section-44.html#section-56"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-44.html"><a href="section-44.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-44.html"><a href="section-44.html#section-57"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -350,10 +409,10 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 
 <span class="kw">print</span>(data)</code></pre>
 <pre><code>## Response [https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258]
-##   Date: 2019-06-17 13:02
+##   Date: 2019-06-17 14:32
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
-##   Size: 57.2 kB
+##   Size: 57 kB
 ## 
 ## 
 ## 
@@ -382,26 +441,26 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 </ol>
 <p>해당 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장되게 됩니다. 이처럼 개발자도구 화면을 통해 내가 추출하고자 하는 데이터가 html 중 어디에 위치하고 있는지 먼저 확인을 하면, 어렵지 않게 원하는 데이터를 읽어올 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(data_title)</code></pre>
-<pre><code>##  [1] &quot;[뉴스8 단신] 필리핀, 보라카이 운항 허가 취소…에어부산 &#39;날벼락&#39;&quot;              
-##  [2] &quot;[숫자뉴스] 56%&quot;                                                               
-##  [3] &quot;계열사에 &#39;회장님표&#39; 김치·와인 강매한 태광 21억 과징금&quot;                       
-##  [4] &quot;\&quot;하는 일도 없는데\&quot; 펀드 판매보수 꼬박꼬박&quot;                                  
-##  [5] &quot;17일 장 마감 후 주요 종목뉴스&quot;                                                
-##  [6] &quot;삼정KPMG, 26일 산업통상자원부와 수입규제 대응전략 세미나 개최&quot;                
-##  [7] &quot;[표]유형별 펀드 자금 동향(6월 14일)&quot;                                          
-##  [8] &quot;한국거래소, 현대일렉트릭 등 공매도 과열 종목 지정&quot;                            
-##  [9] &quot;[분석] &#39;검은 대행진&#39; 홍콩發 ELS 주의보&quot;                                       
-## [10] &quot;바이오로그디바이스, 해성옵틱스 주식 80억원에 취득 결정&quot;                       
-## [11] &quot;메디톡스 \&quot;주주 고발 관련 수사기관 연락 전혀 없었다\&quot;&quot;                        
-## [12] &quot;골드퍼시픽, &#39;다나은&#39; 주식 105억원에 양수 결정&quot;                                
-## [13] &quot;키움증권, 자기주식 50만주 취득 결정&quot;                                          
-## [14] &quot;신한제5호기업인수목적, 19일 코스닥시장 신규상장&quot;                              
-## [15] &quot;[표]아시아 주요 증시 동향(6월 17일)&quot;                                          
-## [16] &quot;메디톡스 &#39;주주들 정현호 대표 고발&#39; 보도에 \&quot;수사기관 연락 받은 사실 없다\&quot;&quot;   
-## [17] &quot;디지캡 \&quot;다산일렉트론 인수로 시너지 기대\&quot;&quot;                                   
-## [18] &quot;박스권 장세에 `특금신탁` 뭉칫돈… 증권사 수탁규모 190兆 육박&quot;                 
-## [19] &quot;[시그널] 한신평, 건축자재 부진에 LG하우시스 신용등급전망 ‘부정적’&quot;          
-## [20] &quot;17일, 기관 코스닥에서 NHN한국사이버결제(+7.67%), 서울반도체(+1.04%) 등 순매수&quot;</code></pre>
+<pre><code>##  [1] &quot;YG엔터 &#39;경찰 수사전담팀 구성&#39; 방침에 하락 마감…YG플러스도&quot;                
+##  [2] &quot;뉴욕증시, FOMC 결과 대기 혼조 출발&quot;                                        
+##  [3] &quot;상하이-런던 주식 교차거래 &#39;후룬퉁&#39; 개시(종합)&quot;                             
+##  [4] &quot;[뉴스8 단신] 필리핀, 보라카이 운항 허가 취소…에어부산 &#39;날벼락&#39;&quot;           
+##  [5] &quot;[숫자뉴스] 56%&quot;                                                            
+##  [6] &quot;계열사에 &#39;회장님표&#39; 김치·와인 강매한 태광 21억 과징금&quot;                    
+##  [7] &quot;\&quot;하는 일도 없는데\&quot; 펀드 판매보수 꼬박꼬박&quot;                               
+##  [8] &quot;17일 장 마감 후 주요 종목뉴스&quot;                                             
+##  [9] &quot;삼정KPMG, 26일 산업통상자원부와 수입규제 대응전략 세미나 개최&quot;             
+## [10] &quot;[표]유형별 펀드 자금 동향(6월 14일)&quot;                                       
+## [11] &quot;한국거래소, 현대일렉트릭 등 공매도 과열 종목 지정&quot;                         
+## [12] &quot;[분석] &#39;검은 대행진&#39; 홍콩發 ELS 주의보&quot;                                    
+## [13] &quot;바이오로그디바이스, 해성옵틱스 주식 80억원에 취득 결정&quot;                    
+## [14] &quot;메디톡스 \&quot;주주 고발 관련 수사기관 연락 전혀 없었다\&quot;&quot;                     
+## [15] &quot;골드퍼시픽, &#39;다나은&#39; 주식 105억원에 양수 결정&quot;                             
+## [16] &quot;키움증권, 자기주식 50만주 취득 결정&quot;                                       
+## [17] &quot;신한제5호기업인수목적, 19일 코스닥시장 신규상장&quot;                           
+## [18] &quot;[표]아시아 주요 증시 동향(6월 17일)&quot;                                       
+## [19] &quot;메디톡스 &#39;주주들 정현호 대표 고발&#39; 보도에 \&quot;수사기관 연락 받은 사실 없다\&quot;&quot;
+## [20] &quot;디지캡 \&quot;다산일렉트론 인수로 시너지 기대\&quot;&quot;</code></pre>
 </div>
 <div id="section-15" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -558,7 +617,7 @@ url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#
 <pre class="sourceCode r"><code class="sourceCode r">down_table =<span class="st"> </span><span class="kw">GET</span>(url)
 <span class="kw">print</span>(down_table)</code></pre>
 <pre><code>## Response [https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&amp;page=1]
-##   Date: 2019-06-17 13:02
+##   Date: 2019-06-17 14:32
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
 ##   Size: 95.1 kB

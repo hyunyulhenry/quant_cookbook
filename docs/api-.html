@@ -47,6 +47,60 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
+<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="libs/highcharts-7.0.1/highcharts.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
+<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
+<script src="libs/highcharts-7.0.1/modules/map.js"></script>
+<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
+<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
+<script src="libs/highcharts-7.0.1/modules/data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
+<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
+<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
+<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
+<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
+<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
+<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
+<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
+<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
+<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
+<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
+<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
+<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
+<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
+<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
+<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -222,27 +276,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.12" data-path="section-37.html"><a href="section-37.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶음</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="section-37.html"><a href="section-37.html#section-39"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a></li>
+<li class="chapter" data-level="8.3" data-path="section-37.html"><a href="section-37.html#section-40"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="section-37.html"><a href="section-37.html#section-41"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="section-37.html"><a href="section-37.html#section-42"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="section-37.html"><a href="section-37.html#section-43"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="section-40.html"><a href="section-40.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
-<li class="chapter" data-level="9.1" data-path="section-40.html"><a href="section-40.html#section-41"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="section-40.html"><a href="section-40.html#section-42"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
-<li class="chapter" data-level="9.1.2" data-path="section-40.html"><a href="section-40.html#section-43"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="section-40.html"><a href="section-40.html#section-44"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="section-40.html"><a href="section-40.html#section-45"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
-<li class="chapter" data-level="9.2.2" data-path="section-40.html"><a href="section-40.html#section-46"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+<li class="chapter" data-level="9" data-path="section-44.html"><a href="section-44.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-44.html"><a href="section-44.html#section-45"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section-44.html"><a href="section-44.html#section-46"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section-44.html"><a href="section-44.html#section-47"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="section-40.html"><a href="section-40.html#section-47"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="section-40.html"><a href="section-40.html#section-48"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
-<li class="chapter" data-level="9.3.2" data-path="section-40.html"><a href="section-40.html#section-49"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+<li class="chapter" data-level="9.2" data-path="section-44.html"><a href="section-44.html#section-48"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="section-44.html"><a href="section-44.html#section-49"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="section-44.html"><a href="section-44.html#section-50"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="section-40.html"><a href="section-40.html#section-50"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="section-40.html"><a href="section-40.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
-<li class="chapter" data-level="9.4.2" data-path="section-40.html"><a href="section-40.html#section-51"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
+<li class="chapter" data-level="9.3" data-path="section-44.html"><a href="section-44.html#section-51"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="section-44.html"><a href="section-44.html#section-52"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="section-44.html"><a href="section-44.html#section-53"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="section-40.html"><a href="section-40.html#section-52"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="section-40.html"><a href="section-40.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
-<li class="chapter" data-level="9.5.2" data-path="section-40.html"><a href="section-40.html#section-53"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+<li class="chapter" data-level="9.4" data-path="section-44.html"><a href="section-44.html#section-54"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="section-44.html"><a href="section-44.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="section-44.html"><a href="section-44.html#section-55"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="section-44.html"><a href="section-44.html#section-56"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-44.html"><a href="section-44.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-44.html"><a href="section-44.html#section-57"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -350,12 +409,12 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 ## 2007-01-09  12.35000  13.28286 12.16429   13.22429   837324600
 ## 2007-01-10  13.53571  13.97143 13.35000   13.85714   738220000
 ##            AAPL.Adjusted
-## 2007-01-03      10.48732
-## 2007-01-04      10.72009
-## 2007-01-05      10.64375
-## 2007-01-08      10.69631
-## 2007-01-09      11.58486
-## 2007-01-10      12.13926</code></pre>
+## 2007-01-03      7.951960
+## 2007-01-04      8.128461
+## 2007-01-05      8.070577
+## 2007-01-08      8.110430
+## 2007-01-09      8.784165
+## 2007-01-10      9.204537</code></pre>
 <p>다운로드 결과로써 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한, Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다. <code>Ad()</code> 함수는 <code>getSymbols()</code> 함수를 통해 다운로드 받은 데이터에서 수정주가만을 선택하여 줍니다. 시계열 그래프를 그려주는 <code>chart_Series()</code>와 함께 수정주가를 그리면 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chart_Series</span>(<span class="kw">Ad</span>(AAPL))</code></pre>
 <p><img src="03-api_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
