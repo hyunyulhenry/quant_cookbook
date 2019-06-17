@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-16" />
+<meta name="date" content="2019-06-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.8" data-path="section-4.html"><a href="section-4.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
 <li class="chapter" data-level="2.3.9" data-path="section-4.html"><a href="section-4.html#class-id"><i class="fa fa-check"></i><b>2.3.9</b> class와 id</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (%&gt;%)</a></li>
+<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (<code>%&gt;%</code>)</a></li>
 <li class="chapter" data-level="2.5" data-path="section-4.html"><a href="section-4.html#section-9"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
@@ -239,6 +239,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="section-40.html"><a href="section-40.html#section-50"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="section-40.html"><a href="section-40.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
 <li class="chapter" data-level="9.4.2" data-path="section-40.html"><a href="section-40.html#section-51"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="section-40.html"><a href="section-40.html#section-52"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-40.html"><a href="section-40.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-40.html"><a href="section-40.html#section-53"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -341,7 +345,7 @@ data_market =<span class="st"> </span><span class="kw">full_join</span>(KOR_tick
 ## $ PBR              &lt;chr&gt; &quot;1.25&quot;, &quot;1.02&quot;, &quot;0.57&quot;, &quot;9.94&quot;, &quot;1.51&quot;, &quot;0.6&quot;...
 ## $ 주당배당금       &lt;int&gt; 1416, 1500, 4000, 0, 6000, 1600, 4000, 10000, 1000...
 ## $ 배당수익률       &lt;dbl&gt; 3.20, 2.29, 2.86, 0.00, 1.82, 3.56, 1.82, 3.92, 4....
-## $ 게시물..일련번호 &lt;int&gt; 1458, 1410, 1452, 1597, 1538, 1540, 1595, 1497, 1454...
+## $ 게시물..일련번호 &lt;int&gt; 1456, 1408, 1450, 1595, 1536, 1538, 1593, 1495, 1452...
 ## $ 총카운트         &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
 ## $ IDX_CD           &lt;chr&gt; &quot;G45&quot;, &quot;G45&quot;, &quot;G25&quot;, &quot;G35&quot;, &quot;G15&quot;, &quot;G40&quot;, &quot;G2...
 ## $ IDX_NM_KOR       &lt;chr&gt; &quot;WICS IT&quot;, &quot;WICS IT&quot;, &quot;WICS 경기관련소비재&quot;, &quot;WICS 건...
@@ -632,7 +636,7 @@ Figure 4.4: The Grammar of Graphics
 
 <span class="kw">ggplot</span>(data_market, <span class="kw">aes</span>(<span class="dt">x =</span> ROE, <span class="dt">y =</span> PBR)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-18-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><code>ggplot()</code> 함수 내에 사용될 데이터인 data_market을 입력하며, aes 인자 내부에 x축은 ROE, y축은 PBR 열을 사용하도록 정의합니다</li>
 <li><code>geom_point()</code> 함수를 통해 산점도 그래프를 그려주도록 합니다. 원하는 그림이 그려지기는 하였으나, ROE와 PBR에 극단치 데이터가 존재하여 둘간의 관계가 잘 보이지 않습니다.</li>
@@ -640,14 +644,14 @@ Figure 4.4: The Grammar of Graphics
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data_market, <span class="kw">aes</span>(<span class="dt">x =</span> ROE, <span class="dt">y =</span> PBR)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.30</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-19-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>이번에는 극단치 효과를 제거하기 위해 <code>coord_cartesian()</code> 함수 내에 xlim과 ylim, 즉 x축과 y축의 범위를 직접 지정해주도록 합니다. 극단치가 제거되어 데이터를 한 눈에 확인할 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data_market, <span class="kw">aes</span>(<span class="dt">x =</span> ROE, <span class="dt">y =</span> PBR,
                         <span class="dt">color =</span> <span class="st">`</span><span class="dt">시장구분</span><span class="st">`</span>, <span class="dt">shape =</span> <span class="st">`</span><span class="dt">시장구분</span><span class="st">`</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&#39;lm&#39;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.30</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>))</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-20-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><code>ggplot()</code> 함수 내부 aes 인자에 color와 shape를 지정해주면, 해당 그룹 별로 모양과 색이 나타납니다. 코스피와 코스닥 종목들에 해당하는 데이터의 색과 점 모양이 다르게 표시할 수 있습니다.</li>
 <li><code>geom_smooth()</code> 함수를 통해 평활선을 추가해줄 수도 있으며, 방법으로 lm(linear model)을 지정해줄 경우 선형회귀선을 그려주게 됩니다. 이 외에도 glm, gam, loess 등의 다양한 회귀선을 그려줄 수 있습니다.</li>
@@ -655,7 +659,7 @@ Figure 4.4: The Grammar of Graphics
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data_market, <span class="kw">aes</span>(<span class="dt">x =</span> PBR)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.1</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-21-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><code>geom_histogram()</code> 함수는 히스토그램을 나타내주며, binwidth 인자를 막대의 너비를 선택해줄 수 있습니다. 국내 종목들의 PBR 데이터는 좌측에 쏠려있고 오른쪽으로 꼬리가 긴 분포를 가지고 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data_market, <span class="kw">aes</span>(<span class="dt">x =</span> PBR)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..density..),
@@ -666,7 +670,7 @@ Figure 4.4: The Grammar of Graphics
 <span class="st">  </span><span class="kw">geom_vline</span>(<span class="kw">aes</span>(<span class="dt">xintercept =</span> <span class="kw">median</span>(PBR, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), <span class="dt">color =</span> <span class="st">&#39;blue&#39;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">median</span>(PBR, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="dt">x =</span> <span class="kw">median</span>(PBR, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), <span class="dt">y =</span> <span class="fl">0.05</span>,
             <span class="dt">col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">hjust =</span> <span class="fl">-0.5</span>)</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-22-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>PBR 히스토그램을 좀 더 자세하게 나타내보도록 하겠습니다.</p>
 <ol style="list-style-type: decimal">
 <li><code>geom_histogram()</code> 함수 내에 aes(y = ..density..)를 추가해주어 밀도함수로 바꾸어주도록 합니다.</li>
@@ -677,7 +681,7 @@ Figure 4.4: The Grammar of Graphics
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data_market, <span class="kw">aes</span>(<span class="dt">x =</span> SEC_NM_KOR, <span class="dt">y =</span> PBR)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_flip</span>()</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-23-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>박스 플롯 역시 데이터의 분포와 극단치를 확인하기 좋은 그림이며, <code>geom_boxplot()</code> 함수를 통해 나타낼 수 있습니다.</p>
 <ol style="list-style-type: decimal">
 <li>x축 데이터로는 섹터 정보, y축 데이터로는 PBR을 선택해 줍니다.</li>
@@ -695,7 +699,7 @@ Figure 4.4: The Grammar of Graphics
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">vjust =</span> <span class="fl">1.3</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>, <span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-24-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>앞에서 배운 데이터 분석과 시각화를 동시에 연결하여 사용할 수도 있습니다.</p>
 <ol style="list-style-type: decimal">
 <li>데이터 분석의 단계로 <code>filter()</code>를 통해 섹터가 NA가 아닌 종목을 선택합니다.</li>
@@ -726,7 +730,7 @@ Figure 4.4: The Grammar of Graphics
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> SEC_NM_KOR, <span class="dt">y =</span> n)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_classic</span>()</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-26-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><code>geom_bar()</code>는 막대그래프를 그려주는 함수입니다.</p>
 <ol style="list-style-type: decimal">
 <li>먼저 <code>group_by()</code>를 통해 섹터 별 그룹을 묶어줍니다.</li>
@@ -747,7 +751,7 @@ Figure 4.4: The Grammar of Graphics
 <span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme_classic</span>()</code></pre>
-<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-27-1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><img src="08-data_analysis_files/figure-html/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><code>filter()</code> 함수를 통해 NA 종목은 삭제해준 후, 섹터 별 종목 갯수를 구해주도록 합니다.</li>
 <li><code>ggplot()</code>의 x축에 <code>reorder()</code> 함수를 적용하여 SEC_NM_KOR 변수를 n 순서대로 정렬해줍니다.</li>

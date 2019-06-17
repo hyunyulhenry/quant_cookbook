@@ -117,7 +117,7 @@ summary(reg)
 
 다음으로 구해진 베타를 그림으로 표현해보도록 하겠습니다.
 
-```{r out.width = '40%', fig.align='center'}
+```{r out.width = '50%', fig.align='center'}
 plot(as.numeric(rm), as.numeric(ri), pch = 4, cex = 0.3, 
      xlab = "KOSPI 200", ylab = "Individual Stock",
      xlim = c(-0.02, 0.02), ylim = c(-0.02, 0.02))
@@ -181,11 +181,14 @@ std_12m_daily = xts::last(ret, 252) %>% apply(., 2, sd) %>% multiply_by(sqrt(252
 3. `last()` 함수는 마지막 n개를 선택해주는 함수이며, 1년 영업일 기준인 252개 데이터를 선택합니다. `dplyr` 패키지의 last() 함수와 변수명이 같으므로, `xts::last()` 형식을 통해 xts 패키지의 함수임을 정의해줍니다.
 4. `apply()` 함수를 sd 즉 변동성을 계산해주며, 연율화를 해주기 위해 `multiply_by()` 함수를 통해 $\sqrt{252}$를 곱해주도록 합니다.
 
-```{r out.width = '40%', fig.align='center'}
+```{r out.width = '50%', fig.align='center'}
 std_12m_daily %>% 
   data.frame() %>%
   ggplot(aes(x = (`.`))) +
   geom_histogram(binwidth = 0.01) +
+  annotate("rect", xmin = -0.02, xmax = 0.02,
+           ymin = 0, ymax = sum(std_12m_daily == 0, na.rm = TRUE) * 1.1,
+           alpha=0.3, fill="red") +
   xlab(NULL)
 
 std_12m_daily[std_12m_daily == 0] = NA
@@ -364,6 +367,7 @@ KOR_price[, invest_mom_sharpe] %>%
 ```{r message = FALSE}
 library(stringr)
 library(ggplot2)
+library(dplyr)
 
 KOR_value = read.csv('data/KOR_value.csv', row.names = 1, stringsAsFactors = FALSE)
 KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
@@ -381,9 +385,29 @@ KOR_ticker[invest_pbr, ] %>%
 
 저PBR 하나의 지표만으로도 우수한 성과를 거둘 수 있음은 오랜 기간동안 증명되고 있습니다. 그러나 저평가 주식이 계속해서 저평가에 머무르는 가치 함정에 빠지지 않기 위해서는, 여러 지표를 동시에 볼 필요도 있습니다.
 
+```{r out.width = '50%', fig.align='center'}
+rank_value = KOR_value %>% 
+  mutate_all(funs(min_rank(.)))
+
+cor(rank_value, use = 'complete.obs') %>%
+  round(., 2) %>%
+  data.frame(ID = rownames(.)) %>%
+  gather(index, value, -ID) %>%
+  ggplot(aes(x = ID, y = index, fill = value)) +
+  geom_tile(color = 'white') +
+  scale_fill_gradient2(low = 'blue', high = 'red', mid = 'white',
+                       midpoint = 0, limit = c(-1, 1), space = 'Lab', name = 'Correlation') +
+  theme_minimal() +
+  xlab(NULL) + ylab(NULL) +
+  geom_text(aes(x = ID, y = index, label = value), color = 'black', size = 4)
+```
+
+먼저 `mutate_all()` 함수를 이용해 모든 열에 함수를 적용해주며, `min_rank()`를 통해 순위를 구해주도록 합니다.
+
+각 열에 해당하는 가치 지표 별 랭킹을 구해준 후 상관관계를 확인해보도록 하며, NA 종목은 삭제해주기 위해 `use = 'complete.obs'`를 입력해주도록 합니다. 같은 가치 지표임에도 불구하고 서로간의 상관관계가 꽤 낮은 지표도 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수도 있습니다.
+
 ```{r}
-rank_sum = KOR_value %>% 
-  apply(., 2, rank) %>%
+rank_sum = rank_value %>%
   rowSums()
 
 invest_value = rank(rank_sum) <= 30
@@ -393,11 +417,219 @@ KOR_ticker[invest_value, ] %>%
   cbind(KOR_value[invest_value, ])
 ```
 
-먼저 `apply()` 함수를 이용해 각 열에 해당하는 가치 지표 별 랭킹을 구해준 후, `rowSums()` 함수를 이용해 종목 별 랭킹들의 합을 구해주도록 합니다. 그 후 4개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 하나의 지표 보다 4개 지표가 골고루 낮은 종목을 선택하여 줍니다. 해당 종목들의 티커, 종목명과 가치 지표들을 확인할 수 있습니다.
+`rowSums()` 함수를 이용해 종목 별 랭킹들의 합을 구해주도록 합니다. 그 후 4개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 하나의 지표 보다 4개 지표가 골고루 낮은 종목을 선택하여 줍니다. 해당 종목들의 티커, 종목명과 가치 지표들을 확인할 수 있습니다.
 
 
 ```{r}
 intersect(KOR_ticker[invest_pbr, '종목명'], KOR_ticker[invest_value, '종목명'])
 ```
 
-단순 PBR 기준 선택된 종목과 비교해봤을 때, 겹치는 종목이 상당히 줄어들었습니다.
+단순 PBR 기준 선택된 종목과 비교해봤을 때, 겹치는 종목이 상당히 줄어 들었습니다.
+
+## 퀄리티 전략
+
+기업의 우량성, 즉 퀄리티는 투자자들이 가장 중요하게 생각하는 요소입니다. 그러나 어떠한 지표가 기업의 퀄리티를 나타내는지 한마디로 정의하기에는 너무나 주관적이고 광범위하여, 쉽지만은 않습니다. 학계 혹은 업계에서 사용되는 우량성 관련 지표는 다음과 같이 요약할 수 있습니다.
+
+1. Profitability (수익성)
+2. Earnings stability (수익의 안정성)
+3. Capital structure (기업 구조)
+4. Growth (수익의 성장성)
+5. Accounting quality (회계적 우량성)
+6. Payout/dilution (배당) 
+7. Investment (투자)
+
+퀄리티 전략에는 주가 보다는 재무제표 데이터가 많이 사용됩니다.
+
+### F-Score
+
+F-Score 지표는 조셉 피오트로스키 교수가 발표한 지표입니다. 그는 논문에서, 저 PBR을 이용한 밸류 전략은 높은 성과를 기록하지만 재무 상태가 불량한 기업이 많으며, 저 PBR 종목 중 재무적으로 우량한 기업을 선정하여 투자한다면 성과를 훨씬 개선할 수 있다고 보았습니다.
+
+F-Score에서는 재무적 우량 정도를 수익성(Profitability), 재무 성과(Financial Performance), 운영 효율성(Operating Efficiency)으로 구분하여 총 9개의 지표를 선정합니다. 표 \@ref(tab:fscore)는 이를 요약한 테이블입니다.
+
+```{r fscore, echo = FALSE}
+knitr::kable(
+  data.frame(
+  '지표' = c('수익성', '수익성', '수익성', '수익성', '재무성과', '재무성과', '재무성과',
+           '운영 효율성', '운영 효율성'),
+  '항목' = c('$ROA$', '$CFO$', '$\\Delta ROA$', '$ACCRUAL$',
+           '$\\Delta LEVER$', '$\\Delta LIQUID$', '$EQ\\_OFFER$',
+           '$\\Delta MARGIN$', '$\\Delta TURN$'),
+  '점수' = c('ROA가 양수면 1점', 'CFO가 양수면 1점', 'ROA가 증가했으면 1점',
+           'CFO > ROA면 1점', '레버리지가 감소했으면 1점', '유동성이 증가했으면 1점',
+           '발행주식수가 감소했으면 1점', '매출총이익률이 증가했으면 1점', '회전율이 증가했으면 1점')
+  ),
+  booktabs = TRUE,
+  caption = 'F-Score 요약'
+)
+```
+
+각 지표가 우수할 경우 1점, 그렇지 않을 경우 0점을 매겨, 총 0점부터 9점까지의 포트폴리오를 구성합니다. 
+
+$$ F\_SCORE = F\_ROA + F\_\Delta ROA + F\_CFO + F\_ACCRUAL + F\_\Delta MARGIN + \\
+F\_ \Delta TURN + F\_\Delta LEVER + F\_\Delta LIQUID + F\_EQ\_OFFER $$
+
+```{r message = FALSE}
+library(stringr)
+library(ggplot2)
+library(dplyr)
+
+KOR_fs = readRDS('data/KOR_fs.Rds')
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+```
+
+먼저 재무제표와 티커 파일을 불러오도록 합니다. 재무제표 데이터의 경우 RdS 형태로 저장되어 있으며, `readRDS()` 함수를 이용해 list 형태 그래도 불러올 수 있습니다.
+
+```{r}
+# 수익성
+ROA = KOR_fs$'지배주주순이익' / KOR_fs$'자산'
+CFO = KOR_fs$'영업활동으로인한현금흐름' / KOR_fs$'자산'
+ACCURUAL = CFO - ROA
+
+# 재무성과
+LEV = KOR_fs$'장기차입금' / KOR_fs$'자산'
+LIQ = KOR_fs$'유동자산' / KOR_fs$'유동부채'
+OFFER = KOR_fs$'유상증자'
+
+# 운영 효율성
+MARGIN = KOR_fs$'매출총이익' / KOR_fs$'매출액'
+TURN = KOR_fs$'매출액' / KOR_fs$'자산'
+```
+
+먼저 지표에 해당하는 내용을 계산해줍니다.
+
+1. ROA는 지배주주순이익을 자산으로 나누어 계산합니다.
+2. CFO는 영업활동현금흐름을 자산으로 나누어 계산합니다.
+3. ACCURUAL은 CFO와 ROA의 차이를 이용해 계산합니다.
+4. Leverage는 장기차입금을 자산으로 나누어 계산합니다.
+5. Liquidity는 유동자산을 유동부채로 나누어 계산합니다.
+6. 우리가 받은 데이터에서는 발행주식수 데이터를 구할수 없으므로, Offer에 대한 대용치로 유상증자 여부를 사용합니다.
+7. Margin은 매출총이익을 매출액으로 나누어 계산합니다.
+8. Turnover는 매출액을 자산으로 나누어 계산합니다.
+
+다음으로는 각 지표들이 조건을 충족하는지 여부를 판단하여, 지표별로 1점 혹은 0점을 부여해줍니다.
+
+```{r}
+num_col = ncol(KOR_fs[[1]])
+
+F_1 = as.integer(ROA[, num_col] > 0)
+F_2 = as.integer(CFO[, num_col] > 0)
+F_3 = as.integer(ROA[, num_col] - ROA[, (num_col-1)] > 0)
+F_4 = as.integer(ACCURUAL[,num_col] > 0) 
+F_5 = as.integer(LEV[, num_col] - LEV[, (num_col-1)] <= 0) 
+F_6 = as.integer(LIQ[, num_col] - LIQ[, (num_col-1)] > 0)
+F_7 = as.integer(is.na(OFFER[,num_col]) |
+                   OFFER[,num_col] <= 0)
+F_8 = as.integer(MARGIN[, num_col] - MARGIN[, (num_col-1)] > 0)
+F_9 = as.integer(TURN[,num_col] - TURN[,(num_col-1)] > 0)
+```
+
+먼저 `ncol()` 함수를 이용해 열 갯수를 구해줍니다. 가장 최근 연도의 재무제표가 최우측에 위치하고 있으므로, 해당 변수를 통해 최근 연도 데이터만을 선택할 수 있습니다.
+
+`as.integer()` 함수는 TRUE일 경우 1, FALSE 일 경우 0을 반환하는 함수로써, F-Score 지표의 점수를 매기는데 매우 유용합니다. 점수 기준은 다음과 같습니다.
+
+1. ROA가 양수면 1점, 그렇지 않으면 0점
+2. 영업활동현금흐름이 양수면 1점, 그렇지 않으면 0점
+3. 최근 ROA가 전년 대비 증가했으면 1점, 그렇지 않으면 0점
+4. Accurual(CFO - ROA)가 양수면 1점, 그렇지 않으면 0점
+5. 레버리지가 전년 대비 증가했으면 1점, 그렇지 않으면 0점
+6. 유동성이 전년 대비 증가해으면 1점, 그렇지 않으면 0점
+7. 유상증자 항목이 없거나 0보다 작으면 1점, 그렇지 않으면 0점
+8. 매출총이익률이 전년 대비 증가했으면 1점, 그렇지 않으면 0점
+9. 회전율이 전년 대비 증가했으면 1점, 그렇지 않으면 0점
+
+```{r}
+F_Table = cbind(F_1, F_2, F_3, F_4, F_5, F_6, F_7, F_8, F_9) 
+F_Score = F_Table %>%
+  apply(., 1, sum, na.rm = TRUE) %>%
+  setNames(KOR_ticker$`종목명`)
+```
+
+1. `cbind()`를 통해 열의 형태로 묶어줍니다.
+2. `apply()` 함수를 통해 종목 별 지표의 합을 더해 F-Score를 계산해줍니다.
+3. `setNanmes()` 함수를 통해 종목명을 입력해 줍니다.
+
+```{r out.width = '50%', fig.align='center'}
+(F_dist = prop.table(table(F_Score)) %>% round(3))
+
+F_dist %>%
+  data.frame() %>%
+  ggplot(aes(x = F_Score, y = Freq,
+             label = paste0(Freq * 100, '%'))) +
+  geom_bar(stat = 'identity') +
+  # coord_flip() +
+  geom_text(color = 'black', size = 3, vjust = -0.4) +
+  scale_y_continuous(expand = c(0, 0, 0, 0.05),
+                     labels = scales::percent) +
+  ylab(NULL) +
+  theme_classic() 
+```
+
+`table()` 함수를 통해 각 스코어 별 갯수를 구한 후, `prop.table()`을 통해 비중으로 변환하도록 합니다. 이를 통해 점수 별 비중을 살펴보면 3~6점에 상당히 많은 종목이 분포하고 있음이 확인됩니다.
+
+```{r}
+invest_F_Score = F_Score %in% c(9)
+KOR_ticker[invest_F_Score, ] %>% 
+  select(`종목코드`, `종목명`) %>%
+  mutate(`F-Score` = F_Score[invest_F_Score])
+```
+
+F_Score가 9점인 종목의 티커와 종목명을 확인해봅니다. 재무적으로 우량하다고 판단되는 F-Score 9점인 종목은 총 `r sum(invest_F_Score)`개가 존재하고 있습니다.
+
+### 각 지표를 결합하기
+
+이번에는 퀄리티를 측정하는 요소 중 가장 널리 사용되는 수익성의 지표를 결합한 포트폴리오를 만들어 보겠으며, 사용되는 지표는 **자기자본이익률(ROE)**, **매출총이익(Gross Profit)**, **영업활동현금흐름(Cashflow From Operating)** 입니다.
+
+```{r}
+library(stringr)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+KOR_fs = readRDS('data/KOR_fs.Rds')
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+
+num_col = ncol(KOR_fs[[1]])
+quality_roe = (KOR_fs$'지배주주순이익' / KOR_fs$'자본')[num_col]
+quality_gpa = (KOR_fs$'매출총이익' / KOR_fs$'자산')[num_col]
+quality_cfo = (KOR_fs$'영업활동으로인한현금흐름' / KOR_fs$'자산')[num_col]
+quality_profit = cbind(quality_roe, quality_gpa, quality_cfo) %>%
+  setNames(., c('ROE', 'GPA', 'CFO'))
+```
+
+먼저 재무제표와 티커 파일을 불러온 후, 세가지 지표에 해당하는 값을 구한 뒤 최근년도 데이터만을 선택합니다. 그 후, `cbind()` 함수를 이용해 지표들을 하나로 묶어줍니다.
+
+```{r out.width = '50%', fig.align='center'}
+rank_quality = quality_profit %>% 
+  mutate_all(funs(min_rank(desc(.))))
+
+cor(rank_quality, use = 'complete.obs') %>%
+  round(., 2) %>%
+  data.frame(ID = rownames(.)) %>%
+  gather(index, value, -ID) %>%
+  ggplot(aes(x = ID, y = index, fill = value)) +
+  geom_tile(color = 'white') +
+  scale_fill_gradient2(low = 'blue', high = 'red', mid = 'white',
+                       midpoint = 0, limit = c(-1, 1), space = 'Lab', name = 'Correlation') +
+  theme_minimal() +
+  xlab(NULL) + ylab(NULL) +
+  geom_text(aes(x = ID, y = index, label = value), color = 'black', size = 4)
+```
+
+`mutate_all()` 함수와 `min_rank()` 함수를 통해 지표 별 랭킹을 구해주도록 하며, 퀄리티 지표의 경우 높을수록 좋은 내림차순으로 계산하여야 하므로, `desc()`을 추가해줍니다.
+
+수익성 지표 역시 서로 간의 상관관계가 낮은 지표가 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수 있습니다.
+
+```{r}
+rank_sum = rank_quality %>%
+  rowSums()
+
+invest_quality = rank(rank_sum) <= 30
+
+KOR_ticker[invest_quality, ] %>%
+  select(`종목코드`, `종목명`) %>%
+  cbind(quality_profit[invest_quality, ])
+```
+
+`rowSums()` 함수를 이용해 종목 별 랭킹들의 합을 구해주도록 합니다. 그 후 4개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 세가지 수익 지표가 골고루 높은 종목을 선택하여 줍니다. 해당 종목들의 티커, 종목명, ROE, GPA, CFO을 출력하여 확인하도록 합니다.

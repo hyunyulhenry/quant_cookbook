@@ -80,7 +80,7 @@ glimpse(data_market)
 ## $ PBR              <chr> "1.25", "1.02", "0.57", "9.94", "1.51", "0.6"...
 ## $ 주당배당금       <int> 1416, 1500, 4000, 0, 6000, 1600, 4000, 10000, 1000...
 ## $ 배당수익률       <dbl> 3.20, 2.29, 2.86, 0.00, 1.82, 3.56, 1.82, 3.92, 4....
-## $ 게시물..일련번호 <int> 1458, 1410, 1452, 1597, 1538, 1540, 1595, 1497, 1454...
+## $ 게시물..일련번호 <int> 1456, 1408, 1450, 1595, 1536, 1538, 1593, 1495, 1452...
 ## $ 총카운트         <int> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
 ## $ IDX_CD           <chr> "G45", "G45", "G25", "G35", "G15", "G40", "G2...
 ## $ IDX_NM_KOR       <chr> "WICS IT", "WICS IT", "WICS 경기관련소비재", "WICS 건...
@@ -518,7 +518,7 @@ ggplot(data_market, aes(x = ROE, y = PBR)) +
   geom_point()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-18-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" />
 
 1. `ggplot()` 함수 내에 사용될 데이터인 data_market을 입력하며, aes 인자 내부에 x축은 ROE, y축은 PBR 열을 사용하도록 정의합니다
 2. `geom_point()` 함수를 통해 산점도 그래프를 그려주도록 합니다. 원하는 그림이 그려지기는 하였으나, ROE와 PBR에 극단치 데이터가 존재하여 둘간의 관계가 잘 보이지 않습니다.
@@ -530,7 +530,7 @@ ggplot(data_market, aes(x = ROE, y = PBR)) +
   coord_cartesian(xlim = c(0, 0.30), ylim = c(0, 3))
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-19-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" />
 
 이번에는 극단치 효과를 제거하기 위해 `coord_cartesian()` 함수 내에 xlim과 ylim, 즉 x축과 y축의 범위를 직접 지정해주도록 합니다. 극단치가 제거되어 데이터를 한 눈에 확인할 수 있습니다.
 
@@ -544,7 +544,7 @@ ggplot(data_market, aes(x = ROE, y = PBR,
   coord_cartesian(xlim = c(0, 0.30), ylim = c(0, 3))
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-20-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
 
 1. `ggplot()` 함수 내부 aes 인자에 color와 shape를 지정해주면, 해당 그룹 별로 모양과 색이 나타납니다. 코스피와 코스닥 종목들에 해당하는 데이터의 색과 점 모양이 다르게 표시할 수 있습니다.
 2. `geom_smooth()` 함수를 통해 평활선을 추가해줄 수도 있으며, 방법으로 lm(linear model)을 지정해줄 경우 선형회귀선을 그려주게 됩니다. 이 외에도 glm, gam, loess 등의 다양한 회귀선을 그려줄 수 있습니다.
@@ -556,7 +556,7 @@ ggplot(data_market, aes(x = PBR)) +
   coord_cartesian(xlim = c(0, 10))
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-21-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
 
 `geom_histogram()` 함수는 히스토그램을 나타내주며, binwidth 인자를 막대의 너비를 선택해줄 수 있습니다. 국내 종목들의 PBR 데이터는 좌측에 쏠려있고 오른쪽으로 꼬리가 긴 분포를 가지고 있습니다.
 
@@ -573,7 +573,7 @@ ggplot(data_market, aes(x = PBR)) +
             col = 'black', size = 4, hjust = -0.5)
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-22-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
 
 PBR 히스토그램을 좀 더 자세하게 나타내보도록 하겠습니다.
 
@@ -589,7 +589,7 @@ ggplot(data_market, aes(x = SEC_NM_KOR, y = PBR)) +
   coord_flip()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-23-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
 
 박스 플롯 역시 데이터의 분포와 극단치를 확인하기 좋은 그림이며, `geom_boxplot()` 함수를 통해 나타낼 수 있습니다.
 
@@ -613,7 +613,7 @@ data_market %>%
   theme(legend.position = 'bottom', legend.title = element_blank())
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-24-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
 
 앞에서 배운 데이터 분석과 시각화를 동시에 연결하여 사용할 수도 있습니다.
 
@@ -653,7 +653,7 @@ data_market %>%
   theme_classic()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-26-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
 
 `geom_bar()`는 막대그래프를 그려주는 함수입니다. 
 
@@ -680,7 +680,7 @@ data_market %>%
   theme_classic()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-27-1.png" width="40%" style="display: block; margin: auto;" />
+<img src="08-data_analysis_files/figure-html/unnamed-chunk-27-1.png" width="50%" style="display: block; margin: auto;" />
 
 1. `filter()` 함수를 통해 NA 종목은 삭제해준 후, 섹터 별 종목 갯수를 구해주도록 합니다.
 2. `ggplot()`의 x축에 `reorder()` 함수를 적용하여 SEC_NM_KOR 변수를 n 순서대로 정렬해줍니다.

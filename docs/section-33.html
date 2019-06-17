@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-16" />
+<meta name="date" content="2019-06-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.8" data-path="section-4.html"><a href="section-4.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
 <li class="chapter" data-level="2.3.9" data-path="section-4.html"><a href="section-4.html#class-id"><i class="fa fa-check"></i><b>2.3.9</b> class와 id</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (%&gt;%)</a></li>
+<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (<code>%&gt;%</code>)</a></li>
 <li class="chapter" data-level="2.5" data-path="section-4.html"><a href="section-4.html#section-9"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
@@ -240,6 +240,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.1" data-path="section-40.html"><a href="section-40.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
 <li class="chapter" data-level="9.4.2" data-path="section-40.html"><a href="section-40.html#section-51"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
+<li class="chapter" data-level="9.5" data-path="section-40.html"><a href="section-40.html#section-52"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-40.html"><a href="section-40.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-40.html"><a href="section-40.html#section-53"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -289,12 +293,12 @@ price_list =<span class="st"> </span><span class="kw">do.call</span>(cbind, pric
 
 <span class="kw">head</span>(price_list[, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</code></pre>
 <pre><code>##            005930 000660 005380 068270 051910
-## 2017-05-23     NA     NA     NA     NA 289500
-## 2017-05-24     NA     NA     NA     NA 290000
-## 2017-05-25     NA     NA     NA     NA 296000
-## 2017-05-26     NA     NA     NA     NA 304500
-## 2017-05-29     NA     NA     NA     NA 309500
-## 2017-05-30  44640  57400 164000  93933 306500</code></pre>
+## 2017-05-30  44640  57400 164000  93933 306500
+## 2017-05-31  44700  57000 163000  93737 302000
+## 2017-06-01  44680  56400 165500  93149 303000
+## 2017-06-02  45960  57100 163000  94227 294000
+## 2017-06-05  45940  56100 161500  95894 291500
+## 2017-06-07  45300  56500 159000  96875 290500</code></pre>
 <ol style="list-style-type: decimal">
 <li>먼저 티커가 저장된 csv 파일을 불러온 후, 티커를 6자리로 맞춰주도록 합니다.</li>
 <li>빈 리스트인 price_list 생성합니다.</li>

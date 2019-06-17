@@ -123,12 +123,13 @@ data 폴더의 KOR_price 폴더 내에 티커_price.csv 이름으로 저장해�
 
 위의 코드에서 for loop 구문을 이용하여 i 값만 변경해주면 모든 종목의 주가를 다운로드 받을 수 있습니다. 전 종목 주가를 다운로드 받는 전체 코드는 다음과 같습니다.
 
-```{r eval = FALSE}
+```{r eval = FALSE, warning = FALSE}
 library(httr)
 library(rvest)
 library(stringr)
 library(xts)
 library(lubridate)
+library(readr)
 
 KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
 print(KOR_ticker$'종목코드'[1])

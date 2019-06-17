@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-16" />
+<meta name="date" content="2019-06-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.8" data-path="section-4.html"><a href="section-4.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
 <li class="chapter" data-level="2.3.9" data-path="section-4.html"><a href="section-4.html#class-id"><i class="fa fa-check"></i><b>2.3.9</b> class와 id</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (%&gt;%)</a></li>
+<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (<code>%&gt;%</code>)</a></li>
 <li class="chapter" data-level="2.5" data-path="section-4.html"><a href="section-4.html#section-9"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
@@ -240,6 +240,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.1" data-path="section-40.html"><a href="section-40.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
 <li class="chapter" data-level="9.4.2" data-path="section-40.html"><a href="section-40.html#section-51"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
+<li class="chapter" data-level="9.5" data-path="section-40.html"><a href="section-40.html#section-52"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-40.html"><a href="section-40.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-40.html"><a href="section-40.html#section-53"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -263,6 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="section-4" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> 크롤링을 위한 기본 지식</h1>
+<p>기존에 프로그래밍에 익숙한 분들도 크롤링에 대해서는 생소한 경우가 많습니다. 기초적인 프로그래밍이나 데이터 분석에 관한 책이나 강의가 굉장히 많은 것과는 달리, 크롤링에 대해서는 지식을 접할 경로가 잘 없기 때문입니다. 물론 크롤링은 기계적인 단계가 많기 때문에 조금만 연습해도 매우 유용하게 사용할 수 있는 기술입니다. 그러나 좀 더 복잡한 웹페이지나 데이터 내용을 수집하기 위해서는 인코딩, 통신구조에 대한 지식이 필요한 순간이 찾아옵니다.</p>
+<p>본 장에서는 크롤링을 하기 위해 사전에 알고 있으면 도움이 되는 인코딩, 웹의 동작 방식, HTML과 CSS에 대해 알아보도록 하겠습니다. 그리고 실제 크롤링시 유익하게 사용되는 파이프 오퍼레이터와 오류에 대한 예외처리에 대해 알아보도록 하겠습니다.</p>
 <div id="r-utf-8-" class="section level2">
 <h2><span class="header-section-number">2.1</span> 인코딩의 이해와 R에서 UTF-8 설정하기</h2>
 <div id="ascii" class="section level3">
@@ -684,7 +690,7 @@ Figure 2.11: id 예제
 </div>
 </div>
 <div id="section-8" class="section level2">
-<h2><span class="header-section-number">2.4</span> 파이프 오퍼레이터 (%&gt;%)</h2>
+<h2><span class="header-section-number">2.4</span> 파이프 오퍼레이터 (<code>%&gt;%</code>)</h2>
 <p>R 내에서 동일한 데이터를 대상으로 연속적으로 작업하게 해주는 오퍼레이터(연산자)가 바로 파이프 오퍼레이터 입니다. 크롤링에 꼭 필요한 <code>rvest</code> 패키지를 설치할 경우 자동으로 <code>magrittr</code> 패키지가 설치되어 사용할 수 있습니다.</p>
 <p>흔히 프로그래밍에서 x라는 데이터를 F()라는 함수에 넣어 결과값을 확인하고 싶을 경우, F(x)의 방법을 사용합니다. 예를 들어 3과 5라는 데이터 중 큰 값을 찾고 싶을 때는 <code>max(3,5)</code>를 통해 확인합니다. 이를 통해 나온 결과 값을 또 다시 G()라는 함수에 넣어 결과값을 확인하고자 할 경우, 비슷한 과정을 거칩니다. <code>max(3,5)</code>를 통해 나온 값의 제곱근을 구하고자 할 경우 <code>result = max(3,5)</code>를 통해 첫 번째 결과값을 저장하고, <code>sqrt(result)</code>를 통해 두 번째 결과값을 계산합니다. 물론 <code>sqrt(max(3,5))</code>와 같은 표현법으로 한번에 표현할 수 있습니다.</p>
 <p>이러한 표현의 단점은, 계산하는 함수가 많아질수록 저장하는 변수가 늘어나거나 혹은 괄호가 지나치게 길어집니다. 그러나 파이프 오퍼레이터인 <code>%&gt;%</code>를 사용할 경우, 함수 간의 관계를 매우 직관적으로 표현하고 이해할 수 있습니다. 이를 정리하면 아래 표와 같습니다.</p>

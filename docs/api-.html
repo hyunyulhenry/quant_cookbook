@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-16" />
+<meta name="date" content="2019-06-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -156,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.8" data-path="section-4.html"><a href="section-4.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
 <li class="chapter" data-level="2.3.9" data-path="section-4.html"><a href="section-4.html#class-id"><i class="fa fa-check"></i><b>2.3.9</b> class와 id</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (%&gt;%)</a></li>
+<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (<code>%&gt;%</code>)</a></li>
 <li class="chapter" data-level="2.5" data-path="section-4.html"><a href="section-4.html#section-9"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
@@ -239,6 +239,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="section-40.html"><a href="section-40.html#section-50"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="section-40.html"><a href="section-40.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
 <li class="chapter" data-level="9.4.2" data-path="section-40.html"><a href="section-40.html#section-51"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="section-40.html"><a href="section-40.html#section-52"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-40.html"><a href="section-40.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-40.html"><a href="section-40.html#section-53"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -346,12 +350,12 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 ## 2007-01-09  12.35000  13.28286 12.16429   13.22429   837324600
 ## 2007-01-10  13.53571  13.97143 13.35000   13.85714   738220000
 ##            AAPL.Adjusted
-## 2007-01-03      7.951960
-## 2007-01-04      8.128461
-## 2007-01-05      8.070577
-## 2007-01-08      8.110430
-## 2007-01-09      8.784165
-## 2007-01-10      9.204537</code></pre>
+## 2007-01-03      10.48732
+## 2007-01-04      10.72009
+## 2007-01-05      10.64375
+## 2007-01-08      10.69631
+## 2007-01-09      11.58486
+## 2007-01-10      12.13926</code></pre>
 <p>다운로드 결과로써 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한, Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다. <code>Ad()</code> 함수는 <code>getSymbols()</code> 함수를 통해 다운로드 받은 데이터에서 수정주가만을 선택하여 줍니다. 시계열 그래프를 그려주는 <code>chart_Series()</code>와 함께 수정주가를 그리면 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chart_Series</span>(<span class="kw">Ad</span>(AAPL))</code></pre>
 <p><img src="03-api_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
