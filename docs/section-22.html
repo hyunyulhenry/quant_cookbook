@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-17" />
+<meta name="date" content="2019-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,6 +304,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.2" data-path="section-44.html"><a href="section-44.html#section-57"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="section-58.html"><a href="section-58.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-58.html"><a href="section-58.html#section-59"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-58.html"><a href="section-58.html#section-60"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-58.html"><a href="section-58.html#section-61"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-58.html"><a href="section-58.html#section-62"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-58.html"><a href="section-58.html#section-63"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -375,7 +383,7 @@ name =<span class="st"> </span>KOR_ticker<span class="op">$</span><span class="s
 price =<span class="st"> </span><span class="kw">xts</span>(<span class="ot">NA</span>, <span class="dt">order.by =</span> <span class="kw">Sys.Date</span>())
 <span class="kw">print</span>(price)</code></pre>
 <pre><code>##            [,1]
-## 2019-06-17   NA</code></pre>
+## 2019-06-19   NA</code></pre>
 <ol style="list-style-type: decimal">
 <li>먼저 data 폴더 내에 KOR_price 폴더를 생성해줍니다.</li>
 <li>i = 1 을 입력해 줍니다. 향후 for loop 구문을 통해 i 값만 변경하면 모든 종목의 주가를 다운로드 받을 수 있습니다.</li>
@@ -393,12 +401,12 @@ data_html =<span class="st"> </span><span class="kw">read_html</span>(data, <spa
 <span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&#39;data&#39;</span>) 
 
 <span class="kw">print</span>(<span class="kw">head</span>(data_html))</code></pre>
-<pre><code>## [1] &quot;20170530|45520|45660|44480|44640|248672&quot;
-## [2] &quot;20170531|44580|45020|44400|44700|373382&quot;
-## [3] &quot;20170601|44860|44900|44400|44680|195070&quot;
-## [4] &quot;20170602|45060|45960|45000|45960|249775&quot;
-## [5] &quot;20170605|46040|46360|45720|45940|151988&quot;
-## [6] &quot;20170607|46500|46500|45240|45300|274588&quot;</code></pre>
+<pre><code>## [1] &quot;20170601|44860|44900|44400|44680|195070&quot;
+## [2] &quot;20170602|45060|45960|45000|45960|249775&quot;
+## [3] &quot;20170605|46040|46360|45720|45940|151988&quot;
+## [4] &quot;20170607|46500|46500|45240|45300|274588&quot;
+## [5] &quot;20170608|45000|45580|45000|45160|279575&quot;
+## [6] &quot;20170609|45680|46440|45600|46100|234657&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>paste0()</code> 함수를 이용해 원하는 종목의 url을 생성해 줍니다. url중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.</li>
 <li><code>GET()</code> 함수를 통해 페이지의 데이터를 불러옵니다.</li>
@@ -411,14 +419,14 @@ data_html =<span class="st"> </span><span class="kw">read_html</span>(data, <spa
 price =<span class="st"> </span><span class="kw">read_delim</span>(data_html, <span class="dt">delim =</span> <span class="st">&#39;|&#39;</span>)
 <span class="kw">print</span>(<span class="kw">head</span>(price))</code></pre>
 <pre><code>## # A tibble: 6 x 6
-##   `20170530` `45520` `45660` `44480` `44640` `248672`
+##   `20170601` `44860` `44900` `44400` `44680` `195070`
 ##        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-## 1   20170531   44580   45020   44400   44700   373382
-## 2   20170601   44860   44900   44400   44680   195070
-## 3   20170602   45060   45960   45000   45960   249775
-## 4   20170605   46040   46360   45720   45940   151988
-## 5   20170607   46500   46500   45240   45300   274588
-## 6   20170608   45000   45580   45000   45160   279575</code></pre>
+## 1   20170602   45060   45960   45000   45960   249775
+## 2   20170605   46040   46360   45720   45940   151988
+## 3   20170607   46500   46500   45240   45300   274588
+## 4   20170608   45000   45580   45000   45160   279575
+## 5   20170609   45680   46440   45600   46100   234657
+## 6   20170612   45420   45600   45140   45380   219086</code></pre>
 <p><code>readr</code> 패키지의 <code>read_delim()</code> 함수를 쓸 경우 구분자로 이루어진 데이터를 테이블로 쉽게 변경할 수 있습니다. 데이터를 확인해보면 테이블 형태로 변경되었으며 각 열은 날짜, 시가, 고가, 저가, 종가, 거래량을 의미합니다. 이 중 우리가 필요한 날짜와 종가를 선택한 후, 데이터 클랜징을 해주도록 합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
 
@@ -432,12 +440,12 @@ price[, <span class="dv">1</span>] =<span class="st"> </span><span class="ot">NU
 
 <span class="kw">print</span>(<span class="kw">tail</span>(price))</code></pre>
 <pre><code>##            Price
-## 2019-06-10 44800
-## 2019-06-11 44850
 ## 2019-06-12 44600
 ## 2019-06-13 43750
 ## 2019-06-14 44000
-## 2019-06-17 43900</code></pre>
+## 2019-06-17 43900
+## 2019-06-18 44350
+## 2019-06-19 45350</code></pre>
 <ol style="list-style-type: decimal">
 <li>날짜에 해당하는 첫번째 열과, 종가에 해당하는 다섯번째 열만을 선택해 저장해 줍니다.</li>
 <li>티블 형태의 데이터를 데이터프레임 형태로 변경해 줍니다.</li>
@@ -727,7 +735,7 @@ price =<span class="st"> </span><span class="kw">read_html</span>(data) <span cl
 <span class="st">  </span><span class="kw">parse_number</span>()
 
 <span class="kw">print</span>(price)</code></pre>
-<pre><code>## [1] 44000</code></pre>
+<pre><code>## [1] 44350</code></pre>
 <ol style="list-style-type: decimal">
 <li>먼저 url을 입력한 후, <code>GET()</code> 함수를 이용하여 데이터를 불러옵니다.</li>
 <li><code>read_html()</code> 함수를 이용해 html 데이터를 불러온 후, <code>html_node()</code> 함수 내에 위에서 구한 xpath를 입력하여, 해당 지점의 데이터를 추출합니다.</li>
@@ -766,7 +774,7 @@ data_value[data_value <span class="op">&lt;</span><span class="st"> </span><span
 
 <span class="kw">print</span>(data_value)</code></pre>
 <pre><code>##      PER      PBR      PCR      PSR 
-## 5.984622 1.060210 3.918588 1.077528</code></pre>
+## 6.032227 1.068644 3.949759 1.086099</code></pre>
 <p>분자에는 현재 주가를 입력하며, 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 단, 주가는 원 단위, 재무 데이터는 억 단위이므로, 둘 간의 단위를 동일하게 맞춰주기 위해 분모에 억을 곱해 줍니다. 또한 가치지표가 음수인 경우는<code>NA</code>로 변경해주도록 합니다.</p>
 <p>결과를 확인해보면 4가지 가치지표가 잘 계산되었습니다.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(data_value, <span class="st">&#39;data/KOR_value/005930_value.csv&#39;</span>)</code></pre>
@@ -1029,7 +1037,7 @@ price =<span class="st"> </span><span class="kw">read_html</span>(data) <span cl
 <span class="st">  </span><span class="kw">as.numeric</span>()
 
 <span class="kw">print</span>(price)</code></pre>
-<pre><code>## [1] 43900</code></pre>
+<pre><code>## [1] 45350</code></pre>
 <ol style="list-style-type: decimal">
 <li>해당 페이지 url을 저장 후, <code>GET()</code> 함수를 통해 페이지 정보를 받습니다.</li>
 <li><code>read_html()</code> 함수를 이용해 데이터를 받고, <code>html_node()</code> 함수와 Xpath를 이용해 현재 주가에 해당하는 html을 구합니다. 주가의 경우 페이지 상단에서 확인할 수 있습니다.</li>
@@ -1099,7 +1107,7 @@ share_yahoo =<span class="st"> </span>share_yahoo <span class="op">*</span><span
 data_value_yahoo[data_value_yahoo <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span>
 <span class="kw">print</span>(data_value_yahoo)</code></pre>
 <pre><code>##      PER      PBR      PCR      PSR 
-## 5.971241 1.091699 3.909827 1.075118</code></pre>
+## 6.168469 1.127757 4.038967 1.110629</code></pre>
 <p>분자에는 주가를, 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 야후 파이낸스의 재무 데이터는 천원 단위이므로, 둘 간의 단위를 동일하게 맞춰주기 위해 분모에 천을 곱해 줍니다. 또한 가치지표가 음수인 경우는<code>NA</code>로 변경해주도록 합니다.</p>
 <p>결과를 확인해보면 4가지 가치지표가 잘 계산되었습니다. Company Guide에서 구한 값과는 재무데이터의 차이로 인해 미세한 차이가 있지만, 이는 무시해도 될 정도입니다.</p>
 <table>
@@ -1116,17 +1124,17 @@ data_value_yahoo[data_value_yahoo <span class="op">&lt;</span><span class="st"> 
 <tbody>
 <tr class="odd">
 <td>Company Guide</td>
-<td align="right">5.98</td>
-<td align="right">1.06</td>
-<td align="right">3.92</td>
-<td align="right">1.08</td>
+<td align="right">6.03</td>
+<td align="right">1.07</td>
+<td align="right">3.95</td>
+<td align="right">1.09</td>
 </tr>
 <tr class="even">
 <td>야후 파이낸스</td>
-<td align="right">5.97</td>
-<td align="right">1.09</td>
-<td align="right">3.91</td>
-<td align="right">1.08</td>
+<td align="right">6.17</td>
+<td align="right">1.13</td>
+<td align="right">4.04</td>
+<td align="right">1.11</td>
 </tr>
 </tbody>
 </table>

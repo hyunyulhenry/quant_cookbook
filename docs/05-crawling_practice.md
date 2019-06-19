@@ -72,7 +72,7 @@ print(otp)
 ```
 
 ```
-## [1] "vDfqRc92OziMrxW4rOHJF6jiayIMs/zrbRXLyVYnkV3xq/9HjZGNiwo4VjGMnQ6RA0u39B9Tc7UMb57qneTvXAcDZ+k+e3mHuvhJzCLrFNikTOE8lMidwOg00de2MO+GyMwNauSMwI+Ixbuy4MWCb1QZMWbfTOTwDBREMGFEomgrBShMeN5iqd6j7fmYyiDF42H3alDaM0Vi2xnSSH/KJTzt0Mw5juUqUePDXM8kthcSJGnu5D53oOoDPYfSuLTF3tcshZ87YG5b4fSuTfYnw5QZQqEglybJLo54kSQu5Xo="
+## [1] "vDfqRc92OziMrxW4rOHJF4b4LPl6lDkvzkfVUxcFmCdKQUNbta+isMfEcAeUmMkiHho8hQuu4gizSXl3B7sUY6XRAQ1B702xw0SCqa3jfcfQUycnZMRnSrL0ictDxamLZGqyb9x1ytOcB04PbTMkFk6XYDzeYA3vQKM8ZjEww5mqEkfMqOvvqNhrq9HN8t+PJ9NfQnkjnWV1or6aYkTpgzVfFsbsE9W2T9C+iCna/0QMcPK1ZqE1mBCEQumTnXVjQJ4ZPzEVpPlqFGAQjkS+yPNSJxLbMKQatgN29P6ULIs="
 ```
 
 이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.
@@ -283,7 +283,7 @@ print(head(KOR_ticker))
 ## 330        1416       3.20             1458       NA
 ## 45         1500       2.29             1410       NA
 ## 301        4000       2.86             1452       NA
-## 331        1417       3.91             2088       NA
+## 331        1417       3.91             2089       NA
 ## 1278          0       0.00             1597       NA
 ## 1082       6000       1.82             1538       NA
 ```

@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-17" />
+<meta name="date" content="2019-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,6 +304,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.2" data-path="section-44.html"><a href="section-44.html#section-57"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="section-58.html"><a href="section-58.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-58.html"><a href="section-58.html#section-59"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-58.html"><a href="section-58.html#section-60"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-58.html"><a href="section-58.html#section-61"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-58.html"><a href="section-58.html#section-62"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-58.html"><a href="section-58.html#section-63"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -383,7 +391,7 @@ otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span cl
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(otp)</code></pre>
-<pre><code>## [1] &quot;vDfqRc92OziMrxW4rOHJF6jiayIMs/zrbRXLyVYnkV3xq/9HjZGNiwo4VjGMnQ6RA0u39B9Tc7UMb57qneTvXAcDZ+k+e3mHuvhJzCLrFNikTOE8lMidwOg00de2MO+GyMwNauSMwI+Ixbuy4MWCb1QZMWbfTOTwDBREMGFEomgrBShMeN5iqd6j7fmYyiDF42H3alDaM0Vi2xnSSH/KJTzt0Mw5juUqUePDXM8kthcSJGnu5D53oOoDPYfSuLTF3tcshZ87YG5b4fSuTfYnw5QZQqEglybJLo54kSQu5Xo=&quot;</code></pre>
+<pre><code>## [1] &quot;vDfqRc92OziMrxW4rOHJF4b4LPl6lDkvzkfVUxcFmCdKQUNbta+isMfEcAeUmMkiHho8hQuu4gizSXl3B7sUY6XRAQ1B702xw0SCqa3jfcfQUycnZMRnSrL0ictDxamLZGqyb9x1ytOcB04PbTMkFk6XYDzeYA3vQKM8ZjEww5mqEkfMqOvvqNhrq9HN8t+PJ9NfQnkjnWV1or6aYkTpgzVfFsbsE9W2T9C+iCna/0QMcPK1ZqE1mBCEQumTnXVjQJ4ZPzEVpPlqFGAQjkS+yPNSJxLbMKQatgN29P6ULIs=&quot;</code></pre>
 <p>이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span>
 down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),
@@ -521,7 +529,7 @@ down_ind =<span class="st"> </span><span class="kw">read.csv</span>(<span class=
 ## 330        1416       3.20             1458       NA
 ## 45         1500       2.29             1410       NA
 ## 301        4000       2.86             1452       NA
-## 331        1417       3.91             2088       NA
+## 331        1417       3.91             2089       NA
 ## 1278          0       0.00             1597       NA
 ## 1082       6000       1.82             1538       NA</code></pre>
 <p>데이터를 시가총액 순으로 내림차순 해줄 필요도 있습니다. <code>order()</code> 함수를 통해 상대적인 순서를 구할 수 있으며, R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꾸어 주도록 합니다. 결과적으로 시가총액 기준 내림차순으로 해당 데이터가 정렬됩니다.</p>

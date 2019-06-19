@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-17" />
+<meta name="date" content="2019-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -304,6 +304,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.2" data-path="section-44.html"><a href="section-44.html#section-57"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="section-58.html"><a href="section-58.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-58.html"><a href="section-58.html#section-59"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-58.html"><a href="section-58.html#section-60"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-58.html"><a href="section-58.html#section-61"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-58.html"><a href="section-58.html#section-62"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-58.html"><a href="section-58.html#section-63"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -409,10 +417,10 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 
 <span class="kw">print</span>(data)</code></pre>
 <pre><code>## Response [https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258]
-##   Date: 2019-06-17 14:56
+##   Date: 2019-06-19 13:33
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
-##   Size: 57 kB
+##   Size: 57.7 kB
 ## 
 ## 
 ## 
@@ -441,26 +449,26 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 </ol>
 <p>해당 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장되게 됩니다. 이처럼 개발자도구 화면을 통해 내가 추출하고자 하는 데이터가 html 중 어디에 위치하고 있는지 먼저 확인을 하면, 어렵지 않게 원하는 데이터를 읽어올 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(data_title)</code></pre>
-<pre><code>##  [1] &quot;YG엔터 &#39;경찰 수사전담팀 구성&#39; 방침에 하락 마감…YG플러스도&quot;                
-##  [2] &quot;뉴욕증시, FOMC 결과 대기 혼조 출발&quot;                                        
-##  [3] &quot;상하이-런던 주식 교차거래 &#39;후룬퉁&#39; 개시(종합)&quot;                             
-##  [4] &quot;[뉴스8 단신] 필리핀, 보라카이 운항 허가 취소…에어부산 &#39;날벼락&#39;&quot;           
-##  [5] &quot;[숫자뉴스] 56%&quot;                                                            
-##  [6] &quot;계열사에 &#39;회장님표&#39; 김치·와인 강매한 태광 21억 과징금&quot;                    
-##  [7] &quot;\&quot;하는 일도 없는데\&quot; 펀드 판매보수 꼬박꼬박&quot;                               
-##  [8] &quot;17일 장 마감 후 주요 종목뉴스&quot;                                             
-##  [9] &quot;삼정KPMG, 26일 산업통상자원부와 수입규제 대응전략 세미나 개최&quot;             
-## [10] &quot;[표]유형별 펀드 자금 동향(6월 14일)&quot;                                       
-## [11] &quot;한국거래소, 현대일렉트릭 등 공매도 과열 종목 지정&quot;                         
-## [12] &quot;[분석] &#39;검은 대행진&#39; 홍콩發 ELS 주의보&quot;                                    
-## [13] &quot;바이오로그디바이스, 해성옵틱스 주식 80억원에 취득 결정&quot;                    
-## [14] &quot;메디톡스 \&quot;주주 고발 관련 수사기관 연락 전혀 없었다\&quot;&quot;                     
-## [15] &quot;골드퍼시픽, &#39;다나은&#39; 주식 105억원에 양수 결정&quot;                             
-## [16] &quot;키움증권, 자기주식 50만주 취득 결정&quot;                                       
-## [17] &quot;신한제5호기업인수목적, 19일 코스닥시장 신규상장&quot;                           
-## [18] &quot;[표]아시아 주요 증시 동향(6월 17일)&quot;                                       
-## [19] &quot;메디톡스 &#39;주주들 정현호 대표 고발&#39; 보도에 \&quot;수사기관 연락 받은 사실 없다\&quot;&quot;
-## [20] &quot;디지캡 \&quot;다산일렉트론 인수로 시너지 기대\&quot;&quot;</code></pre>
+<pre><code>##  [1] &quot;\&quot;역대급 출몰\&quot;…작년대비 400배 늘어난 독성해파리&quot;                                
+##  [2] &quot;[단독] 거리제한 기준은 가까운 문? 먼 문?…이마트24 &#39;꼼수 출점&#39; 의혹&quot;              
+##  [3] &quot;5만 원권 발행 10년…수표 사라지고 씀씀이는 커져&quot;                                  
+##  [4] &quot;외국인 차별 논란, 외국인 내국인 모두 &#39;우려&#39;&quot;                                      
+##  [5] &quot;최관·이상철·정희선 교수, `2019 삼정KPMG 프로페서` 위촉&quot;                         
+##  [6] &quot;[마켓인사이트]LG전자 수처리 자회사 매각, SC PE-부방 경쟁으로 압축&quot;                
+##  [7] &quot;  두산, 연료전지·소재사업 분할 재상장 예비심사 통과&quot;                             
+##  [8] &quot;한국거래소 &quot;                                                                      
+##  [9] &quot;‘초단타 매매’ 메릴린치   제재 여부 내달로 연기&quot;                                 
+## [10] &quot;장 마감 후 기업공시[6월 19일]&quot;                                                    
+## [11] &quot;[표]아시아 주요 증시 동향(6월 19일)&quot;                                              
+## [12] &quot;[인터뷰] 유의진 우리넷 대표 \&quot;OLED시장 발전 가능성 높아… 후공정 모듈 개발 주력\&quot;&quot;
+## [13] &quot;코오롱티슈진, 상폐결정 내달 10일로 연기&quot;                                          
+## [14] &quot;네이처셀 &#39;울고&#39; 해성옵틱스 &#39;웃고&#39;… 유증에 희비 엇갈려&quot;                           
+## [15] &quot;정부 투자·육성 계획에 &#39;팹리스 기업&#39; 주가 훈풍&quot;                                   
+## [16] &quot;한국투자신탁, 룩셈부르크 오피스빌딩 펀드 출시&quot;                                    
+## [17] &quot;[마켓워치] IMM인베, 항공기부품사에 175억 프리IPO 투자&quot;                            
+## [18] &quot;신한금융그룹, 모태펀드·성장금융 매칭 출자 나서&quot;                                  
+## [19] &quot;아이엠텍, 성진금속 2만 4500주 양수…거래소 \&quot;우회상장여부 확인\&quot;&quot;                 
+## [20] &quot;어닝쇼크 공포 확산… 상장사 2분기 영업익 줄하향&quot;</code></pre>
 </div>
 <div id="section-15" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -617,10 +625,10 @@ url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#
 <pre class="sourceCode r"><code class="sourceCode r">down_table =<span class="st"> </span><span class="kw">GET</span>(url)
 <span class="kw">print</span>(down_table)</code></pre>
 <pre><code>## Response [https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&amp;page=1]
-##   Date: 2019-06-17 14:56
+##   Date: 2019-06-19 13:33
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
-##   Size: 95.1 kB
+##   Size: 95.3 kB
 ## 
 ## 
 ## 
@@ -692,36 +700,36 @@ table =<span class="st"> </span>table[[<span class="dv">2</span>]]
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">head</span>(table))</code></pre>
 <pre><code>##    N     종목명  현재가 전일비 등락률 액면가  시가총액 상장주식수
 ## 1 NA                                                             
-## 2  1   삼성전자  43,900    100 -0.23%    100 2,620,735  5,969,783
-## 3  2 SK하이닉스  63,700    600 +0.95%  5,000   463,738    728,002
-## 4  3     현대차 140,000    500 -0.36%  5,000   299,135    213,668
-## 5  4 삼성전자우  35,650    650 -1.79%    100   293,359    822,887
-## 6  5   셀트리온 205,000  4,000 +1.99%  1,000   263,075    128,329
+## 2  1   삼성전자  45,350  1,000 +2.25%    100 2,707,296  5,969,783
+## 3  2 SK하이닉스  67,200  3,800 +5.99%  5,000   489,218    728,002
+## 4  3 삼성전자우  37,050    650 +1.79%    100   304,880    822,887
+## 5  4     현대차 140,000  1,000 -0.71%  5,000   299,135    213,668
+## 6  5   셀트리온 211,500  3,500 +1.68%  1,000   271,416    128,329
 ##   외국인비율    거래량    PER   ROE 토론실
 ## 1         NA             &lt;NA&gt;  &lt;NA&gt;     NA
-## 2      57.11 7,359,657   7.29 19.63     NA
-## 3      50.00 2,426,252   2.98 38.53     NA
-## 4      44.61   228,445  26.16  2.20     NA
-## 5      92.55 1,156,576   5.92   N/A     NA
-## 6      20.57   323,697 100.05 10.84     NA</code></pre>
+## 2      57.10 9,355,085   7.53 19.63     NA
+## 3      50.02 6,161,232   3.15 38.53     NA
+## 4      92.51 1,122,650   6.15   N/A     NA
+## 5      44.58   301,577  26.16  2.20     NA
+## 6      20.61   378,509 103.22 10.84     NA</code></pre>
 <p>이 중 마지막 열인 토론실은 필요가 없는 열이며, 첫번째 행과 같이 아무런 정보가 없는 행이 존재하기도 합니다. 이를 정리하면 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">table[, <span class="kw">ncol</span>(table)] =<span class="st"> </span><span class="ot">NULL</span>
 table =<span class="st"> </span><span class="kw">na.omit</span>(table)
 <span class="kw">print</span>(<span class="kw">head</span>(table))</code></pre>
 <pre><code>##    N     종목명  현재가 전일비 등락률 액면가  시가총액 상장주식수
-## 2  1   삼성전자  43,900    100 -0.23%    100 2,620,735  5,969,783
-## 3  2 SK하이닉스  63,700    600 +0.95%  5,000   463,738    728,002
-## 4  3     현대차 140,000    500 -0.36%  5,000   299,135    213,668
-## 5  4 삼성전자우  35,650    650 -1.79%    100   293,359    822,887
-## 6  5   셀트리온 205,000  4,000 +1.99%  1,000   263,075    128,329
-## 10 6     LG화학 348,500  4,000 +1.16%  5,000   246,014     70,592
+## 2  1   삼성전자  45,350  1,000 +2.25%    100 2,707,296  5,969,783
+## 3  2 SK하이닉스  67,200  3,800 +5.99%  5,000   489,218    728,002
+## 4  3 삼성전자우  37,050    650 +1.79%    100   304,880    822,887
+## 5  4     현대차 140,000  1,000 -0.71%  5,000   299,135    213,668
+## 6  5   셀트리온 211,500  3,500 +1.68%  1,000   271,416    128,329
+## 10 6     LG화학 348,500  3,000 +0.87%  5,000   246,014     70,592
 ##    외국인비율    거래량    PER   ROE
-## 2       57.11 7,359,657   7.29 19.63
-## 3       50.00 2,426,252   2.98 38.53
-## 4       44.61   228,445  26.16  2.20
-## 5       92.55 1,156,576   5.92   N/A
-## 6       20.57   323,697 100.05 10.84
-## 10      38.59   147,415  18.53  8.86</code></pre>
+## 2       57.10 9,355,085   7.53 19.63
+## 3       50.02 6,161,232   3.15 38.53
+## 4       92.51 1,122,650   6.15   N/A
+## 5       44.58   301,577  26.16  2.20
+## 6       20.61   378,509 103.22 10.84
+## 10      38.64   100,841  18.53  8.86</code></pre>
 <p>이제 우리가 필요한 정보는 6자리 티커입니다. 티커 역시 개발자도구 화면을 통해 tbody → td → a 태그에서 href 속성에 위치하고 있음을 알고 있으며, 이를 추출하는 코드는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">symbol =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">html_nodes</span>(., <span class="st">&#39;tbody&#39;</span>) <span class="op">%&gt;%</span>
@@ -731,8 +739,8 @@ table =<span class="st"> </span><span class="kw">na.omit</span>(table)
 <span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</code></pre>
 <pre><code>##  [1] &quot;/item/main.nhn?code=005930&quot;  &quot;/item/board.nhn?code=005930&quot;
 ##  [3] &quot;/item/main.nhn?code=000660&quot;  &quot;/item/board.nhn?code=000660&quot;
-##  [5] &quot;/item/main.nhn?code=005380&quot;  &quot;/item/board.nhn?code=005380&quot;
-##  [7] &quot;/item/main.nhn?code=005935&quot;  &quot;/item/board.nhn?code=005935&quot;
+##  [5] &quot;/item/main.nhn?code=005935&quot;  &quot;/item/board.nhn?code=005935&quot;
+##  [7] &quot;/item/main.nhn?code=005380&quot;  &quot;/item/board.nhn?code=005380&quot;
 ##  [9] &quot;/item/main.nhn?code=068270&quot;  &quot;/item/board.nhn?code=068270&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>read_html()</code>함수를 통해 html 정보를 읽어오며, 인코딩은 ’EUC-KR’로 설정합니다.</li>
@@ -749,18 +757,18 @@ table =<span class="st"> </span><span class="kw">na.omit</span>(table)
 ##                    &quot;005930&quot;                    &quot;005930&quot; 
 ##  /item/main.nhn?code=000660 /item/board.nhn?code=000660 
 ##                    &quot;000660&quot;                    &quot;000660&quot; 
-##  /item/main.nhn?code=005380 /item/board.nhn?code=005380 
-##                    &quot;005380&quot;                    &quot;005380&quot; 
 ##  /item/main.nhn?code=005935 /item/board.nhn?code=005935 
 ##                    &quot;005935&quot;                    &quot;005935&quot; 
+##  /item/main.nhn?code=005380 /item/board.nhn?code=005380 
+##                    &quot;005380&quot;                    &quot;005380&quot; 
 ##  /item/main.nhn?code=068270 /item/board.nhn?code=068270 
 ##                    &quot;068270&quot;                    &quot;068270&quot;</code></pre>
 <p><code>sapply()</code> 함수를 통해 symbol 변수의 내용들에 <code>function()</code>을 적용하며, <code>substr()</code> 함수 내에 <code>nchar()</code> 함수를 적용하여 마지막 6자리 글자만을 추출하도록 합니다.</p>
 <p>결과를 살펴보면 티커에 해당하는 마지막 6글자만 추출된 것이 확인됩니다. 그러나 결과를 살펴보면 동일한 내용이 두번 연속하여 추출됩니다. 이는 main.nhn?code= 에 해당하는 부분은 종목명에 설정된 링크, board.nhn?code= 에 해당하는 부분은 토론실에 설정된 링크이기 때문입니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">symbol =<span class="st"> </span><span class="kw">unique</span>(symbol)
 <span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</code></pre>
-<pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;005380&quot; &quot;005935&quot; &quot;068270&quot; &quot;051910&quot; &quot;055550&quot;
-##  [8] &quot;017670&quot; &quot;012330&quot; &quot;051900&quot;</code></pre>
+<pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;005935&quot; &quot;005380&quot; &quot;068270&quot; &quot;051910&quot; &quot;055550&quot;
+##  [8] &quot;051900&quot; &quot;012330&quot; &quot;017670&quot;</code></pre>
 <p><code>unique()</code> 함수를 이용하여 중복되는 티커를 제거하면 우리가 원하는 티커 부분만 깔끔하게 정리가 됩니다. 해당 내용을 위에서 구한 table에 입력한 후 데이터를 다듬는 과정은 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">table<span class="op">$</span>N =<span class="st"> </span>symbol
 <span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &#39;종목코드&#39;</span>

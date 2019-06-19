@@ -40,16 +40,16 @@ knitr::kable(
 )
 ```
 
-이 중 데이터의 손실을 없애기 위해 `full_join()`을 사용하여 두 데이터를 합치도록 하겠습니다.
+이 중 거래소 티커 기준으로 데이터를 맞추기 위해 `left_join()`을 사용하여 두 데이터를 합치도록 하겠습니다.
 
 ```{r message = FALSE}
 library(dplyr)
 
-data_market = full_join(KOR_ticker, KOR_sector,
+data_market = left_join(KOR_ticker, KOR_sector,
                          by = c('종목코드' = 'CMP_CD', '종목명' = 'CMP_KOR'))
 ```
 
-`full_join()` 함수를 이용해 KOR_ticker와 KOR_sector 데이터를 합쳐주도록 합니다. by 인자는 데이터를 합치는 기준점을 의미하며, x 데이터(KOR_ticker)의 종목코드와 y 데이터(KOR_sector)의 CMP_CD는 같음을, x 데이터의 종목명과 y 데이터의 CMP_KOR는 같음을 정의합니다.
+`left_join()` 함수를 이용해 KOR_ticker와 KOR_sector 데이터를 합쳐주도록 합니다. by 인자는 데이터를 합치는 기준점을 의미하며, x 데이터(KOR_ticker)의 종목코드와 y 데이터(KOR_sector)의 CMP_CD는 같음을, x 데이터의 종목명과 y 데이터의 CMP_KOR는 같음을 정의합니다.
 
 ### `glimpse()`: 데이터 구조 확인하기
 
