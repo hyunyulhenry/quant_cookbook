@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-19" />
+<meta name="date" content="2019-06-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,6 +311,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.2" data-path="section-58.html"><a href="section-58.html#section-62"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
 <li class="chapter" data-level="10.2.3" data-path="section-58.html"><a href="section-58.html#section-63"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
 </ul></li>
+<li class="chapter" data-level="10.3" data-path="section-58.html"><a href="section-58.html#section-64"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-58.html"><a href="section-58.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-58.html"><a href="section-58.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-58.html"><a href="section-58.html#section-65"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="section-58.html"><a href="section-58.html#section-66"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -537,7 +543,7 @@ reg =<span class="st"> </span><span class="kw">lm</span>(ri <span class="op">~</
 <p>주식의 위험은 변동성뿐만 아니라 베타 등 여러 지표로도 측정할 수 있습니다. 저변동성 효과와 비슷하게 고유변동성이 낮은 주식의 수익률이 높은 저고유변동성 효과, 베타가 낮은 주식의 수익률이 오히려 높은 저베타 효과도 발견되고 있으며, 이러한 효과들을 합쳐 저위험 효과로 부르기도 합니다.</p>
 <div id="section-49" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> 저변동성 포트폴리오 구하기: 일간 기준</h3>
-<p>먼저 최근 1년 일간 수익률 기준 변동성이 낮은 30종목을 선택하도록 하겠습니다.</p>
+<p>먼저 최근 1년 일간 수익률 기준 변동성이 낮은 30 종목을 선택하도록 하겠습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
 <span class="kw">library</span>(xts)
 <span class="kw">library</span>(PerformanceAnalytics)
@@ -633,7 +639,7 @@ KOR_ticker[invest_lowvol, ] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">52</span>))
 
 std_12m_weekly[std_12m_weekly <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></code></pre>
-<p>먼저 최근 252일 수익률울 선택한 후, <code>apply.weekly()</code> 함수 내 Return.cumulative를 입력하여 주간 수익률을 계산해주도록 합니다. 이 외에도 <code>apply.monthly()</code>, <code>apply.yearly()</code> 함수 등으로 일간 수익률을 월간, 연간 수익률 등으로 변환할 수 있습니다. 그 후 과정은 위와 동일합니다.</p>
+<p>먼저 최근 252일 수익률울 선택한 후, <code>apply.weekly()</code> 함수 내 Return.cumulative를 입력하여 주간 수익률을 계산하며, 연율화를 위해 연간 주수에 해당하는 <span class="math inline">\(\sqrt{52}\)</span>를 곱해주도록 합니다. 이 외에도 <code>apply.monthly()</code>, <code>apply.yearly()</code> 함수 등으로 일간 수익률을 월간, 연간 수익률 등으로 변환할 수 있습니다. 그 후 과정은 위와 동일합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">std_12m_weekly[<span class="kw">rank</span>(std_12m_weekly) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</code></pre>
 <pre><code>##    X316140    X030200    X001720    X019680    X002960    X015350 
 ## 0.15274966 0.15157981 0.11649582 0.15019451 0.14310423 0.12891254 
@@ -904,17 +910,9 @@ KOR_ticker[invest_pbr, ] <span class="op">%&gt;%</span>
 <h3><span class="header-section-number">9.4.2</span> 각 지표를 결합하기</h3>
 <p>저PBR 하나의 지표만으로도 우수한 성과를 거둘 수 있음은 오랜 기간동안 증명되고 있습니다. 그러나 저평가 주식이 계속해서 저평가에 머무르는 가치 함정에 빠지지 않기 위해서는, 여러 지표를 동시에 볼 필요도 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">rank_value =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="kw">min_rank</span>(.)))</code></pre>
-<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
-## please use list() instead
-## 
-## # Before:
-## funs(name = f(.)
-## 
-## # After: 
-## list(name = ~f(.))
-## This warning is displayed once per session.</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(rank_value, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(.)))
+
+<span class="kw">cor</span>(rank_value, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">rownames</span>(.)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(index, value, <span class="op">-</span>ID) <span class="op">%&gt;%</span>
@@ -1187,9 +1185,17 @@ quality_profit =<span class="st"> </span><span class="kw">cbind</span>(quality_r
 <span class="st">  </span><span class="kw">setNames</span>(., <span class="kw">c</span>(<span class="st">&#39;ROE&#39;</span>, <span class="st">&#39;GPA&#39;</span>, <span class="st">&#39;CFO&#39;</span>))</code></pre>
 <p>먼저 재무제표와 티커 파일을 불러온 후, 세가지 지표에 해당하는 값을 구한 뒤 최근년도 데이터만을 선택합니다. 그 후, <code>cbind()</code> 함수를 이용해 지표들을 하나로 묶어줍니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">rank_quality =<span class="st"> </span>quality_profit <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="kw">min_rank</span>(<span class="kw">desc</span>(.))))
-
-<span class="kw">cor</span>(rank_quality, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="kw">min_rank</span>(<span class="kw">desc</span>(.))))</code></pre>
+<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(rank_quality, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">rownames</span>(.)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(index, value, <span class="op">-</span>ID) <span class="op">%&gt;%</span>

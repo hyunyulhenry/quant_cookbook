@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-19" />
+<meta name="date" content="2019-06-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,6 +311,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.2" data-path="section-58.html"><a href="section-58.html#section-62"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
 <li class="chapter" data-level="10.2.3" data-path="section-58.html"><a href="section-58.html#section-63"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
 </ul></li>
+<li class="chapter" data-level="10.3" data-path="section-58.html"><a href="section-58.html#section-64"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-58.html"><a href="section-58.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-58.html"><a href="section-58.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-58.html"><a href="section-58.html#section-65"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="section-58.html"><a href="section-58.html#section-66"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -335,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="section-58" class="section level1">
 <h1><span class="header-section-number">Chapter 10</span> 퀀트 전략을 이용한 종목선정 (심화)</h1>
 <p>지난 장에서는 팩터를 이용한 투자 전략의 기본이 되는 로우볼, 모멘텀, 밸류, 퀄리티 전략에 대해 알아보았습니다. 물론 이러한 단일 팩터를 이용한 투자도 장기적으로 우수한 성과를 보이지만, 여러 팩터를 결합하거나 좀더 정밀하게 전략을 만든다면 더욱 우수한 성과를 거둘 수 있습니다.</p>
-<p>이번 장에서는 섹터별 효과를 없앤 후 포트폴리오를 구성하는 방법, 극단치 데이터 제거 및 팩터 결합 방법, 그리고 멀티팩터 구성방법에 대해 알아보겠습니다.</p>
+<p>이번 장에서는 섹터별 효과를 없앤 후 포트폴리오를 구성하는 방법, 이상치 데이터 제거 및 팩터 결합 방법, 그리고 멀티팩터 구성방법에 대해 알아보겠습니다.</p>
 <div id="section-59" class="section level2">
 <h2><span class="header-section-number">10.1</span> 섹터 중립 포트폴리오</h2>
 <p>팩터 전략의 단점 중 하나는 선택된 종목들이 특정 섹터로 쏠리는 경우가 있다는 점입니다. 특히 과거 수익률을 토대로 종목을 선정하는 모멘텀 전략의 경우, 특정 섹터가 좋을때 동일한 섹터의 모든 종목이 함께 움직이는 경향이 있어 이러한 쏠림이 심할 수 있습니다.</p>
@@ -486,8 +492,8 @@ Figure 5.1: 밸류 팩터와 퀄리티 팩터간의 관계
 </tr>
 <tr class="even">
 <td align="left">계산</td>
-<td align="left"><span class="math inline">\(\frac{이자\,및\,법인세 차감전이익}{기업\,가치}\)</span></td>
-<td align="left"><span class="math inline">\(\frac{이자\,및\,법인세 차감전이익}{투하자본}\)</span></td>
+<td align="left"><span class="math inline">\(\frac{이자\,및\,법인세\,차감전이익}{기업\,가치}\)</span></td>
+<td align="left"><span class="math inline">\(\frac{이자\,및\,법인세\,차감전이익}{투하자본}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -596,8 +602,238 @@ KOR_ticker[invest_magic, ] <span class="op">%&gt;%</span>
 ## 29   094970       제이엠티  0.2402346      0.2700186
 ## 30   194510     파티게임즈  0.2170685      0.5069124</code></pre>
 <p>이익수익률과 투하 자본 수익률의 랭킹을 각각 구해주며, 내림차순으로 값을 구하기 위해 마이너스를 붙여줍니다. 그 후 두 값의 합의 랭킹 기준 상위 30 종목을 선택합니다. 그 후 종목코드와 종목명, 각 지표를 확인해주도록 합니다.</p>
-
 </div>
+</div>
+<div id="section-64" class="section level2">
+<h2><span class="header-section-number">10.3</span> 이상치 데이터 제거 및 팩터의 결합</h2>
+<p>모든 데이터 분석에서 중요한 문제 중 하나가 이상치(극단치, Outlier) 데이터를 어떻게 처리할 것인가 입니다. 과거 12개월 수익률이 10배인 주식이 과연 모멘텀 관점에서 좋기만 한 주식인가, ROE가 100% 넘는 주식이 과연 퀄리티 관점에서 좋기만 한 주식인가 고민이 되기 마련입니다.</p>
+<p>따라서 이러한 이상치를 제외하고 분석할지, 포함해서 분석할지를 판단해야 하며, 만일 포함한다면 그대로 사용할 것인지 보정하여 사용할 것인지도 판단해야 합니다.</p>
+<p>우리가 가지고 있는 데이터에서 이러한 이상치 데이터를 탐색해보도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+<span class="kw">library</span>(ggplot2)
+
+KOR_value =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_value.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+KOR_value <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> PBR)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.1</span>)</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(KOR_value<span class="op">$</span>PBR, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
+<pre><code>## [1] 137.6451</code></pre>
+<p>국내 종목들의 PBR을 통해 히스토그램을 그려보면 오른쪽으로 꼬리가 매우 긴 분포를 보이고 있습니다. 이는 PBR이 무려 137.65인 이상치 데이터가 존재하기 때문입니다. 이처럼 모든 팩터 지표에는 극단치 데이터가 존재하기 마련이며, 이를 처리하는 방법에 대해 알아보도록 하겠습니다.</p>
+<div id="trim---" class="section level3">
+<h3><span class="header-section-number">10.3.1</span> 트림(Trim): 이상치 데이터 삭제</h3>
+<p>트림은 이상치 데이터를 삭제하는 방법입니다. 위의 예제에서 이상치에 해당하는 상하위 1% 데이터를 삭제해주도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+value_trim =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(PBR) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">PBR =</span> <span class="kw">ifelse</span>(<span class="kw">percent_rank</span>(PBR) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.99</span>, <span class="ot">NA</span>, PBR),
+         <span class="dt">PBR =</span> <span class="kw">ifelse</span>(<span class="kw">percent_rank</span>(PBR) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span>, <span class="ot">NA</span>, PBR))
+
+value_trim <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> PBR)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.1</span>)</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><code>percent_rank()</code> 함수를 통해 백분위를 구한 후 상하위 1%에 해당하는 데이터들은 NA로 변경하였습니다. 결과적으로 지나치게 PBR이 낮은 종목과 높은 종목은 제거가 되어 x축의 스케일이 많이 줄어든 모습입니다.</p>
+<p>평균이나 분산과 같이 통계값을 구하는 과정에서는 이상치 데이터를 제거하는 것이 바람직 할 수 있습니다. 그러나 팩터를 이용해 포트폴리오를 구하는 과정에서 해당 방법은 잘 사용되지 않습니다. 데이터의 손실이 발생하게 되며, 제거된 종목 중 정말로 좋은 종목이 존재할 수도 있기 때문입니다.</p>
+</div>
+<div id="winsorizing---" class="section level3">
+<h3><span class="header-section-number">10.3.2</span> 윈저라이징(Winsorizing): 이상치 데이터 대체</h3>
+<p>포트폴리오 구성에서는 일반적으로 이상치 데이터를 다른 데이터로 대체하는 윈저라이징 방법이 사용됩니다. 예를 들어, 상위 99%를 초과하는 데이터는 99% 값으로 대체하며, 하위 1% 미만의 데이터는 1% 데이터로 대체합니다. 즉, 좌우로 울타리를 쳐놓고 해당 범위를 넘어가는 값을 강제로 울타리에 맞춰줍니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">value_winsor =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(PBR) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">PBR =</span> <span class="kw">ifelse</span>(<span class="kw">percent_rank</span>(PBR) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.99</span>,
+                      <span class="kw">quantile</span>(., <span class="fl">0.99</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), PBR),
+         <span class="dt">PBR =</span> <span class="kw">ifelse</span>(<span class="kw">percent_rank</span>(PBR) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.01</span>,
+                      <span class="kw">quantile</span>(., <span class="fl">0.01</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), PBR))
+
+value_winsor <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> PBR)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.1</span>)</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-15-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>역시나 <code>percent_rank()</code> 함수를 통해 백분위를 구한 후, 해당 범위를 초과할 경우 각각 상하위 1% 데이터로 변형을 해주도록 합니다. 그림을 살펴보면 x축 양 끝 부분의 막대가 길어진 것을 확인할 수 있습니다.</p>
+</div>
+<div id="section-65" class="section level3">
+<h3><span class="header-section-number">10.3.3</span> 팩터의 결합 방법</h3>
+<p>우리는 이전에 밸류 지표의 결합, 퀄리티 지표의 결합, 그리고 마법공식 포트폴리오를 구성할 때 단순히 랭킹을 더하는 방법을 사용하였습니다. 물론 투자 종목수가 얼마 되지 않거나, 개인투자자의 입장에서는 이러한 방법이 가장 심플하면서도 효과적일수 있습니다.</p>
+<p>그러나 전문투자자 혹은 팩터를 분석하는 업무를 할 경우, 이처럼 단순히 랭킹을 더하는 방법은 여러가지 문제를 지니고 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+  
+KOR_value <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>key)  </code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-16-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>위 그림은 각 밸류 지표의 랭킹을 구한 후 히스토그램으로 나타낸 것입니다. 랭킹을 구하는 것의 가장 큰 장점은 극단치로 인한 효과가 사라진다는 점과, 균등한 분포를 가진다는 점입니다.</p>
+<p>그러나 각 지표의 x축을 보면 최대값이 서로 다릅니다. 이는 지표별 결측치로 인해 유효 데이터의 갯수가 달라 나타나는 현상이며, 서로 다른 범위의 분포를 단순히 합치는 것은 좋은 방법이 아닙니다.</p>
+<p>예를 들어 A, B, C, D 팩터에 각각 비중을 40%, 30%, 20%, 10% 부여하여 포트폴리오를 구성하고자 할 경우를 생각해 봅시다. 각 랭킹은 분포의 범위가 다르므로, 랭킹과 비중의 가중평균을 통해 포트폴리오를 구성하는 방법은 왜곡된 결과를 발생시킵니다.</p>
+<p>이러한 문제를 해결하는 가장 좋은 방법은 랭킹을 구한 후, 이를 Z-Score로 정규화하는 방법입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">KOR_value <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">scale</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>key)  </code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-17-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><code>min_rank()</code>를 통해 랭킹을 구한 후, <code>scale()</code>을 통해 정규화를 해주었습니다. 기본적으로 랭킹의 분포가 가진 극단치 효과가 사라지는 점과 균등 분포의 장점을 유지하고 있으며, 분포의 범위 역시 거의 동일하게 바뀌었습니다.</p>
+<p>이처럼 여러 팩터를 결합하여 포트폴리오를 구성하고자 하는 경우, 먼저 각 팩터(지표) 별 랭킹을 구한 후 정규화를 한 뒤 더하는 것이, 왜곡 효과가 제거된 안정적인 방법입니다.</p>
+<p><span class="math display">\[Z－Score(Rank(Factor\,A)) + Z－Score(Rank(Factor\,B)) +\,\dots\,+ Z－Score(Rank(Factor\,N))\]</span></p>
+</div>
+</div>
+<div id="section-66" class="section level2">
+<h2><span class="header-section-number">10.4</span> 멀티팩터 포트폴리오</h2>
+<p>앞에서 배웠던 팩터 이론들과 결합 방법들을 응용하여 멀티팩터 포트폴리오를 구성해보도록 하겠습니다. 각 팩터에 사용되는 지표는 다음과 같습니다.</p>
+<ul>
+<li>퀄리티: 자기자본이익률, 매출총이익, 영업활동현금흐름</li>
+<li>밸류: PER, PBR, PSR, PCR</li>
+<li>모멘텀: 3개월 수익률, 6개월 수익률, 12개월 수익률</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xts)
+<span class="kw">library</span>(stringr)
+
+KOR_fs =<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/KOR_fs.Rds&#39;</span>)
+KOR_value =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_value.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+KOR_price =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_price.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.xts</span>()
+
+KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) 
+KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =<span class="st"> </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</code></pre>
+<p>먼저 재무제표, 가치지표, 주가 데이터를 불러오도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">num_col =<span class="st"> </span><span class="kw">ncol</span>(KOR_fs[[<span class="dv">1</span>]])
+quality_roe =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;지배주주순이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자본&#39;</span>)[num_col]
+quality_gpa =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;매출총이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>)[num_col]
+quality_cfo =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;영업활동으로인한현금흐름&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>)[num_col]
+quality_profit =<span class="st"> </span><span class="kw">cbind</span>(quality_roe, quality_gpa, quality_cfo) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(., <span class="kw">c</span>(<span class="st">&#39;ROE&#39;</span>, <span class="st">&#39;GPA&#39;</span>, <span class="st">&#39;CFO&#39;</span>))
+
+factor_quality =<span class="st"> </span>quality_profit <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(<span class="kw">desc</span>(.)))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">scale</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rowSums</span>()
+
+factor_quality <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">.</span><span class="st">`</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>첫번째로 퀄리티 지표를 계산해줍니다. 코드는 앞장에서 살펴본 것과 거의 비슷하며, 자기자본이익률, 매출총이익, 영업활동현금흐름을 계산해줍니다. 그 후 <code>mutate_all()</code> 함수를 통해 랭킹을 구한 후 다시 표준화를 해주도록 하며, 내림차순으로 정리하기 위해 랭킹 부분에 <code>desc()</code>를 붙여줍니다.</p>
+<p>그 후 <code>rowSums()</code> 함수를 통해 계산된 Z-Score를 종목별로 합쳐주도록 합니다. Z-Score의 히스토그램을 살펴보면 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">factor_value =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">scale</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rowSums</span>()
+
+factor_value <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">.</span><span class="st">`</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>두번째로 밸류 지표를 계산해줍니다. 밸류 지표의 경우 이미 테이블 형태로 들어와 있으며, 랭킹과 표준화를 거쳐 합을 구해주도록 합니다. 역시나 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(dplyr)
+
+ret_3m =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">60</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {<span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>})
+ret_6m =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">120</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {<span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>})
+ret_12m =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">252</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {<span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>})
+ret_bind =<span class="st"> </span><span class="kw">cbind</span>(ret_3m, ret_6m, ret_12m) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>()
+
+factor_mom =<span class="st"> </span>ret_bind <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(<span class="kw">desc</span>(.)))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">scale</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rowSums</span>()
+
+factor_mom <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">.</span><span class="st">`</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>마지막으로 모멘텀 지표를 계산해줍니다. 최근 60일, 120일, 252일 주가를 통해 3개월, 6개월, 12개월 수익률을 구해준 후 <code>cbind()</code>를 통해 열로 묶어주도록 합니다. 그 후 내림차순 기준 랭킹과 표준화를 거쳐 합을 구해주도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+
+factor_qvm =<span class="st"> </span><span class="kw">cbind</span>(factor_quality, factor_value, factor_mom) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">scale</span>(.))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">factor_quality =</span> factor_quality <span class="op">*</span><span class="st"> </span><span class="fl">0.33</span>,
+         <span class="dt">factor_value =</span> factor_value <span class="op">*</span><span class="st"> </span><span class="fl">0.33</span>,
+         <span class="dt">factor_mom =</span> factor_mom <span class="op">*</span><span class="st"> </span><span class="fl">0.33</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rowSums</span>()
+
+invest_qvm =<span class="st"> </span><span class="kw">rank</span>(factor_qvm) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></code></pre>
+<p>계산된 팩터들을 토대로 최종 포트폴리오를 구성해주도록 합니다. 각 팩터의 분포가 역시나 다르기 때문에 다시 한번 <code>scale()</code>을 통해 정규화를 해주도록 하며, 각 팩터에 동일한 비중인 0.33을 곱해준 후 이를 더해주도록 합니다. 물론 팩터 별 비중을 [0.2, 0.4, 0.4]와 같이 다르게 줄 수도 있으며, 이는 어떠한 팩터를 더욱 중요하게 생각하는지 혹은 더욱 좋게 보는지에 따라 조정이 가능합니다.</p>
+<p>최종적으로 해당 값의 랭킹 기준 상위 30 종목을 선택해 줍니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">quality_profit[invest_qvm, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>key, <span class="dt">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>먼저 선택된 종목의 퀄리티 지표별 분포를 살펴보도록 하겠습니다. 대부분 종목의 수익성이 높음이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">KOR_value[invest_qvm, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>key, <span class="dt">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>이번에는 선택된 종목의 가치 지표별 분포입니다. 대부분 종목의 값이 낮아, 밸류 종목임이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ret_bind[invest_qvm, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>key, <span class="dt">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>마지막으로 각 종목들의 기간 별 수익률 분포입니다. 역시나 대부분의 종목들이 높은 수익률을 보입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">KOR_ticker[invest_qvm, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">&#39;종목코드&#39;</span>, <span class="st">&#39;종목명&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(quality_roe[invest_qvm, ], <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(KOR_value<span class="op">$</span>PBR[invest_qvm], <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(ret_12m[invest_qvm], <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;종목코드&#39;</span>, <span class="st">&#39;종목명&#39;</span>, <span class="st">&#39;ROE&#39;</span>, <span class="st">&#39;PBR&#39;</span>, <span class="st">&#39;12M&#39;</span>))</code></pre>
+<pre><code>##      종목코드         종목명  ROE  PBR   12M
+## 170    010780   아이에스동서 0.22 1.06  0.34
+## 229    034310           NICE 0.06 0.78  0.11
+## 357    122990         와이솔 0.17 1.87  0.46
+## 359    097520       엠씨넥스 0.23 3.62  1.15
+## 378    215200 메가스터디교육 0.19 1.97  0.23
+## 464    002310     아세아제지 0.15 0.65  0.07
+## 486    016590     신대양제지 0.16 0.65  0.01
+## 487    067990   도이치모터스 0.17 1.63  0.82
+## 604    013580       계룡건설 0.20 0.54 -0.08
+## 636    035890       서희건설 0.12 0.79  0.21
+## 717    002170       삼양통상 0.09 0.72  0.67
+## 733    005990     매일홀딩스 0.05 0.37 -0.13
+## 755    023600       삼보판지 0.16 0.53  0.30
+## 785    036810     에프에스티 0.18 1.78  0.29
+## 803    101330       모베이스 0.09 0.75  0.42
+## 808    065130   탑엔지니어링 0.06 0.60  0.68
+## 860    038390     레드캡투어 0.09 1.01  0.09
+## 874    039340     한국경제TV 0.13 1.35  0.52
+## 899    069510         에스텍 0.14 1.05  0.26
+## 947    005710       대원산업 0.10 0.48 -0.03
+## 990    007540           샘표 0.06 0.57  0.34
+## 1071   006580       대양제지 0.25 0.95  0.28
+## 1256   031310     아이즈비전 0.10 0.84  0.42
+## 1279   016740           두올 0.09 0.57 -0.19
+## 1513   037330   인지디스플레 0.06 0.40  0.13
+## 1514   092780     동양피스톤 0.12 0.72  0.33
+## 1527   019180     티에이치엔 0.12 1.92  0.24
+## 1584   004140           동방 0.12 0.48 -0.01
+## 1645   002710        TCC스틸 0.09 0.51  0.27
+## 1649   091340      S&amp;K폴리텍 0.11 0.82  0.32</code></pre>
+<p>포트폴리오 내 종목들을 대상으로 팩터 별 대표적인 지표인 ROE, PBR, 12개월 수익률을 나타내었습니다. 전반적으로 ROE는 높고 PBR은 낮으며, 12개월 수익률이 높은 모습을 보입니다. 물론 특정 팩터의 강도가 약하더라도 나머지 팩터의 강도가 충분히 쌔다면, 포트폴리오에 편입되는 모습을 보이기도 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(quality_profit, KOR_value, ret_bind)[invest_qvm, ] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>()</code></pre>
+<pre><code>##        ROE   GPA   CFO   PER PBR   PCR   PSR ret_3m ret_6m ret_12m
+## [1,] 0.129 0.274 0.133 7.967   1 3.885 0.496  0.219  0.459   0.284</code></pre>
+<p>마지막으로 포트폴리오 내 종목들의 지표 별 평균을 계산한 값입니다.</p>
+
 </div>
 </div>
 

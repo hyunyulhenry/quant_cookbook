@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-19" />
+<meta name="date" content="2019-06-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -311,6 +311,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2.2" data-path="section-58.html"><a href="section-58.html#section-62"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
 <li class="chapter" data-level="10.2.3" data-path="section-58.html"><a href="section-58.html#section-63"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
 </ul></li>
+<li class="chapter" data-level="10.3" data-path="section-58.html"><a href="section-58.html#section-64"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-58.html"><a href="section-58.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-58.html"><a href="section-58.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-58.html"><a href="section-58.html#section-65"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="section-58.html"><a href="section-58.html#section-66"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -552,8 +558,23 @@ data_value =<span class="st"> </span><span class="kw">list</span>()
 ## 068270 97.300689 9.6753724 66.666633 25.9376035
 ## 051910 16.154841 1.3733681 11.195115  0.8441124
 ## 055550  6.835012 0.5886837        NA         NA</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">data_value =<span class="st"> </span>data_value <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="kw">na_if</span>(., <span class="ot">Inf</span>)))</code></pre>
+<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(data_value, <span class="st">&#39;data/KOR_value.csv&#39;</span>)</code></pre>
-<p>열 이름이 가치지표에 해당하는 부분만을 선택한 후, 행이름을 티커들로 변경합니다. 마지막으로 data 폴더 내에 <strong>KOR_value.csv</strong> 파일로 저장해주도록 합니다.</p>
+<ol style="list-style-type: decimal">
+<li><p>열 이름이 가치지표에 해당하는 부분만을 선택한 후, 행이름을 티커들로 변경합니다.</p></li>
+<li><p>일부 종목의 경우 재무 데이터가 0으로 표기되어 가치지표가 Inf으로 계산되는 경우가 있습니다. <code>mutate_all()</code> 내에 <code>na_if()</code> 함수를 이용하여 Inf 데이터를 NA로 변경해 주도록 합니다.</p></li>
+<li><p>data 폴더 내에 <strong>KOR_value.csv</strong> 파일로 저장해주도록 합니다.</p></li>
+</ol>
 
 </div>
 </div>

@@ -187,7 +187,7 @@ sd(example)
 
 ### 저변동성 포트폴리오 구하기: 일간 기준
 
-먼저 최근 1년 일간 수익률 기준 변동성이 낮은 30종목을 선택하도록 하겠습니다.
+먼저 최근 1년 일간 수익률 기준 변동성이 낮은 30 종목을 선택하도록 하겠습니다.
 
 
 ```r
@@ -324,7 +324,7 @@ std_12m_weekly = xts::last(ret, 252) %>%
 std_12m_weekly[std_12m_weekly == 0] = NA
 ```
 
-먼저 최근 252일 수익률울 선택한 후, `apply.weekly()` 함수 내 Return.cumulative를 입력하여 주간 수익률을 계산해주도록 합니다. 이 외에도 `apply.monthly()`, `apply.yearly()` 함수 등으로 일간 수익률을 월간, 연간 수익률 등으로 변환할 수 있습니다. 그 후 과정은 위와 동일합니다.
+먼저 최근 252일 수익률울 선택한 후, `apply.weekly()` 함수 내 Return.cumulative를 입력하여 주간 수익률을 계산하며, 연율화를 위해 연간 주수에 해당하는 $\sqrt{52}$를 곱해주도록 합니다. 이 외에도 `apply.monthly()`, `apply.yearly()` 함수 등으로 일간 수익률을 월간, 연간 수익률 등으로 변환할 수 있습니다. 그 후 과정은 위와 동일합니다.
 
 
 
@@ -675,22 +675,8 @@ KOR_ticker[invest_pbr, ] %>%
 
 ```r
 rank_value = KOR_value %>% 
-  mutate_all(funs(min_rank(.)))
-```
+  mutate_all(list(~min_rank(.)))
 
-```
-## Warning: funs() is soft deprecated as of dplyr 0.8.0
-## please use list() instead
-## 
-## # Before:
-## funs(name = f(.)
-## 
-## # After: 
-## list(name = ~f(.))
-## This warning is displayed once per session.
-```
-
-```r
 cor(rank_value, use = 'complete.obs') %>%
   round(., 2) %>%
   data.frame(ID = rownames(.)) %>%
@@ -993,7 +979,21 @@ quality_profit = cbind(quality_roe, quality_gpa, quality_cfo) %>%
 ```r
 rank_quality = quality_profit %>% 
   mutate_all(funs(min_rank(desc(.))))
+```
 
+```
+## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.
+```
+
+```r
 cor(rank_quality, use = 'complete.obs') %>%
   round(., 2) %>%
   data.frame(ID = rownames(.)) %>%

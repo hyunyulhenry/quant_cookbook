@@ -285,7 +285,28 @@ print(head(data_value))
 ```
 
 ```r
+data_value = data_value %>%
+  mutate_all(funs(na_if(., Inf)))
+```
+
+```
+## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.
+```
+
+```r
 write.csv(data_value, 'data/KOR_value.csv')
 ```
 
-열 이름이 가치지표에 해당하는 부분만을 선택한 후, 행이름을 티커들로 변경합니다. 마지막으로 data 폴더 내에 **KOR_value.csv** 파일로 저장해주도록 합니다.
+1. 열 이름이 가치지표에 해당하는 부분만을 선택한 후, 행이름을 티커들로 변경합니다.
+
+2. 일부 종목의 경우 재무 데이터가 0으로 표기되어 가치지표가 Inf으로 계산되는 경우가 있습니다. `mutate_all()` 내에 `na_if()` 함수를 이용하여 Inf 데이터를 NA로 변경해 주도록 합니다.
+
+3. data 폴더 내에 **KOR_value.csv** 파일로 저장해주도록 합니다.
