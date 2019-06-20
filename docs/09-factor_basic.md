@@ -111,19 +111,20 @@ summary(reg)
 ## lm(formula = ri ~ rm)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.06886 -0.01294 -0.00169  0.01080  0.09545 
+##       Min        1Q    Median        3Q       Max 
+## -0.068895 -0.012945 -0.001719  0.010820  0.095422 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 0.0003446  0.0007213   0.478    0.633    
-## rm          1.7622492  0.0906194  19.447   <2e-16 ***
+## (Intercept) 0.0003728  0.0007227   0.516    0.606    
+## rm          1.7614327  0.0907389  19.412   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.0195 on 729 degrees of freedom
-## Multiple R-squared:  0.3416,	Adjusted R-squared:  0.3407 
-## F-statistic: 378.2 on 1 and 729 DF,  p-value: < 2.2e-16
+## Residual standard error: 0.01951 on 727 degrees of freedom
+##   (2 observations deleted due to missingness)
+## Multiple R-squared:  0.3414,	Adjusted R-squared:  0.3405 
+## F-statistic: 376.8 on 1 and 727 DF,  p-value: < 2.2e-16
 ```
 
 증권주를 대상으로 베타를 구하기 위한 회귀분석을 실시해 주도록 합니다. 자산가격결정모형의 수식인 $R_i = R_f + \beta_i×[R_m - R_f]$ 에서 편의를 위해 무위험 수익률인 $R_f$를 0으로 가정하면, $R_i = \beta_i×R_m$의 형태로 나타낼 수 있습니다. 이 중 $R_m$는 독립변수인 주식시장의 수익률을, $R_i$는 종속변수인 개별주식의 수익률을 의미합니다.
@@ -132,7 +133,7 @@ summary(reg)
 2. `lm()` 함수를 통해 손쉽게 선형회귀분석을 실시할 수 있으며, 회귀분석의 결과를 reg 변수에 저장해줍니다.
 3. `summary()` 함수는 데이터의 요약 정보를 나타내며, 해당 예시에서는 회귀분석결과에 대한 정보를 보여줍니다.
 
-회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 1.76로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 19.45로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.
+회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 1.76로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 19.41로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.
 
 ### 베타 시각화 ###
 

@@ -397,7 +397,7 @@ otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span cl
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(otp)</code></pre>
-<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhrgUMa29fcNzwo1q8cgVfieb1vIfCWJO++zQLyQ5qQiiEQIzzgAut/hQc58JgThtqipFrdmv08d7eHsdwZN60Y9R8MSjLaCR7F4OWzBru7506hwnlTpe/+YeXj9SHEsT7ppc3dwdhPf725kF6al86KV5he6FgGeib6mGcWCEh9YbNChskepqgEDp7afcIP2/TOKd9FhV+A+uYultoJlwUwaJyafq2lCqR6Wo6giH6UvhUOwydcQLvZdvNgxLPELRqeN08bUliVlarJutVRgp8eY=&quot;</code></pre>
+<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhlLpUGlt44N9KeXt2lT57yVawmcwKjp92MPmusVU09NuIYQEBNSsWgRH+d99CXjQzvZTUSGTqqoWpBqHIMngv43+7a06tePMdBJhRbgwHCiihTsUSzRbY9SLKQ8yDGUOlg5JDMEqiXARyXYZG5o53pprY82vjVzv2RpP9QtH6CGMSQvS8H1+0+vNi+VzIOtRIG5+fS3bsIlPRKNsvG+RAxSAiVB/Bb4cgm5rbK17BDA5TnQYOZ6WVanKCIODc2qngIaPAUihjJe2+LvK97djo1Q=&quot;</code></pre>
 <p>이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span>
 down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),
