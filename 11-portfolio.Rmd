@@ -793,11 +793,12 @@ $$MRC_i = \frac{\partial\sigma_p}{\partial w_i} $$
 $\sqrt {f'(x)} = \frac{f'(x)}{2\sqrt{f(x)}}$인 사실을 이용하면, 한계 위험기여도는 아래와 같이 풀 수 있습니다. 결과적으로 분자는 분산-공분산 행렬과 각 자산의 비중의 곱, 분모는 포트폴리오의 표준편차 형태로 나타납니다. 
 
 \begin{equation} 
-\sigma_p = \sqrt{w'\Omega w} \\
-\frac{\partial\sigma_p}{\partial w} = \frac{\partial(\sqrt{w'\Omega w})}{\partial w} \\
-=\frac{\partial(w'\Omega w)}{\partial w} \times \frac{1}{2\sqrt{w'\Omega w}} \\
-=\frac{2\Omega w}{2\sqrt{w'\Omega w}} \\
-=\frac{\Omega w}{\sqrt{w'\Omega w}}
+\begin{split}
+\frac{\partial\sigma_p}{\partial w} & = \frac{\partial(\sqrt{w'\Omega w})}{\partial w} \\
+& =\frac{\partial(w'\Omega w)}{\partial w} \times \frac{1}{2\sqrt{w'\Omega w}} \\
+& =\frac{2\Omega w}{2\sqrt{w'\Omega w}} \\
+& =\frac{\Omega w}{\sqrt{w'\Omega w}}
+\end{split}
 \end{equation} 
 
 위험기여도는 특정 자산이 포트폴리오 내에서 차지하는 위험의 비중입니다. 한계 위험기여도가 큰 자산도 포트폴리오 내에서 비중이 작다면, 포트폴리오 내에서 차지하는 위험의 비중은 작을 것입니다. 반면에, 한계 위험기여도가 작은 자산일지라도 비중이 압도적으로 많다면, 포트폴리오 내에서 차지하는 위험의 비중은 클 것입니다. 

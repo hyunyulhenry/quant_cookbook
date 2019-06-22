@@ -1291,11 +1291,12 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
 <p><span class="math display">\[MRC_i = \frac{\partial\sigma_p}{\partial w_i} \]</span></p>
 <p><span class="math inline">\(\sqrt {f&#39;(x)} = \frac{f&#39;(x)}{2\sqrt{f(x)}}\)</span>인 사실을 이용하면, 한계 위험기여도는 아래와 같이 풀 수 있습니다. 결과적으로 분자는 분산-공분산 행렬과 각 자산의 비중의 곱, 분모는 포트폴리오의 표준편차 형태로 나타납니다.</p>
 <p><span class="math display">\[\begin{equation} 
-\sigma_p = \sqrt{w&#39;\Omega w} \\
-\frac{\partial\sigma_p}{\partial w} = \frac{\partial(\sqrt{w&#39;\Omega w})}{\partial w} \\
-=\frac{\partial(w&#39;\Omega w)}{\partial w} \times \frac{1}{2\sqrt{w&#39;\Omega w}} \\
-=\frac{2\Omega w}{2\sqrt{w&#39;\Omega w}} \\
-=\frac{\Omega w}{\sqrt{w&#39;\Omega w}}
+\begin{split}
+\frac{\partial\sigma_p}{\partial w} &amp; = \frac{\partial(\sqrt{w&#39;\Omega w})}{\partial w} \\
+&amp; =\frac{\partial(w&#39;\Omega w)}{\partial w} \times \frac{1}{2\sqrt{w&#39;\Omega w}} \\
+&amp; =\frac{2\Omega w}{2\sqrt{w&#39;\Omega w}} \\
+&amp; =\frac{\Omega w}{\sqrt{w&#39;\Omega w}}
+\end{split}
 \end{equation}\]</span></p>
 <p>위험기여도는 특정 자산이 포트폴리오 내에서 차지하는 위험의 비중입니다. 한계 위험기여도가 큰 자산도 포트폴리오 내에서 비중이 작다면, 포트폴리오 내에서 차지하는 위험의 비중은 작을 것입니다. 반면에, 한계 위험기여도가 작은 자산일지라도 비중이 압도적으로 많다면, 포트폴리오 내에서 차지하는 위험의 비중은 클 것입니다.</p>
 <p>결과적으로 <span class="math inline">\(i\)</span>번째 자산의 위험기여도는, <span class="math inline">\(i\)</span>번째 자산의 한계 위험기여도와 포트폴리오 내 비중의 곱으로 이루어집니다.</p>
