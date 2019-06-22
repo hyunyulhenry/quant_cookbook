@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-20" />
+<meta name="date" content="2019-06-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="section-44.html">
-
+<link rel="next" href="section-67.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -318,6 +318,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="section-58.html"><a href="section-58.html#section-66"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="section-67.html"><a href="section-67.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-67.html"><a href="section-67.html#section-68"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-67.html"><a href="section-67.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-67.html"><a href="section-67.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-67.html"><a href="section-67.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-67.html"><a href="section-67.html#section-69"><i class="fa fa-check"></i><b>11.1.4</b> 결과값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-67.html"><a href="section-67.html#section-70"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-67.html"><a href="section-67.html#section-71"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="section-67.html"><a href="section-67.html#section-72"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="section-67.html"><a href="section-67.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="section-67.html"><a href="section-67.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="section-67.html"><a href="section-67.html#section-73"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="section-67.html"><a href="section-67.html#section-74"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="section-67.html"><a href="section-67.html#section-75"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="section-67.html"><a href="section-67.html#section-76"><i class="fa fa-check"></i><b>11.3.1</b> 전통적 자산배분, 주식 60%와 채권 40%</a></li>
+<li class="chapter" data-level="11.3.2" data-path="section-67.html"><a href="section-67.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="section-67.html"><a href="section-67.html#section-77"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -362,7 +383,7 @@ ret_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class=
   })
 
 invest_mom =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>ret_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></code></pre>
-<p>기존의 코드와 동일하게, 주식 가격 및 티커 데이터를 불러온 후, 최근 12개얼 수익률을 구해 상위 30 종목을 선택합니다.</p>
+<p>기존의 코드와 동일하게, 주식 가격 및 티커 데이터를 불러온 후, 최근 12개월 수익률을 구해 상위 30 종목을 선택합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">KOR_sector =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_sector.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
 KOR_sector<span class="op">$</span><span class="st">&#39;CMP_CD&#39;</span> =<span class="st"> </span><span class="kw">str_pad</span>(KOR_sector<span class="op">$</span><span class="st">&#39;CMP_CD&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)
 data_market =<span class="st"> </span><span class="kw">left_join</span>(KOR_ticker, KOR_sector,
@@ -753,6 +774,20 @@ factor_mom <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre>
 <p><img src="10-factor_adv_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>마지막으로 모멘텀 지표를 계산해줍니다. 최근 60일, 120일, 252일 주가를 통해 3개월, 6개월, 12개월 수익률을 구해준 후 <code>cbind()</code>를 통해 열로 묶어주도록 합니다. 그 후 내림차순 기준 랭킹과 표준화를 거쳐 합을 구해주도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(corrplot)
+
+<span class="kw">cbind</span>(factor_quality, factor_value, factor_mom) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;Quality&#39;</span>, <span class="st">&#39;Value&#39;</span>, <span class="st">&#39;Momentum&#39;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cor</span>(<span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,
+           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="dv">1</span>,
+           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt =</span> <span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,
+           <span class="dt">col =</span> <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),
+           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</code></pre>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>퀄리티, 밸류, 모멘텀 팩터 간의 랭크의 서로 간 상관관계가 매우 낮으며, 여러 팩터를 동시에 고려함으로써 분산효과를 기대할 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
 
 factor_qvm =<span class="st"> </span><span class="kw">cbind</span>(factor_quality, factor_value, factor_mom) <span class="op">%&gt;%</span>
@@ -773,7 +808,7 @@ invest_qvm =<span class="st"> </span><span class="kw">rank</span>(factor_qvm) <s
 <span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>key, <span class="dt">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</code></pre>
-<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>먼저 선택된 종목의 퀄리티 지표별 분포를 살펴보도록 하겠습니다. 대부분 종목의 수익성이 높음이 확인됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">KOR_value[invest_qvm, ] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span>
@@ -781,7 +816,7 @@ invest_qvm =<span class="st"> </span><span class="kw">rank</span>(factor_qvm) <s
 <span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>key, <span class="dt">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</code></pre>
-<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>이번에는 선택된 종목의 가치 지표별 분포입니다. 대부분 종목의 값이 낮아, 밸류 종목임이 확인됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">ret_bind[invest_qvm, ] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span>
@@ -789,7 +824,7 @@ invest_qvm =<span class="st"> </span><span class="kw">rank</span>(factor_qvm) <s
 <span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>key, <span class="dt">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</code></pre>
-<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="10-factor_adv_files/figure-html/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>마지막으로 각 종목들의 기간 별 수익률 분포입니다. 역시나 대부분의 종목들이 높은 수익률을 보입니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">KOR_ticker[invest_qvm, ] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="st">&#39;종목코드&#39;</span>, <span class="st">&#39;종목명&#39;</span>) <span class="op">%&gt;%</span>
@@ -837,38 +872,13 @@ invest_qvm =<span class="st"> </span><span class="kw">rank</span>(factor_qvm) <s
 
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="section-44.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="section-44.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-67.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -30,7 +30,7 @@ ret_12m = ret %>% sapply(., function(x) {
 invest_mom = rank(-ret_12m) <= 30
 ```
 
-기존의 코드와 동일하게, 주식 가격 및 티커 데이터를 불러온 후, 최근 12개얼 수익률을 구해 상위 30 종목을 선택합니다.
+기존의 코드와 동일하게, 주식 가격 및 티커 데이터를 불러온 후, 최근 12개월 수익률을 구해 상위 30 종목을 선택합니다.
 
 
 ```r
@@ -551,6 +551,25 @@ factor_mom %>%
 마지막으로 모멘텀 지표를 계산해줍니다. 최근 60일, 120일, 252일 주가를 통해 3개월, 6개월, 12개월 수익률을 구해준 후 `cbind()`를 통해 열로 묶어주도록 합니다. 그 후 내림차순 기준 랭킹과 표준화를 거쳐 합을 구해주도록 합니다.
 
 
+```r
+library(corrplot)
+
+cbind(factor_quality, factor_value, factor_mom) %>%
+  data.frame() %>%
+  setNames(c('Quality', 'Value', 'Momentum')) %>%
+  cor(use = 'complete.obs') %>%
+  round(., 2) %>%
+  corrplot(method = 'color', type = 'upper',
+           addCoef.col = 'black', number.cex = 1,
+           tl.cex = 0.6, tl.srt = 45, tl.col = 'black',
+           col = colorRampPalette(c('blue', 'white', 'red'))(200),
+           mar=c(0,0,0.5,0))
+```
+
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
+
+퀄리티, 밸류, 모멘텀 팩터 간의 랭크의 서로 간 상관관계가 매우 낮으며, 여러 팩터를 동시에 고려함으로써 분산효과를 기대할 수 있습니다.
+
 
 ```r
 library(tidyr)
@@ -582,7 +601,7 @@ quality_profit[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-23-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
 
 먼저 선택된 종목의 퀄리티 지표별 분포를 살펴보도록 하겠습니다. 대부분 종목의 수익성이 높음이 확인됩니다.
 
@@ -596,7 +615,7 @@ KOR_value[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" />
 
 이번에는 선택된 종목의 가치 지표별 분포입니다. 대부분 종목의 값이 낮아, 밸류 종목임이 확인됩니다.
 
@@ -610,7 +629,7 @@ ret_bind[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-25-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-26-1.png" width="50%" style="display: block; margin: auto;" />
 
 마지막으로 각 종목들의 기간 별 수익률 분포입니다. 역시나 대부분의 종목들이 높은 수익률을 보입니다.
 

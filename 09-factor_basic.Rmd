@@ -385,26 +385,26 @@ KOR_ticker[invest_pbr, ] %>%
 
 저PBR 하나의 지표만으로도 우수한 성과를 거둘 수 있음은 오랜 기간동안 증명되고 있습니다. 그러나 저평가 주식이 계속해서 저평가에 머무르는 가치 함정에 빠지지 않기 위해서는, 여러 지표를 동시에 볼 필요도 있습니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r message = FALSE, out.width = '50%', fig.align='center'}
+library(corrplot)
+
 rank_value = KOR_value %>% 
   mutate_all(list(~min_rank(.)))
 
 cor(rank_value, use = 'complete.obs') %>%
   round(., 2) %>%
-  data.frame(ID = rownames(.)) %>%
-  gather(index, value, -ID) %>%
-  ggplot(aes(x = ID, y = index, fill = value)) +
-  geom_tile(color = 'white') +
-  scale_fill_gradient2(low = 'blue', high = 'red', mid = 'white',
-                       midpoint = 0, limit = c(-1, 1), space = 'Lab', name = 'Correlation') +
-  theme_minimal() +
-  xlab(NULL) + ylab(NULL) +
-  geom_text(aes(x = ID, y = index, label = value), color = 'black', size = 4)
+  corrplot(method = 'color', type = 'upper',
+           addCoef.col = 'black', number.cex = 0.7,
+           tl.cex = 0.6, tl.srt=45, tl.col = 'black',
+           col = colorRampPalette(c('blue', 'white', 'red'))(200),
+           mar=c(0,0,0.5,0))
 ```
 
 먼저 `mutate_all()` 함수를 이용해 모든 열에 함수를 적용해주며, `min_rank()`를 통해 순위를 구해주도록 합니다.
 
-각 열에 해당하는 가치 지표 별 랭킹을 구해준 후 상관관계를 확인해보도록 하며, NA 종목은 삭제해주기 위해 `use = 'complete.obs'`를 입력해주도록 합니다. 같은 가치 지표임에도 불구하고 서로간의 상관관계가 꽤 낮은 지표도 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수도 있습니다.
+각 열에 해당하는 가치 지표 별 랭킹을 구해준 후 상관관계를 확인해보도록 하며, NA 종목은 삭제해주기 위해 `use = 'complete.obs'`를 입력해주도록 합니다.
+
+`corrplot` 패키지의 `corrplot()` 함수를 이용해 상관관계를 그려보면, 같은 가치 지표임에도 불구하고 서로간의 상관관계가 꽤 낮은 지표도 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수도 있습니다.
 
 ```{r}
 rank_sum = rank_value %>%
@@ -606,15 +606,11 @@ rank_quality = quality_profit %>%
 
 cor(rank_quality, use = 'complete.obs') %>%
   round(., 2) %>%
-  data.frame(ID = rownames(.)) %>%
-  gather(index, value, -ID) %>%
-  ggplot(aes(x = ID, y = index, fill = value)) +
-  geom_tile(color = 'white') +
-  scale_fill_gradient2(low = 'blue', high = 'red', mid = 'white',
-                       midpoint = 0, limit = c(-1, 1), space = 'Lab', name = 'Correlation') +
-  theme_minimal() +
-  xlab(NULL) + ylab(NULL) +
-  geom_text(aes(x = ID, y = index, label = value), color = 'black', size = 4)
+  corrplot(method = 'color', type = 'upper',
+           addCoef.col = 'black', number.cex = 0.7,
+           tl.cex = 0.6, tl.srt = 45, tl.col = 'black',
+           col = colorRampPalette(c('blue', 'white', 'red'))(200),
+           mar=c(0,0,0.5,0))
 ```
 
 `mutate_all()` 함수와 `min_rank()` 함수를 통해 지표 별 랭킹을 구해주도록 하며, 퀄리티 지표의 경우 높을수록 좋은 내림차순으로 계산하여야 하므로, `desc()`을 추가해줍니다.

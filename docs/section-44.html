@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-20" />
+<meta name="date" content="2019-06-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -318,6 +318,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="section-58.html"><a href="section-58.html#section-66"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="section-67.html"><a href="section-67.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-67.html"><a href="section-67.html#section-68"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-67.html"><a href="section-67.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-67.html"><a href="section-67.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-67.html"><a href="section-67.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-67.html"><a href="section-67.html#section-69"><i class="fa fa-check"></i><b>11.1.4</b> 결과값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-67.html"><a href="section-67.html#section-70"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-67.html"><a href="section-67.html#section-71"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="section-67.html"><a href="section-67.html#section-72"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="section-67.html"><a href="section-67.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="section-67.html"><a href="section-67.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="section-67.html"><a href="section-67.html#section-73"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="section-67.html"><a href="section-67.html#section-74"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="section-67.html"><a href="section-67.html#section-75"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="section-67.html"><a href="section-67.html#section-76"><i class="fa fa-check"></i><b>11.3.1</b> 전통적 자산배분, 주식 60%와 채권 40%</a></li>
+<li class="chapter" data-level="11.3.2" data-path="section-67.html"><a href="section-67.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="section-67.html"><a href="section-67.html#section-77"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -485,27 +506,26 @@ reg =<span class="st"> </span><span class="kw">lm</span>(ri <span class="op">~</
 ## lm(formula = ri ~ rm)
 ## 
 ## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.068895 -0.012945 -0.001719  0.010820  0.095422 
+##      Min       1Q   Median       3Q      Max 
+## -0.06886 -0.01294 -0.00169  0.01080  0.09545 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 0.0003728  0.0007227   0.516    0.606    
-## rm          1.7614327  0.0907389  19.412   &lt;2e-16 ***
+## (Intercept) 0.0003446  0.0007213   0.478    0.633    
+## rm          1.7622492  0.0906194  19.447   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.01951 on 727 degrees of freedom
-##   (2 observations deleted due to missingness)
-## Multiple R-squared:  0.3414, Adjusted R-squared:  0.3405 
-## F-statistic: 376.8 on 1 and 727 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.0195 on 729 degrees of freedom
+## Multiple R-squared:  0.3416, Adjusted R-squared:  0.3407 
+## F-statistic: 378.2 on 1 and 729 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>증권주를 대상으로 베타를 구하기 위한 회귀분석을 실시해 주도록 합니다. 자산가격결정모형의 수식인 <span class="math inline">\(R_i = R_f + \beta_i×[R_m - R_f]\)</span> 에서 편의를 위해 무위험 수익률인 <span class="math inline">\(R_f\)</span>를 0으로 가정하면, <span class="math inline">\(R_i = \beta_i×R_m\)</span>의 형태로 나타낼 수 있습니다. 이 중 <span class="math inline">\(R_m\)</span>는 독립변수인 주식시장의 수익률을, <span class="math inline">\(R_i\)</span>는 종속변수인 개별주식의 수익률을 의미합니다.</p>
 <ol style="list-style-type: decimal">
 <li>독립변수는 첫번째 열인 KOSPI 200 ETF의 수익률을 선택해주며, 종속변수는 세번째 열인 증권주의 수익률을 선택해줍니다.</li>
 <li><code>lm()</code> 함수를 통해 손쉽게 선형회귀분석을 실시할 수 있으며, 회귀분석의 결과를 reg 변수에 저장해줍니다.</li>
 <li><code>summary()</code> 함수는 데이터의 요약 정보를 나타내며, 해당 예시에서는 회귀분석결과에 대한 정보를 보여줍니다.</li>
 </ol>
-<p>회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 1.76로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 19.41로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.</p>
+<p>회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 1.76로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 19.45로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.</p>
 </div>
 <div id="section-47" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> 베타 시각화</h3>
@@ -910,23 +930,22 @@ KOR_ticker[invest_pbr, ] <span class="op">%&gt;%</span>
 <div id="section-55" class="section level3">
 <h3><span class="header-section-number">9.4.2</span> 각 지표를 결합하기</h3>
 <p>저PBR 하나의 지표만으로도 우수한 성과를 거둘 수 있음은 오랜 기간동안 증명되고 있습니다. 그러나 저평가 주식이 계속해서 저평가에 머무르는 가치 함정에 빠지지 않기 위해서는, 여러 지표를 동시에 볼 필요도 있습니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">rank_value =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span><span class="st"> </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(corrplot)
+
+rank_value =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(.)))
 
 <span class="kw">cor</span>(rank_value, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">rownames</span>(.)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(index, value, <span class="op">-</span>ID) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> ID, <span class="dt">y =</span> index, <span class="dt">fill =</span> value)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_tile</span>(<span class="dt">color =</span> <span class="st">&#39;white&#39;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">low =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">high =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">mid =</span> <span class="st">&#39;white&#39;</span>,
-                       <span class="dt">midpoint =</span> <span class="dv">0</span>, <span class="dt">limit =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">space =</span> <span class="st">&#39;Lab&#39;</span>, <span class="dt">name =</span> <span class="st">&#39;Correlation&#39;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> ID, <span class="dt">y =</span> index, <span class="dt">label =</span> value), <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">size =</span> <span class="dv">4</span>)</code></pre>
+<span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,
+           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="fl">0.7</span>,
+           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt=</span><span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,
+           <span class="dt">col =</span> <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),
+           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</code></pre>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-24-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>먼저 <code>mutate_all()</code> 함수를 이용해 모든 열에 함수를 적용해주며, <code>min_rank()</code>를 통해 순위를 구해주도록 합니다.</p>
-<p>각 열에 해당하는 가치 지표 별 랭킹을 구해준 후 상관관계를 확인해보도록 하며, NA 종목은 삭제해주기 위해 <code>use = 'complete.obs'</code>를 입력해주도록 합니다. 같은 가치 지표임에도 불구하고 서로간의 상관관계가 꽤 낮은 지표도 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수도 있습니다.</p>
+<p>각 열에 해당하는 가치 지표 별 랭킹을 구해준 후 상관관계를 확인해보도록 하며, NA 종목은 삭제해주기 위해 <code>use = 'complete.obs'</code>를 입력해주도록 합니다.</p>
+<p><code>corrplot</code> 패키지의 <code>corrplot()</code> 함수를 이용해 상관관계를 그려보면, 같은 가치 지표임에도 불구하고 서로간의 상관관계가 꽤 낮은 지표도 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수도 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">rank_sum =<span class="st"> </span>rank_value <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rowSums</span>()
 
@@ -1198,15 +1217,11 @@ quality_profit =<span class="st"> </span><span class="kw">cbind</span>(quality_r
 ## This warning is displayed once per session.</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(rank_quality, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">data.frame</span>(<span class="dt">ID =</span> <span class="kw">rownames</span>(.)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(index, value, <span class="op">-</span>ID) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> ID, <span class="dt">y =</span> index, <span class="dt">fill =</span> value)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_tile</span>(<span class="dt">color =</span> <span class="st">&#39;white&#39;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">low =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">high =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">mid =</span> <span class="st">&#39;white&#39;</span>,
-                       <span class="dt">midpoint =</span> <span class="dv">0</span>, <span class="dt">limit =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">space =</span> <span class="st">&#39;Lab&#39;</span>, <span class="dt">name =</span> <span class="st">&#39;Correlation&#39;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> ID, <span class="dt">y =</span> index, <span class="dt">label =</span> value), <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">size =</span> <span class="dv">4</span>)</code></pre>
+<span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,
+           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="fl">0.7</span>,
+           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt =</span> <span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,
+           <span class="dt">col =</span> <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),
+           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</code></pre>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-34-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><code>mutate_all()</code> 함수와 <code>min_rank()</code> 함수를 통해 지표 별 랭킹을 구해주도록 하며, 퀄리티 지표의 경우 높을수록 좋은 내림차순으로 계산하여야 하므로, <code>desc()</code>을 추가해줍니다.</p>
 <p>수익성 지표 역시 서로 간의 상관관계가 낮은 지표가 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수 있습니다.</p>
