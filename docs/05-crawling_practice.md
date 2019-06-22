@@ -72,7 +72,7 @@ print(otp)
 ```
 
 ```
-## [1] "onU/FrwFkurWr1qEGgPEhg1+Guatgdrw97t+6hCpZxMImcRW5+6UMz6OFQiq7bip/nxOjMJZHzRsRq3VkaoGM/VjjdJflgMXjfYrF2F7JRbK5IAh9NggpvZSj5+O/0D2oOs3Im2yuwce9gWkGC5ep1NvN7K/zg+fdUMJYIzxAmoMNcOHg0IAnG3/vX+o3gGiN+KGiY4+uecdVl9gZPllE1IJ6ge0P/lliQcnxJdN4FD8apfGOVjmT4shG61nwNfZ4rsd1rJN6UQcxJzKzROQHe5hHoa5rOwyvt1bFLE66z8="
+## [1] "onU/FrwFkurWr1qEGgPEhuY5ywZspM2189tQ6/K5IMpMX5BhIp7sITzoTi0fBalnOvK4Jy0JYLWxgn54oHhXAiH+Sc8jPwfLWDSyVkVMw1eWMzaCW6h9lDIWul8jNxMBjd2ZkA1EbQt6+iaiVpS7/7nFokJIbEYYVqiHoUGSyGTVgXRWJvUme94DvkDTB7Lmr6E8QjZmwimbq8T6CMSyPhu35T4xt/OilNqkeSo4Qm/OaowGZXkX21PxVKkDrbvAFWCD/WA4Qh72wK4C/DiiuqF17/PqjS/PjNRF4nEyaKo="
 ```
 
 이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.
@@ -183,12 +183,12 @@ print(down_ind)
 ##  2 2019-06-07 290650   엘앤씨바이~ -        22750 830   27.41 7,252 3.14 
 ##  3 2019-06-07 239340   미래에셋제~ -         5200 -     -     -     -    
 ##  4 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
-##  5 2019-06-07 038680   에스넷 -         9600 300   32    4,302 2.23 
-##  6 2019-06-07 214680   디알텍 -         2005 29    69.14 709   2.83 
-##  7 2019-06-07 242040   나무기술~ -         3345 -     -     462   7.24 
-##  8 2019-06-07 088800   에이스테크~ -        11500 97    118.~ 2,291 5.02 
+##  5 2019-06-07 192390   윈하이텍~ -         4590 669   6.86  5,803 0.79 
+##  6 2019-06-07 038680   에스넷 -         9600 300   32    4,302 2.23 
+##  7 2019-06-07 214680   디알텍 -         2005 29    69.14 709   2.83 
+##  8 2019-06-07 242040   나무기술~ -         3345 -     -     462   7.24 
 ##  9 2019-06-07 121890   에스디시스~ -         4980 -     -     1,912 2.6  
-## 10 2019-06-07 032500   케이엠더블~ -        41200 -     -     2,292 17.98
+## 10 2019-06-07 088800   에이스테크~ -        11500 97    118.~ 2,291 5.02 
 ## # ... with 2,194 more rows, and 4 more variables: 주당배당금 <dbl>,
 ## #   배당수익률 <dbl>, `게시물 일련번호` <dbl>, 총카운트 <dbl>
 ```
@@ -280,12 +280,12 @@ print(head(KOR_ticker))
 ## 1278 2.521666e+13 2019-06-07        - 196500  2,063 95.25  19,766 9.94
 ## 1082 2.333077e+13 2019-06-07        - 330500 19,217  17.2 218,227 1.51
 ##      주당배당금 배당수익률 게시물..일련번호 총카운트
-## 330        1416       3.20             1458       NA
-## 45         1500       2.29             1410       NA
-## 301        4000       2.86             1452       NA
+## 330        1416       3.20             1456       NA
+## 45         1500       2.29             1408       NA
+## 301        4000       2.86             1450       NA
 ## 331        1417       3.91             2095       NA
-## 1278          0       0.00             1597       NA
-## 1082       6000       1.82             1538       NA
+## 1278          0       0.00             1595       NA
+## 1082       6000       1.82             1536       NA
 ```
 
 데이터를 시가총액 순으로 내림차순 해줄 필요도 있습니다. `order()` 함수를 통해 상대적인 순서를 구할 수 있으며, R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꾸어 주도록 합니다. 결과적으로 시가총액 기준 내림차순으로 해당 데이터가 정렬됩니다.

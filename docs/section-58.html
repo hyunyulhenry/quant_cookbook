@@ -524,12 +524,12 @@ Figure 5.1: 밸류 팩터와 퀄리티 팩터간의 관계
 <p>재무제표 항목을 통해 이율과 투하 자본 수익률을 계산하고, 이를 통해 마법공식 포트폴리오를 구성하도록 하겠습니다.</p>
 <p>먼저, 밸류지표에 해당하는 이익수익률을 계산해보도록 하겟습니다. 이익수익률은 이자 및 법인세 차감전이익(EBIT)를 기업 가치(시가총액 + 순차입금)으로 나눈 값입니다. 이를 분해하면 다음과 같습니다.</p>
 <p><span class="math display">\[\begin{equation} 
-
-이익수익률 = \frac{이자\,및\,법인세\,차감전이익}{기업\,가치} \\
-= \frac{이자\,및\,법인세\,차감전이익}{시가총액 + 순차입금} \\
-= \frac{당기순이익 + 법인세 + 이자비용}{시가총액 + 총부채 - 여유자금} \\
-= \frac{당기순이익 + 법인세 + 이자비용}{시가총액 + 총부채 - (현금 - max(0, 유동부채 - 유동자산 + 현금))}
-
+\begin{split}
+이익수익률 &amp; = \frac{이자\,및\,법인세\,차감전이익}{기업\,가치} \\
+&amp; = \frac{이자\,및\,법인세\,차감전이익}{시가총액 + 순차입금} \\
+&amp; = \frac{당기순이익 + 법인세 + 이자비용}{시가총액 + 총부채 - 여유자금} \\
+&amp; = \frac{당기순이익 + 법인세 + 이자비용}{시가총액 + 총부채 - (현금 - max(0, 유동부채 - 유동자산 + 현금))}
+\end{split}
 \end{equation}\]</span></p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
 <span class="kw">library</span>(dplyr)
@@ -562,11 +562,11 @@ magic_ey =<span class="st"> </span>magic_ebit <span class="op">/</span><span cla
 <li>우리가 가지고 있는 밸류 데이터와 재무제표 데이터를 통해 시가총액을 역산할 수 있습니다. PER 값에 Earnings를 곱해주면 시가총액이 계산되게 됩니다. 이를 통해 계산된 시가총액을 HTS나 금융 사이트의 값과 비교하면 거의 비슷함이 확인됩니다.</li>
 </ol>
 <p><span class="math display">\[\begin{equation} 
-
-PER \times Earnings = \frac{Price}{Earnings/Shares} \times Earnings \\
-= \frac{Price \times Shares}{Earnings} \times Earnings \\
-= Price \times Earnings = Market\,Cap
-
+\begin{split}
+PER \times Earnings &amp; = \frac{Price}{Earnings/Shares} \times Earnings \\
+&amp; = \frac{Price \times Shares}{Earnings} \times Earnings \\
+&amp; = Price \times Earnings = Market\,Cap
+\end{split}
 \end{equation}\]</span></p>
 <ol start="2" style="list-style-type: decimal">
 <li>총 부채는 부채 항목을 사용하면 됩니다.</li>
@@ -575,10 +575,10 @@ PER \times Earnings = \frac{Price}{Earnings/Shares} \times Earnings \\
 <p>분자와 분모 부분을 나누어주면 이익수익률을 계산할 수 있습니다.</p>
 <p>다음으로 퀄리티 지표에 해당하는 투하 자본 수익률을 계산하도록 하겠습니다. 해당 값은 이자 및 법인세 차감전이익(EBIT)를 투하자본(IC)으로 나누어 계산되며, 이를 분해하면 다음과 같습니다.</p>
 <p><span class="math display">\[\begin{equation} 
-
-투하 자본 수익률 = \frac{이자\,및\,법인세\,차감전이익}{투하자본} \\
-= \frac{당기순이익 + 법인세 + 이자비용}{(유동자산 - 유동부채) + (비유동자산 - 감가상각비)}
-
+\begin{split}
+투하 자본 수익률 &amp; = \frac{이자\,및\,법인세\,차감전이익}{투하자본} \\
+&amp; = \frac{당기순이익 + 법인세 + 이자비용}{(유동자산 - 유동부채) + (비유동자산 - 감가상각비)}
+\end{split}
 \end{equation}\]</span></p>
 <pre class="sourceCode r"><code class="sourceCode r">magic_ic =<span class="st"> </span>((KOR_fs<span class="op">$</span><span class="st">&#39;유동자산&#39;</span> <span class="op">-</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유동부채&#39;</span>) <span class="op">+</span>
 <span class="st">              </span>(KOR_fs<span class="op">$</span><span class="st">&#39;비유동자산&#39;</span> <span class="op">-</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;감가상각비&#39;</span>))[num_col]
