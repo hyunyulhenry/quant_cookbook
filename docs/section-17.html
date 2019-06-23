@@ -347,6 +347,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.2" data-path="section-78.html"><a href="section-78.html#section-80"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="section-78.html"><a href="section-78.html#section-81"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -427,7 +428,7 @@ otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span cl
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(otp)</code></pre>
-<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhg5XumIyl2kdbgtq+sWb+WwC3VVmPhde8BLKj37E9WHCrObCNwJD8OlV0e/koSQaImPsx0oI2fe6EU7wTUYkQtlNfCVO64Hn2gXk15f+FLm51si1oKf1DxCJkiUIEb9VTm1NVJN+WzJ8lIjs6hOzjIzyvOJkrgWxzqOrH5CWakMwHV7kFEjmpwvXfTGM4ah3e6UFuqAwn9PrzvDp3dX46oltIZVJ2hmypADQWg0shQ6Q6ofrWV6iMrCor0DDzWustiT8+KvE0WQQQkQniclLMlY=&quot;</code></pre>
+<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhtPnKZRjeo9kbN5JGszS7arj/bdjNFjefcCm+L6I0JUXe1HzefxUBByY2abg2MV1ID33wdYKd2OpSIgBHeTZHzJr0wynz24tjk5duu5JPgMjwBgripw4YISXCA3FNv9pEsLswDex8M7F4OPlibJY3yaRPyKcAEleo2VSO2vJhnnWyWAyyc/iyj0DMMN63wUWRhWgh6iKSiaEL8UEyLQkqh3UeJZJQr0yj4JJ28pCpQc89KRdx2WBYYlB9GJr+t9GZB2LNKlhmRi/2weAeixRLZQ=&quot;</code></pre>
 <p>이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span>
 down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),

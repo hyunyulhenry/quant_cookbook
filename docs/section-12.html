@@ -347,6 +347,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.2" data-path="section-78.html"><a href="section-78.html#section-80"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="section-78.html"><a href="section-78.html#section-81"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -453,10 +454,10 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 
 <span class="kw">print</span>(data)</code></pre>
 <pre><code>## Response [https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258]
-##   Date: 2019-06-23 08:23
+##   Date: 2019-06-23 13:07
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
-##   Size: 58.2 kB
+##   Size: 58.7 kB
 ## 
 ## 
 ## 
@@ -485,26 +486,26 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 </ol>
 <p>해당 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장되게 됩니다. 이처럼 개발자도구 화면을 통해 내가 추출하고자 하는 데이터가 html 중 어디에 위치하고 있는지 먼저 확인을 하면, 어렵지 않게 원하는 데이터를 읽어올 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(data_title)</code></pre>
-<pre><code>##  [1] &quot;&#39;K팝 공연 기획&#39; 마이뮤직테이스트…벤처캐피털 상대로 프리IPO 나서&quot;      
-##  [2] &quot;키위미디어, 또 주식 96% 무상감자 추진&quot;                                 
-##  [3] &quot;개미가 산 상반기 &#39;톱10 종목&#39; 9개나 떨어졌다&quot;                           
-##  [4] &quot;하나대체운용, 옛 현대증권 빌딩 코스콤에 매각&quot;                          
-##  [5] &quot;오사카 G20 담판 &#39;노딜&#39;이냐 &#39;빅딜&#39;이냐&quot;                                 
-##  [6] &quot;부동산시장 다시 &#39;꿈틀&#39;…현대건설·대림산업·한샘 담아볼까&quot;             
-##  [7] &quot;美·中 무역협상에 촉각…중동 정세도 변수&quot;                              
-##  [8] &quot;SK이노베이션, 유가 반등 확인한 후 접근해야&quot;                            
-##  [9] &quot;\&quot;美 금리인하 시사는 긍정적 요인…韓도 투자 심리 회복 위한 대책 절실\&quot;&quot;
-## [10] &quot;&#39;와우스탁킹&#39; 엘비세미콘·줌인터넷·미래산업·동성제약 등 집중매매&quot;     
-## [11] &quot;3기 신도시 수혜株 현대산업개발 &#39;주목&#39;…공모형 리츠도 유망&quot;             
-## [12] &quot;&#39;비둘기파&#39;로 변신하는 美 Fed 위원들&quot;                                   
-## [13] &quot;\&quot;저평가株 투자 유효…화승인더스트리 주목\&quot;&quot;                           
-## [14] &quot;“JP모건체이스, 양호한 실적 지속… 대출성장은 정체 예상”&quot;             
-## [15] &quot;&#39;한쪽은 위기, 다른 한쪽은 기회&#39; YG·SM 엇갈린 주가 전망&quot;               
-## [16] &quot;초여름 IPO 시장 기대감↑&quot;                                              
-## [17] &quot;[마켓인]해외 물류센터 사들이는 미래에셋운용, 폴란드 투자도 완료&quot;       
-## [18] &quot;[표]주간 코스닥 기관·외국인·개인 순매수·도 상위종목[6월 17일~21일)&quot; 
-## [19] &quot;[블록체인 오딧세이]서비스 출시 앞두고 특허 출원 잇따라&quot;                
-## [20] &quot;[그래픽] 역대 금리역전·기준금리 인하 시기&quot;</code></pre>
+<pre><code>##  [1] &quot;\&quot;금값, 온스당 1500달러 간다\&quot;&quot;                                                        
+##  [2] &quot;하반기 中 대규모 OLED 투자…엘아이에스, 최대 수혜주 부각&quot;                              
+##  [3] &quot;\&quot;제 2의 인생 찾아요\&quot; 시니어 모델 도전 열풍&quot;                                          
+##  [4] &quot;[표] 주요국 증시 주간 동향&quot;                                                            
+##  [5] &quot;제 1회 KAA-한경 언론상에 이만우 고려대 교수·최종학 서울대 교수&quot;                       
+##  [6] &quot;\&quot;4분기 회복 기대…반도체·자동차 투자를\&quot;&quot;                                            
+##  [7] &quot;한솔홀딩스 \&quot;잉여현금 40% 배당·자사주매입에 쓰겠다\&quot;&quot;                                 
+##  [8] &quot;금값 6년새 최고…금ETF도 반짝반짝&quot;                                                     
+##  [9] &quot;한진칼 백기사 델타, 왜 지분 10%만 살까&quot;                                                
+## [10] &quot;ELS 발행액 사상최대… 증권사 실적효자 거듭나나&quot;                                        
+## [11] &quot;G2전쟁 반사익 기대했는데… 베트남펀드 재미 못봤네&quot;                                     
+## [12] &quot;팔면 오르고, 사면 내리고… 탈탈 털린 개미들&quot;                                           
+## [13] &quot;KB자산운용, 종로타워 투자하는 부동산펀드 출시&quot;                                         
+## [14] &quot;중간배당 확대 호재… 고배당주 ETF 주목&quot;                                                
+## [15] &quot;[마켓워치] ‘상장 무산’ 바디프랜드 회사채 발행&quot;                                       
+## [16] &quot;활기 찾는 7월 IPO시장… 몸값 1000억원대 ‘알짜’ 노려라&quot;                               
+## [17] &quot;메디톡스, 中 허가중단 루머에 &#39;냉가슴&#39;&quot;                                                 
+## [18] &quot;상반기 증시 개미 울고 외국인 웃었다&quot;                                                   
+## [19] &quot;\&quot;美 연준발 유동성 장세땐 박스권 탈피… G2가 최대변수\&quot; [리서치센터장 하반기 증시전망]&quot;
+## [20] &quot;[이번주 추천주] &#39;BTS월드&#39; 출시 넷마블·호재 만난 현대차 주목&quot;</code></pre>
 </div>
 <div id="section-15" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -661,7 +662,7 @@ url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#
 <pre class="sourceCode r"><code class="sourceCode r">down_table =<span class="st"> </span><span class="kw">GET</span>(url)
 <span class="kw">print</span>(down_table)</code></pre>
 <pre><code>## Response [https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&amp;page=1]
-##   Date: 2019-06-23 08:23
+##   Date: 2019-06-23 13:07
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
 ##   Size: 94.9 kB
