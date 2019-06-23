@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-22" />
+<meta name="date" content="2019-06-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -101,6 +101,8 @@
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -339,6 +341,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3.3" data-path="section-67.html"><a href="section-67.html#section-77"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="section-78.html"><a href="section-78.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-78.html"><a href="section-78.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-78.html"><a href="section-78.html#section-79"><i class="fa fa-check"></i><b>12.1.1</b> 인자목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-78.html"><a href="section-78.html#section-80"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="section-78.html"><a href="section-78.html#section-81"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -410,7 +419,7 @@ name =<span class="st"> </span>KOR_ticker<span class="op">$</span><span class="s
 price =<span class="st"> </span><span class="kw">xts</span>(<span class="ot">NA</span>, <span class="dt">order.by =</span> <span class="kw">Sys.Date</span>())
 <span class="kw">print</span>(price)</code></pre>
 <pre><code>##            [,1]
-## 2019-06-22   NA</code></pre>
+## 2019-06-23   NA</code></pre>
 <ol style="list-style-type: decimal">
 <li>먼저 data 폴더 내에 KOR_price 폴더를 생성해줍니다.</li>
 <li>i = 1 을 입력해 줍니다. 향후 for loop 구문을 통해 i 값만 변경하면 모든 종목의 주가를 다운로드 받을 수 있습니다.</li>

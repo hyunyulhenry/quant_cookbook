@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-22" />
+<meta name="date" content="2019-06-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -101,6 +101,8 @@
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -339,6 +341,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3.3" data-path="section-67.html"><a href="section-67.html#section-77"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="section-78.html"><a href="section-78.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-78.html"><a href="section-78.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-78.html"><a href="section-78.html#section-79"><i class="fa fa-check"></i><b>12.1.1</b> 인자목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-78.html"><a href="section-78.html#section-80"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="section-78.html"><a href="section-78.html#section-81"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -418,7 +427,7 @@ otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span cl
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(otp)</code></pre>
-<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhuY5ywZspM2189tQ6/K5IMpMX5BhIp7sITzoTi0fBalnOvK4Jy0JYLWxgn54oHhXAiH+Sc8jPwfLWDSyVkVMw1eWMzaCW6h9lDIWul8jNxMBjd2ZkA1EbQt6+iaiVpS7/7nFokJIbEYYVqiHoUGSyGTVgXRWJvUme94DvkDTB7Lmr6E8QjZmwimbq8T6CMSyPhu35T4xt/OilNqkeSo4Qm/OaowGZXkX21PxVKkDrbvAFWCD/WA4Qh72wK4C/DiiuqF17/PqjS/PjNRF4nEyaKo=&quot;</code></pre>
+<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhg5XumIyl2kdbgtq+sWb+WwC3VVmPhde8BLKj37E9WHCrObCNwJD8OlV0e/koSQaImPsx0oI2fe6EU7wTUYkQtlNfCVO64Hn2gXk15f+FLm51si1oKf1DxCJkiUIEb9VTm1NVJN+WzJ8lIjs6hOzjIzyvOJkrgWxzqOrH5CWakMwHV7kFEjmpwvXfTGM4ah3e6UFuqAwn9PrzvDp3dX46oltIZVJ2hmypADQWg0shQ6Q6ofrWV6iMrCor0DDzWustiT8+KvE0WQQQkQniclLMlY=&quot;</code></pre>
 <p>이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span>
 down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),
@@ -494,8 +503,8 @@ down_ind =<span class="st"> </span><span class="kw">POST</span>(down_url, <span 
 ##  1 2019-06-07 060300   레드로버~ -         1190 -     -     2,128 0.56 
 ##  2 2019-06-07 290650   엘앤씨바이~ -        22750 830   27.41 7,252 3.14 
 ##  3 2019-06-07 239340   미래에셋제~ -         5200 -     -     -     -    
-##  4 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
-##  5 2019-06-07 192390   윈하이텍~ -         4590 669   6.86  5,803 0.79 
+##  4 2019-06-07 086060   진바이오텍~ -         6940 312   22.24 5,570 1.25 
+##  5 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
 ##  6 2019-06-07 038680   에스넷 -         9600 300   32    4,302 2.23 
 ##  7 2019-06-07 214680   디알텍 -         2005 29    69.14 709   2.83 
 ##  8 2019-06-07 242040   나무기술~ -         3345 -     -     462   7.24 

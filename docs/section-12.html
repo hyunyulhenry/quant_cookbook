@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-22" />
+<meta name="date" content="2019-06-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -101,6 +101,8 @@
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -339,6 +341,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.3.3" data-path="section-67.html"><a href="section-67.html#section-77"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="12" data-path="section-78.html"><a href="section-78.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-78.html"><a href="section-78.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-78.html"><a href="section-78.html#section-79"><i class="fa fa-check"></i><b>12.1.1</b> 인자목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-78.html"><a href="section-78.html#section-80"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="section-78.html"><a href="section-78.html#section-81"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -444,10 +453,10 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 
 <span class="kw">print</span>(data)</code></pre>
 <pre><code>## Response [https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258]
-##   Date: 2019-06-22 14:39
+##   Date: 2019-06-23 08:23
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
-##   Size: 58.6 kB
+##   Size: 58.2 kB
 ## 
 ## 
 ## 
@@ -476,26 +485,26 @@ data =<span class="st"> </span><span class="kw">GET</span>(url)
 </ol>
 <p>해당 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장되게 됩니다. 이처럼 개발자도구 화면을 통해 내가 추출하고자 하는 데이터가 html 중 어디에 위치하고 있는지 먼저 확인을 하면, 어렵지 않게 원하는 데이터를 읽어올 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(data_title)</code></pre>
-<pre><code>##  [1] &quot;바닥다진 삼화콘덴서 반등하나?&quot;                                     
-##  [2] &quot;864회 로또 1등 &#39;3, 7, 10, 13, 25, 36&#39;…보너스 &#39;32&#39;&quot;                
-##  [3] &quot;극장가 장악한 디즈니 주식 담아볼까…20대도 주식 직구&quot;              
-##  [4] &quot;마크롱, ECB 총재 유력후보 獨연방은행 총재 공개 조롱&quot;               
-##  [5] &quot;서울 도심 달리는 자율주행차…세계 최초 5G 자율주행 시험&quot;           
-##  [6] &quot;키움證, ‘채권의 시대’도 온라인으로 선도&quot;                         
-##  [7] &quot;계속 상승하는 금가격…\&quot;어디까지 오를까\&quot;&quot;                         
-##  [8] &quot;“사이먼 프로퍼티, 배당여력 손상 없다면 투자매력 여전 ”&quot;          
-##  [9] &quot;[주목! e스몰캡]‘파스명가’ 신신제약, 노령인구 늘며 이익 개선&quot;     
-## [10] &quot;고배당 ETF 투자 적기는?&quot;                                           
-## [11] &quot;에듀윌, 직업상담사 시험 대비 ‘환급+연장반’ 모집&quot;                 
-## [12] &quot;나이스신평 \&quot;신세계푸드 단기신용등급 A1 →A2+로 강등\&quot;&quot;            
-## [13] &quot;[거꾸로읽는증시]2020년 기대한 한국, 우려한 일본&quot;                   
-## [14] &quot;게임 배급사 팡스카이 IPO, \&quot;대표작 없어도 통할까\&quot;&quot;                
-## [15] &quot;[영화로 경제 보기]여러분, 1인 방송이 이렇게 무섭습니다…‘곤지암’&quot;
-## [16] &quot;금리 인하 시사에도 외인 은행주 &#39;러브콜&#39; 왜?&quot;                       
-## [17] &quot;G20 정상회담 앞둔 증시...상승반전 가능할까&quot;                        
-## [18] &quot;\&quot;신용등급 &#39;하향검토&#39; 유지\&quot;…아시아나항공 운명은?&quot;                
-## [19] &quot;[주목!e해외주식]반등하는 테슬라…2분기 실적 ‘분수령’&quot;            
-## [20] &quot;중기중앙회장 일가 주식 불공정거래 혐의 검찰에 이첩&quot;</code></pre>
+<pre><code>##  [1] &quot;&#39;K팝 공연 기획&#39; 마이뮤직테이스트…벤처캐피털 상대로 프리IPO 나서&quot;      
+##  [2] &quot;키위미디어, 또 주식 96% 무상감자 추진&quot;                                 
+##  [3] &quot;개미가 산 상반기 &#39;톱10 종목&#39; 9개나 떨어졌다&quot;                           
+##  [4] &quot;하나대체운용, 옛 현대증권 빌딩 코스콤에 매각&quot;                          
+##  [5] &quot;오사카 G20 담판 &#39;노딜&#39;이냐 &#39;빅딜&#39;이냐&quot;                                 
+##  [6] &quot;부동산시장 다시 &#39;꿈틀&#39;…현대건설·대림산업·한샘 담아볼까&quot;             
+##  [7] &quot;美·中 무역협상에 촉각…중동 정세도 변수&quot;                              
+##  [8] &quot;SK이노베이션, 유가 반등 확인한 후 접근해야&quot;                            
+##  [9] &quot;\&quot;美 금리인하 시사는 긍정적 요인…韓도 투자 심리 회복 위한 대책 절실\&quot;&quot;
+## [10] &quot;&#39;와우스탁킹&#39; 엘비세미콘·줌인터넷·미래산업·동성제약 등 집중매매&quot;     
+## [11] &quot;3기 신도시 수혜株 현대산업개발 &#39;주목&#39;…공모형 리츠도 유망&quot;             
+## [12] &quot;&#39;비둘기파&#39;로 변신하는 美 Fed 위원들&quot;                                   
+## [13] &quot;\&quot;저평가株 투자 유효…화승인더스트리 주목\&quot;&quot;                           
+## [14] &quot;“JP모건체이스, 양호한 실적 지속… 대출성장은 정체 예상”&quot;             
+## [15] &quot;&#39;한쪽은 위기, 다른 한쪽은 기회&#39; YG·SM 엇갈린 주가 전망&quot;               
+## [16] &quot;초여름 IPO 시장 기대감↑&quot;                                              
+## [17] &quot;[마켓인]해외 물류센터 사들이는 미래에셋운용, 폴란드 투자도 완료&quot;       
+## [18] &quot;[표]주간 코스닥 기관·외국인·개인 순매수·도 상위종목[6월 17일~21일)&quot; 
+## [19] &quot;[블록체인 오딧세이]서비스 출시 앞두고 특허 출원 잇따라&quot;                
+## [20] &quot;[그래픽] 역대 금리역전·기준금리 인하 시기&quot;</code></pre>
 </div>
 <div id="section-15" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -652,7 +661,7 @@ url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#
 <pre class="sourceCode r"><code class="sourceCode r">down_table =<span class="st"> </span><span class="kw">GET</span>(url)
 <span class="kw">print</span>(down_table)</code></pre>
 <pre><code>## Response [https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&amp;page=1]
-##   Date: 2019-06-22 14:39
+##   Date: 2019-06-23 08:23
 ##   Status: 200
 ##   Content-Type: text/html;charset=EUC-KR
 ##   Size: 94.9 kB

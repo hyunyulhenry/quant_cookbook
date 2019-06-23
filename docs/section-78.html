@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</title>
-  <meta name="description" content="Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <title>Chapter 12 포트폴리오 백테스트 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</title>
+  <meta name="description" content="Chapter 12 포트폴리오 백테스트 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta property="og:title" content="Chapter 12 포트폴리오 백테스트 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta name="twitter:title" content="Chapter 12 포트폴리오 백테스트 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
   
   
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="section-4.html">
+<link rel="prev" href="section-67.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -368,96 +368,559 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="section-1" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> 퀀트 투자의 심장: 데이터와 프로그래밍</h1>
-<p>몇 년 전까지만 하더라도 <strong>퀀트 투자</strong>는 일반 투자자들에게 매우 낯선 영역이었던 반면, 최근에는 각종 커뮤니티와 매체를 통해 이제는 익숙한 단어가 되었습니다. 퀀트 투자에서 말하는 <strong>퀀트</strong>란 모형을 기반으로 금융상품의 가격을 산정하거나, 이를 바탕으로 투자를 하는 사람을 말합니다. <strong>퀀트<sup>Quant</sup></strong>라는 단어가 <strong>계량적</strong>을 의미하는 퀀티터티브<sup>Quantitative</sup>에서 앞 글자를 따온 점을 생각하면 쉽게 이해가 될 것입니다.</p>
-<p>퀀트 투자 역시 이와 비슷한 의미입니다. 사람들이 일반적으로 투자법이라 알고 있는 산업과 기업을 분석하여 가치를 매기는 <strong>정성적인</strong> 투자법과는 달리, 수학과 통계를 기반으로 투자 전략을 만들고 이를 바탕으로 투자하는 <strong>정량적인</strong> 투자법을 의미합니다.</p>
-<p>이처럼 데이터의 수집과 가공, 이를 바탕으로 모델을 만든 후 실행하는 단계는 데이터 과학의 업무 흐름도와 매우 유사합니다. <strong>해들리 위컴<sup>Hadley</sup> <sup>Wickham</sup></strong>에 따르면<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, 데이터 과학의 업무 과정은 다음과 같습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="images/ds_flow.jpg" alt="데이터 과학 업무 과정" width="512" />
-<p class="caption">
-Figure 1.1: 데이터 과학 업무 과정
-</p>
+<div id="section-78" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> 포트폴리오 백테스트</h1>
+<p>백테스트란 현재 생각하는 전략을 과거부터 실행하였을 시, 어떠한 성과가 발생하는지 테스트해보는 과정입니다. 과거의 데이터를 기반으로 전략을 실행하는 퀀트 투자에 있어서, 이는 핵심 단계이기도 합니다. 백테스트 결과를 통해 해당 전략의 손익뿐만 아니라 각종 위험을 대략적으로 판단할 수 있으며, 어떤 구간에서 전략이 좋았는지 혹은 나빴는지에 대한 이해도 키울 수 있습니다. 이러한 이해를 바탕으로 퀀트 투자를 지속한다면 단기적으로 수익이 나쁜 구간에서도 그 이유에 대한 객관적인 안목을 키울 수 있으며, 확신을 가지고 전략을 지속할 수 있습니다.</p>
+<p>그러나 백테스트를 아무리 보수적으로 혹은 엄밀하게 진행하더라도 이미 일어난 결과를 대상으로 한다는 점에서 정답을 보고 답지를 쓰는 격이라는 점을 항상 명심해야 합니다. 백테스트 수익률만을 보고 투자에 대한 판단을 하거나, 혹은 동일한 수익률이 미래에도 반복될 것이라 믿는다면 이는 백미러를 보고 운전을 하는 매우 위험한 결과를 초래할 수도 있습니다.</p>
+<p>R에서 백테스트는 <code>PerformanceAnalytics</code> 패키지 내의 <code>Return.portfolio()</code> 함수를 사용하여 매우 간단하게 수행할 수 있습니다. 이번 장에서는 해당 함수에 대한 이해와 더불어, 구체적인 사용 방법에 대한 예시로써 <strong>전통적인 주식 60% &amp; 채권 40% 포트폴리오</strong>, <strong>시점 선택 전략</strong>, <strong>동적 자산배분</strong>에 대한 백테스트를 실행합니다.</p>
+<div id="return.portfolio-" class="section level2">
+<h2><span class="header-section-number">12.1</span> <code>Return.Portfolio()</code> 함수</h2>
+<p>프로그래밍을 이용하여 백테스트를 할 경우, 전략이 단순하다면 단 몇 줄 만으로도 테스트가 가능합니다. 그러나 전략이 복잡해지거나 적용해야 할 요소가 많아질 경우, 패키지를 이용하는 것이 효율적인 방법입니다.</p>
+<p><code>PerformanceAnalytics</code> 패키지의 <code>Return.portfolio()</code> 함수는 백테스트 과정에서 가장 대중적으로 사용되는 함수입니다. 해당 함수의 가장 큰 장점은 각 자산의 수익률과 리밸런싱 비중만 있으면 백테스트 수익률, 턴오버 등을 쉽게 계산할 수 있다는 점이며, 리밸런싱 시점과 수익률의 시점이 일치하지 않아도 된다는 점입니다. 즉, 수익률 데이터는 일간, 리밸런싱 시점은 분기 혹은 연간으로 된 경우에도 매우 쉽게 백테스트를 수행할 수 있습니다.</p>
+<div id="section-79" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> 인자목록 살펴보기</h3>
+<p>먼저 <code>Return.portfolio()</code> 함수는 다음과 같은 형태로 구성되어 있으며, 표 <a href="section-78.html#tab:returnportarg">12.1</a>는 인자의 내용을 정리한 것입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Return.portfolio</span>(R, <span class="dt">weights =</span> <span class="ot">NULL</span>, <span class="dt">wealth.index =</span> <span class="ot">FALSE</span>,
+  <span class="dt">contribution =</span> <span class="ot">FALSE</span>, <span class="dt">geometric =</span> <span class="ot">TRUE</span>, <span class="dt">rebalance_on =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;years&quot;</span>,
+  <span class="st">&quot;quarters&quot;</span>, <span class="st">&quot;months&quot;</span>, <span class="st">&quot;weeks&quot;</span>, <span class="st">&quot;days&quot;</span>), <span class="dt">value =</span> <span class="dv">1</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>, ...)</code></pre>
+<table>
+<caption><span id="tab:returnportarg">Table 12.1: </span><code>Return.portfolio()</code> 함수 내 인자 설명</caption>
+<thead>
+<tr class="header">
+<th align="left">인자</th>
+<th align="left">내용</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">R</td>
+<td align="left">각 자산 수익률 데이터</td>
+</tr>
+<tr class="even">
+<td align="left">weights</td>
+<td align="left">각 리밸런싱 시기의 자산 별 목표 비중. 미 입력시 동일비중 포트폴리오를 가정하여 백테스트가 이루짐</td>
+</tr>
+<tr class="odd">
+<td align="left">wealth.index</td>
+<td align="left">포트폴리오 시작점이 1인 wealth index에 대한 생성여부이며, 디폴트는 FALSE로 설정</td>
+</tr>
+<tr class="even">
+<td align="left">contribution</td>
+<td align="left">포트폴리오 내에서 각 자산 별 성과기여를 나타내는지에 대한 여부이며, 디폴트는 FALSE로 설정</td>
+</tr>
+<tr class="odd">
+<td align="left">geometric</td>
+<td align="left">포트폴리오 수익률 계산시 복리(기하)수익률 적용 여부이며, 디폴트는 TRUE로써 복리수익률을 계산</td>
+</tr>
+<tr class="even">
+<td align="left">rebalance_on</td>
+<td align="left">weight 값이 미입력 혹은 매번 같은 비중일 경우, 리밸런싱 주기를 선택할 수 있음</td>
+</tr>
+<tr class="odd">
+<td align="left">value</td>
+<td align="left">초기 포트폴리오 가치를 의미하며, 디폴트는 1</td>
+</tr>
+<tr class="even">
+<td align="left">verbose</td>
+<td align="left">부가적인 결과를 표시할지에 대한 여부. 디폴트인 FALSE를 입력할 경우 포트폴리오 수익률만이 시계열 형태로 표시되며, TRUE를 입력할 경우 수익률 외에 자산 별 성과기여, 비중, 성과 등이 리스트 형태로 표현됨</td>
+</tr>
+</tbody>
+</table>
+<p>이 중 가장 중요한 인자는 개별 자산의 수익률인 R과 리밸런싱 시기의 자산 별 목표 비중인 weights 입니다. 매 리밸런싱 시점마다 적용되는 자산 별 비중이 동일할 경우(예: 매월 말 60%대 40% 비중으로 리밸런싱) 상수 형태로 입력하여도 되지만, 시점마다 자산 별 목표비중이 다를 경우 weights는 시계열 형태로 입력되어야 합니다.</p>
+<p>목표 비중을 시계열 형태로 입력할 경우 주의해야 할 점은 다음과 같습니다.</p>
+<ol style="list-style-type: decimal">
+<li>시계열 형태로 인식할 수 있도록, 행이름 혹은 인덱스가 날짜 형태로 입력되어야 합니다.</li>
+<li>수익률 데이터와 비중 데이터의 열 개수는 동일해야 하며, 각 열에 해당하는 자산은 동일해야 합니다. 즉, 수익률 데이터의 첫번째 열에 A주식 데이터가 있다면, 비중 데이터의 첫번째 열도 목표 A주식 비중을 입력해야 합니다.</li>
+<li>각 시점의 비중의 합은 1이 되어야 합니다. 그렇지 않을 경우 제대로된 수익률이 계산되지 않습니다.</li>
+</ol>
+<p>weights에 값을 입력하지 않을 동일비중 포트폴리오를 구성하며, 포트폴리오 리밸런싱은 하지 않습니다.</p>
 </div>
-<p>데이터 과학은프로그래밍을 통해 데이터를 불러온 후 이를 정리하고, 원하는 결과를 찾기 위해 데이터를 변형하거나, 시각화하거나, 모델링을 합니다. 그 후 이러한 결과를 바탕으로 타인과 소통하는 일련의 과정을 의미합니다.</p>
-<p>퀀트 투자의 단계 역시 이와 매우 유사합니다. 투자에 필요한 주가, 재무제표 등의 데이터를 수집하여 정리한 후, 필요한 지표를 얻기 위해 가공을 합니다. 그 후 투자 모형을 이용한 투자 종목을 선택하거나 백테스트를 수행하며, 이를 바탕으로 실제 투자를 하고 성과 평가를 하게 됩니다. 따라서 퀀트 투자는 데이터 과학이 금융에 응용된 사례라고도 볼 수 있으며, 그 중심에는 역시 데이터와 프로그래밍이 있습니다.</p>
-<p>본 책에서도 위의 단계와 동일하게 데이터를 불러오기, 각 데이터 별로 정리하고 가공하기, 시각화를 통해 데이터의 특징 파악하기, 퀀트 모델을 이용하여 종목 선택하기, 백테스트를 실시한 후 성과 및 위험 평가하기에 대해 알아볼 예정입니다. 이에 앞서 본 장에서는 퀀트 투자의 심장이라고 볼 수 있는 데이터는 어떻게 얻을 수 있는지, 왜 프로그래밍을 해야 하는지, 그 중에서도 R은 무엇인지에 대해 간략히 살펴보겠습니다.</p>
-<div id="section-2" class="section level2">
-<h2><span class="header-section-number">1.1</span> 데이터 구하기</h2>
-<p>퀀트 투자에 필요한 데이터의 경우, 여러 데이터 제공업자들이 제공하는 서비스를 이용한다면 매우 손쉽게 구할 수 있습니다. 글로벌 데이터 수집에는 블룸버그 혹은 Factset, 국내 데이터 수집에는 DataGuide가 흔히 사용됩니다. 물론 비용을 더 지불한다면 단순 데이터 수집뿐만 아니라 즉석에서 백테스트 및 성과 평가까지 가능합니다. Factset에서 판매하는 Alpha Testing 기능, 혹은 S&amp;P Global에서 판매하는 ClariFI®를 사용한다면, 전세계 주식을 대상으로 원하는 전략의 백테스트 결과를 마우스 클릭과 몇 번의 동작만으로 수행할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="images/ClariFI_backtest.png" alt="ClariFI®의 백테스트 기능" width="546" />
-<p class="caption">
-Figure 1.2: ClariFI®의 백테스트 기능
-</p>
+<div id="section-80" class="section level3">
+<h3><span class="header-section-number">12.1.2</span> 출력값 살펴보기</h3>
+<p>해당 함수는 verbose를 TRUE로 설정할 경우 다양한 결과값을 리스트 형태로 반환합니다.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 12.2: </span><code>Return.portfolio()</code> 함수 반환값</caption>
+<thead>
+<tr class="header">
+<th align="left">결과</th>
+<th align="left">내용</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">returns</td>
+<td align="left">포트폴리오 수익률</td>
+</tr>
+<tr class="even">
+<td align="left">contribution</td>
+<td align="left">일자 별 개별 자산의 포트폴리오 수익률 기여도</td>
+</tr>
+<tr class="odd">
+<td align="left">BOP.Weight</td>
+<td align="left">일자 별 개별 자산의 포트폴리오 내 비중 (시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Weight와 동일</td>
+</tr>
+<tr class="even">
+<td align="left">EOP.Weight</td>
+<td align="left">일자 별 개별 자산의 포트폴리오 내 비중 (종료시점)</td>
+</tr>
+<tr class="odd">
+<td align="left">BOP.Value</td>
+<td align="left">일자 별 개별 자산의 가치 (시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Value와 동일</td>
+</tr>
+<tr class="even">
+<td align="left">EOP.Value</td>
+<td align="left">일자 별 개별 자산의 가치 (종료시점)</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p>이러한 데이터 제공업자들을 이용하는 방법의 최대 단점은 바로 비용입니다. 블룸버그 단말기의 경우 1년 사용료가 대리 한 명의 연봉과 비슷하여, 흔히들 <strong>블대리</strong>라 부르기도 합니다. 국내 데이터 업체의 경우 이보다 저렴하기는 하지만, 역시 1년 사용료가 수백 만원 정도로, 일반 개인 투자자들이 감당하기에는 부담이 가는 비용입니다.</p>
-<p>해외데이터의 경우 Quandl<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>이나 tiingo<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>등의 업체가 제공하는 서비스를 통해 상대적으로 저렴한 가격으로 데이터를 구할 수 있기도 합니다. 물론 대형 데이터 제공업체에 비해 데이터의 종류나 기간은 짧은 편이지만, 대부분의 퀀트 투자자들이 주식을 대상으로 한다는 점을 생각해보면 충분한 데이터를 얻을 수 있습니다. tiingo에서는 전세계 64,386개 주식의 30년 이상 가격 정보, 21,352개 주식의 12년 이상 재무정보를 월 $10에 받을 수 있으며, 한정된 종목과 용량에 한해서는 무료로 데이터를 받을 수도 있습니다. 더군다나 API를 통해 프로그램 내에서 직접 데이터를 받을 수 있다는 편의성도 존재합니다.</p>
-<p>그러나 아쉽게도 이러한 데이터에서 한국 시장의 정보는 소외가 되어있습니다. 따라서 돈을 들이지 않고 국내 데이터를 얻기 위해서는 직접 발품을 파는 수밖에 없습니다. <a href="https://finance.yahoo.com/" target="blank">야후 파이낸스<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></a>에서 제공하는 금융데이터를 API를 통해 받을 수도 있으며, 국내 금융 사이트들에서 제공하는 정보를 크롤링하여 데이터를 가공할 수도 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="images/naver_finance_table.jpg" alt="NAVER 금융 제공 재무정보" width="100%" />
-<p class="caption">
-Figure 1.3: NAVER 금융 제공 재무정보
-</p>
 </div>
-<p>아래의 표는 국내의 금융 데이터를 구할 수 있는 사이트의 주소들 입니다. 해당 사이트의 정보를 잘만 활용한다면 장기간의 주가 및 재무정보를 무료로 수집할 수 있습니다. 물론 데이터 제공업체가 제공하는 깔끔한 형태의 데이터가 아니므로 클랜징 작업이 필요하다는 점, 그리고 상장폐지된 기업의 경우 데이터를 구하는 점이 힘들다는 단점이 있습니다. 그러나 비용이 들지 않는 다는 점, 그리고 현재 시점에서 투자 종목을 선택할 때는 상장폐지된 기업이 필요하지 않는다는 점을 고려하면, 이는 큰 문제가 되지 않는다 생각합니다.</p>
+<div id="section-81" class="section level2">
+<h2><span class="header-section-number">12.2</span> 전통적인 60대 40 포트폴리오 백테스트</h2>
+<p><code>Return.portfolio()</code> 함수의 가장 간단한 예제로써 전통적인 60대 40 포트폴리오를 백테스트 하도록 합니다. 해당 포트폴리오는 주식과 채권에 각각 60%와 40%를 투자하며, 특정 시점 마다 해당 비중을 맞춰주기 위해 리밸런싱을 수행합니다. 매해 말 리밸런싱을 가정하는 예제를 살펴보도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(magrittr)
+
+ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;TLT&#39;</span>)
+<span class="kw">getSymbols</span>(ticker)</code></pre>
+<pre><code>## [1] &quot;SPY&quot; &quot;TLT&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind, <span class="kw">lapply</span>(ticker, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))
+rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</code></pre>
+<p>글로벌 자산의 ETF 데이터 중 주식(S&amp;P 500)과 채권(미국 장기채)에 해당하는 데이터를 다운로드 받은 후, 수익률을 계산하도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(rets)</code></pre>
+<pre><code>##              SPY.Adjusted TLT.Adjusted
+## SPY.Adjusted     1.000000    -0.434726
+## TLT.Adjusted    -0.434726     1.000000</code></pre>
+<p><code>cor()</code> 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.43로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">portfolio =<span class="st"> </span><span class="kw">Return.portfolio</span>(<span class="dt">R =</span> rets,
+                             <span class="dt">weights =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),
+                             <span class="dt">rebalance_on =</span> <span class="st">&#39;years&#39;</span>,
+                             <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><code>Return.portfolio()</code> 함수를 이용하여 백테스트를 실행합니다.</p>
+<ol style="list-style-type: decimal">
+<li>자산의 수익률인 R에는 수익률 테이블인 rets 를 입력합니다.</li>
+<li>리밸런싱 비중인 weights에는 60%와 40%를 의미하는 c(0.6, 0.4)를 입력합니다.</li>
+<li>리밸런싱 시기인 rebalance_on에는 연간 리밸런싱에 해당하는 ‘years’를 입력합니다. 리밸런싱 주기는 이 외에도 ’quarters’, ‘months’, ‘weeks’, ’days’도 입력이 가능합니다.</li>
+<li>결과물들을 리스트로 확인하기 위해 verbose를 TRUE로 설정합니다.</li>
+</ol>
+<p>위 과정을 통해 주식과 채권 투자 비중을 각각 60%와 40%로 리밸런싱하는 포트폴리오의 백테스트가 실행됩니다. 표 <a href="section-78.html#tab:portreturn">12.3</a>는 함수 내에서 포트폴리오의 수익률이 어떻게 계산되는지를 요약한 과정입니다.</p>
+<table class="table table-striped table-hover table-bordered table-condensed" style="font-size: 8.5px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:portreturn">Table 12.3: </span><code>Return.portfolio()</code> 계산 과정
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작금액
 </div>
-<div id="section-3" class="section level2">
-<h2><span class="header-section-number">1.2</span> 퀀트 투자와 프로그래밍</h2>
-<p>우리가 구한 데이터는 연구나 투자에 바로 사용할 수 있는 형태로 주어지는 경우가 거의 없기 때문에 이를 목적에 맞게 처리하는 과정을 거쳐야 하며, 이를 흔히 데이터 클랜징 작업이라 합니다. 또한, 데이터가 정제된 이후 이를 활용한 투자 전략의 백테스트나 종목 선정을 위해서도 프로그래밍은 필수입니다. 물론 모든 퀀트 투자에서 프로그래밍이 필수인 것은 아닙니다. 엑셀을 이용하여도 간단한 형태의 백테스트 및 종목 선정은 얼마든지 가능합니다. 그러나 응용성 및 효율성의 측면에서 엑셀을 이용하는 것은 매우 비효율적입니다.</p>
-<p>데이터를 수집하고 클랜징 작업을 하는 경우, 몇 종목 되지 않는다면 엑셀을 이용하여도 충분히 가능합니다. 그러나 종목 수가 수 천 종목을 넘어갈 경우, 데이터를 손으로 일일이 처리하는 것은 사실상 불가능에 가깝습니다. 이러한 단순 반복 작업의 경우 프로그래밍을 이용한다면 훨씬 효율적으로 작업을 수행할 수 있습니다.</p>
-<p>백테스트에서도 프로그래밍을 사용하는 것이 훨씬 효율적입니다. 과거 12개월 누적 수익률이 높은 30종목에 투자하는 모멘텀 전략의 백테스트를 한다고 가정합시다. 처음에는 엑셀을 통해 백테스트를 하는 것이 편하다고 생각될 수 있습니다. 그러나 만일 12개월이 아닌 6개월 누적 수익률로 백테스트를 하고자 한다면 어떨까요? 다시 6개월 누적 수익률을 구하는 작업을 위해 명령어를 바꾸고 드래그를 해야 할 것입니다. 그러나 프로그래밍을 이용한다면 <code>n = 12</code> 였던 부분을 <code>n = 6</code>으로 변경한 후, 단지 클릭을 하면 새로운 백테스트가 완료됩니다.</p>
-<p>전체 데이터가 100MB 정도라 가정할 때, 투자 전략이 계속해서 늘어날 경우는 어떨까요? 엑셀에서 A라는 전략을 백테스트 하기 위해서는 해당 데이터를 이용하여 작업을 한 후 저장합니다. 그 후 B라는 전략을 새롭게 백테스트 하려면 해당 데이터를 새로운 엑셀 파일에 복사하여 작업한 후 저장해야 합니다. 결과적으로 10개의 전략만 백테스트 하더라도 100MB 짜리 엑셀파일이 10개, 즉 1GB 정도의 엑셀 파일이 쌓이게 됩니다. 만일 데이터가 바뀔 경우, 다시 10개 엑셀 시트의 데이터를 일일이 바꿔야 하는 귀찮음도 감수해야 합니다. 물론 하나의 엑셀 파일 내에서 모든 전략을 수행할 수도 있지만, 이는 엄청난 속도 저하의 문제가 있습니다.</p>
-<p>그러나 프로그래밍을 이용한다면 어떨까요? 백테스트를 수행하는 프로그래밍 스크립트는 불과 몇 KB에 불과합니다. 10개의 전략에 대한 스크립트 파일을 합해도 1MB가 되지 않습니다. 데이터가 바뀌더라도 원본 데이터 파일 하나만 수정해주면 됩니다.</p>
-<p>물론 대부분의 사람들에게 프로그래밍은 매우 낯선 도구입니다. 그러나 퀀트 투자에 필요한 프로그래밍은 매우 한정적이고 반복적이기에, 몇 개의 단어와 구문만 익숙해지면 사용하는데 큰 어려움이 없습니다. 또한 개발자들의 프로그래밍에 비하면 상당히 쉬운 수준이므로, 비교적 빠른 시간 내에 원하는 전략을 테스트하고 수행하는 정도의 능력을 갖출 수도 있습니다.</p>
-<p>최근에는 프로그래밍을 공부할 수 있는 좋은 온라인 사이트 및 학원도 늘어나고 있으므로, 프로그래밍을 처음 시작하기에도 큰 어려움이 없습니다. DataCamp<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>는 사람들이 즐겨 이용하는 온라인 프로그래밍 학원으로써 <strong>R, Python, SQL</strong>과 같은 언어를 단계별로 배워 나갈 수 있으며, 저럼한 사용료로 모든 과정을 수강할 수 있습니다. 직접 코드를 입력해야 과정이 진행된다는 점에서 초보자들도 능동적으로 학습할 수 있는 장점이 있습니다.</p>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작합계
 </div>
-<div id="r-" class="section level2">
-<h2><span class="header-section-number">1.3</span> R 프로그램</h2>
-<p>인간이 사용하는 언어의 종류가 다양하듯이, 프로그램 언어의 종류 역시 매우 다양합니다. 대략700여개 이상의 프로그램 언어 중<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> 사람들이 대중적으로 사용하는 언어는 그리 많지 않으므로, 대중성과 효율성을 위해 사용량이 많은 언어를 이용하는 것이 좋습니다.</p>
-<p>아래 그림은 프로그래밍 언어의 사용 통계 순위<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>입니다. 이 중 R과 Python은 금융에서 대표적으로 사용되는 언어로써, 매우 대중적인 언어이기도 합니다. 해당 언어가 많이 사용되는 가장 큰 이유는 무료인 점, 그리고 일반인들도 사용하기에 매우 편한 형태로 언어가 구성되어 있다는 점입니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
-<img src="images/tiobe_index.jpg" alt="2017년 기준 프로그래밍 언어 사용 통계 순위" width="500" />
-<p class="caption">
-Figure 1.4: 2017년 기준 프로그래밍 언어 사용 통계 순위
-</p>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작비중
 </div>
-<p>이러한 프로그래밍 언어 중 본 책에서는 R을 이용하였습니다. R의 장점은 무료라는 점 이외에도, 타 언어는 비교할 수 없는 다양한 패키지 입니다. 두터운 사용자 층을 기반으로 하여 R에는 상상할 수 없을 정도로 다양한 패키지가 존재하며, 특히 통계나 계량분석과 관련된 패키지는 독보적이라 할 수 있습니다.</p>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+수익률
 </div>
-<div id="r--1" class="section level2">
-<h2><span class="header-section-number">1.4</span> 퀀트 투자에 유용한 R 패키지</h2>
-<p>여러 연구자 및 실무자들의 헌신적인 노력과 함께, R에는 금융 연구와 퀀트 투자를 위한 다양한 패키지들이 만들어져 있으며, 누구나 무료로 이용이 가능합니다. 그 중 해당 책의 내용에 사용되는 패키지 중 중요하다고 생각되는 것 위주로 소개하도록 하겠습니다. 각 패키지에 대한 자세한 설명은 구글에서 패키지 명으로 검색한 후, PDF 파일을 통해 확인할 수 있습니다.</p>
-<ul>
-<li><p><code>quantmod</code>: 이름에서 알 수 있듯이 퀀트 투자에 매우 유용한 패키지 입니다. API를 이용하여 데이터를 다운로드 받는 <code>getSymbols()</code> 함수는 너무나 많이 사용되는 함수이며, 이 외에도 볼린져밴드, 이동평균선, 상대 강도 지수RSI 등 여러 기술적 지표들을 주가 차트에 나타낼 수도 있습니다.</p></li>
-<li><p><code>PerformanceAnalytics</code>: 포트폴리오의 성과와 위험을 측정하는데 역시나 매우 유용한 패키지 입니다. 백테스트에 사용되는 <code>Return.portfolio()</code> 함수는 포트폴리오 단위의 백테스트에 필수적인 함수입니다. 또한 성과를 측정하는 상당히 많은 함수를 이용하여, 포트폴리오의 성과뿐만 아니라 위험을 파악할 수 있습니다.</p></li>
-<li><p><code>xts</code>: 기본적으로 금융 데이터는 시계열 형태이며, 해당 패키지는 여러 데이터들을 시계열 형태<sup>eXtensible</sup> <sup>Time</sup> <sup>Series</sup>로 변형시켜 줍니다. 일별 수익률을 월별 수익률 혹은 연도별 수익률로 변환하는 <code>apply.monthly()</code>와 <code>apply.yearly()</code> 함수, 데이터들의 특정 시점을 찾아주는 <code>endpoints()</code> 함수 역시 백테스트에 필수적으로 사용되는 함수입니다. 해당 패키지는 <code>PerformanceAnalytics</code> 패키지 설치 시 자동으로 설치됩니다.</p></li>
-<li><p><code>zoo</code>: 해당 패키지 역시 시계열 데이터를 다루는데 유용함 함수가 존재합니다. <code>rollapply()</code> 함수는 <code>apply()</code> 함수를 전체 데이터가 아닌 롤링-윈도우 기법으로 활용할 수 있게 해주며, na 데이터를 채워주는 <code>na.locf()</code> 함수는 시계열 데이터의 결측치를 보정할 때 매우 유용합니다.</p></li>
-<li><p><code>httr</code> &amp; <code>rvest</code>: 데이터를 웹에서 직접 수집하기 위해서는 크롤링이 필수이며, <code>httr</code>과 <code>rvest</code>는 이에 사용되는 패키지 입니다. <code>httr</code>의 경우 http의 표준 요청을 수행해주는 패키지로써 단순히 데이터를 받는 <code>GET()</code> 함수와 사용자가 필요한 값을 선택하여 요청하는 <code>POST()</code> 함수가 대표적으로 사용됩니다. <code>rvest</code>의 경우 html 문서의 데이터를 가져오는데 사용되는 패키지이며, 웹 페이지에서 데이터를 크롤링 한 후 원하는 데이터만 뽑는데 필요한 여러 함수들이 포함되어 있습니다.</p></li>
-<li><p><code>dplyr</code>: 해당 패키지는 데이터 처리에 특화된 패키지로써, R을 이용한 데이터 과학 분야에서 가장 많이 사용되는 패키지 중 하나입니다. C++로 작성되어 매우 빠른 처리속도를 보이며, API나 크롤링을 통해 수집한 데이터들을 정리할 때도 매우 유용하게 사용됩니다.</p></li>
-<li><p><code>ggplot2</code>: 데이터를 시각화할 때 가장 많이 사용되는 패키지입니다. 물론 R에서 기본적으로 내장된 <code>plot()</code> 함수를 이용하여도 시각화가 가능하지만, 해당 패키지를 이용할 경우 훨씬 다양하고 깔끔하게 데이터를 그림으로 표현할 수 있습니다.</p></li>
-</ul>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료금액
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료합계
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료비중
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+최종수익률
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+1.주식
+</th>
+<th style="text-align:right;">
+2.채권
+</th>
+<th style="text-align:right;">
+3.1+2
+</th>
+<th style="text-align:right;">
+4.주식
+</th>
+<th style="text-align:right;">
+5.채권
+</th>
+<th style="text-align:right;">
+6.주식
+</th>
+<th style="text-align:right;">
+7.채권
+</th>
+<th style="text-align:right;">
+8.주식
+</th>
+<th style="text-align:right;">
+9.채권
+</th>
+<th style="text-align:right;">
+10.8+9
+</th>
+<th style="text-align:right;">
+11.주식
+</th>
+<th style="text-align:right;">
+12.채권
+</th>
+<th style="text-align:right;">
+13.수익률
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2017-12-26
+</td>
+<td style="text-align:right;">
+1.603
+</td>
+<td style="text-align:right;">
+0.940
+</td>
+<td style="text-align:right;">
+2.543
+</td>
+<td style="text-align:right;">
+0.630
+</td>
+<td style="text-align:right;">
+0.370
+</td>
+<td style="text-align:right;">
+-0.001
+</td>
+<td style="text-align:right;">
+0.003
+</td>
+<td style="text-align:right;">
+1.601
+</td>
+<td style="text-align:right;">
+0.943
+</td>
+<td style="text-align:right;">
+2.544
+</td>
+<td style="text-align:right;">
+0.629
+</td>
+<td style="text-align:right;">
+0.371
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017-12-27
+</td>
+<td style="text-align:right;">
+1.601
+</td>
+<td style="text-align:right;">
+0.943
+</td>
+<td style="text-align:right;">
+2.544
+</td>
+<td style="text-align:right;">
+0.629
+</td>
+<td style="text-align:right;">
+0.371
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+<td style="text-align:right;">
+1.602
+</td>
+<td style="text-align:right;">
+0.956
+</td>
+<td style="text-align:right;">
+2.557
+</td>
+<td style="text-align:right;">
+0.626
+</td>
+<td style="text-align:right;">
+0.374
+</td>
+<td style="text-align:right;">
+0.005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017-12-28
+</td>
+<td style="text-align:right;">
+1.602
+</td>
+<td style="text-align:right;">
+0.956
+</td>
+<td style="text-align:right;">
+2.557
+</td>
+<td style="text-align:right;">
+0.626
+</td>
+<td style="text-align:right;">
+0.374
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+-0.001
+</td>
+<td style="text-align:right;">
+1.605
+</td>
+<td style="text-align:right;">
+0.955
+</td>
+<td style="text-align:right;">
+2.560
+</td>
+<td style="text-align:right;">
+0.627
+</td>
+<td style="text-align:right;">
+0.373
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017-12-29
+</td>
+<td style="text-align:right;">
+1.605
+</td>
+<td style="text-align:right;">
+0.955
+</td>
+<td style="text-align:right;">
+2.560
+</td>
+<td style="text-align:right;">
+0.627
+</td>
+<td style="text-align:right;">
+0.373
+</td>
+<td style="text-align:right;">
+-0.004
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+1.599
+</td>
+<td style="text-align:right;">
+0.956
+</td>
+<td style="text-align:right;">
+2.555
+</td>
+<td style="text-align:right;">
+0.626
+</td>
+<td style="text-align:right;">
+0.374
+</td>
+<td style="text-align:right;">
+-0.002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+2018-01-02
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1.533
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1.022
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+2.555
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.600
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.400
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.007
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+-0.011
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1.544
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1.011
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+2.555
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.604
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.396
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2018-01-03
+</td>
+<td style="text-align:right;">
+1.544
+</td>
+<td style="text-align:right;">
+1.011
+</td>
+<td style="text-align:right;">
+2.555
+</td>
+<td style="text-align:right;">
+0.604
+</td>
+<td style="text-align:right;">
+0.396
+</td>
+<td style="text-align:right;">
+0.006
+</td>
+<td style="text-align:right;">
+0.005
+</td>
+<td style="text-align:right;">
+1.554
+</td>
+<td style="text-align:right;">
+1.016
+</td>
+<td style="text-align:right;">
+2.570
+</td>
+<td style="text-align:right;">
+0.605
+</td>
+<td style="text-align:right;">
+0.395
+</td>
+<td style="text-align:right;">
+0.006
+</td>
+</tr>
+</tbody>
+</table>
+<p>먼저 2017-12-27일에 해당하는 데이터를 보면 시작시점에 주식과 채권에는 각각 1.601과 0.943이 투자되어 있으며, 이를 합하면 2.544이 됩니다. 이를 포트폴리오 내 비중으로 환산하면 비중은 각각 0.629과 0.371가 됩니다.</p>
+<p>해당일의 주식과 채권의 수익률은 각각 0, 0.013이 되며, 이를 시작금액에 곱하면 종료시점의 금액은 1.602과 0.956가 됩니다. 각각의 금액을 종료금액의 합인 2.557으로 나누게 되면, 포트폴리오 내 비중은 0.626, 0.374로 변하게 됩니다. 포트폴리오 수익률은 2017-12-27 포트폴리오 금액인 2.557을 전일의 포트폴리오 금액인 2.544로 나누어 계산된 값인 0.005가 됩니다.</p>
+<p>리밸런싱이 없다면 2017-12-27일의 종료금액과 종료비중은 2017-12-28일의 시작금액과 시작비중에 그대로 적용되며, 위와 동일한 단계를 통해 포트폴리오 수익률이 계산됩니다.</p>
+<p>그러나 매해 리밸런싱을 가정했으므로, 첫 영업일인 2018-01-02일에는 포트폴리오 리밸런싱이 이루어집니다. 따라서 전일 2017-12-29일의 종료금액의 합인 2.555을 사전에 정의한 0.6과 0.4에 맞게 각 자산을 시작시점에 매수 혹은 매도하게 됩니다. 이후에는 기존과 동일하게 해당일의 수익률을 곱해 종료시점의 금액과 비중을 구한 후, 포트폴리오 수익률을 계산하게 됩니다.</p>
+<p>리밸런싱 전일 종료시점의 비중과 리밸런싱 당일 시작시점의 비중 차이의 절대값을 합하면, 포트폴리오의 턴오버를 계산할 수도 있습니다. 해당 예제에서는 2017-12-29일 종료시점의 비중인 0.626, 0.374와 2018-01-02일 시작시점의 비중인 0.6, 0.4의 차이인 0.026, -0.026의 절대값의 합계인 0.052가 턴오버가 됩니다.</p>
+<p>이처럼 리밸런싱을 원하는 시점과 비중을 정의하면, <code>Return.portfolio()</code> 함수 내에서는 위의 단계를 거쳐 포트폴리오의 수익률, 시작과 종료시점의 금액 및 비중이 계산되며, 이를 응용하여 턴오버를 계산할 수도 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">portfolios =<span class="st"> </span><span class="kw">cbind</span>(rets, portfolio<span class="op">$</span>returns)
+<span class="kw">charts.PerformanceSummary</span>(portfolios, <span class="dt">main =</span> <span class="st">&#39;60대 40 포트폴리오&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><code>PerformanceAnalytics</code> 패키지의 <code>charts.PerformanceSummary()</code> 함수는 기간별 수익률을 입력시 누적수익률, 일별수익률, 드로우다운 그래프를 자동으로 그려줍니다.</p>
+<p>검은색 그래프는 주식 수익률(SPY), 붉은색 그래프는 채권 수익률(TLT), 초록색 그래프는 60대 40 포트폴리오 수익률을 의미합니다. 주식과 채권은 상반되는 움직임을 보이며 상승하며, 분산투자 포트폴리오는 각 개별 자산에 비해 훨씬 안정적인 수익률을 보입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(portfolio<span class="op">$</span>BOP.Weight <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(portfolio<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+               <span class="dt">order.by =</span> <span class="kw">index</span>(portfolio<span class="op">$</span>BOP.Weight))
+
+<span class="kw">chart.TimeSeries</span>(turnover)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>전일 종료시점의 비중인 EOP.Weight를 <code>lag()</code> 함수를 이용해 한 단계씩 내린 후, 시작시점의 비중인 BOP.Weight와의 차이의 절대값을 더해주면 해당 시점에서의 턴오버가 계산됩니다. 이를 <code>xts()</code> 함수를 이용해 시계열 형태로 만들어준 뒤, <code>chart.TimeSeries()</code> 함수를 이용해 그래프로 나타내줍니다.</p>
+<p>리밸런싱 시점에 해당하는 매해 첫 영업일에 턴오버가 발생하며, 그렇지 않은 날은 매수 혹은 매도가 없으므로 턴오버 역시 0을 기록합니다. 2008년에는 주식과 채권의 등락폭이 심하였으므로 이듬해엔 2009년 리밸런싱으로 인한 턴오버가 심하지만, 이를 제외한 해는 턴오버가 그리 심하지 않습니다.</p>
 
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>R을 활용한 데이터 과학(해들리 위컴, 개럿 그롤문드 저/김설기, 최혜민 역)<a href="section-1.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p><a href="https://www.quandl.com/" class="uri">https://www.quandl.com/</a><a href="section-1.html#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p><a href="https://www.tiingo.com/" class="uri">https://www.tiingo.com/</a><a href="section-1.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p><a href="https://finance.yahoo.com/" class="uri">https://finance.yahoo.com/</a><a href="section-1.html#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p><a href="https://www.datacamp.com/" class="uri">https://www.datacamp.com/</a><a href="section-1.html#fnref5" class="footnote-back">↩</a></p></li>
-<li id="fn6"><p><a href="https://en.wikipedia.org/wiki/List_of_programming_languages" class="uri">https://en.wikipedia.org/wiki/List_of_programming_languages</a><a href="section-1.html#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p><a href="https://www.tiobe.com/tiobe-index/" class="uri">https://www.tiobe.com/tiobe-index/</a><a href="section-1.html#fnref7" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="section-67.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

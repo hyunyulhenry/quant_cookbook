@@ -24,20 +24,22 @@ symbols = c('SPY', # 미국 주식: SPDR S&P 500 ETF
             )
 getSymbols(symbols, src = 'yahoo')
 
-prices = do.call(cbind,
-                 lapply(symbols, function(x) Ad(get(x)))) %>%
+prices = do.call(cbind, lapply(symbols, function(x) Ad(get(x)))) %>%
   setNames(symbols)
 
 rets = Return.calculate(prices) %>% na.omit()
-write.csv(data.frame(rets), 'data/data_global.csv')
 ```
 
-`getSymbols()` 함수를 통해 일반적으로 자산배분에서 많이 사용되는 주식과 채권, 대체자산에 해당하는 ETF 가격 데이터를 받은 후, `lapply()`와 `Ad()`, `get()` 함수의 조합을 통해 수정주가 만을 선택하여 열의 형태로 묶어주도록 합니다. 그 후 `Return.calculate()` 함수를 통해 수익률을 계산 해줍니다. 해당 데이터는 다음 자에서도 쓰일 예정이므로 data 폴더 내 **data_global.csv** 이름으로 저장해주도록 합니다.
+```{r echo = FALSE, eval = FALSE}
+write.csv(data.frame(rets), 'data/data_global.csv')
+```
 
 ```{r echo = FALSE}
 library(magrittr)
 rets = read.csv('data/data_global.csv', stringsAsFactors = FALSE, row.names = 1) %>% xts::as.xts()
 ```
+
+`getSymbols()` 함수를 통해 일반적으로 자산배분에서 많이 사용되는 주식과 채권, 대체자산에 해당하는 ETF 가격 데이터를 받은 후, `lapply()`와 `Ad()`, `get()` 함수의 조합을 통해 수정주가 만을 선택하여 열의 형태로 묶어주도록 합니다. 그 후 `Return.calculate()` 함수를 통해 수익률을 계산 해줍니다. 
 
 ```{r message = FALSE, warning = FALSE, out.width = '50%', fig.align = 'center'}
 library(tidyr)
@@ -870,7 +872,7 @@ print(w)
 
 1. x0은 최적화를 위한 초기 입력값이며 동일비중인 10%씩을 입력해 줍니다.
 2. P는 분산-공분산 행렬을 입력해줍니다. 
-3. mrc는 목표로 하는 각 자산 별 위험기여도 값이며, 위험균형 포트폴리오의 경우 모든 자산의 위험기여도가 동일해야하므로 10%씩을 입력해 줍니다.
+3. mrc는 목표로 하는 각 자산 별 위험기여도 값^[엄밀하게는 mrc가 아닌 rc가 맞는 용어입니다.]이며, 위험균형 포트폴리오의 경우 모든 자산의 위험기여도가 동일해야하므로 10%씩을 입력해 줍니다.
 
 `rp()` 함수는 위 입력변수를 바탕으로 최적화를 만족하는 해를 찾아줍니다. `getx()` 함수를 통해 해를 추출할 수 있으며, `drop()`을 통해 벡터 형태로 변환해줍니다. 마지막으로 비중의 합이 1이 되기 위해 비중들의 합으로 나눠주도록 합니다.
 
