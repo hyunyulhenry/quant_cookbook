@@ -347,9 +347,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.2" data-path="section-78.html"><a href="section-78.html#section-80"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="section-78.html"><a href="section-78.html#section-81"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
-<li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="section-78.html"><a href="section-78.html#section-83"><i class="fa fa-check"></i><b>12.3.1</b> 동적 자산배분 백테스트</a></li>
-</ul></li>
+<li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="section-78.html"><a href="section-78.html#section-83"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -1031,8 +1030,9 @@ portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class
 <span class="kw">chart.TimeSeries</span>(turnover)</code></pre>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>해당 전략의 회전율을 확인해보면, 몇년 간 매매가 없는 경우도 존재합니다. 그러나 매매가 발생할 시 매수와 매도 포지션 양쪽의 매매로 인해 200%의 회전율이 발생하게 됩니다.</p>
-<div id="section-83" class="section level3">
-<h3><span class="header-section-number">12.3.1</span> 동적 자산배분 백테스트</h3>
+</div>
+<div id="section-83" class="section level2">
+<h2><span class="header-section-number">12.4</span> 동적 자산배분 백테스트</h2>
 <p>백테스트의 마지막으로 기존에 배웠던 것들을 응용하여 동적 자산배분의 백테스트를 수행하도록 하겠습니다. 일반적인 자산배분이 주식과 채권, 대체자산에 투자비중을 사전에 정해놓고 약간의 비율만 수정하는 정적 자산배분인 반면, 동적 자산배분이란 투자비중에 대한 제한이 없이 동적으로 포트폴리오를 구성하는 방법입니다.</p>
 <p>동적 자산배분을 이용한 포트폴리오는 다음과 같이 구성됩니다.</p>
 <ol style="list-style-type: decimal">
@@ -1142,7 +1142,6 @@ GDAA<span class="op">$</span>net =<span class="st"> </span>GDAA<span class="op">
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>기존 비용을 고려하지 않은 포트폴리오에 비해, 비용을 차감한 포트폴리오 수익률이 시간이 지남에 따라 서서히 감소함이 확인됩니다. 이러한 차이는 비용이 클수록, 혹은 매매회전율이 높을수록 더욱 벌어지게 됩니다.</p>
 
-</div>
 </div>
 </div>
 
