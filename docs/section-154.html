@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 포트폴리오 백테스트 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</title>
+  <meta name="description" content="Chapter 12 포트폴리오 백테스트 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 포트폴리오 백테스트 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 포트폴리오 백테스트 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  
+  
+  
+
+<meta name="author" content="이현열" />
+
+
+<meta name="date" content="2019-06-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="section-143.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
+<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="libs/highcharts-7.0.1/highcharts.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
+<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
+<script src="libs/highcharts-7.0.1/modules/map.js"></script>
+<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
+<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
+<script src="libs/highcharts-7.0.1/modules/data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
+<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
+<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
+<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
+<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
+<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
+<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
+<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
+<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
+<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
+<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
+<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
+<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
+<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
+<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
+<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">퀀트 투자 쿡북</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>여는 글</a></li>
+<li class="chapter" data-level="1" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
+<li class="chapter" data-level="1.1" data-path="section-1.html"><a href="section-1.html#section-2"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
+<li class="chapter" data-level="1.2" data-path="section-1.html"><a href="section-1.html#section-3"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
+<li class="chapter" data-level="1.3" data-path="section-1.html"><a href="section-1.html#r-"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
+<li class="chapter" data-level="1.4" data-path="section-1.html"><a href="section-1.html#r--1"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
+<li class="chapter" data-level="2.1" data-path="section-4.html"><a href="section-4.html#r-utf-8-"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="section-4.html"><a href="section-4.html#ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
+<li class="chapter" data-level="2.1.2" data-path="section-4.html"><a href="section-4.html#section-5"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩의 종류</a></li>
+<li class="chapter" data-level="2.1.3" data-path="section-4.html"><a href="section-4.html#r-utf-8--1"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="section-4.html"><a href="section-4.html#section-6"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="section-4.html"><a href="section-4.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="section-4.html"><a href="section-4.html#html-css-"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS 이해하기</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="section-4.html"><a href="section-4.html#html--"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
+<li class="chapter" data-level="2.3.2" data-path="section-4.html"><a href="section-4.html#section-7"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.3" data-path="section-4.html"><a href="section-4.html#h--p-"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
+<li class="chapter" data-level="2.3.4" data-path="section-4.html"><a href="section-4.html#ul-ol-"><i class="fa fa-check"></i><b>2.3.4</b> 리스트: ul과 ol 태그</a></li>
+<li class="chapter" data-level="2.3.5" data-path="section-4.html"><a href="section-4.html#table-"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
+<li class="chapter" data-level="2.3.6" data-path="section-4.html"><a href="section-4.html#a-src--"><i class="fa fa-check"></i><b>2.3.6</b> a, src 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.7" data-path="section-4.html"><a href="section-4.html#div-"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
+<li class="chapter" data-level="2.3.8" data-path="section-4.html"><a href="section-4.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
+<li class="chapter" data-level="2.3.9" data-path="section-4.html"><a href="section-4.html#class-id"><i class="fa fa-check"></i><b>2.3.9</b> class와 id</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="2.5" data-path="section-4.html"><a href="section-4.html#section-9"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
+<li class="chapter" data-level="3.1" data-path="api-.html"><a href="api-.html#api--quandl--"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
+<li class="chapter" data-level="3.2" data-path="api-.html"><a href="api-.html#getsymbols---api-"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="api-.html"><a href="api-.html#section-10"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.2" data-path="api-.html"><a href="api-.html#section-11"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.3" data-path="api-.html"><a href="api-.html#fred--"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="section-12.html"><a href="section-12.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-12.html"><a href="section-12.html#get-post--"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="section-12.html"><a href="section-12.html#get-"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
+<li class="chapter" data-level="4.1.2" data-path="section-12.html"><a href="section-12.html#post-"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="section-12.html"><a href="section-12.html#section-13"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="section-12.html"><a href="section-12.html#section-14"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
+<li class="chapter" data-level="4.2.2" data-path="section-12.html"><a href="section-12.html#section-15"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
+<li class="chapter" data-level="4.2.3" data-path="section-12.html"><a href="section-12.html#section-16"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-17.html"><a href="section-17.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-17.html"><a href="section-17.html#section-18"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="section-17.html"><a href="section-17.html#section-19"><i class="fa fa-check"></i><b>5.1.1</b> 산업별 현황 크롤링</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="section-17.html"><a href="section-17.html#onufrwfkurwr1qeggpehtpnkzrjeo9kbn5jgszs7arjbdjnfjefccml6i0juxe1hzefxubbyy2abg2mv1id33wdykd2opsigbhetzhzjr0wynz24tjk5duu5jpgmjwbgripw4yisxca3fnv9peslswdex8m7f4oplibjy3yarpykcaeleo2vso2vjhnnwywayyciyj0dmmn63wuwrhwgh6iksiael8ueylqkqh3uejzjqr0yj4jj28pcpqc89krdx2wbyylb9gjrt9gzb2lnklhmri2weaeixrlzq"><i class="fa fa-check"></i><b>5.2</b> [1] “onU/FrwFkurWr1qEGgPEhtPnKZRjeo9kbN5JGszS7arj/bdjNFjefcCm+L6I0JUXe1HzefxUBByY2abg2MV1ID33wdYKd2OpSIgBHeTZHzJr0wynz24tjk5duu5JPgMjwBgripw4YISXCA3FNv9pEsLswDex8M7F4OPlibJY3yaRPyKcAEleo2VSO2vJhnnWyWAyyc/iyj0DMMN63wUWRhWgh6iKSiaEL8UEyLQkqh3UeJZJQr0yj4JJ28pCpQc89KRdx2WBYYlB9GJr+t9GZB2LNKlhmRi/2weAeixRLZQ=”</a></li>
+<li class="chapter" data-level="5.3" data-path="section-17.html"><a href="section-17.html#a-tibble-2243-x-7"><i class="fa fa-check"></i><b>5.3</b> # A tibble: 2,243 x 7</a></li>
+<li class="chapter" data-level="5.4" data-path="section-17.html"><a href="section-17.html#section-20"><i class="fa fa-check"></i><b>5.4</b> 시장구분 종목코드 종목명 산업분류 <code>현재가(종가)</code> 전일대비 <code>시가총액(원)</code></a></li>
+<li class="chapter" data-level="5.5" data-path="section-17.html"><a href="section-17.html#section-21"><i class="fa fa-check"></i><b>5.5</b> <chr> <chr> <chr> <chr> <dbl> <dbl> <dbl></a></li>
+<li class="chapter" data-level="5.6" data-path="section-17.html"><a href="section-17.html#section-22"><i class="fa fa-check"></i><b>5.6</b> 1 코스피 030720 동원수산~ 어업 8940 -20 41605016700</a></li>
+<li class="chapter" data-level="5.7" data-path="section-17.html"><a href="section-17.html#section-23"><i class="fa fa-check"></i><b>5.7</b> 2 코스피 007160 사조산업~ 어업 54400 800 272000000000</a></li>
+<li class="chapter" data-level="5.8" data-path="section-17.html"><a href="section-17.html#section-24"><i class="fa fa-check"></i><b>5.8</b> 3 코스피 006040 동원산업~ 어업 246500 500 829028800000</a></li>
+<li class="chapter" data-level="5.9" data-path="section-17.html"><a href="section-17.html#section-25"><i class="fa fa-check"></i><b>5.9</b> 4 코스피 004970 신라교역~ 어업 14350 350 229600000000</a></li>
+<li class="chapter" data-level="5.10" data-path="section-17.html"><a href="section-17.html#section-26"><i class="fa fa-check"></i><b>5.10</b> 5 코스피 012320 경동인베스~ 광업 40300 1350 95310426900</a></li>
+<li class="chapter" data-level="5.11" data-path="section-17.html"><a href="section-17.html#section-27"><i class="fa fa-check"></i><b>5.11</b> 6 코스피 003580 넥스트사이~ 광업 5200 260 122099322800</a></li>
+<li class="chapter" data-level="5.12" data-path="section-17.html"><a href="section-17.html#section-28"><i class="fa fa-check"></i><b>5.12</b> 7 코스피 017810 풀무원 음식료품 11300 200 430427735000</a></li>
+<li class="chapter" data-level="5.13" data-path="section-17.html"><a href="section-17.html#section-29"><i class="fa fa-check"></i><b>5.13</b> 8 코스피 280360 롯데제과~ 음식료품 159500 -500 1023466361500</a></li>
+<li class="chapter" data-level="5.14" data-path="section-17.html"><a href="section-17.html#section-30"><i class="fa fa-check"></i><b>5.14</b> 9 코스피 271560 오리온 음식료품 83300 1400 3293359795600</a></li>
+<li class="chapter" data-level="5.15" data-path="section-17.html"><a href="section-17.html#section-31"><i class="fa fa-check"></i><b>5.15</b> 10 코스피 006090 사조오양~ 음식료품 8220 30 77454914580</a></li>
+<li class="chapter" data-level="5.16" data-path="section-17.html"><a href="section-17.html#with-2233-more-rows"><i class="fa fa-check"></i><b>5.16</b> # … with 2,233 more rows</a></li>
+<li class="chapter" data-level="5.17" data-path="section-17.html"><a href="section-17.html#false"><i class="fa fa-check"></i><b>5.17</b> [1] FALSE</a><ul>
+<li class="chapter" data-level="5.17.1" data-path="section-17.html"><a href="section-17.html#section-32"><i class="fa fa-check"></i><b>5.17.1</b> 개별종목 지표 크롤링</a></li>
+</ul></li>
+<li class="chapter" data-level="5.18" data-path="section-17.html"><a href="section-17.html#a-tibble-2204-x-13"><i class="fa fa-check"></i><b>5.18</b> # A tibble: 2,204 x 13</a></li>
+<li class="chapter" data-level="5.19" data-path="section-17.html"><a href="section-17.html#eps-per-bps-pbr"><i class="fa fa-check"></i><b>5.19</b> 일자 종목코드 종목명 관리여부 종가 EPS PER BPS PBR</a></li>
+<li class="chapter" data-level="5.20" data-path="section-17.html"><a href="section-17.html#section-33"><i class="fa fa-check"></i><b>5.20</b> <date> <chr> <chr> <chr> <dbl> <chr> <chr> <chr> <chr></a></li>
+<li class="chapter" data-level="5.21" data-path="section-17.html"><a href="section-17.html#section-34"><i class="fa fa-check"></i><b>5.21</b> 1 2019-06-07 060300 레드로버~ - 1190 - - 2,128 0.56</a></li>
+<li class="chapter" data-level="5.22" data-path="section-17.html"><a href="section-17.html#section-35"><i class="fa fa-check"></i><b>5.22</b> 2 2019-06-07 290650 엘앤씨바이~ - 22750 830 27.41 7,252 3.14</a></li>
+<li class="chapter" data-level="5.23" data-path="section-17.html"><a href="section-17.html#section-36"><i class="fa fa-check"></i><b>5.23</b> 3 2019-06-07 239340 미래에셋제~ - 5200 - - - -</a></li>
+<li class="chapter" data-level="5.24" data-path="section-17.html"><a href="section-17.html#section-37"><i class="fa fa-check"></i><b>5.24</b> 4 2019-06-07 086060 진바이오텍~ - 6940 312 22.24 5,570 1.25</a></li>
+<li class="chapter" data-level="5.25" data-path="section-17.html"><a href="section-17.html#section-38"><i class="fa fa-check"></i><b>5.25</b> 5 2019-06-07 033430 디에스티~ - 1310 - - 338 3.88</a></li>
+<li class="chapter" data-level="5.26" data-path="section-17.html"><a href="section-17.html#section-39"><i class="fa fa-check"></i><b>5.26</b> 6 2019-06-07 038680 에스넷 - 9600 300 32 4,302 2.23</a></li>
+<li class="chapter" data-level="5.27" data-path="section-17.html"><a href="section-17.html#section-40"><i class="fa fa-check"></i><b>5.27</b> 7 2019-06-07 214680 디알텍 - 2005 29 69.14 709 2.83</a></li>
+<li class="chapter" data-level="5.28" data-path="section-17.html"><a href="section-17.html#section-41"><i class="fa fa-check"></i><b>5.28</b> 8 2019-06-07 242040 나무기술~ - 3345 - - 462 7.24</a></li>
+<li class="chapter" data-level="5.29" data-path="section-17.html"><a href="section-17.html#section-42"><i class="fa fa-check"></i><b>5.29</b> 9 2019-06-07 121890 에스디시스~ - 4980 - - 1,912 2.6</a></li>
+<li class="chapter" data-level="5.30" data-path="section-17.html"><a href="section-17.html#section-43"><i class="fa fa-check"></i><b>5.30</b> 10 2019-06-07 088800 에이스테크~ - 11500 97 118.~ 2,291 5.02</a></li>
+<li class="chapter" data-level="5.31" data-path="section-17.html"><a href="section-17.html#with-2194-more-rows-and-4-more-variables-"><i class="fa fa-check"></i><b>5.31</b> # … with 2,194 more rows, and 4 more variables: 주당배당금 <dbl>,</a></li>
+<li class="chapter" data-level="5.32" data-path="section-17.html"><a href="section-17.html#section-44"><i class="fa fa-check"></i><b>5.32</b> # 배당수익률 <dbl>, <code>게시물 일련번호</code> <dbl>, 총카운트 <dbl></a><ul>
+<li class="chapter" data-level="5.32.1" data-path="section-17.html"><a href="section-17.html#section-45"><i class="fa fa-check"></i><b>5.32.1</b> 데이터 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="5.33" data-path="section-17.html"><a href="section-17.html#section-46"><i class="fa fa-check"></i><b>5.33</b> [1] “종목코드” “종목명”</a></li>
+<li class="chapter" data-level="5.34" data-path="section-17.html"><a href="section-17.html#ankor"><i class="fa fa-check"></i><b>5.34</b> [1] “엘브이엠씨홀딩스” “한국패러랠” “한국ANKOR유전”</a></li>
+<li class="chapter" data-level="5.35" data-path="section-17.html"><a href="section-17.html#section-47"><i class="fa fa-check"></i><b>5.35</b> [4] “맵스리얼티1” “맥쿼리인프라” “하나니켈2호”</a></li>
+<li class="chapter" data-level="5.36" data-path="section-17.html"><a href="section-17.html#section-48"><i class="fa fa-check"></i><b>5.36</b> [7] “하나니켈1호” “베트남개발1” “신한알파리츠”</a></li>
+<li class="chapter" data-level="5.37" data-path="section-17.html"><a href="section-17.html#section-49"><i class="fa fa-check"></i><b>5.37</b> [10] “이리츠코크렙” “모두투어리츠” “하이골드12호”</a></li>
+<li class="chapter" data-level="5.38" data-path="section-17.html"><a href="section-17.html#section-50"><i class="fa fa-check"></i><b>5.38</b> [13] “하이골드8호” “바다로19호” “하이골드3호”</a></li>
+<li class="chapter" data-level="5.39" data-path="section-17.html"><a href="section-17.html#section-51"><i class="fa fa-check"></i><b>5.39</b> [16] “케이탑리츠” “에이리츠” “동북아13호”</a></li>
+<li class="chapter" data-level="5.40" data-path="section-17.html"><a href="section-17.html#jtc"><i class="fa fa-check"></i><b>5.40</b> [19] “동북아12호” “컬러레이” “JTC”</a></li>
+<li class="chapter" data-level="5.41" data-path="section-17.html"><a href="section-17.html#section-52"><i class="fa fa-check"></i><b>5.41</b> [22] “뉴프라이드” “윙입푸드” “글로벌에스엠”</a></li>
+<li class="chapter" data-level="5.42" data-path="section-17.html"><a href="section-17.html#section-53"><i class="fa fa-check"></i><b>5.42</b> [25] “크리스탈신소재” “씨케이에이치” “차이나그레이트”</a></li>
+<li class="chapter" data-level="5.43" data-path="section-17.html"><a href="section-17.html#grt"><i class="fa fa-check"></i><b>5.43</b> [28] “골든센츄리” “오가닉티코스메틱” “GRT”</a></li>
+<li class="chapter" data-level="5.44" data-path="section-17.html"><a href="section-17.html#section-54"><i class="fa fa-check"></i><b>5.44</b> [31] “로스웰” “헝셩그룹” “이스트아시아홀딩스”</a></li>
+<li class="chapter" data-level="5.45" data-path="section-17.html"><a href="section-17.html#snk-sbi"><i class="fa fa-check"></i><b>5.45</b> [34] “에스앤씨엔진그룹” “SNK” “SBI핀테크솔루션즈”</a></li>
+<li class="chapter" data-level="5.46" data-path="section-17.html"><a href="section-17.html#section-55"><i class="fa fa-check"></i><b>5.46</b> [37] “잉글우드랩” “코오롱티슈진” “엑세스바이오”</a></li>
+<li class="chapter" data-level="5.47" data-path="section-17.html"><a href="section-17.html#section-56"><i class="fa fa-check"></i><b>5.47</b> 종목코드 종목명 시장구분 산업분류 현재가.종가. 전일대비</a></li>
+<li class="chapter" data-level="5.48" data-path="section-17.html"><a href="section-17.html#section-57"><i class="fa fa-check"></i><b>5.48</b> 330 005930 삼성전자 코스피 전기전자 44200 300</a></li>
+<li class="chapter" data-level="5.49" data-path="section-17.html"><a href="section-17.html#sk---65400-300"><i class="fa fa-check"></i><b>5.49</b> 45 000660 SK하이닉스 코스피 전기전자 65400 300</a></li>
+<li class="chapter" data-level="5.50" data-path="section-17.html"><a href="section-17.html#section-58"><i class="fa fa-check"></i><b>5.50</b> 301 005380 현대차 코스피 운수장비 140000 -1000</a></li>
+<li class="chapter" data-level="5.51" data-path="section-17.html"><a href="section-17.html#section-59"><i class="fa fa-check"></i><b>5.51</b> 331 005935 삼성전자우 코스피 전기전자 36250 200</a></li>
+<li class="chapter" data-level="5.52" data-path="section-17.html"><a href="section-17.html#section-60"><i class="fa fa-check"></i><b>5.52</b> 1278 068270 셀트리온 코스피 의약품 196500 500</a></li>
+<li class="chapter" data-level="5.53" data-path="section-17.html"><a href="section-17.html#lg---330500--1000"><i class="fa fa-check"></i><b>5.53</b> 1082 051910 LG화학 코스피 화학 330500 -1000</a></li>
+<li class="chapter" data-level="5.54" data-path="section-17.html"><a href="section-17.html#eps-per-bps-pbr-1"><i class="fa fa-check"></i><b>5.54</b> 시가총액.원. 일자 관리여부 종가 EPS PER BPS PBR</a></li>
+<li class="chapter" data-level="5.55" data-path="section-17.html"><a href="section-17.html#e14-2019-06-07---44200-6461-6.84-35342-1.25"><i class="fa fa-check"></i><b>5.55</b> 330 2.638644e+14 2019-06-07 - 44200 6,461 6.84 35,342 1.25</a></li>
+<li class="chapter" data-level="5.56" data-path="section-17.html"><a href="section-17.html#e13-2019-06-07---65400-22255-2.94-64348-1.02"><i class="fa fa-check"></i><b>5.56</b> 45 4.761135e+13 2019-06-07 - 65400 22,255 2.94 64,348 1.02</a></li>
+<li class="chapter" data-level="5.57" data-path="section-17.html"><a href="section-17.html#e13-2019-06-07---140000-5632-24.86-245447-0.57"><i class="fa fa-check"></i><b>5.57</b> 301 2.991355e+13 2019-06-07 - 140000 5,632 24.86 245,447 0.57</a></li>
+<li class="chapter" data-level="5.58" data-path="section-17.html"><a href="section-17.html#e13-2019-06-07---36250--------"><i class="fa fa-check"></i><b>5.58</b> 331 2.982964e+13 2019-06-07 - 36250 - - - -</a></li>
+<li class="chapter" data-level="5.59" data-path="section-17.html"><a href="section-17.html#e13-2019-06-07---196500-2063-95.25-19766-9.94"><i class="fa fa-check"></i><b>5.59</b> 1278 2.521666e+13 2019-06-07 - 196500 2,063 95.25 19,766 9.94</a></li>
+<li class="chapter" data-level="5.60" data-path="section-17.html"><a href="section-17.html#e13-2019-06-07---330500-19217-17.2-218227-1.51"><i class="fa fa-check"></i><b>5.60</b> 1082 2.333077e+13 2019-06-07 - 330500 19,217 17.2 218,227 1.51</a></li>
+<li class="chapter" data-level="5.61" data-path="section-17.html"><a href="section-17.html#section-61"><i class="fa fa-check"></i><b>5.61</b> 주당배당금 배당수익률 게시물..일련번호 총카운트</a></li>
+<li class="chapter" data-level="5.62" data-path="section-17.html"><a href="section-17.html#na"><i class="fa fa-check"></i><b>5.62</b> 330 1416 3.20 1456 NA</a></li>
+<li class="chapter" data-level="5.63" data-path="section-17.html"><a href="section-17.html#na-1"><i class="fa fa-check"></i><b>5.63</b> 45 1500 2.29 1408 NA</a></li>
+<li class="chapter" data-level="5.64" data-path="section-17.html"><a href="section-17.html#na-2"><i class="fa fa-check"></i><b>5.64</b> 301 4000 2.86 1450 NA</a></li>
+<li class="chapter" data-level="5.65" data-path="section-17.html"><a href="section-17.html#na-3"><i class="fa fa-check"></i><b>5.65</b> 331 1417 3.91 2095 NA</a></li>
+<li class="chapter" data-level="5.66" data-path="section-17.html"><a href="section-17.html#na-4"><i class="fa fa-check"></i><b>5.66</b> 1278 0 0.00 1595 NA</a></li>
+<li class="chapter" data-level="5.67" data-path="section-17.html"><a href="section-17.html#na-5"><i class="fa fa-check"></i><b>5.67</b> 1082 6000 1.82 1536 NA</a></li>
+<li class="chapter" data-level="5.68" data-path="section-17.html"><a href="section-17.html#section-62"><i class="fa fa-check"></i><b>5.68</b> [1] “미래에셋제5호스팩” “한화에스비아이스팩” “엔에이치스팩14호”</a></li>
+<li class="chapter" data-level="5.69" data-path="section-17.html"><a href="section-17.html#section-63"><i class="fa fa-check"></i><b>5.69</b> [4] “엔에이치스팩10호” “엔에이치스팩12호” “삼성스팩2호”</a></li>
+<li class="chapter" data-level="5.70" data-path="section-17.html"><a href="section-17.html#section-64"><i class="fa fa-check"></i><b>5.70</b> [7] “대신밸런스제5호스팩” “케이비제10호스팩” “엔에이치스팩11호”</a></li>
+<li class="chapter" data-level="5.71" data-path="section-17.html"><a href="section-17.html#section-65"><i class="fa fa-check"></i><b>5.71</b> [10] “유진스팩4호” “신한제4호스팩” “하나금융11호스팩”</a></li>
+<li class="chapter" data-level="5.72" data-path="section-17.html"><a href="section-17.html#db7-sk4"><i class="fa fa-check"></i><b>5.72</b> [13] “케이비17호스팩” “DB금융스팩7호” “SK4호스팩”</a></li>
+<li class="chapter" data-level="5.73" data-path="section-17.html"><a href="section-17.html#section-66"><i class="fa fa-check"></i><b>5.73</b> [16] “한국제7호스팩” “대신밸런스제6호스팩” “미래에셋대우스팩1호”</a></li>
+<li class="chapter" data-level="5.74" data-path="section-17.html"><a href="section-17.html#ibks5-5"><i class="fa fa-check"></i><b>5.74</b> [19] “대신밸런스제4호스팩” “IBKS제5호스팩” “동부스팩5호”</a></li>
+<li class="chapter" data-level="5.75" data-path="section-17.html"><a href="section-17.html#db6-6-10"><i class="fa fa-check"></i><b>5.75</b> [22] “DB금융스팩6호” “하나머스트제6호스팩” “하나금융10호스팩”</a></li>
+<li class="chapter" data-level="5.76" data-path="section-17.html"><a href="section-17.html#section-67"><i class="fa fa-check"></i><b>5.76</b> [25] “삼성머스트스팩3호” “유안타제4호스팩” “한국제6호스팩”</a></li>
+<li class="chapter" data-level="5.77" data-path="section-17.html"><a href="section-17.html#ibks6-4-"><i class="fa fa-check"></i><b>5.77</b> [28] “IBKS제6호스팩” “신영스팩4호” “한화수성스팩”</a></li>
+<li class="chapter" data-level="5.78" data-path="section-17.html"><a href="section-17.html#ibks10-4-9"><i class="fa fa-check"></i><b>5.78</b> [31] “IBKS제10호스팩” “하이제4호스팩” “하나금융9호스팩”</a></li>
+<li class="chapter" data-level="5.79" data-path="section-17.html"><a href="section-17.html#section-68"><i class="fa fa-check"></i><b>5.79</b> [34] “유안타제3호스팩” “교보7호스팩” “한국제5호스팩”</a></li>
+<li class="chapter" data-level="5.80" data-path="section-17.html"><a href="section-17.html#ibks9-8-ibks7"><i class="fa fa-check"></i><b>5.80</b> [37] “IBKS제9호스팩” “교보8호스팩” “IBKS제7호스팩”</a></li>
+<li class="chapter" data-level="5.81" data-path="section-17.html"><a href="section-17.html#sk3"><i class="fa fa-check"></i><b>5.81</b> [40] “신한제3호스팩” “키움제5호스팩” “SK3호스팩”</a></li>
+<li class="chapter" data-level="5.82" data-path="section-17.html"><a href="section-17.html#section-69"><i class="fa fa-check"></i><b>5.82</b> [43] “한국제8호스팩” “한화에이스스팩4호” “엔에이치스팩13호”</a></li>
+<li class="chapter" data-level="5.83" data-path="section-17.html"><a href="section-17.html#section-70"><i class="fa fa-check"></i><b>5.83</b> [46] “미래에셋대우스팩2호” “한화에이스스팩3호” “케이비제11호스팩”</a></li>
+<li class="chapter" data-level="5.84" data-path="section-17.html"><a href="section-17.html#section-71"><i class="fa fa-check"></i><b>5.84</b> [1] “골든브릿지이안5호”</a></li>
+<li class="chapter" data-level="5.85" data-path="section-17.html"><a href="section-17.html#section-72"><i class="fa fa-check"></i><b>5.85</b> [1] “삼성전자우” “미래에셋대우” “현대차우”</a></li>
+<li class="chapter" data-level="5.86" data-path="section-17.html"><a href="section-17.html#lg-lg-"><i class="fa fa-check"></i><b>5.86</b> [4] “LG생활건강우” “LG화학우” “아모레퍼시픽우”</a></li>
+<li class="chapter" data-level="5.87" data-path="section-17.html"><a href="section-17.html#lg-"><i class="fa fa-check"></i><b>5.87</b> [7] “삼성화재우” “LG전자우” “신영증권우”</a></li>
+<li class="chapter" data-level="5.88" data-path="section-17.html"><a href="section-17.html#section-73"><i class="fa fa-check"></i><b>5.88</b> [10] “연우” “두산우” “한국금융지주우”</a></li>
+<li class="chapter" data-level="5.89" data-path="section-17.html"><a href="section-17.html#s-oil-"><i class="fa fa-check"></i><b>5.89</b> [13] “대신증권우” “S-Oil우” “대림산업우”</a></li>
+<li class="chapter" data-level="5.90" data-path="section-17.html"><a href="section-17.html#nh-g-cj-"><i class="fa fa-check"></i><b>5.90</b> [16] “NH투자증권우” “아모레G우” “CJ제일제당 우”</a></li>
+<li class="chapter" data-level="5.91" data-path="section-17.html"><a href="section-17.html#lg-sk-sdi"><i class="fa fa-check"></i><b>5.91</b> [19] “LG우” “SK이노베이션우” “삼성SDI우”</a></li>
+<li class="chapter" data-level="5.92" data-path="section-17.html"><a href="section-17.html#cj-"><i class="fa fa-check"></i><b>5.92</b> [22] “삼성전기우” “CJ우” “금호석유우”</a></li>
+<li class="chapter" data-level="5.93" data-path="section-17.html"><a href="section-17.html#sk-gs-"><i class="fa fa-check"></i><b>5.93</b> [25] “SK우” “GS우” “미래에셋대우우”</a></li>
+<li class="chapter" data-level="5.94" data-path="section-17.html"><a href="section-17.html#section-74"><i class="fa fa-check"></i><b>5.94</b> [28] “롯데칠성우” “부국증권우” “코오롱인더우”</a></li>
+<li class="chapter" data-level="5.95" data-path="section-17.html"><a href="section-17.html#section-75"><i class="fa fa-check"></i><b>5.95</b> [31] “롯데지주우” “유한양행우” “유화증권우”</a></li>
+<li class="chapter" data-level="5.96" data-path="section-17.html"><a href="section-17.html#sk-"><i class="fa fa-check"></i><b>5.96</b> [34] “호텔신라우” “SK케미칼우” “남양유업우”</a></li>
+<li class="chapter" data-level="5.97" data-path="section-17.html"><a href="section-17.html#lg-byc"><i class="fa fa-check"></i><b>5.97</b> [37] “한진칼우” “LG하우시스우” “BYC우”</a></li>
+<li class="chapter" data-level="5.98" data-path="section-17.html"><a href="section-17.html#section-76"><i class="fa fa-check"></i><b>5.98</b> [40] “유안타증권우” “대한항공우” “세방우”</a></li>
+<li class="chapter" data-level="5.99" data-path="section-17.html"><a href="section-17.html#sk-1-"><i class="fa fa-check"></i><b>5.99</b> [43] “SK디스커버리우” “대덕전자1우” “태영건설우”</a></li>
+<li class="chapter" data-level="5.100" data-path="section-17.html"><a href="section-17.html#section-77"><i class="fa fa-check"></i><b>5.100</b> [46] “대상우” “금호산업우” “한화우”</a></li>
+<li class="chapter" data-level="5.101" data-path="section-17.html"><a href="section-17.html#section-78"><i class="fa fa-check"></i><b>5.101</b> [49] “현대건설우” “한화케미칼우” “삼양홀딩스우”</a></li>
+<li class="chapter" data-level="5.102" data-path="section-17.html"><a href="section-17.html#section-79"><i class="fa fa-check"></i><b>5.102</b> [52] “녹십자홀딩스2우” “신풍제약우” “삼양사우”</a></li>
+<li class="chapter" data-level="5.103" data-path="section-17.html"><a href="section-17.html#sk--1"><i class="fa fa-check"></i><b>5.103</b> [55] “넥센우” “SK증권우” “남선알미우”</a></li>
+<li class="chapter" data-level="5.104" data-path="section-17.html"><a href="section-17.html#npc"><i class="fa fa-check"></i><b>5.104</b> [58] “코오롱우” “계양전기우” “NPC우”</a></li>
+<li class="chapter" data-level="5.105" data-path="section-17.html"><a href="section-17.html#sk--2"><i class="fa fa-check"></i><b>5.105</b> [61] “한화투자증권우” “SK네트웍스우” “태양금속우”</a></li>
+<li class="chapter" data-level="5.106" data-path="section-17.html"><a href="section-17.html#section-80"><i class="fa fa-check"></i><b>5.106</b> [64] “쌍용양회우” “서울식품우” “성문전자우”</a></li>
+<li class="chapter" data-level="5.107" data-path="section-17.html"><a href="section-17.html#section-81"><i class="fa fa-check"></i><b>5.107</b> [67] “대원전선우” “일양약품우” “성신양회우”</a></li>
+<li class="chapter" data-level="5.108" data-path="section-17.html"><a href="section-17.html#section-82"><i class="fa fa-check"></i><b>5.108</b> [70] “대한제당우” “유유제약1우” “코리아써우”</a></li>
+<li class="chapter" data-level="5.109" data-path="section-17.html"><a href="section-17.html#cj1"><i class="fa fa-check"></i><b>5.109</b> [73] “크라운해태홀딩스우” “동원시스템즈우” “CJ씨푸드1우”</a></li>
+<li class="chapter" data-level="5.110" data-path="section-17.html"><a href="section-17.html#section-83"><i class="fa fa-check"></i><b>5.110</b> [76] “현대비앤지스틸우” “삼성중공우” “금강공업우”</a></li>
+<li class="chapter" data-level="5.111" data-path="section-17.html"><a href="section-17.html#section-84"><i class="fa fa-check"></i><b>5.111</b> [79] “대호피앤씨우” “크라운제과우” “동부제철우”</a></li>
+<li class="chapter" data-level="5.112" data-path="section-17.html"><a href="section-17.html#section-85"><i class="fa fa-check"></i><b>5.112</b> [82] “깨끗한나라우” “노루페인트우” “대상홀딩스우”</a></li>
+<li class="chapter" data-level="5.113" data-path="section-17.html"><a href="section-17.html#section-86"><i class="fa fa-check"></i><b>5.113</b> [85] “덕성우” “코오롱글로벌우” “동양우”</a></li>
+<li class="chapter" data-level="5.114" data-path="section-17.html"><a href="section-17.html#db1-"><i class="fa fa-check"></i><b>5.114</b> [88] “신원우” “DB하이텍1우” “하이트진로홀딩스우”</a></li>
+<li class="chapter" data-level="5.115" data-path="section-17.html"><a href="section-17.html#jw-"><i class="fa fa-check"></i><b>5.115</b> [91] “흥국화재우” “JW중외제약우” “한양증권우”</a></li>
+<li class="chapter" data-level="5.116" data-path="section-17.html"><a href="section-17.html#section-87"><i class="fa fa-check"></i><b>5.116</b> [94] “동부건설우” “노루홀딩스우” “소프트센우”</a></li>
+<li class="chapter" data-level="5.117" data-path="section-17.html"><a href="section-17.html#b-2b-3b"><i class="fa fa-check"></i><b>5.117</b> [1] “현대차2우B” “미래에셋대우2우B” “한화3우B”</a></li>
+<li class="chapter" data-level="5.118" data-path="section-17.html"><a href="section-17.html#b-b-b"><i class="fa fa-check"></i><b>5.118</b> [4] “현대차3우B” “삼성물산우B” “대교우B”</a></li>
+<li class="chapter" data-level="5.119" data-path="section-17.html"><a href="section-17.html#b-2b-1b"><i class="fa fa-check"></i><b>5.119</b> [7] “대신증권2우B” “두산2우B” “넥센타이어1우B”</a></li>
+<li class="chapter" data-level="5.120" data-path="section-17.html"><a href="section-17.html#b-2b-b"><i class="fa fa-check"></i><b>5.120</b> [10] “하이트진로2우B” “진흥기업2우B” “진흥기업우B”</a></li>
+<li class="chapter" data-level="5.121" data-path="section-17.html"><a href="section-17.html#jw2b-2b-2b"><i class="fa fa-check"></i><b>5.121</b> [13] “JW중외제약2우B” “흥국화재2우B” “코리아써키트2우B”</a></li>
+<li class="chapter" data-level="5.122" data-path="section-17.html"><a href="section-17.html#b-2b-3b-1"><i class="fa fa-check"></i><b>5.122</b> [16] “유유제약2우B” “동양2우B” “대한제당3우B”</a></li>
+<li class="chapter" data-level="5.123" data-path="section-17.html"><a href="section-17.html#b"><i class="fa fa-check"></i><b>5.123</b> [19] “동양3우B”</a></li>
+<li class="chapter" data-level="5.124" data-path="section-17.html"><a href="section-17.html#c"><i class="fa fa-check"></i><b>5.124</b> [1] “루트로닉3우C”</a></li>
+<li class="chapter" data-level="5.125" data-path="section-17.html"><a href="section-17.html#wics---"><i class="fa fa-check"></i><b>5.125</b> WICS 기준 섹터정보 크롤링</a></li>
+<li class="chapter" data-level="5.126" data-path="section-17.html"><a href="section-17.html#info"><i class="fa fa-check"></i><b>5.126</b> $info</a></li>
+<li class="chapter" data-level="5.127" data-path="section-17.html"><a href="section-17.html#infotrd_dt"><i class="fa fa-check"></i><b>5.127</b> <span class="math inline">\(info\)</span>TRD_DT</a></li>
+<li class="chapter" data-level="5.128" data-path="section-17.html"><a href="section-17.html#date1559833200000"><i class="fa fa-check"></i><b>5.128</b> [1] “/Date(1559833200000)/”</a></li>
+<li class="chapter" data-level="5.129" data-path="section-17.html"><a href="section-17.html#section-88"><i class="fa fa-check"></i><b>5.129</b> </a></li>
+<li class="chapter" data-level="5.130" data-path="section-17.html"><a href="section-17.html#infomkt_val"><i class="fa fa-check"></i><b>5.130</b> <span class="math inline">\(info\)</span>MKT_VAL</a></li>
+<li class="chapter" data-level="5.131" data-path="section-17.html"><a href="section-17.html#section-89"><i class="fa fa-check"></i><b>5.131</b> [1] 19850082</a></li>
+<li class="chapter" data-level="5.132" data-path="section-17.html"><a href="section-17.html#section-90"><i class="fa fa-check"></i><b>5.132</b> </a></li>
+<li class="chapter" data-level="5.133" data-path="section-17.html"><a href="section-17.html#infotrd_amt"><i class="fa fa-check"></i><b>5.133</b> <span class="math inline">\(info\)</span>TRD_AMT</a></li>
+<li class="chapter" data-level="5.134" data-path="section-17.html"><a href="section-17.html#section-91"><i class="fa fa-check"></i><b>5.134</b> [1] 70030</a></li>
+<li class="chapter" data-level="5.135" data-path="section-17.html"><a href="section-17.html#section-92"><i class="fa fa-check"></i><b>5.135</b> </a></li>
+<li class="chapter" data-level="5.136" data-path="section-17.html"><a href="section-17.html#infocnt"><i class="fa fa-check"></i><b>5.136</b> <span class="math inline">\(info\)</span>CNT</a></li>
+<li class="chapter" data-level="5.137" data-path="section-17.html"><a href="section-17.html#section-93"><i class="fa fa-check"></i><b>5.137</b> [1] 23</a></li>
+<li class="chapter" data-level="5.138" data-path="section-17.html"><a href="section-17.html#section-94"><i class="fa fa-check"></i><b>5.138</b> </a></li>
+<li class="chapter" data-level="5.139" data-path="section-17.html"><a href="section-17.html#section-95"><i class="fa fa-check"></i><b>5.139</b> </a></li>
+<li class="chapter" data-level="5.140" data-path="section-17.html"><a href="section-17.html#list"><i class="fa fa-check"></i><b>5.140</b> $list</a></li>
+<li class="chapter" data-level="5.141" data-path="section-17.html"><a href="section-17.html#idx_cd-idx_nm_kor-all_mkt_val-cmp_cd-cmp_kor-mkt_val-wgt"><i class="fa fa-check"></i><b>5.141</b> IDX_CD IDX_NM_KOR ALL_MKT_VAL CMP_CD CMP_KOR MKT_VAL WGT</a></li>
+<li class="chapter" data-level="5.142" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-096770-sk-9052841-45.61"><i class="fa fa-check"></i><b>5.142</b> 1 G10 WICS 에너지 19850082 096770 SK이노베이션 9052841 45.61</a></li>
+<li class="chapter" data-level="5.143" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-010950-s-oil-3403265-17.14"><i class="fa fa-check"></i><b>5.143</b> 2 G10 WICS 에너지 19850082 010950 S-Oil 3403265 17.14</a></li>
+<li class="chapter" data-level="5.144" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-267250--2873204-14.47"><i class="fa fa-check"></i><b>5.144</b> 3 G10 WICS 에너지 19850082 267250 현대중공업지주 2873204 14.47</a></li>
+<li class="chapter" data-level="5.145" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-078930-gs-2491805-12.55"><i class="fa fa-check"></i><b>5.145</b> 4 G10 WICS 에너지 19850082 078930 GS 2491805 12.55</a></li>
+<li class="chapter" data-level="5.146" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-067630--624986-3.15"><i class="fa fa-check"></i><b>5.146</b> 5 G10 WICS 에너지 19850082 067630 에이치엘비생명과학 624986 3.15</a></li>
+<li class="chapter" data-level="5.147" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-006120-sk-257059-1.30"><i class="fa fa-check"></i><b>5.147</b> 6 G10 WICS 에너지 19850082 006120 SK디스커버리 257059 1.30</a></li>
+<li class="chapter" data-level="5.148" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-002960--198881-1.00"><i class="fa fa-check"></i><b>5.148</b> 7 G10 WICS 에너지 19850082 002960 한국쉘석유 198881 1.00</a></li>
+<li class="chapter" data-level="5.149" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-091090--146439-0.74"><i class="fa fa-check"></i><b>5.149</b> 8 G10 WICS 에너지 19850082 091090 세원셀론텍 146439 0.74</a></li>
+<li class="chapter" data-level="5.150" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-011930--118388-0.60"><i class="fa fa-check"></i><b>5.150</b> 9 G10 WICS 에너지 19850082 011930 신성이엔지 118388 0.60</a></li>
+<li class="chapter" data-level="5.151" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-128820--79162-0.40"><i class="fa fa-check"></i><b>5.151</b> 10 G10 WICS 에너지 19850082 128820 대성산업 79162 0.40</a></li>
+<li class="chapter" data-level="5.152" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-043200--75903-0.38"><i class="fa fa-check"></i><b>5.152</b> 11 G10 WICS 에너지 19850082 043200 파루 75903 0.38</a></li>
+<li class="chapter" data-level="5.153" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-003650--71918-0.36"><i class="fa fa-check"></i><b>5.153</b> 12 G10 WICS 에너지 19850082 003650 미창석유 71918 0.36</a></li>
+<li class="chapter" data-level="5.154" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-014530--62828-0.32"><i class="fa fa-check"></i><b>5.154</b> 13 G10 WICS 에너지 19850082 014530 극동유화 62828 0.32</a></li>
+<li class="chapter" data-level="5.155" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-099220-sdn-55967-0.28"><i class="fa fa-check"></i><b>5.155</b> 14 G10 WICS 에너지 19850082 099220 SDN 55967 0.28</a></li>
+<li class="chapter" data-level="5.156" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-024060--53460-0.27"><i class="fa fa-check"></i><b>5.156</b> 15 G10 WICS 에너지 19850082 024060 흥구석유 53460 0.27</a></li>
+<li class="chapter" data-level="5.157" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-041590--50901-0.26"><i class="fa fa-check"></i><b>5.157</b> 16 G10 WICS 에너지 19850082 041590 에너전트 50901 0.26</a></li>
+<li class="chapter" data-level="5.158" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-095910--46873-0.24"><i class="fa fa-check"></i><b>5.158</b> 17 G10 WICS 에너지 19850082 095910 에스에너지 46873 0.24</a></li>
+<li class="chapter" data-level="5.159" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-060900--43739-0.22"><i class="fa fa-check"></i><b>5.159</b> 18 G10 WICS 에너지 19850082 060900 퍼시픽바이오 43739 0.22</a></li>
+<li class="chapter" data-level="5.160" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-012320--40030-0.20"><i class="fa fa-check"></i><b>5.160</b> 19 G10 WICS 에너지 19850082 012320 경동인베스트 40030 0.20</a></li>
+<li class="chapter" data-level="5.161" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-093230--32266-0.16"><i class="fa fa-check"></i><b>5.161</b> 20 G10 WICS 에너지 19850082 093230 이아이디 32266 0.16</a></li>
+<li class="chapter" data-level="5.162" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-038620--30094-0.15"><i class="fa fa-check"></i><b>5.162</b> 21 G10 WICS 에너지 19850082 038620 위즈코프 30094 0.15</a></li>
+<li class="chapter" data-level="5.163" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-137950--29363-0.15"><i class="fa fa-check"></i><b>5.163</b> 22 G10 WICS 에너지 19850082 137950 제이씨케미칼 29363 0.15</a></li>
+<li class="chapter" data-level="5.164" data-path="section-17.html"><a href="section-17.html#g10-wics--19850082-000440--10711-0.05"><i class="fa fa-check"></i><b>5.164</b> 23 G10 WICS 에너지 19850082 000440 중앙에너비스 10711 0.05</a></li>
+<li class="chapter" data-level="5.165" data-path="section-17.html"><a href="section-17.html#s_wgt-cal_wgt-sec_cd-sec_nm_kor-seq-top60-apt_shr_cnt"><i class="fa fa-check"></i><b>5.165</b> S_WGT CAL_WGT SEC_CD SEC_NM_KOR SEQ TOP60 APT_SHR_CNT</a></li>
+<li class="chapter" data-level="5.166" data-path="section-17.html"><a href="section-17.html#g10--1-2-56403994"><i class="fa fa-check"></i><b>5.166</b> 1 45.61 1 G10 에너지 1 2 56403994</a></li>
+<li class="chapter" data-level="5.167" data-path="section-17.html"><a href="section-17.html#g10--2-2-41655633"><i class="fa fa-check"></i><b>5.167</b> 2 62.75 1 G10 에너지 2 2 41655633</a></li>
+<li class="chapter" data-level="5.168" data-path="section-17.html"><a href="section-17.html#g10--3-2-9283372"><i class="fa fa-check"></i><b>5.168</b> 3 77.23 1 G10 에너지 3 2 9283372</a></li>
+<li class="chapter" data-level="5.169" data-path="section-17.html"><a href="section-17.html#g10--4-2-49245150"><i class="fa fa-check"></i><b>5.169</b> 4 89.78 1 G10 에너지 4 2 49245150</a></li>
+<li class="chapter" data-level="5.170" data-path="section-17.html"><a href="section-17.html#g10--5-2-39307272"><i class="fa fa-check"></i><b>5.170</b> 5 92.93 1 G10 에너지 5 2 39307272</a></li>
+<li class="chapter" data-level="5.171" data-path="section-17.html"><a href="section-17.html#g10--6-2-10470820"><i class="fa fa-check"></i><b>5.171</b> 6 94.22 1 G10 에너지 6 2 10470820</a></li>
+<li class="chapter" data-level="5.172" data-path="section-17.html"><a href="section-17.html#g10--7-2-611000"><i class="fa fa-check"></i><b>5.172</b> 7 95.22 1 G10 에너지 7 2 611000</a></li>
+<li class="chapter" data-level="5.173" data-path="section-17.html"><a href="section-17.html#g10--8-2-42693554"><i class="fa fa-check"></i><b>5.173</b> 8 95.96 1 G10 에너지 8 2 42693554</a></li>
+<li class="chapter" data-level="5.174" data-path="section-17.html"><a href="section-17.html#g10--9-2-100756131"><i class="fa fa-check"></i><b>5.174</b> 9 96.56 1 G10 에너지 9 2 100756131</a></li>
+<li class="chapter" data-level="5.175" data-path="section-17.html"><a href="section-17.html#g10--10-2-15832417"><i class="fa fa-check"></i><b>5.175</b> 10 96.96 1 G10 에너지 10 2 15832417</a></li>
+<li class="chapter" data-level="5.176" data-path="section-17.html"><a href="section-17.html#g10--11-2-29707590"><i class="fa fa-check"></i><b>5.176</b> 11 97.34 1 G10 에너지 11 2 29707590</a></li>
+<li class="chapter" data-level="5.177" data-path="section-17.html"><a href="section-17.html#g10--12-2-922026"><i class="fa fa-check"></i><b>5.177</b> 12 97.70 1 G10 에너지 12 2 922026</a></li>
+<li class="chapter" data-level="5.178" data-path="section-17.html"><a href="section-17.html#g10--13-2-18132098"><i class="fa fa-check"></i><b>5.178</b> 13 98.02 1 G10 에너지 13 2 18132098</a></li>
+<li class="chapter" data-level="5.179" data-path="section-17.html"><a href="section-17.html#g10--14-2-38598075"><i class="fa fa-check"></i><b>5.179</b> 14 98.30 1 G10 에너지 14 2 38598075</a></li>
+<li class="chapter" data-level="5.180" data-path="section-17.html"><a href="section-17.html#g10--15-2-9000000"><i class="fa fa-check"></i><b>5.180</b> 15 98.57 1 G10 에너지 15 2 9000000</a></li>
+<li class="chapter" data-level="5.181" data-path="section-17.html"><a href="section-17.html#g10--16-2-31132353"><i class="fa fa-check"></i><b>5.181</b> 16 98.83 1 G10 에너지 16 2 31132353</a></li>
+<li class="chapter" data-level="5.182" data-path="section-17.html"><a href="section-17.html#g10--17-2-10290527"><i class="fa fa-check"></i><b>5.182</b> 17 99.06 1 G10 에너지 17 2 10290527</a></li>
+<li class="chapter" data-level="5.183" data-path="section-17.html"><a href="section-17.html#g10--18-2-53017111"><i class="fa fa-check"></i><b>5.183</b> 18 99.28 1 G10 에너지 18 2 53017111</a></li>
+<li class="chapter" data-level="5.184" data-path="section-17.html"><a href="section-17.html#g10--19-2-993310"><i class="fa fa-check"></i><b>5.184</b> 19 99.48 1 G10 에너지 19 2 993310</a></li>
+<li class="chapter" data-level="5.185" data-path="section-17.html"><a href="section-17.html#g10--20-2-140285009"><i class="fa fa-check"></i><b>5.185</b> 20 99.65 1 G10 에너지 20 2 140285009</a></li>
+<li class="chapter" data-level="5.186" data-path="section-17.html"><a href="section-17.html#g10--21-2-24075079"><i class="fa fa-check"></i><b>5.186</b> 21 99.80 1 G10 에너지 21 2 24075079</a></li>
+<li class="chapter" data-level="5.187" data-path="section-17.html"><a href="section-17.html#g10--22-2-8353752"><i class="fa fa-check"></i><b>5.187</b> 22 99.95 1 G10 에너지 22 2 8353752</a></li>
+<li class="chapter" data-level="5.188" data-path="section-17.html"><a href="section-17.html#g10--23-2-1556783"><i class="fa fa-check"></i><b>5.188</b> 23 100.00 1 G10 에너지 23 2 1556783</a></li>
+<li class="chapter" data-level="5.189" data-path="section-17.html"><a href="section-17.html#section-96"><i class="fa fa-check"></i><b>5.189</b> </a></li>
+<li class="chapter" data-level="5.190" data-path="section-17.html"><a href="section-17.html#sector"><i class="fa fa-check"></i><b>5.190</b> $sector</a></li>
+<li class="chapter" data-level="5.191" data-path="section-17.html"><a href="section-17.html#sec_cd-sec_nm_kor-sec_rate-idx_rate"><i class="fa fa-check"></i><b>5.191</b> SEC_CD SEC_NM_KOR SEC_RATE IDX_RATE</a></li>
+<li class="chapter" data-level="5.192" data-path="section-17.html"><a href="section-17.html#g25--16.05-0"><i class="fa fa-check"></i><b>5.192</b> 1 G25 경기관련소비재 16.05 0</a></li>
+<li class="chapter" data-level="5.193" data-path="section-17.html"><a href="section-17.html#g35--9.27-0"><i class="fa fa-check"></i><b>5.193</b> 2 G35 건강관리 9.27 0</a></li>
+<li class="chapter" data-level="5.194" data-path="section-17.html"><a href="section-17.html#g50--2.26-0"><i class="fa fa-check"></i><b>5.194</b> 3 G50 커뮤니케이션서비스 2.26 0</a></li>
+<li class="chapter" data-level="5.195" data-path="section-17.html"><a href="section-17.html#g40--10.31-0"><i class="fa fa-check"></i><b>5.195</b> 4 G40 금융 10.31 0</a></li>
+<li class="chapter" data-level="5.196" data-path="section-17.html"><a href="section-17.html#g10--2.37-100"><i class="fa fa-check"></i><b>5.196</b> 5 G10 에너지 2.37 100</a></li>
+<li class="chapter" data-level="5.197" data-path="section-17.html"><a href="section-17.html#g20--12.68-0"><i class="fa fa-check"></i><b>5.197</b> 6 G20 산업재 12.68 0</a></li>
+<li class="chapter" data-level="5.198" data-path="section-17.html"><a href="section-17.html#g55--1.70-0"><i class="fa fa-check"></i><b>5.198</b> 7 G55 유틸리티 1.70 0</a></li>
+<li class="chapter" data-level="5.199" data-path="section-17.html"><a href="section-17.html#g30--3.75-0"><i class="fa fa-check"></i><b>5.199</b> 8 G30 필수소비재 3.75 0</a></li>
+<li class="chapter" data-level="5.200" data-path="section-17.html"><a href="section-17.html#g15--7.89-0"><i class="fa fa-check"></i><b>5.200</b> 9 G15 소재 7.89 0</a></li>
+<li class="chapter" data-level="5.201" data-path="section-17.html"><a href="section-17.html#g45-it-33.73-0"><i class="fa fa-check"></i><b>5.201</b> 10 G45 IT 33.73 0</a></li>
+<li class="chapter" data-level="5.202" data-path="section-17.html"><a href="section-17.html#section-97"><i class="fa fa-check"></i><b>5.202</b> </a></li>
+<li class="chapter" data-level="5.203" data-path="section-17.html"><a href="section-17.html#size"><i class="fa fa-check"></i><b>5.203</b> $size</a></li>
+<li class="chapter" data-level="5.204" data-path="section-17.html"><a href="section-17.html#sec_cd-sec_nm_kor-sec_rate-idx_rate-1"><i class="fa fa-check"></i><b>5.204</b> SEC_CD SEC_NM_KOR SEC_RATE IDX_RATE</a></li>
+<li class="chapter" data-level="5.205" data-path="section-17.html"><a href="section-17.html#wmi510-wmi500--69.40-89.78"><i class="fa fa-check"></i><b>5.205</b> 1 WMI510 WMI500 대형주 69.40 89.78</a></li>
+<li class="chapter" data-level="5.206" data-path="section-17.html"><a href="section-17.html#wmi520-wmi500--13.56-4.44"><i class="fa fa-check"></i><b>5.206</b> 2 WMI520 WMI500 중형주 13.56 4.44</a></li>
+<li class="chapter" data-level="5.207" data-path="section-17.html"><a href="section-17.html#wmi530-wmi500--17.04-5.78"><i class="fa fa-check"></i><b>5.207</b> 3 WMI530 WMI500 소형주 17.04 5.78</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-98.html"><a href="section-98.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-98.html"><a href="section-98.html#section-99"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="section-98.html"><a href="section-98.html#section-100"><i class="fa fa-check"></i><b>6.1.1</b> 개별 종목 주가 크롤링</a></li>
+<li class="chapter" data-level="6.1.2" data-path="section-98.html"><a href="section-98.html#section-101"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="section-98.html"><a href="section-98.html#section-102"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="section-98.html"><a href="section-98.html#section-103"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.2.2" data-path="section-98.html"><a href="section-98.html#section-104"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="6.2.3" data-path="section-98.html"><a href="section-98.html#section-105"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="section-98.html"><a href="section-98.html#section-106"><i class="fa fa-check"></i><b>6.3</b> 야후 파이낸스 데이터 구하기</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="section-98.html"><a href="section-98.html#section-107"><i class="fa fa-check"></i><b>6.3.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.3.2" data-path="section-98.html"><a href="section-98.html#section-108"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="section-109.html"><a href="section-109.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-109.html"><a href="section-109.html#section-110"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-109.html"><a href="section-109.html#section-111"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="section-109.html"><a href="section-109.html#section-112"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-113.html"><a href="section-113.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-113.html"><a href="section-113.html#section-114"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-113.html"><a href="section-113.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-113.html"><a href="section-113.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-113.html"><a href="section-113.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-113.html"><a href="section-113.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="section-113.html"><a href="section-113.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="section-113.html"><a href="section-113.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변경</a></li>
+<li class="chapter" data-level="8.1.7" data-path="section-113.html"><a href="section-113.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="section-113.html"><a href="section-113.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통계값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="section-113.html"><a href="section-113.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="section-113.html"><a href="section-113.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="section-113.html"><a href="section-113.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="section-113.html"><a href="section-113.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶음</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="section-113.html"><a href="section-113.html#section-115"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a></li>
+<li class="chapter" data-level="8.3" data-path="section-113.html"><a href="section-113.html#section-116"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="section-113.html"><a href="section-113.html#section-117"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="section-113.html"><a href="section-113.html#section-118"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="section-113.html"><a href="section-113.html#section-119"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="section-120.html"><a href="section-120.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-120.html"><a href="section-120.html#section-121"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section-120.html"><a href="section-120.html#section-122"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section-120.html"><a href="section-120.html#section-123"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="section-120.html"><a href="section-120.html#section-124"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="section-120.html"><a href="section-120.html#section-125"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="section-120.html"><a href="section-120.html#section-126"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="section-120.html"><a href="section-120.html#section-127"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="section-120.html"><a href="section-120.html#section-128"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="section-120.html"><a href="section-120.html#section-129"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="section-120.html"><a href="section-120.html#section-130"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="section-120.html"><a href="section-120.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="section-120.html"><a href="section-120.html#section-131"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="section-120.html"><a href="section-120.html#section-132"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-120.html"><a href="section-120.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-120.html"><a href="section-120.html#section-133"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="section-134.html"><a href="section-134.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-134.html"><a href="section-134.html#section-135"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-134.html"><a href="section-134.html#section-136"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-134.html"><a href="section-134.html#section-137"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-134.html"><a href="section-134.html#section-138"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-134.html"><a href="section-134.html#section-139"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="section-134.html"><a href="section-134.html#section-140"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-134.html"><a href="section-134.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-134.html"><a href="section-134.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-134.html"><a href="section-134.html#section-141"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="section-134.html"><a href="section-134.html#section-142"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="section-143.html"><a href="section-143.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-143.html"><a href="section-143.html#section-144"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-143.html"><a href="section-143.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-143.html"><a href="section-143.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-143.html"><a href="section-143.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-143.html"><a href="section-143.html#section-145"><i class="fa fa-check"></i><b>11.1.4</b> 결과값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-143.html"><a href="section-143.html#section-146"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-143.html"><a href="section-143.html#section-147"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="section-143.html"><a href="section-143.html#section-148"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="section-143.html"><a href="section-143.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="section-143.html"><a href="section-143.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="section-143.html"><a href="section-143.html#section-149"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="section-143.html"><a href="section-143.html#section-150"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="section-143.html"><a href="section-143.html#section-151"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="section-143.html"><a href="section-143.html#section-152"><i class="fa fa-check"></i><b>11.3.1</b> 전통적 자산배분, 주식 60%와 채권 40%</a></li>
+<li class="chapter" data-level="11.3.2" data-path="section-143.html"><a href="section-143.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="section-143.html"><a href="section-143.html#section-153"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="section-154.html"><a href="section-154.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-154.html"><a href="section-154.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-154.html"><a href="section-154.html#section-155"><i class="fa fa-check"></i><b>12.1.1</b> 인자목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-154.html"><a href="section-154.html#section-156"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="section-154.html"><a href="section-154.html#section-157"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-154.html"><a href="section-154.html#section-158"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="section-154.html"><a href="section-154.html#section-159"><i class="fa fa-check"></i><b>12.3.1</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-154" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> 포트폴리오 백테스트</h1>
+<p>백테스트란 현재 생각하는 전략을 과거부터 실행하였을 시, 어떠한 성과가 발생하는지 테스트해보는 과정입니다. 과거의 데이터를 기반으로 전략을 실행하는 퀀트 투자에 있어서, 이는 핵심 단계이기도 합니다. 백테스트 결과를 통해 해당 전략의 손익뿐만 아니라 각종 위험을 대략적으로 판단할 수 있으며, 어떤 구간에서 전략이 좋았는지 혹은 나빴는지에 대한 이해도 키울 수 있습니다. 이러한 이해를 바탕으로 퀀트 투자를 지속한다면 단기적으로 수익이 나쁜 구간에서도 그 이유에 대한 객관적인 안목을 키울 수 있으며, 확신을 가지고 전략을 지속할 수 있습니다.</p>
+<p>그러나 백테스트를 아무리 보수적으로 혹은 엄밀하게 진행하더라도 이미 일어난 결과를 대상으로 한다는 점에서 정답을 보고 답지를 쓰는 격이라는 점을 항상 명심해야 합니다. 백테스트 수익률만을 보고 투자에 대한 판단을 하거나, 혹은 동일한 수익률이 미래에도 반복될 것이라 믿는다면 이는 백미러를 보고 운전을 하는 매우 위험한 결과를 초래할 수도 있습니다.</p>
+<p>R에서 백테스트는 <code>PerformanceAnalytics</code> 패키지 내의 <code>Return.portfolio()</code> 함수를 사용하여 매우 간단하게 수행할 수 있습니다. 이번 장에서는 해당 함수에 대한 이해와 더불어, 구체적인 사용 방법에 대한 예시로써 <strong>전통적인 주식 60% &amp; 채권 40% 포트폴리오</strong>, <strong>시점 선택 전략</strong>, <strong>동적 자산배분</strong>에 대한 백테스트를 실행합니다.</p>
+<div id="return.portfolio-" class="section level2">
+<h2><span class="header-section-number">12.1</span> <code>Return.Portfolio()</code> 함수</h2>
+<p>프로그래밍을 이용하여 백테스트를 할 경우, 전략이 단순하다면 단 몇 줄 만으로도 테스트가 가능합니다. 그러나 전략이 복잡해지거나 적용해야 할 요소가 많아질 경우, 패키지를 이용하는 것이 효율적인 방법입니다.</p>
+<p><code>PerformanceAnalytics</code> 패키지의 <code>Return.portfolio()</code> 함수는 백테스트 과정에서 가장 대중적으로 사용되는 함수입니다. 해당 함수의 가장 큰 장점은 각 자산의 수익률과 리밸런싱 비중만 있으면 백테스트 수익률, 회전율 등을 쉽게 계산할 수 있다는 점이며, 리밸런싱 시점과 수익률의 시점이 일치하지 않아도 된다는 점입니다. 즉, 수익률 데이터는 일간, 리밸런싱 시점은 분기 혹은 연간으로 된 경우에도 매우 쉽게 백테스트를 수행할 수 있습니다.</p>
+<div id="section-155" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> 인자목록 살펴보기</h3>
+<p>먼저 <code>Return.portfolio()</code> 함수는 다음과 같은 형태로 구성되어 있으며, 표 <a href="section-154.html#tab:returnportarg">12.1</a>는 인자의 내용을 정리한 것입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Return.portfolio</span>(R, <span class="dt">weights =</span> <span class="ot">NULL</span>, <span class="dt">wealth.index =</span> <span class="ot">FALSE</span>,
+  <span class="dt">contribution =</span> <span class="ot">FALSE</span>, <span class="dt">geometric =</span> <span class="ot">TRUE</span>, <span class="dt">rebalance_on =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;years&quot;</span>,
+  <span class="st">&quot;quarters&quot;</span>, <span class="st">&quot;months&quot;</span>, <span class="st">&quot;weeks&quot;</span>, <span class="st">&quot;days&quot;</span>), <span class="dt">value =</span> <span class="dv">1</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>, ...)</code></pre>
+<table>
+<caption><span id="tab:returnportarg">Table 12.1: </span><code>Return.portfolio()</code> 함수 내 인자 설명</caption>
+<thead>
+<tr class="header">
+<th align="left">인자</th>
+<th align="left">내용</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">R</td>
+<td align="left">각 자산 수익률 데이터</td>
+</tr>
+<tr class="even">
+<td align="left">weights</td>
+<td align="left">각 리밸런싱 시기의 자산 별 목표 비중. 미 입력시 동일비중 포트폴리오를 가정하여 백테스트가 이루짐</td>
+</tr>
+<tr class="odd">
+<td align="left">wealth.index</td>
+<td align="left">포트폴리오 시작점이 1인 wealth index에 대한 생성여부이며, 디폴트는 FALSE로 설정</td>
+</tr>
+<tr class="even">
+<td align="left">contribution</td>
+<td align="left">포트폴리오 내에서 각 자산 별 성과기여를 나타내는지에 대한 여부이며, 디폴트는 FALSE로 설정</td>
+</tr>
+<tr class="odd">
+<td align="left">geometric</td>
+<td align="left">포트폴리오 수익률 계산시 복리(기하)수익률 적용 여부이며, 디폴트는 TRUE로써 복리수익률을 계산</td>
+</tr>
+<tr class="even">
+<td align="left">rebalance_on</td>
+<td align="left">weight 값이 미입력 혹은 매번 같은 비중일 경우, 리밸런싱 주기를 선택할 수 있음</td>
+</tr>
+<tr class="odd">
+<td align="left">value</td>
+<td align="left">초기 포트폴리오 가치를 의미하며, 디폴트는 1</td>
+</tr>
+<tr class="even">
+<td align="left">verbose</td>
+<td align="left">부가적인 결과를 표시할지에 대한 여부. 디폴트인 FALSE를 입력할 경우 포트폴리오 수익률만이 시계열 형태로 표시되며, TRUE를 입력할 경우 수익률 외에 자산 별 성과기여, 비중, 성과 등이 리스트 형태로 표현됨</td>
+</tr>
+</tbody>
+</table>
+<p>이 중 가장 중요한 인자는 개별 자산의 수익률인 R과 리밸런싱 시기의 자산 별 목표 비중인 weights 입니다. 매 리밸런싱 시점마다 적용되는 자산 별 비중이 동일할 경우(예: 매월 말 60%대 40% 비중으로 리밸런싱) 상수 형태로 입력하여도 되지만, 시점마다 자산 별 목표비중이 다를 경우 weights는 시계열 형태로 입력되어야 합니다.</p>
+<p>목표 비중을 시계열 형태로 입력할 경우 주의해야 할 점은 다음과 같습니다.</p>
+<ol style="list-style-type: decimal">
+<li>시계열 형태로 인식할 수 있도록, 행이름 혹은 인덱스가 날짜 형태로 입력되어야 합니다.</li>
+<li>수익률 데이터와 비중 데이터의 열 개수는 동일해야 하며, 각 열에 해당하는 자산은 동일해야 합니다. 즉, 수익률 데이터의 첫번째 열에 A주식 데이터가 있다면, 비중 데이터의 첫번째 열도 목표 A주식 비중을 입력해야 합니다.</li>
+<li>각 시점의 비중의 합은 1이 되어야 합니다. 그렇지 않을 경우 제대로된 수익률이 계산되지 않습니다.</li>
+</ol>
+<p>weights에 값을 입력하지 않을 동일비중 포트폴리오를 구성하며, 포트폴리오 리밸런싱은 하지 않습니다.</p>
+</div>
+<div id="section-156" class="section level3">
+<h3><span class="header-section-number">12.1.2</span> 출력값 살펴보기</h3>
+<p>해당 함수는 verbose를 TRUE로 설정할 경우 다양한 결과값을 리스트 형태로 반환합니다.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 12.2: </span><code>Return.portfolio()</code> 함수 반환값</caption>
+<thead>
+<tr class="header">
+<th align="left">결과</th>
+<th align="left">내용</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">returns</td>
+<td align="left">포트폴리오 수익률</td>
+</tr>
+<tr class="even">
+<td align="left">contribution</td>
+<td align="left">일자 별 개별 자산의 포트폴리오 수익률 기여도</td>
+</tr>
+<tr class="odd">
+<td align="left">BOP.Weight</td>
+<td align="left">일자 별 개별 자산의 포트폴리오 내 비중 (시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Weight와 동일</td>
+</tr>
+<tr class="even">
+<td align="left">EOP.Weight</td>
+<td align="left">일자 별 개별 자산의 포트폴리오 내 비중 (종료시점)</td>
+</tr>
+<tr class="odd">
+<td align="left">BOP.Value</td>
+<td align="left">일자 별 개별 자산의 가치 (시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Value와 동일</td>
+</tr>
+<tr class="even">
+<td align="left">EOP.Value</td>
+<td align="left">일자 별 개별 자산의 가치 (종료시점)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="section-157" class="section level2">
+<h2><span class="header-section-number">12.2</span> 전통적인 60대 40 포트폴리오 백테스트</h2>
+<p><code>Return.portfolio()</code> 함수의 가장 간단한 예제로써 전통적인 60대 40 포트폴리오를 백테스트 하도록 합니다. 해당 포트폴리오는 주식과 채권에 각각 60%와 40%를 투자하며, 특정 시점 마다 해당 비중을 맞춰주기 위해 리밸런싱을 수행합니다. 매해 말 리밸런싱을 가정하는 예제를 살펴보도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(magrittr)
+
+ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;TLT&#39;</span>)
+<span class="kw">getSymbols</span>(ticker)</code></pre>
+<pre><code>## [1] &quot;SPY&quot; &quot;TLT&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind, <span class="kw">lapply</span>(ticker, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))
+rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</code></pre>
+<p>글로벌 자산의 ETF 데이터 중 주식(S&amp;P 500)과 채권(미국 장기채)에 해당하는 데이터를 다운로드 받은 후, 수익률을 계산하도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(rets)</code></pre>
+<pre><code>##              SPY.Adjusted TLT.Adjusted
+## SPY.Adjusted     1.000000    -0.434726
+## TLT.Adjusted    -0.434726     1.000000</code></pre>
+<p><code>cor()</code> 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.43로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">portfolio =<span class="st"> </span><span class="kw">Return.portfolio</span>(<span class="dt">R =</span> rets,
+                             <span class="dt">weights =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),
+                             <span class="dt">rebalance_on =</span> <span class="st">&#39;years&#39;</span>,
+                             <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><code>Return.portfolio()</code> 함수를 이용하여 백테스트를 실행합니다.</p>
+<ol style="list-style-type: decimal">
+<li>자산의 수익률인 R에는 수익률 테이블인 rets 를 입력합니다.</li>
+<li>리밸런싱 비중인 weights에는 60%와 40%를 의미하는 c(0.6, 0.4)를 입력합니다.</li>
+<li>리밸런싱 시기인 rebalance_on에는 연간 리밸런싱에 해당하는 ‘years’를 입력합니다. 리밸런싱 주기는 이 외에도 ’quarters’, ‘months’, ‘weeks’, ’days’도 입력이 가능합니다.</li>
+<li>결과물들을 리스트로 확인하기 위해 verbose를 TRUE로 설정합니다.</li>
+</ol>
+<p>위 과정을 통해 주식과 채권 투자 비중을 각각 60%와 40%로 리밸런싱하는 포트폴리오의 백테스트가 실행됩니다. 표 <a href="section-154.html#tab:portreturn">12.3</a>는 함수 내에서 포트폴리오의 수익률이 어떻게 계산되는지를 요약한 과정입니다.</p>
+<table class="table table-striped table-hover table-bordered table-condensed" style="font-size: 8.5px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:portreturn">Table 12.3: </span><code>Return.portfolio()</code> 계산 과정
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작금액
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작합계
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작비중
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+수익률
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료금액
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료합계
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료비중
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+최종수익률
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+1.주식
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+2.채권
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+3.1+2
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+4.주식
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+5.채권
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+6.주식
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+7.채권
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+8.주식
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+9.채권
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+10.8+9
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+11.주식
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+12.채권
+</th>
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
+13.수익률
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2017-12-26
+</td>
+<td style="text-align:right;">
+1.603
+</td>
+<td style="text-align:right;">
+0.940
+</td>
+<td style="text-align:right;">
+2.543
+</td>
+<td style="text-align:right;">
+0.630
+</td>
+<td style="text-align:right;">
+0.370
+</td>
+<td style="text-align:right;">
+-0.001
+</td>
+<td style="text-align:right;">
+0.003
+</td>
+<td style="text-align:right;">
+1.601
+</td>
+<td style="text-align:right;">
+0.943
+</td>
+<td style="text-align:right;">
+2.544
+</td>
+<td style="text-align:right;">
+0.629
+</td>
+<td style="text-align:right;">
+0.371
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017-12-27
+</td>
+<td style="text-align:right;">
+1.601
+</td>
+<td style="text-align:right;">
+0.943
+</td>
+<td style="text-align:right;">
+2.544
+</td>
+<td style="text-align:right;">
+0.629
+</td>
+<td style="text-align:right;">
+0.371
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+<td style="text-align:right;">
+1.602
+</td>
+<td style="text-align:right;">
+0.956
+</td>
+<td style="text-align:right;">
+2.557
+</td>
+<td style="text-align:right;">
+0.626
+</td>
+<td style="text-align:right;">
+0.374
+</td>
+<td style="text-align:right;">
+0.005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017-12-28
+</td>
+<td style="text-align:right;">
+1.602
+</td>
+<td style="text-align:right;">
+0.956
+</td>
+<td style="text-align:right;">
+2.557
+</td>
+<td style="text-align:right;">
+0.626
+</td>
+<td style="text-align:right;">
+0.374
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+-0.001
+</td>
+<td style="text-align:right;">
+1.605
+</td>
+<td style="text-align:right;">
+0.955
+</td>
+<td style="text-align:right;">
+2.560
+</td>
+<td style="text-align:right;">
+0.627
+</td>
+<td style="text-align:right;">
+0.373
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2017-12-29
+</td>
+<td style="text-align:right;">
+1.605
+</td>
+<td style="text-align:right;">
+0.955
+</td>
+<td style="text-align:right;">
+2.560
+</td>
+<td style="text-align:right;">
+0.627
+</td>
+<td style="text-align:right;">
+0.373
+</td>
+<td style="text-align:right;">
+-0.004
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+<td style="text-align:right;">
+1.599
+</td>
+<td style="text-align:right;">
+0.956
+</td>
+<td style="text-align:right;">
+2.555
+</td>
+<td style="text-align:right;">
+0.626
+</td>
+<td style="text-align:right;">
+0.374
+</td>
+<td style="text-align:right;">
+-0.002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+2018-01-02
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1.533
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1.022
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+2.555
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.600
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.400
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.007
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+-0.011
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1.544
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+1.011
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+2.555
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.604
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.396
+</td>
+<td style="text-align:right;font-weight: bold;color: white !important;background-color: #D7261E !important;">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2018-01-03
+</td>
+<td style="text-align:right;">
+1.544
+</td>
+<td style="text-align:right;">
+1.011
+</td>
+<td style="text-align:right;">
+2.555
+</td>
+<td style="text-align:right;">
+0.604
+</td>
+<td style="text-align:right;">
+0.396
+</td>
+<td style="text-align:right;">
+0.006
+</td>
+<td style="text-align:right;">
+0.005
+</td>
+<td style="text-align:right;">
+1.554
+</td>
+<td style="text-align:right;">
+1.016
+</td>
+<td style="text-align:right;">
+2.570
+</td>
+<td style="text-align:right;">
+0.605
+</td>
+<td style="text-align:right;">
+0.395
+</td>
+<td style="text-align:right;">
+0.006
+</td>
+</tr>
+</tbody>
+</table>
+<p>먼저 2017-12-27일에 해당하는 데이터를 보면 시작시점에 주식과 채권에는 각각 1.601과 0.943이 투자되어 있으며, 이를 합하면 2.544이 됩니다. 이를 포트폴리오 내 비중으로 환산하면 비중은 각각 0.629과 0.371가 됩니다.</p>
+<p>해당일의 주식과 채권의 수익률은 각각 0, 0.013이 되며, 이를 시작금액에 곱하면 종료시점의 금액은 1.602과 0.956가 됩니다. 각각의 금액을 종료금액의 합인 2.557으로 나누게 되면, 포트폴리오 내 비중은 0.626, 0.374로 변하게 됩니다. 포트폴리오 수익률은 2017-12-27 포트폴리오 금액인 2.557을 전일의 포트폴리오 금액인 2.544로 나누어 계산된 값인 0.005가 됩니다.</p>
+<p>리밸런싱이 없다면 2017-12-27일의 종료금액과 종료비중은 2017-12-28일의 시작금액과 시작비중에 그대로 적용되며, 위와 동일한 단계를 통해 포트폴리오 수익률이 계산됩니다.</p>
+<p>그러나 매해 리밸런싱을 가정했으므로, 첫 영업일인 2018-01-02일에는 포트폴리오 리밸런싱이 이루어집니다. 따라서 전일 2017-12-29일의 종료금액의 합인 2.555을 사전에 정의한 0.6과 0.4에 맞게 각 자산을 시작시점에 매수 혹은 매도하게 됩니다. 이후에는 기존과 동일하게 해당일의 수익률을 곱해 종료시점의 금액과 비중을 구한 후, 포트폴리오 수익률을 계산하게 됩니다.</p>
+<p>리밸런싱 전일 종료시점의 비중과 리밸런싱 당일 시작시점의 비중 차이의 절대값을 합하면, 포트폴리오의 회전율을 계산할 수도 있습니다. 해당 예제에서는 2017-12-29일 종료시점의 비중인 0.626, 0.374와 2018-01-02일 시작시점의 비중인 0.6, 0.4의 차이인 0.026, -0.026의 절대값의 합계인 0.052가 회전율이 됩니다.</p>
+<p>이처럼 리밸런싱을 원하는 시점과 비중을 정의하면, <code>Return.portfolio()</code> 함수 내에서는 위의 단계를 거쳐 포트폴리오의 수익률, 시작과 종료시점의 금액 및 비중이 계산되며, 이를 응용하여 회전율을 계산할 수도 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">portfolios =<span class="st"> </span><span class="kw">cbind</span>(rets, portfolio<span class="op">$</span>returns) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;주식&#39;</span>, <span class="st">&#39;채권&#39;</span>, <span class="st">&#39;60대 40&#39;</span>))
+<span class="kw">charts.PerformanceSummary</span>(portfolios, <span class="dt">main =</span> <span class="st">&#39;60대 40 포트폴리오&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><code>PerformanceAnalytics</code> 패키지의 <code>charts.PerformanceSummary()</code> 함수는 기간별 수익률을 입력시 누적수익률, 일별수익률, 드로우다운 그래프를 자동으로 그려줍니다.</p>
+<p>검은색 그래프는 주식 수익률(SPY), 붉은색 그래프는 채권 수익률(TLT), 초록색 그래프는 60대 40 포트폴리오 수익률을 의미합니다. 주식과 채권은 상반되는 움직임을 보이며 상승하며, 분산투자 포트폴리오는 각 개별 자산에 비해 훨씬 안정적인 수익률을 보입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(portfolio<span class="op">$</span>BOP.Weight <span class="op">-</span>
+<span class="st">                             </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(portfolio<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+               <span class="dt">order.by =</span> <span class="kw">index</span>(portfolio<span class="op">$</span>BOP.Weight))
+
+<span class="kw">chart.TimeSeries</span>(turnover)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>전일 종료시점의 비중인 EOP.Weight를 <code>lag()</code> 함수를 이용해 한 단계씩 내린 후, 시작시점의 비중인 BOP.Weight와의 차이의 절대값을 더해주면 해당 시점에서의 회전율이 계산됩니다. <code>lag()</code> 함수의 경우 <code>dplyr</code> 패키지에도 동일한 이름의 함수가 존재하므로, 충돌을 방지하기 위해 <code>timeSeries</code> 패키지의 함수임을 선언해줍니다. 이를 <code>xts()</code> 함수를 이용해 시계열 형태로 만들어준 뒤, <code>chart.TimeSeries()</code> 함수를 이용해 그래프로 나타내줍니다.</p>
+<p>리밸런싱 시점에 해당하는 매해 첫 영업일에 회전율이 발생하며, 그렇지 않은 날은 매수 혹은 매도가 없으므로 회전율 역시 0을 기록합니다. 2008년에는 주식과 채권의 등락폭이 심하였으므로 이듬해엔 2009년 리밸런싱으로 인한 회전율이 심하지만, 이를 제외한 해는 회전율이 그리 심하지 않습니다.</p>
+</div>
+<div id="section-158" class="section level2">
+<h2><span class="header-section-number">12.3</span> 시점 선택 전략 백테스트</h2>
+<p>이전 테스트가 리밸런싱 시점 별 비중이 60%와 40%로 고정되어 있었다면, 이번에는 시점 별 비중이 다른 형태의 예제를 살펴보도록 하겠습니다.</p>
+<p>메브 파버(Meb Faber)는 본인의 논문<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>을 통해, 시점 선택(Market Timing) 전략을 사용할 경우 단순 매수 후 보유 대비 극심한 하락장에서 낙폭을 줄일 수 있으며, 이로 인해 위험 대비 수익률을 올릴 수 있다고 설명합니다. 논문에서 말하는 시점 선택의 투자 규칙은 다음과 같습니다.</p>
+<p><span class="math display">\[주가 &gt; 10개월\,이동평균 \to 매수 \\
+주가 &lt; 10개월\,이동평균 \to 매도\,및\,현금\,보유\]</span></p>
+<p>해당 규칙을 미국 S&amp;P 500에 적용하는 예제를 살펴보도록 하겠습니다. 현재 주식 가격이 과거 10개월 주식 가격의 단순 평균 대비 이상이면 매수, 그렇지 않으면 전량 매도 후 현금을 보유하는 전략이며, 리밸런싱은 매월 말에 실행하도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+
+symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;SHY&#39;</span>)
+<span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</code></pre>
+<pre><code>## [1] &quot;SPY&quot; &quot;SHY&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind, <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))
+rets =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">Return.calculate</span>(prices))</code></pre>
+<p>먼저 주식과 현금에 해당하는 ETF 데이터를 다운로드 받습니다. 주식에 해당하는 ETF로는 S&amp;P 500 수익률을 추종하는 SPY를 사용하며, 현금에 해당하는 ETF로는 미국 단기채 수익률을 추종하는 SHY를 사용합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)
+
+<span class="kw">print</span>(ep)</code></pre>
+<pre><code>##   [1]    0   19   38   60   80  102  123  144  167  186  209  230  250  271
+##  [15]  291  311  333  354  375  397  418  439  462  481  503  523  542  564
+##  [29]  585  605  627  649  670  691  713  733  755  774  793  816  837  857
+##  [43]  879  900  922  943  964  985 1007 1027 1046 1069 1089 1110 1132 1152
+##  [57] 1175 1196 1217 1238 1259 1279 1299 1321 1341 1363 1384 1405 1428 1447
+##  [71] 1468 1489 1509 1530 1549 1569 1591 1613 1633 1655 1677 1697 1720 1740
+##  [85] 1761 1782 1801 1822 1843 1864 1885 1907 1928 1949 1972 1991 2013 2033
+##  [99] 2052 2074 2095 2115 2137 2159 2180 2201 2223 2243 2265 2284 2304 2326
+## [113] 2347 2368 2390 2410 2433 2454 2475 2496 2517 2537 2556 2579 2598 2620
+## [127] 2642 2662 2685 2705 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
+## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123 3138</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">wts =<span class="st"> </span><span class="kw">list</span>()
+lookback =<span class="st"> </span><span class="dv">10</span></code></pre>
+<p>먼저 <code>xts</code> 패키지의 <code>endpoints()</code> 함수를 이용해 매월 말일의 위치를 구합니다. 해당 함수는 <code>endpoints(x, on= 'months', k=1)</code>의 형태로 이루어지며 x는 시계열 데이터, on은 원하는 기간, k는 구간 길이를 의미합니다. 즉, 시계열 데이터에서 월말에 해당하는 부분의 위치를 반환하며, 매 월이 아닌 ‘weeks’, ‘quarters’, ‘years’ 등도 입력이 가능합니다.</p>
+<p>결과적으로 ep에는 rets의 인덱스 중 매월 말일에 해당하는 부분의 위치가 구해집니다.</p>
+<p>각 시점 별 비중이 입력될 wts를 공백의 리스트 형식으로 저장해주며, n개월 이동평균 값에 해당하는 lookback 변수에는 10을 입력해 줍니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">i =<span class="st"> </span>lookback <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]
+
+<span class="kw">head</span>(sub_price, <span class="dv">3</span>)</code></pre>
+<pre><code>##            SPY.Adjusted
+## 2007-01-03     109.5034
+## 2007-01-04     109.7357
+## 2007-01-05     108.8605</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(sub_price, <span class="dv">3</span>)</code></pre>
+<pre><code>##            SPY.Adjusted
+## 2007-10-26     120.5480
+## 2007-10-29     120.9483
+## 2007-10-30     120.1086</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)
+
+wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)
+wt[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">last</span>(sub_price) <span class="op">&gt;</span><span class="st"> </span>sma, <span class="dv">1</span>, <span class="dv">0</span>)
+wt[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>wt[<span class="dv">1</span>]
+
+wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))</code></pre>
+<p>해당 전략은 for loop 구문을 통해, 매월 말 과거 10개월 이동평균을 구한 후 매수 혹은 매도를 선택한 후 비중을 계산합니다. 예시를 위해 첫번째 시점의 테스트 과정을 살펴보도록 하며, 과거 10개월에 해당하는 가격의 이동평균이 필요하므로 처음 시작은 i+1 인 11 부터 가능합니다.</p>
+<ol style="list-style-type: decimal">
+<li>주가는 일별 데이터이며, 현재부터 과거 10개월에 해당하는 주가를 선택해야 합니다. 앞서 <code>endpoints()</code> 함수를 통해 주가에서 월말 기준점의 위치를 찾았으며, ep[i]는 현재시점 주가의 위치를, ep[i-lookback]는 현재부터 10개월 전 주가 위치를 의미합니다. 이를 통해 과거 10개월 간 주가를 찾은 후 sub_price에 저장하도록 합니다.</li>
+<li><code>mean()</code>을 통해 10개월 주가의 평균을 계산합니다.</li>
+<li><code>rep(0, 2)</code>를 통해 비중이 들어갈 0 벡터를 생성해 줍니다.</li>
+<li><code>ifelse()</code> 구문을 통해 해당 전략의 조건에 맞는 비중을 계산합니다. wt[1]은 주식의 투자비중이며, 만일 현재 주가가 10개월 이동평균보다 클 경우, 주식에 해당하는 비중은 1을, 그렇지 않을 경우 0을 부여합니다. wt[2]는 현금의 투자비중이며, 1에서 주식의 투자비중을 뺀 값을 입력합니다. 표 <a href="section-154.html#tab:sma">12.4</a>는 해당 규칙이 요약되어 있습니다.</li>
+<li>위에서 만들어진 벡터를 <code>xts()</code>를 통해 시계열 형태로 바꾼 후, wts의 i번째 리스트에 저장해줍니다.</li>
+</ol>
+<table>
+<caption>
+<span id="tab:sma">Table 12.4: </span>시점선택 조건 별 비중
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+자산
+</th>
+<th style="text-align:left;">
+현재주가 &gt; 10개월 이동평균
+</th>
+<th style="text-align:left;">
+현재 주가 &lt; 10개월 이동평균
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+주식비중
+</td>
+<td style="text-align:left;">
+wt[1] = 1
+</td>
+<td style="text-align:left;">
+wt[1] = 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+현금비중
+</td>
+<td style="text-align:left;">
+wt[2] = 0
+</td>
+<td style="text-align:left;">
+wt[2] = 1
+</td>
+</tr>
+</tbody>
+</table>
+<p>위 과정을 for loop 구문을 통해 전체 기간에 적용한 백테스트는 다음과 같습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)
+wts =<span class="st"> </span><span class="kw">list</span>()
+lookback =<span class="st"> </span><span class="dv">10</span>
+
+<span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {
+  sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]
+  sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)
+  wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)
+  wt[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">last</span>(sub_price) <span class="op">&gt;</span><span class="st"> </span>sma, <span class="dv">1</span>, <span class="dv">0</span>)
+  wt[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>wt[<span class="dv">1</span>]
+  
+  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))
+}
+
+wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</code></pre>
+<p>매월 말 과거 10개월 이동평균을 구한 후 현재 주가와 비교해 주식 혹은 현금 투자비중을 구한 후 wts 리스트에 저장합니다. 그 후, <code>do.call()</code> 함수를 통해 리스트를 테이블로 묶어주도록 합니다.</p>
+<p>수익률 데이터와 비중 데이터가 구해졌으므로, <code>Return.portfolio()</code> 함수를 통해 포트폴리오의 수익률을 계산해주도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">Tactical =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)
+portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">cbind</span>(rets[,<span class="dv">1</span>], Tactical<span class="op">$</span>returns)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;매수 후 보유&#39;</span>, <span class="st">&#39;시점 선택 전략&#39;</span>))
+
+<span class="kw">charts.PerformanceSummary</span>(portfolios, <span class="dt">main =</span> <span class="st">&quot;Buy &amp; Hold vs Tactical&quot;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: decimal">
+<li>수익률 데이터와 비중 데이터의 입력을 통해 백테스트를 실행합니다.</li>
+<li><code>cbind()</code> 함수를 통해 SPY 데이터와 포트폴리오 수익률을 합쳐주도록 합니다. 시점 선택 포트폴리오의 경우 lookback 기간인 10개월에 대한 수익률이 없어 NA로 표시되므로, <code>na.omit()</code>을 통해 해당 부분을 제거합니다.</li>
+<li><code>charts.PerformanceSummary()</code> 함수를 통해 수익률을 그래프로 나타냅니다.</li>
+</ol>
+<p>검은색 그래프가 S&amp;P500 에 매수 후 보유시 수익률, 붉은색 그래프는 시점 선택 전략을 적용한 수익률입니다. 2008년과 같은 하락장에서 낙폭이 훨씬 낮음이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(Tactical<span class="op">$</span>BOP.Weight <span class="op">-</span>
+<span class="st">                             </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(Tactical<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+               <span class="dt">order.by =</span> <span class="kw">index</span>(Tactical<span class="op">$</span>BOP.Weight))
+
+<span class="kw">chart.TimeSeries</span>(turnover)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>해당 전략의 회전율을 확인해보면, 몇년 간 매매가 없는 경우도 존재합니다. 그러나 매매가 발생할 시 매수와 매도 포지션 양쪽의 매매로 인해 200%의 회전율이 발생하게 됩니다.</p>
+<div id="section-159" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> 동적 자산배분 백테스트</h3>
+<p>마지막으로 기존에 배웠던것들을 응용하여 동적 자산배분의 백테스트를 수행하도록 하겠습니다. 일반적인 자산배분이 주식과 채권, 대체자산에 투자비중을 사전에 정해놓고 약간의 비율만 수정하는 정적 자산배분인 반면, 동적 자산배분이란 투자비중에 대한 제한이 없이 동적으로 포트폴리오를 구성하는 방법입니다.</p>
+<p>동적 자산배분을 이용한 포트폴리오는 다음과 같이 구성됩니다.</p>
+<ol style="list-style-type: decimal">
+<li>글로벌 자산 10개 중, 과거 12개월 수익률이 높은 5개 자산 선택</li>
+<li>최소분산 포트폴리오를 구성하며, 개별 비중의 제한은 최소 10%, 최대 30% 제약조건을 설정</li>
+<li>매월 말 리밸런싱을 실시</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(RiskPortfolios)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
+
+symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="co"># 미국 주식: SPDR S&amp;P 500 ETF</span>
+            <span class="st">&#39;IEV&#39;</span>, <span class="co"># 유럽 주식: iShares Europe ETF </span>
+            <span class="st">&#39;EWJ&#39;</span>, <span class="co"># 일본 주식: iShares Europe ETF </span>
+            <span class="st">&#39;EEM&#39;</span>, <span class="co"># 이머징 주식: iShares MSCI Emerging Markets ETF</span>
+            <span class="st">&#39;TLT&#39;</span>, <span class="co"># 미국 장기채: iShares 20+ Year Treasury Bond ETF</span>
+            <span class="st">&#39;IEF&#39;</span>, <span class="co"># 미국 중기채: iShares 7-10 Year Treasury Bond ETF</span>
+            <span class="st">&#39;IYR&#39;</span>, <span class="co"># 미국 리츠: iShares U.S. Real Estate ETF</span>
+            <span class="st">&#39;RWX&#39;</span>, <span class="co"># 글로벌 리츠: SPDR Dow Jones International Real Estate ETF</span>
+            <span class="st">&#39;GLD&#39;</span>, <span class="co"># 금: SPDR Gold Shares</span>
+            <span class="st">&#39;DBC&#39;</span>  <span class="co"># 상품: Invesco DB Commodity Index Tracking Fund</span>
+            )
+<span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</code></pre>
+<pre><code>##  [1] &quot;SPY&quot; &quot;IEV&quot; &quot;EWJ&quot; &quot;EEM&quot; &quot;TLT&quot; &quot;IEF&quot; &quot;IYR&quot; &quot;RWX&quot; &quot;GLD&quot; &quot;DBC&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind, <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x)))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(symbols)
+
+rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</code></pre>
+<p>먼저 이전 장과 동일하게 글로벌 자산을 대표하는 ETF 데이터를 다운로드 받은 후, 수정주가의 수익률을 계산하도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)
+wts =<span class="st"> </span><span class="kw">list</span>()
+lookback =<span class="st"> </span><span class="dv">12</span>
+wt_zero =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</code></pre>
+<p>백테스트에 사용되는 각종 값들을 사전에 정의합니다.</p>
+<ol style="list-style-type: decimal">
+<li><code>endpoints()</code> 함수를 통해 매월 말일의 위치를 구합니다.</li>
+<li>매월의 투자 비중이 들어갈 빈 리스트를 wts에 설정합니다.</li>
+<li>수익률을 측정할 과거 n기간을 12개월로 설정합니다.</li>
+<li><code>rep()</code> 함수를 통해 비중이 들어갈 0으로 이루어진 벡터를 구하며, 이름을 설정합니다.</li>
+</ol>
+<p>다음은 매월 말 투자 규칙에 따라 포트폴리오의 비중을 구하는 백테스트 과정입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {
+  sub_ret =<span class="st"> </span>rets[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , ]
+  cum =<span class="st"> </span><span class="kw">Return.cumulative</span>(sub_ret)
+  
+  K =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>cum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>
+  covmat =<span class="st"> </span><span class="kw">cov</span>(sub_ret[, K])
+  
+  wt =<span class="st"> </span>wt_zero
+  wt[K] =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat, <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>, <span class="dt">constraint =</span> <span class="st">&#39;user&#39;</span>,
+                                                  <span class="dt">LB =</span> <span class="kw">rep</span>(<span class="fl">0.10</span>, <span class="dv">5</span>), <span class="dt">UB =</span> <span class="kw">rep</span>(<span class="fl">0.30</span>, <span class="dv">5</span>)))
+  
+  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))
+}
+
+wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</code></pre>
+<p>for loop 구문을 통해 매월 말 과거 12개월 수익률을 구한 후 비중을 계산하며, 따라서 처음 시작은 i+1 인 13 부터 가능합니다.</p>
+<ol style="list-style-type: decimal">
+<li>ep[i]는 현재시점 주가의 위치를, ep[i-lookback]는 현재부터 12개월 전 주가 위치를 의미합니다. 이를 통해 과거 12개월 간 수익률을 찾은 후 sub_price에 저장하도록 합니다.</li>
+<li><code>Return.cumulative()</code> 함수를 통해 해당 기간의 자산 별 누적수익률을 구합니다.</li>
+<li><code>rank()</code>를 통해 수익률 상위 5개 자산을 선택하며, 내림차순으로 정렬해야 하므로 마이너스 부호를 붙여주도록 합니다.</li>
+<li><code>cov()</code> 함수를 통해 수익률 상위 5개 자산의 분산-공분산 행렬을 구하도록 합니다.</li>
+<li>임시로 비중이 저장될 wt 변수에 0으로 이루어진 벡터를 입력한 후, <code>optimalPortfolio()</code> 함수를 통해 최소분산 포트폴리오를 구성하는 해를 찾습니다. 개별 투자비중의 제한은 최소 10%, 최대 30%를 설정하며, 구해진 해를 wt의 K번째 값에 입력합니다.</li>
+<li>위에서 만들어진 벡터를 <code>xts()</code>를 통해 시계열 형태로 바꾼 후, wts의 i번째 리스트에 저장해줍니다.</li>
+<li>for loop 구문이 끝난 후, <code>do.call()</code> 함수를 통해 투자 비중이 저장된 list를 테이블 형태로 바꿔주도록 합니다.</li>
+</ol>
+<p>이를 통해 동적 자산배분의 투자 규칙에 맞는 매월 말 투자비중이 계산되었습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">GDAA =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)
+<span class="kw">charts.PerformanceSummary</span>(GDAA<span class="op">$</span>returns, <span class="dt">main =</span> <span class="st">&#39;동적자산배분&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>수익률과 비중 데이터가 있으므로 <code>Return.portfolio()</code> 함수를 통해 백테스트 수익률을 계산할 수 있습니다. <code>charts.PerformanceSummary()</code> 함수를 통해 누적수익률을 확인하면, 해당 전략을 이용한 포트폴리오가 꾸준히 우상햔 한느 모습을 보이게 됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">wts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(key, value, <span class="op">-</span>Index) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Index =</span> <span class="kw">as.Date</span>(Index)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">key =</span> <span class="kw">factor</span>(key, <span class="dt">levels =</span> <span class="kw">unique</span>(key))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">color =</span> key, <span class="dt">fill =</span> key), <span class="dt">position =</span> <span class="st">&#39;stack&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks=</span><span class="st">&quot;years&quot;</span>, <span class="dt">date_labels=</span><span class="st">&quot;%Y&quot;</span>,
+               <span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>,
+                                  <span class="dt">size =</span> <span class="dv">12</span>),
+        <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>,
+        <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">8</span>),
+        <span class="dt">panel.grid.minor.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">byrow =</span> <span class="ot">TRUE</span>))</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>반면 자산 별 투자 비중의 변화가 많은것을 알 수 있습니다. 이는 수익률 상위 5개에 해당하는 자산이 매월 말 바뀌는 원인과, 최소분산 포트폴리오를 구성하는 비중이 계속해서 바뀌는 원인 때문입니다.</p>
+<p>회전율이 상대적으로 낮았던 기존 백테스트의 경우 매매비용, 세금, 기타비용등을 고려하지 않아도 수익률에 크게 영향이 없지만, 회전율이 상대적으로 높은 전략의 경우 이러한 것들을 무시하지 않을 수 없습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">GDAA<span class="op">$</span>turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(GDAA<span class="op">$</span>BOP.Weight <span class="op">-</span><span class="st"> </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(GDAA<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+               <span class="dt">order.by =</span> <span class="kw">index</span>(GDAA<span class="op">$</span>BOP.Weight))
+<span class="kw">chart.TimeSeries</span>(GDAA<span class="op">$</span>turnover)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>기존에 살펴본 방법으로 회전율을 계산할 경우, 매월 상당한 매매회전이 발생함이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fee =<span class="st"> </span><span class="fl">0.0030</span>
+GDAA<span class="op">$</span>net =<span class="st"> </span>GDAA<span class="op">$</span>returns <span class="op">-</span><span class="st"> </span>GDAA<span class="op">$</span>turnover<span class="op">*</span>fee</code></pre>
+<p>매수 혹은 매도당 발생하는 세금, 수수료, 시장충격 등 총 비용을 0.3%로 가정합니다. 포트폴리오 수익률에서 회전율과 총비용의 곱을 빼면, 비용 후 포트폴리오의 순 수익률이 계산됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(GDAA<span class="op">$</span>returns, GDAA<span class="op">$</span>net) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;No Fee&#39;</span>, <span class="st">&#39;After Fee&#39;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">charts.PerformanceSummary</span>(<span class="dt">main =</span> <span class="st">&#39;Global Dynamic Asset Allocation&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>기존 비용을 고려하지 않은 포트폴리오에 비해, 비용을 차감한 포트폴리오 수익률이 시간이 지남에 따라 서서히 감소함이 확인됩니다. 이러한 차이는 비용이 비쌀수록, 혹은 매매회전율이 높을수록 더욱 벌어지게 됩니다.</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Faber, M. (2013). A quantitative approach to tactical asset allocation.<a href="section-154.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section-143.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

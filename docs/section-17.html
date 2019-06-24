@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-23" />
+<meta name="date" content="2019-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -347,7 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.2" data-path="section-78.html"><a href="section-78.html#section-80"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="section-78.html"><a href="section-78.html#section-81"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
-<li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="section-78.html"><a href="section-78.html#section-83"><i class="fa fa-check"></i><b>12.3.1</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -428,7 +430,7 @@ otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span cl
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(otp)</code></pre>
-<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhtPnKZRjeo9kbN5JGszS7arj/bdjNFjefcCm+L6I0JUXe1HzefxUBByY2abg2MV1ID33wdYKd2OpSIgBHeTZHzJr0wynz24tjk5duu5JPgMjwBgripw4YISXCA3FNv9pEsLswDex8M7F4OPlibJY3yaRPyKcAEleo2VSO2vJhnnWyWAyyc/iyj0DMMN63wUWRhWgh6iKSiaEL8UEyLQkqh3UeJZJQr0yj4JJ28pCpQc89KRdx2WBYYlB9GJr+t9GZB2LNKlhmRi/2weAeixRLZQ=&quot;</code></pre>
+<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhoauuEo7QTGjMNnw5Mg8yzWpAXDcQ1iCn6XgznxuU7/Oyqe+0V2+Lw5C1hJmtWIEi62/Uyb+9lkKiW90ysZaqAmbrJrqORgvlWEZS3xVLEoWg3x0o5o8zPPll10QoLYU151TulLvqyKVb7D+oucG7m3z0dGCi5rxbbfL1cbZ2FOwCFRxSx0VPFDNN1BtQYHMnL4Tk5RuFvX6u+IX9pVt2EHaMgP1u+S22Sc6cQYgS5D/iQkU6M5CGE4ZUDJhjLdZDKpuFX+gNVt4iclvaFpUUwE=&quot;</code></pre>
 <p>이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span>
 down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),
@@ -566,7 +568,7 @@ down_ind =<span class="st"> </span><span class="kw">read.csv</span>(<span class=
 ## 330        1416       3.20             1456       NA
 ## 45         1500       2.29             1408       NA
 ## 301        4000       2.86             1450       NA
-## 331        1417       3.91             2095       NA
+## 331        1417       3.91             2098       NA
 ## 1278          0       0.00             1595       NA
 ## 1082       6000       1.82             1536       NA</code></pre>
 <p>데이터를 시가총액 순으로 내림차순 해줄 필요도 있습니다. <code>order()</code> 함수를 통해 상대적인 순서를 구할 수 있으며, R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꾸어 주도록 합니다. 결과적으로 시가총액 기준 내림차순으로 해당 데이터가 정렬됩니다.</p>

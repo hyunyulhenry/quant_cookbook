@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # 포트폴리오 백테스트
 
 백테스트란 현재 생각하는 전략을 과거부터 실행하였을 시, 어떠한 성과가 발생하는지 테스트해보는 과정입니다. 과거의 데이터를 기반으로 전략을 실행하는 퀀트 투자에 있어서, 이는 핵심 단계이기도 합니다. 백테스트 결과를 통해 해당 전략의 손익뿐만 아니라 각종 위험을 대략적으로 판단할 수 있으며, 어떤 구간에서 전략이 좋았는지 혹은 나빴는지에 대한 이해도 키울 수 있습니다. 이러한 이해를 바탕으로 퀀트 투자를 지속한다면 단기적으로 수익이 나쁜 구간에서도 그 이유에 대한 객관적인 안목을 키울 수 있으며, 확신을 가지고 전략을 지속할 수 있습니다.
@@ -136,20 +141,20 @@ portfolio = Return.portfolio(R = rets,
 <th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">최종수익률</div></th>
 </tr>
   <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> 1.주식 </th>
-   <th style="text-align:right;"> 2.채권 </th>
-   <th style="text-align:right;"> 3.1+2 </th>
-   <th style="text-align:right;"> 4.주식 </th>
-   <th style="text-align:right;"> 5.채권 </th>
-   <th style="text-align:right;"> 6.주식 </th>
-   <th style="text-align:right;"> 7.채권 </th>
-   <th style="text-align:right;"> 8.주식 </th>
-   <th style="text-align:right;"> 9.채권 </th>
-   <th style="text-align:right;"> 10.8+9 </th>
-   <th style="text-align:right;"> 11.주식 </th>
-   <th style="text-align:right;"> 12.채권 </th>
-   <th style="text-align:right;"> 13.수익률 </th>
+   <th style="text-align:left;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">   </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 1.주식 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 2.채권 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 3.1+2 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 4.주식 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 5.채권 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 6.주식 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 7.채권 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 8.주식 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 9.채권 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 10.8+9 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 11.주식 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 12.채권 </th>
+   <th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);"> 13.수익률 </th>
   </tr>
  </thead>
 <tbody>
@@ -266,7 +271,8 @@ portfolio = Return.portfolio(R = rets,
 
 
 ```r
-portfolios = cbind(rets, portfolio$returns)
+portfolios = cbind(rets, portfolio$returns) %>%
+  setNames(c('주식', '채권', '60대 40'))
 charts.PerformanceSummary(portfolios, main = '60대 40 포트폴리오')
 ```
 
@@ -278,7 +284,8 @@ charts.PerformanceSummary(portfolios, main = '60대 40 포트폴리오')
 
 
 ```r
-turnover = xts(rowSums(abs(portfolio$BOP.Weight - lag(portfolio$EOP.Weight)), na.rm = TRUE),
+turnover = xts(rowSums(abs(portfolio$BOP.Weight -
+                             timeSeries::lag(portfolio$EOP.Weight)), na.rm = TRUE),
                order.by = index(portfolio$BOP.Weight))
 
 chart.TimeSeries(turnover)
@@ -286,7 +293,7 @@ chart.TimeSeries(turnover)
 
 <img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto;" />
 
-전일 종료시점의 비중인 EOP.Weight를 `lag()` 함수를 이용해 한 단계씩 내린 후, 시작시점의 비중인 BOP.Weight와의 차이의 절대값을 더해주면 해당 시점에서의 회전율이 계산됩니다. 이를 `xts()` 함수를 이용해 시계열 형태로 만들어준 뒤, `chart.TimeSeries()` 함수를 이용해 그래프로 나타내줍니다.
+전일 종료시점의 비중인 EOP.Weight를 `lag()` 함수를 이용해 한 단계씩 내린 후, 시작시점의 비중인 BOP.Weight와의 차이의 절대값을 더해주면 해당 시점에서의 회전율이 계산됩니다. `lag()` 함수의 경우 `dplyr` 패키지에도 동일한 이름의 함수가 존재하므로, 충돌을 방지하기 위해 `timeSeries` 패키지의 함수임을 선언해줍니다. 이를 `xts()` 함수를 이용해 시계열 형태로 만들어준 뒤, `chart.TimeSeries()` 함수를 이용해 그래프로 나타내줍니다.
 
 리밸런싱 시점에 해당하는 매해 첫 영업일에 회전율이 발생하며, 그렇지 않은 날은 매수 혹은 매도가 없으므로 회전율 역시 0을 기록합니다. 2008년에는 주식과 채권의 등락폭이 심하였으므로 이듬해엔 2009년 리밸런싱으로 인한 회전율이 심하지만, 이를 제외한 해는 회전율이 그리 심하지 않습니다.
 
@@ -356,7 +363,6 @@ lookback = 10
 
 ```r
 i = lookback + 1
-
 sub_price = prices[ep[i-lookback] : ep[i] , 1]
 
 head(sub_price, 3)
@@ -449,7 +455,8 @@ wts = do.call(rbind, wts)
 
 ```r
 Tactical = Return.portfolio(rets, wts, verbose = TRUE)
-portfolios = na.omit(cbind(rets[,1], Tactical$returns))
+portfolios = na.omit(cbind(rets[,1], Tactical$returns)) %>%
+  setNames(c('매수 후 보유', '시점 선택 전략'))
 
 charts.PerformanceSummary(portfolios, main = "Buy & Hold vs Tactical")
 ```
@@ -465,7 +472,8 @@ charts.PerformanceSummary(portfolios, main = "Buy & Hold vs Tactical")
 
 
 ```r
-turnover = xts(rowSums(abs(Tactical$BOP.Weight - lag(Tactical$EOP.Weight)), na.rm = TRUE),
+turnover = xts(rowSums(abs(Tactical$BOP.Weight -
+                             timeSeries::lag(Tactical$EOP.Weight)), na.rm = TRUE),
                order.by = index(Tactical$BOP.Weight))
 
 chart.TimeSeries(turnover)
@@ -474,3 +482,170 @@ chart.TimeSeries(turnover)
 <img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" />
 
 해당 전략의 회전율을 확인해보면, 몇년 간 매매가 없는 경우도 존재합니다. 그러나 매매가 발생할 시 매수와 매도 포지션 양쪽의 매매로 인해 200%의 회전율이 발생하게 됩니다. 
+
+### 동적 자산배분 백테스트
+
+백테스트의 마지막으로 기존에 배웠던 것들을 응용하여 동적 자산배분의 백테스트를 수행하도록 하겠습니다. 일반적인 자산배분이 주식과 채권, 대체자산에 투자비중을 사전에 정해놓고 약간의 비율만 수정하는 정적 자산배분인 반면, 동적 자산배분이란 투자비중에 대한 제한이 없이 동적으로 포트폴리오를 구성하는 방법입니다.
+
+동적 자산배분을 이용한 포트폴리오는 다음과 같이 구성됩니다.
+
+1. 글로벌 자산 10개 중, 과거 12개월 수익률이 높은 5개 자산 선택
+2. 최소분산 포트폴리오를 구성하며, 개별 투자 비중은 최소 10%, 최대 30% 제약조건을 설정
+3. 매월 말 리밸런싱 실시
+
+
+```r
+library(quantmod)
+library(PerformanceAnalytics)
+library(RiskPortfolios)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+
+symbols = c('SPY', # 미국 주식: SPDR S&P 500 ETF
+            'IEV', # 유럽 주식: iShares Europe ETF 
+            'EWJ', # 일본 주식: iShares Europe ETF 
+            'EEM', # 이머징 주식: iShares MSCI Emerging Markets ETF
+            'TLT', # 미국 장기채: iShares 20+ Year Treasury Bond ETF
+            'IEF', # 미국 중기채: iShares 7-10 Year Treasury Bond ETF
+            'IYR', # 미국 리츠: iShares U.S. Real Estate ETF
+            'RWX', # 글로벌 리츠: SPDR Dow Jones International Real Estate ETF
+            'GLD', # 금: SPDR Gold Shares
+            'DBC'  # 상품: Invesco DB Commodity Index Tracking Fund
+            )
+getSymbols(symbols, src = 'yahoo')
+```
+
+```
+##  [1] "SPY" "IEV" "EWJ" "EEM" "TLT" "IEF" "IYR" "RWX" "GLD" "DBC"
+```
+
+```r
+prices = do.call(cbind, lapply(symbols, function(x) Ad(get(x)))) %>%
+  setNames(symbols)
+
+rets = Return.calculate(prices) %>% na.omit()
+```
+
+먼저 이전 장과 동일하게 글로벌 자산을 대표하는 ETF 데이터를 다운로드 받은 후, 수정주가의 수익률을 계산합니다.
+
+
+```r
+ep = endpoints(rets, on = 'months')
+wts = list()
+lookback = 12
+wt_zero = rep(0, 10) %>% setNames(colnames(rets))
+```
+
+백테스트에 사용되는 각종 값들을 사전에 정의합니다.
+
+1. `endpoints()` 함수를 통해 매월 말일의 위치를 구합니다.
+2. 매월의 투자 비중이 들어갈 빈 리스트를 wts에 설정합니다.
+3. 수익률을 측정할 과거 n기간을 12개월로 설정합니다.
+4. `rep()` 함수를 통해 비중이 들어갈 0으로 이루어진 벡터를 구하며, 이름을 설정합니다.
+
+다음은 매월 말 투자 규칙에 따라 포트폴리오의 비중을 구하는 백테스트 과정입니다.
+
+
+```r
+for (i in (lookback+1) : length(ep)) {
+  sub_ret = rets[ep[i-lookback] : ep[i] , ]
+  cum = Return.cumulative(sub_ret)
+  
+  K = rank(-cum) <= 5
+  covmat = cov(sub_ret[, K])
+  
+  wt = wt_zero
+  wt[K] = optimalPortfolio(covmat, control = list(type = 'minvol', constraint = 'user',
+                                                  LB = rep(0.10, 5), UB = rep(0.30, 5)))
+  
+  wts[[i]] = xts(t(wt), order.by = index(rets[ep[i]]))
+}
+
+wts = do.call(rbind, wts)
+```
+
+for loop 구문을 통해 매월 말 과거 12개월 수익률을 구한 후 비중을 계산하며, 따라서 처음 시작은 i+1 인 13 부터 가능합니다.
+
+1. ep[i]는 현재시점 수익률의 위치를, ep[i-lookback]는 현재부터 12개월 전 수익률의 위치를 의미합니다. 이를 통해 과거 12개월 간 수익률을 찾은 후 sub_ret에 저장하도록 합니다.
+2. `Return.cumulative()` 함수를 통해 해당 기간의 자산 별 누적수익률을 구합니다.
+3. `rank()` 함수를 통해 수익률 상위 5개 자산을 선택하며, 내림차순으로 정렬해야 하므로 마이너스 부호를 붙여주도록 합니다.
+4. `cov()` 함수를 통해 수익률 상위 5개 자산의 분산-공분산 행렬을 구하도록 합니다.
+5. 임시로 비중이 저장될 wt 변수에 0으로 이루어진 벡터를 입력한 후, `optimalPortfolio()` 함수를 통해 최소분산 포트폴리오를 구성하는 해를 찾습니다. 개별 투자비중의 제한은 최소 10%, 최대 30%를 설정하며, 구해진 해를 wt의 K번째 값에 입력합니다.
+6. 위에서 만들어진 벡터를 `xts()`를 통해 시계열 형태로 바꾼 후, wts의 i번째 리스트에 저장해줍니다.
+7. for loop 구문이 끝난 후, `do.call()` 함수를 통해 투자 비중이 저장된 list를 테이블 형태로 바꿔주도록 합니다.
+
+이를 통해 동적 자산배분의 투자 규칙에 맞는 매월 말 투자비중이 계산되었습니다.
+
+
+
+```r
+GDAA = Return.portfolio(rets, wts, verbose = TRUE)
+charts.PerformanceSummary(GDAA$returns, main = '동적자산배분')
+```
+
+<img src="12-backtest_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" />
+
+수익률과 비중 데이터가 있으므로 `Return.portfolio()` 함수를 통해 백테스트 수익률을 계산할 수 있습니다. `charts.PerformanceSummary()` 함수를 통해 누적수익률을 확인하면, 해당 전략을 이용한 포트폴리오가 꾸준히 우상향 하는 모습을 보이게 됩니다.
+
+
+
+```r
+wts %>% fortify.zoo() %>%
+  gather(key, value, -Index) %>%
+  mutate(Index = as.Date(Index)) %>%
+  mutate(key = factor(key, levels = unique(key))) %>%
+  ggplot(aes(x = Index, y = value)) +
+  geom_area(aes(color = key, fill = key), position = 'stack') +
+  xlab(NULL) + ylab(NULL) +  theme_bw() +
+  scale_x_date(date_breaks="years", date_labels="%Y",
+               expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  theme(plot.title = element_text(hjust = 0.5,
+                                  size = 12),
+        legend.position = 'bottom',
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = guide_legend(byrow = TRUE))
+```
+
+<img src="12-backtest_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" />
+
+반면 자산 별 투자 비중의 변화가 많은것을 알 수 있습니다. 이는 수익률 상위 5개에 해당하는 자산이 매월 말 바뀌는 원인과, 최소분산 포트폴리오를 구성하는 비중이 계속해서 바뀌는 원인 때문입니다. 
+
+회전율이 상대적으로 낮았던 기존 백테스트의 경우 매매비용, 세금, 기타비용 등을 고려하지 않아도 수익률에 크게 영향이 없지만, 회전율이 상대적으로 높은 전략의 경우 이러한 것들을 무시하지 않을 수 없습니다.
+
+
+
+```r
+GDAA$turnover = xts(rowSums(abs(GDAA$BOP.Weight -
+                                  timeSeries::lag(GDAA$EOP.Weight)), na.rm = TRUE),
+               order.by = index(GDAA$BOP.Weight))
+chart.TimeSeries(GDAA$turnover)
+```
+
+<img src="12-backtest_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
+
+기존에 살펴본 방법으로 회전율을 계산할 경우, 매월 상당한 매매회전이 발생함이 확인됩니다.
+
+
+
+```r
+fee = 0.0030
+GDAA$net = GDAA$returns - GDAA$turnover*fee
+```
+
+매수 혹은 매도당 발생하는 세금, 수수료, 시장충격 등 총 비용을 0.3%로 가정합니다. 포트폴리오 수익률에서 회전율과 총비용의 곱을 빼면, 비용 후 포트폴리오의 순 수익률이 계산됩니다. 
+
+
+
+```r
+cbind(GDAA$returns, GDAA$net) %>%
+  setNames(c('No Fee', 'After Fee')) %>%
+  charts.PerformanceSummary(main = 'Global Dynamic Asset Allocation')
+```
+
+<img src="12-backtest_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
+
+기존 비용을 고려하지 않은 포트폴리오에 비해, 비용을 차감한 포트폴리오 수익률이 시간이 지남에 따라 서서히 감소함이 확인됩니다. 이러한 차이는 비용이 클수록, 혹은 매매회전율이 높을수록 더욱 벌어지게 됩니다.

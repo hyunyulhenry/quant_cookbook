@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-23" />
+<meta name="date" content="2019-06-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -347,7 +347,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.2" data-path="section-78.html"><a href="section-78.html#section-80"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="section-78.html"><a href="section-78.html#section-81"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
-<li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="section-78.html"><a href="section-78.html#section-83"><i class="fa fa-check"></i><b>12.3.1</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
@@ -556,45 +558,45 @@ rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) 
 </th>
 </tr>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 1.주식
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 2.채권
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 3.1+2
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 4.주식
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 5.채권
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 6.주식
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 7.채권
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 8.주식
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 9.채권
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 10.8+9
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 11.주식
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 12.채권
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;-webkit-transform: rotate(-60deg); -moz-transform: rotate(-60deg); -ms-transform: rotate(-60deg); -o-transform: rotate(-60deg); transform: rotate(-60deg);">
 13.수익률
 </th>
 </tr>
@@ -872,17 +874,19 @@ rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) 
 <p>그러나 매해 리밸런싱을 가정했으므로, 첫 영업일인 2018-01-02일에는 포트폴리오 리밸런싱이 이루어집니다. 따라서 전일 2017-12-29일의 종료금액의 합인 2.555을 사전에 정의한 0.6과 0.4에 맞게 각 자산을 시작시점에 매수 혹은 매도하게 됩니다. 이후에는 기존과 동일하게 해당일의 수익률을 곱해 종료시점의 금액과 비중을 구한 후, 포트폴리오 수익률을 계산하게 됩니다.</p>
 <p>리밸런싱 전일 종료시점의 비중과 리밸런싱 당일 시작시점의 비중 차이의 절대값을 합하면, 포트폴리오의 회전율을 계산할 수도 있습니다. 해당 예제에서는 2017-12-29일 종료시점의 비중인 0.626, 0.374와 2018-01-02일 시작시점의 비중인 0.6, 0.4의 차이인 0.026, -0.026의 절대값의 합계인 0.052가 회전율이 됩니다.</p>
 <p>이처럼 리밸런싱을 원하는 시점과 비중을 정의하면, <code>Return.portfolio()</code> 함수 내에서는 위의 단계를 거쳐 포트폴리오의 수익률, 시작과 종료시점의 금액 및 비중이 계산되며, 이를 응용하여 회전율을 계산할 수도 있습니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">portfolios =<span class="st"> </span><span class="kw">cbind</span>(rets, portfolio<span class="op">$</span>returns)
+<pre class="sourceCode r"><code class="sourceCode r">portfolios =<span class="st"> </span><span class="kw">cbind</span>(rets, portfolio<span class="op">$</span>returns) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;주식&#39;</span>, <span class="st">&#39;채권&#39;</span>, <span class="st">&#39;60대 40&#39;</span>))
 <span class="kw">charts.PerformanceSummary</span>(portfolios, <span class="dt">main =</span> <span class="st">&#39;60대 40 포트폴리오&#39;</span>)</code></pre>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-7-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p><code>PerformanceAnalytics</code> 패키지의 <code>charts.PerformanceSummary()</code> 함수는 기간별 수익률을 입력시 누적수익률, 일별수익률, 드로우다운 그래프를 자동으로 그려줍니다.</p>
 <p>검은색 그래프는 주식 수익률(SPY), 붉은색 그래프는 채권 수익률(TLT), 초록색 그래프는 60대 40 포트폴리오 수익률을 의미합니다. 주식과 채권은 상반되는 움직임을 보이며 상승하며, 분산투자 포트폴리오는 각 개별 자산에 비해 훨씬 안정적인 수익률을 보입니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(portfolio<span class="op">$</span>BOP.Weight <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(portfolio<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(portfolio<span class="op">$</span>BOP.Weight <span class="op">-</span>
+<span class="st">                             </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(portfolio<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
                <span class="dt">order.by =</span> <span class="kw">index</span>(portfolio<span class="op">$</span>BOP.Weight))
 
 <span class="kw">chart.TimeSeries</span>(turnover)</code></pre>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="50%" style="display: block; margin: auto;" /></p>
-<p>전일 종료시점의 비중인 EOP.Weight를 <code>lag()</code> 함수를 이용해 한 단계씩 내린 후, 시작시점의 비중인 BOP.Weight와의 차이의 절대값을 더해주면 해당 시점에서의 회전율이 계산됩니다. 이를 <code>xts()</code> 함수를 이용해 시계열 형태로 만들어준 뒤, <code>chart.TimeSeries()</code> 함수를 이용해 그래프로 나타내줍니다.</p>
+<p>전일 종료시점의 비중인 EOP.Weight를 <code>lag()</code> 함수를 이용해 한 단계씩 내린 후, 시작시점의 비중인 BOP.Weight와의 차이의 절대값을 더해주면 해당 시점에서의 회전율이 계산됩니다. <code>lag()</code> 함수의 경우 <code>dplyr</code> 패키지에도 동일한 이름의 함수가 존재하므로, 충돌을 방지하기 위해 <code>timeSeries</code> 패키지의 함수임을 선언해줍니다. 이를 <code>xts()</code> 함수를 이용해 시계열 형태로 만들어준 뒤, <code>chart.TimeSeries()</code> 함수를 이용해 그래프로 나타내줍니다.</p>
 <p>리밸런싱 시점에 해당하는 매해 첫 영업일에 회전율이 발생하며, 그렇지 않은 날은 매수 혹은 매도가 없으므로 회전율 역시 0을 기록합니다. 2008년에는 주식과 채권의 등락폭이 심하였으므로 이듬해엔 2009년 리밸런싱으로 인한 회전율이 심하지만, 이를 제외한 해는 회전율이 그리 심하지 않습니다.</p>
 </div>
 <div id="section-82" class="section level2">
@@ -921,7 +925,6 @@ lookback =<span class="st"> </span><span class="dv">10</span></code></pre>
 <p>결과적으로 ep에는 rets의 인덱스 중 매월 말일에 해당하는 부분의 위치가 구해집니다.</p>
 <p>각 시점 별 비중이 입력될 wts를 공백의 리스트 형식으로 저장해주며, n개월 이동평균 값에 해당하는 lookback 변수에는 10을 입력해 줍니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">i =<span class="st"> </span>lookback <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-
 sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]
 
 <span class="kw">head</span>(sub_price, <span class="dv">3</span>)</code></pre>
@@ -1010,7 +1013,8 @@ wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</code>
 <p>매월 말 과거 10개월 이동평균을 구한 후 현재 주가와 비교해 주식 혹은 현금 투자비중을 구한 후 wts 리스트에 저장합니다. 그 후, <code>do.call()</code> 함수를 통해 리스트를 테이블로 묶어주도록 합니다.</p>
 <p>수익률 데이터와 비중 데이터가 구해졌으므로, <code>Return.portfolio()</code> 함수를 통해 포트폴리오의 수익률을 계산해주도록 합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">Tactical =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)
-portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">cbind</span>(rets[,<span class="dv">1</span>], Tactical<span class="op">$</span>returns))
+portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">cbind</span>(rets[,<span class="dv">1</span>], Tactical<span class="op">$</span>returns)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;매수 후 보유&#39;</span>, <span class="st">&#39;시점 선택 전략&#39;</span>))
 
 <span class="kw">charts.PerformanceSummary</span>(portfolios, <span class="dt">main =</span> <span class="st">&quot;Buy &amp; Hold vs Tactical&quot;</span>)</code></pre>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-13-1.png" width="50%" style="display: block; margin: auto;" /></p>
@@ -1020,13 +1024,125 @@ portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class
 <li><code>charts.PerformanceSummary()</code> 함수를 통해 수익률을 그래프로 나타냅니다.</li>
 </ol>
 <p>검은색 그래프가 S&amp;P500 에 매수 후 보유시 수익률, 붉은색 그래프는 시점 선택 전략을 적용한 수익률입니다. 2008년과 같은 하락장에서 낙폭이 훨씬 낮음이 확인됩니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(Tactical<span class="op">$</span>BOP.Weight <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(Tactical<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(Tactical<span class="op">$</span>BOP.Weight <span class="op">-</span>
+<span class="st">                             </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(Tactical<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
                <span class="dt">order.by =</span> <span class="kw">index</span>(Tactical<span class="op">$</span>BOP.Weight))
 
 <span class="kw">chart.TimeSeries</span>(turnover)</code></pre>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>해당 전략의 회전율을 확인해보면, 몇년 간 매매가 없는 경우도 존재합니다. 그러나 매매가 발생할 시 매수와 매도 포지션 양쪽의 매매로 인해 200%의 회전율이 발생하게 됩니다.</p>
+<div id="section-83" class="section level3">
+<h3><span class="header-section-number">12.3.1</span> 동적 자산배분 백테스트</h3>
+<p>백테스트의 마지막으로 기존에 배웠던 것들을 응용하여 동적 자산배분의 백테스트를 수행하도록 하겠습니다. 일반적인 자산배분이 주식과 채권, 대체자산에 투자비중을 사전에 정해놓고 약간의 비율만 수정하는 정적 자산배분인 반면, 동적 자산배분이란 투자비중에 대한 제한이 없이 동적으로 포트폴리오를 구성하는 방법입니다.</p>
+<p>동적 자산배분을 이용한 포트폴리오는 다음과 같이 구성됩니다.</p>
+<ol style="list-style-type: decimal">
+<li>글로벌 자산 10개 중, 과거 12개월 수익률이 높은 5개 자산 선택</li>
+<li>최소분산 포트폴리오를 구성하며, 개별 투자 비중은 최소 10%, 최대 30% 제약조건을 설정</li>
+<li>매월 말 리밸런싱 실시</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(RiskPortfolios)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
 
+symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="co"># 미국 주식: SPDR S&amp;P 500 ETF</span>
+            <span class="st">&#39;IEV&#39;</span>, <span class="co"># 유럽 주식: iShares Europe ETF </span>
+            <span class="st">&#39;EWJ&#39;</span>, <span class="co"># 일본 주식: iShares Europe ETF </span>
+            <span class="st">&#39;EEM&#39;</span>, <span class="co"># 이머징 주식: iShares MSCI Emerging Markets ETF</span>
+            <span class="st">&#39;TLT&#39;</span>, <span class="co"># 미국 장기채: iShares 20+ Year Treasury Bond ETF</span>
+            <span class="st">&#39;IEF&#39;</span>, <span class="co"># 미국 중기채: iShares 7-10 Year Treasury Bond ETF</span>
+            <span class="st">&#39;IYR&#39;</span>, <span class="co"># 미국 리츠: iShares U.S. Real Estate ETF</span>
+            <span class="st">&#39;RWX&#39;</span>, <span class="co"># 글로벌 리츠: SPDR Dow Jones International Real Estate ETF</span>
+            <span class="st">&#39;GLD&#39;</span>, <span class="co"># 금: SPDR Gold Shares</span>
+            <span class="st">&#39;DBC&#39;</span>  <span class="co"># 상품: Invesco DB Commodity Index Tracking Fund</span>
+            )
+<span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</code></pre>
+<pre><code>##  [1] &quot;SPY&quot; &quot;IEV&quot; &quot;EWJ&quot; &quot;EEM&quot; &quot;TLT&quot; &quot;IEF&quot; &quot;IYR&quot; &quot;RWX&quot; &quot;GLD&quot; &quot;DBC&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind, <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x)))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(symbols)
+
+rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</code></pre>
+<p>먼저 이전 장과 동일하게 글로벌 자산을 대표하는 ETF 데이터를 다운로드 받은 후, 수정주가의 수익률을 계산합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)
+wts =<span class="st"> </span><span class="kw">list</span>()
+lookback =<span class="st"> </span><span class="dv">12</span>
+wt_zero =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</code></pre>
+<p>백테스트에 사용되는 각종 값들을 사전에 정의합니다.</p>
+<ol style="list-style-type: decimal">
+<li><code>endpoints()</code> 함수를 통해 매월 말일의 위치를 구합니다.</li>
+<li>매월의 투자 비중이 들어갈 빈 리스트를 wts에 설정합니다.</li>
+<li>수익률을 측정할 과거 n기간을 12개월로 설정합니다.</li>
+<li><code>rep()</code> 함수를 통해 비중이 들어갈 0으로 이루어진 벡터를 구하며, 이름을 설정합니다.</li>
+</ol>
+<p>다음은 매월 말 투자 규칙에 따라 포트폴리오의 비중을 구하는 백테스트 과정입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {
+  sub_ret =<span class="st"> </span>rets[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , ]
+  cum =<span class="st"> </span><span class="kw">Return.cumulative</span>(sub_ret)
+  
+  K =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>cum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>
+  covmat =<span class="st"> </span><span class="kw">cov</span>(sub_ret[, K])
+  
+  wt =<span class="st"> </span>wt_zero
+  wt[K] =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat, <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>, <span class="dt">constraint =</span> <span class="st">&#39;user&#39;</span>,
+                                                  <span class="dt">LB =</span> <span class="kw">rep</span>(<span class="fl">0.10</span>, <span class="dv">5</span>), <span class="dt">UB =</span> <span class="kw">rep</span>(<span class="fl">0.30</span>, <span class="dv">5</span>)))
+  
+  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))
+}
+
+wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</code></pre>
+<p>for loop 구문을 통해 매월 말 과거 12개월 수익률을 구한 후 비중을 계산하며, 따라서 처음 시작은 i+1 인 13 부터 가능합니다.</p>
+<ol style="list-style-type: decimal">
+<li>ep[i]는 현재시점 수익률의 위치를, ep[i-lookback]는 현재부터 12개월 전 수익률의 위치를 의미합니다. 이를 통해 과거 12개월 간 수익률을 찾은 후 sub_ret에 저장하도록 합니다.</li>
+<li><code>Return.cumulative()</code> 함수를 통해 해당 기간의 자산 별 누적수익률을 구합니다.</li>
+<li><code>rank()</code> 함수를 통해 수익률 상위 5개 자산을 선택하며, 내림차순으로 정렬해야 하므로 마이너스 부호를 붙여주도록 합니다.</li>
+<li><code>cov()</code> 함수를 통해 수익률 상위 5개 자산의 분산-공분산 행렬을 구하도록 합니다.</li>
+<li>임시로 비중이 저장될 wt 변수에 0으로 이루어진 벡터를 입력한 후, <code>optimalPortfolio()</code> 함수를 통해 최소분산 포트폴리오를 구성하는 해를 찾습니다. 개별 투자비중의 제한은 최소 10%, 최대 30%를 설정하며, 구해진 해를 wt의 K번째 값에 입력합니다.</li>
+<li>위에서 만들어진 벡터를 <code>xts()</code>를 통해 시계열 형태로 바꾼 후, wts의 i번째 리스트에 저장해줍니다.</li>
+<li>for loop 구문이 끝난 후, <code>do.call()</code> 함수를 통해 투자 비중이 저장된 list를 테이블 형태로 바꿔주도록 합니다.</li>
+</ol>
+<p>이를 통해 동적 자산배분의 투자 규칙에 맞는 매월 말 투자비중이 계산되었습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">GDAA =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)
+<span class="kw">charts.PerformanceSummary</span>(GDAA<span class="op">$</span>returns, <span class="dt">main =</span> <span class="st">&#39;동적자산배분&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-18-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>수익률과 비중 데이터가 있으므로 <code>Return.portfolio()</code> 함수를 통해 백테스트 수익률을 계산할 수 있습니다. <code>charts.PerformanceSummary()</code> 함수를 통해 누적수익률을 확인하면, 해당 전략을 이용한 포트폴리오가 꾸준히 우상향 하는 모습을 보이게 됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">wts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(key, value, <span class="op">-</span>Index) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Index =</span> <span class="kw">as.Date</span>(Index)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">key =</span> <span class="kw">factor</span>(key, <span class="dt">levels =</span> <span class="kw">unique</span>(key))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">color =</span> key, <span class="dt">fill =</span> key), <span class="dt">position =</span> <span class="st">&#39;stack&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks=</span><span class="st">&quot;years&quot;</span>, <span class="dt">date_labels=</span><span class="st">&quot;%Y&quot;</span>,
+               <span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>,
+                                  <span class="dt">size =</span> <span class="dv">12</span>),
+        <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>,
+        <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
+        <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">8</span>),
+        <span class="dt">panel.grid.minor.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">byrow =</span> <span class="ot">TRUE</span>))</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>반면 자산 별 투자 비중의 변화가 많은것을 알 수 있습니다. 이는 수익률 상위 5개에 해당하는 자산이 매월 말 바뀌는 원인과, 최소분산 포트폴리오를 구성하는 비중이 계속해서 바뀌는 원인 때문입니다.</p>
+<p>회전율이 상대적으로 낮았던 기존 백테스트의 경우 매매비용, 세금, 기타비용 등을 고려하지 않아도 수익률에 크게 영향이 없지만, 회전율이 상대적으로 높은 전략의 경우 이러한 것들을 무시하지 않을 수 없습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">GDAA<span class="op">$</span>turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(GDAA<span class="op">$</span>BOP.Weight <span class="op">-</span>
+<span class="st">                                  </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(GDAA<span class="op">$</span>EOP.Weight)), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+               <span class="dt">order.by =</span> <span class="kw">index</span>(GDAA<span class="op">$</span>BOP.Weight))
+<span class="kw">chart.TimeSeries</span>(GDAA<span class="op">$</span>turnover)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>기존에 살펴본 방법으로 회전율을 계산할 경우, 매월 상당한 매매회전이 발생함이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fee =<span class="st"> </span><span class="fl">0.0030</span>
+GDAA<span class="op">$</span>net =<span class="st"> </span>GDAA<span class="op">$</span>returns <span class="op">-</span><span class="st"> </span>GDAA<span class="op">$</span>turnover<span class="op">*</span>fee</code></pre>
+<p>매수 혹은 매도당 발생하는 세금, 수수료, 시장충격 등 총 비용을 0.3%로 가정합니다. 포트폴리오 수익률에서 회전율과 총비용의 곱을 빼면, 비용 후 포트폴리오의 순 수익률이 계산됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(GDAA<span class="op">$</span>returns, GDAA<span class="op">$</span>net) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;No Fee&#39;</span>, <span class="st">&#39;After Fee&#39;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">charts.PerformanceSummary</span>(<span class="dt">main =</span> <span class="st">&#39;Global Dynamic Asset Allocation&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p>기존 비용을 고려하지 않은 포트폴리오에 비해, 비용을 차감한 포트폴리오 수익률이 시간이 지남에 따라 서서히 감소함이 확인됩니다. 이러한 차이는 비용이 클수록, 혹은 매매회전율이 높을수록 더욱 벌어지게 됩니다.</p>
+
+</div>
 </div>
 </div>
 
