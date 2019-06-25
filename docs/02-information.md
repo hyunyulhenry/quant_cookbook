@@ -13,7 +13,7 @@ R에서 스크립트를 한글로 작성하여 저장한 후 이를 다시 불�
 이러한 사람과 컴퓨터간의 번역을 위해 최초로 사용된 방식이 아스키(ASCII: American Standard Code for Information Interchange)입니다. 0부터 127까지 총 128개 바이트에 알파벳과 숫자, 그리고 자주 사용되는 특수문자 값을 부여하고, 글자가 입력되면 이에 대응되는 바이트가 저장됩니다. 그러나 아스키의 American이라는 이름에서 알 수 있듯이 이는 영어의 알파벳이 아닌 다른 언어를 표현하는데는 한계가 있으며, 이를 보완하기 위한 여러 방법들이 나오게 되었습니다.
 
 <div class="figure" style="text-align: center">
-<img src="images/ascii_code.jpg" alt="아스키 코드 표" width="438" />
+<img src="images/ascii_code.jpg" alt="아스키 코드 표"  />
 <p class="caption">(\#fig:unnamed-chunk-1)아스키 코드 표</p>
 </div>
 
@@ -26,7 +26,7 @@ R에서 스크립트를 한글로 작성하여 저장한 후 이를 다시 불�
 조합형의 대표적 방법으로는 UTF-8이 있습니다. 이는 모음과 자음 각각에 코드를 부여한 후 조합하여 한글을 나타냅니다. 조합형의 경우 한글뿐만이 아니라 다양한 언어에 적용할 수 있다는 장점으로 인해 전세계 웹페이지의 대부분이 UTF-8로 만들어 지고 있습니다.
 
 <div class="figure" style="text-align: center">
-<img src="images/encoding_ratio.jpg" alt="웹페이지에서 사용되는 인코딩 비율" width="690" />
+<img src="images/encoding_ratio.jpg" alt="웹페이지에서 사용되는 인코딩 비율"  />
 <p class="caption">(\#fig:unnamed-chunk-2)웹페이지에서 사용되는 인코딩 비율</p>
 </div>
 
@@ -53,7 +53,7 @@ R에서 스크립트를 한글로 작성하여 저장한 후 이를 다시 불�
 크롤링은 웹사이트의 정보를 수집하는 과정이니 만큼, 웹이 어떻게 동작하는지 알아둘 필요가 있습니다. 
 
 <div class="figure" style="text-align: center">
-<img src="images/web_str.jpg" alt="웹 환경 구조" width="384" />
+<img src="images/web_str.jpg" alt="웹 환경 구조"  />
 <p class="caption">(\#fig:unnamed-chunk-5)웹 환경 구조</p>
 </div>
 
@@ -483,6 +483,13 @@ round(exp(diff(log(x))), 2)
 
 ```r
 library(magrittr)
+```
+
+```
+## Warning: 패키지 'magrittr'는 R 버전 3.5.3에서 작성되었습니다
+```
+
+```r
 x %>% log() %>% diff() %>% exp() %>% round(., 2)
 ```
 

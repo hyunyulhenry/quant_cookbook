@@ -34,6 +34,9 @@ rets = Return.calculate(prices) %>% na.omit()
 
 
 
+```
+## Warning: 패키지 'magrittr'는 R 버전 3.5.3에서 작성되었습니다
+```
 
 `getSymbols()` 함수를 통해 일반적으로 자산배분에서 많이 사용되는 주식과 채권, 대체자산에 해당하는 ETF 가격 데이터를 받은 후, `lapply()`와 `Ad()`, `get()` 함수의 조합을 통해 수정주가 만을 선택하여 열의 형태로 묶어주도록 합니다. 그 후 `Return.calculate()` 함수를 통해 수익률을 계산 해줍니다. 
 

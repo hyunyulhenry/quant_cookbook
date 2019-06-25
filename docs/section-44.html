@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-25" />
+<meta name="date" content="2019-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -589,8 +589,9 @@ reg =<span class="st"> </span><span class="kw">lm</span>(ri <span class="op">~</
 <span class="kw">library</span>(xts)
 <span class="kw">library</span>(PerformanceAnalytics)
 <span class="kw">library</span>(magrittr)
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)</code></pre>
+<pre><code>## Warning: 패키지 &#39;ggplot2&#39;는 R 버전 3.5.3에서 작성되었습니다</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 KOR_price =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_price.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.xts</span>()
 KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) 

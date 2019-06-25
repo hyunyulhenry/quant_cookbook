@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-25" />
+<meta name="date" content="2019-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -452,8 +452,9 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 <div id="section-10" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> 주가 다운로드</h3>
 <p><code>getSymbols()</code> 함수의 기본적인 사용법은 매우 간단합니다. 괄호 안에 다운로드 받고자 하는 종목의 티커를 입력하면 됩니다. 아래의 코드는 애플의 티커인 “AAPL”을 입력한 경우입니다. 티커와 동일한 변수인 AAPL이 생성되며, 주가 데이터가 다운로드 된 후 xts 형태로 입력됩니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
-<span class="kw">getSymbols</span>(<span class="st">&#39;AAPL&#39;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)</code></pre>
+<pre><code>## Warning: 패키지 &#39;quantmod&#39;는 R 버전 3.5.3에서 작성되었습니다</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getSymbols</span>(<span class="st">&#39;AAPL&#39;</span>)</code></pre>
 <pre><code>## [1] &quot;AAPL&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(AAPL)</code></pre>
 <pre><code>##            AAPL.Open AAPL.High AAPL.Low AAPL.Close AAPL.Volume
@@ -485,12 +486,12 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 ## 2000-01-07  3.446429  3.607143 3.410714   3.553571   115183600
 ## 2000-01-10  3.642857  3.651786 3.383929   3.491071   126266000
 ##            AAPL.Adjusted
-## 2000-01-03      3.502161
-## 2000-01-04      3.206892
-## 2000-01-05      3.253822
-## 2000-01-06      2.972241
-## 2000-01-07      3.113032
-## 2000-01-10      3.058280</code></pre>
+## 2000-01-03      2.655498
+## 2000-01-04      2.431611
+## 2000-01-05      2.467196
+## 2000-01-06      2.253689
+## 2000-01-07      2.360442
+## 2000-01-10      2.318927</code></pre>
 <p>한번에 여러 종목의 주가를 다운로드 받을 수도 있습니다. 아래 예제와 같이 페이스북과 엔비디아의 티커인 FB와 NVDA를 ticker 변수에 입력하여 주고, <code>getSymbols()</code> 함수에 티커들을 입력한 변수를 넣어주면 두 종목의 주가가 동시에 다운로드 됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;FB&#39;</span>, <span class="st">&#39;NVDA&#39;</span>) 
 <span class="kw">getSymbols</span>(ticker)</code></pre>
@@ -566,7 +567,7 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 <p>먼저 미 국채 10년물 금리에 해당하는 티커인 “DGS10”을 입력해 줍니다. 그 후, 데이터 소스에 해당하는 src에 “FRED”를 입력해 주면, 해당 데이터가 다운로드 됩니다. <code>chart_Series</code>를 통해 해당 데이터를 그래프로 나타내면 다음과 같습니다.</p>
 <p>각 항목 별 티커를 찾는 방법은 매우 간단합니다. 먼저 FRED의 홈페이지<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>에 접속하여, 원하는 데이터를 검색합니다. 예시로써 원/달러 환율에 해당하는 South Korea / U.S. Foreign Exchange Rate 를 검색하여 원하는 페이지에 접속합니다. 이 중 페이지 주소에서 /series/ 다음에 위치하는 DEXKOUS 가 해당 항목의 티커입니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
-<img src="images/api_fred.png" alt="FRED 사이트 내 원/달러 환율의 티커 확인" width="788" />
+<img src="images/api_fred.png" alt="FRED 사이트 내 원/달러 환율의 티커 확인"  />
 <p class="caption">
 Figure 3.1: FRED 사이트 내 원/달러 환율의 티커 확인
 </p>

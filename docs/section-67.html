@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-25" />
+<meta name="date" content="2019-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -405,6 +405,7 @@ prices =<span class="st"> </span><span class="kw">do.call</span>(cbind, <span cl
 <span class="st">  </span><span class="kw">setNames</span>(symbols)
 
 rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</code></pre>
+<pre><code>## Warning: 패키지 &#39;magrittr&#39;는 R 버전 3.5.3에서 작성되었습니다</code></pre>
 <p><code>getSymbols()</code> 함수를 통해 일반적으로 자산배분에서 많이 사용되는 주식과 채권, 대체자산에 해당하는 ETF 가격 데이터를 받은 후, <code>lapply()</code>와 <code>Ad()</code>, <code>get()</code> 함수의 조합을 통해 수정주가 만을 선택하여 열의 형태로 묶어주도록 합니다. 그 후 <code>Return.calculate()</code> 함수를 통해 수익률을 계산 해줍니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
 <span class="kw">library</span>(dplyr)

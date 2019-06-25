@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-25" />
+<meta name="date" content="2019-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -438,7 +438,7 @@ otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span cl
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(otp)</code></pre>
-<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhtkBVp+MOakPbk276xbdzobsb/5DtBUD6QGwjL+BeQUj+PIT9QMfreM7RYQBhvieNEyc9OqsZgu6hWGGvxx7ysNGYcHN+zije0PSHw8Rrfd5fP9Hgdo6jQREKRaY/LsZME7QsNplLar+aIOZ5ysWOTpU26uxeF6J2IYUJ6dAe2VRwEk1C/FGeEh5t3VpxEJmXpGiHr8c297DW3AerBKowqe4FV14j+RTOA0bjWYnwW0puKHqyhVkFtbd2KMkizH5LYy19HAO6RVTdUlqJ7VfSrg=&quot;</code></pre>
+<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhuK2+cr1MATxgNbHi6RKZYDPNzEM2Pm/JnHvtMQxTSe9VN/4ajCCAP1GTZymRYFQnjGF/Xrzg+9oDgupTx4iphgXyAVtmZkEz+IxXvomD4gevih1aOB8T8u9mGAW5jQnUm1NrxyCQEc7iOzDigRDevAw+IPvCzJObV6F9nWWS1nldT/A6+M5SM1Lb3s9BZTufVGepmaKQMaF2WYmmhjKaZo56FC9uHlNRcLq3bB1xfUQkxYaRB+plE9QYbRmoCtpo0Kq3GUOF5xO+9xtK+w4tzc=&quot;</code></pre>
 <p>이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span>
 down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),
@@ -576,7 +576,7 @@ down_ind =<span class="st"> </span><span class="kw">read.csv</span>(<span class=
 ## 330        1416       3.20             1456       NA
 ## 45         1500       2.29             1408       NA
 ## 301        4000       2.86             1450       NA
-## 331        1417       3.91             2099       NA
+## 331        1417       3.91             2100       NA
 ## 1278          0       0.00             1595       NA
 ## 1082       6000       1.82             1536       NA</code></pre>
 <p>데이터를 시가총액 순으로 내림차순 해줄 필요도 있습니다. <code>order()</code> 함수를 통해 상대적인 순서를 구할 수 있으며, R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꾸어 주도록 합니다. 결과적으로 시가총액 기준 내림차순으로 해당 데이터가 정렬됩니다.</p>

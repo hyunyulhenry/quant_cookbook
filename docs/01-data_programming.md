@@ -7,7 +7,7 @@
 이처럼 데이터의 수집과 가공, 이를 바탕으로 모델을 만든 후 실행하는 단계는 데이터 과학의 업무 흐름도와 매우 유사합니다. **해들리 위컴^Hadley^ ^Wickham^**에 따르면^[R을 활용한 데이터 과학(해들리 위컴, 개럿 그롤문드 저/김설기, 최혜민 역)], 데이터 과학의 업무 과정은 다음과 같습니다.
 
 <div class="figure" style="text-align: center">
-<img src="images/ds_flow.jpg" alt="데이터 과학 업무 과정" width="512" />
+<img src="images/ds_flow.jpg" alt="데이터 과학 업무 과정"  />
 <p class="caption">(\#fig:unnamed-chunk-1)데이터 과학 업무 과정</p>
 </div>
 
@@ -22,7 +22,7 @@
 퀀트 투자에 필요한 데이터의 경우, 여러 데이터 제공업자들이 제공하는 서비스를 이용한다면 매우 손쉽게 구할 수 있습니다. 글로벌 데이터 수집에는 블룸버그 혹은 Factset, 국내 데이터 수집에는 DataGuide가 흔히 사용됩니다. 물론 비용을 더 지불한다면 단순 데이터 수집뿐만 아니라 즉석에서 백테스트 및 성과 평가까지 가능합니다. Factset에서 판매하는 Alpha Testing 기능, 혹은 S&P Global에서 판매하는 ClariFI®를 사용한다면, 전세계 주식을 대상으로 원하는 전략의 백테스트 결과를 마우스 클릭과 몇 번의 동작만으로 수행할 수 있습니다.
 
 <div class="figure" style="text-align: center">
-<img src="images/ClariFI_backtest.png" alt="ClariFI®의 백테스트 기능" width="546" />
+<img src="images/ClariFI_backtest.png" alt="ClariFI®의 백테스트 기능"  />
 <p class="caption">(\#fig:unnamed-chunk-2)ClariFI®의 백테스트 기능</p>
 </div>
 
@@ -62,7 +62,7 @@
 아래 그림은 프로그래밍 언어의 사용 통계 순위^[https://www.tiobe.com/tiobe-index/]입니다. 이 중 R과 Python은 금융에서 대표적으로 사용되는 언어로써, 매우 대중적인 언어이기도 합니다. 해당 언어가 많이 사용되는 가장 큰 이유는 무료인 점, 그리고 일반인들도 사용하기에 매우 편한 형태로 언어가 구성되어 있다는 점입니다. 
 
 <div class="figure" style="text-align: center">
-<img src="images/tiobe_index.jpg" alt="2017년 기준 프로그래밍 언어 사용 통계 순위" width="500" />
+<img src="images/tiobe_index.jpg" alt="2017년 기준 프로그래밍 언어 사용 통계 순위"  />
 <p class="caption">(\#fig:unnamed-chunk-4)2017년 기준 프로그래밍 언어 사용 통계 순위</p>
 </div>
 

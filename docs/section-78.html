@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-25" />
+<meta name="date" content="2019-06-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -501,8 +501,8 @@ rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) 
 <p>글로벌 자산의 ETF 데이터 중 주식(S&amp;P 500)과 채권(미국 장기채)에 해당하는 데이터를 다운로드 받은 후, 수익률을 계산하도록 합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(rets)</code></pre>
 <pre><code>##              SPY.Adjusted TLT.Adjusted
-## SPY.Adjusted    1.0000000   -0.4347139
-## TLT.Adjusted   -0.4347139    1.0000000</code></pre>
+## SPY.Adjusted    1.0000000   -0.4347422
+## TLT.Adjusted   -0.4347422    1.0000000</code></pre>
 <p><code>cor()</code> 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.43로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">portfolio =<span class="st"> </span><span class="kw">Return.portfolio</span>(<span class="dt">R =</span> rets,
                              <span class="dt">weights =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),
@@ -926,7 +926,7 @@ rets =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">
 ##  [99] 2052 2074 2095 2115 2137 2159 2180 2201 2223 2243 2265 2284 2304 2326
 ## [113] 2347 2368 2390 2410 2433 2454 2475 2496 2517 2537 2556 2579 2598 2620
 ## [127] 2642 2662 2685 2705 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
-## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123 3139</code></pre>
+## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123 3140</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">wts =<span class="st"> </span><span class="kw">list</span>()
 lookback =<span class="st"> </span><span class="dv">10</span></code></pre>
 <p>먼저 <code>xts</code> 패키지의 <code>endpoints()</code> 함수를 이용해 매월 말일의 위치를 구합니다. 해당 함수는 <code>endpoints(x, on= 'months', k=1)</code>의 형태로 이루어지며 x는 시계열 데이터, on은 원하는 기간, k는 구간 길이를 의미합니다. 즉, 시계열 데이터에서 월말에 해당하는 부분의 위치를 반환하며, 매 월이 아닌 ‘weeks’, ‘quarters’, ‘years’ 등도 입력이 가능합니다.</p>

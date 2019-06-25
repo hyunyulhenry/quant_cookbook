@@ -196,6 +196,13 @@ library(xts)
 library(PerformanceAnalytics)
 library(magrittr)
 library(ggplot2)
+```
+
+```
+## Warning: 패키지 'ggplot2'는 R 버전 3.5.3에서 작성되었습니다
+```
+
+```r
 library(dplyr)
 
 KOR_price = read.csv('data/KOR_price.csv', row.names = 1, stringsAsFactors = FALSE) %>% as.xts()

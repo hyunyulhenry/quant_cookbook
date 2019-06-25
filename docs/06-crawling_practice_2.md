@@ -78,7 +78,7 @@ print(price)
 
 ```
 ##            [,1]
-## 2019-06-25   NA
+## 2019-06-26   NA
 ```
 
 1. 먼저 data 폴더 내에 KOR_price 폴더를 생성해줍니다.
@@ -471,7 +471,7 @@ http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&gicode=A005930
 위의 주소 역시 A 뒤의 6자리 티커만 변경할 경우, 해당 종목의 스냅샷 페이지로 이동하게 됩니다.
 
 <div class="figure" style="text-align: center">
-<img src="images/crawl_practice_comp_price.png" alt="Company Guide 스냅샷 화면" width="519" />
+<img src="images/crawl_practice_comp_price.png" alt="Company Guide 스냅샷 화면"  />
 <p class="caption">(\#fig:unnamed-chunk-20)Company Guide 스냅샷 화면</p>
 </div>
 
@@ -480,7 +480,7 @@ http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&gicode=A005930
 Xpath란 XML 중 특정 값의 태그나 속성을 찾기 쉽게 만든 주소라 생각하면 됩니다. 예를 들어 R 프로그램이 저장된 곳을 윈도우 탐색기를 이용하여 이용할 경우 C:\\Program Files\\R\\R-3.4.1 형태의 주소를 보이며, 이는 윈도우의 path 문법입니다. XML 역시 이와 동일한 개념의 XPath가 존재합니다. 웹페이지에서 Xpath를 찾는 법은 다음과 같습니다.
 
 <div class="figure" style="text-align: center">
-<img src="images/crawl_practice_comp_price2.png" alt="Company Guide 스냅샷 화면" width="674" />
+<img src="images/crawl_practice_comp_price2.png" alt="Company Guide 스냅샷 화면"  />
 <p class="caption">(\#fig:unnamed-chunk-21)Company Guide 스냅샷 화면</p>
 </div>
 
@@ -507,7 +507,7 @@ print(price)
 ```
 
 ```
-## [1] 45500
+## [1] 45600
 ```
 
 1. 먼저 url을 입력한 후, `GET()` 함수를 이용하여 데이터를 불러옵니다.
@@ -575,7 +575,7 @@ print(data_value)
 
 ```
 ##      PER      PBR      PCR      PSR 
-## 6.188643 1.096354 4.052177 1.114262
+## 6.202244 1.098763 4.061083 1.116711
 ```
 
 분자에는 현재 주가를 입력하며, 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 단, 주가는 원 단위, 재무 데이터는 억 단위이므로, 둘 간의 단위를 동일하게 맞춰주기 위해 분모에 억을 곱해 줍니다. 또한 가치지표가 음수인 경우는`NA`로 변경해주도록 합니다.
@@ -727,7 +727,7 @@ data/KOR_fs 폴더에는 전 종목의 재무제표 데이터가, data/KOR_value
 ### 재무제표 다운로드
 
 <div class="figure" style="text-align: center">
-<img src="images/crawl_practice_yahoo.png" alt="야후 파이낸스 재무제표" width="686" />
+<img src="images/crawl_practice_yahoo.png" alt="야후 파이낸스 재무제표"  />
 <p class="caption">(\#fig:unnamed-chunk-30)야후 파이낸스 재무제표</p>
 </div>
 
@@ -989,9 +989,9 @@ print(data_value_yahoo)
 
 Table: (\#tab:unnamed-chunk-41)두 사이트의 가치지표 비교
 
-                  PER    PBR    PCR    PSR
---------------  -----  -----  -----  -----
-Company Guide    6.19   1.10   4.05   1.11
-야후 파이낸스    6.20   1.13   4.06   1.12
+                 PER    PBR    PCR    PSR
+--------------  ----  -----  -----  -----
+Company Guide    6.2   1.10   4.06   1.12
+야후 파이낸스    6.2   1.13   4.06   1.12
 
 해당 방법 또한 url의 티커 부분만 변경하면 전 종목의 재무제표와 가치지표 데이터를 다운로드 받을 수 있습니다. 그러나 주의해야 할점은 코스피 종목은 끝이 .KS, 코스닥 종목은 끝이 .KQ가 되어야 합니다. 자세한 코드는 생략하도록 하겠습니다.
