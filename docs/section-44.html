@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-24" />
+<meta name="date" content="2019-06-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -350,6 +350,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
 <li class="chapter" data-level="12.4" data-path="section-78.html"><a href="section-78.html#section-83"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
 </ul></li>
+<li class="chapter" data-level="13" data-path="section-84.html"><a href="section-84.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="section-84.html"><a href="section-84.html#section-85"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="section-84.html"><a href="section-84.html#section-86"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="section-84.html"><a href="section-84.html#section-87"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="section-84.html"><a href="section-84.html#section-88"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="section-84.html"><a href="section-84.html#section-89"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="section-84.html"><a href="section-84.html#section-90"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -452,7 +461,7 @@ Figure 1.2: 스마트베타 ETF 전략 예시
 <p>주식시장에서의 베타는 통계학의 회귀분석모형에서 기울기를 나타내는 베타와 정확히 의미가 같습니다. 회귀분석모형은 <span class="math inline">\(y = a + bx\)</span> 형태로 나타나며, x의 변화에 따른 y의 변화의 기울기가 회귀계수인 b입니다. 이를 주식에 적용한 모형이 자산가격결정모형(CAPM: Capital Asset Pricing Model)이며, 그 식은 다음과 같습니다.</p>
 <p><span class="math display">\[회귀분석모형: y = a + bx\]</span>
 <span class="math display">\[자산가격결정모형: R_i = R_f + \beta_i×[R_m - R_f]\]</span></p>
-<p>먼저 회귀분석모형의 상수항인 a에 해당하는 부분은 무위험 수익률을 나타내는 <span class="math inline">\(R_f\)</span>입니다. 독립변수인 x에 해당하는 부분은 무위험 수익률 대비 주식 시장의 초과 수익률을 나태내는 <span class="math inline">\(R_m - R_f\)</span>입니다. 종속변수인 y에 해당하는 부분은 개별주식의 수익률을 나타내는 <span class="math inline">\(R_i\)</span>이며, 최종적으로 회귀계수인 b에 해당하는 부분은 개별 주식의 베타인 입니다.</p>
+<p>먼저 회귀분석모형의 상수항인 a에 해당하는 부분은 무위험 수익률을 나타내는 <span class="math inline">\(R_f\)</span>입니다. 독립변수인 x에 해당하는 부분은 무위험 수익률 대비 주식 시장의 초과 수익률을 나타내는 시장위험 프리미엄인 <span class="math inline">\(R_m - R_f\)</span>입니다. 종속변수인 y에 해당하는 부분은 개별주식의 수익률을 나타내는 <span class="math inline">\(R_i\)</span>이며, 최종적으로 회귀계수인 b에 해당하는 부분은 개별 주식의 베타인 입니다.</p>
 <table>
 <caption><span id="tab:unnamed-chunk-4">Table 9.3: </span>회귀분석모형과 자산가격결정모형의 비교</caption>
 <thead>
@@ -471,12 +480,12 @@ Figure 1.2: 스마트베타 ETF 전략 예시
 <tr class="even">
 <td align="left">독립변수</td>
 <td align="left">x</td>
-<td align="left"><span class="math inline">\(R_m - R_f\)</span> (초과 수익률)</td>
+<td align="left"><span class="math inline">\(R_m - R_f\)</span>(시장위험 프리미엄)</td>
 </tr>
 <tr class="odd">
 <td align="left">종속변수</td>
 <td align="left">y</td>
-<td align="left"><span class="math inline">\(R_i\)</span> (개별주식의 수익률</td>
+<td align="left"><span class="math inline">\(R_i\)</span> (개별주식의 수익률)</td>
 </tr>
 <tr class="even">
 <td align="left">회귀계수</td>
@@ -517,27 +526,26 @@ reg =<span class="st"> </span><span class="kw">lm</span>(ri <span class="op">~</
 ## lm(formula = ri ~ rm)
 ## 
 ## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.068895 -0.012945 -0.001719  0.010820  0.095422 
+##      Min       1Q   Median       3Q      Max 
+## -0.06886 -0.01294 -0.00169  0.01080  0.09545 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 0.0003728  0.0007227   0.516    0.606    
-## rm          1.7614327  0.0907389  19.412   &lt;2e-16 ***
+## (Intercept) 0.0003446  0.0007213   0.478    0.633    
+## rm          1.7622492  0.0906194  19.447   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.01951 on 727 degrees of freedom
-##   (2 observations deleted due to missingness)
-## Multiple R-squared:  0.3414, Adjusted R-squared:  0.3405 
-## F-statistic: 376.8 on 1 and 727 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.0195 on 729 degrees of freedom
+## Multiple R-squared:  0.3416, Adjusted R-squared:  0.3407 
+## F-statistic: 378.2 on 1 and 729 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>증권주를 대상으로 베타를 구하기 위한 회귀분석을 실시해 주도록 합니다. 자산가격결정모형의 수식인 <span class="math inline">\(R_i = R_f + \beta_i×[R_m - R_f]\)</span> 에서 편의를 위해 무위험 수익률인 <span class="math inline">\(R_f\)</span>를 0으로 가정하면, <span class="math inline">\(R_i = \beta_i×R_m\)</span>의 형태로 나타낼 수 있습니다. 이 중 <span class="math inline">\(R_m\)</span>는 독립변수인 주식시장의 수익률을, <span class="math inline">\(R_i\)</span>는 종속변수인 개별주식의 수익률을 의미합니다.</p>
 <ol style="list-style-type: decimal">
 <li>독립변수는 첫번째 열인 KOSPI 200 ETF의 수익률을 선택해주며, 종속변수는 세번째 열인 증권주의 수익률을 선택해줍니다.</li>
 <li><code>lm()</code> 함수를 통해 손쉽게 선형회귀분석을 실시할 수 있으며, 회귀분석의 결과를 reg 변수에 저장해줍니다.</li>
 <li><code>summary()</code> 함수는 데이터의 요약 정보를 나타내며, 해당 예시에서는 회귀분석결과에 대한 정보를 보여줍니다.</li>
 </ol>
-<p>회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 1.76로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 19.41로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.</p>
+<p>회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 1.76로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 19.45로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.</p>
 </div>
 <div id="section-47" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> 베타 시각화</h3>

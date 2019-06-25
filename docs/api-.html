@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-24" />
+<meta name="date" content="2019-06-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -350,6 +350,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
 <li class="chapter" data-level="12.4" data-path="section-78.html"><a href="section-78.html#section-83"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
 </ul></li>
+<li class="chapter" data-level="13" data-path="section-84.html"><a href="section-84.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="section-84.html"><a href="section-84.html#section-85"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="section-84.html"><a href="section-84.html#section-86"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="section-84.html"><a href="section-84.html#section-87"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="section-84.html"><a href="section-84.html#section-88"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="section-84.html"><a href="section-84.html#section-89"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="section-84.html"><a href="section-84.html#section-90"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -375,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>본 장과 다음 장에서는 본격적으로 데이터를 수집하는 방법에 대해 배우도록 하겠습니다. 그 중 해당 장에서는 API를 이용하여 데이터를 수집하는 방법에 대해 살펴보도록 합니다.</p>
 <p>API 제공자는 본인이 가진 데이터베이스를 다른 누군가가 쉽게 사용할 수 있는 형태로 가지고 있으며, 해당 데이터베이스에 접근할 수 있는 열쇠인 API 주소를 가진 사람은 이를 언제든지 사용할 수 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="images/api_api.png" alt="API 개념" width="294" />
+<img src="images/api_api.png" alt="API 개념" width="50%" />
 <p class="caption">
 Figure 1.1: API 개념
 </p>
@@ -476,12 +485,12 @@ data.nflx =<span class="st"> </span><span class="kw">read.csv</span>(url.nflx)
 ## 2000-01-07  3.446429  3.607143 3.410714   3.553571   115183600
 ## 2000-01-10  3.642857  3.651786 3.383929   3.491071   126266000
 ##            AAPL.Adjusted
-## 2000-01-03      2.655498
-## 2000-01-04      2.431611
-## 2000-01-05      2.467196
-## 2000-01-06      2.253689
-## 2000-01-07      2.360442
-## 2000-01-10      2.318927</code></pre>
+## 2000-01-03      3.502161
+## 2000-01-04      3.206892
+## 2000-01-05      3.253822
+## 2000-01-06      2.972241
+## 2000-01-07      3.113032
+## 2000-01-10      3.058280</code></pre>
 <p>한번에 여러 종목의 주가를 다운로드 받을 수도 있습니다. 아래 예제와 같이 페이스북과 엔비디아의 티커인 FB와 NVDA를 ticker 변수에 입력하여 주고, <code>getSymbols()</code> 함수에 티커들을 입력한 변수를 넣어주면 두 종목의 주가가 동시에 다운로드 됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;FB&#39;</span>, <span class="st">&#39;NVDA&#39;</span>) 
 <span class="kw">getSymbols</span>(ticker)</code></pre>
@@ -567,12 +576,12 @@ Figure 3.1: FRED 사이트 내 원/달러 환율의 티커 확인
 <pre><code>## [1] &quot;DEXKOUS&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(DEXKOUS)</code></pre>
 <pre><code>##            DEXKOUS
-## 2019-06-07 1181.27
-## 2019-06-10 1185.01
-## 2019-06-11 1178.88
-## 2019-06-12 1182.82
-## 2019-06-13 1183.23
-## 2019-06-14 1184.70</code></pre>
+## 2019-06-14 1184.70
+## 2019-06-17 1186.53
+## 2019-06-18 1185.37
+## 2019-06-19 1185.37
+## 2019-06-20 1159.05
+## 2019-06-21 1163.25</code></pre>
 
 </div>
 </div>

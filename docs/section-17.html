@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-06-24" />
+<meta name="date" content="2019-06-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -350,6 +350,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3" data-path="section-78.html"><a href="section-78.html#section-82"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
 <li class="chapter" data-level="12.4" data-path="section-78.html"><a href="section-78.html#section-83"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
 </ul></li>
+<li class="chapter" data-level="13" data-path="section-84.html"><a href="section-84.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="section-84.html"><a href="section-84.html#section-85"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="section-84.html"><a href="section-84.html#section-86"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="section-84.html"><a href="section-84.html#section-87"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="section-84.html"><a href="section-84.html#section-88"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="section-84.html"><a href="section-84.html#section-89"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="section-84.html"><a href="section-84.html#section-90"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -429,7 +438,7 @@ otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span cl
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP는 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(otp)</code></pre>
-<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhkS2VYD5IHPQWxS090TbvRfON3PiSeaDEGxPT+bcKD7PWh5Zupv+J1RegUCMizu73BSlv9YrmX1c0tBEqWe4tM4X4TzLmiDCa58s+Tcgx/h//F7eP3AXj32AD2F8vTmmgouxL8e9+FI2G2EINYjmJdKgwH1OCCxFQsQ+ZeQ1Ir755kqMl81w1Va7rZTGu8bY5Nq9fY9Whnu00UJfXOVOTw35PYiuqHU3Er8cJXz/IXA7iBuJo8DRG37cPXRAQP7VCQwSmr1qJZvvYVqQ/xowMTY=&quot;</code></pre>
+<pre><code>## [1] &quot;onU/FrwFkurWr1qEGgPEhtkBVp+MOakPbk276xbdzobsb/5DtBUD6QGwjL+BeQUj+PIT9QMfreM7RYQBhvieNEyc9OqsZgu6hWGGvxx7ysNGYcHN+zije0PSHw8Rrfd5fP9Hgdo6jQREKRaY/LsZME7QsNplLar+aIOZ5ysWOTpU26uxeF6J2IYUJ6dAe2VRwEk1C/FGeEh5t3VpxEJmXpGiHr8c297DW3AerBKowqe4FV14j+RTOA0bjWYnwW0puKHqyhVkFtbd2KMkizH5LYy19HAO6RVTdUlqJ7VfSrg=&quot;</code></pre>
 <p>이제 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드 받을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span>
 down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),
@@ -505,13 +514,13 @@ down_ind =<span class="st"> </span><span class="kw">POST</span>(down_url, <span 
 ##  1 2019-06-07 060300   레드로버~ -         1190 -     -     2,128 0.56 
 ##  2 2019-06-07 290650   엘앤씨바이~ -        22750 830   27.41 7,252 3.14 
 ##  3 2019-06-07 239340   미래에셋제~ -         5200 -     -     -     -    
-##  4 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
-##  5 2019-06-07 038680   에스넷 -         9600 300   32    4,302 2.23 
-##  6 2019-06-07 214680   디알텍 -         2005 29    69.14 709   2.83 
-##  7 2019-06-07 242040   나무기술~ -         3345 -     -     462   7.24 
-##  8 2019-06-07 088800   에이스테크~ -        11500 97    118.~ 2,291 5.02 
+##  4 2019-06-07 086060   진바이오텍~ -         6940 312   22.24 5,570 1.25 
+##  5 2019-06-07 033430   디에스티~ -         1310 -     -     338   3.88 
+##  6 2019-06-07 038680   에스넷 -         9600 300   32    4,302 2.23 
+##  7 2019-06-07 214680   디알텍 -         2005 29    69.14 709   2.83 
+##  8 2019-06-07 242040   나무기술~ -         3345 -     -     462   7.24 
 ##  9 2019-06-07 121890   에스디시스~ -         4980 -     -     1,912 2.6  
-## 10 2019-06-07 032500   케이엠더블~ -        41200 -     -     2,292 17.98
+## 10 2019-06-07 088800   에이스테크~ -        11500 97    118.~ 2,291 5.02 
 ## # ... with 2,194 more rows, and 4 more variables: 주당배당금 &lt;dbl&gt;,
 ## #   배당수익률 &lt;dbl&gt;, `게시물 일련번호` &lt;dbl&gt;, 총카운트 &lt;dbl&gt;</code></pre>
 <p>위 과정을 통해 down_ind 변수에는 개별종목 지표 데이터가 저장되었습니다. 해당 데이터 역시 csv 파일로 다운로드 받도록 하겠습니다.</p>
@@ -564,12 +573,12 @@ down_ind =<span class="st"> </span><span class="kw">read.csv</span>(<span class=
 ## 1278 2.521666e+13 2019-06-07        - 196500  2,063 95.25  19,766 9.94
 ## 1082 2.333077e+13 2019-06-07        - 330500 19,217  17.2 218,227 1.51
 ##      주당배당금 배당수익률 게시물..일련번호 총카운트
-## 330        1416       3.20             1458       NA
-## 45         1500       2.29             1410       NA
-## 301        4000       2.86             1452       NA
-## 331        1417       3.91             2098       NA
-## 1278          0       0.00             1597       NA
-## 1082       6000       1.82             1538       NA</code></pre>
+## 330        1416       3.20             1456       NA
+## 45         1500       2.29             1408       NA
+## 301        4000       2.86             1450       NA
+## 331        1417       3.91             2099       NA
+## 1278          0       0.00             1595       NA
+## 1082       6000       1.82             1536       NA</code></pre>
 <p>데이터를 시가총액 순으로 내림차순 해줄 필요도 있습니다. <code>order()</code> 함수를 통해 상대적인 순서를 구할 수 있으며, R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꾸어 주도록 합니다. 결과적으로 시가총액 기준 내림차순으로 해당 데이터가 정렬됩니다.</p>
 <p>마지막으로 <strong>스팩, 우선주</strong> 종목 역시 제외해 주어야 합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">KOR_ticker[<span class="kw">grepl</span>(<span class="st">&#39;스팩&#39;</span>, KOR_ticker[, <span class="st">&#39;종목명&#39;</span>]), <span class="st">&#39;종목명&#39;</span>]  <span class="co"># 스팩</span></code></pre>
