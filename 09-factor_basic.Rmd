@@ -1,10 +1,12 @@
 # 퀀트 전략을 이용한 종목선정 (기본)
 
-API와 크롤링을 이용하여 데이터를 모두 수집한 뒤, 이를 정리하였습니다. 데이터가 준비되었으므로 이제 각종 퀀트 전략을 활용하여 투자하고자 하는 종목을 선정해야 합니다. 
+투자에 필요한 주가, 재무제표, 가치지표 데이터가 준비되었다면 퀀트 전략을 활용하여 투자하고자 하는 종목을 선정해야 합니다. 
 
-퀀트 투자는 크게 포트폴리오 운용 전략과 트레이딩 전략으로 나눌 수 있습니다. 포트폴트폴리오 운용 전략의 경우 과거 주식 시장을 분석하여 좋은 주식의 기준을 찾아낸 후 해당 기준에 만족하는 종목을 매수하거나, 이와 정반대에 있는 나쁜 주식을 공매도 하기도 합니다. 투자의 속도가 매우 느리며, 다수의 종목을 하나의 포트폴리오로 구성하여 운용하는 특징이 있습니다. 반면 트레이딩 전략의 경우, 단기간에 발생되는 주식의 움직임을 연구한 후 예측하여, 매수 혹은 매도하는 전략입니다. 투자의 속도가 매우 빠르며 소수의 종목을 대상으로 합니다.
+퀀트 투자는 크게 포트폴리오 운용 전략과 트레이딩 전략으로 나눌 수 있습니다. 포트폴트폴리오 운용 전략의 경우 과거 주식 시장을 분석하여 좋은 주식의 기준을 찾아낸 후 해당 기준에 만족하는 종목을 매수하거나, 이와 반대에 있는 나쁜 주식을 공매도 하기도 합니다. 투자의 속도가 느리며, 다수의 종목을 하나의 포트폴리오로 구성하여 운용하는 특징이 있습니다. 반면 트레이딩 전략의 경우, 단기간에 발생되는 주식의 움직임을 연구한 후 예측하여, 매수 혹은 매도하는 전략입니다. 투자의 속도가 빠르며 소수의 종목을 대상으로 합니다.
 
 ```{r echo = FALSE}
+library(magrittr)
+
 knitr::kable(
   data.frame(
   '기준' = c('투자철학', '투자목적', '학문적 기반' ,'투자의 속도'),
@@ -13,29 +15,31 @@ knitr::kable(
   ),
   col.names = c('기준', '포트폴리오 운용 전략', '트레이딩 전략'),
   booktabs = TRUE,
+  align = "c",
   caption = '퀀트 투자 종류의 비교'
-)
+) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
-이 중 본 책에서는 포트폴리오에 기반한 운용 전략에 대해 다루도록 합니다. 과거의 데이터를 바탕으로 주식의 수익률에 영향을 지표를 팩터^Factor^라 합니다. 즉 팩터의 강도가 양인 종목들로 구성한 포트폴리오의 경우 향후 수익률이 높을 것으로 예상되며, 팩터의 강도가 음인 종목들로 구성한 포트폴리오의 경우 반대로 향후 수익률이 낮을 것으로 예상됩니다.
+이 중 본 책에서는 포트폴리오에 기반한 운용 전략에 대해 다루도록 합니다. 주식의 수익률에 영향을 미치는 요소를 팩터^Factor^라 합니다. 즉 팩터의 강도가 양인 종목들로 구성한 포트폴리오의 경우 향후 수익률이 높을 것으로 예상되며, 팩터의 강도가 음인 종목들로 구성한 포트폴리오의 경우 반대로 향후 수익률이 낮을 것으로 예상됩니다.
 
-팩터에 대한 연구는 학자들에 의해 수십년간 끊임없이 진행되어 왔지만, 일반 투자자들이 이러한 논문을 모두 찾아보고 연구하는 것은 사실상 불가능에 가깝습니다. 그러나 최근에는 **스마트베타**라는 이름으로 팩터 투자가 대중화되고 있습니다. 최근 유행하고 있는 스마트베타 ETF의 경우 팩터를 기준으로 포트폴리오를 구성한 상품으로써, 학계나 실무에서 검증된 팩터 전략을 기반으로 합니다.
+팩터에 대한 연구는 학자들에 의해 오랫동안 진행되어 왔지만, 일반 투자자들이 이러한 논문을 모두 찾아보고 연구하는 것은 사실상 불가능에 가깝습니다. 그러나 최근에는 **스마트베타**라는 이름으로 팩터 투자가 대중화되고 있습니다. 최근 유행하고 있는 스마트베타 ETF의 경우 팩터를 기준으로 포트폴리오를 구성한 상품으로써, 학계나 실무에서 검증된 팩터 전략을 기반으로 합니다.
 
 해당 상품들의 홈페이지나 투자설명서에는 종목 선정 기준에 대해 자세히 나와있으므로 이는 매우 훌륭한 투자 전략이기도 합니다. 따라서 스마트베타 ETF에 나와있는 투자 전략을 자세히 분석하는 것만으로도 훌륭한 퀀트 투자 전략을 만들 수 있습니다. 
 
-```{r fig.cap='스마트베타 ETF 전략 예시', fig.align='center', out.width = '70%', echo = FALSE}
+```{r fig.cap='스마트베타 ETF 전략 예시', fig.align='center', out.width = '80%', echo = FALSE}
 knitr::include_graphics('images/factor_smartbeta.png')
 ```
 
 본 장에서는 투자에 많이 활용되는 기본적인 팩터에 대해 알아보고, 우리가 구한 데이터를 바탕으로 각 팩터 별 투자 종목을 선택하는 방법에 대해 알아보도록 하겠습니다.
 
-아울러 본 책에서 각종 모델을 통해 나온 종목들은, 데이터를 받은 시점에서의 종목이며 매수 추천은 아님을 밝힙니다.
+**아울러 본 책에서 각종 모델을 통해 나온 종목들은, 데이터를 받은 시점에서의 종목이며 매수 추천은 아님을 밝힙니다.**
 
 ## 베타 이해하기
 
-투자자들이라면 누구나 한번 쯤 들어봤을만한 용어가 베타^Beta^ 입니다. 기본적으로 개별 주식의 수익률에 가장 크게 영향을 주는 요소는 주식시장의 움직임일수 밖에 없습니다. 아무리 좋은 주식도 주식시장이 폭락한다면 같이 떨어지며, 아무리 나쁜 주식도 주식시장이 급등한다면 대부분 같이 오르기 마련입니다.
+투자자들이라면 누구나 한번은 들어봤을만한 용어가 베타^Beta^ 입니다. 기본적으로 개별 주식의 수익률에 가장 크게 영향을 주는 요소는 주식시장의 움직임일수 밖에 없습니다. 아무리 좋은 주식도 주식시장이 폭락한다면 같이 떨어지며, 아무리 나쁜 주식도 주식시장이 상승한다면 대부분 같이 오르기 마련입니다.
 
-개별 주식이 전체 주식시장의 변동에 반응하는 정도를 나타낸 값이 베타입니다. 베타가 1이라는 뜻은 주식시장과 움직임이 정확히같다는 뜻으로써, 시장 그 자체를 나타냅니다. 베타가 1.5라는 뜻은 주식시장이 수익률이 +1% 일 때 개별 주식의 수익률은 +1.5% 이며, 반대로 주식시장의 수익률이 -1% 일 때 개별 주식의 수익률은 -1.5% 입니다. 반면 베타가 0.5라는 주식시장 수익률의 절반 정도만이 움직이게 됩니다.
+개별 주식이 전체 주식시장의 변동에 반응하는 정도를 나타낸 값이 베타입니다. 베타가 1이라는 뜻은 주식시장과 움직임이 정확히 같다는 뜻으로써, 시장 그 자체를 나타냅니다. 베타가 1.5라는 뜻은 주식시장이 수익률이 +1% 일 때 개별 주식의 수익률은 +1.5%, 반대로 주식시장의 수익률이 -1% 일 때 개별 주식의 수익률은 -1.5% 움직인다는 뜻입니다. 반면 베타가 0.5라면 주식시장 수익률의 절반 정도만이 움직이게 됩니다.
 
 ```{r echo = FALSE}
 knitr::kable(
@@ -46,8 +50,10 @@ knitr::kable(
   ),
   col.names = c('베타', '주식시장이 +1% 일 경우', '주식시장이 -1% 일 경우'),
   booktabs = TRUE,
-  caption = '베타에 따른 개별 주식의 수익률 움직임'
-)
+  align = "c",
+  caption = '베타에 따른 개별 주식의 수익률 움직임' 
+) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
 이처럼 베타가 큰 주식은 주식시장보다 수익률의 움직임이 크며, 반대로 베타가 낮은 주식은 주식시장보다 수익률의 움직임이 작습니다. 따라서 일반적으로 상승장이 기대될 때는 베타가 큰 주식에, 하락장일이 기대될 때는 베타가 낮은 주식에 투자하는 것이 좋습니다.
@@ -55,28 +61,32 @@ knitr::kable(
 주식시장에서의 베타는 통계학의 회귀분석모형에서 기울기를 나타내는 베타와 정확히 의미가 같습니다. 회귀분석모형은 $y = a + bx$ 형태로 나타나며, x의 변화에 따른 y의 변화의 기울기가 회귀계수인 b입니다. 이를 주식에 적용한 모형이 자산가격결정모형(CAPM: Capital Asset Pricing Model)이며, 그 식은 다음과 같습니다.
 
 $$회귀분석모형: y = a + bx$$
-$$자산가격결정모형: R_i = R_f + \beta_i×[R_m - R_f]$$
+$$자산가격결정모형: R_i = R_f + \beta_i\times[R_m - R_f]$$
 
-먼저 회귀분석모형의 상수항인 a에 해당하는 부분은 무위험 수익률을 나타내는 $R_f$입니다. 독립변수인 x에 해당하는 부분은 무위험 수익률 대비 주식 시장의 초과 수익률을 나타내는 시장위험 프리미엄인 $R_m - R_f$입니다. 종속변수인 y에 해당하는 부분은 개별주식의 수익률을 나타내는 $R_i$이며, 최종적으로 회귀계수인 b에 해당하는 부분은 개별 주식의 베타인 입니다.
+먼저 회귀분석모형의 상수항인 a에 해당하는 부분은 무위험 수익률을 나타내는 $R_f$입니다. 독립변수인 x에 해당하는 부분은 무위험 수익률 대비 주식 시장의 초과 수익률을 나타내는 시장위험 프리미엄인 $R_m - R_f$입니다. 종속변수인 y에 해당하는 부분은 개별주식의 수익률을 나타내는 $R_i$이며, 최종적으로 회귀계수인 b에 해당하는 부분은 개별 주식의 베타입니다.
 
 ```{r echo = FALSE}
 knitr::kable(
   data.frame(
-  '구분' = c('상수항', '독립변수', '종속변수', '회귀계수'),
-  '회귀분석모형' = c('a','x', 'y', 'b'),
-  '자산가격결정모형' = c('$R_f$ (무위험 수익률)', '$R_m - R_f$(시장위험 프리미엄)',
+  'V1' = c('상수항', '독립변수', '종속변수', '회귀계수'),
+  'V2' = c('a','x', 'y', 'b'),
+  'V3' = c('$R_f$ (무위험 수익률)', '$R_m - R_f$ (시장위험 프리미엄)',
                  '$R_i$ (개별주식의 수익률)', '$\\beta_i$ (개별주식의 베타)')
   ),
+  col.names = c('구분', '회귀분석모형', '자산가격결정모형'),
   booktabs = TRUE,
+  align = "c",
+  escape = FALSE,
   caption = '회귀분석모형과 자산가격결정모형의 비교'
-)
+) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
-통계학에서 회귀계수는 $\beta = \frac{cov(x,y)}{σ_x^2}$ 형태로 구할 수 있으며, x와 y에 각각 시장수익률과 개별주식의 수익률을 대입할 경우 개별주식의 베타는 $\beta_i= ρ(i,m) ×  \frac{σ_i}{σ_m}$  형태로 구할 수 있습니다. 그러나 이러한 수식을 모르더라도 R에서는 간단히 베타를 구할 수 있습니다.
+통계학에서 회귀계수는 $\beta = \frac{cov(x,y)}{\sigma_x^2}$ 형태로 구할 수 있으며, x와 y에 각각 시장수익률과 개별주식의 수익률을 대입할 경우 개별주식의 베타는 $\beta_i= \rho(i,m) \times\frac{\sigma_i}{\sigma_m}$  형태로 구할 수 있습니다. 그러나 이러한 수식을 모르더라도 R에서는 간단히 베타를 구할 수 있습니다.
 
 ### 베타 계산하기
 
-베타를 구하는 방법을 알아보기 위해 주식시장에 대한 대용치로 KOSPI 200 ETF, 전통적 고베타주인 증권주를 이용하도록 하겠습니다.
+베타를 구하는 방법을 알아보기 위해 주식시장에 대한 대용치로 KOSPI 200 ETF, 개별주식으로는 전통적 고베타주인 증권주를 이용하겠습니다.
 
 ```{r message = FALSE, warning = FALSE}
 library(quantmod)
@@ -85,14 +95,15 @@ library(magrittr)
 
 symbols = c('102110.KS', '039490.KS')
 getSymbols(symbols)
-prices = do.call(cbind, lapply(symbols, function(x) Cl(get(x))))
+prices = do.call(cbind,
+                 lapply(symbols, function(x)Cl(get(x))))
 
 ret = Return.calculate(prices)
 ret = ret['2016-01::2018-12']
 ```
 
 1. KOSPI 200 ETF인 TIGER 200(102110.KS), 증권주인 키움증권(039490.KS)의 티커를 입력합니다.
-2. `getSymbols()` 함수를 이용하여 해당 티커들의 데이터가 다운로드 받습니다.
+2. `getSymbols()` 함수를 이용하여 해당 티커들의 데이터를 다운로드 받습니다.
 3. `lapply()` 함수 내에 `Cl()`과 `get()`함수를 사용하여 종가에 해당하는 데이터만 추출하며, 리스트 형태의 데이터를 열의 형태로 묶어주기 위해 `do.call()` 함수와 `cbind()` 함수를 사용해 줍니다.
 4. `Return.calculate()` 함수를 통해 수익률을 계산해 줍니다.
 5. xts 형식의 데이터는 대괄호 속에 ['시작일자::종료일자']와 같은 형태로, 원하는 날짜를 편리하게 선택할 수 있으며, 위에서는 2016년 1월부터 2018년 12월 까지 데이터를 선택합니다.
@@ -105,31 +116,29 @@ reg = lm(ri ~ rm)
 summary(reg)
 ```
 
-증권주를 대상으로 베타를 구하기 위한 회귀분석을 실시해 주도록 합니다. 자산가격결정모형의 수식인 $R_i = R_f + \beta_i×[R_m - R_f]$ 에서 편의를 위해 무위험 수익률인 $R_f$를 0으로 가정하면, $R_i = \beta_i×R_m$의 형태로 나타낼 수 있습니다. 이 중 $R_m$는 독립변수인 주식시장의 수익률을, $R_i$는 종속변수인 개별주식의 수익률을 의미합니다.
+증권주를 대상으로 베타를 구하기 위한 회귀분석을 실시합니다. 자산가격결정모형의 수식인 $R_i = R_f + \beta_i \times [R_m - R_f]$ 에서 편의를 위해 무위험 수익률인 $R_f$를 0으로 가정하면, $R_i = \beta_i \times R_m$의 형태로 나타낼 수 있습니다. 이 중 $R_m$는 독립변수인 주식시장의 수익률을, $R_i$는 종속변수인 개별주식의 수익률을 의미합니다.
 
-1. 독립변수는 첫번째 열인 KOSPI 200 ETF의 수익률을 선택해주며, 종속변수는 세번째 열인 증권주의 수익률을 선택해줍니다.
+1. 독립변수는 첫번째 열인 KOSPI 200 ETF의 수익률을 선택하며, 종속변수는 두번째 열인 증권주의 수익률을 선택합니다.
 2. `lm()` 함수를 통해 손쉽게 선형회귀분석을 실시할 수 있으며, 회귀분석의 결과를 reg 변수에 저장해줍니다.
 3. `summary()` 함수는 데이터의 요약 정보를 나타내며, 해당 예시에서는 회귀분석결과에 대한 정보를 보여줍니다.
 
-회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 `r round(summary(reg)$coef[2, 1], 2)`로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 `r round(summary(reg)$coef[2, 3], 2)`로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 `r round(summary(reg)$adj.r.squared, 2)`를 보입니다.
+회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 `r round(summary(reg)$coef[2, 1], 2)`으로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 `r round(summary(reg)$coef[2, 3], 2)`로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 `r round(summary(reg)$adj.r.squared, 2)`를 보입니다.
 
 ### 베타 시각화 ###
 
 다음으로 구해진 베타를 그림으로 표현해보도록 하겠습니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r}
 plot(as.numeric(rm), as.numeric(ri), pch = 4, cex = 0.3, 
      xlab = "KOSPI 200", ylab = "Individual Stock",
      xlim = c(-0.02, 0.02), ylim = c(-0.02, 0.02))
-grid()
 abline(a = 0, b = 1, lty = 2)
 abline(reg, col = 'red')
 ```
 
-1. `plot()` 함수를 통해 그림을 그려주며, x축과 y축에 주식시장 수익률과 개별주식 수익률을 입력합니다.pch는 점들의 모양을, cex는 점들의 크기를 나타내며, xlab과 ylab은 각각 x축과 y축에 들어갈 문구를 나타냅니다. xlim과 ylim은 x축과 y축의 최소 및 최대 범위를 지정해줍니다.
-2. `grid()` 함수를 통해 격자무늬를 추가해줍니다.
-3. 첫번째 `abline()`에서 a는 상수, b는 직선의 기울기, lty는 선의 유형을 나타냅니다. 이를 통해 기울기, 즉 베타가 1일 경우의 선을 점선으로 표현합니다.
-4. 두번째 `abline()`에 회귀분석 결과를 입력해주면 자동적으로 회귀식을 그려줍니다. 
+1. `plot()` 함수를 통해 그림을 그려주며, x축과 y축에 주식시장 수익률과 개별주식 수익률을 입력합니다. pch는 점들의 모양을, cex는 점들의 크기를 나타내며, xlab과 ylab은 각각 x축과 y축에 들어갈 문구를 나타냅니다. xlim과 ylim은 x축과 y축의 최소 및 최대 범위를 지정해줍니다.
+2. 첫번째 `abline()`에서 a는 상수, b는 직선의 기울기, lty는 선의 유형을 나타냅니다. 이를 통해 기울기, 즉 베타가 1일 경우의 선을 점선으로 표현합니다.
+3. 두번째 `abline()`에 회귀분석 결과를 입력해주면 자동적으로 회귀식을 그려줍니다. 
 
 검은색의 점선이 기울기가 1인 경우이며, 붉은색의 직선이 증권주의 회귀분석결과를 나타냅니다. 기울기가 1보다 훨씬 가파름이 확인되며, 즉 베타가 1보다 크다는 사실을 알 수 있습니다. 
 
@@ -146,11 +155,11 @@ example = c(85, 76, 73, 80, 72)
 sd(example)
 ```
 
-개별 주식의 표준편차를 측정할 때는 주식의 가격이 아닌 수익률로 계산해야 합니다. 수익률의 표준편차가 크다는 의미는 수익률의 위 아래로 많이 움직여 위험한 종목으로 여겨집니다. 반면, 표준편차가 작다는 의미는 수익률의 움직임이 적어 상대적으로 안전한 종목으로 여겨집니다.
+개별 주식의 표준편차를 측정할 때는 주식의 가격이 아닌 수익률로 계산해야 합니다. 수익률의 표준편차가 크다는 의미는 수익률이 위 아래로 많이 움직여 위험한 종목으로 여겨집니다. 반면, 표준편차가 작다는 의미는 수익률의 움직임이 적어 상대적으로 안전한 종목으로 여겨집니다.
 
 전통적 금융 이론에서는 수익률의 변동성이 클수록 위험이 크고, 이런 위험에 대한 보상으로 기대수익률이 높아야 한다고 보았습니다. 따라서 고변동성 종목의 기대수익률이 크고, 저변동성 종목의 기대수익률이 낮은 고위험 고수익이 당연한 믿음이었습니다. 그러나 현실에서는 오히려 변동성이 낮은 종목들의 수익률이 변동성이 높은 종목들의 수익률 보다 높은, 저변동성 효과가 발견되고 있습니다. 이러한 저변동성 효과가 발생하는 원인으로는 여러 가설이 있습니다.
 
-1. 투자자들은 대체로 자신의 능력을 과신하는 경향이 있으며, 복권과 같이 큰 수익을 가져다 주는 고변동성 주식을 선호하는 경향이 있습니다. 이러한 결과로 고변동성 주식은 과대 평가가 되어 수익률이 낮은 반면, 과소 평가된 저변동성 주식들은 높은 수익률을 보이게 됩니다.
+1. 투자자들은 대체로 자신의 능력을 과신하는 경향이 있으며, 복권과 같이 큰 수익을 가져다 주는 고변동성 주식을 선호하는 경향이 있습니다. 이러한 결과로 고변동성 주식은 과대 평가되어 수익률이 낮은 반면, 과소 평가된 저변동성 주식들은 높은 수익률을 보이게 됩니다.
 2. 대부분 기관투자가들이 레버리지 투자가 되지 않는 상황에서, 벤치마크 대비 높은 성과를 얻기 위해 고변동성 주식에 투자하는 경향이 있으며, 이 또한 고변동성 주식이 과대 평가되는 결과로 이어집니다.
 3. 시장의 상승과 하락이 반복됨에 따라 고변동성 주식이 변동성 손실(Volatility Drag)로 인해 수익률이 하락하게 되는 이유도 있습니다.
 
@@ -168,35 +177,40 @@ library(magrittr)
 library(ggplot2)
 library(dplyr)
 
-KOR_price = read.csv('data/KOR_price.csv', row.names = 1, stringsAsFactors = FALSE) %>% as.xts()
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+KOR_price = read.csv('data/KOR_price.csv', row.names = 1,
+                     stringsAsFactors = FALSE) %>% as.xts()
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' = 
+  str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
 ret = Return.calculate(KOR_price)
-std_12m_daily = xts::last(ret, 252) %>% apply(., 2, sd) %>% multiply_by(sqrt(252))
+std_12m_daily = xts::last(ret, 252) %>% apply(., 2, sd) %>%
+  multiply_by(sqrt(252))
 ```
 
-1. 먼저 미리 저장해둔 가격 정보와 티커 정보를 불러오도록 하며, 가격 정보의 경우 `as.xts()` 함수를 통해 xts 형태로 변경해주도록 합니다.
-2. `Return.calculate()` 함수를 통해 수익률을 구하도록 합니다.
-3. `last()` 함수는 마지막 n개를 선택해주는 함수이며, 1년 영업일 기준인 252개 데이터를 선택합니다. `dplyr` 패키지의 last() 함수와 변수명이 같으므로, `xts::last()` 형식을 통해 xts 패키지의 함수임을 정의해줍니다.
-4. `apply()` 함수를 sd 즉 변동성을 계산해주며, 연율화를 해주기 위해 `multiply_by()` 함수를 통해 $\sqrt{252}$를 곱해주도록 합니다.
+1. 저장해둔 가격 정보와 티커 정보를 불러오도록 하며, 가격 정보의 경우 `as.xts()` 함수를 통해 xts 형태로 변경해주도록 합니다.
+2. `Return.calculate()` 함수를 통해 수익률을 구합니다.
+3. `last()` 함수는 마지막 n개 데이터를 선택해주는 함수이며, 1년 영업일 기준인 252개 데이터를 선택합니다. `dplyr` 패키지의 `last()` 함수와 이름이 같으므로, `xts::last()` 형식을 통해 xts 패키지의 함수임을 정의해줍니다.
+4. `apply()` 함수를 통해 sd 즉 변동성을 계산해주며, 연율화를 해주기 위해 `multiply_by()` 함수를 통해 $\sqrt{252}$를 곱해주도록 합니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r}
 std_12m_daily %>% 
   data.frame() %>%
   ggplot(aes(x = (`.`))) +
   geom_histogram(binwidth = 0.01) +
   annotate("rect", xmin = -0.02, xmax = 0.02,
-           ymin = 0, ymax = sum(std_12m_daily == 0, na.rm = TRUE) * 1.1,
+           ymin = 0,
+           ymax = sum(std_12m_daily == 0, na.rm = TRUE) * 1.1,
            alpha=0.3, fill="red") +
   xlab(NULL)
 
 std_12m_daily[std_12m_daily == 0] = NA
 ```
 
-변동성을 히스토그램으로 나타내보면, 0에 위치하는 종목들이 다수 존재합니다. 해당 종목들은 최근 1년간 거래정지로 인해 가격이 변하지 않았고, 이로 인해 변동성이 없는 종목들이며, 해당 종믁들은 NA로 처리해주도록 합니다.
+변동성을 히스토그램으로 나타내보면, 0에 위치하는 종목들이 다수 존재합니다. 해당 종목들은 최근 1년간 거래정지로 인해 가격이 변하지 않았고, 이로 인해 변동성이 없는 종목들입니다. 해당 종믁들은 NA로 처리해주도록 합니다.
 
-```{r out.width = '40%', fig.align='center'}
+```{r}
 std_12m_daily[rank(std_12m_daily) <= 30]
 
 std_12m_daily[rank(std_12m_daily) <= 30] %>%
@@ -206,7 +220,7 @@ std_12m_daily[rank(std_12m_daily) <= 30] %>%
   xlab(NULL)
 ```
 
-`rank()` 함수를 통해 순위를 구할 수 있으며, R은 기본적으로 오름차순 즉 가장 낮은 값의 순위가 1이 됩니다. 따라서 변동성이 낮을수록 높은 순위가 되며, 30위 이하의 순위를 선택하면 변동성이 낮은 30종목이 선택됩니다. 또한 `ggplot()` 함수를 이용해 해당 종목들의 변동성을 확인해볼 수도 있습니다.
+`rank()` 함수를 통해 순위를 구할 수 있으며, R은 기본적으로 오름차순 즉 가장 낮은 값의 순위가 1이 됩니다. 따라서 변동성이 낮을수록 높은 순위가 되며, 30위 이하의 순위를 선택하면 변동성이 낮은 30 종목이 선택됩니다. 또한 `ggplot()` 함수를 이용해 해당 종목들의 변동성을 확인해볼 수도 있습니다.
 
 이번에는 해당 종목들의 티커 및 종목명을 확인하도록 하겠습니다.
 
@@ -214,7 +228,7 @@ std_12m_daily[rank(std_12m_daily) <= 30] %>%
 invest_lowvol = rank(std_12m_daily) <= 30
 KOR_ticker[invest_lowvol, ] %>%
   select(`종목코드`, `종목명`) %>%
-  mutate(`변동성` = std_12m_daily[invest_lowvol])
+  mutate(`변동성` = round(std_12m_daily[invest_lowvol], 4))
 ```
 
 티커와 종목명, 그리고 연율화 변동성을 확인할 수 있습니다.
@@ -240,14 +254,16 @@ std_12m_weekly[rank(std_12m_weekly) <= 30]
 invest_lowvol_weekly = rank(std_12m_weekly) <= 30
 KOR_ticker[invest_lowvol_weekly, ] %>%
   select(`종목코드`, `종목명`) %>%
-  mutate(`변동성` = std_12m_weekly[invest_lowvol_weekly])
+  mutate(`변동성` =
+           round(std_12m_weekly[invest_lowvol_weekly], 4))
 ```
 
-주간 수익률의 변동성이 낮은 30종목을 선택하여 종목코드, 종목명, 연율화 변동성을 확인하도록 합니다.
+주간 수익률의 변동성이 낮은 30 종목을 선택하여 종목코드, 종목명, 연율화 변동성을 확인하도록 합니다.
 
 
 ```{r}
-intersect(KOR_ticker[invest_lowvol, '종목명'], KOR_ticker[invest_lowvol_weekly, '종목명'])
+intersect(KOR_ticker[invest_lowvol, '종목명'],
+          KOR_ticker[invest_lowvol_weekly, '종목명'])
 ```
 
 `intersect()` 함수를 통해 일간 변동성 기준과 주간 변동성 기준 모두에 포함되는 종목을 찾을 수 있습니다.
@@ -269,9 +285,12 @@ library(PerformanceAnalytics)
 library(magrittr)
 library(dplyr)
 
-KOR_price = read.csv('data/KOR_price.csv', row.names = 1, stringsAsFactors = FALSE) %>% as.xts()
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+KOR_price = read.csv('data/KOR_price.csv', row.names = 1,
+                     stringsAsFactors = FALSE) %>% as.xts()
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
 ret = Return.calculate(KOR_price) %>% xts::last(252) 
 ret_12m = ret %>% sapply(., function(x) {
@@ -292,14 +311,14 @@ ret_12m[rank(-ret_12m) <= 30]
 invest_mom = rank(-ret_12m) <= 30
 KOR_ticker[invest_mom, ] %>%
   select(`종목코드`, `종목명`) %>%
-  mutate(`수익률` = ret_12m[invest_mom])
+  mutate(`수익률` = round(ret_12m[invest_mom], 4))
 ```
 
 티커와 종목명, 그리고 누적수익률을 확인할 수 있습니다.
 
 ### 모멘텀 포트폴리오 구하기: 위험조정 수익률
 
-투자성과 평가시 단순 수익률 보다는 위험이 함께 고려된 위험조정 수익률을 사용하는 것이 일반적이며, 대표적으로 샤프지수가 사용됩니다. 모멘텀 측정 역시 단순 12개월 누적수익률을 사용하기 보다 변동성이 함께 고려된 지표를 사용할 수 있습니다. 이는 누적 수익률을 변동성으로 나누어 계산할 수 있습니다.
+단순히 과거 수익률로만 모멘텀 종목을 선택할 경우, 각종 테마나 이벤트로 인한 급등으로 인해 변동성이 지나치게 높은 종목이 존재할 수도 있습니다. 누적 수익률을 변동성으로 나누어 위험을 고려해줄 경우, 이러한 종목은 제외되며 상대적으로 안정적인 모멘텀 종목을 선택할 수 있습니다.
 
 ```{r}
 ret = Return.calculate(KOR_price) %>% xts::last(252) 
@@ -321,20 +340,24 @@ sharpe_12m = ret_12m / std_12m
 invest_mom_sharpe = rank(-sharpe_12m) <= 30
 KOR_ticker[invest_mom_sharpe, ] %>%
   select(`종목코드`, `종목명`) %>%
-  mutate(`수익률` = ret_12m[invest_mom_sharpe],
-         `변동성` = std_12m[invest_mom_sharpe],
-         `샤프지수` = sharpe_12m[invest_mom_sharpe])
+  mutate(`수익률` = round(ret_12m[invest_mom_sharpe], 2),
+         `변동성` = round(std_12m[invest_mom_sharpe], 2),
+         `위험조정 수익률` =
+           round(sharpe_12m[invest_mom_sharpe], 2)) %>%
+  as_tibble() %>%
+  print(n = Inf)
 ```
 
-티커와 종목명, 누적수익률, 변동성, 샤프지수를 확인할 수 있습니다.
+티커와 종목명, 누적수익률, 변동성, 위험조정 수익률을 확인할 수 있습니다.
 
 ```{r}
-intersect(KOR_ticker[invest_mom, '종목명'], KOR_ticker[invest_mom_sharpe, '종목명'])
+intersect(KOR_ticker[invest_mom, '종목명'],
+          KOR_ticker[invest_mom_sharpe, '종목명'])
 ```
 
 `intersect()` 함수를 통해 단순 수익률 및 위험조정 수익률 기준 모두에 포함되는 종목을 찾을 수 있습니다. 다음 그림은 위험조정 수익률 상위 30 종목의 가격 그래프입니다.
 
-```{r message = FALSE, fig.align='center'}
+```{r message = FALSE}
 library(xts)
 library(tidyr)
 library(ggplot2)
@@ -358,7 +381,7 @@ KOR_price[, invest_mom_sharpe] %>%
 1. 위험한 기업은 시장에서 상대적으로 낮은 가격에 거래되며, 이러한 위험을 감당하는 대가로 수익이 발생
 2. 투자자들의 성장주에 대한 과잉 반응으로 인해 가치주는 시장에서 소외되며, 제자리를 찾아가는 과정에서 수익이 발생
 
-가치를 나타내는 지표는 굉장히 많지만, 일반적으로 PER, PBR, PCR, PSR가 많이 사용됩니다.
+기업의 가치를 나타내는 지표는 굉장히 많지만, 일반적으로 PER, PBR, PCR, PSR가 많이 사용됩니다.
 
 ### 밸류 포트폴리오 구하기: 저 PBR 
 
@@ -369,23 +392,26 @@ library(stringr)
 library(ggplot2)
 library(dplyr)
 
-KOR_value = read.csv('data/KOR_value.csv', row.names = 1, stringsAsFactors = FALSE)
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+KOR_value = read.csv('data/KOR_value.csv', row.names = 1,
+                     stringsAsFactors = FALSE)
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
 invest_pbr = rank(KOR_value$PBR) <= 30
 KOR_ticker[invest_pbr, ] %>%
   select(`종목코드`, `종목명`) %>%
-  mutate(`PBR` = KOR_value[invest_pbr, 'PBR'])
+  mutate(`PBR` = round(KOR_value[invest_pbr, 'PBR'], 4))
 ```
 
-먼저 가치 지표들을 저장한 데이터와 티커 데이터를 불러오도록 하며, `rank()`를 통해 PBR이 낮은 30 종목을 선택해주도록 합니다. 그 후 종목코드와 종목명, PBR을 확인해보도록 합니다. 많은 홀딩스 등 지주사가 특성상 저PBR 포트폴리오에 많이 구성되어 있습니다.
+먼저 가치 지표들을 저장한 데이터와 티커 데이터를 불러오도록 하며, `rank()`를 통해 PBR이 낮은 30 종목을 선택해주도록 합니다. 그 후 종목코드와 종목명, PBR을 확인해보도록 합니다. 홀딩스 등 지주사가 그 특성상 저 PBR 포트폴리오에 많이 구성되어 있습니다.
 
 ### 각 지표를 결합하기
 
-저PBR 하나의 지표만으로도 우수한 성과를 거둘 수 있음은 오랜 기간동안 증명되고 있습니다. 그러나 저평가 주식이 계속해서 저평가에 머무르는 가치 함정에 빠지지 않기 위해서는, 여러 지표를 동시에 볼 필요도 있습니다.
+저 PBR 하나의 지표만으로도 우수한 성과를 거둘 수 있음은 오랜 기간동안 증명되고 있습니다. 그러나 저평가 주식이 계속해서 저평가에 머무르는 가치 함정에 빠지지 않기 위해서는, 여러 지표를 동시에 볼 필요도 있습니다.
 
-```{r message = FALSE, out.width = '50%', fig.align='center'}
+```{r message = FALSE}
 library(corrplot)
 
 rank_value = KOR_value %>% 
@@ -394,9 +420,10 @@ rank_value = KOR_value %>%
 cor(rank_value, use = 'complete.obs') %>%
   round(., 2) %>%
   corrplot(method = 'color', type = 'upper',
-           addCoef.col = 'black', number.cex = 0.7,
+           addCoef.col = 'black', number.cex = 1,
            tl.cex = 0.6, tl.srt=45, tl.col = 'black',
-           col = colorRampPalette(c('blue', 'white', 'red'))(200),
+           col = colorRampPalette(
+             c('blue', 'white', 'red'))(200),
            mar=c(0,0,0.5,0))
 ```
 
@@ -414,21 +441,22 @@ invest_value = rank(rank_sum) <= 30
 
 KOR_ticker[invest_value, ] %>%
   select(`종목코드`, `종목명`) %>%
-  cbind(KOR_value[invest_value, ])
+  cbind(round(KOR_value[invest_value, ], 2))
 ```
 
-`rowSums()` 함수를 이용해 종목 별 랭킹들의 합을 구해주도록 합니다. 그 후 4개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 하나의 지표 보다 4개 지표가 골고루 낮은 종목을 선택하여 줍니다. 해당 종목들의 티커, 종목명과 가치 지표들을 확인할 수 있습니다.
+`rowSums()` 함수를 이용해 종목 별 랭킹들의 합을 구해줍니다. 그 후 4개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 하나의 지표 보다 4개 지표가 골고루 낮은 종목을 선택하여 줍니다. 해당 종목들의 티커, 종목명과 가치 지표들을 확인할 수 있습니다.
 
 
 ```{r}
-intersect(KOR_ticker[invest_pbr, '종목명'], KOR_ticker[invest_value, '종목명'])
+intersect(KOR_ticker[invest_pbr, '종목명'],
+          KOR_ticker[invest_value, '종목명'])
 ```
 
-단순 PBR 기준 선택된 종목과 비교해봤을 때, 겹치는 종목이 상당히 줄어 들었습니다.
+단순 저 PBR 기준 선택된 종목과 비교해봤을 때, 겹치는 종목이 상당히 줄어들었습니다.
 
 ## 퀄리티 전략
 
-기업의 우량성, 즉 퀄리티는 투자자들이 가장 중요하게 생각하는 요소입니다. 그러나 어떠한 지표가 기업의 퀄리티를 나타내는지 한마디로 정의하기에는 너무나 주관적이고 광범위하여, 쉽지만은 않습니다. 학계 혹은 업계에서 사용되는 우량성 관련 지표는 다음과 같이 요약할 수 있습니다.
+기업의 우량성, 즉 퀄리티는 투자자들이 매우 중요하게 생각하는 요소입니다. 그러나 어떠한 지표가 기업의 퀄리티를 나타내는지 한마디로 정의하기에는 너무나 주관적이고 광범위하여 쉽지 않습니다. 학계 혹은 업계에서 사용되는 우량성 관련 지표는 다음과 같이 요약할 수 있습니다.
 
 1. Profitability (수익성)
 2. Earnings stability (수익의 안정성)
@@ -438,7 +466,7 @@ intersect(KOR_ticker[invest_pbr, '종목명'], KOR_ticker[invest_value, '종목�
 6. Payout/dilution (배당) 
 7. Investment (투자)
 
-퀄리티 전략에는 주가 보다는 재무제표 데이터가 많이 사용됩니다.
+퀄리티 전략에는 재무제표 데이터가 주로 사용됩니다.
 
 ### F-Score
 
@@ -449,24 +477,37 @@ F-Score에서는 재무적 우량 정도를 수익성(Profitability), 재무 성
 ```{r fscore, echo = FALSE}
 knitr::kable(
   data.frame(
-  '지표' = c('수익성', '수익성', '수익성', '수익성', '재무성과', '재무성과', '재무성과',
-           '운영 효율성', '운영 효율성'),
-  '항목' = c('$ROA$', '$CFO$', '$\\Delta ROA$', '$ACCRUAL$',
+  'V1' = c('Profitability', 'Profitability', 'Profitability', 'Profitability',
+           'Financial Performance', 'Financial Performance', 'Financial Performance',
+           'Operating Efficiency', 'Operating Efficiency'),
+  'V2' = c('$ROA$', '$CFO$', '$\\Delta ROA$', '$ACCRUAL$',
            '$\\Delta LEVER$', '$\\Delta LIQUID$', '$EQ\\_OFFER$',
            '$\\Delta MARGIN$', '$\\Delta TURN$'),
-  '점수' = c('ROA가 양수면 1점', 'CFO가 양수면 1점', 'ROA가 증가했으면 1점',
+  'V3' = c('ROA가 양수면 1점', 'CFO가 양수면 1점', 'ROA가 증가했으면 1점',
            'CFO > ROA면 1점', '레버리지가 감소했으면 1점', '유동성이 증가했으면 1점',
            '발행주식수가 감소했으면 1점', '매출총이익률이 증가했으면 1점', '회전율이 증가했으면 1점')
   ),
+  col.names = c('지표', '항목', '점수'),
   booktabs = TRUE,
+  escape = FALSE, 
+  align = "c",
   caption = 'F-Score 요약'
-)
+) %>%
+  kableExtra::kable_styling(latex_options = c("hold_position")) %>%
+  kableExtra::row_spec(c(1:4, 8:9) - 1, extra_latex_after = "\\rowcolor{gray!6}") %>%
+  kableExtra::collapse_rows(columns = 1, latex_hline = "major", valign = "middle")
 ```
 
 각 지표가 우수할 경우 1점, 그렇지 않을 경우 0점을 매겨, 총 0점부터 9점까지의 포트폴리오를 구성합니다. 
 
-$$ F\_SCORE = F\_ROA + F\_\Delta ROA + F\_CFO + F\_ACCRUAL + F\_\Delta MARGIN + \\
-F\_ \Delta TURN + F\_\Delta LEVER + F\_\Delta LIQUID + F\_EQ\_OFFER $$
+\begin{scriptsize}
+\begin{equation*} 
+\begin{split}
+F\_SCORE &= F\_ROA + F\_\Delta ROA + F\_CFO + F\_ACCRUAL + F\_\Delta MARGIN \\
+ &+ F\_ \Delta TURN + F\_\Delta LEVER + F\_\Delta LIQUID + F\_EQ\_OFFER
+\end{split}
+\end{equation*} 
+\end{scriptsize}
 
 ```{r message = FALSE}
 library(stringr)
@@ -474,8 +515,10 @@ library(ggplot2)
 library(dplyr)
 
 KOR_fs = readRDS('data/KOR_fs.Rds')
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 ```
 
 먼저 재무제표와 티커 파일을 불러오도록 합니다. 재무제표 데이터의 경우 RdS 형태로 저장되어 있으며, `readRDS()` 함수를 이용해 list 형태 그래도 불러올 수 있습니다.
@@ -507,7 +550,7 @@ TURN = KOR_fs$'매출액' / KOR_fs$'자산'
 7. Margin은 매출총이익을 매출액으로 나누어 계산합니다.
 8. Turnover는 매출액을 자산으로 나누어 계산합니다.
 
-다음으로는 각 지표들이 조건을 충족하는지 여부를 판단하여, 지표별로 1점 혹은 0점을 부여해줍니다.
+다음으로 각 지표들이 조건을 충족하는지 여부를 판단하여, 지표 별로 1점 혹은 0점을 부여해줍니다.
 
 ```{r}
 num_col = ncol(KOR_fs[[1]])
@@ -515,12 +558,13 @@ num_col = ncol(KOR_fs[[1]])
 F_1 = as.integer(ROA[, num_col] > 0)
 F_2 = as.integer(CFO[, num_col] > 0)
 F_3 = as.integer(ROA[, num_col] - ROA[, (num_col-1)] > 0)
-F_4 = as.integer(ACCURUAL[,num_col] > 0) 
+F_4 = as.integer(ACCURUAL[, num_col] > 0) 
 F_5 = as.integer(LEV[, num_col] - LEV[, (num_col-1)] <= 0) 
 F_6 = as.integer(LIQ[, num_col] - LIQ[, (num_col-1)] > 0)
 F_7 = as.integer(is.na(OFFER[,num_col]) |
                    OFFER[,num_col] <= 0)
-F_8 = as.integer(MARGIN[, num_col] - MARGIN[, (num_col-1)] > 0)
+F_8 = as.integer(MARGIN[, num_col] -
+                   MARGIN[, (num_col-1)] > 0)
 F_9 = as.integer(TURN[,num_col] - TURN[,(num_col-1)] > 0)
 ```
 
@@ -531,8 +575,8 @@ F_9 = as.integer(TURN[,num_col] - TURN[,(num_col-1)] > 0)
 1. ROA가 양수면 1점, 그렇지 않으면 0점
 2. 영업활동현금흐름이 양수면 1점, 그렇지 않으면 0점
 3. 최근 ROA가 전년 대비 증가했으면 1점, 그렇지 않으면 0점
-4. Accurual(CFO - ROA)가 양수면 1점, 그렇지 않으면 0점
-5. 레버리지가 전년 대비 증가했으면 1점, 그렇지 않으면 0점
+4. Accurual(CFO - ROA)이 양수면 1점, 그렇지 않으면 0점
+5. 레버리지가 전년 대비 감소했으면 1점, 그렇지 않으면 0점
 6. 유동성이 전년 대비 증가해으면 1점, 그렇지 않으면 0점
 7. 유상증자 항목이 없거나 0보다 작으면 1점, 그렇지 않으면 0점
 8. 매출총이익률이 전년 대비 증가했으면 1점, 그렇지 않으면 0점
@@ -549,7 +593,7 @@ F_Score = F_Table %>%
 2. `apply()` 함수를 통해 종목 별 지표의 합을 더해 F-Score를 계산해줍니다.
 3. `setNanmes()` 함수를 통해 종목명을 입력해 줍니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r}
 (F_dist = prop.table(table(F_Score)) %>% round(3))
 
 F_dist %>%
@@ -557,7 +601,6 @@ F_dist %>%
   ggplot(aes(x = F_Score, y = Freq,
              label = paste0(Freq * 100, '%'))) +
   geom_bar(stat = 'identity') +
-  # coord_flip() +
   geom_text(color = 'black', size = 3, vjust = -0.4) +
   scale_y_continuous(expand = c(0, 0, 0, 0.05),
                      labels = scales::percent) +
@@ -565,7 +608,7 @@ F_dist %>%
   theme_classic() 
 ```
 
-`table()` 함수를 통해 각 스코어 별 갯수를 구한 후, `prop.table()`을 통해 비중으로 변환하도록 합니다. 이를 통해 점수 별 비중을 살펴보면 3~6점에 상당히 많은 종목이 분포하고 있음이 확인됩니다.
+`table()` 함수를 통해 각 스코어 별 갯수를 구한 후, `prop.table()`을 통해 비중으로 변환합니다. 이를 통해 점수 별 비중을 살펴보면 3~6점에 상당히 많은 종목이 분포하고 있음이 확인됩니다.
 
 ```{r}
 invest_F_Score = F_Score %in% c(9)
@@ -574,11 +617,11 @@ KOR_ticker[invest_F_Score, ] %>%
   mutate(`F-Score` = F_Score[invest_F_Score])
 ```
 
-F_Score가 9점인 종목의 티커와 종목명을 확인해봅니다. 재무적으로 우량하다고 판단되는 F-Score 9점인 종목은 총 `r sum(invest_F_Score)`개가 존재하고 있습니다.
+F-Score가 9점인 종목의 티커와 종목명을 확인해봅니다. 재무적으로 우량하다고 판단되는 F-Score 9점인 종목은 총 `r sum(invest_F_Score)`개가 존재하고 있습니다.
 
 ### 각 지표를 결합하기
 
-이번에는 퀄리티를 측정하는 요소 중 가장 널리 사용되는 수익성의 지표를 결합한 포트폴리오를 만들어 보겠으며, 사용되는 지표는 **자기자본이익률(ROE)**, **매출총이익(Gross Profit)**, **영업활동현금흐름(Cashflow From Operating)** 입니다.
+이번에는 퀄리티를 측정하는 요소 중 가장 널리 사용되는 수익성 지표를 결합한 포트폴리오를 만들어 보겠으며, 사용되는 지표는 **자기자본이익률(ROE)**, **매출총이익(Gross Profit)**, **영업활동현금흐름(Cashflow From Operating)** 입니다.
 
 ```{r}
 library(stringr)
@@ -587,35 +630,41 @@ library(dplyr)
 library(tidyr)
 
 KOR_fs = readRDS('data/KOR_fs.Rds')
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
 num_col = ncol(KOR_fs[[1]])
 quality_roe = (KOR_fs$'지배주주순이익' / KOR_fs$'자본')[num_col]
 quality_gpa = (KOR_fs$'매출총이익' / KOR_fs$'자산')[num_col]
-quality_cfo = (KOR_fs$'영업활동으로인한현금흐름' / KOR_fs$'자산')[num_col]
-quality_profit = cbind(quality_roe, quality_gpa, quality_cfo) %>%
+quality_cfo =
+  (KOR_fs$'영업활동으로인한현금흐름' / KOR_fs$'자산')[num_col]
+
+quality_profit =
+  cbind(quality_roe, quality_gpa, quality_cfo) %>%
   setNames(., c('ROE', 'GPA', 'CFO'))
 ```
 
 먼저 재무제표와 티커 파일을 불러온 후, 세가지 지표에 해당하는 값을 구한 뒤 최근년도 데이터만을 선택합니다. 그 후, `cbind()` 함수를 이용해 지표들을 하나로 묶어줍니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r}
 rank_quality = quality_profit %>% 
-  mutate_all(funs(min_rank(desc(.))))
+  mutate_all(list(~min_rank(desc(.))))
 
 cor(rank_quality, use = 'complete.obs') %>%
   round(., 2) %>%
   corrplot(method = 'color', type = 'upper',
-           addCoef.col = 'black', number.cex = 0.7,
+           addCoef.col = 'black', number.cex = 1,
            tl.cex = 0.6, tl.srt = 45, tl.col = 'black',
-           col = colorRampPalette(c('blue', 'white', 'red'))(200),
+           col =
+             colorRampPalette(c('blue', 'white', 'red'))(200),
            mar=c(0,0,0.5,0))
 ```
 
-`mutate_all()` 함수와 `min_rank()` 함수를 통해 지표 별 랭킹을 구해주도록 하며, 퀄리티 지표의 경우 높을수록 좋은 내림차순으로 계산하여야 하므로, `desc()`을 추가해줍니다.
+`mutate_all()` 함수와 `min_rank()` 함수를 통해 지표 별 랭킹을 구해주도록 하며, 퀄리티 지표의 경우 높을수록 좋은 내림차순으로 계산하여야 하므로 `desc()`을 추가해줍니다.
 
-수익성 지표 역시 서로 간의 상관관계가 낮은 지표가 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수 있습니다.
+수익성 지표 역시 서로 간의 상관관계가 낮아, 지표를 통합적으로 고려시 분산효과를 기대할 수 있습니다.
 
 ```{r}
 rank_sum = rank_quality %>%
@@ -625,7 +674,7 @@ invest_quality = rank(rank_sum) <= 30
 
 KOR_ticker[invest_quality, ] %>%
   select(`종목코드`, `종목명`) %>%
-  cbind(quality_profit[invest_quality, ])
+  cbind(round(quality_profit[invest_quality, ], 4))
 ```
 
-`rowSums()` 함수를 이용해 종목 별 랭킹들의 합을 구해주도록 합니다. 그 후 3개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 세가지 수익 지표가 골고루 높은 종목을 선택하여 줍니다. 해당 종목들의 티커, 종목명, ROE, GPA, CFO을 출력하여 확인하도록 합니다.
+`rowSums()` 함수를 이용해 종목 별 랭킹들의 합을 구해주도록 합니다. 그 후 3개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 세가지 수익 지표가 골고루 높은 종목을 선택합니다. 해당 종목들의 티커, 종목명, ROE, GPA, CFO을 출력하여 확인하도록 합니다.

@@ -1,10 +1,12 @@
+
 --- 
 title: "퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기"
 author: "이현열"
-date: "2019-06-26"
+date: "2019-07-06"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
+fontsize: 12pt
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes

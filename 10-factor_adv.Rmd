@@ -1,12 +1,12 @@
 # 퀀트 전략을 이용한 종목선정 (심화)
 
-지난 장에서는 팩터를 이용한 투자 전략의 기본이 되는 로우볼, 모멘텀, 밸류, 퀄리티 전략에 대해 알아보았습니다. 물론 이러한 단일 팩터를 이용한 투자도 장기적으로 우수한 성과를 보이지만, 여러 팩터를 결합하거나 좀더 정밀하게 전략을 만든다면 더욱 우수한 성과를 거둘 수 있습니다.
+지난 장에서는 팩터를 이용한 투자 전략의 기본이 되는 로우볼, 모멘텀, 밸류, 퀄리티 전략에 대해 알아보았습니다. 물론 이러한 단일 팩터를 이용한 투자도 장기적으로 우수한 성과를 보이지만, 여러 팩터를 결합하거나 정밀하게 전략을 만든다면 더욱 우수한 성과를 거둘 수 있습니다.
 
-이번 장에서는 섹터별 효과를 없앤 후 포트폴리오를 구성하는 방법, 이상치 데이터 제거 및 팩터 결합 방법, 그리고 멀티팩터 구성방법에 대해 알아보겠습니다.
+이번 장에서는 섹터 별 효과를 없앤 후 포트폴리오를 구성하는 방법, 이상치 데이터 제거 및 팩터 결합 방법, 그리고 멀티팩터 구성방법에 대해 알아보겠습니다.
 
 ## 섹터 중립 포트폴리오
 
-팩터 전략의 단점 중 하나는 선택된 종목들이 특정 섹터로 쏠리는 경우가 있다는 점입니다. 특히 과거 수익률을 토대로 종목을 선정하는 모멘텀 전략의 경우, 특정 섹터가 좋을때 동일한 섹터의 모든 종목이 함께 움직이는 경향이 있어 이러한 쏠림이 심할 수 있습니다.
+팩터 전략의 단점 중 하나는 선택된 종목들이 특정 섹터로 쏠리는 경우가 있다는 점입니다. 특히 과거 수익률을 토대로 종목을 선정하는 모멘텀 전략의 경우, 특정 섹터의 호황기에 동일한 섹터의 모든 종목이 함께 움직이는 경향이 있어 이러한 쏠림이 심할 수 있습니다.
 
 먼저 지난 장에서 배운 12개월 모멘텀을 이용한 포트폴리오 구성 방법을 다시 살펴보도록 하겠습니다.
 
@@ -17,9 +17,12 @@ library(PerformanceAnalytics)
 library(dplyr)
 library(ggplot2)
 
-KOR_price = read.csv('data/KOR_price.csv', row.names = 1, stringsAsFactors = FALSE) %>% as.xts()
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+KOR_price = read.csv('data/KOR_price.csv', row.names = 1,
+                     stringsAsFactors = FALSE) %>% as.xts()
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
 ret = Return.calculate(KOR_price) %>% xts::last(252) 
 ret_12m = ret %>% sapply(., function(x) {
@@ -31,21 +34,25 @@ invest_mom = rank(-ret_12m) <= 30
 
 기존의 코드와 동일하게, 주식 가격 및 티커 데이터를 불러온 후, 최근 12개월 수익률을 구해 상위 30 종목을 선택합니다.
 
-```{r out.width = '50%', fig.align='center'}
-KOR_sector = read.csv('data/KOR_sector.csv', row.names = 1, stringsAsFactors = FALSE)
-KOR_sector$'CMP_CD' = str_pad(KOR_sector$'CMP_CD', 6, 'left', 0)
+```{r}
+KOR_sector = read.csv('data/KOR_sector.csv', row.names = 1,
+                      stringsAsFactors = FALSE)
+KOR_sector$'CMP_CD' =
+  str_pad(KOR_sector$'CMP_CD', 6, 'left', 0)
 data_market = left_join(KOR_ticker, KOR_sector,
-                         by = c('종목코드' = 'CMP_CD', '종목명' = 'CMP_KOR'))
+                         by = c('종목코드' = 'CMP_CD',
+                                '종목명' = 'CMP_KOR'))
 ```
 
 해당 종목들의 섹터 정보를 추가로 살펴보기 위해, 섹터 데이터를 불러온 후, `left_join()` 함수를 이용해 티커와 결합하여 data_market에 저장해줍니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r}
 data_market[invest_mom, ] %>%
   select(`SEC_NM_KOR`) %>%
   group_by(`SEC_NM_KOR`) %>%
   summarize(n = n()) %>%
-  ggplot(aes(x = reorder(`SEC_NM_KOR`, `n`), y = `n`, label = n)) +
+  ggplot(aes(x = reorder(`SEC_NM_KOR`, `n`),
+             y = `n`, label = n)) +
   geom_col() +
   geom_text(color = 'black', size = 4, hjust = -0.3) +
   xlab(NULL) +
@@ -55,9 +62,9 @@ data_market[invest_mom, ] %>%
   theme_classic()
 ```
 
-`group_by()` 함수를 이용하여 12개월 기준 모멘텀 포트폴리오 종목들의 섹터 별 종목수를 계산해준 후, `ggplot()` 함수를 이용하여 이를 그림으로 나타내줍니다. 그림에서 알 수 있듯이, 특정 섹터에 대부분의 종목이 몰려있습니다.
+`group_by()` 함수를 이용하여 12개월 기준 모멘텀 포트폴리오 종목들의 섹터 별 종목수를 계산해준 후, `ggplot()` 함수를 이용하여 이를 그림으로 나타냅니다. 그림에서 알 수 있듯이, 특정 섹터에 대부분의 종목이 몰려있습니다.
 
-따라서 여러 종목으로 포트폴리오를 구성하였지만, 분해해보면 특정 섹터에 쏠림이 심하다는 것을 알 수 있습니다. 이러한 섹터 쏠림 현상을 제거한 **섹터 중립 포트폴리오**를 구성해 보도록 하겠습니다.
+따라서 여러 종목으로 포트폴리오를 구성하였지만, 이를 분해해보면 특정 섹터에 쏠림이 심하다는 것을 알 수 있습니다. 이러한 섹터 쏠림 현상을 제거한 **섹터 중립 포트폴리오**를 구성해 보도록 하겠습니다.
 
 ```{r}
 sector_neutral = data_market %>%
@@ -65,26 +72,30 @@ sector_neutral = data_market %>%
   mutate(`ret` = ret_12m) %>%
   group_by(`SEC_NM_KOR`) %>%
   mutate(scale_per_sector = scale(`ret`),
-         scale_per_sector = ifelse(is.na(`SEC_NM_KOR`), NA, scale_per_sector))
+         scale_per_sector = ifelse(is.na(`SEC_NM_KOR`),
+                                   NA, scale_per_sector))
 ```
 
-1. 먼저 종목코드와 섹터정보, 그리고 12개월 수익률 정보를 불러옵니다.
-2. `group_by()` 함수를 통해 섹터별 그룹을 만들어 줍니다.
-3. `scale()` 함수를 이용해 정규화를 해줍니다. 정규화의 경우 $\frac{x- \mu}{\sigma}$로 계산됩니다. 
-4. 섹터 정보가 없는 정보는 삭제해주도록 합니다.
+1. data_market에서 종목코드와 섹터정보를 선택합니다.
+2. `mutate()` 함수를 통해 미리 계산한 12개월 수익률 정보를 새로운 열에 합쳐줍니다.
+3. `group_by()` 함수를 통해 섹터 별 그룹을 만들어 줍니다.
+4. `scale()` 함수를 이용해 그룹 별 정규화를 해줍니다. 정규화의 경우 $\frac{x- \mu}{\sigma}$로 계산됩니다. 
+5. 섹터 정보가 없는 정보는 삭제해주도록 합니다.
 
 위의 정규화 과정을 살펴보면, 전체 종목에서 12개월 수익률을 비교하는 것이 아닌 각 섹터별로 수익률의 강도를 비교하게 됩니다. 따라서 특정 종목의 과거 수익률이 전체 종목과 비교해서 높았어도 해당 섹터 내에서의 순위가 낮다면, 정규화된 값은 낮게됩니다. 
 
-따라서 섹터 별 정규화 과정을 거친 값으로 비교 분석을 한다면, 섹터 효과가 어느정도 제거된 포트폴리오를 구성할 수 있습니다.
+따라서 섹터 별 정규화 과정을 거친 값으로 비교 분석을 한다면, 섹터 효과가 제거된 포트폴리오를 구성할 수 있습니다.
 
-```{r out.width = '50%', fig.align='center'}
-invest_mom_neutral = rank(-sector_neutral$scale_per_sector) <= 30
+```{r}
+invest_mom_neutral =
+  rank(-sector_neutral$scale_per_sector) <= 30
 
 data_market[invest_mom_neutral, ] %>%
   select(`SEC_NM_KOR`) %>%
   group_by(`SEC_NM_KOR`) %>%
   summarize(n = n()) %>%
-  ggplot(aes(x = reorder(`SEC_NM_KOR`, `n`), y = `n`, label = n)) +
+  ggplot(aes(x = reorder(`SEC_NM_KOR`, `n`),
+             y = `n`, label = n)) +
   geom_col() +
   geom_text(color = 'black', size = 4, hjust = -0.3) +
   xlab(NULL) +
@@ -94,13 +105,13 @@ data_market[invest_mom_neutral, ] %>%
   theme_classic()
 ```
 
-정규화된 값의 랭킹이 높은 상위 30 종목을 선택하며, 내림차순을 위해 마이너스를 붙여줍니다. 해당 포트폴리오의 섹터 별 구성종목을 확인해보면, 단순하게 포트폴리오를 구성한 것 대비, 여러 섹터에 종목이 분산되어 있음이 확인됩니다.
+정규화된 값의 랭킹이 높은 상위 30 종목을 선택하며, 내림차순을 위해 마이너스를 붙여줍니다. 해당 포트폴리오의 섹터 별 구성종목을 확인해보면, 단순하게 포트폴리오를 구성한 것 대비, 여러 섹터에 종목이 분산되어 있습니다.
 
 이처럼 `group_by()` 함수를 통해 손쉽게 그룹별 중립화를 할 수 있으며, 글로벌 투자를 하는 경우에는 지역, 국가, 섹터 별로도 중립화된 포트폴리오를 구성하기도 합니다.
 
 ## 마법공식
 
-하나의 팩터만을 보고 투자하는 것 보다, 둘 혹은 그 이상의 팩터를 결합하여 투자하는 것이 훨씬 좋은 포트폴리오를 구성할 수 있으며, 이러한 방법을 멀티 팩터라 합니다. 그중에서도 밸류와 퀄리티의 조합은 전통적으로 많이 사용되어진 방법이며, 그 중 대표적인 예가 조엘 그린블라트의 마법공식입니다.
+하나의 팩터만을 보고 투자하는 것 보다, 둘 혹은 그 이상의 팩터를 결합하여 투자하는 것이 훨씬 좋은 포트폴리오를 구성할 수 있으며, 이러한 방법을 멀티팩터라 합니다. 그중에서도 밸류와 퀄리티의 조합은 전통적으로 많이 사용된 방법이며, 그 중 대표적인 예가 조엘 그린블라트의 마법공식입니다.
 
 이번 장에서는 퀄리티와 밸류 간의 관계, 그리고 마법공식의 정의와 구성방법에 대해 알아보도록 하겠습니다.
 
@@ -116,12 +127,15 @@ data_market[invest_mom_neutral, ] %>%
 library(stringr)
 library(dplyr)
 
-KOR_value = read.csv('data/KOR_value.csv', row.names = 1, stringsAsFactors = FALSE)
+KOR_value = read.csv('data/KOR_value.csv', row.names = 1,
+                     stringsAsFactors = FALSE)
 KOR_fs = readRDS('data/KOR_fs.Rds')
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
 
 data_pbr = KOR_value['PBR']
-data_gpa = (KOR_fs$'매출총이익' / KOR_fs$'자산')[ncol(KOR_fs$'매출총이익')] %>%
+data_gpa =
+  (KOR_fs$'매출총이익' / KOR_fs$'자산')[ncol(KOR_fs[[1]])] %>%
   setNames('GPA')
 
 cbind(data_pbr, -data_gpa) %>%
@@ -130,7 +144,7 @@ cbind(data_pbr, -data_gpa) %>%
 
 데이터를 불러온 후, PBR과 GPA(매출총이익 / 자산)를 구해주도록 합니다. 그 후 랭킹의 상관관계인 스피어만 상관관계를 구해보면, 서로 간 반대 관계가 있음이 확인됩니다. PBR의 경우 오름차순, GPA의 경우 내림차순 이므로 GPA 앞에 마이너스를 붙여주었습니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r}
 cbind(data_pbr, data_gpa) %>%
   mutate(quantile_pbr = ntile(data_pbr, 5)) %>%
   filter(!is.na(quantile_pbr)) %>%
@@ -149,16 +163,16 @@ cbind(data_pbr, data_gpa) %>%
 4. 각 PBR 그룹 별 GPA의 평균값을 구해줍니다.
 5. `ggplot()`을 이용해 시각화를 해줍니다.
 
-그림에서 알수 있듯이 PBR이 낮을수록 GPA도 낮으며, 즉 가치주일수록 우량성은 떨어집니다. 반면에 PBR이 높을수록 GPA도 늪으며, 이는 주식의 가격이 비쌀수록 우량성도 높다는 것을 의미합니다.
+그림에서 알 수 있듯이 PBR이 낮을수록 GPA도 낮으며, 즉 가치주일수록 우량성은 떨어집니다. 반면에 PBR이 높을수록 GPA도 늪으며, 이는 주식의 가격이 비쌀수록 우량성도 높다는 것을 의미합니다.
 
 이를 이용해 밸류 팩터와 퀄리티 팩터간의 관계를 나타내면 다음과 같습니다.
 
 
-```{r fig.cap='밸류 팩터와 퀄리티 팩터간의 관계', fig.align='center', out.width = '50%', echo = FALSE}
+```{r fig.cap='밸류 팩터와 퀄리티 팩터간의 관계', out.width = "50%", echo = FALSE}
 knitr::include_graphics('images/tableqv.png')
 ```
 
-주가가 쌀수록 기업의 우량성은 떨어지며(①번), 반대로 기업의 우량성이 좋으면 주식은 비싼 경향(③번)이 있습니다. 물론 우량성도 떨어지고 비싸기만한 주식(②번)을 사려는 사람들 아마 없을 겁니다. 결과적으로 우리가 원하는 최고의 주식은 우량성이 있으면서도 가격은 싼 주식(④번)일 것입니다. 
+주가가 쌀수록 기업의 우량성은 떨어지며(①번), 반대로 기업의 우량성이 좋으면 주식은 비싼 경향(③번)이 있습니다. 물론 우량성도 떨어지고 비싸기만한 주식(②번)을 사려는 사람들 아마 없을 겁니다. 결과적으로 우리가 원하는 최고의 주식은 우량성이 있으면서도 가격은 싼 주식(④번)입니다. 
 
 ### 마법공식 이해하기
 
@@ -166,11 +180,11 @@ knitr::include_graphics('images/tableqv.png')
 
 첫번째 지표는 이율(Earnings Yield)로써 기업의 수익을 기업의 가치로 나는 값입니다. 이는 PER의 역수와 비슷하며, 밸류 지표 중 하나입니다.
 
-두번째 지표는 투자 자본 수익률(Return on Capital)로써 기업의 수익을 투자한 자본으로 나눈 값입니다. 이는 ROE와도 비슷하며, 퀄리티 지표 중 하나입니다.
+두번째 지표는 투자자본 수익률(Return on Capital)로써 기업의 수익을 투자한 자본으로 나눈 값입니다. 이는 ROE와도 비슷하며, 퀄리티 지표 중 하나입니다.
 
 마법공식은 이 두가지 지표의 랭킹을 각각 구한 후, 랭킹의 합 기준 상위 30 개 종목을 1년간 보유한 후 매도하는 전략입니다.
 
-해당 전략은 국내 투자자들에게도 많이 사랑받는 전략입니다. 그러나 두 지표를 계산하기 위한 데이터를 수집하는데 어려움이 있어 많은 투자자들이 이율 대신 PER를, 투하 자본 수익률 대신 ROE를 사용합니다. 그러나 우리가 수집한 데이터를 통해 충분히 원래의 마법공식을 구현할 수 있습니다.
+해당 전략은 국내 투자자들에게도 많이 사랑받는 전략이지만 두 지표를 계산하기 위한 데이터를 수집하는데 어려움이 있어 많은 투자자들이 이율 대신 PER를, 투하 자본 수익률 대신 ROE를 사용합니다. 그러나 우리가 수집한 데이터를 통해 충분히 원래의 마법공식을 구현할 수 있습니다.
 
 ```{r echo = FALSE, warning = FALSE}
 library(magrittr)
@@ -180,51 +194,62 @@ knitr::kable(
     '팩터' = c('지표', '계산'),
     'v1' = c('이율 (Earnings Yield)',
               '$\\frac{이자\\,및\\,법인세\\,차감전이익}{기업\\,가치}$'),
-    'v2' = c('투하 자본 수익률 (Return On Capital)',
+    'v2' = c('투하자본 수익률 (Return On Capital)',
              '$\\frac{이자\\,및\\,법인세\\,차감전이익}{투하자본}$')
                 
   ),
   col.names = c('팩터', 'Value', 'Quality'),
   booktabs = TRUE,
+  escape = FALSE,
+  align = "c",
   caption = '마법공식의 구성 요소'
-)
+) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
 ### 마법공식 구성하기
 
-재무제표 항목을 통해 이율과 투하 자본 수익률을 계산하고, 이를 통해 마법공식 포트폴리오를 구성하도록 하겠습니다.
+재무제표 항목을 통해 이율과 투하자본 수익률을 계산하고, 이를 통해 마법공식 포트폴리오를 구성하도록 하겠습니다.
 
-먼저, 밸류지표에 해당하는 이익수익률을 계산해보도록 하겟습니다. 이익수익률은 이자 및 법인세 차감전이익(EBIT)를 기업 가치(시가총액 + 순차입금)으로 나눈 값입니다. 이를 분해하면 다음과 같습니다.
+먼저, 밸류지표에 해당하는 이익수익률을 계산해보도록 하겟습니다. 이익수익률은 이자 및 법인세 차감전이익(EBIT)을 기업가치(시가총액 + 순차입금)로 나눈 값입니다. 이를 분해하면 다음과 같습니다.
 
-\begin{equation} 
+\begin{small}
+\begin{equation*} 
 \begin{split}
-이익수익률 & = \frac{이자\,및\,법인세\,차감전이익}{기업\,가치} \\
+ 이익수익률 & = \frac{이자\,및\,법인세\,차감전이익}{기업\,가치} \\
 & = \frac{이자\,및\,법인세\,차감전이익}{시가총액 + 순차입금} \\
 & = \frac{당기순이익 + 법인세 + 이자비용}{시가총액 + 총부채 - 여유자금} \\
 & = \frac{당기순이익 + 법인세 + 이자비용}{시가총액 + 총부채 - (현금 - max(0, 유동부채 - 유동자산 + 현금))}
 \end{split}
-\end{equation} 
+\end{equation*} 
+\end{small}
 
 ```{r warning = FALSE}
 library(stringr)
 library(dplyr)
 
-KOR_value = read.csv('data/KOR_value.csv', row.names = 1, stringsAsFactors = FALSE)
+KOR_value = read.csv('data/KOR_value.csv', row.names = 1,
+                     stringsAsFactors = FALSE)
 KOR_fs = readRDS('data/KOR_fs.Rds')
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
 num_col = ncol(KOR_fs[[1]])
 
 # 분자
-magic_ebit = (KOR_fs$'지배주주순이익' + KOR_fs$'법인세비용' + KOR_fs$'이자비용')[num_col]
+magic_ebit = (KOR_fs$'지배주주순이익' + KOR_fs$'법인세비용' +
+                KOR_fs$'이자비용')[num_col]
 
 # 분모
 magic_cap = KOR_value$PER * KOR_fs$'지배주주순이익'[num_col]
 magic_debt = KOR_fs$'부채'[num_col]
-magic_excess_cash_1 = KOR_fs$'유동부채' - KOR_fs$'유동자산' + KOR_fs$'현금및현금성자산'
+magic_excess_cash_1 = KOR_fs$'유동부채' - KOR_fs$'유동자산' +
+  KOR_fs$'현금및현금성자산'
 magic_excess_cash_1[magic_excess_cash_1 < 0] = 0
-magic_excess_cash_2 = (KOR_fs$'현금및현금성자산' - magic_excess_cash_1)[num_col]
+magic_excess_cash_2 =
+  (KOR_fs$'현금및현금성자산' - magic_excess_cash_1)[num_col]
 
 magic_ev = magic_cap + magic_debt - magic_excess_cash_2
 
@@ -240,27 +265,29 @@ magic_ey = magic_ebit / magic_ev
 
 1. 우리가 가지고 있는 밸류 데이터와 재무제표 데이터를 통해 시가총액을 역산할 수 있습니다. PER 값에 Earnings를 곱해주면 시가총액이 계산되게 됩니다. 이를 통해 계산된 시가총액을 HTS나 금융 사이트의 값과 비교하면 거의 비슷함이 확인됩니다.
 
-\begin{equation} 
+\begin{equation*} 
 \begin{split}
 PER \times Earnings & = \frac{Price}{Earnings/Shares} \times Earnings \\
 & = \frac{Price \times Shares}{Earnings} \times Earnings \\
 & = Price \times Earnings = Market\,Cap
 \end{split}
-\end{equation} 
+\end{equation*} 
 
-2. 총 부채는 부채 항목을 사용하면 됩니다.
-3. 여유자금은 두 단계에 걸쳐 계산하도록 합니다. 먼저 **유동부채 - 유동자산 + 현금** 값을 구해준 후, 0보다 작은 값은 모두 0으로 바꾸어주도록 합니다. 이 값을 현금 및 현금성자산 항목에서 차감하여 최종적인 여유자금을 구하도록 합니다.
+2. 총 부채는 부채 항목을 사용합니다.
+3. 여유자금은 두 단계에 걸쳐 계산하도록 합니다. 먼저 **유동부채 - 유동자산 + 현금** 값을 구해준 후, 0보다 작은 값은 모두 0으로 바꾸줍니다. 이 값을 현금 및 현금성자산 항목에서 차감하여 최종적인 여유자금을 구하도록 합니다.
 
 분자와 분모 부분을 나누어주면 이익수익률을 계산할 수 있습니다.
 
-다음으로 퀄리티 지표에 해당하는 투하 자본 수익률을 계산하도록 하겠습니다. 해당 값은 이자 및 법인세 차감전이익(EBIT)를 투하자본(IC)으로 나누어 계산되며, 이를 분해하면 다음과 같습니다.
+다음으로 퀄리티 지표에 해당하는 투하자본 수익률을 계산하도록 하겠습니다. 해당 값은 이자 및 법인세 차감전이익(EBIT)를 투하자본(IC)으로 나누어 계산되며, 이를 분해하면 다음과 같습니다.
 
-\begin{equation} 
+\begin{small}
+\begin{equation*} 
 \begin{split}
-투하 자본 수익률 & = \frac{이자\,및\,법인세\,차감전이익}{투하자본} \\
+투하자본\,수익률 & = \frac{이자\,및\,법인세\,차감전이익}{투하자본} \\
 & = \frac{당기순이익 + 법인세 + 이자비용}{(유동자산 - 유동부채) + (비유동자산 - 감가상각비)}
 \end{split}
-\end{equation} 
+\end{equation*} 
+\end{small}
 
 ```{r}
 magic_ic = ((KOR_fs$'유동자산' - KOR_fs$'유동부채') +
@@ -268,7 +295,7 @@ magic_ic = ((KOR_fs$'유동자산' - KOR_fs$'유동부채') +
 magic_roc = magic_ebit / magic_ic
 ```
 
-투하 자본 수익률은 비교적 쉽게 계산할 수 있습니다. 분모에 해당하는 투하 자본의 경우 재무제표 항목을 그대로 사용하면 되며, 분자인 이자 및 법인세 차감전이익은 위에서 이미 구해둔 값을 그대로 사용하면 됩니다.
+투하자본 수익률은 비교적 쉽게 계산할 수 있습니다. 분모에 해당하는 투하 자본의 경우 재무제표 항목을 그대로 사용하면 되며, 분자인 이자 및 법인세 차감전이익은 위에서 이미 구해둔 값을 사용하면 됩니다.
 
 이제 두 지표를 활용하여 마법공식 포트폴리오를 구성하도록 하겠습니다.
 
@@ -277,11 +304,11 @@ invest_magic = rank(rank(-magic_ey) + rank(-magic_roc)) <= 30
 
 KOR_ticker[invest_magic, ] %>%
   select(`종목코드`, `종목명`) %>%
-  mutate(`이익수익률` = magic_ey[invest_magic, ],
-         `투하자본수익률` = magic_roc[invest_magic, ])
+  mutate(`이익수익률` = round(magic_ey[invest_magic, ], 4),
+         `투하자본수익률` = round(magic_roc[invest_magic, ], 4))
 ```
 
-이익수익률과 투하 자본 수익률의 랭킹을 각각 구해주며, 내림차순으로 값을 구하기 위해 마이너스를 붙여줍니다. 그 후 두 값의 합의 랭킹 기준 상위 30 종목을 선택합니다. 그 후 종목코드와 종목명, 각 지표를 확인해주도록 합니다.
+이익수익률과 투하 자본 수익률의 랭킹을 각각 구해주며, 내림차순으로 값을 구하기 위해 마이너스를 붙여줍니다. 그 후 두 값의 합의 랭킹 기준 상위 30 종목을 선택한 후 종목코드와 종목명, 각 지표를 확인해주도록 합니다.
 
 ## 이상치 데이터 제거 및 팩터의 결합
 
@@ -291,25 +318,27 @@ KOR_ticker[invest_magic, ] %>%
 
 우리가 가지고 있는 데이터에서 이러한 이상치 데이터를 탐색해보도록 하겠습니다.
 
-```{r fig.align='center', out.width = '50%', warning = FALSE, message = FALSE}
+```{r warning = FALSE, message = FALSE}
 library(magrittr)
 library(ggplot2)
 
-KOR_value = read.csv('data/KOR_value.csv', row.names = 1, stringsAsFactors = FALSE)
+KOR_value = read.csv('data/KOR_value.csv', row.names = 1,
+                     stringsAsFactors = FALSE)
+
+max(KOR_value$PBR, na.rm = TRUE)
+
 KOR_value %>%
   ggplot(aes(x = PBR)) +
   geom_histogram(binwidth = 0.1)
-
-max(KOR_value$PBR, na.rm = TRUE)
 ```
 
-국내 종목들의 PBR을 통해 히스토그램을 그려보면 오른쪽으로 꼬리가 매우 긴 분포를 보이고 있습니다. 이는 PBR이 무려 `r round(max(KOR_value$PBR, na.rm = TRUE),2)`인 이상치 데이터가 존재하기 때문입니다. 이처럼 모든 팩터 지표에는 극단치 데이터가 존재하기 마련이며, 이를 처리하는 방법에 대해 알아보도록 하겠습니다.
+국내 종목들의 PBR 히스토그램을 그려보면 오른쪽으로 꼬리가 매우 긴 분포를 보이고 있습니다. 이는 PBR이 무려 `r round(max(KOR_value$PBR, na.rm = TRUE),2)`인 이상치 데이터가 존재하기 때문입니다. 이처럼 모든 팩터 지표에는 극단치 데이터가 존재하기 마련이며, 이를 처리하는 방법에 대해 알아보도록 하겠습니다.
 
 ### 트림(Trim): 이상치 데이터 삭제
 
 트림은 이상치 데이터를 삭제하는 방법입니다. 위의 예제에서 이상치에 해당하는 상하위 1% 데이터를 삭제해주도록 하겠습니다.
 
-```{r fig.align='center', out.width = '50%', warning = FALSE}
+```{r warning = FALSE}
 library(dplyr)
 
 value_trim = KOR_value %>%
@@ -324,14 +353,14 @@ value_trim %>%
 
 `percent_rank()` 함수를 통해 백분위를 구한 후 상하위 1%에 해당하는 데이터들은 NA로 변경하였습니다. 결과적으로 지나치게 PBR이 낮은 종목과 높은 종목은 제거가 되어 x축의 스케일이 많이 줄어든 모습입니다.
 
-평균이나 분산과 같이 통계값을 구하는 과정에서는 이상치 데이터를 제거하는 것이 바람직 할 수 있습니다. 그러나 팩터를 이용해 포트폴리오를 구하는 과정에서 해당 방법은 잘 사용되지 않습니다. 데이터의 손실이 발생하게 되며, 제거된 종목 중 정말로 좋은 종목이 존재할 수도 있기 때문입니다.
+평균이나 분산과 같이 통계값을 구하는 과정에서는 이상치 데이터를 제거하는 것은 바람직 할 수 있습니다. 그러나 팩터를 이용해 포트폴리오를 구하는 과정에서 해당 방법은 잘 사용되지 않습니다. 데이터의 손실이 발생하게 되며, 제거된 종목 중 정말로 좋은 종목이 존재할 수도 있기 때문입니다.
 
 
 ### 윈저라이징(Winsorizing): 이상치 데이터 대체
 
 포트폴리오 구성에서는 일반적으로 이상치 데이터를 다른 데이터로 대체하는 윈저라이징 방법이 사용됩니다. 예를 들어, 상위 99%를 초과하는 데이터는 99% 값으로 대체하며, 하위 1% 미만의 데이터는 1% 데이터로 대체합니다. 즉, 좌우로 울타리를 쳐놓고 해당 범위를 넘어가는 값을 강제로 울타리에 맞춰줍니다.
 
-```{r fig.align='center', out.width = '50%', warning = FALSE}
+```{r warning = FALSE}
 value_winsor = KOR_value %>%
   select(PBR) %>%
   mutate(PBR = ifelse(percent_rank(PBR) > 0.99,
@@ -344,15 +373,15 @@ value_winsor %>%
   geom_histogram(binwidth = 0.1)
 ```
 
-역시나 `percent_rank()` 함수를 통해 백분위를 구한 후, 해당 범위를 초과할 경우 각각 상하위 1% 데이터로 변형을 해주도록 합니다. 그림을 살펴보면 x축 양 끝 부분의 막대가 길어진 것을 확인할 수 있습니다.
+역시나 `percent_rank()` 함수를 통해 백분위를 구한 후, 해당 범위를 초과할 경우 각각 상하위 1% 데이터로 변형을 해줍니다. 그림을 살펴보면 x축 양 끝 부분의 막대가 길어진 것을 확인할 수 있습니다.
 
 ### 팩터의 결합 방법
 
-우리는 이전에 밸류 지표의 결합, 퀄리티 지표의 결합, 그리고 마법공식 포트폴리오를 구성할 때 단순히 랭킹을 더하는 방법을 사용하였습니다. 물론 투자 종목수가 얼마 되지 않거나, 개인투자자의 입장에서는 이러한 방법이 가장 심플하면서도 효과적일수 있습니다.
+밸류 지표의 결합, 퀄리티 지표의 결합, 그리고 마법공식 포트폴리오를 구성할 때 단순히 랭킹을 더하는 방법을 사용하였습니다. 물론 투자 종목수가 얼마 되지 않거나, 개인투자자의 입장에서는 이러한 방법이 가장 심플하면서도 효과적일수 있습니다.
 
 그러나 전문투자자 혹은 팩터를 분석하는 업무를 할 경우, 이처럼 단순히 랭킹을 더하는 방법은 여러가지 문제를 지니고 있습니다.
 
-```{r fig.align='center', out.width = '50%', message = FALSE, warning = FALSE}
+```{r message = FALSE, warning = FALSE}
 library(tidyr)
   
 KOR_value %>%
@@ -365,13 +394,13 @@ KOR_value %>%
 
 위 그림은 각 밸류 지표의 랭킹을 구한 후 히스토그램으로 나타낸 것입니다. 랭킹을 구하는 것의 가장 큰 장점은 극단치로 인한 효과가 사라진다는 점과, 균등한 분포를 가진다는 점입니다.
 
-그러나 각 지표의 x축을 보면 최대값이 서로 다릅니다. 이는 지표별 결측치로 인해 유효 데이터의 갯수가 달라 나타나는 현상이며, 서로 다른 범위의 분포를 단순히 합치는 것은 좋은 방법이 아닙니다.
+그러나 각 지표의 x축을 보면 최대값이 서로 다릅니다. 이는 지표 별 결측치로 인해 유효 데이터의 갯수가 달라 나타나는 현상이며, 서로 다른 범위의 분포를 단순히 합치는 것은 좋은 방법이 아닙니다.
 
 예를 들어 A, B, C, D 팩터에 각각 비중을 40%, 30%, 20%, 10% 부여하여 포트폴리오를 구성하고자 할 경우를 생각해 봅시다. 각 랭킹은 분포의 범위가 다르므로, 랭킹과 비중의 가중평균을 통해 포트폴리오를 구성하는 방법은 왜곡된 결과를 발생시킵니다.
 
 이러한 문제를 해결하는 가장 좋은 방법은 랭킹을 구한 후, 이를 Z-Score로 정규화하는 방법입니다.
 
-```{r fig.align='center', out.width = '50%', message = FALSE, warning = FALSE}
+```{r message = FALSE, warning = FALSE}
 KOR_value %>%
   mutate_all(list(~min_rank(.))) %>%
   mutate_all(list(~scale(.))) %>%
@@ -383,9 +412,13 @@ KOR_value %>%
 
 `min_rank()`를 통해 랭킹을 구한 후, `scale()`을 통해 정규화를 해주었습니다. 기본적으로 랭킹의 분포가 가진 극단치 효과가 사라지는 점과 균등 분포의 장점을 유지하고 있으며, 분포의 범위 역시 거의 동일하게 바뀌었습니다.
 
-이처럼 여러 팩터를 결합하여 포트폴리오를 구성하고자 하는 경우, 먼저 각 팩터(지표) 별 랭킹을 구한 후 정규화를 한 뒤 더하는 것이, 왜곡 효과가 제거된 안정적인 방법입니다. 
+이처럼 여러 팩터를 결합하여 포트폴리오를 구성하고자 하는 경우, 먼저 각 팩터(지표) 별 랭킹을 정규화를 한 뒤 더하는 것이, 왜곡 효과가 제거된 안정적인 방법입니다. 
 
-$$Z－Score(Rank(Factor\,A)) + Z－Score(Rank(Factor\,B)) +\,\dots\,+ Z－Score(Rank(Factor\,N))$$
+\begin{scriptsize}
+\begin{equation*} 
+Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Rank(Factor\,N))
+\end{equation*} 
+\end{scriptsize}
 
 ## 멀티팩터 포트폴리오
 
@@ -400,21 +433,28 @@ library(xts)
 library(stringr)
 
 KOR_fs = readRDS('data/KOR_fs.Rds')
-KOR_value = read.csv('data/KOR_value.csv', row.names = 1, stringsAsFactors = FALSE)
-KOR_price = read.csv('data/KOR_price.csv', row.names = 1, stringsAsFactors = FALSE) %>% as.xts()
+KOR_value = read.csv('data/KOR_value.csv', row.names = 1,
+                     stringsAsFactors = FALSE)
+KOR_price = read.csv('data/KOR_price.csv', row.names = 1,
+                     stringsAsFactors = FALSE) %>% as.xts()
 
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE) 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE) 
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 ```
 
 먼저 재무제표, 가치지표, 주가 데이터를 불러오도록 합니다.
 
-```{r warning = FALSE, message = FALSE, fig.align='center', out.width = '50%'}
+```{r warning = FALSE, message = FALSE, out.width='50%'}
 num_col = ncol(KOR_fs[[1]])
 quality_roe = (KOR_fs$'지배주주순이익' / KOR_fs$'자본')[num_col]
 quality_gpa = (KOR_fs$'매출총이익' / KOR_fs$'자산')[num_col]
-quality_cfo = (KOR_fs$'영업활동으로인한현금흐름' / KOR_fs$'자산')[num_col]
-quality_profit = cbind(quality_roe, quality_gpa, quality_cfo) %>%
+quality_cfo =
+  (KOR_fs$'영업활동으로인한현금흐름' / KOR_fs$'자산')[num_col]
+
+quality_profit =
+  cbind(quality_roe, quality_gpa, quality_cfo) %>%
   setNames(., c('ROE', 'GPA', 'CFO'))
 
 factor_quality = quality_profit %>%
@@ -428,12 +468,12 @@ factor_quality %>%
   geom_histogram()
 ```
 
-첫번째로 퀄리티 지표를 계산해줍니다. 코드는 앞장에서 살펴본 것과 거의 비슷하며, 자기자본이익률, 매출총이익, 영업활동현금흐름을 계산해줍니다. 그 후 `mutate_all()` 함수를 통해 랭킹을 구한 후 다시 표준화를 해주도록 하며, 내림차순으로 정리하기 위해 랭킹 부분에 `desc()`를 붙여줍니다. 
+첫번째로 퀄리티 지표를 계산해줍니다. 코드는 앞에서 살펴본 것과 거의 비슷하며, 자기자본이익률, 매출총이익, 영업활동현금흐름을 계산해줍니다. 그 후 `mutate_all()` 함수를 통해 랭킹을 구한 후 다시 표준화를 해주도록 하며, 내림차순으로 정리하기 위해 랭킹 부분에 `desc()`를 붙여줍니다. 
 
-그 후 `rowSums()` 함수를 통해 계산된 Z-Score를 종목별로 합쳐주도록 합니다. Z-Score의 히스토그램을 살펴보면 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.
+`rowSums()` 함수를 통해 계산된 Z-Score를 종목별로 합쳐주도록 합니다. Z-Score의 히스토그램을 살펴보면 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.
 
 
-```{r warning = FALSE, message = FALSE, fig.align='center', out.width = '50%'}
+```{r warning = FALSE, message = FALSE, out.width='50%'}
 factor_value = KOR_value %>%
   mutate_all(list(~min_rank(.))) %>%
   mutate_all(list(~scale(.))) %>%
@@ -447,7 +487,7 @@ factor_value %>%
 
 두번째로 밸류 지표를 계산해줍니다. 밸류 지표의 경우 이미 테이블 형태로 들어와 있으며, 랭킹과 표준화를 거쳐 합을 구해주도록 합니다. 역시나 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.
 
-```{r warning = FALSE, message = FALSE, fig.align='center', out.width = '50%'}
+```{r warning = FALSE, message = FALSE, out.width='50%'}
 library(PerformanceAnalytics)
 library(dplyr)
 
@@ -472,7 +512,7 @@ factor_mom %>%
 
 마지막으로 모멘텀 지표를 계산해줍니다. 최근 60일, 120일, 252일 주가를 통해 3개월, 6개월, 12개월 수익률을 구해준 후 `cbind()`를 통해 열로 묶어주도록 합니다. 그 후 내림차순 기준 랭킹과 표준화를 거쳐 합을 구해주도록 합니다.
 
-```{r warning = FALSE, message = FALSE, fig.align='center', out.width = '50%'}
+```{r warning = FALSE, message = FALSE}
 library(corrplot)
 
 cbind(factor_quality, factor_value, factor_mom) %>%
@@ -483,7 +523,8 @@ cbind(factor_quality, factor_value, factor_mom) %>%
   corrplot(method = 'color', type = 'upper',
            addCoef.col = 'black', number.cex = 1,
            tl.cex = 0.6, tl.srt = 45, tl.col = 'black',
-           col = colorRampPalette(c('blue', 'white', 'red'))(200),
+           col =
+             colorRampPalette(c('blue', 'white', 'red'))(200),
            mar=c(0,0,0.5,0))
 
 ```
@@ -491,9 +532,8 @@ cbind(factor_quality, factor_value, factor_mom) %>%
 퀄리티, 밸류, 모멘텀 팩터 간의 랭크의 서로 간 상관관계가 매우 낮으며, 여러 팩터를 동시에 고려함으로써 분산효과를 기대할 수 있습니다.
 
 ```{r warning = FALSE, message = FALSE}
-library(tidyr)
-
-factor_qvm = cbind(factor_quality, factor_value, factor_mom) %>%
+factor_qvm =
+  cbind(factor_quality, factor_value, factor_mom) %>%
   data.frame() %>%
   mutate_all(list(~scale(.))) %>%
   mutate(factor_quality = factor_quality * 0.33,
@@ -510,7 +550,9 @@ invest_qvm = rank(factor_qvm) <= 30
 
 최종적으로 해당 값의 랭킹 기준 상위 30 종목을 선택해 줍니다.
 
-```{r warning = FALSE, message = FALSE, fig.align='center', out.width = '50%'}
+```{r warning = FALSE, message = FALSE}
+library(tidyr)
+
 quality_profit[invest_qvm, ] %>%
   gather() %>%
   ggplot(aes(x = value)) +
@@ -521,7 +563,7 @@ quality_profit[invest_qvm, ] %>%
 
 먼저 선택된 종목의 퀄리티 지표별 분포를 살펴보도록 하겠습니다. 대부분 종목의 수익성이 높음이 확인됩니다.
 
-```{r warning = FALSE, message = FALSE, fig.align='center', out.width = '50%'}
+```{r warning = FALSE, message = FALSE}
 KOR_value[invest_qvm, ] %>%
   gather() %>%
   ggplot(aes(x = value)) +
@@ -532,7 +574,7 @@ KOR_value[invest_qvm, ] %>%
 
 이번에는 선택된 종목의 가치 지표별 분포입니다. 대부분 종목의 값이 낮아, 밸류 종목임이 확인됩니다.
 
-```{r warning = FALSE, message = FALSE, fig.align='center', out.width = '50%'}
+```{r warning = FALSE, message = FALSE}
 ret_bind[invest_qvm, ] %>%
   gather() %>%
   ggplot(aes(x = value)) +
@@ -560,3 +602,4 @@ cbind(quality_profit, KOR_value, ret_bind)[invest_qvm, ] %>%
 ```
 
 마지막으로 포트폴리오 내 종목들의 지표 별 평균을 계산한 값입니다.
+

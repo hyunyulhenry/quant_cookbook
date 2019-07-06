@@ -11,11 +11,15 @@
 ```{r}
 library(stringr)
 
-KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1, stringsAsFactors = FALSE)
-KOR_sector = read.csv('data/KOR_sector.csv', row.names = 1, stringsAsFactors = FALSE)
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
+                      stringsAsFactors = FALSE)
+KOR_sector = read.csv('data/KOR_sector.csv', row.names = 1,
+                      stringsAsFactors = FALSE)
 
-KOR_ticker$'종목코드' = str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
-KOR_sector$'CMP_CD' = str_pad(KOR_sector$'CMP_CD', 6, 'left', 0)
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6,'left', 0)
+KOR_sector$'CMP_CD' =
+  str_pad(KOR_sector$'CMP_CD', 6, 'left', 0)
 ```
 
 먼저 각 파일을 불러온 후, 티커에 해당하는 종목코드와 CMP_CD 열을 6자리 숫자로 만들어 주도록 합니다.
@@ -36,25 +40,35 @@ knitr::kable(
     '함수' = c('inner_join()', 'full_join()', 'left_join()', 'right_join()'),
     '내용' = c('교집합', '합집합', '좌측 기준', '우측 기준')),
   booktabs = TRUE,
+  align = "c",
   caption = 'join 함수의 종류'
-)
+) %>%
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position")) %>%
+  kableExtra::column_spec(1, width = "4cm") %>%
+  kableExtra::column_spec(2, width = "4cm")
 ```
 
-이 중 거래소 티커 기준으로 데이터를 맞추기 위해 `left_join()`을 사용하여 두 데이터를 합치도록 하겠습니다.
+이 중 거래소 티커 기준으로 데이터를 맞추기 위해 `left_join()` 함수를 사용하여 두 데이터를 합치도록 하겠습니다.
 
 ```{r message = FALSE}
 library(dplyr)
 
 data_market = left_join(KOR_ticker, KOR_sector,
-                         by = c('종목코드' = 'CMP_CD', '종목명' = 'CMP_KOR'))
+                         by = c('종목코드' = 'CMP_CD',
+                                '종목명' = 'CMP_KOR'))
+
+head(data_market)
 ```
 
-`left_join()` 함수를 이용해 KOR_ticker와 KOR_sector 데이터를 합쳐주도록 합니다. by 인자는 데이터를 합치는 기준점을 의미하며, x 데이터(KOR_ticker)의 종목코드와 y 데이터(KOR_sector)의 CMP_CD는 같음을, x 데이터의 종목명과 y 데이터의 CMP_KOR는 같음을 정의합니다.
+`left_join()` 함수를 이용해 KOR_ticker와 KOR_sector 데이터를 합쳐주도록 합니다. by 인자는 데이터를 합치는 기준점을 의미하며, x 데이터(KOR_ticker)의 **종목코드**와 y 데이터(KOR_sector)의 **CMP_CD**는 같음을, x 데이터의 **종목명**과 y 데이터의 **CMP_KOR**는 같음을 정의합니다. 
 
 ### `glimpse()`: 데이터 구조 확인하기
 
-```{r}
+```{r eval = FALSE}
 glimpse(data_market)
+```
+```{r echo = FALSE}
+glimpse(data_market, width = 50)
 ```
 
 `glimpse()` 함수는 데이터 내용, 구조, 형식을 확인하는 함수입니다. 기본 함수인 `str()`과 그 역할은 비슷하지만, tidy 형태로 결과물이 훨씬 깔끔하게 출력됩니다. 총 관측값 및 열의 갯수, 각 열의 이름과 데이터 형식, 앞부분 데이터를 확인할 수 있습니다.
@@ -70,7 +84,7 @@ data_market = data_market %>%
 head(names(data_market), 10)
 ```
 
-`rename()` 함수는 열 이름을 바꾸는 함수로써,`rename(tbl, new_name, old_name)` 형태로 입력합니다. 위의 경우 **시가총액.원.** 열이름이 **시가총액*으로 변경되었습니다.
+`rename()` 함수는 열 이름을 바꾸는 함수로써, `rename(tbl, new_name, old_name)` 형태로 입력합니다. 위의 경우 **시가총액.원.** 열이름이 **시가총액**으로 변경되었습니다.
 
 ### distinct(): 고유한 값 확인
 
@@ -79,7 +93,7 @@ data_market %>%
   distinct(SEC_NM_KOR) %>% c() 
 ```
 
-`distinct()` 함수는 고유한 값을 반환하며, 기본함수 중 `unique()`와 동일한 기능을 합니다. 데이터의 섹터 정보를 확인해보면, WICS 기준 10개 섹터 및 섹터 정보가 없는 종목인 NA 값이 있음이 확인됩니다.
+`distinct()` 함수는 고유한 값을 반환하며, 기본함수 중 `unique()`와 동일한 기능을 합니다. 데이터의 섹터 정보를 확인해보면, WICS 기준 10개 섹터 및 섹터 정보가 없는 종목인 NA 값이 있습니다.
 
 ### `select()`: 원하는 열만 선택
 
@@ -106,7 +120,7 @@ data_market %>%
 
 해당 함수는 다양한 응용기능도 제공합니다. `starts_with()`의 경우 특정 문자로 시작하는 열들을, `ends_with()`의 경우 특정 문자로 끝나는 열들을, `contains()`의 경우 특정 문자가 포함되는 열들을 선택해 줍니다.
 
-### `mutate()`: 열 생성 및 데이터 변경
+### `mutate()`: 열 생성 및 데이터 변형
 
 ```{r warning = FALSE}
 data_market = data_market %>%
@@ -123,7 +137,7 @@ data_market %>%
   select(`종목명`, `ROE`, `size`) %>% head()
 ```
 
-`mutate()` 함수는 원하는 형태로 열을 생성하거나 가공하는 함수입니다. 위의 예제에서는 먼저 PBR과 PER열을 `as.numeric()` 함수를 통해 숫자 형태로 변경한 후, PBR을 PER로 나눈 값을 ROE 열에 생성합니다. 그 후, `round()` 함수를 통해 ROE 값을 반올림 해주며, `ifelse()` 함수를 통해 시가총액의 중앙값 보다 큰 기업의 경우 big, 아닐 경우 small 임을 size 열에 저장해줍니다.
+`mutate()` 함수는 원하는 형태로 열을 생성하거나 변형하는 함수입니다. 위의 예제에서는 먼저 PBR과 PER열을 `as.numeric()` 함수를 통해 숫자 형태로 변경한 후, PBR을 PER로 나눈 값을 ROE 열에 생성합니다. 그 후, `round()` 함수를 통해 ROE 값을 반올림 해주며, `ifelse()` 함수를 통해 시가총액의 중앙값 보다 큰 기업의 경우 big, 아닐 경우 small 임을 size 열에 저장해줍니다.
 
 이 외에도 `mutate_*()` 계열 함수에는 `mutate_all()`, `mutate_if()`, `mutate_at()` 처럼 각 상황에 맞게 쓸수있는 다양한 함수들이 존재합니다.
 
@@ -135,7 +149,7 @@ data_market %>%
   filter(`PBR` < 1) %>% head()
 
 data_market %>%
-  select(`종목명`, `PER`, `PBR`, `ROE`) %>%
+  select(`종목명`, `PBR`, `PER`, `ROE`) %>%
   filter(PBR < 1 & PER < 20 & ROE > 0.1 ) %>% head()
 ```
 
@@ -165,20 +179,20 @@ data_market %>%
   head(5)
 ```
 
-`arrange()` 함수의 경우 선택한 열을 기준으로 데이터를 정렬해주며, 오름차순을 기준으로 정렬합니다. 내림차순으로 데이터를 정렬하고자 할 경우 `arrange()` 내에 `desc()` 함수를 추가로 입력해주면 됩니다.
+`arrange()` 함수는 선택한 열을 기준으로 데이터를 정렬해주며, 오름차순을 기준으로 정렬합니다. 내림차순으로 데이터를 정렬하고자 할 경우 `arrange()` 내에 `desc()` 함수를 추가로 입력해주면 됩니다.
 
 ### `row_number()`: 순위 계산
 
 ```{r}
 data_market %>%
   mutate(PBR_rank = row_number(PBR)) %>%
-  select(PBR, PBR_rank) %>%
+  select(`종목명`, PBR, PBR_rank) %>%
   arrange(PBR) %>%
   head(5)
 
 data_market %>%
   mutate(PBR_rank = row_number(desc(ROE))) %>%
-  select(ROE, PBR_rank) %>%
+  select(`종목명`, ROE, PBR_rank) %>%
   arrange(desc(ROE)) %>%
   head(5)
 ```
@@ -229,28 +243,27 @@ data_market %>%
 
 ## 종목정보 시각화
 
-R 내에서 기본적으로 제공하는 `plot()` 함수를 통해서도 시각화가 충분히 가능합니다. 그러나 데이터 과학자들에게 가장 많이 사랑받는 패키지 중 하나인 `ggplot2` 패키지의 `ggplot()` 함수를 사용할 경우 훨씬 아름답게 그림이 표현 가능하며, 다양한 기능들을 매우 쉽게 사용할 수도 있습니다.
+R에서 기본적으로 제공하는 `plot()` 함수를 통해서도 시각화가 충분히 가능합니다. 그러나 데이터 과학자들에게 가장 많이 사랑받는 패키지 중 하나인 `ggplot2` 패키지의 `ggplot()` 함수를 사용할 경우 훨씬 아름답게 그림이 표현 가능하며, 다양한 기능들을 매우 쉽게 사용할 수도 있습니다.
 
 `ggplot()` 함수는 플러스(+) 기호를 사용한다는 점과 문법이 다소 어색하다는 점 때문에 처음에 배우기가 쉽지는 않습니다. 그러나 해당 패키지의 근본이 되는 철학인 **The Grammar of Graphics**를 이해하고 조금만 연습해본다면, 충분히 손쉽게 사용이 가능합니다.
 
-```{r fig.cap='The Grammar of Graphics', fig.align='center', out.width = '50%', echo = FALSE}
+```{r fig.cap='The Grammar of Graphics', out.width = '50%', echo = FALSE}
 knitr::include_graphics('images/data_analysis_gg.png')
 ```
 
-`ggplot2` 패키지에 대해 더욱 공부하고 싶으신 분은, 해당 패키지의 제작자인 해들리 위컴의 책^[Ggplot2 : R로 분석한 데이터를 멋진 그래픽으로, 해들리 위컴 저/박진수 역]을 추천드립니다.
+### `geom_point()`: 산점도 나타내기
 
-
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+```{r warning = FALSE}
 library(ggplot2)
 
 ggplot(data_market, aes(x = ROE, y = PBR)) +
   geom_point()
 ```
 
-1. `ggplot()` 함수 내에 사용될 데이터인 data_market을 입력하며, aes 인자 내부에 x축은 ROE, y축은 PBR 열을 사용하도록 정의합니다
+1. `ggplot()` 함수 내에 사용될 데이터인 data_market을 입력하며, aes 인자 내부에 x축은 ROE, y축은 PBR 열을 사용하도록 정의합니다.
 2. `geom_point()` 함수를 통해 산점도 그래프를 그려주도록 합니다. 원하는 그림이 그려지기는 하였으나, ROE와 PBR에 극단치 데이터가 존재하여 둘간의 관계가 잘 보이지 않습니다.
 
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+```{r warning = FALSE}
 ggplot(data_market, aes(x = ROE, y = PBR)) +
   geom_point() +
   coord_cartesian(xlim = c(0, 0.30), ylim = c(0, 3))
@@ -258,10 +271,10 @@ ggplot(data_market, aes(x = ROE, y = PBR)) +
 
 이번에는 극단치 효과를 제거하기 위해 `coord_cartesian()` 함수 내에 xlim과 ylim, 즉 x축과 y축의 범위를 직접 지정해주도록 합니다. 극단치가 제거되어 데이터를 한 눈에 확인할 수 있습니다.
 
-
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+```{r warning = FALSE}
 ggplot(data_market, aes(x = ROE, y = PBR,
-                        color = `시장구분`, shape = `시장구분`)) +
+                        color = `시장구분`,
+                        shape = `시장구분`)) +
   geom_point() +
   geom_smooth(method = 'lm') +
   coord_cartesian(xlim = c(0, 0.30), ylim = c(0, 3))
@@ -270,24 +283,28 @@ ggplot(data_market, aes(x = ROE, y = PBR,
 1. `ggplot()` 함수 내부 aes 인자에 color와 shape를 지정해주면, 해당 그룹 별로 모양과 색이 나타납니다. 코스피와 코스닥 종목들에 해당하는 데이터의 색과 점 모양이 다르게 표시할 수 있습니다.
 2. `geom_smooth()` 함수를 통해 평활선을 추가해줄 수도 있으며, 방법으로 lm(linear model)을 지정해줄 경우 선형회귀선을 그려주게 됩니다. 이 외에도 glm, gam, loess 등의 다양한 회귀선을 그려줄 수 있습니다.
 
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+### `geom_histogram()`: 히스토그램 나타내기
+
+```{r warning = FALSE}
 ggplot(data_market, aes(x = PBR)) +
   geom_histogram(binwidth = 0.1) + 
   coord_cartesian(xlim = c(0, 10))
 ```
 
-`geom_histogram()` 함수는 히스토그램을 나타내주며, binwidth 인자를 막대의 너비를 선택해줄 수 있습니다. 국내 종목들의 PBR 데이터는 좌측에 쏠려있고 오른쪽으로 꼬리가 긴 분포를 가지고 있습니다.
+`geom_histogram()` 함수는 히스토그램을 나타내주며, binwidth 인자를 막대의 통해 너비를 선택해줄 수 있습니다. 국내 종목들의 PBR 데이터는 좌측에 쏠려있고 오른쪽으로 꼬리가 긴 분포를 가지고 있습니다.
 
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+```{r warning = FALSE}
 ggplot(data_market, aes(x = PBR)) +
   geom_histogram(aes(y = ..density..),
                  binwidth = 0.1,
                  color = 'sky blue', fill = 'sky blue') + 
   coord_cartesian(xlim = c(0, 10)) +
   geom_density(color = 'red') +
-  geom_vline(aes(xintercept = median(PBR, na.rm = TRUE)), color = 'blue') +
-  geom_text(aes(label = median(PBR, na.rm = TRUE), x = median(PBR, na.rm = TRUE)), y = 0.05,
-            col = 'black', size = 4, hjust = -0.5)
+  geom_vline(aes(xintercept = median(PBR, na.rm = TRUE)),
+             color = 'blue') +
+  geom_text(aes(label = median(PBR, na.rm = TRUE),
+                x = median(PBR, na.rm = TRUE), y = 0.05),
+             col = 'black', size = 6, hjust = -0.5)
 ```
 
 PBR 히스토그램을 좀 더 자세하게 나타내보도록 하겠습니다.
@@ -297,21 +314,26 @@ PBR 히스토그램을 좀 더 자세하게 나타내보도록 하겠습니다.
 3. `geom_vline()` 함수는 세로선을 그려주며, xintercept 즉 x축으로 PBR의 중앙값을 선택해 줍니다.
 4. `geom_text()` 함수는 그림 내에 글자를 표현해주며, label 인자에 원하는 글자를 입력해준 후 글자가 표현될 x축, y축, 색상, 사이즈 등을 선택할 수 있습니다.
 
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+### `geom_boxplot()`: 박스플롯 나타내기
+
+```{r warning = FALSE}
 ggplot(data_market, aes(x = SEC_NM_KOR, y = PBR)) +
   geom_boxplot() +
   coord_flip()
 ```
 
-박스 플롯 역시 데이터의 분포와 극단치를 확인하기 좋은 그림이며, `geom_boxplot()` 함수를 통해 나타낼 수 있습니다.
+박스플롯 역시 데이터의 분포와 이상치를 확인하기 좋은 그림이며, geom_boxplot() 함수를
+통해 나타낼 수 있습니다.
 
 1. x축 데이터로는 섹터 정보, y축 데이터로는 PBR을 선택해 줍니다.
-2. `geom_boxplot()`를 통해 박스 플롯을 그려줍니다.
-3. `coord_flip()` 함수는 x축과 y축을 뒤집어 표현하게 해주며 x축에 PBR, y축에 섹터 정보가 나타나게 되었습니다. 
+2. `geom_boxplot()`를 통해 박스플롯을 그려줍니다.
+3. `coord_flip()` 함수는 x축과 y축을 뒤집어 표현해주며 x축에 PBR, y축에 섹터 정보가 나타나게 되었습니다. 
 
 결과를 살펴보면 유틸리티나 금융 섹터의 경우 PBR이 잘 모여있는 반면, IT나 건강관리 섹터 등은 매우 극단적인 PBR을 가지고 있는 종목이 존재합니다.
 
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+### `dplyr`과 `ggplot`을 연결하여 사용하기
+
+```{r warning = FALSE}
 data_market %>%
   filter(!is.na(SEC_NM_KOR)) %>%
   group_by(SEC_NM_KOR) %>%
@@ -321,7 +343,8 @@ data_market %>%
              color = SEC_NM_KOR, label = SEC_NM_KOR)) +
   geom_point() +
   geom_text(color = 'black', size = 3, vjust = 1.3) +
-  theme(legend.position = 'bottom', legend.title = element_blank())
+  theme(legend.position = 'bottom',
+        legend.title = element_blank())
 ```
 
 앞에서 배운 데이터 분석과 시각화를 동시에 연결하여 사용할 수도 있습니다.
@@ -340,10 +363,13 @@ data_market %>%
 
 해당 결과를 파이프 오퍼레이터(`%>%`)로 이을 경우 그대로 시각화가 가능하며, `ggplot()` 함수 내에 데이터를 입력하지 않아도 됩니다.
 
-4. x축과 y축을 설정해준 뒤, 색상과 라벨을 섹터로 지정해주면 각 섹터 별로 다른 색상의 산점도가 그려지게 됩니다. 5. `geom_text()` 함수를 통해 앞에서 라벨로 지정한 섹터 정보들을 출력해줍니다.
+4. x축과 y축을 설정해준 뒤, 색상과 라벨을 섹터로 지정해주면 각 섹터 별로 다른 색상의 산점도가 그려지게 됩니다.
+5. `geom_text()` 함수를 통해 앞에서 라벨로 지정한 섹터 정보들을 출력해줍니다.
 6. `theme()` 함수를 통해 다양한 테마를 지정해주도록 합니다. legend.position 인자를 통해 범례를 하단에 배치하였으며, legend.title 인자를 통해 범례의 제목을 삭제해 주었습니다.
 
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+### `geom_bar()`: 막대그래프를 나타내기
+
+```{r warning = FALSE}
 data_market %>%
   group_by(SEC_NM_KOR) %>%
   summarize(n = n()) %>%
@@ -357,11 +383,11 @@ data_market %>%
 1. 먼저 `group_by()`를 통해 섹터 별 그룹을 묶어줍니다.
 2. `summarize()` 함수 내부에 `n()`을 통해, 각 그룹 별 데이터 갯수를 구합니다. 
 3. `ggplot()` 함수에서 x축에는 SEC_NM_KOR, y축에는 n을 지정해줍니다.
-4. `geom_bar()`를 통해 막대그래프를 그려주도록 합니다.y축에 해당하는 n 데이터를 그대로 사용하기 위해서는 stat인자를 'identity'로 지정해주어야 합니다. `theme_*()` 함수를 통해 배경 테마를 바꿀수도 있습니다. 
+4. `geom_bar()`를 통해 막대그래프를 그려주도록 합니다. y축에 해당하는 n 데이터를 그대로 사용하기 위해서는 stat인자를 **identity**로 지정해주어야 합니다. `theme_*()` 함수를 통해 배경 테마를 바꿀수도 있습니다. 
 
 한편 위 그래프는 데이터 갯수에 따라 순서대로 막대가 정렬되지 않아 보기에 좋은 형태는 아닙니다. 이를 반영하여 더욱 보기좋은 그래프로 나타내주도록 하겠습니다.
 
-```{r out.width = '50%', fig.align='center', warning = FALSE}
+```{r warning = FALSE}
 data_market %>%
   filter(!is.na(SEC_NM_KOR)) %>%
   group_by(SEC_NM_KOR) %>%
@@ -394,9 +420,8 @@ data_market %>%
 
 ### 주가 그래프 나타내기
 
-```{r message = FALSE, warning = FALSE}
+```{r message = FALSE, warning = FALSE, results = 'hide'}
 library(quantmod)
-library(magrittr)
 
 getSymbols('SPY')
 prices = Cl(SPY)
@@ -404,13 +429,13 @@ prices = Cl(SPY)
 
 `getSymbols()` 함수를 이용하여 미국 S&P500 지수를 추종하는 ETF인 SPY의 데이터를 다운로드 받은 후, `Cl()` 함수를 이용하여 종가에 해당하는 데이터만 추출합니다. 이제 해당 가격 및 수익률을 바탕으로 그래프를 그려보도록 하겠습니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r}
 plot(prices, main = 'Price')
 ```
 
 `getSymbols()` 함수는 데이터를 xts 형식으로 내려받으며, R에서는 데이터가 xts 형식일 경우 기본함수인 `plot()`으로 그래프를 그려도 x축에 시간을 나타내주며, 우측 상단에 기간을 표시해 줍니다. 그러나 완벽히 깔끔한 형태의 그래프라 보기는 어려운 면이 있습니다.
 
-```{r out.width = '50%', fig.align='center'}
+```{r}
 library(ggplot2)
 
 SPY %>%
@@ -422,16 +447,33 @@ SPY %>%
 
 ### 인터랙티브 그래프 나타내기
 
-```{r message = FALSE, fig.align='center'}
+```{r message = FALSE, eval = FALSE}
 library(dygraphs)
 
 dygraph(prices) %>%
   dyRangeSelector()
 ```
 
+```{r message = FALSE, eval = FALSE, echo = FALSE}
+library(dygraphs)
+library(htmlwidgets)
+library(webshot)
+
+m = dygraph(prices) %>%
+  dyRangeSelector()
+
+saveWidget(m, paste0(getwd(),'/data/dygraph.html'), selfcontained = FALSE)
+webshot(paste0(getwd(),'/data/dygraph.html'), 
+        delay = 1, file = 'images/dygraph.png')
+```
+
+```{r echo = FALSE}
+knitr::include_graphics('images/dygraph.png')
+```
+
 `dygraphs` 패키지의 `dygraph()` 함수를 이용하면 사용자의 움직임에 따라 반응하는 그래프를 그릴 수 있습니다. 해당 패키지는 JavaScript를 이용하여 인터랙티브한 그래프를 구현하며, 그래프 위에 마우스를 올릴 경우 날짜 및 가격이 표시되기도 하며, 하단의 셀렉터를 이용해 원하는 기간의 수익률을 선택할 수도 있습니다.
 
-```{r message = FALSE, fig.align='center'}
+```{r eval = FALSE}
 library(highcharter)
 
 highchart(type = 'stock') %>%
@@ -439,10 +481,26 @@ highchart(type = 'stock') %>%
   hc_scrollbar(enabled = FALSE)
 ```
 
+```{r echo = FALSE, eval = FALSE}
+library(highcharter)
+m = highchart(type = 'stock') %>%
+  hc_add_series(prices) %>%
+  hc_scrollbar(enabled = FALSE)
+
+saveWidget(m, paste0(getwd(),'/data/highcharter.html'), selfcontained = FALSE)
+webshot(paste0(getwd(),'/data/highcharter.html'), 
+        delay = 1, file = 'images/highcharter.png')
+```
+
+```{r echo = FALSE}
+knitr::include_graphics('images/highcharter.png')
+```
+
 `highcharter` 패키지의 `highchart()` 함수 역시 이와 비슷한 기능을 하며, 인터랙티브 그래프를 생성해줍니다. 좌측 상단의 기간을 클릭할 경우 해당 기간의 수익률 만을 확인할 수도 있으며, 우측 상단에 기간을 직접 입력할 수도 있습니다.
 
-```{r message = FALSE, fig.align='center'}
+```{r eval = FALSE}
 library(plotly)
+
 p = SPY %>%
   ggplot(aes(x = Index, y = SPY.Close)) +
   geom_line()
@@ -450,24 +508,54 @@ p = SPY %>%
 ggplotly(p)
 ```
 
+```{r echo = FALSE, eval = FALSE}
+library(plotly)
+p = SPY %>%
+  ggplot(aes(x = Index, y = SPY.Close)) +
+  geom_line()
+
+p = ggplotly(p)
+
+saveWidget(p, paste0(getwd(),'/data/ggplotly.html'), selfcontained = FALSE)
+webshot(paste0(getwd(),'/data/ggplotly.html'), file = 'images/ggplotly.png')
+```
+
+```{r echo = FALSE}
+knitr::include_graphics('images/ggplotly.png')
+```
+
 `plotly` 패키지는 R 뿐만 아니라 Python, MATLAB, Julia 등 여러 프로그래밍 언어에 사용될 수 있는 그래픽 패키지로써 최근에 많은 사랑을 받고 있습니다. R 내에서는 단순히 `ggplot()`을 이용해 나타낸 그림에 `ggplotly()` 함수를 추가해주는것 만으로 인터랙티브한 그래프를 만들어 줍니다. 
 
-또한 해당 패키지는 최근에 샤이니에서도 많이 사용되고 있습니다. 따라서 샤이니를 이용한 웹페이지 제작을 생각하고 계신분이라면, 원래의 함수 실행법도 알아두면 좋습니다.
+또한 해당 패키지는 최근 샤이니에서도 많이 사용되고 있습니다. 따라서 샤이니를 이용한 웹페이지 제작을 생각하고 계신분이라면, 원래의 함수 실행법도 알아두면 좋습니다.
 
-```{r message = FALSE, fig.align='center'}
+```{r eval = FALSE}
 prices %>%
   fortify.zoo %>%
   plot_ly(x= ~Index, y = ~SPY.Close ) %>%
   add_lines()
 ```
 
+```{r echo = FALSE, eval = FALSE}
+p = prices %>%
+  fortify.zoo %>%
+  plot_ly(x= ~Index, y = ~SPY.Close ) %>%
+  add_lines()
+
+saveWidget(p, paste0(getwd(),'/data/plotly.html'), selfcontained = FALSE)
+webshot(paste0(getwd(),'/data/plotly.html'), file = 'images/plotly.png')
+```
+
+```{r echo = FALSE}
+knitr::include_graphics('images/plotly.png')
+```
+
 `plot_ly()` 함수 내부에 x축과 y축을 설정해주며, 변수명 앞에 물결표(~)를 붙여줍니다. 그 후, `add_lines()` 함수를 추가해주면 선그래프를 표시해줍니다. `ggplot()` 함수의 경우 각 레이어의 연결을 플러스 기호(`+`)를 통해 해주었지만, `plot_ly()` 함수의 경우 파이프 오퍼레이터(`%>%`)를 통해 할 수 있다는 장점이 있습니다.
 
 ### 연도별 수익률 나타내기
 
-주가 그래프 외에 연도별 수익률을 그리는 것도 필수적인 일입니다. `ggplot()`을 통해 연도별 수익률을 막대그래프로 나타내는 방법을 살펴보도록 하겠습니다.
+주가 그래프 외에 연도별 수익률을 그리는 것도 중요합니다. `ggplot()`을 통해 연도별 수익률을 막대그래프로 나타내는 방법을 살펴보도록 하겠습니다.
 
-```{r out.width = '50%', message = FALSE, fig.align='center'}
+```{r message = FALSE}
 library(PerformanceAnalytics)
 
 ret_yearly = prices %>%
@@ -490,7 +578,7 @@ ggplot(ret_yearly, aes(x = Index, y = SPY.Close)) +
 
 1. 먼저 `apply.yearly()` 함수를 이용해 연도별 수익률을 계산해준 뒤 반올림을 해줍니다.
 2. `fortify.zoo()` 함수를 통해 인덱스에 있는 시간 데이터를 Index 열로 이동합니다.
-3. `mutate()` 함수 내에 `substring()` 을 통해 Index의 1부터 4번째 까지 글자, 즉 연도에 해당하는 부분을 뽑아낸 후, 숫자 형태로 저장합니다.
+3. `mutate()` 함수 내에 `substring()` 을 통해 Index의 1번째부터 4번째 글자, 즉 연도에 해당하는 부분을 뽑아낸 후, 숫자 형태로 저장합니다.
 4. `ggplot()` 함수를 이용해 x축에는 연도가 저장된 Index, y축에는 수익률이 저장된 SPY.Close를 입력합니다.
 5. `geom_bar()` 함수를 통해 막대그래프를 그려줍니다.
 6. `scale_x_continuous()` 함수를 통해 x축에 모든 연도가 출력되도록 합니다.

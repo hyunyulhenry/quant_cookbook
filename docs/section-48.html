@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 퀀트 전략을 이용한 종목선정 (기본) | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</title>
+  <meta name="description" content="Chapter 9 퀀트 전략을 이용한 종목선정 (기본) | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 퀀트 전략을 이용한 종목선정 (기본) | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 퀀트 전략을 이용한 종목선정 (기본) | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  
+  
+  
+
+<meta name="author" content="이현열" />
+
+
+<meta name="date" content="2019-07-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="section-41.html">
+<link rel="next" href="section-62.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">퀀트 투자 쿡북</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>여는 글</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-1"><i class="fa fa-check"></i>책의 구성</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-2"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-3"><i class="fa fa-check"></i>웹 주소 및 연락처</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
+<li class="chapter" data-level="1.1" data-path="section-4.html"><a href="section-4.html#section-5"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
+<li class="chapter" data-level="1.2" data-path="section-4.html"><a href="section-4.html#section-6"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
+<li class="chapter" data-level="1.3" data-path="section-4.html"><a href="section-4.html#r-"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
+<li class="chapter" data-level="1.4" data-path="section-4.html"><a href="section-4.html#r--1"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
+<li class="chapter" data-level="2.1" data-path="section-7.html"><a href="section-7.html#r-utf-8-"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="section-7.html"><a href="section-7.html#ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
+<li class="chapter" data-level="2.1.2" data-path="section-7.html"><a href="section-7.html#section-8"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩의 종류</a></li>
+<li class="chapter" data-level="2.1.3" data-path="section-7.html"><a href="section-7.html#r-utf-8--1"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="section-7.html"><a href="section-7.html#section-9"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="section-7.html"><a href="section-7.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="section-7.html"><a href="section-7.html#html-css-"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS 이해하기</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="section-7.html"><a href="section-7.html#html--"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
+<li class="chapter" data-level="2.3.2" data-path="section-7.html"><a href="section-7.html#section-10"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.3" data-path="section-7.html"><a href="section-7.html#h--p-"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
+<li class="chapter" data-level="2.3.4" data-path="section-7.html"><a href="section-7.html#ul-ol-"><i class="fa fa-check"></i><b>2.3.4</b> 리스트: ul과 ol 태그</a></li>
+<li class="chapter" data-level="2.3.5" data-path="section-7.html"><a href="section-7.html#table-"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
+<li class="chapter" data-level="2.3.6" data-path="section-7.html"><a href="section-7.html#a-src--"><i class="fa fa-check"></i><b>2.3.6</b> a, src 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.7" data-path="section-7.html"><a href="section-7.html#div-"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
+<li class="chapter" data-level="2.3.8" data-path="section-7.html"><a href="section-7.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
+<li class="chapter" data-level="2.3.9" data-path="section-7.html"><a href="section-7.html#class-id"><i class="fa fa-check"></i><b>2.3.9</b> class와 id</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="section-7.html"><a href="section-7.html#section-11"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="2.5" data-path="section-7.html"><a href="section-7.html#section-12"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
+<li class="chapter" data-level="3.1" data-path="api-.html"><a href="api-.html#api--quandl--"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
+<li class="chapter" data-level="3.2" data-path="api-.html"><a href="api-.html#getsymbols---api-"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="api-.html"><a href="api-.html#section-13"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.2" data-path="api-.html"><a href="api-.html#section-14"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.3" data-path="api-.html"><a href="api-.html#fred--"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="section-15.html"><a href="section-15.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-15.html"><a href="section-15.html#get-post--"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="section-15.html"><a href="section-15.html#get-"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
+<li class="chapter" data-level="4.1.2" data-path="section-15.html"><a href="section-15.html#post-"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="section-15.html"><a href="section-15.html#section-16"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="section-15.html"><a href="section-15.html#section-17"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
+<li class="chapter" data-level="4.2.2" data-path="section-15.html"><a href="section-15.html#section-18"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
+<li class="chapter" data-level="4.2.3" data-path="section-15.html"><a href="section-15.html#section-19"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="section-20.html"><a href="section-20.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-20.html"><a href="section-20.html#section-21"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="section-20.html"><a href="section-20.html#section-22"><i class="fa fa-check"></i><b>5.1.1</b> 산업별 현황 크롤링</a></li>
+<li class="chapter" data-level="5.1.2" data-path="section-20.html"><a href="section-20.html#section-23"><i class="fa fa-check"></i><b>5.1.2</b> 개별종목 지표 크롤링</a></li>
+<li class="chapter" data-level="5.1.3" data-path="section-20.html"><a href="section-20.html#section-24"><i class="fa fa-check"></i><b>5.1.3</b> 최근 영업일 기준 데이터 받기</a></li>
+<li class="chapter" data-level="5.1.4" data-path="section-20.html"><a href="section-20.html#section-25"><i class="fa fa-check"></i><b>5.1.4</b> 데이터 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="section-20.html"><a href="section-20.html#wics---"><i class="fa fa-check"></i><b>5.2</b> WICS 기준 섹터정보 크롤링</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="section-26.html"><a href="section-26.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-26.html"><a href="section-26.html#section-27"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="section-26.html"><a href="section-26.html#section-28"><i class="fa fa-check"></i><b>6.1.1</b> 개별 종목 주가 크롤링</a></li>
+<li class="chapter" data-level="6.1.2" data-path="section-26.html"><a href="section-26.html#section-29"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="section-26.html"><a href="section-26.html#section-30"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="section-26.html"><a href="section-26.html#section-31"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.2.2" data-path="section-26.html"><a href="section-26.html#section-32"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="6.2.3" data-path="section-26.html"><a href="section-26.html#section-33"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="section-26.html"><a href="section-26.html#section-34"><i class="fa fa-check"></i><b>6.3</b> 야후 파이낸스 데이터 구하기</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="section-26.html"><a href="section-26.html#section-35"><i class="fa fa-check"></i><b>6.3.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.3.2" data-path="section-26.html"><a href="section-26.html#section-36"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="section-37.html"><a href="section-37.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-37.html"><a href="section-37.html#section-38"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-37.html"><a href="section-37.html#section-39"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="section-37.html"><a href="section-37.html#section-40"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-41.html"><a href="section-41.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-41.html"><a href="section-41.html#section-42"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-41.html"><a href="section-41.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-41.html"><a href="section-41.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-41.html"><a href="section-41.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-41.html"><a href="section-41.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="section-41.html"><a href="section-41.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="section-41.html"><a href="section-41.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
+<li class="chapter" data-level="8.1.7" data-path="section-41.html"><a href="section-41.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="section-41.html"><a href="section-41.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통계값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="section-41.html"><a href="section-41.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="section-41.html"><a href="section-41.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="section-41.html"><a href="section-41.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="section-41.html"><a href="section-41.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶음</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="section-41.html"><a href="section-41.html#section-43"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-41.html"><a href="section-41.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-41.html"><a href="section-41.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
+<li class="chapter" data-level="8.2.3" data-path="section-41.html"><a href="section-41.html#geom_boxplot--"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스플롯 나타내기</a></li>
+<li class="chapter" data-level="8.2.4" data-path="section-41.html"><a href="section-41.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
+<li class="chapter" data-level="8.2.5" data-path="section-41.html"><a href="section-41.html#geom_bar--"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대그래프를 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="section-41.html"><a href="section-41.html#section-44"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="section-41.html"><a href="section-41.html#section-45"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="section-41.html"><a href="section-41.html#section-46"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="section-41.html"><a href="section-41.html#section-47"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="section-48.html"><a href="section-48.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-48.html"><a href="section-48.html#section-49"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section-48.html"><a href="section-48.html#section-50"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section-48.html"><a href="section-48.html#section-51"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="section-48.html"><a href="section-48.html#section-52"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="section-48.html"><a href="section-48.html#section-53"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="section-48.html"><a href="section-48.html#section-54"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="section-48.html"><a href="section-48.html#section-55"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="section-48.html"><a href="section-48.html#section-56"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="section-48.html"><a href="section-48.html#section-57"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="section-48.html"><a href="section-48.html#section-58"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="section-48.html"><a href="section-48.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="section-48.html"><a href="section-48.html#section-59"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="section-48.html"><a href="section-48.html#section-60"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-48.html"><a href="section-48.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-48.html"><a href="section-48.html#section-61"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="section-62.html"><a href="section-62.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-62.html"><a href="section-62.html#section-63"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-62.html"><a href="section-62.html#section-64"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-62.html"><a href="section-62.html#section-65"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-62.html"><a href="section-62.html#section-66"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-62.html"><a href="section-62.html#section-67"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="section-62.html"><a href="section-62.html#section-68"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-62.html"><a href="section-62.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-62.html"><a href="section-62.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-62.html"><a href="section-62.html#section-69"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="section-62.html"><a href="section-62.html#section-70"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="section-71.html"><a href="section-71.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-71.html"><a href="section-71.html#section-72"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-71.html"><a href="section-71.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-71.html"><a href="section-71.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-71.html"><a href="section-71.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-71.html"><a href="section-71.html#section-73"><i class="fa fa-check"></i><b>11.1.4</b> 결과값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-71.html"><a href="section-71.html#section-74"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-71.html"><a href="section-71.html#section-75"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="section-71.html"><a href="section-71.html#section-76"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="section-71.html"><a href="section-71.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="section-71.html"><a href="section-71.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="section-71.html"><a href="section-71.html#section-77"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="section-71.html"><a href="section-71.html#section-78"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="section-71.html"><a href="section-71.html#section-79"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="section-71.html"><a href="section-71.html#section-80"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
+<li class="chapter" data-level="11.3.2" data-path="section-71.html"><a href="section-71.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="section-71.html"><a href="section-71.html#section-81"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="section-82.html"><a href="section-82.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-82.html"><a href="section-82.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-82.html"><a href="section-82.html#section-83"><i class="fa fa-check"></i><b>12.1.1</b> 인자목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-82.html"><a href="section-82.html#section-84"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="section-82.html"><a href="section-82.html#section-85"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-82.html"><a href="section-82.html#section-86"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="section-82.html"><a href="section-82.html#section-87"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="section-88.html"><a href="section-88.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="section-88.html"><a href="section-88.html#section-89"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="section-88.html"><a href="section-88.html#section-90"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="section-88.html"><a href="section-88.html#section-91"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="section-88.html"><a href="section-88.html#section-92"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="section-88.html"><a href="section-88.html#section-93"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="section-88.html"><a href="section-88.html#section-94"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section-48" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> 퀀트 전략을 이용한 종목선정 (기본)</h1>
+<p>투자에 필요한 주가, 재무제표, 가치지표 데이터가 준비되었다면 퀀트 전략을 활용하여 투자하고자 하는 종목을 선정해야 합니다.</p>
+<p>퀀트 투자는 크게 포트폴리오 운용 전략과 트레이딩 전략으로 나눌 수 있습니다. 포트폴트폴리오 운용 전략의 경우 과거 주식 시장을 분석하여 좋은 주식의 기준을 찾아낸 후 해당 기준에 만족하는 종목을 매수하거나, 이와 반대에 있는 나쁜 주식을 공매도 하기도 합니다. 투자의 속도가 느리며, 다수의 종목을 하나의 포트폴리오로 구성하여 운용하는 특징이 있습니다. 반면 트레이딩 전략의 경우, 단기간에 발생되는 주식의 움직임을 연구한 후 예측하여, 매수 혹은 매도하는 전략입니다. 투자의 속도가 빠르며 소수의 종목을 대상으로 합니다.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-2">표 9.1: </span>퀀트 투자 종류의 비교</caption>
+<thead>
+<tr class="header">
+<th align="center">기준</th>
+<th align="center">포트폴리오 운용 전략</th>
+<th align="center">트레이딩 전략</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">투자철학</td>
+<td align="center">규칙에 기반한 투자</td>
+<td align="center">규칙에 기반한 투자</td>
+</tr>
+<tr class="even">
+<td align="center">투자목적</td>
+<td align="center">좋은 주식을 매수</td>
+<td align="center">좋은 시점을 매수</td>
+</tr>
+<tr class="odd">
+<td align="center">학문적 기반</td>
+<td align="center">경제학, 통계학 등</td>
+<td align="center">통계학, 공학, 정보처리 등</td>
+</tr>
+<tr class="even">
+<td align="center">투자의 속도</td>
+<td align="center">느림</td>
+<td align="center">빠름</td>
+</tr>
+</tbody>
+</table>
+<p>이 중 본 책에서는 포트폴리오에 기반한 운용 전략에 대해 다루도록 합니다. 주식의 수익률에 영향을 미치는 요소를 팩터<sup>Factor</sup>라 합니다. 즉 팩터의 강도가 양인 종목들로 구성한 포트폴리오의 경우 향후 수익률이 높을 것으로 예상되며, 팩터의 강도가 음인 종목들로 구성한 포트폴리오의 경우 반대로 향후 수익률이 낮을 것으로 예상됩니다.</p>
+<p>팩터에 대한 연구는 학자들에 의해 오랫동안 진행되어 왔지만, 일반 투자자들이 이러한 논문을 모두 찾아보고 연구하는 것은 사실상 불가능에 가깝습니다. 그러나 최근에는 <strong>스마트베타</strong>라는 이름으로 팩터 투자가 대중화되고 있습니다. 최근 유행하고 있는 스마트베타 ETF의 경우 팩터를 기준으로 포트폴리오를 구성한 상품으로써, 학계나 실무에서 검증된 팩터 전략을 기반으로 합니다.</p>
+<p>해당 상품들의 홈페이지나 투자설명서에는 종목 선정 기준에 대해 자세히 나와있으므로 이는 매우 훌륭한 투자 전략이기도 합니다. 따라서 스마트베타 ETF에 나와있는 투자 전략을 자세히 분석하는 것만으로도 훌륭한 퀀트 투자 전략을 만들 수 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="images/factor_smartbeta.png" alt="스마트베타 ETF 전략 예시" width="80%" />
+<p class="caption">
+그림 2.1: 스마트베타 ETF 전략 예시
+</p>
+</div>
+<p>본 장에서는 투자에 많이 활용되는 기본적인 팩터에 대해 알아보고, 우리가 구한 데이터를 바탕으로 각 팩터 별 투자 종목을 선택하는 방법에 대해 알아보도록 하겠습니다.</p>
+<p><strong>아울러 본 책에서 각종 모델을 통해 나온 종목들은, 데이터를 받은 시점에서의 종목이며 매수 추천은 아님을 밝힙니다.</strong></p>
+<div id="section-49" class="section level2">
+<h2><span class="header-section-number">9.1</span> 베타 이해하기</h2>
+<p>투자자들이라면 누구나 한번은 들어봤을만한 용어가 베타<sup>Beta</sup> 입니다. 기본적으로 개별 주식의 수익률에 가장 크게 영향을 주는 요소는 주식시장의 움직임일수 밖에 없습니다. 아무리 좋은 주식도 주식시장이 폭락한다면 같이 떨어지며, 아무리 나쁜 주식도 주식시장이 상승한다면 대부분 같이 오르기 마련입니다.</p>
+<p>개별 주식이 전체 주식시장의 변동에 반응하는 정도를 나타낸 값이 베타입니다. 베타가 1이라는 뜻은 주식시장과 움직임이 정확히 같다는 뜻으로써, 시장 그 자체를 나타냅니다. 베타가 1.5라는 뜻은 주식시장이 수익률이 +1% 일 때 개별 주식의 수익률은 +1.5%, 반대로 주식시장의 수익률이 -1% 일 때 개별 주식의 수익률은 -1.5% 움직인다는 뜻입니다. 반면 베타가 0.5라면 주식시장 수익률의 절반 정도만이 움직이게 됩니다.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-4">표 9.2: </span>베타에 따른 개별 주식의 수익률 움직임
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+베타
+</th>
+<th style="text-align:center;">
+주식시장이 +1% 일 경우
+</th>
+<th style="text-align:center;">
+주식시장이 -1% 일 경우
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+0.5
+</td>
+<td style="text-align:center;">
++0.5%
+</td>
+<td style="text-align:center;">
+-0.5%
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1.0
+</td>
+<td style="text-align:center;">
++1.0%
+</td>
+<td style="text-align:center;">
+-1.0%
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1.5
+</td>
+<td style="text-align:center;">
++1.5%
+</td>
+<td style="text-align:center;">
+-1.5%
+</td>
+</tr>
+</tbody>
+</table>
+<p>이처럼 베타가 큰 주식은 주식시장보다 수익률의 움직임이 크며, 반대로 베타가 낮은 주식은 주식시장보다 수익률의 움직임이 작습니다. 따라서 일반적으로 상승장이 기대될 때는 베타가 큰 주식에, 하락장일이 기대될 때는 베타가 낮은 주식에 투자하는 것이 좋습니다.</p>
+<p>주식시장에서의 베타는 통계학의 회귀분석모형에서 기울기를 나타내는 베타와 정확히 의미가 같습니다. 회귀분석모형은 <span class="math inline">\(y = a + bx\)</span> 형태로 나타나며, x의 변화에 따른 y의 변화의 기울기가 회귀계수인 b입니다. 이를 주식에 적용한 모형이 자산가격결정모형(CAPM: Capital Asset Pricing Model)이며, 그 식은 다음과 같습니다.</p>
+<p><span class="math display">\[회귀분석모형: y = a + bx\]</span>
+<span class="math display">\[자산가격결정모형: R_i = R_f + \beta_i\times[R_m - R_f]\]</span></p>
+<p>먼저 회귀분석모형의 상수항인 a에 해당하는 부분은 무위험 수익률을 나타내는 <span class="math inline">\(R_f\)</span>입니다. 독립변수인 x에 해당하는 부분은 무위험 수익률 대비 주식 시장의 초과 수익률을 나타내는 시장위험 프리미엄인 <span class="math inline">\(R_m - R_f\)</span>입니다. 종속변수인 y에 해당하는 부분은 개별주식의 수익률을 나타내는 <span class="math inline">\(R_i\)</span>이며, 최종적으로 회귀계수인 b에 해당하는 부분은 개별 주식의 베타입니다.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-5">표 2.2: </span>회귀분석모형과 자산가격결정모형의 비교
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+구분
+</th>
+<th style="text-align:center;">
+회귀분석모형
+</th>
+<th style="text-align:center;">
+자산가격결정모형
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+상수항
+</td>
+<td style="text-align:center;">
+a
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(R_f\)</span> (무위험 수익률)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+독립변수
+</td>
+<td style="text-align:center;">
+x
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(R_m - R_f\)</span> (시장위험 프리미엄)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+종속변수
+</td>
+<td style="text-align:center;">
+y
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(R_i\)</span> (개별주식의 수익률)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+회귀계수
+</td>
+<td style="text-align:center;">
+b
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(\beta_i\)</span> (개별주식의 베타)
+</td>
+</tr>
+</tbody>
+</table>
+<p>통계학에서 회귀계수는 <span class="math inline">\(\beta = \frac{cov(x,y)}{\sigma_x^2}\)</span> 형태로 구할 수 있으며, x와 y에 각각 시장수익률과 개별주식의 수익률을 대입할 경우 개별주식의 베타는 <span class="math inline">\(\beta_i= \rho(i,m) \times\frac{\sigma_i}{\sigma_m}\)</span> 형태로 구할 수 있습니다. 그러나 이러한 수식을 모르더라도 R에서는 간단히 베타를 구할 수 있습니다.</p>
+<div id="section-50" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> 베타 계산하기</h3>
+<p>베타를 구하는 방법을 알아보기 위해 주식시장에 대한 대용치로 KOSPI 200 ETF, 개별주식으로는 전통적 고베타주인 증권주를 이용하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(magrittr)
+
+symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;102110.KS&#39;</span>, <span class="st">&#39;039490.KS&#39;</span>)
+<span class="kw">getSymbols</span>(symbols)</code></pre>
+<pre><code>## [1] &quot;102110.KS&quot; &quot;039490.KS&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,
+                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x)<span class="kw">Cl</span>(<span class="kw">get</span>(x))))
+
+ret =<span class="st"> </span><span class="kw">Return.calculate</span>(prices)
+ret =<span class="st"> </span>ret[<span class="st">&#39;2016-01::2018-12&#39;</span>]</code></pre>
+<ol style="list-style-type: decimal">
+<li>KOSPI 200 ETF인 TIGER 200(102110.KS), 증권주인 키움증권(039490.KS)의 티커를 입력합니다.</li>
+<li><code>getSymbols()</code> 함수를 이용하여 해당 티커들의 데이터를 다운로드 받습니다.</li>
+<li><code>lapply()</code> 함수 내에 <code>Cl()</code>과 <code>get()</code>함수를 사용하여 종가에 해당하는 데이터만 추출하며, 리스트 형태의 데이터를 열의 형태로 묶어주기 위해 <code>do.call()</code> 함수와 <code>cbind()</code> 함수를 사용해 줍니다.</li>
+<li><code>Return.calculate()</code> 함수를 통해 수익률을 계산해 줍니다.</li>
+<li>xts 형식의 데이터는 대괄호 속에 [‘시작일자::종료일자’]와 같은 형태로, 원하는 날짜를 편리하게 선택할 수 있으며, 위에서는 2016년 1월부터 2018년 12월 까지 데이터를 선택합니다.</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">rm =<span class="st"> </span>ret[, <span class="dv">1</span>]
+ri =<span class="st"> </span>ret[, <span class="dv">2</span>]
+
+reg =<span class="st"> </span><span class="kw">lm</span>(ri <span class="op">~</span><span class="st"> </span>rm)
+<span class="kw">summary</span>(reg)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ri ~ rm)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.06886 -0.01294 -0.00169  0.01080  0.09545 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 0.000345   0.000721    0.48     0.63    
+## rm          1.762249   0.090619   19.45   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0195 on 729 degrees of freedom
+## Multiple R-squared:  0.342,  Adjusted R-squared:  0.341 
+## F-statistic:  378 on 1 and 729 DF,  p-value: &lt;2e-16</code></pre>
+<p>증권주를 대상으로 베타를 구하기 위한 회귀분석을 실시합니다. 자산가격결정모형의 수식인 <span class="math inline">\(R_i = R_f + \beta_i \times [R_m - R_f]\)</span> 에서 편의를 위해 무위험 수익률인 <span class="math inline">\(R_f\)</span>를 0으로 가정하면, <span class="math inline">\(R_i = \beta_i \times R_m\)</span>의 형태로 나타낼 수 있습니다. 이 중 <span class="math inline">\(R_m\)</span>는 독립변수인 주식시장의 수익률을, <span class="math inline">\(R_i\)</span>는 종속변수인 개별주식의 수익률을 의미합니다.</p>
+<ol style="list-style-type: decimal">
+<li>독립변수는 첫번째 열인 KOSPI 200 ETF의 수익률을 선택하며, 종속변수는 두번째 열인 증권주의 수익률을 선택합니다.</li>
+<li><code>lm()</code> 함수를 통해 손쉽게 선형회귀분석을 실시할 수 있으며, 회귀분석의 결과를 reg 변수에 저장해줍니다.</li>
+<li><code>summary()</code> 함수는 데이터의 요약 정보를 나타내며, 해당 예시에서는 회귀분석결과에 대한 정보를 보여줍니다.</li>
+</ol>
+<p>회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients 부분입니다. Intercept 부분은 회귀분석의 상수항에 해당하는 부분으로써, 값이 거의 0에 가깝고 t밸류 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분은 x의 Estimate 부분으로써, 베타값이 1.76으로 증권주의 특성인 고베타주임이 확인되며, t밸류 또한 19.45로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.</p>
+</div>
+<div id="section-51" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> 베타 시각화</h3>
+<p>다음으로 구해진 베타를 그림으로 표현해보도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">as.numeric</span>(rm), <span class="kw">as.numeric</span>(ri), <span class="dt">pch =</span> <span class="dv">4</span>, <span class="dt">cex =</span> <span class="fl">0.3</span>, 
+     <span class="dt">xlab =</span> <span class="st">&quot;KOSPI 200&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Individual Stock&quot;</span>,
+     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.02</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.02</span>))
+<span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
+<span class="kw">abline</span>(reg, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)</code></pre>
+<p><img src="09-factor_basic_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: decimal">
+<li><code>plot()</code> 함수를 통해 그림을 그려주며, x축과 y축에 주식시장 수익률과 개별주식 수익률을 입력합니다. pch는 점들의 모양을, cex는 점들의 크기를 나타내며, xlab과 ylab은 각각 x축과 y축에 들어갈 문구를 나타냅니다. xlim과 ylim은 x축과 y축의 최소 및 최대 범위를 지정해줍니다.</li>
+<li>첫번째 <code>abline()</code>에서 a는 상수, b는 직선의 기울기, lty는 선의 유형을 나타냅니다. 이를 통해 기울기, 즉 베타가 1일 경우의 선을 점선으로 표현합니다.</li>
+<li>두번째 <code>abline()</code>에 회귀분석 결과를 입력해주면 자동적으로 회귀식을 그려줍니다.</li>
+</ol>
+<p>검은색의 점선이 기울기가 1인 경우이며, 붉은색의 직선이 증권주의 회귀분석결과를 나타냅니다. 기울기가 1보다 훨씬 가파름이 확인되며, 즉 베타가 1보다 크다는 사실을 알 수 있습니다.</p>
+</div>
+</div>
+<div id="section-52" class="section level2">
+<h2><span class="header-section-number">9.2</span> 저변동성 전략</h2>
+<p>금융 시장에서 변동성은 수익률이 움직이는 정도로써, 일반적으로 표준편차가 사용됩니다. 표준편차는 자료가 평균을 중심으로 얼마나 퍼져 있는지를 나타내는 수치로써, 수식은 다음과 같습니다.</p>
+<p><span class="math display">\[\sigma = \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})^2}}{n-1}}\]</span></p>
+<p>관측값의 개수가 작을 경우에는 수식에 대입하여 계산하는 것이 가능하지만, 관측값이 수백 혹은 수천개로 늘어날 경우 컴퓨터를 이용하지 않고 계산하는 것은 사실상 불가능합니다. R에서는 복잡한 계산과정 없이 <code>sd()</code> 함수를 이용하여 간단하게 표준편차를 계산할 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">example =<span class="st"> </span><span class="kw">c</span>(<span class="dv">85</span>, <span class="dv">76</span>, <span class="dv">73</span>, <span class="dv">80</span>, <span class="dv">72</span>)
+<span class="kw">sd</span>(example)</code></pre>
+<pre><code>## [1] 5.357</code></pre>
+<p>개별 주식의 표준편차를 측정할 때는 주식의 가격이 아닌 수익률로 계산해야 합니다. 수익률의 표준편차가 크다는 의미는 수익률이 위 아래로 많이 움직여 위험한 종목으로 여겨집니다. 반면, 표준편차가 작다는 의미는 수익률의 움직임이 적어 상대적으로 안전한 종목으로 여겨집니다.</p>
+<p>전통적 금융 이론에서는 수익률의 변동성이 클수록 위험이 크고, 이런 위험에 대한 보상으로 기대수익률이 높아야 한다고 보았습니다. 따라서 고변동성 종목의 기대수익률이 크고, 저변동성 종목의 기대수익률이 낮은 고위험 고수익이 당연한 믿음이었습니다. 그러나 현실에서는 오히려 변동성이 낮은 종목들의 수익률이 변동성이 높은 종목들의 수익률 보다 높은, 저변동성 효과가 발견되고 있습니다. 이러한 저변동성 효과가 발생하는 원인으로는 여러 가설이 있습니다.</p>
+<ol style="list-style-type: decimal">
+<li>투자자들은 대체로 자신의 능력을 과신하는 경향이 있으며, 복권과 같이 큰 수익을 가져다 주는 고변동성 주식을 선호하는 경향이 있습니다. 이러한 결과로 고변동성 주식은 과대 평가되어 수익률이 낮은 반면, 과소 평가된 저변동성 주식들은 높은 수익률을 보이게 됩니다.</li>
+<li>대부분 기관투자가들이 레버리지 투자가 되지 않는 상황에서, 벤치마크 대비 높은 성과를 얻기 위해 고변동성 주식에 투자하는 경향이 있으며, 이 또한 고변동성 주식이 과대 평가되는 결과로 이어집니다.</li>
+<li>시장의 상승과 하락이 반복됨에 따라 고변동성 주식이 변동성 손실(Volatility Drag)로 인해 수익률이 하락하게 되는 이유도 있습니다.</li>
+</ol>
+<p>주식의 위험은 변동성뿐만 아니라 베타 등 여러 지표로도 측정할 수 있습니다. 저변동성 효과와 비슷하게 고유변동성이 낮은 주식의 수익률이 높은 저고유변동성 효과, 베타가 낮은 주식의 수익률이 오히려 높은 저베타 효과도 발견되고 있으며, 이러한 효과들을 합쳐 저위험 효과로 부르기도 합니다.</p>
+<div id="section-53" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> 저변동성 포트폴리오 구하기: 일간 기준</h3>
+<p>먼저 최근 1년 일간 수익률 기준 변동성이 낮은 30 종목을 선택하도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
+<span class="kw">library</span>(xts)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(magrittr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(dplyr)
+
+KOR_price =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_price.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,
+                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.xts</span>()
+KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,
+                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) 
+KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =<span class="st"> </span>
+<span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)
+
+ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price)
+std_12m_daily =<span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(ret, <span class="dv">252</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">252</span>))</code></pre>
+<ol style="list-style-type: decimal">
+<li>저장해둔 가격 정보와 티커 정보를 불러오도록 하며, 가격 정보의 경우 <code>as.xts()</code> 함수를 통해 xts 형태로 변경해주도록 합니다.</li>
+<li><code>Return.calculate()</code> 함수를 통해 수익률을 구합니다.</li>
+<li><code>last()</code> 함수는 마지막 n개 데이터를 선택해주는 함수이며, 1년 영업일 기준인 252개 데이터를 선택합니다. <code>dplyr</code> 패키지의 <code>last()</code> 함수와 이름이 같으므로, <code>xts::last()</code> 형식을 통해 xts 패키지의 함수임을 정의해줍니다.</li>
+<li><code>apply()</code> 함수를 통해 sd 즉 변동성을 계산해주며, 연율화를 해주기 위해 <code>multiply_by()</code> 함수를 통해 <span class="math inline">\(\sqrt{252}\)</span>를 곱해주도록 합니다.</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">std_12m_daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> (<span class="st">`</span><span class="dt">.</span><span class="st">`</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;rect&quot;</span>, <span class="dt">xmin =</span> <span class="fl">-0.02</span>, <span class="dt">xmax =</span> <span class="fl">0.02</span>,
+           <span class="dt">ymin =</span> <span class="dv">0</span>,
+           <span class="dt">ymax =</span> <span class="kw">sum</span>(std_12m_daily <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">*</span><span class="st"> </span><span class="fl">1.1</span>,
+           <span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">fill=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)
+
+std_12m_daily[std_12m_daily <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></code></pre>
+<p><img src="09-factor_basic_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>변동성을 히스토그램으로 나타내보면, 0에 위치하는 종목들이 다수 존재합니다. 해당 종목들은 최근 1년간 거래정지로 인해 가격이 변하지 않았고, 이로 인해 변동성이 없는 종목들입니다. 해당 종믁들은 NA로 처리해주도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">std_12m_daily[<span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</code></pre>
+<pre><code>## X030200 X001720 X015350 X017390 X034950 X015360 X092230 X018120 X092130 
+## 0.15627 0.14199 0.12591 0.16792 0.14813 0.11614 0.12852 0.10121 0.14265 
+## X001270 X117580 X006220 X003460 X003650 X007330 X034590 X040420 X023000 
+## 0.15961 0.11326 0.15551 0.10164 0.17117 0.14762 0.05139 0.12132 0.15994 
+## X000650 X003080 X107590 X004450 X001750 X006660 X014440 X066670 X115310 
+## 0.15922 0.13433 0.17215 0.14424 0.13215 0.17100 0.16803 0.15343 0.15709 
+## X049430 X025530 X066790 
+## 0.17370 0.17350 0.09720</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">std_12m_daily[<span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>), <span class="dt">y =</span> <span class="st">`</span><span class="dt">.</span><span class="st">`</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</code></pre>
+<p><img src="09-factor_basic_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><code>rank()</code> 함수를 통해 순위를 구할 수 있으며, R은 기본적으로 오름차순 즉 가장 낮은 값의 순위가 1이 됩니다. 따라서 변동성이 낮을수록 높은 순위가 되며, 30위 이하의 순위를 선택하면 변동성이 낮은 30 종목이 선택됩니다. 또한 <code>ggplot()</code> 함수를 이용해 해당 종목들의 변동성을 확인해볼 수도 있습니다.</p>
+<p>이번에는 해당 종목들의 티커 및 종목명을 확인하도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">invest_lowvol =<span class="st"> </span><span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>
+KOR_ticker[invest_lowvol, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(std_12m_daily[invest_lowvol], <span class="dv">4</span>))</code></pre>
+<pre><code>##    종목코드         종목명 변동성
+## 1    030200             KT 0.1563
+## 2    001720       신영증권 0.1420
+## 3    015350       부산가스 0.1259
+## 4    017390       서울가스 0.1679
+## 5    034950   한국기업평가 0.1481
+## 6    015360   예스코홀딩스 0.1161
+## 7    092230      KPX홀딩스 0.1285
+## 8    018120       진로발효 0.1012
+## 9    092130     이크레더블 0.1427
+## 10   001270       부국증권 0.1596
+## 11   117580     대성에너지 0.1133
+## 12   006220       제주은행 0.1555
+## 13   003460       유화증권 0.1016
+## 14   003650       미창석유 0.1712
+## 15   007330   푸른저축은행 0.1476
+## 16   034590   인천도시가스 0.0514
+## 17   040420 정상제이엘에스 0.1213
+## 18   023000       삼원강재 0.1599
+## 19   000650       천일고속 0.1592
+## 20   003080       성보화학 0.1343
+## 21   107590     미원홀딩스 0.1721
+## 22   004450       삼화왕관 0.1442
+## 23   001750       한양증권 0.1321
+## 24   006660       삼성공조 0.1710
+## 25   014440       영보화학 0.1680
+## 26   066670   디스플레이텍 0.1534
+## 27   115310       인포바인 0.1571
+## 28   049430         코메론 0.1737
+## 29   025530      SJM홀딩스 0.1735
+## 30   066790       씨씨에스 0.0972</code></pre>
+<p>티커와 종목명, 그리고 연율화 변동성을 확인할 수 있습니다.</p>
+</div>
+<div id="section-54" class="section level3">
+<h3><span class="header-section-number">9.2.2</span> 저변동성 포트폴리오 구하기: 주간 기준</h3>
+<p>이번에는 일간 변동성이 아닌 주간 변동성을 기준으로 저변동성 종목을 선택하도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">std_12m_weekly =<span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(ret, <span class="dv">252</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">apply.weekly</span>(Return.cumulative) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">52</span>))
+
+std_12m_weekly[std_12m_weekly <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></code></pre>
+<p>먼저 최근 252일 수익률울 선택한 후, <code>apply.weekly()</code> 함수 내 Return.cumulative를 입력하여 주간 수익률을 계산하며, 연율화를 위해 연간 주수에 해당하는 <span class="math inline">\(\sqrt{52}\)</span>를 곱해주도록 합니다. 이 외에도 <code>apply.monthly()</code>, <code>apply.yearly()</code> 함수 등으로 일간 수익률을 월간, 연간 수익률 등으로 변환할 수 있습니다. 그 후 과정은 위와 동일합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">std_12m_weekly[<span class="kw">rank</span>(std_12m_weekly) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</code></pre>
+<pre><code>## X316140 X030200 X001720 X019680 X002960 X015350 X017390 X034950 X015360 
+## 0.15526 0.14535 0.11912 0.14722 0.13555 0.12668 0.15443 0.13875 0.09979 
+## X092230 X018120 X092130 X312610 X001270 X117580 X038390 X003460 X003650 
+## 0.11673 0.07575 0.14683 0.05745 0.16038 0.12097 0.16150 0.08612 0.14894 
+## X007330 X034590 X019440 X040420 X004450 X001750 X004080 X066670 X115310 
+## 0.15059 0.03623 0.16329 0.11287 0.11352 0.12518 0.16374 0.14154 0.12913 
+## X049430 X002070 X066790 
+## 0.13032 0.14917 0.13632</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">invest_lowvol_weekly =<span class="st"> </span><span class="kw">rank</span>(std_12m_weekly) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>
+KOR_ticker[invest_lowvol_weekly, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =
+<span class="st">           </span><span class="kw">round</span>(std_12m_weekly[invest_lowvol_weekly], <span class="dv">4</span>))</code></pre>
+<pre><code>##    종목코드         종목명 변동성
+## 1    316140   우리금융지주 0.1553
+## 2    030200             KT 0.1454
+## 3    001720       신영증권 0.1191
+## 4    019680           대교 0.1472
+## 5    002960     한국쉘석유 0.1356
+## 6    015350       부산가스 0.1267
+## 7    017390       서울가스 0.1544
+## 8    034950   한국기업평가 0.1387
+## 9    015360   예스코홀딩스 0.0998
+## 10   092230      KPX홀딩스 0.1167
+## 11   018120       진로발효 0.0757
+## 12   092130     이크레더블 0.1468
+## 13   312610 에이에프더블류 0.0575
+## 14   001270       부국증권 0.1604
+## 15   117580     대성에너지 0.1210
+## 16   038390     레드캡투어 0.1615
+## 17   003460       유화증권 0.0861
+## 18   003650       미창석유 0.1489
+## 19   007330   푸른저축은행 0.1506
+## 20   034590   인천도시가스 0.0362
+## 21   019440     세아특수강 0.1633
+## 22   040420 정상제이엘에스 0.1129
+## 23   004450       삼화왕관 0.1135
+## 24   001750       한양증권 0.1252
+## 25   004080           신흥 0.1637
+## 26   066670   디스플레이텍 0.1415
+## 27   115310       인포바인 0.1291
+## 28   049430         코메론 0.1303
+## 29   002070     남영비비안 0.1492
+## 30   066790       씨씨에스 0.1363</code></pre>
+<p>주간 수익률의 변동성이 낮은 30 종목을 선택하여 종목코드, 종목명, 연율화 변동성을 확인하도록 합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">intersect</span>(KOR_ticker[invest_lowvol, <span class="st">&#39;종목명&#39;</span>],
+          KOR_ticker[invest_lowvol_weekly, <span class="st">&#39;종목명&#39;</span>])</code></pre>
+<pre><code>##  [1] &quot;KT&quot;             &quot;신영증권&quot;       &quot;부산가스&quot;       &quot;서울가스&quot;      
+##  [5] &quot;한국기업평가&quot;   &quot;예스코홀딩스&quot;   &quot;KPX홀딩스&quot;      &quot;진로발효&quot;      
+##  [9] &quot;이크레더블&quot;     &quot;부국증권&quot;       &quot;대성에너지&quot;     &quot;유화증권&quot;      
+## [13] &quot;미창석유&quot;       &quot;푸른저축은행&quot;   &quot;인천도시가스&quot;   &quot;정상제이엘에스&quot;
+## [17] &quot;삼화왕관&quot;       &quot;한양증권&quot;       &quot;디스플레이텍&quot;   &quot;인포바인&quot;      
+## [21] &quot;코메론&quot;         &quot;씨씨에스&quot;</code></pre>
+<p><code>intersect()</code> 함수를 통해 일간 변동성 기준과 주간 변동성 기준 모두에 포함되는 종목을 찾을 수 있습니다.</p>
+</div>
+</div>
+<div id="section-55" class="section level2">
+<h2><span class="header-section-number">9.3</span> 모멘텀 전략</h2>
+<p>투자에서 모멘텀이란 주가 혹은 이익의 추세로써, 상승 추세의 주식은 지속적으로 상승하며 하락 추세의 주식은 지속적으로 하락하는 현상을 말합니다. 모멘텀 현상이 발생하는 원인 중 가장 큰 이유는 투자자들의 스스로에 대한 과잉 신뢰 때문입니다. 사람들은 자신의 판단을 지지하는 정보에 대해서는 과잉 반응하는, 자신의 판단을 부정하는 정보에 대해서는 과소 반응하는 경향이 있습니다. 이러한 투자자들의 비합리성으로 인해 모멘텀 현상이 생겨나게 됩니다.</p>
+<p>모멘텀의 종류는 크게 기업의 이익에 대한 추세를 나타내는 이익 모멘텀과, 주가의 모멘텀에 대한 가격 모멘텀이 있습니다. 또한 가격 모멘텀도 1주일 혹은 1개월 이하를 의미하는 단기 모멘텀, 3개월에서 12개월을 의미하는 중기 모멘텀, 3년에서 5년을 의미하는 장기 모멘텀이 있으며, 이중에서도 3개월에서 12개월 가격 모멘텀을 흔히 모멘텀이라 합니다.</p>
+<div id="section-56" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</h3>
+<p>먼저 최근 1년 동안의 수익률이 높은 30 종목을 선택하도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
+<span class="kw">library</span>(xts)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(magrittr)
+<span class="kw">library</span>(dplyr)
+
+KOR_price =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_price.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,
+                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.xts</span>()
+KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,
+                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) 
+KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =
+<span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)
+
+ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">252</span>) 
+ret_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {
+  <span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+  })</code></pre>
+<ol style="list-style-type: decimal">
+<li>가격 정보와 티커 정보를 불러온 후, <code>Return.calculate()</code> 함수를 통해 수익률을 계산합니다. 그 후, 최근 252일 수익률을 선택합니다.</li>
+<li><code>sapply()</code> 함수 내부에 <code>prod()</code> 함수를 이용하여 각 종목의 누적수익률을 계산해줍니다.</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">ret_12m[<span class="kw">rank</span>(<span class="op">-</span>ret_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</code></pre>
+<pre><code>## X032500 X214150 X078070 X048410 X230360 X239610 X061970 X078130 X097520 
+##   2.362   2.110   6.434   2.228   1.835   2.031   1.836   2.004   1.439 
+## X047310 X138080 X008350 X179900 X214870 X143160 X176440 X263920 X009460 
+##   1.524   4.521   1.836   1.651   2.827   2.130   2.853   2.336   1.822 
+## X263540 X190510 X037070 X215090 X001140 X023770 X024060 X100030 X051160 
+##   1.461   1.504   1.458   1.420   2.816   3.609   1.449   2.141   3.089 
+## X139670 X090740 X051630 
+##   2.930   1.437   1.775</code></pre>
+<p><code>rank()</code> 함수를 통해 순위를 구하도록 하며, 모멘텀의 경우 높을수록 좋은 내림차순으로 순위를 계산해야 하므로 수익률 앞에 마이너스(-)를 붙여주도록 합니다. 12개월 누적수익률이 높은 종목들이 선택됨이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">invest_mom =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>ret_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>
+KOR_ticker[invest_mom, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">수익률</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(ret_12m[invest_mom], <span class="dv">4</span>))</code></pre>
+<pre><code>##    종목코드           종목명 수익률
+## 1    032500     케이엠더블유  2.362
+## 2    214150         클래시스  2.110
+## 3    078070   유비쿼스홀딩스  6.434
+## 4    048410       현대바이오  2.228
+## 5    230360       에코마케팅  1.835
+## 6    239610 에이치엘사이언스  2.031
+## 7    061970       엘비세미콘  1.836
+## 8    078130         국일제지  2.004
+## 9    097520         엠씨넥스  1.439
+## 10   047310       파워로직스  1.524
+## 11   138080       오이솔루션  4.521
+## 12   008350       남선알미늄  1.836
+## 13   179900         유티아이  1.651
+## 14   214870           뉴지랩  2.827
+## 15   143160         아이디스  2.130
+## 16   176440       에이치엔티  2.853
+## 17   263920     블러썸엠앤씨  2.336
+## 18   009460         한창제지  1.822
+## 19   263540             샘코  1.461
+## 20   190510           나무가  1.504
+## 21   037070           파세코  1.458
+## 22   215090   리퓨어유니맥스  1.420
+## 23   001140             국보  2.816
+## 24   023770       플레이위드  3.609
+## 25   024060         흥구석유  1.449
+## 26   100030       모바일리더  2.141
+## 27   051160       지어소프트  3.089
+## 28   139670       키네마스터  2.930
+## 29   090740     연이정보통신  1.437
+## 30   051630         진양화학  1.775</code></pre>
+<p>티커와 종목명, 그리고 누적수익률을 확인할 수 있습니다.</p>
+</div>
+<div id="section-57" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> 모멘텀 포트폴리오 구하기: 위험조정 수익률</h3>
+<p>단순히 과거 수익률로만 모멘텀 종목을 선택할 경우, 각종 테마나 이벤트로 인한 급등으로 인해 변동성이 지나치게 높은 종목이 존재할 수도 있습니다. 누적 수익률을 변동성으로 나누어 위험을 고려해줄 경우, 이러한 종목은 제외되며 상대적으로 안정적인 모멘텀 종목을 선택할 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">252</span>) 
+ret_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {
+  <span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>
+  })
+std_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">252</span>))
+sharpe_12m =<span class="st"> </span>ret_12m <span class="op">/</span><span class="st"> </span>std_12m</code></pre>
+<ol style="list-style-type: decimal">
+<li>최근 1년에 해당하는 수익률을 선택합니다.</li>
+<li><code>sapply()</code>와 <code>prod()</code> 함수를 이용해 분자에 해당하는 누적수익률을 계산합니다.</li>
+<li><code>apply()</code>와 <code>multiply_by()</code> 함수를 이용해 분모에 해당하는 연율화 변동성을 계산합니다.</li>
+<li>수익률을 변동성으로 나누어 위험조정 수익률을 계산해줍니다.</li>
+</ol>
+<p>이를 통해 수익률이 높으면서 변동성이 낮은 종목을 선정할 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">invest_mom_sharpe =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>sharpe_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>
+KOR_ticker[invest_mom_sharpe, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">수익률</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(ret_12m[invest_mom_sharpe], <span class="dv">2</span>),
+         <span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(std_12m[invest_mom_sharpe], <span class="dv">2</span>),
+         <span class="st">`</span><span class="dt">위험조정 수익률</span><span class="st">`</span> =
+<span class="st">           </span><span class="kw">round</span>(sharpe_12m[invest_mom_sharpe], <span class="dv">2</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="ot">Inf</span>)</code></pre>
+<pre><code>## # A tibble: 30 x 5
+##    종목코드 종목명           수익률 변동성 `위험조정 수익률`
+##    &lt;chr&gt;    &lt;chr&gt;             &lt;dbl&gt;  &lt;dbl&gt;             &lt;dbl&gt;
+##  1 081660   휠라코리아         1.2   0.48               2.47
+##  2 032500   케이엠더블유       2.36  0.6                3.94
+##  3 091700   파트론             1.07  0.42               2.52
+##  4 214150   클래시스           2.11  0.63               3.35
+##  5 078070   유비쿼스홀딩스     6.43  0.68               9.53
+##  6 048410   현대바이오         2.23  1.03               2.16
+##  7 029960   코엔텍             1.12  0.49               2.31
+##  8 230360   에코마케팅         1.83  0.64               2.85
+##  9 239610   에이치엘사이언스   2.03  0.61               3.33
+## 10 061970   엘비세미콘         1.84  0.87               2.11
+## 11 078130   국일제지           2     0.91               2.2 
+## 12 097520   엠씨넥스           1.44  0.56               2.56
+## 13 047310   파워로직스         1.52  0.61               2.49
+## 14 138080   오이솔루션         4.52  0.63               7.19
+## 15 008350   남선알미늄         1.84  0.77               2.4 
+## 16 123860   아나패스           1.06  0.47               2.25
+## 17 214870   뉴지랩             2.83  0.66               4.29
+## 18 143160   아이디스           2.13  0.85               2.5 
+## 19 176440   에이치엔티         2.85  0.84               3.38
+## 20 263920   블러썸엠앤씨       2.34  0.84               2.79
+## 21 009460   한창제지           1.82  0.78               2.33
+## 22 190510   나무가             1.5   0.46               3.24
+## 23 001140   국보               2.82  1.05               2.68
+## 24 023770   플레이위드         3.61  0.8                4.51
+## 25 100030   모바일리더         2.14  0.66               3.26
+## 26 051160   지어소프트         3.09  0.85               3.63
+## 27 139670   키네마스터         2.93  0.83               3.51
+## 28 104460   동양피엔에프       1.09  0.43               2.52
+## 29 051630   진양화학           1.77  0.83               2.13
+## 30 050760   에스폴리텍         1.32  0.580              2.28</code></pre>
+<p>티커와 종목명, 누적수익률, 변동성, 위험조정 수익률을 확인할 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">intersect</span>(KOR_ticker[invest_mom, <span class="st">&#39;종목명&#39;</span>],
+          KOR_ticker[invest_mom_sharpe, <span class="st">&#39;종목명&#39;</span>])</code></pre>
+<pre><code>##  [1] &quot;케이엠더블유&quot;     &quot;클래시스&quot;         &quot;유비쿼스홀딩스&quot;  
+##  [4] &quot;현대바이오&quot;       &quot;에코마케팅&quot;       &quot;에이치엘사이언스&quot;
+##  [7] &quot;엘비세미콘&quot;       &quot;국일제지&quot;         &quot;엠씨넥스&quot;        
+## [10] &quot;파워로직스&quot;       &quot;오이솔루션&quot;       &quot;남선알미늄&quot;      
+## [13] &quot;뉴지랩&quot;           &quot;아이디스&quot;         &quot;에이치엔티&quot;      
+## [16] &quot;블러썸엠앤씨&quot;     &quot;한창제지&quot;         &quot;나무가&quot;          
+## [19] &quot;국보&quot;             &quot;플레이위드&quot;       &quot;모바일리더&quot;      
+## [22] &quot;지어소프트&quot;       &quot;키네마스터&quot;       &quot;진양화학&quot;</code></pre>
+<p><code>intersect()</code> 함수를 통해 단순 수익률 및 위험조정 수익률 기준 모두에 포함되는 종목을 찾을 수 있습니다. 다음 그림은 위험조정 수익률 상위 30 종목의 가격 그래프입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xts)
+<span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(ggplot2)
+
+KOR_price[, invest_mom_sharpe] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(ticker, price, <span class="op">-</span>Index) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> price)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>ticker, <span class="dt">scales =</span> <span class="st">&#39;free&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),
+        <span class="dt">axis.text.y=</span><span class="kw">element_blank</span>())</code></pre>
+<p><img src="09-factor_basic_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="section-58" class="section level2">
+<h2><span class="header-section-number">9.4</span> 밸류 전략</h2>
+<p>가치주 효과란 내재 가치 대비 낮은 가격의 주식(저 PER, 저 PBR 등)이, 내재 가치 대비 비싼 주식보다 수익률이 높은 현상을 뜻합니다. 가치 효과가 발생하는 원인에 대한 이론은 다음가 같습니다.</p>
+<ol style="list-style-type: decimal">
+<li>위험한 기업은 시장에서 상대적으로 낮은 가격에 거래되며, 이러한 위험을 감당하는 대가로 수익이 발생</li>
+<li>투자자들의 성장주에 대한 과잉 반응으로 인해 가치주는 시장에서 소외되며, 제자리를 찾아가는 과정에서 수익이 발생</li>
+</ol>
+<p>기업의 가치를 나타내는 지표는 굉장히 많지만, 일반적으로 PER, PBR, PCR, PSR가 많이 사용됩니다.</p>
+<div id="pbr" class="section level3">
+<h3><span class="header-section-number">9.4.1</span> 밸류 포트폴리오 구하기: 저 PBR</h3>
+<p>먼저 기업의 가치 여부를 판단할 때 가장 많이 사용되는 지표인 PBR을 이용한 포트폴리오를 구성하도록 하겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(dplyr)
+
+KOR_value =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_value.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,
+                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,
+                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) 
+KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =
+<span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)
+
+invest_pbr =<span class="st"> </span><span class="kw">rank</span>(KOR_value<span class="op">$</span>PBR) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>
+KOR_ticker[invest_pbr, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">PBR</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(KOR_value[invest_pbr, <span class="st">&#39;PBR&#39;</span>], <span class="dv">4</span>))</code></pre>
+<pre><code>##    종목코드           종목명    PBR
+## 1    088350         한화생명 0.2318
+## 2    000880             한화 0.1212
+## 3    034020       두산중공업 0.2028
+## 4    006120     SK디스커버리 0.2315
+## 5    058650       세아홀딩스 0.1228
+## 6    032190       다우데이타 0.1375
+## 7    005720             넥센 0.1834
+## 8    003300       한일홀딩스 0.1856
+## 9    001940      KISCO홀딩스 0.2044
+## 10   002030           아세아 0.1773
+## 11   036530        S&amp;T홀딩스 0.1665
+## 12   092230        KPX홀딩스 0.2199
+## 13   003030     세아제강지주 0.1788
+## 14   000140 하이트진로홀딩스 0.2080
+## 15   033160       엠케이전자 0.2107
+## 16   035080   인터파크홀딩스 0.1895
+## 17   009200       무림페이퍼 0.1951
+## 18   007860             서연 0.1151
+## 19   002300         한국제지 0.1950
+## 20   005010           휴스틸 0.2328
+## 21   040610             SG&amp;G 0.1291
+## 22   025530        SJM홀딩스 0.2030
+## 23   031980 피에스케이홀딩스 0.1797
+## 24   006200   한국전자홀딩스 0.1420
+## 25   000950             전방 0.2298
+## 26   037400         우리조명 0.1818
+## 27   017680         데코앤이 0.0885
+## 28   194510       파티게임즈 0.2083
+## 29   192410           감마누 0.2165
+## 30   149940             모다 0.0539</code></pre>
+<p>먼저 가치 지표들을 저장한 데이터와 티커 데이터를 불러오도록 하며, <code>rank()</code>를 통해 PBR이 낮은 30 종목을 선택해주도록 합니다. 그 후 종목코드와 종목명, PBR을 확인해보도록 합니다. 홀딩스 등 지주사가 그 특성상 저 PBR 포트폴리오에 많이 구성되어 있습니다.</p>
+</div>
+<div id="section-59" class="section level3">
+<h3><span class="header-section-number">9.4.2</span> 각 지표를 결합하기</h3>
+<p>저 PBR 하나의 지표만으로도 우수한 성과를 거둘 수 있음은 오랜 기간동안 증명되고 있습니다. 그러나 저평가 주식이 계속해서 저평가에 머무르는 가치 함정에 빠지지 않기 위해서는, 여러 지표를 동시에 볼 필요도 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(corrplot)
+
+rank_value =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(.)))
+
+<span class="kw">cor</span>(rank_value, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,
+           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="dv">1</span>,
+           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt=</span><span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,
+           <span class="dt">col =</span> <span class="kw">colorRampPalette</span>(
+             <span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),
+           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</code></pre>
+<p><img src="09-factor_basic_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>먼저 <code>mutate_all()</code> 함수를 이용해 모든 열에 함수를 적용해주며, <code>min_rank()</code>를 통해 순위를 구해주도록 합니다.</p>
+<p>각 열에 해당하는 가치 지표 별 랭킹을 구해준 후 상관관계를 확인해보도록 하며, NA 종목은 삭제해주기 위해 <code>use = 'complete.obs'</code>를 입력해주도록 합니다.</p>
+<p><code>corrplot</code> 패키지의 <code>corrplot()</code> 함수를 이용해 상관관계를 그려보면, 같은 가치 지표임에도 불구하고 서로간의 상관관계가 꽤 낮은 지표도 존재하여, 지표를 통합적으로 고려시 분산효과를 기대할 수도 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rank_sum =<span class="st"> </span>rank_value <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rowSums</span>()
+
+invest_value =<span class="st"> </span><span class="kw">rank</span>(rank_sum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>
+
+KOR_ticker[invest_value, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(KOR_value[invest_value, ], <span class="dv">2</span>))</code></pre>
+<pre><code>##      종목코드           종목명   PER  PBR  PCR  PSR
+## 19     034730               SK  7.23 0.32 2.07 0.16
+## 87     001040               CJ 10.57 0.23 1.89 0.10
+## 106    000880             한화  4.38 0.12 0.75 0.04
+## 159    042670   두산인프라코어  5.15 0.33 1.52 0.16
+## 288    006840         AK홀딩스  5.42 0.39 1.83 0.16
+## 394    017940               E1  5.08 0.30 2.15 0.09
+## 417    058650       세아홀딩스 11.26 0.12 2.62 0.07
+## 444    005720             넥센  5.55 0.18 2.55 0.25
+## 471    015750       성우하이텍 13.37 0.25 1.20 0.09
+## 485    003300       한일홀딩스  0.63 0.19 2.53 0.27
+## 552    084690       대상홀딩스 11.40 0.24 1.88 0.08
+## 588    002030           아세아  4.90 0.18 1.03 0.15
+## 589    036530        S&amp;T홀딩스  9.13 0.17 1.94 0.18
+## 596    013580         계룡건설  2.73 0.55 2.34 0.11
+## 616    003030     세아제강지주  0.76 0.18 1.90 0.14
+## 745    033160       엠케이전자  7.07 0.21 3.52 0.25
+## 748    005990       매일홀딩스  7.08 0.35 2.48 0.12
+## 887    267290     경동도시가스  4.38 0.47 1.24 0.09
+## 963    009200       무림페이퍼  3.75 0.20 1.52 0.12
+## 984    016710       대성홀딩스  6.58 0.24 2.28 0.14
+## 1004   005710         대원산업  4.44 0.45 1.89 0.18
+## 1085   036000           예림당  7.48 0.31 3.39 0.15
+## 1204   003480 한진중공업홀딩스 11.02 0.27 1.73 0.10
+## 1262   005010           휴스틸  5.49 0.23 0.83 0.16
+## 1332   002200         수출포장  4.91 0.37 2.02 0.30
+## 1402   037350       성도이엔지  5.07 0.40 1.57 0.15
+## 1484   004140             동방  4.45 0.52 2.39 0.13
+## 1717   002710          TCC스틸  5.52 0.48 2.51 0.13
+## 1759   031980 피에스케이홀딩스  0.91 0.18 1.18 0.15
+## 1890   012620         원일특강  6.09 0.38 4.34 0.16</code></pre>
+<p><code>rowSums()</code> 함수를 이용해 종목 별 랭킹들의 합을 구해줍니다. 그 후 4개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 하나의 지표 보다 4개 지표가 골고루 낮은 종목을 선택하여 줍니다. 해당 종목들의 티커, 종목명과 가치 지표들을 확인할 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">intersect</span>(KOR_ticker[invest_pbr, <span class="st">&#39;종목명&#39;</span>],
+          KOR_ticker[invest_value, <span class="st">&#39;종목명&#39;</span>])</code></pre>
+<pre><code>##  [1] &quot;한화&quot;             &quot;세아홀딩스&quot;       &quot;넥센&quot;            
+##  [4] &quot;한일홀딩스&quot;       &quot;아세아&quot;           &quot;S&amp;T홀딩스&quot;       
+##  [7] &quot;세아제강지주&quot;     &quot;엠케이전자&quot;       &quot;무림페이퍼&quot;      
+## [10] &quot;휴스틸&quot;           &quot;피에스케이홀딩스&quot;</code></pre>
+<p>단순 저 PBR 기준 선택된 종목과 비교해봤을 때, 겹치는 종목이 상당히 줄어들었습니다.</p>
+</div>
+</div>
+<div id="section-60" class="section level2">
+<h2><span class="header-section-number">9.5</span> 퀄리티 전략</h2>
+<p>기업의 우량성, 즉 퀄리티는 투자자들이 매우 중요하게 생각하는 요소입니다. 그러나 어떠한 지표가 기업의 퀄리티를 나타내는지 한마디로 정의하기에는 너무나 주관적이고 광범위하여 쉽지 않습니다. 학계 혹은 업계에서 사용되는 우량성 관련 지표는 다음과 같이 요약할 수 있습니다.</p>
+<ol style="list-style-type: decimal">
+<li>Profitability (수익성)</li>
+<li>Earnings stability (수익의 안정성)</li>
+<li>Capital structure (기업 구조)</li>
+<li>Growth (수익의 성장성)</li>
+<li>Accounting quality (회계적 우량성)</li>
+<li>Payout/dilution (배당)</li>
+<li>Investment (투자)</li>
+</ol>
+<p>퀄리티 전략에는 재무제표 데이터가 주로 사용됩니다.</p>
+<div id="f-score" class="section level3">
+<h3><span class="header-section-number">9.5.1</span> F-Score</h3>
+<p>F-Score 지표는 조셉 피오트로스키 교수가 발표한 지표입니다. 그는 논문에서, 저 PBR을 이용한 밸류 전략은 높은 성과를 기록하지만 재무 상태가 불량한 기업이 많으며, 저 PBR 종목 중 재무적으로 우량한 기업을 선정하여 투자한다면 성과를 훨씬 개선할 수 있다고 보았습니다.</p>
+<p>F-Score에서는 재무적 우량 정도를 수익성(Profitability), 재무 성과(Financial Performance), 운영 효율성(Operating Efficiency)으로 구분하여 총 9개의 지표를 선정합니다. 표 <a href="section-48.html#tab:fscore">9.3</a>는 이를 요약한 테이블입니다.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:fscore">표 9.3: </span>F-Score 요약
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+지표
+</th>
+<th style="text-align:center;">
+항목
+</th>
+<th style="text-align:center;">
+점수
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;vertical-align: middle !important;" rowspan="4">
+Profitability
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(ROA\)</span>
+</td>
+<td style="text-align:center;">
+ROA가 양수면 1점
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(CFO\)</span>
+</td>
+<td style="text-align:center;">
+CFO가 양수면 1점
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\Delta ROA\)</span>
+</td>
+<td style="text-align:center;">
+ROA가 증가했으면 1점
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(ACCRUAL\)</span>
+</td>
+<td style="text-align:center;">
+CFO &gt; ROA면 1점
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align: middle !important;" rowspan="3">
+Financial Performance
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(\Delta LEVER\)</span>
+</td>
+<td style="text-align:center;">
+레버리지가 감소했으면 1점
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\Delta LIQUID\)</span>
+</td>
+<td style="text-align:center;">
+유동성이 증가했으면 1점
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(EQ\_OFFER\)</span>
+</td>
+<td style="text-align:center;">
+발행주식수가 감소했으면 1점
+</td>
+</tr>
+<tr>
+<td style="text-align:center;vertical-align: middle !important;" rowspan="2">
+Operating Efficiency
+</td>
+<td style="text-align:center;">
+<span class="math inline">\(\Delta MARGIN\)</span>
+</td>
+<td style="text-align:center;">
+매출총이익률이 증가했으면 1점
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+<span class="math inline">\(\Delta TURN\)</span>
+</td>
+<td style="text-align:center;">
+회전율이 증가했으면 1점
+</td>
+</tr>
+</tbody>
+</table>
+<p>각 지표가 우수할 경우 1점, 그렇지 않을 경우 0점을 매겨, 총 0점부터 9점까지의 포트폴리오를 구성합니다.</p>
+
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(dplyr)
+
+KOR_fs =<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/KOR_fs.Rds&#39;</span>)
+KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,
+                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) 
+KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =
+<span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</code></pre>
+<p>먼저 재무제표와 티커 파일을 불러오도록 합니다. 재무제표 데이터의 경우 RdS 형태로 저장되어 있으며, <code>readRDS()</code> 함수를 이용해 list 형태 그래도 불러올 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 수익성</span>
+ROA =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;지배주주순이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>
+CFO =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;영업활동으로인한현금흐름&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>
+ACCURUAL =<span class="st"> </span>CFO <span class="op">-</span><span class="st"> </span>ROA
+
+<span class="co"># 재무성과</span>
+LEV =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;장기차입금&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>
+LIQ =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유동자산&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유동부채&#39;</span>
+OFFER =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유상증자&#39;</span>
+
+<span class="co"># 운영 효율성</span>
+MARGIN =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출총이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출액&#39;</span>
+TURN =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출액&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></code></pre>
+<p>먼저 지표에 해당하는 내용을 계산해줍니다.</p>
+<ol style="list-style-type: decimal">
+<li>ROA는 지배주주순이익을 자산으로 나누어 계산합니다.</li>
+<li>CFO는 영업활동현금흐름을 자산으로 나누어 계산합니다.</li>
+<li>ACCURUAL은 CFO와 ROA의 차이를 이용해 계산합니다.</li>
+<li>Leverage는 장기차입금을 자산으로 나누어 계산합니다.</li>
+<li>Liquidity는 유동자산을 유동부채로 나누어 계산합니다.</li>
+<li>우리가 받은 데이터에서는 발행주식수 데이터를 구할수 없으므로, Offer에 대한 대용치로 유상증자 여부를 사용합니다.</li>
+<li>Margin은 매출총이익을 매출액으로 나누어 계산합니다.</li>
+<li>Turnover는 매출액을 자산으로 나누어 계산합니다.</li>
+</ol>
+<p>다음으로 각 지표들이 조건을 충족하는지 여부를 판단하여, 지표 별로 1점 혹은 0점을 부여해줍니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">num_col =<span class="st"> </span><span class="kw">ncol</span>(KOR_fs[[<span class="dv">1</span>]])
+
+F_<span class="dv">1</span> =<span class="st"> </span><span class="kw">as.integer</span>(ROA[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+F_<span class="dv">2</span> =<span class="st"> </span><span class="kw">as.integer</span>(CFO[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+F_<span class="dv">3</span> =<span class="st"> </span><span class="kw">as.integer</span>(ROA[, num_col] <span class="op">-</span><span class="st"> </span>ROA[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+F_<span class="dv">4</span> =<span class="st"> </span><span class="kw">as.integer</span>(ACCURUAL[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) 
+F_<span class="dv">5</span> =<span class="st"> </span><span class="kw">as.integer</span>(LEV[, num_col] <span class="op">-</span><span class="st"> </span>LEV[, (num_col<span class="dv">-1</span>)] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>) 
+F_<span class="dv">6</span> =<span class="st"> </span><span class="kw">as.integer</span>(LIQ[, num_col] <span class="op">-</span><span class="st"> </span>LIQ[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+F_<span class="dv">7</span> =<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">is.na</span>(OFFER[,num_col]) <span class="op">|</span>
+<span class="st">                   </span>OFFER[,num_col] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>)
+F_<span class="dv">8</span> =<span class="st"> </span><span class="kw">as.integer</span>(MARGIN[, num_col] <span class="op">-</span>
+<span class="st">                   </span>MARGIN[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)
+F_<span class="dv">9</span> =<span class="st"> </span><span class="kw">as.integer</span>(TURN[,num_col] <span class="op">-</span><span class="st"> </span>TURN[,(num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</code></pre>
+<p>먼저 <code>ncol()</code> 함수를 이용해 열 갯수를 구해줍니다. 가장 최근 연도의 재무제표가 최우측에 위치하고 있으므로, 해당 변수를 통해 최근 연도 데이터만을 선택할 수 있습니다.</p>
+<p><code>as.integer()</code> 함수는 TRUE일 경우 1, FALSE 일 경우 0을 반환하는 함수로써, F-Score 지표의 점수를 매기는데 매우 유용합니다. 점수 기준은 다음과 같습니다.</p>
+<ol style="list-style-type: decimal">
+<li>ROA가 양수면 1점, 그렇지 않으면 0점</li>
+<li>영업활동현금흐름이 양수면 1점, 그렇지 않으면 0점</li>
+<li>최근 ROA가 전년 대비 증가했으면 1점, 그렇지 않으면 0점</li>
+<li>Accurual(CFO - ROA)이 양수면 1점, 그렇지 않으면 0점</li>
+<li>레버리지가 전년 대비 감소했으면 1점, 그렇지 않으면 0점</li>
+<li>유동성이 전년 대비 증가해으면 1점, 그렇지 않으면 0점</li>
+<li>유상증자 항목이 없거나 0보다 작으면 1점, 그렇지 않으면 0점</li>
+<li>매출총이익률이 전년 대비 증가했으면 1점, 그렇지 않으면 0점</li>
+<li>회전율이 전년 대비 증가했으면 1점, 그렇지 않으면 0점</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">F_Table =<span class="st"> </span><span class="kw">cbind</span>(F_<span class="dv">1</span>, F_<span class="dv">2</span>, F_<span class="dv">3</span>, F_<span class="dv">4</span>, F_<span class="dv">5</span>, F_<span class="dv">6</span>, F_<span class="dv">7</span>, F_<span class="dv">8</span>, F_<span class="dv">9</span>) 
+F_Score =<span class="st"> </span>F_Table <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">apply</span>(., <span class="dv">1</span>, sum, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(KOR_ticker<span class="op">$</span><span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>)</code></pre>
+<ol style="list-style-type: decimal">
+<li><code>cbind()</code>를 통해 열의 형태로 묶어줍니다.</li>
+<li><code>apply()</code> 함수를 통해 종목 별 지표의 합을 더해 F-Score를 계산해줍니다.</li>
+<li><code>setNanmes()</code> 함수를 통해 종목명을 입력해 줍니다.</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r">(<span class="dt">F_dist =</span> <span class="kw">prop.table</span>(<span class="kw">table</span>(F_Score)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">3</span>))</code></pre>
+<pre><code>## F_Score
+##     0     1     2     3     4     5     6     7     8     9 
+## 0.004 0.052 0.092 0.170 0.202 0.189 0.147 0.089 0.044 0.011</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">F_dist <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> F_Score, <span class="dt">y =</span> Freq,
+             <span class="dt">label =</span> <span class="kw">paste0</span>(Freq <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="st">&#39;%&#39;</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">vjust =</span> <span class="fl">-0.4</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.05</span>),
+                     <span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_classic</span>() </code></pre>
+<p><img src="09-factor_basic_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><code>table()</code> 함수를 통해 각 스코어 별 갯수를 구한 후, <code>prop.table()</code>을 통해 비중으로 변환합니다. 이를 통해 점수 별 비중을 살펴보면 3~6점에 상당히 많은 종목이 분포하고 있음이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">invest_F_Score =<span class="st"> </span>F_Score <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">9</span>)
+KOR_ticker[invest_F_Score, ] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">F-Score</span><span class="st">`</span> =<span class="st"> </span>F_Score[invest_F_Score])</code></pre>
+<pre><code>##    종목코드           종목명 F-Score
+## 1    051900       LG생활건강       9
+## 2    081660       휠라코리아       9
+## 3    271560           오리온       9
+## 4    031430 신세계인터내셔날       9
+## 5    285130         SK케미칼       9
+## 6    011280         태림포장       9
+## 7    036540        SFA반도체       9
+## 8    044340           위닉스       9
+## 9    004690           삼천리       9
+## 10   002310       아세아제지       9
+## 11   232140     와이아이케이       9
+## 12   023600         삼보판지       9
+## 13   203650     드림시큐리티       9
+## 14   089010       켐트로닉스       9
+## 15   007980       태평양물산       9
+## 16   009200       무림페이퍼       9
+## 17   006580         대양제지       9
+## 18   008250         이건산업       9
+## 19   174880         장원테크       9
+## 20   002200         수출포장       9
+## 21   005670           푸드웰       9
+## 22   091340        S&amp;K폴리텍       9
+## 23   080580       오킨스전자       9</code></pre>
+<p>F-Score가 9점인 종목의 티커와 종목명을 확인해봅니다. 재무적으로 우량하다고 판단되는 F-Score 9점인 종목은 총 23개가 존재하고 있습니다.</p>
+</div>
+<div id="section-61" class="section level3">
+<h3><span class="header-section-number">9.5.2</span> 각 지표를 결합하기</h3>
+<p>이번에는 퀄리티를 측정하는 요소 중 가장 널리 사용되는 수익성 지표를 결합한 포트폴리오를 만들어 보겠으며, 사용되는 지표는 <strong>자기자본이익률(ROE)</strong>, <strong>매출총이익(Gross Profit)</strong>, <strong>영업활동현금흐름(Cashflow From Operating)</strong> 입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(tidyr)
+
+KOR_fs =<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/KOR_fs.Rds&#39;</span>)
+KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,
+                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) 
+KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =
+<span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)
+
+num_col =<span class="st"> </span><span class="kw">ncol</span>(KOR_fs[[<span class="dv">1</span>]])
+quality_roe =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;지배주주순이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자본&#39;</span>)[num_col]
+quality_gpa =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;매출총이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>)[num_col]
+quality_cfo =
+<span class="st">  </span>(KOR_fs<span class="op">$</span><span class="st">&#39;영업활동으로인한현금흐름&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>)[num_col]
+
+quality_profit =
+<span class="st">  </span><span class="kw">cbind</span>(quality_roe, quality_gpa, quality_cfo) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(., <span class="kw">c</span>(<span class="st">&#39;ROE&#39;</span>, <span class="st">&#39;GPA&#39;</span>, <span class="st">&#39;CFO&#39;</span>))</code></pre>
+<p>먼저 재무제표와 티커 파일을 불러온 후, 세가지 지표에 해당하는 값을 구한 뒤 최근년도 데이터만을 선택합니다. 그 후, <code>cbind()</code> 함수를 이용해 지표들을 하나로 묶어줍니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rank_quality =<span class="st"> </span>quality_profit <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(<span class="kw">desc</span>(.))))
+
+<span class="kw">cor</span>(rank_quality, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,
+           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="dv">1</span>,
+           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt =</span> <span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,
+           <span class="dt">col =</span>
+             <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),
+           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</code></pre>
+<p><img src="09-factor_basic_files/figure-html/unnamed-chunk-35-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><code>mutate_all()</code> 함수와 <code>min_rank()</code> 함수를 통해 지표 별 랭킹을 구해주도록 하며, 퀄리티 지표의 경우 높을수록 좋은 내림차순으로 계산하여야 하므로 <code>desc()</code>을 추가해줍니다.</p>
+<p>수익성 지표 역시 서로 간의 상관관계가 낮아, 지표를 통합적으로 고려시 분산효과를 기대할 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">rank_sum =<span class="st"> </span>rank_quality <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rowSums</span>()
+
+invest_quality =<span class="st"> </span><span class="kw">rank</span>(rank_sum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>
+
+KOR_ticker[invest_quality, ] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(quality_profit[invest_quality, ], <span class="dv">4</span>))</code></pre>
+<pre><code>##      종목코드           종목명    ROE    GPA    CFO
+## 2      000660       SK하이닉스 0.3317 0.3969 0.3492
+## 11     051900       LG생활건강 0.1900 0.7679 0.1549
+## 46     021240       웅진코웨이 0.3220 0.7689 0.2266
+## 72     282330        BGF리테일 0.2956 0.6877 0.2332
+## 93     086900         메디톡스 0.2722 0.3828 0.1395
+## 114    012510       더존비즈온 0.2311 0.4560 0.2228
+## 175    192080     더블유게임즈 0.1694 0.4846 0.1568
+## 193    030190     NICE평가정보 0.1930 1.4316 0.1843
+## 232    214150         클래시스 0.2922 0.4584 0.2114
+## 245    067160       아프리카TV 0.2325 0.8038 0.2463
+## 272    090460         비에이치 0.4343 0.3265 0.3429
+## 283    069080             웹젠 0.1602 0.5517 0.2072
+## 308    001820       삼화콘덴서 0.4851 0.4627 0.2768
+## 369    042700       한미반도체 0.2287 0.3935 0.1854
+## 387    192440     슈피겐코리아 0.1634 0.6277 0.1280
+## 392    092730           네오팜 0.2597 0.6626 0.2222
+## 398    215200   메가스터디교육 0.1894 0.5539 0.2500
+## 461    119860           다나와 0.1822 0.9806 0.1531
+## 497    034950     한국기업평가 0.1579 0.6442 0.1737
+## 586    086390       유니테스트 0.3714 0.5698 0.3391
+## 611    220630 해마로푸드서비스 0.2345 0.6656 0.1499
+## 643    092130       이크레더블 0.2599 0.6572 0.2367
+## 744    232140     와이아이케이 0.2460 0.2868 0.2306
+## 797    036810       에프에스티 0.1770 0.3460 0.2114
+## 913    225190       삼양옵틱스 0.3463 0.5934 0.3209
+## 975    130580     나이스디앤비 0.2058 0.9171 0.2011
+## 1087   241790       오션브릿지 0.2445 0.2841 0.3604
+## 1295   285490           노바텍 0.2219 0.3133 0.1898
+## 1369   308100       까스텔바쟉 0.1783 0.7352 0.1349
+## 1603   063760           이엘피 0.2226 0.3052 0.2234</code></pre>
+<p><code>rowSums()</code> 함수를 이용해 종목 별 랭킹들의 합을 구해주도록 합니다. 그 후 3개 지표 랭킹의 합 기준 랭킹이 낮은 30 종목을 선택해 줍니다. 즉 세가지 수익 지표가 골고루 높은 종목을 선택합니다. 해당 종목들의 티커, 종목명, ROE, GPA, CFO을 출력하여 확인하도록 합니다.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="section-41.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-62.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
