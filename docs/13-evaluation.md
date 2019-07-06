@@ -25,12 +25,18 @@ excel_sheets(tf)
 ```
 
 ```
-##  [1] "QMJ Factors"                   "Definition"                   
-##  [3] "Data Sources"                  "--> Additional Global Factors"
-##  [5] "MKT"                           "SMB"                          
-##  [7] "HML FF"                        "HML Devil"                    
-##  [9] "UMD"                           "ME(t-1)"                      
-## [11] "RF"                            "Sources and Definitions"      
+##  [1] "QMJ Factors"                  
+##  [2] "Definition"                   
+##  [3] "Data Sources"                 
+##  [4] "--> Additional Global Factors"
+##  [5] "MKT"                          
+##  [6] "SMB"                          
+##  [7] "HML FF"                       
+##  [8] "HML Devil"                    
+##  [9] "UMD"                          
+## [10] "ME(t-1)"                      
+## [11] "RF"                           
+## [12] "Sources and Definitions"      
 ## [13] "Disclosures"
 ```
 
@@ -96,7 +102,9 @@ library(PerformanceAnalytics)
 chart.CumReturns(df$QMJ)
 ```
 
-<img src="13-evaluation_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{13-evaluation_files/figure-latex/unnamed-chunk-5-1} \end{center}
 
 먼저 `chart.CumReturns()` 함수를 이용해 QMJ 팩터의 누적수익률을 그래프로 나타내봅니다. 1989-07-31 부터 2019-05-31까지 장기간동안 우상향 하는 모습을 보이고 있습니다.
 
@@ -202,10 +210,14 @@ SharpeRatio.annualized(df$QMJ, Rf = df$RF, geometric = TRUE)
 
 먼저 낙폭(Drawdown)은 수익률이 하락한 후 반등하기 전까지 얼마나 하락하였는지를 나타냅니다. 최대낙폭(Maximum Drawdown)은 이러한 낙폭 중 가장 값이 큰 값으로써, 최고점에서 최저점까지 얼마나 손실을 보는지를 나타냅니다. 투자를 함에 있어 수익률이 하락하는 것은 어쩔 수 없지만, 최대낙폭이 지나치게 큰 전략에 투자하는 것은 매우 위험한 선택이 될 수 있습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/drawdown.png" alt="낙폭과 최대낙폭" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-9)낙폭과 최대낙폭</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/drawdown} 
+
+}
+
+\caption{낙폭과 최대낙폭}(\#fig:unnamed-chunk-9)
+\end{figure}
 
 
 ```r
@@ -213,12 +225,18 @@ table.Drawdowns(df$QMJ)
 ```
 
 ```
-##         From     Trough         To   Depth Length To Trough Recovery
-## 1 2002-10-31 2004-01-31 2008-08-31 -0.2118     71        16       55
-## 2 2009-03-31 2009-09-30 2012-05-31 -0.2013     39         7       32
-## 3 1992-11-30 1993-08-31 1997-01-31 -0.1404     51        10       41
-## 4 1998-10-31 1999-04-30 2000-05-31 -0.0868     20         7       13
-## 5 2012-08-31 2013-01-31 2014-10-31 -0.0666     27         6       21
+##         From     Trough         To   Depth Length
+## 1 2002-10-31 2004-01-31 2008-08-31 -0.2118     71
+## 2 2009-03-31 2009-09-30 2012-05-31 -0.2013     39
+## 3 1992-11-30 1993-08-31 1997-01-31 -0.1404     51
+## 4 1998-10-31 1999-04-30 2000-05-31 -0.0868     20
+## 5 2012-08-31 2013-01-31 2014-10-31 -0.0666     27
+##   To Trough Recovery
+## 1        16       55
+## 2         7       32
+## 3        10       41
+## 4         7       13
+## 5         6       21
 ```
 
 ```r
@@ -233,7 +251,9 @@ maxDrawdown(df$QMJ)
 chart.Drawdown(df$QMJ)
 ```
 
-<img src="13-evaluation_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{13-evaluation_files/figure-latex/unnamed-chunk-10-1} \end{center}
 
 이러한 낙폭에 대한 지표들은 손으로 계산하기 번거롭지만, 패키지 내 함수를 사용한다면 매우 손쉽게 계산할 수 있습니다. 
 
@@ -307,7 +327,9 @@ ggplot(R.yr, aes(x = Index, y = value, fill = key)) +
                 size = 3)
 ```
 
-<img src="13-evaluation_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{13-evaluation_files/figure-latex/unnamed-chunk-13-1} \end{center}
 
 `apply.yearly()` 함수를 통해 계산한 연도별 수익률에 `ggplot()` 함수를 응용할 경우 막대그래프로 나타낼 수도 있으며, 시각화를 통해 포트폴리오의 수익률 추이가 더욱 쉽게 확인됩니다.
 
@@ -377,7 +399,9 @@ df$QMJ %>% apply.monthly(., Return.cumulative) %>%
   xlab(NULL) + ylab(NULL)
 ```
 
-<img src="13-evaluation_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{13-evaluation_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 롤링 윈도우 연율화 수익률 역시 매우 중요한 지표입니다. 해당 값이 지속적으로 하락할 경우, 전략이 더이상 동작하지 않는 것인지 혹은 가장 험난한 시기를 지났기에 인내심을 갖고 기다려야 할지 판단해야 합니다.
 

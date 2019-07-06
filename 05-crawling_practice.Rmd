@@ -176,7 +176,8 @@ url = 'https://finance.naver.com/sise/sise_deposit.nhn'
 
 biz_day = GET(url) %>%
   read_html(encoding = 'EUC-KR') %>%
-  html_nodes(xpath = '//*[@id="type_1"]/div/ul[2]/li/span') %>%
+  html_nodes(xpath =
+               '//*[@id="type_1"]/div/ul[2]/li/span') %>%
   html_text() %>%
   str_match(('[0-9]+.[0-9]+.[0-9]+') ) %>%
   str_replace_all('\\.', '')
@@ -205,13 +206,15 @@ url = 'https://finance.naver.com/sise/sise_deposit.nhn'
 
 biz_day = GET(url) %>%
   read_html(encoding = 'EUC-KR') %>%
-  html_nodes(xpath = '//*[@id="type_1"]/div/ul[2]/li/span') %>%
+  html_nodes(xpath =
+               '//*[@id="type_1"]/div/ul[2]/li/span') %>%
   html_text() %>%
   str_match(('[0-9]+.[0-9]+.[0-9]+') ) %>%
   str_replace_all('\\.', '')
 
 # 산업별 현황 OTP 발급
-gen_otp_url = 'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+gen_otp_url =
+  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
 gen_otp_data = list(
   name = 'fileDown',
   filetype = 'csv',
@@ -236,7 +239,8 @@ ifelse(dir.exists('data'), FALSE, dir.create('data'))
 write.csv(down_sector, 'data/krx_sector.csv')
 
 # 개별종목 지표 OTP 발급
-gen_otp_url = 'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+gen_otp_url =
+  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
 gen_otp_data = list(
   name = 'fileDown',
   filetype = 'csv',

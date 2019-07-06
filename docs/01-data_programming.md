@@ -7,10 +7,14 @@
 
 이처럼 데이터의 수집과 가공, 이를 바탕으로 모델을 만든 후 실행하는 단계는 데이터 과학의 업무 흐름도와 매우 유사합니다. **해들리 위컴^Hadley^ ^Wickham^**에 따르면^[R을 활용한 데이터 과학(해들리 위컴, 개럿 그롤문드 저/김설기, 최혜민 역)], 데이터 과학의 업무 과정은 그림  \@ref(fig:ds)과 같습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/ds_flow.jpg" alt="데이터 과학 업무 과정" width="70%" />
-<p class="caption">(\#fig:ds)데이터 과학 업무 과정</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/ds_flow} 
+
+}
+
+\caption{데이터 과학 업무 과정}(\#fig:ds)
+\end{figure}
 
 데이터 과학자들은 프로그래밍을 통해 데이터를 불러온 후 이를 정리하고, 원하는 결과를 찾기 위해 데이터를 변형 혹은 시각화하고, 모델링 업무을 합니다. 그 후 이러한 결과를 바탕으로 타인과 소통하는 일련의 과정을 거칩니다.
 
@@ -22,10 +26,14 @@
 
 퀀트 투자에 필요한 데이터의 경우, 여러 데이터 제공업자들의 서비스를 이용한다면 매우 손쉽게 구할 수 있습니다. 글로벌 데이터 수집에는 블룸버그 혹은 Factset, 국내 데이터 수집에는 DataGuide가 흔히 사용됩니다. 물론 비용을 더 지불한다면 단순 데이터 수집뿐만 아니라 즉석에서 백테스트 및 성과 평가까지 가능합니다. Factset에서 판매하는 Alpha Testing 기능, 혹은 S&P Global에서 판매하는 ClariFI®(그림 \@ref(fig:clarifi))를 사용한다면, 전세계 주식을 대상으로 원하는 전략의 백테스트 결과를 마우스 클릭과 몇 번의 동작만으로 수행할 수 있습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/ClariFI_backtest.png" alt="ClariFI®의 백테스트 기능" width="70%" />
-<p class="caption">(\#fig:clarifi)ClariFI®의 백테스트 기능</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/ClariFI_backtest} 
+
+}
+
+\caption{ClariFI®의 백테스트 기능}(\#fig:clarifi)
+\end{figure}
 
 이러한 데이터 제공업자들을 이용하는 방법의 최대 단점은 바로 비용입니다. 블룸버그 단말기의 경우 1년 사용료가 대리 한 명의 연봉과 비슷하여, 흔히 **블대리**라 부르기도 합니다. 국내 데이터 업체의 경우 이보다 저렴하기는 하지만, 역시 1년 사용료가 수백 만원 정도로, 일반 개인 투자자들이 감당하기에는 부담이 됩니다.
 
@@ -33,10 +41,14 @@
 
 그러나 아쉽게도 이러한 데이터에서 한국 시장의 정보는 소외되어 있습니다. 따라서 돈을 들이지 않고 국내 데이터를 얻기 위해서는 직접 발품을 파는 수밖에 없습니다. <a href="https://finance.yahoo.com/" target="blank">야후 파이낸스^[https://finance.yahoo.com/]</a> 혹은 국내 금융 사이트들에서 제공하는 정보를 크롤링하여 데이터를 수집할 수 있습니다. 
 
-<div class="figure" style="text-align: center">
-<img src="images/naver_finance_table.jpg" alt="NAVER 금융 제공 재무정보" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-2)NAVER 금융 제공 재무정보</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/naver_finance_table} 
+
+}
+
+\caption{NAVER 금융 제공 재무정보}(\#fig:unnamed-chunk-2)
+\end{figure}
 
 이러한 정보를 잘만 활용한다면 장기간의 주가 및 재무정보를 무료로 수집할 수 있습니다. 물론 데이터 제공업체가 제공하는 깔끔한 형태의 데이터가 아니므로 클랜징 작업이 필요하다는 점, 그리고 상장폐지된 기업의 경우 데이터를 구하기 힘들다는 단점이 있습니다. 그러나 비용이 들지 않는다는 점, 그리고 현재 시점에서 투자 종목을 선택할 때는 상장폐지된 기업의 정보가 필요하지 않는다는 점을 고려하면, 이는 큰 문제가 되지 않습니다.
 
@@ -60,19 +72,27 @@
 
 그림 \@ref(fig:tiobe)는  프로그래밍 언어의 사용 통계 순위^[https://www.tiobe.com/tiobe-index/]입니다. 이 중 R과 Python은 매우 대중적인 언어입니다. 해당 언어가 많이 사용되는 가장 큰 이유는 무료인 점, 그리고 일반인들이 사용하기에도 매우 편한 형태로 언어가 구성되어 있다는 점입니다. 
 
-<div class="figure" style="text-align: center">
-<img src="images/tiobe_index.png" alt="2017년 기준 프로그래밍 언어 사용 통계 순위" width="50%" />
-<p class="caption">(\#fig:pkg)2017년 기준 프로그래밍 언어 사용 통계 순위</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.5\linewidth]{images/tiobe_index} 
+
+}
+
+\caption{2017년 기준 프로그래밍 언어 사용 통계 순위}(\#fig:pkg)
+\end{figure}
 
 이러한 프로그래밍 언어 중 본 책에서는 R을 이용하였습니다. R의 장점은 무료라는 점 이외에도, 타 언어는 비교할 수 없는 다양한 패키지의 존재입니다. 두터운 사용자 층을 기반으로 하여 R에는 상상할 수 없을 정도로 다양한 패키지가 존재하며, 특히 통계나 계량분석과 관련된 패키지는 독보적이라 할 수 있습니다.
 
 
 
-<div class="figure" style="text-align: center">
-<img src="images/cran_pkgs.png" alt="CRAN 등록 패키지 수" width="70%" />
-<p class="caption">(\#fig:tiobe)CRAN 등록 패키지 수</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/cran_pkgs} 
+
+}
+
+\caption{CRAN 등록 패키지 수}(\#fig:tiobe)
+\end{figure}
 
 ## 퀀트 투자에 유용한 R 패키지
 

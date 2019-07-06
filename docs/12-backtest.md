@@ -27,19 +27,26 @@ Return.portfolio(R, weights = NULL, wealth.index = FALSE,
   value = 1, verbose = FALSE, ...)
 ```
 
+\begin{table}[!h]
 
-Table: (\#tab:returnportarg)Return.portfolio() 함수 내 인자 설명
-
-     인자                                                                                                         내용                                                                                                  
---------------  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      R                                                                                                  각 자산 수익률 데이터                                                                                          
-   weights                                                          리밸런싱 시기의 자산 별 목표 비중. 미 입력시 동일비중 포트폴리오를 가정하여 백테스트가 이루어짐                                                     
- wealth.index                                                               포트폴리오 시작점이 1인 wealth index에 대한 생성여부이며, 디폴트는 FALSE로 설정                                                             
- contribution                                                            포트폴리오 내에서 자산 별 성과기여를 나타내는지에 대한 여부이며, 디폴트는 FALSE로 설정                                                         
-  geometric                                                           포트폴리오 수익률 계산시 복리(기하)수익률 적용 여부이며, 디폴트는 TRUE로써 복리수익률을 계산                                                      
- rebalance_on                                                                weight 값이 미입력 혹은 매번 같은 비중일 경우, 리밸런싱 주기를 선택할 수 있음                                                              
-    value                                                                                     초기 포트폴리오 가치를 의미하며, 디폴트는 1                                                                               
-   verbose       부가적인 결과를 표시할지에 대한 여부. 디폴트인 FALSE를 입력할 경우 포트폴리오 수익률만이 시계열 형태로 계산되며, TRUE를 입력할 경우 수익률 외에 자산 별 성과기여, 비중, 성과 등이 리스트 형태로 계산됨 
+\caption{(\#tab:returnportarg)Return.portfolio() 함수 내 인자 설명}
+\centering
+\begin{tabular}{>{\centering\arraybackslash}p{2cm}>{\centering\arraybackslash}p{10cm}}
+\toprule
+인자 & 내용\\
+\midrule
+\rowcolor{gray!6}  R & 각 자산 수익률 데이터\\
+weights & 리밸런싱 시기의 자산 별 목표 비중. 미 입력시 동일비중 포트폴리오를 가정하여 백테스트가 이루어짐\\
+\rowcolor{gray!6}  wealth.index & 포트폴리오 시작점이 1인 wealth index에 대한 생성여부이며, 디폴트는 FALSE로 설정\\
+contribution & 포트폴리오 내에서 자산 별 성과기여를 나타내는지에 대한 여부이며, 디폴트는 FALSE로 설정\\
+\rowcolor{gray!6}  geometric & 포트폴리오 수익률 계산시 복리(기하)수익률 적용 여부이며, 디폴트는 TRUE로써 복리수익률을 계산\\
+\addlinespace
+rebalance\_on & weight 값이 미입력 혹은 매번 같은 비중일 경우, 리밸런싱 주기를 선택할 수 있음\\
+\rowcolor{gray!6}  value & 초기 포트폴리오 가치를 의미하며, 디폴트는 1\\
+verbose & 부가적인 결과를 표시할지에 대한 여부. 디폴트인 FALSE를 입력할 경우 포트폴리오 수익률만이 시계열 형태로 계산되며, TRUE를 입력할 경우 수익률 외에 자산 별 성과기여, 비중, 성과 등이 리스트 형태로 계산됨\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 이 중 가장 중요한 인자는 개별 자산의 수익률인 R과 리밸런싱 시기의 자산 별 목표 비중인 weights 입니다. 매 리밸런싱 시점마다 적용되는 자산 별 비중이 동일할 경우(예: 매월 말 60%대 40% 비중으로 리밸런싱) 상수 형태로 입력하여도 되지만, 시점마다 자산 별 목표비중이 다를 경우 weights는 시계열 형태로 입력되어야 합니다.  
 
@@ -55,41 +62,24 @@ weights에 값을 입력하지 않을 경우 동일비중 포트폴리오를 구
 
 해당 함수는 verbose를 TRUE로 설정할 경우 다양한 결과값을 리스트 형태로 반환합니다.
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-3)Return.portfolio() 함수 반환값</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 결과 </th>
-   <th style="text-align:center;"> 내용 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;width: 2cm; "> returns </td>
-   <td style="text-align:center;width: 10cm; "> 포트폴리오 수익률 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;width: 2cm; "> contribution </td>
-   <td style="text-align:center;width: 10cm; "> 일자 별 개별 자산의 포트폴리오 수익률 기여도 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;width: 2cm; "> BOP.Weight </td>
-   <td style="text-align:center;width: 10cm; "> 일자 별 개별 자산의 포트폴리오 내 비중 (시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Weight와 동일 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;width: 2cm; "> EOP.Weight </td>
-   <td style="text-align:center;width: 10cm; "> 일자 별 개별 자산의 포트폴리오 내 비중 (종료시점) </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;width: 2cm; "> BOP.Value </td>
-   <td style="text-align:center;width: 10cm; "> 일자 별 개별 자산의 가치 (시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Value와 동일 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;width: 2cm; "> EOP.Value </td>
-   <td style="text-align:center;width: 10cm; "> 일자 별 개별 자산의 가치 (종료시점) </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[!h]
+
+\caption{(\#tab:unnamed-chunk-3)Return.portfolio() 함수 반환값}
+\centering
+\begin{tabular}{>{\centering\arraybackslash}p{2cm}>{\centering\arraybackslash}p{10cm}}
+\toprule
+결과 & 내용\\
+\midrule
+\rowcolor{gray!6}  returns & 포트폴리오 수익률\\
+contribution & 일자 별 개별 자산의 포트폴리오 수익률 기여도\\
+\rowcolor{gray!6}  BOP.Weight & 일자 별 개별 자산의 포트폴리오 내 비중 (시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Weight와 동일\\
+EOP.Weight & 일자 별 개별 자산의 포트폴리오 내 비중 (종료시점)\\
+\rowcolor{gray!6}  BOP.Value & 일자 별 개별 자산의 가치 (시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Value와 동일\\
+\addlinespace
+EOP.Value & 일자 별 개별 자산의 가치 (종료시점)\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 ## 전통적인 60대 40 포트폴리오 백테스트
 
@@ -149,152 +139,29 @@ portfolio = Return.portfolio(R = rets,
 
 
 
-<table class="table table-striped table-hover table-bordered table-condensed table table" style="margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; font-size: 7px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:portreturn)Return.portfolio() 계산 과정</caption>
- <thead>
-<tr>
-<th style="border-bottom:hidden" colspan="1"></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작금액</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작합계</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작비중</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">수익률</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료금액</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료합계</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료비중</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">최종수익률</div></th>
-</tr>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:center;"> 1.주식 </th>
-   <th style="text-align:center;"> 2.채권 </th>
-   <th style="text-align:center;"> 3.1+2 </th>
-   <th style="text-align:center;"> 4.주식 </th>
-   <th style="text-align:center;"> 5.채권 </th>
-   <th style="text-align:center;"> 6.주식 </th>
-   <th style="text-align:center;"> 7.채권 </th>
-   <th style="text-align:center;"> 8.주식 </th>
-   <th style="text-align:center;"> 9.채권 </th>
-   <th style="text-align:center;"> 10.8+9 </th>
-   <th style="text-align:center;"> 11.주식 </th>
-   <th style="text-align:center;"> 12.채권 </th>
-   <th style="text-align:center;"> 13.최종 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;width: 1.4cm; "> 2017-12-26 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.603 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.940 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.543 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.630 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.370 </td>
-   <td style="text-align:center;width: 1.0cm; "> -0.001 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.003 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.601 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.943 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.544 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.629 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.371 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 1.4cm; "> 2017-12-27 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.601 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.943 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.544 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.629 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.371 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.000 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.013 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.602 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.956 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.557 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.626 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.374 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.005 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 1.4cm; "> 2017-12-28 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.602 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.956 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.557 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.626 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.374 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.002 </td>
-   <td style="text-align:center;width: 1.0cm; "> -0.001 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.605 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.955 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.560 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.627 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.373 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 1.4cm; "> 2017-12-29 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.605 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.955 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.560 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.627 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.373 </td>
-   <td style="text-align:center;width: 1.0cm; "> -0.004 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.002 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.599 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.956 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.555 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.626 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.374 </td>
-   <td style="text-align:center;width: 1.0cm; "> -0.002 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;color: white !important;background-color: #D7261E !important;width: 1.4cm; "> 2018-01-02 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 1.533 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 1.022 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 2.555 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 0.600 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 0.400 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 0.007 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> -0.011 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 1.544 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 1.011 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 2.555 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 0.604 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 0.396 </td>
-   <td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; "> 0.000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 1.4cm; "> 2018-01-03 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.544 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.011 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.555 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.604 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.396 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.006 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.005 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.554 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.016 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.570 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.605 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.395 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.006 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;width: 1.4cm; "> 2018-01-04 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.554 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.016 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.570 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.605 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.395 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.004 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.000 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.560 </td>
-   <td style="text-align:center;width: 1.0cm; "> 1.016 </td>
-   <td style="text-align:center;width: 1.0cm; "> 2.576 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.606 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.394 </td>
-   <td style="text-align:center;width: 1.0cm; "> 0.002 </td>
-  </tr>
-</tbody>
-</table>
+
+\begin{landscape}\begin{table}[!h]
+
+\caption{(\#tab:portreturn)Return.portfolio() 계산 과정}
+\centering
+\fontsize{7}{9}\selectfont
+\begin{tabular}{>{\raggedright\arraybackslash}p{1.4cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}>{\centering\arraybackslash}p{1.0cm}}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{2}{c}{시작금액} & \multicolumn{1}{c}{시작합계} & \multicolumn{2}{c}{시작비중} & \multicolumn{2}{c}{수익률} & \multicolumn{2}{c}{종료금액} & \multicolumn{1}{c}{종료합계} & \multicolumn{2}{c}{종료비중} & \multicolumn{1}{c}{최종수익률} \\
+\cmidrule(l{3pt}r{3pt}){2-3} \cmidrule(l{3pt}r{3pt}){4-4} \cmidrule(l{3pt}r{3pt}){5-6} \cmidrule(l{3pt}r{3pt}){7-8} \cmidrule(l{3pt}r{3pt}){9-10} \cmidrule(l{3pt}r{3pt}){11-11} \cmidrule(l{3pt}r{3pt}){12-13} \cmidrule(l{3pt}r{3pt}){14-14}
+  & 1.주식 & 2.채권 & 3.1+2 & 4.주식 & 5.채권 & 6.주식 & 7.채권 & 8.주식 & 9.채권 & 10.8+9 & 11.주식 & 12.채권 & 13.최종\\
+\midrule
+\rowcolor{gray!6}  \rowcolor{gray!6}  2017-12-26 & 1.603 & 0.940 & 2.543 & 0.630 & 0.370 & -0.001 & 0.003 & 1.601 & 0.943 & 2.544 & 0.629 & 0.371 & 0.000\\
+2017-12-27 & 1.601 & 0.943 & 2.544 & 0.629 & 0.371 & 0.000 & 0.013 & 1.602 & 0.956 & 2.557 & 0.626 & 0.374 & 0.005\\
+\rowcolor{gray!6}  \rowcolor{gray!6}  2017-12-28 & 1.602 & 0.956 & 2.557 & 0.626 & 0.374 & 0.002 & -0.001 & 1.605 & 0.955 & 2.560 & 0.627 & 0.373 & 0.001\\
+2017-12-29 & 1.605 & 0.955 & 2.560 & 0.627 & 0.373 & -0.004 & 0.002 & 1.599 & 0.956 & 2.555 & 0.626 & 0.374 & -0.002\\
+\rowcolor{gray!6}  \rowcolor[HTML]{D7261E}  \textcolor{white}{2018-01-02} & \textcolor{white}{1.533} & \textcolor{white}{1.022} & \textcolor{white}{2.555} & \textcolor{white}{0.600} & \textcolor{white}{0.400} & \textcolor{white}{0.007} & \textcolor{white}{-0.011} & \textcolor{white}{1.544} & \textcolor{white}{1.011} & \textcolor{white}{2.555} & \textcolor{white}{0.604} & \textcolor{white}{0.396} & \textcolor{white}{0.000}\\
+2018-01-03 & 1.544 & 1.011 & 2.555 & 0.604 & 0.396 & 0.006 & 0.005 & 1.554 & 1.016 & 2.570 & 0.605 & 0.395 & 0.006\\
+\rowcolor{gray!6}  \rowcolor{gray!6}  2018-01-04 & 1.554 & 1.016 & 2.570 & 0.605 & 0.395 & 0.004 & 0.000 & 1.560 & 1.016 & 2.576 & 0.606 & 0.394 & 0.002\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{landscape}
 
 먼저 2017-12-27일에 해당하는 데이터를 보면 시작시점에 주식과 채권에는 각각 1.601과 0.943이 투자되어 있으며, 이를 합하면 2.544이 됩니다. 이를 포트폴리오 내 비중으로 환산하면 비중은 각각 0.629과 0.371가 됩니다.
 
@@ -318,7 +185,9 @@ charts.PerformanceSummary(portfolios,
                           main = '60대 40 포트폴리오')
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{12-backtest_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 `PerformanceAnalytics` 패키지의 `charts.PerformanceSummary()` 함수는 기간별 수익률을 입력시 누적수익률, 일별수익률, 드로우다운 그래프를 자동으로 그려줍니다. 
 
@@ -335,7 +204,9 @@ turnover = xts(
 chart.TimeSeries(turnover)
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{12-backtest_files/figure-latex/unnamed-chunk-9-1} \end{center}
 
 전일 종료시점의 비중인 EOP.Weight를 `lag()` 함수를 이용해 한 단계씩 내린 후, 시작시점의 비중인 BOP.Weight와의 차이의 절대값을 더해주면 해당 시점에서의 회전율이 계산됩니다. `lag()` 함수의 경우 `dplyr` 패키지에도 동일한 이름의 함수가 존재하므로, 충돌을 방지하기 위해 `timeSeries` 패키지의 함수임을 선언해줍니다. 이를 `xts()` 함수를 이용해 시계열 형태로 만들어준 뒤, `chart.TimeSeries()` 함수를 이용해 그래프로 나타내줍니다.
 
@@ -381,17 +252,22 @@ print(ep)
 ```
 
 ```
-##   [1]    0   19   38   60   80  102  123  144  167  186  209  230  250  271
-##  [15]  291  311  333  354  375  397  418  439  462  481  503  523  542  564
-##  [29]  585  605  627  649  670  691  713  733  755  774  793  816  837  857
-##  [43]  879  900  922  943  964  985 1007 1027 1046 1069 1089 1110 1132 1152
-##  [57] 1175 1196 1217 1238 1259 1279 1299 1321 1341 1363 1384 1405 1428 1447
-##  [71] 1468 1489 1509 1530 1549 1569 1591 1613 1633 1655 1677 1697 1720 1740
-##  [85] 1761 1782 1801 1822 1843 1864 1885 1907 1928 1949 1972 1991 2013 2033
-##  [99] 2052 2074 2095 2115 2137 2159 2180 2201 2223 2243 2265 2284 2304 2326
-## [113] 2347 2368 2390 2410 2433 2454 2475 2496 2517 2537 2556 2579 2598 2620
-## [127] 2642 2662 2685 2705 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
-## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123 3143 3147
+##   [1]    0   19   38   60   80  102  123  144  167  186
+##  [11]  209  230  250  271  291  311  333  354  375  397
+##  [21]  418  439  462  481  503  523  542  564  585  605
+##  [31]  627  649  670  691  713  733  755  774  793  816
+##  [41]  837  857  879  900  922  943  964  985 1007 1027
+##  [51] 1046 1069 1089 1110 1132 1152 1175 1196 1217 1238
+##  [61] 1259 1279 1299 1321 1341 1363 1384 1405 1428 1447
+##  [71] 1468 1489 1509 1530 1549 1569 1591 1613 1633 1655
+##  [81] 1677 1697 1720 1740 1761 1782 1801 1822 1843 1864
+##  [91] 1885 1907 1928 1949 1972 1991 2013 2033 2052 2074
+## [101] 2095 2115 2137 2159 2180 2201 2223 2243 2265 2284
+## [111] 2304 2326 2347 2368 2390 2410 2433 2454 2475 2496
+## [121] 2517 2537 2556 2579 2598 2620 2642 2662 2685 2705
+## [131] 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
+## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123
+## [151] 3143 3147
 ```
 
 ```r
@@ -449,28 +325,19 @@ wts[[i]] = xts(t(wt), order.by = index(rets[ep[i]]))
 4. `ifelse()` 구문을 통해 해당 전략의 조건에 맞는 비중을 계산합니다. wt[1]은 주식의 투자비중이며, 만일 현재 주가가 10개월 이동평균보다 클 경우 주식에 해당하는 비중은 1을, 그렇지 않을 경우 0을 부여합니다. wt[2]는 현금의 투자비중이며, 1에서 주식의 투자비중을 뺀 값을 입력합니다. 표 \@ref(tab:sma)는 해당 규칙이 요약되어 있습니다.
 5. 위에서 만들어진 벡터를 `xts()`를 통해 시계열 형태로 바꾼 후, wts의 i번째 리스트에 저장해줍니다.
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:sma)시점선택 조건 별 비중</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 자산 </th>
-   <th style="text-align:center;"> 현재주가 &gt; 10개월 이동평균 </th>
-   <th style="text-align:center;"> 현재 주가 &lt; 10개월 이동평균 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> 주식비중 </td>
-   <td style="text-align:center;"> wt[1] = 1 </td>
-   <td style="text-align:center;"> wt[1] = 0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 현금비중 </td>
-   <td style="text-align:center;"> wt[2] = 0 </td>
-   <td style="text-align:center;"> wt[2] = 1 </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[!h]
+
+\caption{(\#tab:sma)시점선택 조건 별 비중}
+\centering
+\begin{tabular}{ccc}
+\toprule
+자산 & 현재주가 > 10개월 이동평균 & 현재 주가 < 10개월 이동평균\\
+\midrule
+\rowcolor{gray!6}  주식비중 & wt[1] = 1 & wt[1] = 0\\
+현금비중 & wt[2] = 0 & wt[2] = 1\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 위 과정을 for loop 구문을 통해 전체 기간에 적용한 백테스트는 다음과 같습니다.
 
@@ -507,7 +374,9 @@ charts.PerformanceSummary(portfolios,
                           main = "Buy & Hold vs Tactical")
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{12-backtest_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 1. 수익률 데이터와 비중 데이터의 입력을 통해 백테스트를 실행합니다.
 2. `cbind()` 함수를 통해 SPY 데이터와 포트폴리오 수익률을 합쳐주도록 합니다. 시점 선택 포트폴리오의 경우 lookback 기간인 초기 10개월에 대한 수익률이 없어 NA로 표시되므로, `na.omit()`을 통해 해당 부분을 제거합니다.
@@ -526,7 +395,9 @@ turnover = xts(rowSums(abs(Tactical$BOP.Weight -
 chart.TimeSeries(turnover)
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{12-backtest_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 해당 전략의 회전율을 확인해보면, 몇년 간 매매가 없는 경우도 존재합니다. 그러나 매매가 발생할 시 매수와 매도 포지션 양쪽의 매매로 인해 200%의 회전율이 발생하게 됩니다. 
 
@@ -549,22 +420,23 @@ library(tidyr)
 library(dplyr)
 library(ggplot2)
 
-symbols = c('SPY', 
-            'IEV', 
-            'EWJ', 
-            'EEM', 
-            'TLT', 
-            'IEF', 
-            'IYR', 
-            'RWX', 
-            'GLD', 
-            'DBC'  
+symbols = c('SPY', # 미국 주식
+            'IEV', # 유럽 주식 
+            'EWJ', # 일본 주식
+            'EEM', # 이머징 주식
+            'TLT', # 미국 장기채
+            'IEF', # 미국 중기채
+            'IYR', # 미국 리츠
+            'RWX', # 글로벌 리츠
+            'GLD', # 금
+            'DBC'  # 상품
             )
 getSymbols(symbols, src = 'yahoo')
 ```
 
 ```
-##  [1] "SPY" "IEV" "EWJ" "EEM" "TLT" "IEF" "IYR" "RWX" "GLD" "DBC"
+##  [1] "SPY" "IEV" "EWJ" "EEM" "TLT" "IEF" "IYR" "RWX"
+##  [9] "GLD" "DBC"
 ```
 
 ```r
@@ -635,7 +507,9 @@ GDAA = Return.portfolio(rets, wts, verbose = TRUE)
 charts.PerformanceSummary(GDAA$returns, main = '동적자산배분')
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{12-backtest_files/figure-latex/unnamed-chunk-19-1} \end{center}
 
 수익률과 비중 데이터가 있으므로 `Return.portfolio()` 함수를 통해 백테스트 수익률을 계산할 수 있습니다. `charts.PerformanceSummary()` 함수를 통해 누적수익률을 확인하면, 해당 전략을 이용한 포트폴리오가 꾸준히 우상향 하는 모습을 보이게 됩니다.
 
@@ -663,7 +537,9 @@ wts %>% fortify.zoo() %>%
   guides(color = guide_legend(byrow = TRUE))
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{12-backtest_files/figure-latex/unnamed-chunk-20-1} \end{center}
 
 반면 자산 별 투자 비중의 변화가 많은것을 알 수 있습니다. 이는 수익률 상위 5개에 해당하는 자산이 매월 말 바뀌는 원인과, 최소분산 포트폴리오를 구성하는 비중이 계속해서 바뀌는 원인 때문입니다. 
 
@@ -681,7 +557,9 @@ GDAA$turnover = xts(
 chart.TimeSeries(GDAA$turnover)
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{12-backtest_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
 기존에 살펴본 방법으로 회전율을 계산할 경우, 매월 상당한 매매회전이 발생함이 확인됩니다.
 
@@ -702,6 +580,8 @@ cbind(GDAA$returns, GDAA$net) %>%
   charts.PerformanceSummary(main = 'GDAA')
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{12-backtest_files/figure-latex/unnamed-chunk-23-1} \end{center}
 
 기존 비용을 고려하지 않은 포트폴리오(검은색)에 비해, 비용을 차감한 포트폴리오(붉은색)의 수익률이 시간이 지남에 따라 서서히 감소합니다. 이러한 차이는 비용이 클수록, 혹은 매매회전율이 높을수록 더욱 벌어지게 됩니다.

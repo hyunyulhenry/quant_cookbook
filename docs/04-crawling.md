@@ -13,10 +13,14 @@ API를 이용할 경우 데이터를 매우 쉽게 수집할 수 있지만, 국�
 
 우리가 인터넷에 접속하여 서버에 파일을 요청하면, 서버는 이에 해당하는 파일을 우리에게 보내줍니다. 이러한 과정을 사람이 수행하기 편하고 시각적으로 보기 편하도록 만들어 진 것이 크롬과 같은 웹브라우저 이며, 서버의 주소를 기억하기 쉽게하기 위해 만든 것이 인터넷 주소 입니다. 우리가 서버에 데이터를 요청하는 형태는 다양하지만 크롤링에서는 주로 GET과 POST 방식을 사용합니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_flow.png" alt="클라이언트와 서버 간의 요청/응답 과정" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-2)클라이언트와 서버 간의 요청/응답 과정</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_flow} 
+
+}
+
+\caption{클라이언트와 서버 간의 요청/응답 과정}(\#fig:unnamed-chunk-2)
+\end{figure}
 
 ### GET 방식
 
@@ -24,19 +28,27 @@ GET 방식은 인터넷 주소를 기준으로, 이에 해당하는 데이터나
 
 한경컨센서스^[http://hkconsensus.hankyung.com/]에 접속한 후 상단의 탭에서 기업을 선택하면, 주소의 끝부분에 **?skinType=business**가 추가되며 이에 해당하는 페이지의 내용을 보여줍니다. 즉, 해당 페이지는 GET 방식을 사용하고 있으며 입력종류는 skinType, 이에 해당하는 기업 탭의 입력값은 business 임을 알 수 있습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_hk.png" alt="한경 컨센서스 기업 REPORT 페이지" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-3)한경 컨센서스 기업 REPORT 페이지</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{images/crawl_hk} 
+
+}
+
+\caption{한경 컨센서스 기업 REPORT 페이지}(\#fig:unnamed-chunk-3)
+\end{figure}
 
 이번에는 파생 탭을 선택하여 봅니다. 역시나 홈페이지 주소가 변경되며 해당 주소에 맞는 내용이 나타납니다. 주소의 끝부분이 **?skinType=derivative** 로 변경되며, 입력 값이 변경됨에 따라 페이지의 내용이 이에 맞게 변하는 모습이 확인됩니다. 여러 다른 탭들을 눌러보면 **?skinType=** 뒷부분의 입력값이 변함에 따라 이에 해당하는 페이지로 내용이 변경됨이 확인됩니다.
 
 다시 기업 탭을 선택한 후, 다음 페이지를 확인하기 위해 하단의 2를 클릭합니다. 기존 주소인 **?skinType=business** 뒤에 추가로 **sdate**와 **edate**, 그리고 **now_page** 쿼리가 추가됩니다. sdate에 검색 기간의 시작시점, edate에 검색 기간의 종료시점, now_page에 원하는 페이지를 수기로 입력해도 이에 해당하는 페이지의 데이터를 보여줍니다. 이처럼 GET 방식으로 데이터를 요청할 경우, 웹 페이지 주소를 수정하여 원하는 종류의 데이터를 받아올 수 있습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_hk2.png" alt="쿼리 추가로 인한 url의 변경" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-4)쿼리 추가로 인한 url의 변경</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{images/crawl_hk2} 
+
+}
+
+\caption{쿼리 추가로 인한 url의 변경}(\#fig:unnamed-chunk-4)
+\end{figure}
 
 ### POST 방식
 
@@ -44,26 +56,38 @@ POST 방식은 사용자가 필요한 값을 추가해서 요청하는 방법입
 
 한국거래소 상장공시시스템^[http://kind.krx.co.kr/]에 접속하여 전체메뉴보기를 누른 후, 상장법인상세정보 중 상장종목현황을 선택합니다. 웹 페이지 주소가 바뀌며, 상장종목현황이 보여집니다. 
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_corp_list.png" alt="상장공시시스템의 상장종목현황 메뉴" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-5)상장공시시스템의 상장종목현황 메뉴</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_corp_list} 
+
+}
+
+\caption{상장공시시스템의 상장종목현황 메뉴}(\#fig:unnamed-chunk-5)
+\end{figure}
 
 이번엔 조회일자를 2017-12-28로 선택한 후, 검색을 눌러보도록 합니다. 페이지의 내용은 선택일 기준으로 변경되었지만, 주소는 변경되지 않고 그대로 남아있습니다. GET 방식에서는 선택항목에 따라 웹 페이지 주소가 변경되었지만, POST 방식을 사용하여 서버에 데이터를 요청하는 해당 사이트는 그렇지 않음이 확인됩니다.
 
 POST 방식의 데이터 요청과정을 살펴보기 위해서는 개발자도구를 이용해야 하며, 크롬 브라우저에서 F12 키를 눌러 해당 화면을 열 수 있습니다. 개발자도구 화면을 연 상태에서 다시 한번 **검색**을 클릭해 봅니다. Network 탭을 클릭하면, **검색**을 클릭함과 함게 브라우저와 서버간의 통신 과정을 살펴볼 수 있습니다. 이 중 **listedIssueStatus.do** 라는 항목이 POST 형태임을 알 수 있습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_corp_list_2.png" alt="크롬 개발자도구의 Network 화면" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-6)크롬 개발자도구의 Network 화면</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{images/crawl_corp_list_2} 
+
+}
+
+\caption{크롬 개발자도구의 Network 화면}(\#fig:unnamed-chunk-6)
+\end{figure}
 
 해당 메뉴를 클릭하면 통신 과정을 좀 더 자세히 알 수 있습니다. 가장 하단의 Form Data에는 서버에 데이터를 요청하는 내역이 있습니다. method에는 readListIssueStatus, selDate에는 2017-12-28라는 값이 있습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_corp_list_3.png" alt="POST 방식의 서버 요청 내역" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-7)POST 방식의 서버 요청 내역</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_corp_list_3} 
+
+}
+
+\caption{POST 방식의 서버 요청 내역}(\#fig:unnamed-chunk-7)
+\end{figure}
 
 이처럼 POST 방식은 요청하는 데이터에 대한 쿼리가 GET 방식처럼 url을 통해 전송되는 것이 아닌 body를 통해 전송되므로, 이에 대한 정보는 웹브라우저를 통해 확인할 수 없습니다.
 
@@ -77,10 +101,14 @@ POST 방식의 데이터 요청과정을 살펴보기 위해서는 개발자도�
 
 뉴스 제목 부분에 마우스를 올려둔 후 우클릭 → 검사를 선택할 경우 개발자도구 화면이 열리며, 해당 글자가 html 내에서 어떤 부분에 위치하는지 확인할 수 있습니다. 해당 제목은 dl 태그 → dd 태그의 articleSubject 클래스 → a 태그 중 title 속성에 위치하고 있습니다. 태그와 속성의 차이가 이해되지 않으시는 분은 해당 장을 다시 살펴보시기 바랍니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_naver_news.png" alt="실시간 속보의 제목 부분 html" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-8)실시간 속보의 제목 부분 html</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{images/crawl_naver_news} 
+
+}
+
+\caption{실시간 속보의 제목 부분 html}(\#fig:unnamed-chunk-8)
+\end{figure}
 
 먼저 해당 페이지의 내용을 R로 불러오도록 하겠습니다.
 
@@ -150,19 +178,27 @@ print(data_title)
 
 한국거래소 상장공시시스템에 접속한 후 오늘의 공시 → 전체 → 더보기를 선택하여 전체 공시내용을 확인할 수 있습니다. 
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_kind.png" alt="오늘의공시 확인하기" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-13)오늘의공시 확인하기</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_kind} 
+
+}
+
+\caption{오늘의공시 확인하기}(\#fig:unnamed-chunk-13)
+\end{figure}
 
 해당 페이지에서 날짜를 변경할 경우, 페이지의 내용은 해당일의 공시로 변경되지만 url은 변경되지 않습니다. 이처럼 POST 방식의 경우 요청하는 데이터에 대한 쿼리가 body의 형태를 통해 전송되므로, 개발자도구 화면을 통해 해당 쿼리에 대한 내용을 확인해야 합니다.
 
 개발자도구 화면을 연 상태에서 조회일자를 2018-12-28로 선택한 후 Network 탭의 **todaydisclosure.do** 항목을 살펴보면 Form Data를 통해 서버에 데이터를 요청하는 내역을 확인할 수 있습니다. 여러 항목 중 selDate 부분이 우리가 선택한 일자로 설정되어 있습니다. 
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_kind_post.png" alt="POST 방식의 데이터 요청" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-14)POST 방식의 데이터 요청</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{images/crawl_kind_post} 
+
+}
+
+\caption{POST 방식의 데이터 요청}(\#fig:unnamed-chunk-14)
+\end{figure}
 
 POST 방식으로 쿼리를 요청하는 방법을 코드로 나타내면 다음과 같습니다. 
 
@@ -209,13 +245,20 @@ print(head(data))
 ```
 
 ```
-##      NA           NA                                          NA
-## 1 18:32     화신테크                                최대주주변경
-## 2 18:26 에스제이케이 증권 발행결과(자율공시)(제3자배정 유상증자)
-## 3 18:11     아이엠텍               [정정]유상증자결정(제3자배정)
-## 4 18:10 시그넷이브이                          유형자산 양수 결정
-## 5 18:09                         자기주식매매신청내역(코스닥시장)
-## 6 18:09                                 대량매매내역(코스닥시장)
+##      NA           NA
+## 1 18:32     화신테크
+## 2 18:26 에스제이케이
+## 3 18:11     아이엠텍
+## 4 18:10 시그넷이브이
+## 5 18:09             
+## 6 18:09             
+##                                            NA
+## 1                                최대주주변경
+## 2 증권 발행결과(자율공시)(제3자배정 유상증자)
+## 3               [정정]유상증자결정(제3자배정)
+## 4                          유형자산 양수 결정
+## 5            자기주식매매신청내역(코스닥시장)
+## 6                    대량매매내역(코스닥시장)
 ##               NA                             NA
 ## 1       화신테크 공시차트\r\n\t\t\t\t\t주가차트
 ## 2   에스제이케이 공시차트\r\n\t\t\t\t\t주가차트
@@ -264,20 +307,20 @@ print(head(data))
 ## 4 18:56   해덕파워웨이
 ## 5 18:52 한국테크놀로지
 ## 6 18:52 한국테크놀로지
-##                                                        NA             NA
-## 1                                              소속부변경 코스닥시장본부
-## 2 주권매매거래정지기간변경(상장적격성 실질심사 대상 결정) 코스닥시장본부
-## 3                                            최대주주변경     퓨전데이타
-## 4            관리종목지정(상장적격성 실질심사 대상 결정 ) 코스닥시장본부
-## 5                            전환사채권발행결정(제18회차) 한국테크놀로지
-## 6                            전환사채권발행결정(제17회차) 한국테크놀로지
-##                               NA
-## 1 공시차트\r\n\t\t\t\t\t주가차트
-## 2 공시차트\r\n\t\t\t\t\t주가차트
-## 3 공시차트\r\n\t\t\t\t\t주가차트
-## 4 공시차트\r\n\t\t\t\t\t주가차트
-## 5 공시차트\r\n\t\t\t\t\t주가차트
-## 6 공시차트\r\n\t\t\t\t\t주가차트
+##                                                        NA
+## 1                                              소속부변경
+## 2 주권매매거래정지기간변경(상장적격성 실질심사 대상 결정)
+## 3                                            최대주주변경
+## 4            관리종목지정(상장적격성 실질심사 대상 결정 )
+## 5                            전환사채권발행결정(제18회차)
+## 6                            전환사채권발행결정(제17회차)
+##               NA                             NA
+## 1 코스닥시장본부 공시차트\r\n\t\t\t\t\t주가차트
+## 2 코스닥시장본부 공시차트\r\n\t\t\t\t\t주가차트
+## 3     퓨전데이타 공시차트\r\n\t\t\t\t\t주가차트
+## 4 코스닥시장본부 공시차트\r\n\t\t\t\t\t주가차트
+## 5 한국테크놀로지 공시차트\r\n\t\t\t\t\t주가차트
+## 6 한국테크놀로지 공시차트\r\n\t\t\t\t\t주가차트
 ```
 
 ### 네이버 금융에서 주식티커 크롤링
@@ -291,24 +334,36 @@ print(head(data))
 
 티커 정리를 위해 html에서 확인해야 할 부분은 총 2가지 입니다. 먼저 하단의 페이지 네비게이션을 통해 코스피와 코스닥 시가총액에 해당하는 페이지가 각각 몇번째 페이지까지 존재하는지를 알아야 합니다. 아래와 같은 항목 중 **맨뒤**에 해당하는 페이지가 가장 마지막 페이지입니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_page_navi.png" alt="페이지 네비게이션" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-19)페이지 네비게이션</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_page_navi} 
+
+}
+
+\caption{페이지 네비게이션}(\#fig:unnamed-chunk-19)
+\end{figure}
 
 **맨뒤** 글자에 마우스를 올려둔 후 우클릭 → 검사를 선택할 경우 개발자도구 화면이 열리며, 해당 글자가 html 내에서 어떤 부분에 위치하는지 확인할 수 있습니다. 해당 링크는 pgRR 클래스 → a 태그 중 href 속성에 위치하며, page= 뒷부분의 숫자에 위치하는 페이지로 링크가 걸려있습니다. 
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_page_navi2.png" alt="HTML 내 페이지 네비게이션 부분" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-20)HTML 내 페이지 네비게이션 부분</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{images/crawl_page_navi2} 
+
+}
+
+\caption{HTML 내 페이지 네비게이션 부분}(\#fig:unnamed-chunk-20)
+\end{figure}
 
 종목명 링크에 해당하는 주소 중 끝 6자리는 티커에 해당합니다. 따라서 각 링크들의 주소를 알아야 할 필요도 있습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_naver_corp.png" alt="네이버 금융 시가총액 페이지" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-21)네이버 금융 시가총액 페이지</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=1\linewidth]{images/crawl_naver_corp} 
+
+}
+
+\caption{네이버 금융 시가총액 페이지}(\#fig:unnamed-chunk-21)
+\end{figure}
 
 삼성전자에 마우스를 올려둔 후 우클릭 → 검사를 통해 개발자도구 화면을 살펴보면, 해당 링크가 tbody → td → a 태그에서 href 속성에 위치하고 있음을 알수 있습니다. 
 
@@ -420,20 +475,20 @@ print(head(table))
 ```
 
 ```
-##    N     종목명  현재가 전일비 등락률 액면가  시가총액 상장주식수
-## 1 NA                                                             
-## 2  1   삼성전자  45,650    350 -0.76%    100 2,725,206  5,969,783
-## 3  2 SK하이닉스  68,400  1,800 -2.56%  5,000   497,954    728,002
-## 4  3 삼성전자우  37,350    650 -1.71%    100   307,348    822,887
-## 5  4     현대차 141,500  2,500 +1.80%  5,000   302,340    213,668
-## 6  5   셀트리온 208,000  4,500 +2.21%  1,000   266,924    128,329
-##   외국인비율    거래량    PER   ROE 토론실
-## 1         NA             <NA>  <NA>     NA
-## 2      57.38 7,222,188   7.58 19.63     NA
-## 3      50.70 2,037,255   3.20 38.53     NA
-## 4      92.73   599,446   6.20   N/A     NA
-## 5      44.37   338,120  26.44  2.20     NA
-## 6      21.39   259,974 101.51 10.84     NA
+##    N     종목명  현재가 전일비 등락률 액면가  시가총액
+## 1 NA                                                  
+## 2  1   삼성전자  45,650    350 -0.76%    100 2,725,206
+## 3  2 SK하이닉스  68,400  1,800 -2.56%  5,000   497,954
+## 4  3 삼성전자우  37,350    650 -1.71%    100   307,348
+## 5  4     현대차 141,500  2,500 +1.80%  5,000   302,340
+## 6  5   셀트리온 208,000  4,500 +2.21%  1,000   266,924
+##   상장주식수 외국인비율    거래량    PER   ROE 토론실
+## 1                    NA             <NA>  <NA>     NA
+## 2  5,969,783      57.38 7,222,188   7.58 19.63     NA
+## 3    728,002      50.70 2,037,255   3.20 38.53     NA
+## 4    822,887      92.73   599,446   6.20   N/A     NA
+## 5    213,668      44.37   338,120  26.44  2.20     NA
+## 6    128,329      21.39   259,974 101.51 10.84     NA
 ```
 
 이 중 마지막 열인 토론실은 필요가 없는 열이며, 첫번째 행과 같이 아무런 정보가 없는 행이 존재하기도 합니다. 이를 다음과 같이 정리해주도록 합니다.
@@ -446,20 +501,20 @@ print(head(table))
 ```
 
 ```
-##    N     종목명  현재가 전일비 등락률 액면가  시가총액 상장주식수
-## 2  1   삼성전자  45,650    350 -0.76%    100 2,725,206  5,969,783
-## 3  2 SK하이닉스  68,400  1,800 -2.56%  5,000   497,954    728,002
-## 4  3 삼성전자우  37,350    650 -1.71%    100   307,348    822,887
-## 5  4     현대차 141,500  2,500 +1.80%  5,000   302,340    213,668
-## 6  5   셀트리온 208,000  4,500 +2.21%  1,000   266,924    128,329
-## 10 6     LG화학 354,500  4,000 -1.12%  5,000   250,250     70,592
-##    외국인비율    거래량    PER   ROE
-## 2       57.38 7,222,188   7.58 19.63
-## 3       50.70 2,037,255   3.20 38.53
-## 4       92.73   599,446   6.20   N/A
-## 5       44.37   338,120  26.44  2.20
-## 6       21.39   259,974 101.51 10.84
-## 10      38.90    99,907  18.84  8.86
+##    N     종목명  현재가 전일비 등락률 액면가  시가총액
+## 2  1   삼성전자  45,650    350 -0.76%    100 2,725,206
+## 3  2 SK하이닉스  68,400  1,800 -2.56%  5,000   497,954
+## 4  3 삼성전자우  37,350    650 -1.71%    100   307,348
+## 5  4     현대차 141,500  2,500 +1.80%  5,000   302,340
+## 6  5   셀트리온 208,000  4,500 +2.21%  1,000   266,924
+## 10 6     LG화학 354,500  4,000 -1.12%  5,000   250,250
+##    상장주식수 외국인비율    거래량    PER   ROE
+## 2   5,969,783      57.38 7,222,188   7.58 19.63
+## 3     728,002      50.70 2,037,255   3.20 38.53
+## 4     822,887      92.73   599,446   6.20   N/A
+## 5     213,668      44.37   338,120  26.44  2.20
+## 6     128,329      21.39   259,974 101.51 10.84
+## 10     70,592      38.90    99,907  18.84  8.86
 ```
 
 이제 필요한 정보는 6자리 티커입니다. 티커 역시 개발자도구 화면을 통해 tbody → td → a 태그에서 href 속성에 위치하고 있음을 알고 있으며, 이를 추출하는 코드는 다음과 같습니다.
@@ -476,11 +531,16 @@ print(head(symbol, 10))
 ```
 
 ```
-##  [1] "/item/main.nhn?code=005930"  "/item/board.nhn?code=005930"
-##  [3] "/item/main.nhn?code=000660"  "/item/board.nhn?code=000660"
-##  [5] "/item/main.nhn?code=005935"  "/item/board.nhn?code=005935"
-##  [7] "/item/main.nhn?code=005380"  "/item/board.nhn?code=005380"
-##  [9] "/item/main.nhn?code=068270"  "/item/board.nhn?code=068270"
+##  [1] "/item/main.nhn?code=005930" 
+##  [2] "/item/board.nhn?code=005930"
+##  [3] "/item/main.nhn?code=000660" 
+##  [4] "/item/board.nhn?code=000660"
+##  [5] "/item/main.nhn?code=005935" 
+##  [6] "/item/board.nhn?code=005935"
+##  [7] "/item/main.nhn?code=005380" 
+##  [8] "/item/board.nhn?code=005380"
+##  [9] "/item/main.nhn?code=068270" 
+## [10] "/item/board.nhn?code=068270"
 ```
 
 1. `read_html()`함수를 통해 html 정보를 읽어오며, 인코딩은 **EUC-KR**로 설정합니다.
@@ -523,8 +583,8 @@ print(head(symbol, 10))
 ```
 
 ```
-##  [1] "005930" "000660" "005935" "005380" "068270" "051910" "012330"
-##  [8] "005490" "017670" "055550"
+##  [1] "005930" "000660" "005935" "005380" "068270"
+##  [6] "051910" "012330" "005490" "017670" "055550"
 ```
 
 `unique()` 함수를 이용하여 중복되는 티커를 제거하면 우리가 원하는 티커 부분만 깔끔하게 정리가 됩니다. 해당 내용을 위에서 구한 table에 입력한 후 데이터를 다듬는 과정은 다음과 같습니다.

@@ -2,7 +2,7 @@
 --- 
 title: "퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기"
 author: "이현열"
-date: "2019-07-06"
+date: "2019-07-07"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -16,7 +16,8 @@ github-repo: rstudio/bookdown-demo
 
 # 여는 글 {-}
 
-<img src="images/cover.png" width="50%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.5\linewidth]{images/cover} \end{center}
 
 본 책의 목적은 다음과 같습니다.
 

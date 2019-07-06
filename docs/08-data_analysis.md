@@ -32,20 +32,30 @@ KOR_sector$'CMP_CD' =
 
 두 테이블을 하나로 합치기 위해 `*_join()` 함수를 이용하도록 합니다. 해당 함수는 기존에 살펴본 `merge()` 함수와 동일하며, 합치는 방법은 그림 \@ref(fig:joinimg)과 표 \@ref(tab:joindesc)과 같이 크게 4가지 종류가 있습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/data_analysis_join.png" alt="join 함수의 종류" width="70%" />
-<p class="caption">(\#fig:joinimg)join 함수의 종류</p>
-</div>
+\begin{figure}[h]
 
+{\centering \includegraphics[width=0.7\linewidth]{images/data_analysis_join} 
 
-Table: (\#tab:joindesc)join 함수의 종류
+}
 
-     함수          내용    
---------------  -----------
- inner_join()     교집합   
- full_join()      합집합   
- left_join()     좌측 기준 
- right_join()    우측 기준 
+\caption{join 함수의 종류}(\#fig:joinimg)
+\end{figure}
+
+\begin{table}[!h]
+
+\caption{(\#tab:joindesc)join 함수의 종류}
+\centering
+\begin{tabular}{>{\centering\arraybackslash}p{4cm}>{\centering\arraybackslash}p{4cm}}
+\toprule
+함수 & 내용\\
+\midrule
+\rowcolor{gray!6}  inner\_join() & 교집합\\
+full\_join() & 합집합\\
+\rowcolor{gray!6}  left\_join() & 좌측 기준\\
+right\_join() & 우측 기준\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 이 중 거래소 티커 기준으로 데이터를 맞추기 위해 `left_join()` 함수를 사용하여 두 데이터를 합치도록 하겠습니다.
 
@@ -61,41 +71,48 @@ head(data_market)
 ```
 
 ```
-##   종목코드     종목명 시장구분 산업분류 현재가.종가. 전일대비 시가총액.원.
-## 1   005930   삼성전자   코스피 전기전자        45400     -850    2.710e+14
-## 2   000660 SK하이닉스   코스피 전기전자        69100    -2300    5.030e+13
-## 3   005380     현대차   코스피 운수장비       136000    -1000    2.906e+13
-## 4   068270   셀트리온   코스피   의약품       206000     1000    2.644e+13
-## 5   051910     LG화학   코스피     화학       355500     7000    2.510e+13
-## 6   012330 현대모비스   코스피 운수장비       229500    -2500    2.187e+13
-##         일자 관리여부   종가    EPS   PER     BPS   PBR 주당배당금
-## 1 2019-07-03        -  45400  6,461  7.03  35,342  1.28       1416
-## 2 2019-07-03        -  69100 22,255   3.1  64,348  1.07       1500
-## 3 2019-07-03        - 136000  5,632 24.15 245,447  0.55       4000
-## 4 2019-07-03        - 206000  2,063 99.85  19,766 10.42          0
-## 5 2019-07-03        - 355500 19,217  18.5 218,227  1.63       6000
-## 6 2019-07-03        - 229500 19,944 11.51 314,650  0.73       4000
-##   배당수익률 게시물..일련번호 총카운트 IDX_CD          IDX_NM_KOR
-## 1       3.12             2165       NA    G45             WICS IT
-## 2       2.17             1885       NA    G45             WICS IT
-## 3       2.94             2159       NA    G25 WICS 경기관련소비재
-## 4       0.00             2049       NA    G35       WICS 건강관리
-## 5       1.69             2041       NA    G15           WICS 소재
-## 6       1.74             2169       NA    G25 WICS 경기관련소비재
-##   ALL_MKT_VAL   MKT_VAL   WGT S_WGT CAL_WGT SEC_CD     SEC_NM_KOR SEQ
-## 1   376270891 208452867 55.40 55.40       1    G45             IT   1
-## 2   376270891  35232402  9.36 64.76       1    G45             IT   2
-## 3   141374708  20042076 14.18 14.18       1    G25 경기관련소비재   1
-## 4    81157991  16895164 20.82 20.82       1    G35       건강관리   1
-## 5    71815100  15165000 21.12 43.84       1    G15           소재   2
-## 6   141374708  14257881 10.09 24.26       1    G25 경기관련소비재   2
-##   TOP60 APT_SHR_CNT
-## 1     2  4716128215
-## 2     2   538721750
-## 3    12   143157685
-## 4    21    85980477
-## 5     6    45885023
-## 6    12    64808552
+##   종목코드     종목명 시장구분 산업분류 현재가.종가.
+## 1   005930   삼성전자   코스피 전기전자        45400
+## 2   000660 SK하이닉스   코스피 전기전자        69100
+## 3   005380     현대차   코스피 운수장비       136000
+## 4   068270   셀트리온   코스피   의약품       206000
+## 5   051910     LG화학   코스피     화학       355500
+## 6   012330 현대모비스   코스피 운수장비       229500
+##   전일대비 시가총액.원.       일자 관리여부   종가
+## 1     -850    2.710e+14 2019-07-03        -  45400
+## 2    -2300    5.030e+13 2019-07-03        -  69100
+## 3    -1000    2.906e+13 2019-07-03        - 136000
+## 4     1000    2.644e+13 2019-07-03        - 206000
+## 5     7000    2.510e+13 2019-07-03        - 355500
+## 6    -2500    2.187e+13 2019-07-03        - 229500
+##      EPS   PER     BPS   PBR 주당배당금 배당수익률
+## 1  6,461  7.03  35,342  1.28       1416       3.12
+## 2 22,255   3.1  64,348  1.07       1500       2.17
+## 3  5,632 24.15 245,447  0.55       4000       2.94
+## 4  2,063 99.85  19,766 10.42          0       0.00
+## 5 19,217  18.5 218,227  1.63       6000       1.69
+## 6 19,944 11.51 314,650  0.73       4000       1.74
+##   게시물..일련번호 총카운트 IDX_CD          IDX_NM_KOR
+## 1             2165       NA    G45             WICS IT
+## 2             1885       NA    G45             WICS IT
+## 3             2159       NA    G25 WICS 경기관련소비재
+## 4             2049       NA    G35       WICS 건강관리
+## 5             2041       NA    G15           WICS 소재
+## 6             2169       NA    G25 WICS 경기관련소비재
+##   ALL_MKT_VAL   MKT_VAL   WGT S_WGT CAL_WGT SEC_CD
+## 1   376270891 208452867 55.40 55.40       1    G45
+## 2   376270891  35232402  9.36 64.76       1    G45
+## 3   141374708  20042076 14.18 14.18       1    G25
+## 4    81157991  16895164 20.82 20.82       1    G35
+## 5    71815100  15165000 21.12 43.84       1    G15
+## 6   141374708  14257881 10.09 24.26       1    G25
+##       SEC_NM_KOR SEQ TOP60 APT_SHR_CNT
+## 1             IT   1     2  4716128215
+## 2             IT   2     2   538721750
+## 3 경기관련소비재   1    12   143157685
+## 4       건강관리   1    21    85980477
+## 5           소재   2     6    45885023
+## 6 경기관련소비재   2    12    64808552
 ```
 
 `left_join()` 함수를 이용해 KOR_ticker와 KOR_sector 데이터를 합쳐주도록 합니다. by 인자는 데이터를 합치는 기준점을 의미하며, x 데이터(KOR_ticker)의 **종목코드**와 y 데이터(KOR_sector)의 **CMP_CD**는 같음을, x 데이터의 **종목명**과 y 데이터의 **CMP_KOR**는 같음을 정의합니다. 
@@ -152,9 +169,10 @@ head(names(data_market), 10)
 ```
 
 ```
-##  [1] "종목코드"     "종목명"       "시장구분"     "산업분류"    
-##  [5] "현재가.종가." "전일대비"     "시가총액.원." "일자"        
-##  [9] "관리여부"     "종가"
+##  [1] "종목코드"     "종목명"       "시장구분"    
+##  [4] "산업분류"     "현재가.종가." "전일대비"    
+##  [7] "시가총액.원." "일자"         "관리여부"    
+## [10] "종가"
 ```
 
 ```r
@@ -165,9 +183,10 @@ head(names(data_market), 10)
 ```
 
 ```
-##  [1] "종목코드"     "종목명"       "시장구분"     "산업분류"    
-##  [5] "현재가.종가." "전일대비"     "시가총액"     "일자"        
-##  [9] "관리여부"     "종가"
+##  [1] "종목코드"     "종목명"       "시장구분"    
+##  [4] "산업분류"     "현재가.종가." "전일대비"    
+##  [7] "시가총액"     "일자"         "관리여부"    
+## [10] "종가"
 ```
 
 `rename()` 함수는 열 이름을 바꾸는 함수로써, `rename(tbl, new_name, old_name)` 형태로 입력합니다. 위의 경우 **시가총액.원.** 열이름이 **시가총액**으로 변경되었습니다.
@@ -182,10 +201,12 @@ data_market %>%
 
 ```
 ## $SEC_NM_KOR
-##  [1] "IT"                 "경기관련소비재"     "건강관리"          
-##  [4] "소재"               "금융"               "커뮤니케이션서비스"
-##  [7] "산업재"             "유틸리티"           "에너지"            
-## [10] "필수소비재"         NA
+##  [1] "IT"                 "경기관련소비재"    
+##  [3] "건강관리"           "소재"              
+##  [5] "금융"               "커뮤니케이션서비스"
+##  [7] "산업재"             "유틸리티"          
+##  [9] "에너지"             "필수소비재"        
+## [11] NA
 ```
 
 `distinct()` 함수는 고유한 값을 반환하며, 기본함수 중 `unique()`와 동일한 기능을 합니다. 데이터의 섹터 정보를 확인해보면, WICS 기준 10개 섹터 및 섹터 정보가 없는 종목인 NA 값이 있습니다.
@@ -548,10 +569,14 @@ R에서 기본적으로 제공하는 `plot()` 함수를 통해서도 시각화�
 
 `ggplot()` 함수는 플러스(+) 기호를 사용한다는 점과 문법이 다소 어색하다는 점 때문에 처음에 배우기가 쉽지는 않습니다. 그러나 해당 패키지의 근본이 되는 철학인 **The Grammar of Graphics**를 이해하고 조금만 연습해본다면, 충분히 손쉽게 사용이 가능합니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/data_analysis_gg.png" alt="The Grammar of Graphics" width="50%" />
-<p class="caption">(\#fig:unnamed-chunk-19)The Grammar of Graphics</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.5\linewidth]{images/data_analysis_gg} 
+
+}
+
+\caption{The Grammar of Graphics}(\#fig:unnamed-chunk-19)
+\end{figure}
 
 ### `geom_point()`: 산점도 나타내기
 
@@ -563,7 +588,9 @@ ggplot(data_market, aes(x = ROE, y = PBR)) +
   geom_point()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-20-1} \end{center}
 
 1. `ggplot()` 함수 내에 사용될 데이터인 data_market을 입력하며, aes 인자 내부에 x축은 ROE, y축은 PBR 열을 사용하도록 정의합니다.
 2. `geom_point()` 함수를 통해 산점도 그래프를 그려주도록 합니다. 원하는 그림이 그려지기는 하였으나, ROE와 PBR에 극단치 데이터가 존재하여 둘간의 관계가 잘 보이지 않습니다.
@@ -575,7 +602,9 @@ ggplot(data_market, aes(x = ROE, y = PBR)) +
   coord_cartesian(xlim = c(0, 0.30), ylim = c(0, 3))
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
 이번에는 극단치 효과를 제거하기 위해 `coord_cartesian()` 함수 내에 xlim과 ylim, 즉 x축과 y축의 범위를 직접 지정해주도록 합니다. 극단치가 제거되어 데이터를 한 눈에 확인할 수 있습니다.
 
@@ -589,7 +618,9 @@ ggplot(data_market, aes(x = ROE, y = PBR,
   coord_cartesian(xlim = c(0, 0.30), ylim = c(0, 3))
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 1. `ggplot()` 함수 내부 aes 인자에 color와 shape를 지정해주면, 해당 그룹 별로 모양과 색이 나타납니다. 코스피와 코스닥 종목들에 해당하는 데이터의 색과 점 모양이 다르게 표시할 수 있습니다.
 2. `geom_smooth()` 함수를 통해 평활선을 추가해줄 수도 있으며, 방법으로 lm(linear model)을 지정해줄 경우 선형회귀선을 그려주게 됩니다. 이 외에도 glm, gam, loess 등의 다양한 회귀선을 그려줄 수 있습니다.
@@ -603,7 +634,9 @@ ggplot(data_market, aes(x = PBR)) +
   coord_cartesian(xlim = c(0, 10))
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-23-1} \end{center}
 
 `geom_histogram()` 함수는 히스토그램을 나타내주며, binwidth 인자를 막대의 통해 너비를 선택해줄 수 있습니다. 국내 종목들의 PBR 데이터는 좌측에 쏠려있고 오른쪽으로 꼬리가 긴 분포를 가지고 있습니다.
 
@@ -622,7 +655,9 @@ ggplot(data_market, aes(x = PBR)) +
              col = 'black', size = 6, hjust = -0.5)
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-24-1} \end{center}
 
 PBR 히스토그램을 좀 더 자세하게 나타내보도록 하겠습니다.
 
@@ -640,7 +675,9 @@ ggplot(data_market, aes(x = SEC_NM_KOR, y = PBR)) +
   coord_flip()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-25-1} \end{center}
 
 박스플롯 역시 데이터의 분포와 이상치를 확인하기 좋은 그림이며, geom_boxplot() 함수를
 통해 나타낼 수 있습니다.
@@ -668,7 +705,9 @@ data_market %>%
         legend.title = element_blank())
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-26-1} \end{center}
 
 앞에서 배운 데이터 분석과 시각화를 동시에 연결하여 사용할 수도 있습니다.
 
@@ -711,7 +750,9 @@ data_market %>%
   theme_classic()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-28-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-28-1} \end{center}
 
 `geom_bar()`는 막대그래프를 그려주는 함수입니다. 
 
@@ -738,7 +779,9 @@ data_market %>%
   theme_classic()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-29-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-29-1} \end{center}
 
 1. `filter()` 함수를 통해 NA 종목은 삭제해준 후, 섹터 별 종목 갯수를 구해주도록 합니다.
 2. `ggplot()`의 x축에 `reorder()` 함수를 적용하여 SEC_NM_KOR 변수를 n 순서대로 정렬해줍니다.
@@ -773,7 +816,9 @@ prices = Cl(SPY)
 plot(prices, main = 'Price')
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-31-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-31-1} \end{center}
 
 `getSymbols()` 함수는 데이터를 xts 형식으로 내려받으며, R에서는 데이터가 xts 형식일 경우 기본함수인 `plot()`으로 그래프를 그려도 x축에 시간을 나타내주며, 우측 상단에 기간을 표시해 줍니다. 그러나 완벽히 깔끔한 형태의 그래프라 보기는 어려운 면이 있습니다.
 
@@ -786,7 +831,9 @@ SPY %>%
   geom_line()
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-32-1} \end{center}
 
 `ggplot()`을 이용할 경우 기본 `plot()` 보다 한결 깔끔해졌으며, 패키지 내의 다양한 함수를 이용해 그래프를 꾸며 나갈수도 있습니다.
 
@@ -802,7 +849,8 @@ dygraph(prices) %>%
 
 
 
-<img src="images/dygraph.png" width="70%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.7\linewidth]{images/dygraph} \end{center}
 
 `dygraphs` 패키지의 `dygraph()` 함수를 이용하면 사용자의 움직임에 따라 반응하는 그래프를 그릴 수 있습니다. 해당 패키지는 JavaScript를 이용하여 인터랙티브한 그래프를 구현하며, 그래프 위에 마우스를 올릴 경우 날짜 및 가격이 표시되기도 하며, 하단의 셀렉터를 이용해 원하는 기간의 수익률을 선택할 수도 있습니다.
 
@@ -817,7 +865,8 @@ highchart(type = 'stock') %>%
 
 
 
-<img src="images/highcharter.png" width="70%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.7\linewidth]{images/highcharter} \end{center}
 
 `highcharter` 패키지의 `highchart()` 함수 역시 이와 비슷한 기능을 하며, 인터랙티브 그래프를 생성해줍니다. 좌측 상단의 기간을 클릭할 경우 해당 기간의 수익률 만을 확인할 수도 있으며, 우측 상단에 기간을 직접 입력할 수도 있습니다.
 
@@ -834,7 +883,8 @@ ggplotly(p)
 
 
 
-<img src="images/ggplotly.png" width="70%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.7\linewidth]{images/ggplotly} \end{center}
 
 `plotly` 패키지는 R 뿐만 아니라 Python, MATLAB, Julia 등 여러 프로그래밍 언어에 사용될 수 있는 그래픽 패키지로써 최근에 많은 사랑을 받고 있습니다. R 내에서는 단순히 `ggplot()`을 이용해 나타낸 그림에 `ggplotly()` 함수를 추가해주는것 만으로 인터랙티브한 그래프를 만들어 줍니다. 
 
@@ -850,7 +900,8 @@ prices %>%
 
 
 
-<img src="images/plotly.png" width="70%" style="display: block; margin: auto;" />
+
+\begin{center}\includegraphics[width=0.7\linewidth]{images/plotly} \end{center}
 
 `plot_ly()` 함수 내부에 x축과 y축을 설정해주며, 변수명 앞에 물결표(~)를 붙여줍니다. 그 후, `add_lines()` 함수를 추가해주면 선그래프를 표시해줍니다. `ggplot()` 함수의 경우 각 레이어의 연결을 플러스 기호(`+`)를 통해 해주었지만, `plot_ly()` 함수의 경우 파이프 오퍼레이터(`%>%`)를 통해 할 수 있다는 장점이 있습니다.
 
@@ -880,7 +931,9 @@ ggplot(ret_yearly, aes(x = Index, y = SPY.Close)) +
   xlab(NULL) + ylab(NULL)
 ```
 
-<img src="08-data_analysis_files/figure-html/unnamed-chunk-45-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{08-data_analysis_files/figure-latex/unnamed-chunk-45-1} \end{center}
 
 1. 먼저 `apply.yearly()` 함수를 이용해 연도별 수익률을 계산해준 뒤 반올림을 해줍니다.
 2. `fortify.zoo()` 함수를 통해 인덱스에 있는 시간 데이터를 Index 열로 이동합니다.

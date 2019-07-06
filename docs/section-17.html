@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-07-06" />
+<meta name="date" content="2019-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -497,7 +497,7 @@ down_ind =<span class="st"> </span><span class="kw">POST</span>(down_url, <span 
 그림 4.3: OTP 생성 부분
 </p>
 </div>
-<p>먼저 크롤링하고자 하는 내용에 마우스를 올린 채 우클릭 → 검사를 누르면, 개발자도구 화면이 열리며 해당 지점의 html 부분이 선택됩니다. 그 후 html 화면에서 우클릭 → Copy → Copy Xpath를 선택하면, 해당 지점의 xpath가 복사됩니다.</p>
+<p>먼저 크롤링하고자 하는 내용에 마우스를 올린 채 우클릭 → 검사를 누르면, 개발자도구 화면이 열리며 해당 지점의 html 부분이 선택됩니다. 그 후 html 화면에서 우클릭 → Copy → Copy Xpath를 선택하면, 해당 지점의 Xpath가 복사됩니다.</p>
 <pre class="sourceCode css"><code class="sourceCode css"><span class="er">//*[@id=&quot;type_0&quot;]/div/ul[2]/li/span</span></code></pre>
 <style type="text/css">
 //*[@id="type_0"]/div/ul[2]/li/span
@@ -511,7 +511,8 @@ url =<span class="st"> &#39;https://finance.naver.com/sise/sise_deposit.nhn&#39;
 
 biz_day =<span class="st"> </span><span class="kw">GET</span>(url) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">read_html</span>(<span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">&#39;//*[@id=&quot;type_1&quot;]/div/ul[2]/li/span&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span>
+               <span class="st">&#39;//*[@id=&quot;type_1&quot;]/div/ul[2]/li/span&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_match</span>((<span class="st">&#39;[0-9]+.[0-9]+.[0-9]+&#39;</span>) ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)
@@ -538,13 +539,15 @@ url =<span class="st"> &#39;https://finance.naver.com/sise/sise_deposit.nhn&#39;
 
 biz_day =<span class="st"> </span><span class="kw">GET</span>(url) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">read_html</span>(<span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">&#39;//*[@id=&quot;type_1&quot;]/div/ul[2]/li/span&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span>
+               <span class="st">&#39;//*[@id=&quot;type_1&quot;]/div/ul[2]/li/span&#39;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_match</span>((<span class="st">&#39;[0-9]+.[0-9]+.[0-9]+&#39;</span>) ) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)
 
 <span class="co"># 산업별 현황 OTP 발급</span>
-gen_otp_url =<span class="st"> &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span>
+gen_otp_url =
+<span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span>
 gen_otp_data =<span class="st"> </span><span class="kw">list</span>(
   <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,
   <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,
@@ -568,9 +571,9 @@ down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <sp
 <span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data&#39;</span>), <span class="ot">FALSE</span>, <span class="kw">dir.create</span>(<span class="st">&#39;data&#39;</span>))
 <span class="kw">write.csv</span>(down_sector, <span class="st">&#39;data/krx_sector.csv&#39;</span>)
 
-
 <span class="co"># 개별종목 지표 OTP 발급</span>
-gen_otp_url =<span class="st"> &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span>
+gen_otp_url =
+<span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span>
 gen_otp_data =<span class="st"> </span><span class="kw">list</span>(
   <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,
   <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,

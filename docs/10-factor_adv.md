@@ -66,7 +66,9 @@ data_market[invest_mom, ] %>%
   theme_classic()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-4-1} \end{center}
 
 `group_by()` 함수를 이용하여 12개월 기준 모멘텀 포트폴리오 종목들의 섹터 별 종목수를 계산해준 후, `ggplot()` 함수를 이용하여 이를 그림으로 나타냅니다. 그림에서 알 수 있듯이, 특정 섹터에 대부분의 종목이 몰려있습니다.
 
@@ -113,7 +115,9 @@ data_market[invest_mom_neutral, ] %>%
   theme_classic()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-6-1} \end{center}
 
 정규화된 값의 랭킹이 높은 상위 30 종목을 선택하며, 내림차순을 위해 마이너스를 붙여줍니다. 해당 포트폴리오의 섹터 별 구성종목을 확인해보면, 단순하게 포트폴리오를 구성한 것 대비, 여러 섹터에 종목이 분산되어 있습니다.
 
@@ -173,7 +177,9 @@ cbind(data_pbr, data_gpa) %>%
   xlab('PBR') + ylab('GPA')
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 이번에는 PBR의 분위수 별 GPA 평균값을 구하도록 하겠습니다.
 
@@ -188,10 +194,14 @@ cbind(data_pbr, data_gpa) %>%
 이를 이용해 밸류 팩터와 퀄리티 팩터간의 관계를 나타내면 다음과 같습니다.
 
 
-<div class="figure" style="text-align: center">
-<img src="images/tableqv.png" alt="밸류 팩터와 퀄리티 팩터간의 관계" width="50%" />
-<p class="caption">(\#fig:unnamed-chunk-9)밸류 팩터와 퀄리티 팩터간의 관계</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.5\linewidth]{images/tableqv} 
+
+}
+
+\caption{밸류 팩터와 퀄리티 팩터간의 관계}(\#fig:unnamed-chunk-9)
+\end{figure}
 
 주가가 쌀수록 기업의 우량성은 떨어지며(①번), 반대로 기업의 우량성이 좋으면 주식은 비싼 경향(③번)이 있습니다. 물론 우량성도 떨어지고 비싸기만한 주식(②번)을 사려는 사람들 아마 없을 겁니다. 결과적으로 우리가 원하는 최고의 주식은 우량성이 있으면서도 가격은 싼 주식(④번)입니다. 
 
@@ -207,13 +217,19 @@ cbind(data_pbr, data_gpa) %>%
 
 해당 전략은 국내 투자자들에게도 많이 사랑받는 전략이지만 두 지표를 계산하기 위한 데이터를 수집하는데 어려움이 있어 많은 투자자들이 이율 대신 PER를, 투하 자본 수익률 대신 ROE를 사용합니다. 그러나 우리가 수집한 데이터를 통해 충분히 원래의 마법공식을 구현할 수 있습니다.
 
+\begin{table}[!h]
 
-Table: (\#tab:unnamed-chunk-10)마법공식의 구성 요소
-
- 팩터                          Value                                              Quality                     
-------  ---------------------------------------------------  -------------------------------------------------
- 지표                  이율 (Earnings Yield)                        투하자본 수익률 (Return On Capital)       
- 계산    $\frac{이자\,및\,법인세\,차감전이익}{기업\,가치}$    $\frac{이자\,및\,법인세\,차감전이익}{투하자본}$ 
+\caption{(\#tab:unnamed-chunk-10)마법공식의 구성 요소}
+\centering
+\begin{tabular}{ccc}
+\toprule
+팩터 & Value & Quality\\
+\midrule
+\rowcolor{gray!6}  지표 & 이율 (Earnings Yield) & 투하자본 수익률 (Return On Capital)\\
+계산 & $\frac{이자\,및\,법인세\,차감전이익}{기업\,가치}$ & $\frac{이자\,및\,법인세\,차감전이익}{투하자본}$\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 ### 마법공식 구성하기
 
@@ -384,7 +400,9 @@ KOR_value %>%
   geom_histogram(binwidth = 0.1)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-14-1} \end{center}
 
 국내 종목들의 PBR 히스토그램을 그려보면 오른쪽으로 꼬리가 매우 긴 분포를 보이고 있습니다. 이는 PBR이 무려 106.71인 이상치 데이터가 존재하기 때문입니다. 이처럼 모든 팩터 지표에는 극단치 데이터가 존재하기 마련이며, 이를 처리하는 방법에 대해 알아보도록 하겠습니다.
 
@@ -406,7 +424,9 @@ value_trim %>%
   geom_histogram(binwidth = 0.1)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-15-1} \end{center}
 
 `percent_rank()` 함수를 통해 백분위를 구한 후 상하위 1%에 해당하는 데이터들은 NA로 변경하였습니다. 결과적으로 지나치게 PBR이 낮은 종목과 높은 종목은 제거가 되어 x축의 스케일이 많이 줄어든 모습입니다.
 
@@ -431,7 +451,9 @@ value_winsor %>%
   geom_histogram(binwidth = 0.1)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-16-1} \end{center}
 
 역시나 `percent_rank()` 함수를 통해 백분위를 구한 후, 해당 범위를 초과할 경우 각각 상하위 1% 데이터로 변형을 해줍니다. 그림을 살펴보면 x축 양 끝 부분의 막대가 길어진 것을 확인할 수 있습니다.
 
@@ -453,7 +475,9 @@ KOR_value %>%
   facet_wrap(. ~ key)  
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-17-1} \end{center}
 
 위 그림은 각 밸류 지표의 랭킹을 구한 후 히스토그램으로 나타낸 것입니다. 랭킹을 구하는 것의 가장 큰 장점은 극단치로 인한 효과가 사라진다는 점과, 균등한 분포를 가진다는 점입니다.
 
@@ -474,7 +498,9 @@ KOR_value %>%
   facet_wrap(. ~ key)  
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-18-1} \end{center}
 
 `min_rank()`를 통해 랭킹을 구한 후, `scale()`을 통해 정규화를 해주었습니다. 기본적으로 랭킹의 분포가 가진 극단치 효과가 사라지는 점과 균등 분포의 장점을 유지하고 있으며, 분포의 범위 역시 거의 동일하게 바뀌었습니다.
 
@@ -536,7 +562,9 @@ factor_quality %>%
   geom_histogram()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.5\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-20-1} \end{center}
 
 첫번째로 퀄리티 지표를 계산해줍니다. 코드는 앞에서 살펴본 것과 거의 비슷하며, 자기자본이익률, 매출총이익, 영업활동현금흐름을 계산해줍니다. 그 후 `mutate_all()` 함수를 통해 랭킹을 구한 후 다시 표준화를 해주도록 하며, 내림차순으로 정리하기 위해 랭킹 부분에 `desc()`를 붙여줍니다. 
 
@@ -556,7 +584,9 @@ factor_value %>%
   geom_histogram()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.5\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-21-1} \end{center}
 
 두번째로 밸류 지표를 계산해줍니다. 밸류 지표의 경우 이미 테이블 형태로 들어와 있으며, 랭킹과 표준화를 거쳐 합을 구해주도록 합니다. 역시나 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.
 
@@ -584,7 +614,9 @@ factor_mom %>%
   geom_histogram()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.5\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-22-1} \end{center}
 
 마지막으로 모멘텀 지표를 계산해줍니다. 최근 60일, 120일, 252일 주가를 통해 3개월, 6개월, 12개월 수익률을 구해준 후 `cbind()`를 통해 열로 묶어주도록 합니다. 그 후 내림차순 기준 랭킹과 표준화를 거쳐 합을 구해주도록 합니다.
 
@@ -605,7 +637,9 @@ cbind(factor_quality, factor_value, factor_mom) %>%
            mar=c(0,0,0.5,0))
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-23-1} \end{center}
 
 퀄리티, 밸류, 모멘텀 팩터 간의 랭크의 서로 간 상관관계가 매우 낮으며, 여러 팩터를 동시에 고려함으로써 분산효과를 기대할 수 있습니다.
 
@@ -641,7 +675,9 @@ quality_profit[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-25-1} \end{center}
 
 먼저 선택된 종목의 퀄리티 지표별 분포를 살펴보도록 하겠습니다. 대부분 종목의 수익성이 높음이 확인됩니다.
 
@@ -655,7 +691,9 @@ KOR_value[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-26-1} \end{center}
 
 이번에는 선택된 종목의 가치 지표별 분포입니다. 대부분 종목의 값이 낮아, 밸류 종목임이 확인됩니다.
 
@@ -669,7 +707,9 @@ ret_bind[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{10-factor_adv_files/figure-latex/unnamed-chunk-27-1} \end{center}
 
 마지막으로 각 종목들의 기간 별 수익률 분포입니다. 역시나 대부분의 종목들이 높은 수익률을 보입니다.
 
@@ -726,8 +766,10 @@ cbind(quality_profit, KOR_value, ret_bind)[invest_qvm, ] %>%
 ```
 
 ```
-##        ROE   GPA  CFO   PER   PBR   PCR   PSR ret_3m ret_6m ret_12m
-## [1,] 0.131 0.261 0.13 8.072 0.989 4.102 0.478  0.117  0.442   0.374
+##        ROE   GPA  CFO   PER   PBR   PCR   PSR ret_3m
+## [1,] 0.131 0.261 0.13 8.072 0.989 4.102 0.478  0.117
+##      ret_6m ret_12m
+## [1,]  0.442   0.374
 ```
 
 마지막으로 포트폴리오 내 종목들의 지표 별 평균을 계산한 값입니다.

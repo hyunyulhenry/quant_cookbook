@@ -13,17 +13,25 @@
 
 먼저 네이버 금융에서 특정종목(예: 삼성전자)의 차트 탭^[https://finance.naver.com/item/fchart.nhn?code=005930]을 선택합니다.^[플래쉬가 차단되어 화면이 나오지 않는 경우, 주소창의 왼쪽 상단에 위치한 자물쇠 버튼을 클릭한 다음, Flash를 허용으로 바꾼 후 새로고침을 누르면 차트가 나오게 됩니다.] 해당 차트는 주가 데이터를 받아 그래프를 그려주는 형태입니다. 따라서 해당 데이터가 어디에서 오는지 알기 위해 개발자도구 화면을 이용하도록 합니다. 
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_price2.png" alt="네이버금융 차트의 통신기록" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-2)네이버금융 차트의 통신기록</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_practice_price2} 
+
+}
+
+\caption{네이버금융 차트의 통신기록}(\#fig:unnamed-chunk-2)
+\end{figure}
 
 화면을 연 상태에서 일봉 탭을 선택하면 **sise.nhn**, **schedule.nhn**, **notice.nhn** 총 3가지 항목이 생성됩니다. 이 중 sise.nhn 항목의 Request URL이 주가 데이터를 요청하는 주소입니다. 해당 url에 접속해 보도록 하겠습니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_price3.png" alt="주가 데이터 페이지" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-3)주가 데이터 페이지</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_practice_price3} 
+
+}
+
+\caption{주가 데이터 페이지}(\#fig:unnamed-chunk-3)
+\end{figure}
 
 각 날짜별로 시가, 고가, 저가, 종가, 거래량이 있으며, 주가의 경우 모두 수정주가 기준입니다. 또한 해당 데이터가 item 태그 내 data 속성에 위치하고 있습니다.
 
@@ -71,7 +79,7 @@ print(price)
 
 ```
 ##            [,1]
-## 2019-07-06   NA
+## 2019-07-07   NA
 ```
 
 1. 먼저 data 폴더 내에 KOR_price 폴더를 생성해줍니다.
@@ -287,48 +295,64 @@ lapply(data, function(x) {
 
 ```
 ## [[1]]
-##   IFRS(연결)   2016/12   2017/12   2018/12 2019/03 전년동기 전년동기(%)
-## 1     매출액 2,018,667 2,395,754 2,437,714 523,855  605,637       -13.5
-## 2   매출원가 1,202,777 1,292,907 1,323,944 327,465  319,095         2.6
-## 3 매출총이익   815,890 1,102,847 1,113,770 196,391  286,542       -31.5
+##   IFRS(연결)   2016/12   2017/12   2018/12 2019/03
+## 1     매출액 2,018,667 2,395,754 2,437,714 523,855
+## 2   매출원가 1,202,777 1,292,907 1,323,944 327,465
+## 3 매출총이익   815,890 1,102,847 1,113,770 196,391
+##   전년동기 전년동기(%)
+## 1  605,637       -13.5
+## 2  319,095         2.6
+## 3  286,542       -31.5
 ## 
 ## [[2]]
-##   IFRS(연결) 2018/06 2018/09 2018/12 2019/03 전년동기 전년동기(%)
-## 1     매출액 584,827 654,600 592,651 523,855  605,637       -13.5
-## 2   매출원가 312,746 351,944 340,160 327,465  319,095         2.6
-## 3 매출총이익 272,081 302,656 252,491 196,391  286,542       -31.5
+##   IFRS(연결) 2018/06 2018/09 2018/12 2019/03 전년동기
+## 1     매출액 584,827 654,600 592,651 523,855  605,637
+## 2   매출원가 312,746 351,944 340,160 327,465  319,095
+## 3 매출총이익 272,081 302,656 252,491 196,391  286,542
+##   전년동기(%)
+## 1       -13.5
+## 2         2.6
+## 3       -31.5
 ## 
 ## [[3]]
-##                          IFRS(연결)   2016/12   2017/12   2018/12
-## 1                              자산 2,621,743 3,017,521 3,393,572
-## 2 유동자산계산에 참여한 계정 펼치기 1,414,297 1,469,825 1,746,974
-## 3                          재고자산   183,535   249,834   289,847
-##     2019/03
-## 1 3,450,679
-## 2 1,773,885
-## 3   314,560
+##                          IFRS(연결)   2016/12   2017/12
+## 1                              자산 2,621,743 3,017,521
+## 2 유동자산계산에 참여한 계정 펼치기 1,414,297 1,469,825
+## 3                          재고자산   183,535   249,834
+##     2018/12   2019/03
+## 1 3,393,572 3,450,679
+## 2 1,746,974 1,773,885
+## 3   289,847   314,560
 ## 
 ## [[4]]
-##                          IFRS(연결)   2018/06   2018/09   2018/12
-## 1                              자산 3,186,884 3,371,958 3,393,572
-## 2 유동자산계산에 참여한 계정 펼치기 1,569,768 1,762,820 1,746,974
-## 3                          재고자산   273,588   282,428   289,847
-##     2019/03
-## 1 3,450,679
-## 2 1,773,885
-## 3   314,560
+##                          IFRS(연결)   2018/06   2018/09
+## 1                              자산 3,186,884 3,371,958
+## 2 유동자산계산에 참여한 계정 펼치기 1,569,768 1,762,820
+## 3                          재고자산   273,588   282,428
+##     2018/12   2019/03
+## 1 3,393,572 3,450,679
+## 2 1,746,974 1,773,885
+## 3   289,847   314,560
 ## 
 ## [[5]]
-##                     IFRS(연결) 2016/12 2017/12 2018/12 2019/03
-## 1     영업활동으로인한현금흐름 473,856 621,620 670,319  52,443
-## 2                   당기순손익 227,261 421,867 443,449  50,436
-## 3 법인세비용차감전계속사업이익                                
+##                     IFRS(연결) 2016/12 2017/12 2018/12
+## 1     영업활동으로인한현금흐름 473,856 621,620 670,319
+## 2                   당기순손익 227,261 421,867 443,449
+## 3 법인세비용차감전계속사업이익                        
+##   2019/03
+## 1  52,443
+## 2  50,436
+## 3        
 ## 
 ## [[6]]
-##                     IFRS(연결) 2018/06 2018/09 2018/12 2019/03
-## 1     영업활동으로인한현금흐름 134,378 155,497 224,281  52,443
-## 2                   당기순손익 110,434 131,507  84,622  50,436
-## 3 법인세비용차감전계속사업이익
+##                     IFRS(연결) 2018/06 2018/09 2018/12
+## 1     영업활동으로인한현금흐름 134,378 155,497 224,281
+## 2                   당기순손익 110,434 131,507  84,622
+## 3 법인세비용차감전계속사업이익                        
+##   2019/03
+## 1  52,443
+## 2  50,436
+## 3
 ```
 
 1. 먼저 data 폴더 내에 KOR_fs 폴더를 생성해줍니다.
@@ -339,17 +363,23 @@ lapply(data, function(x) {
 
 위의 과정을 거치면 data 변수에는 총 리스트 형태로 총 6개의 테이블이 들어오게 되며, 그 내용은 표 \@ref(tab:fstable)와 같습니다.
 
+\begin{table}[!h]
 
-Table: (\#tab:fstable)재무제표 테이블 내역
-
- 순서            내용          
-------  -----------------------
-  1      포괄손익계산서 (연간) 
-  2      포괄손익계산서 (분기) 
-  3        재무상태표 (연간)   
-  4        재무상태표 (분기)   
-  5        현금흐름표 (연간)   
-  6        현금흐름표 (분기)   
+\caption{(\#tab:fstable)재무제표 테이블 내역}
+\centering
+\begin{tabular}{c>{\centering\arraybackslash}p{5cm}}
+\toprule
+순서 & 내용\\
+\midrule
+\rowcolor{gray!6}  \rowcolor{black}  \textcolor{white}{\textbf{1}} & \textcolor{white}{\textbf{포괄손익계산서 (연간)}}\\
+2 & 포괄손익계산서 (분기)\\
+\rowcolor{gray!6}  \rowcolor{black}  \textcolor{white}{\textbf{3}} & \textcolor{white}{\textbf{재무상태표 (연간)}}\\
+4 & 재무상태표 (분기)\\
+\rowcolor{gray!6}  \rowcolor{black}  \textcolor{white}{\textbf{5}} & \textcolor{white}{\textbf{현금흐름표 (연간)}}\\
+6 & 현금흐름표 (분기)\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 이 중 연간 기준 재무제표에 해당하는 첫번째, 세번째, 다섯번째 테이블을 선택합니다.
 
@@ -363,8 +393,9 @@ print(names(data_IS))
 ```
 
 ```
-## [1] "IFRS(연결)"  "2016/12"     "2017/12"     "2018/12"     "2019/03"    
-## [6] "전년동기"    "전년동기(%)"
+## [1] "IFRS(연결)"  "2016/12"     "2017/12"    
+## [4] "2018/12"     "2019/03"     "전년동기"   
+## [7] "전년동기(%)"
 ```
 
 ```r
@@ -467,33 +498,21 @@ data 폴더의 KOR_fs 폴더 내에 **티커_fs.csv** 이름으로 저장해주�
 
 위에서 구한 재무제표 데이터를 이용해 가치지표를 계산할 수 있습니다. 흔히 사용되는 가치지표는 **PER, PBR, PCR, PSR** 이며 분자는 주가, 분모는 재무제표 데이터가 사용됩니다.
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-18)가치지표의 종류</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 순서 </th>
-   <th style="text-align:center;"> 분모 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> PER </td>
-   <td style="text-align:center;"> Earnings (순이익) </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> PBR </td>
-   <td style="text-align:center;"> Book Value (순자산) </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> PCR </td>
-   <td style="text-align:center;"> Cashflow (영업활동현금흐름) </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> PSR </td>
-   <td style="text-align:center;"> Sales (매출액) </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[!h]
+
+\caption{(\#tab:unnamed-chunk-18)가치지표의 종류}
+\centering
+\begin{tabular}{cc}
+\toprule
+순서 & 분모\\
+\midrule
+\rowcolor{gray!6}  PER & Earnings (순이익)\\
+PBR & Book Value (순자산)\\
+\rowcolor{gray!6}  PCR & Cashflow (영업활동현금흐름)\\
+PSR & Sales (매출액)\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 위에서 구한 재무제표 항목에서 분모 부분에 해당하는 데이터만 선택하도록 하겠습니다.
 
@@ -531,10 +550,14 @@ print(value_index)
 
 위의 주소 역시 A 뒤의 6자리 티커만 변경할 경우, 해당 종목의 스냅샷 페이지로 이동하게 됩니다.
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_comp_price.png" alt="Company Guide 스냅샷 화면" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-20)Company Guide 스냅샷 화면</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_practice_comp_price} 
+
+}
+
+\caption{Company Guide 스냅샷 화면}(\#fig:unnamed-chunk-20)
+\end{figure}
 
 주가추이 부분에 우리가 원하는 현재 주가가 있으며, 해당 데이터의 Xpath는 다음과 같습니다.
 
@@ -542,11 +565,6 @@ print(value_index)
 ```css
 //*[@id="svdMainChartTxt11"]
 ```
-
-
-<style type="text/css">
-//*[@id="svdMainChartTxt11"]
-</style>
 
 위에서 구한 주가의 Xpath를 이용하여 해당 데이터를 크롤링하도록 하겠습니다.
 
@@ -585,11 +603,6 @@ $$ PER = Price / EPS  = 주가 / 주당순이익$$
 ```css
 //*[@id="svdMainGrid1"]/table/tbody/tr[7]/td[1]
 ```
-
-
-<style type="text/css">
-//*[@id="svdMainGrid1"]/table/tbody/tr[7]/td[1]
-</style>
 
 이를 이용해 발행주식수 중 보통주를 선택하는 방법은 다음과 같습니다.
 
@@ -805,36 +818,32 @@ data/KOR_fs 폴더에는 전 종목의 재무제표 데이터가, data/KOR_value
 
 ### 재무제표 다운로드
 
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_yahoo.png" alt="야후 파이낸스 재무제표" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-29)야후 파이낸스 재무제표</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.7\linewidth]{images/crawl_practice_yahoo} 
+
+}
+
+\caption{야후 파이낸스 재무제표}(\#fig:unnamed-chunk-29)
+\end{figure}
 
 먼저 야후 파이낸스에 접속하여 삼성전자 티커에 해당하는 `005930.KS`를 입력합니다. 그 후, 재무제표 데이터에 해당하는 Financials 항목을 선택합니다. 손익계산서(Income Statement), 재무상태표(Balance Sheet), 현금흐름표(Cash Flow) 총 3개 지표가 있으며, 각각의 url은 표 \@ref(tab:yahoofs)와 같습니다.
 
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 7px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:yahoofs)야후 파이낸스 재무제표 url</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 항목 </th>
-   <th style="text-align:center;"> url </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> Income Statement </td>
-   <td style="text-align:center;"> https://finance.yahoo.com/quote/005930.KS/financials?p=005930.KS </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> Balance Sheet </td>
-   <td style="text-align:center;"> https://finance.yahoo.com/quote/005930.KS/balance-sheet?p=005930.KS </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> Cash Flow </td>
-   <td style="text-align:center;"> https://finance.yahoo.com/quote/005930.KS/cash-flow?p=005930.KS </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[!h]
+
+\caption{(\#tab:yahoofs)야후 파이낸스 재무제표 url}
+\centering
+\fontsize{7}{9}\selectfont
+\begin{tabular}{cc}
+\toprule
+항목 & url\\
+\midrule
+\rowcolor{gray!6}  Income Statement & https://finance.yahoo.com/quote/005930.KS/financials?p=005930.KS\\
+Balance Sheet & https://finance.yahoo.com/quote/005930.KS/balance-sheet?p=005930.KS\\
+\rowcolor{gray!6}  Cash Flow & https://finance.yahoo.com/quote/005930.KS/cash-flow?p=005930.KS\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 각 페이지에서 Xpath를 이용하여 재무제표에 해당하는 테이블 부분만을 선택하여 추출할 수 있으며, 3개 페이지의 해당 Xpath는 모두 아래와 같이 동일합니다.
 
@@ -842,11 +851,6 @@ data/KOR_fs 폴더에는 전 종목의 재무제표 데이터가, data/KOR_value
 ```css
 //*[@id="Col1-1-Financials-Proxy"]/section/div[3]/table
 ```
-
-
-<style type="text/css">
-//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/table
-</style>
 
 위의 정보를 이용하여 재무제표를 다운로드 받는 과정은 다음과 같습니다.
 
@@ -891,20 +895,27 @@ print(head(data_fs))
 ```
 
 ```
-##                     X1                 X2                 X3
-## 1              Revenue         12/31/2018         12/31/2017
-## 2        Total Revenue    243,771,415,000    239,575,376,000
-## 3      Cost of Revenue    132,394,411,000    129,290,661,000
-## 4         Gross Profit    111,377,004,000    110,284,715,000
-## 5   Operating Expenses Operating Expenses Operating Expenses
-## 6 Research Development     18,354,080,000     16,355,612,000
-##                   X4                 X5
-## 1         12/31/2016         12/31/2015
-## 2    201,866,745,000    200,653,482,000
-## 3    120,277,715,000    123,482,118,000
-## 4     81,589,030,000     77,171,364,000
+##                     X1                 X2
+## 1              Revenue         12/31/2018
+## 2        Total Revenue    243,771,415,000
+## 3      Cost of Revenue    132,394,411,000
+## 4         Gross Profit    111,377,004,000
+## 5   Operating Expenses Operating Expenses
+## 6 Research Development     18,354,080,000
+##                   X3                 X4
+## 1         12/31/2017         12/31/2016
+## 2    239,575,376,000    201,866,745,000
+## 3    129,290,661,000    120,277,715,000
+## 4    110,284,715,000     81,589,030,000
 ## 5 Operating Expenses Operating Expenses
-## 6     14,111,381,000     13,705,695,000
+## 6     16,355,612,000     14,111,381,000
+##                   X5
+## 1         12/31/2015
+## 2    200,653,482,000
+## 3    123,482,118,000
+## 4     77,171,364,000
+## 5 Operating Expenses
+## 6     13,705,695,000
 ```
 
 1. 위에서 구한 url을 저장해줍니다.
@@ -937,13 +948,27 @@ print(head(data_fs))
 ```
 
 ```
-##                                     X12.31.2018  X12.31.2017  X12.31.2016
-## Total Revenue                      243771415000 239575376000 201866745000
-## Cost of Revenue                    132394411000 129290661000 120277715000
-## Gross Profit                       111377004000 110284715000  81589030000
-## Operating Expenses                           NA           NA           NA
-## Research Development                18354080000  16355612000  14111381000
-## Selling General and Administrative  32688565000  38947445000  37235161000
+##                                     X12.31.2018
+## Total Revenue                      243771415000
+## Cost of Revenue                    132394411000
+## Gross Profit                       111377004000
+## Operating Expenses                           NA
+## Research Development                18354080000
+## Selling General and Administrative  32688565000
+##                                     X12.31.2017
+## Total Revenue                      239575376000
+## Cost of Revenue                    129290661000
+## Gross Profit                       110284715000
+## Operating Expenses                           NA
+## Research Development                16355612000
+## Selling General and Administrative  38947445000
+##                                     X12.31.2016
+## Total Revenue                      201866745000
+## Cost of Revenue                    120277715000
+## Gross Profit                        81589030000
+## Operating Expenses                           NA
+## Research Development                14111381000
+## Selling General and Administrative  37235161000
 ##                                     X12.31.2015
 ## Total Revenue                      200653482000
 ## Cost of Revenue                    123482118000
@@ -1033,33 +1058,20 @@ print(share_yahoo)
 
 상장주식수의 경우 **Shares Outstanding** 부분에서 찾을 수 있습니다. 해당 지점의 Xpath를 이용해 데이터를 찾으면 5.97B가 추출됩니다. 이 중 숫자 뒤 알파벳 부분은 단위에 해당하며, 각 문자 별 단위는 다음과 같습니다.
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-36)발행주식수 단위</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 알파벳 </th>
-   <th style="text-align:center;"> 단위 </th>
-   <th style="text-align:center;"> 숫자 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> M </td>
-   <td style="text-align:center;"> 백만 (Million) </td>
-   <td style="text-align:center;"> 1,000,000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> B </td>
-   <td style="text-align:center;"> 십억 (Billion) </td>
-   <td style="text-align:center;"> 1,000,000,000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> T </td>
-   <td style="text-align:center;"> 일조 (Triliion) </td>
-   <td style="text-align:center;"> 1,000,000,000,000 </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[!h]
+
+\caption{(\#tab:unnamed-chunk-36)발행주식수 단위}
+\centering
+\begin{tabular}{ccc}
+\toprule
+알파벳 & 단위 & 숫자\\
+\midrule
+\rowcolor{gray!6}  M & 백만 (Million) & 1,000,000\\
+B & 십억 (Billion) & 1,000,000,000\\
+\rowcolor{gray!6}  T & 일조 (Triliion) & 1,000,000,000,000\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 따라서 알파벳을 해당하는 숫자로 변경한 뒤, 이를 앞의 숫자에 곱해주어야 제대로 된 상장주식수가 계산됩니다.
 

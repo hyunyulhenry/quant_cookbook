@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-07-06" />
+<meta name="date" content="2019-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1093,16 +1093,16 @@ portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class
 <span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(ggplot2)
 
-symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, 
-            <span class="st">&#39;IEV&#39;</span>, 
-            <span class="st">&#39;EWJ&#39;</span>, 
-            <span class="st">&#39;EEM&#39;</span>, 
-            <span class="st">&#39;TLT&#39;</span>, 
-            <span class="st">&#39;IEF&#39;</span>, 
-            <span class="st">&#39;IYR&#39;</span>, 
-            <span class="st">&#39;RWX&#39;</span>, 
-            <span class="st">&#39;GLD&#39;</span>, 
-            <span class="st">&#39;DBC&#39;</span>  
+symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="co"># 미국 주식</span>
+            <span class="st">&#39;IEV&#39;</span>, <span class="co"># 유럽 주식 </span>
+            <span class="st">&#39;EWJ&#39;</span>, <span class="co"># 일본 주식</span>
+            <span class="st">&#39;EEM&#39;</span>, <span class="co"># 이머징 주식</span>
+            <span class="st">&#39;TLT&#39;</span>, <span class="co"># 미국 장기채</span>
+            <span class="st">&#39;IEF&#39;</span>, <span class="co"># 미국 중기채</span>
+            <span class="st">&#39;IYR&#39;</span>, <span class="co"># 미국 리츠</span>
+            <span class="st">&#39;RWX&#39;</span>, <span class="co"># 글로벌 리츠</span>
+            <span class="st">&#39;GLD&#39;</span>, <span class="co"># 금</span>
+            <span class="st">&#39;DBC&#39;</span>  <span class="co"># 상품</span>
             )
 <span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</code></pre>
 <pre><code>##  [1] &quot;SPY&quot; &quot;IEV&quot; &quot;EWJ&quot; &quot;EEM&quot; &quot;TLT&quot; &quot;IEF&quot; &quot;IYR&quot; &quot;RWX&quot; &quot;GLD&quot; &quot;DBC&quot;</code></pre>

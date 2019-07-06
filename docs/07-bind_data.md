@@ -102,8 +102,9 @@ print(head(fs_item))
 ```
 
 ```
-## [1] "매출액"           "매출원가"         "매출총이익"      
-## [4] "판매비와관리비"   "인건비"           "유무형자산상각비"
+## [1] "매출액"           "매출원가"        
+## [3] "매출총이익"       "판매비와관리비"  
+## [5] "인건비"           "유무형자산상각비"
 ```
 
 다음으로 재무제표 항목의 기준을 정해줄 필요가 있습니다. 재무제표 작성 항목의 경우 각 업종별로 상이하므로, 이를 모두 고려할 경우 지나치게 데이터가 커지게 됩니다. 또한 퀀트 투자에는 일반적이고 공통적인 항목을 주로 사용하므로 대표적인 재무 항목을 정해 이를 기준으로 데이터를 정리하여도 충분합니다.
@@ -249,15 +250,21 @@ for (i in 1 : nrow(KOR_ticker)){
 
 먼저 티커에 해당하는 파일을 불러온 후, for loop 구문을 통해 가치지표 데이터를 data_value 리스트에 저장해줍니다. 단, csv 내에 데이터가 테이블 \@ref(tab:valuesample)와 같이 행의 형태로 저장되어 있으므로, `t()` 함수를 이용해 열의 형태로 바꿔주도록 하며, 데이터프레임 형태로 저장해줍니다.
 
+\begin{table}[!h]
 
-Table: (\#tab:valuesample)가치지표의 저장 예시
-
- value       x     
--------  ----------
-  PER     Number 1 
-  PBR     Number 2 
-  PCR     Number 3 
-  PSR     Number 4 
+\caption{(\#tab:valuesample)가치지표의 저장 예시}
+\centering
+\begin{tabular}{>{\centering\arraybackslash}p{3cm}>{\centering\arraybackslash}p{5cm}}
+\toprule
+value & x\\
+\midrule
+\rowcolor{gray!6}  PER & Number 1\\
+PBR & Number 2\\
+\rowcolor{gray!6}  PCR & Number 3\\
+PSR & Number 4\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 
 ```r

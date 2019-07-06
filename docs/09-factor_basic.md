@@ -5,15 +5,21 @@
 
 퀀트 투자는 크게 포트폴리오 운용 전략과 트레이딩 전략으로 나눌 수 있습니다. 포트폴트폴리오 운용 전략의 경우 과거 주식 시장을 분석하여 좋은 주식의 기준을 찾아낸 후 해당 기준에 만족하는 종목을 매수하거나, 이와 반대에 있는 나쁜 주식을 공매도 하기도 합니다. 투자의 속도가 느리며, 다수의 종목을 하나의 포트폴리오로 구성하여 운용하는 특징이 있습니다. 반면 트레이딩 전략의 경우, 단기간에 발생되는 주식의 움직임을 연구한 후 예측하여, 매수 혹은 매도하는 전략입니다. 투자의 속도가 빠르며 소수의 종목을 대상으로 합니다.
 
+\begin{table}[!h]
 
-Table: (\#tab:unnamed-chunk-2)퀀트 투자 종류의 비교
-
-    기준        포트폴리오 운용 전략          트레이딩 전략       
--------------  ----------------------  ---------------------------
-  투자철학       규칙에 기반한 투자        규칙에 기반한 투자     
-  투자목적        좋은 주식을 매수          좋은 시점을 매수      
- 학문적 기반     경제학, 통계학 등      통계학, 공학, 정보처리 등 
- 투자의 속도            느림                      빠름            
+\caption{(\#tab:unnamed-chunk-2)퀀트 투자 종류의 비교}
+\centering
+\begin{tabular}{ccc}
+\toprule
+기준 & 포트폴리오 운용 전략 & 트레이딩 전략\\
+\midrule
+\rowcolor{gray!6}  투자철학 & 규칙에 기반한 투자 & 규칙에 기반한 투자\\
+투자목적 & 좋은 주식을 매수 & 좋은 시점을 매수\\
+\rowcolor{gray!6}  학문적 기반 & 경제학, 통계학 등 & 통계학, 공학, 정보처리 등\\
+투자의 속도 & 느림 & 빠름\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 이 중 본 책에서는 포트폴리오에 기반한 운용 전략에 대해 다루도록 합니다. 주식의 수익률에 영향을 미치는 요소를 팩터^Factor^라 합니다. 즉 팩터의 강도가 양인 종목들로 구성한 포트폴리오의 경우 향후 수익률이 높을 것으로 예상되며, 팩터의 강도가 음인 종목들로 구성한 포트폴리오의 경우 반대로 향후 수익률이 낮을 것으로 예상됩니다.
 
@@ -21,10 +27,14 @@ Table: (\#tab:unnamed-chunk-2)퀀트 투자 종류의 비교
 
 해당 상품들의 홈페이지나 투자설명서에는 종목 선정 기준에 대해 자세히 나와있으므로 이는 매우 훌륭한 투자 전략이기도 합니다. 따라서 스마트베타 ETF에 나와있는 투자 전략을 자세히 분석하는 것만으로도 훌륭한 퀀트 투자 전략을 만들 수 있습니다. 
 
-<div class="figure" style="text-align: center">
-<img src="images/factor_smartbeta.png" alt="스마트베타 ETF 전략 예시" width="80%" />
-<p class="caption">(\#fig:unnamed-chunk-3)스마트베타 ETF 전략 예시</p>
-</div>
+\begin{figure}[h]
+
+{\centering \includegraphics[width=0.8\linewidth]{images/factor_smartbeta} 
+
+}
+
+\caption{스마트베타 ETF 전략 예시}(\#fig:unnamed-chunk-3)
+\end{figure}
 
 본 장에서는 투자에 많이 활용되는 기본적인 팩터에 대해 알아보고, 우리가 구한 데이터를 바탕으로 각 팩터 별 투자 종목을 선택하는 방법에 대해 알아보도록 하겠습니다.
 
@@ -36,33 +46,20 @@ Table: (\#tab:unnamed-chunk-2)퀀트 투자 종류의 비교
 
 개별 주식이 전체 주식시장의 변동에 반응하는 정도를 나타낸 값이 베타입니다. 베타가 1이라는 뜻은 주식시장과 움직임이 정확히 같다는 뜻으로써, 시장 그 자체를 나타냅니다. 베타가 1.5라는 뜻은 주식시장이 수익률이 +1% 일 때 개별 주식의 수익률은 +1.5%, 반대로 주식시장의 수익률이 -1% 일 때 개별 주식의 수익률은 -1.5% 움직인다는 뜻입니다. 반면 베타가 0.5라면 주식시장 수익률의 절반 정도만이 움직이게 됩니다.
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-4)베타에 따른 개별 주식의 수익률 움직임</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 베타 </th>
-   <th style="text-align:center;"> 주식시장이 +1% 일 경우 </th>
-   <th style="text-align:center;"> 주식시장이 -1% 일 경우 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> 0.5 </td>
-   <td style="text-align:center;"> +0.5% </td>
-   <td style="text-align:center;"> -0.5% </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 1.0 </td>
-   <td style="text-align:center;"> +1.0% </td>
-   <td style="text-align:center;"> -1.0% </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 1.5 </td>
-   <td style="text-align:center;"> +1.5% </td>
-   <td style="text-align:center;"> -1.5% </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[!h]
+
+\caption{(\#tab:unnamed-chunk-4)베타에 따른 개별 주식의 수익률 움직임}
+\centering
+\begin{tabular}{ccc}
+\toprule
+베타 & 주식시장이 +1\% 일 경우 & 주식시장이 -1\% 일 경우\\
+\midrule
+\rowcolor{gray!6}  0.5 & +0.5\% & -0.5\%\\
+1.0 & +1.0\% & -1.0\%\\
+\rowcolor{gray!6}  1.5 & +1.5\% & -1.5\%\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 이처럼 베타가 큰 주식은 주식시장보다 수익률의 움직임이 크며, 반대로 베타가 낮은 주식은 주식시장보다 수익률의 움직임이 작습니다. 따라서 일반적으로 상승장이 기대될 때는 베타가 큰 주식에, 하락장일이 기대될 때는 베타가 낮은 주식에 투자하는 것이 좋습니다.
 
@@ -73,38 +70,21 @@ $$자산가격결정모형: R_i = R_f + \beta_i\times[R_m - R_f]$$
 
 먼저 회귀분석모형의 상수항인 a에 해당하는 부분은 무위험 수익률을 나타내는 $R_f$입니다. 독립변수인 x에 해당하는 부분은 무위험 수익률 대비 주식 시장의 초과 수익률을 나타내는 시장위험 프리미엄인 $R_m - R_f$입니다. 종속변수인 y에 해당하는 부분은 개별주식의 수익률을 나타내는 $R_i$이며, 최종적으로 회귀계수인 b에 해당하는 부분은 개별 주식의 베타입니다.
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-5)회귀분석모형과 자산가격결정모형의 비교</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 구분 </th>
-   <th style="text-align:center;"> 회귀분석모형 </th>
-   <th style="text-align:center;"> 자산가격결정모형 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> 상수항 </td>
-   <td style="text-align:center;"> a </td>
-   <td style="text-align:center;"> $R_f$ (무위험 수익률) </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 독립변수 </td>
-   <td style="text-align:center;"> x </td>
-   <td style="text-align:center;"> $R_m - R_f$ (시장위험 프리미엄) </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 종속변수 </td>
-   <td style="text-align:center;"> y </td>
-   <td style="text-align:center;"> $R_i$ (개별주식의 수익률) </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> 회귀계수 </td>
-   <td style="text-align:center;"> b </td>
-   <td style="text-align:center;"> $\beta_i$ (개별주식의 베타) </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[!h]
+
+\caption{(\#tab:unnamed-chunk-5)회귀분석모형과 자산가격결정모형의 비교}
+\centering
+\begin{tabular}{ccc}
+\toprule
+구분 & 회귀분석모형 & 자산가격결정모형\\
+\midrule
+\rowcolor{gray!6}  상수항 & a & $R_f$ (무위험 수익률)\\
+독립변수 & x & $R_m - R_f$ (시장위험 프리미엄)\\
+\rowcolor{gray!6}  종속변수 & y & $R_i$ (개별주식의 수익률)\\
+회귀계수 & b & $\beta_i$ (개별주식의 베타)\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 통계학에서 회귀계수는 $\beta = \frac{cov(x,y)}{\sigma_x^2}$ 형태로 구할 수 있으며, x와 y에 각각 시장수익률과 개별주식의 수익률을 대입할 경우 개별주식의 베타는 $\beta_i= \rho(i,m) \times\frac{\sigma_i}{\sigma_m}$  형태로 구할 수 있습니다. 그러나 이러한 수식을 모르더라도 R에서는 간단히 베타를 구할 수 있습니다.
 
@@ -163,7 +143,8 @@ summary(reg)
 ## (Intercept) 0.000373   0.000723    0.52     0.61    
 ## rm          1.761433   0.090739   19.41   <2e-16 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 0.0195 on 727 degrees of freedom
 ##   (2 observations deleted due to missingness)
@@ -192,7 +173,9 @@ abline(a = 0, b = 1, lty = 2)
 abline(reg, col = 'red')
 ```
 
-<img src="09-factor_basic_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-factor_basic_files/figure-latex/unnamed-chunk-8-1} \end{center}
 
 1. `plot()` 함수를 통해 그림을 그려주며, x축과 y축에 주식시장 수익률과 개별주식 수익률을 입력합니다. pch는 점들의 모양을, cex는 점들의 크기를 나타내며, xlab과 ylab은 각각 x축과 y축에 들어갈 문구를 나타냅니다. xlim과 ylim은 x축과 y축의 최소 및 최대 범위를 지정해줍니다.
 2. 첫번째 `abline()`에서 a는 상수, b는 직선의 기울기, lty는 선의 유형을 나타냅니다. 이를 통해 기울기, 즉 베타가 1일 경우의 선을 점선으로 표현합니다.
@@ -273,7 +256,9 @@ std_12m_daily %>%
 std_12m_daily[std_12m_daily == 0] = NA
 ```
 
-<img src="09-factor_basic_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-factor_basic_files/figure-latex/unnamed-chunk-11-1} \end{center}
 
 변동성을 히스토그램으로 나타내보면, 0에 위치하는 종목들이 다수 존재합니다. 해당 종목들은 최근 1년간 거래정지로 인해 가격이 변하지 않았고, 이로 인해 변동성이 없는 종목들입니다. 해당 종믁들은 NA로 처리해주도록 합니다.
 
@@ -283,14 +268,16 @@ std_12m_daily[rank(std_12m_daily) <= 30]
 ```
 
 ```
-## X030200 X001720 X015350 X017390 X034950 X015360 X092230 X018120 X092130 
-## 0.15627 0.14199 0.12591 0.16792 0.14813 0.11614 0.12852 0.10121 0.14265 
-## X001270 X117580 X006220 X003460 X003650 X007330 X034590 X040420 X023000 
-## 0.15961 0.11326 0.15551 0.10164 0.17117 0.14762 0.05139 0.12132 0.15994 
-## X000650 X003080 X107590 X004450 X001750 X006660 X014440 X066670 X115310 
-## 0.15922 0.13433 0.17215 0.14424 0.13215 0.17100 0.16803 0.15343 0.15709 
-## X049430 X025530 X066790 
-## 0.17370 0.17350 0.09720
+## X030200 X001720 X015350 X017390 X034950 X015360 X092230 
+## 0.15627 0.14199 0.12591 0.16792 0.14813 0.11614 0.12852 
+## X018120 X092130 X001270 X117580 X006220 X003460 X003650 
+## 0.10121 0.14265 0.15961 0.11326 0.15551 0.10164 0.17117 
+## X007330 X034590 X040420 X023000 X000650 X003080 X107590 
+## 0.14762 0.05139 0.12132 0.15994 0.15922 0.13433 0.17215 
+## X004450 X001750 X006660 X014440 X066670 X115310 X049430 
+## 0.14424 0.13215 0.17100 0.16803 0.15343 0.15709 0.17370 
+## X025530 X066790 
+## 0.17350 0.09720
 ```
 
 ```r
@@ -301,7 +288,9 @@ std_12m_daily[rank(std_12m_daily) <= 30] %>%
   xlab(NULL)
 ```
 
-<img src="09-factor_basic_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-factor_basic_files/figure-latex/unnamed-chunk-12-1} \end{center}
 
 `rank()` 함수를 통해 순위를 구할 수 있으며, R은 기본적으로 오름차순 즉 가장 낮은 값의 순위가 1이 됩니다. 따라서 변동성이 낮을수록 높은 순위가 되며, 30위 이하의 순위를 선택하면 변동성이 낮은 30 종목이 선택됩니다. 또한 `ggplot()` 함수를 이용해 해당 종목들의 변동성을 확인해볼 수도 있습니다.
 
@@ -373,14 +362,16 @@ std_12m_weekly[rank(std_12m_weekly) <= 30]
 ```
 
 ```
-## X316140 X030200 X001720 X019680 X002960 X015350 X017390 X034950 X015360 
-## 0.15526 0.14535 0.11912 0.14722 0.13555 0.12668 0.15443 0.13875 0.09979 
-## X092230 X018120 X092130 X312610 X001270 X117580 X038390 X003460 X003650 
-## 0.11673 0.07575 0.14683 0.05745 0.16038 0.12097 0.16150 0.08612 0.14894 
-## X007330 X034590 X019440 X040420 X004450 X001750 X004080 X066670 X115310 
-## 0.15059 0.03623 0.16329 0.11287 0.11352 0.12518 0.16374 0.14154 0.12913 
-## X049430 X002070 X066790 
-## 0.13032 0.14917 0.13632
+## X316140 X030200 X001720 X019680 X002960 X015350 X017390 
+## 0.15526 0.14535 0.11912 0.14722 0.13555 0.12668 0.15443 
+## X034950 X015360 X092230 X018120 X092130 X312610 X001270 
+## 0.13875 0.09979 0.11673 0.07575 0.14683 0.05745 0.16038 
+## X117580 X038390 X003460 X003650 X007330 X034590 X019440 
+## 0.12097 0.16150 0.08612 0.14894 0.15059 0.03623 0.16329 
+## X040420 X004450 X001750 X004080 X066670 X115310 X049430 
+## 0.11287 0.11352 0.12518 0.16374 0.14154 0.12913 0.13032 
+## X002070 X066790 
+## 0.14917 0.13632
 ```
 
 ```r
@@ -435,12 +426,14 @@ intersect(KOR_ticker[invest_lowvol, '종목명'],
 ```
 
 ```
-##  [1] "KT"             "신영증권"       "부산가스"       "서울가스"      
-##  [5] "한국기업평가"   "예스코홀딩스"   "KPX홀딩스"      "진로발효"      
-##  [9] "이크레더블"     "부국증권"       "대성에너지"     "유화증권"      
-## [13] "미창석유"       "푸른저축은행"   "인천도시가스"   "정상제이엘에스"
-## [17] "삼화왕관"       "한양증권"       "디스플레이텍"   "인포바인"      
-## [21] "코메론"         "씨씨에스"
+##  [1] "KT"             "신영증권"       "부산가스"      
+##  [4] "서울가스"       "한국기업평가"   "예스코홀딩스"  
+##  [7] "KPX홀딩스"      "진로발효"       "이크레더블"    
+## [10] "부국증권"       "대성에너지"     "유화증권"      
+## [13] "미창석유"       "푸른저축은행"   "인천도시가스"  
+## [16] "정상제이엘에스" "삼화왕관"       "한양증권"      
+## [19] "디스플레이텍"   "인포바인"       "코메론"        
+## [22] "씨씨에스"
 ```
 
 `intersect()` 함수를 통해 일간 변동성 기준과 주간 변동성 기준 모두에 포함되는 종목을 찾을 수 있습니다.
@@ -485,14 +478,16 @@ ret_12m[rank(-ret_12m) <= 30]
 ```
 
 ```
-## X032500 X214150 X078070 X048410 X230360 X239610 X061970 X078130 X097520 
-##   2.362   2.110   6.434   2.228   1.835   2.031   1.836   2.004   1.439 
-## X047310 X138080 X008350 X179900 X214870 X143160 X176440 X263920 X009460 
-##   1.524   4.521   1.836   1.651   2.827   2.130   2.853   2.336   1.822 
-## X263540 X190510 X037070 X215090 X001140 X023770 X024060 X100030 X051160 
-##   1.461   1.504   1.458   1.420   2.816   3.609   1.449   2.141   3.089 
-## X139670 X090740 X051630 
-##   2.930   1.437   1.775
+## X032500 X214150 X078070 X048410 X230360 X239610 X061970 
+##   2.362   2.110   6.434   2.228   1.835   2.031   1.836 
+## X078130 X097520 X047310 X138080 X008350 X179900 X214870 
+##   2.004   1.439   1.524   4.521   1.836   1.651   2.827 
+## X143160 X176440 X263920 X009460 X263540 X190510 X037070 
+##   2.130   2.853   2.336   1.822   1.461   1.504   1.458 
+## X215090 X001140 X023770 X024060 X100030 X051160 X139670 
+##   1.420   2.816   3.609   1.449   2.141   3.089   2.930 
+## X090740 X051630 
+##   1.437   1.775
 ```
 
 `rank()` 함수를 통해 순위를 구하도록 하며, 모멘텀의 경우 높을수록 좋은 내림차순으로 순위를 계산해야 하므로 수익률 앞에 마이너스(-)를 붙여주도록 합니다. 12개월 누적수익률이 높은 종목들이 선택됨이 확인됩니다.
@@ -577,38 +572,38 @@ KOR_ticker[invest_mom_sharpe, ] %>%
 
 ```
 ## # A tibble: 30 x 5
-##    종목코드 종목명           수익률 변동성 `위험조정 수익률`
-##    <chr>    <chr>             <dbl>  <dbl>             <dbl>
-##  1 081660   휠라코리아         1.2   0.48               2.47
-##  2 032500   케이엠더블유       2.36  0.6                3.94
-##  3 091700   파트론             1.07  0.42               2.52
-##  4 214150   클래시스           2.11  0.63               3.35
-##  5 078070   유비쿼스홀딩스     6.43  0.68               9.53
-##  6 048410   현대바이오         2.23  1.03               2.16
-##  7 029960   코엔텍             1.12  0.49               2.31
-##  8 230360   에코마케팅         1.83  0.64               2.85
-##  9 239610   에이치엘사이언스   2.03  0.61               3.33
-## 10 061970   엘비세미콘         1.84  0.87               2.11
-## 11 078130   국일제지           2     0.91               2.2 
-## 12 097520   엠씨넥스           1.44  0.56               2.56
-## 13 047310   파워로직스         1.52  0.61               2.49
-## 14 138080   오이솔루션         4.52  0.63               7.19
-## 15 008350   남선알미늄         1.84  0.77               2.4 
-## 16 123860   아나패스           1.06  0.47               2.25
-## 17 214870   뉴지랩             2.83  0.66               4.29
-## 18 143160   아이디스           2.13  0.85               2.5 
-## 19 176440   에이치엔티         2.85  0.84               3.38
-## 20 263920   블러썸엠앤씨       2.34  0.84               2.79
-## 21 009460   한창제지           1.82  0.78               2.33
-## 22 190510   나무가             1.5   0.46               3.24
-## 23 001140   국보               2.82  1.05               2.68
-## 24 023770   플레이위드         3.61  0.8                4.51
-## 25 100030   모바일리더         2.14  0.66               3.26
-## 26 051160   지어소프트         3.09  0.85               3.63
-## 27 139670   키네마스터         2.93  0.83               3.51
-## 28 104460   동양피엔에프       1.09  0.43               2.52
-## 29 051630   진양화학           1.77  0.83               2.13
-## 30 050760   에스폴리텍         1.32  0.580              2.28
+##    종목코드 종목명        수익률 변동성 `위험조정 수익률`~
+##    <chr>    <chr>          <dbl>  <dbl>            <dbl>
+##  1 081660   휠라코리아      1.2   0.48              2.47
+##  2 032500   케이엠더블유    2.36  0.6               3.94
+##  3 091700   파트론          1.07  0.42              2.52
+##  4 214150   클래시스        2.11  0.63              3.35
+##  5 078070   유비쿼스홀딩스~   6.43  0.68              9.53
+##  6 048410   현대바이오      2.23  1.03              2.16
+##  7 029960   코엔텍          1.12  0.49              2.31
+##  8 230360   에코마케팅      1.83  0.64              2.85
+##  9 239610   에이치엘사이언스~   2.03  0.61              3.33
+## 10 061970   엘비세미콘      1.84  0.87              2.11
+## 11 078130   국일제지        2     0.91              2.2 
+## 12 097520   엠씨넥스        1.44  0.56              2.56
+## 13 047310   파워로직스      1.52  0.61              2.49
+## 14 138080   오이솔루션      4.52  0.63              7.19
+## 15 008350   남선알미늄      1.84  0.77              2.4 
+## 16 123860   아나패스        1.06  0.47              2.25
+## 17 214870   뉴지랩          2.83  0.66              4.29
+## 18 143160   아이디스        2.13  0.85              2.5 
+## 19 176440   에이치엔티      2.85  0.84              3.38
+## 20 263920   블러썸엠앤씨    2.34  0.84              2.79
+## 21 009460   한창제지        1.82  0.78              2.33
+## 22 190510   나무가          1.5   0.46              3.24
+## 23 001140   국보            2.82  1.05              2.68
+## 24 023770   플레이위드      3.61  0.8               4.51
+## 25 100030   모바일리더      2.14  0.66              3.26
+## 26 051160   지어소프트      3.09  0.85              3.63
+## 27 139670   키네마스터      2.93  0.83              3.51
+## 28 104460   동양피엔에프    1.09  0.43              2.52
+## 29 051630   진양화학        1.77  0.83              2.13
+## 30 050760   에스폴리텍      1.32  0.580             2.28
 ```
 
 티커와 종목명, 누적수익률, 변동성, 위험조정 수익률을 확인할 수 있습니다.
@@ -620,14 +615,18 @@ intersect(KOR_ticker[invest_mom, '종목명'],
 ```
 
 ```
-##  [1] "케이엠더블유"     "클래시스"         "유비쿼스홀딩스"  
-##  [4] "현대바이오"       "에코마케팅"       "에이치엘사이언스"
-##  [7] "엘비세미콘"       "국일제지"         "엠씨넥스"        
-## [10] "파워로직스"       "오이솔루션"       "남선알미늄"      
-## [13] "뉴지랩"           "아이디스"         "에이치엔티"      
-## [16] "블러썸엠앤씨"     "한창제지"         "나무가"          
-## [19] "국보"             "플레이위드"       "모바일리더"      
-## [22] "지어소프트"       "키네마스터"       "진양화학"
+##  [1] "케이엠더블유"     "클래시스"        
+##  [3] "유비쿼스홀딩스"   "현대바이오"      
+##  [5] "에코마케팅"       "에이치엘사이언스"
+##  [7] "엘비세미콘"       "국일제지"        
+##  [9] "엠씨넥스"         "파워로직스"      
+## [11] "오이솔루션"       "남선알미늄"      
+## [13] "뉴지랩"           "아이디스"        
+## [15] "에이치엔티"       "블러썸엠앤씨"    
+## [17] "한창제지"         "나무가"          
+## [19] "국보"             "플레이위드"      
+## [21] "모바일리더"       "지어소프트"      
+## [23] "키네마스터"       "진양화학"
 ```
 
 `intersect()` 함수를 통해 단순 수익률 및 위험조정 수익률 기준 모두에 포함되는 종목을 찾을 수 있습니다. 다음 그림은 위험조정 수익률 상위 30 종목의 가격 그래프입니다.
@@ -650,7 +649,9 @@ KOR_price[, invest_mom_sharpe] %>%
         axis.text.y=element_blank())
 ```
 
-<img src="09-factor_basic_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-factor_basic_files/figure-latex/unnamed-chunk-23-1} \end{center}
 
 ## 밸류 전략
 
@@ -741,7 +742,9 @@ cor(rank_value, use = 'complete.obs') %>%
            mar=c(0,0,0.5,0))
 ```
 
-<img src="09-factor_basic_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-factor_basic_files/figure-latex/unnamed-chunk-25-1} \end{center}
 
 먼저 `mutate_all()` 함수를 이용해 모든 열에 함수를 적용해주며, `min_rank()`를 통해 순위를 구해주도록 합니다.
 
@@ -805,10 +808,12 @@ intersect(KOR_ticker[invest_pbr, '종목명'],
 ```
 
 ```
-##  [1] "한화"             "세아홀딩스"       "넥센"            
-##  [4] "한일홀딩스"       "아세아"           "S&T홀딩스"       
-##  [7] "세아제강지주"     "엠케이전자"       "무림페이퍼"      
-## [10] "휴스틸"           "피에스케이홀딩스"
+##  [1] "한화"             "세아홀딩스"      
+##  [3] "넥센"             "한일홀딩스"      
+##  [5] "아세아"           "S&T홀딩스"       
+##  [7] "세아제강지주"     "엠케이전자"      
+##  [9] "무림페이퍼"       "휴스틸"          
+## [11] "피에스케이홀딩스"
 ```
 
 단순 저 PBR 기준 선택된 종목과 비교해봤을 때, 겹치는 종목이 상당히 줄어들었습니다.
@@ -833,63 +838,40 @@ F-Score 지표는 조셉 피오트로스키 교수가 발표한 지표입니다.
 
 F-Score에서는 재무적 우량 정도를 수익성(Profitability), 재무 성과(Financial Performance), 운영 효율성(Operating Efficiency)으로 구분하여 총 9개의 지표를 선정합니다. 표 \@ref(tab:fscore)는 이를 요약한 테이블입니다.
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:fscore)F-Score 요약</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 지표 </th>
-   <th style="text-align:center;"> 항목 </th>
-   <th style="text-align:center;"> 점수 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;vertical-align: middle !important;" rowspan="4"> Profitability </td>
-   <td style="text-align:center;"> $ROA$ </td>
-   <td style="text-align:center;"> ROA가 양수면 1점 </td>
-  </tr>
-  <tr>
-   
-   <td style="text-align:center;"> $CFO$ </td>
-   <td style="text-align:center;"> CFO가 양수면 1점 </td>
-  </tr>
-  <tr>
-   
-   <td style="text-align:center;"> $\Delta ROA$ </td>
-   <td style="text-align:center;"> ROA가 증가했으면 1점 </td>
-  </tr>
-  <tr>
-   
-   <td style="text-align:center;"> $ACCRUAL$ </td>
-   <td style="text-align:center;"> CFO &gt; ROA면 1점 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;vertical-align: middle !important;" rowspan="3"> Financial Performance </td>
-   <td style="text-align:center;"> $\Delta LEVER$ </td>
-   <td style="text-align:center;"> 레버리지가 감소했으면 1점 </td>
-  </tr>
-  <tr>
-   
-   <td style="text-align:center;"> $\Delta LIQUID$ </td>
-   <td style="text-align:center;"> 유동성이 증가했으면 1점 </td>
-  </tr>
-  <tr>
-   
-   <td style="text-align:center;"> $EQ\_OFFER$ </td>
-   <td style="text-align:center;"> 발행주식수가 감소했으면 1점 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;vertical-align: middle !important;" rowspan="2"> Operating Efficiency </td>
-   <td style="text-align:center;"> $\Delta MARGIN$ </td>
-   <td style="text-align:center;"> 매출총이익률이 증가했으면 1점 </td>
-  </tr>
-  <tr>
-   
-   <td style="text-align:center;"> $\Delta TURN$ </td>
-   <td style="text-align:center;"> 회전율이 증가했으면 1점 </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}[!h]
+
+\caption{(\#tab:fscore)F-Score 요약}
+\centering
+\begin{tabular}{ccc}
+\toprule
+지표 & 항목 & 점수\\
+\rowcolor{gray!6}
+\midrule
+ & $ROA$ & ROA가 양수면 1점\\
+
+\rowcolor{gray!6}
+ & $CFO$ & CFO가 양수면 1점\\
+
+\rowcolor{gray!6}
+ & $\Delta ROA$ & ROA가 증가했으면 1점\\
+
+\rowcolor{gray!6}
+\multirow{-4}{*}{\centering\arraybackslash Profitability} & $ACCRUAL$ & CFO > ROA면 1점\\
+\cmidrule{1-3}
+ & $\Delta LEVER$ & 레버리지가 감소했으면 1점\\
+
+ & $\Delta LIQUID$ & 유동성이 증가했으면 1점\\
+
+\multirow{-3}{*}{\centering\arraybackslash Financial Performance} & $EQ\_OFFER$ & 발행주식수가 감소했으면 1점\\
+\cmidrule{1-3}
+\rowcolor{gray!6}
+ & $\Delta MARGIN$ & 매출총이익률이 증가했으면 1점\\
+
+\rowcolor{gray!6}
+\multirow{-2}{*}{\centering\arraybackslash Operating Efficiency} & $\Delta TURN$ & 회전율이 증가했으면 1점\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 각 지표가 우수할 경우 1점, 그렇지 않을 경우 0점을 매겨, 총 0점부터 9점까지의 포트폴리오를 구성합니다. 
 
@@ -997,8 +979,10 @@ F_Score = F_Table %>%
 
 ```
 ## F_Score
-##     0     1     2     3     4     5     6     7     8     9 
-## 0.004 0.052 0.092 0.170 0.202 0.189 0.147 0.089 0.044 0.011
+##     0     1     2     3     4     5     6     7     8 
+## 0.004 0.052 0.092 0.170 0.202 0.189 0.147 0.089 0.044 
+##     9 
+## 0.011
 ```
 
 ```r
@@ -1014,7 +998,9 @@ F_dist %>%
   theme_classic() 
 ```
 
-<img src="09-factor_basic_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-factor_basic_files/figure-latex/unnamed-chunk-32-1} \end{center}
 
 `table()` 함수를 통해 각 스코어 별 갯수를 구한 후, `prop.table()`을 통해 비중으로 변환합니다. 이를 통해 점수 별 비중을 살펴보면 3~6점에 상당히 많은 종목이 분포하고 있음이 확인됩니다.
 
@@ -1100,7 +1086,9 @@ cor(rank_quality, use = 'complete.obs') %>%
            mar=c(0,0,0.5,0))
 ```
 
-<img src="09-factor_basic_files/figure-html/unnamed-chunk-35-1.png" width="70%" style="display: block; margin: auto;" />
+
+
+\begin{center}\includegraphics[width=0.7\linewidth]{09-factor_basic_files/figure-latex/unnamed-chunk-35-1} \end{center}
 
 `mutate_all()` 함수와 `min_rank()` 함수를 통해 지표 별 랭킹을 구해주도록 하며, 퀄리티 지표의 경우 높을수록 좋은 내림차순으로 계산하여야 하므로 `desc()`을 추가해줍니다.
 
