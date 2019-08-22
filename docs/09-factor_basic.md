@@ -152,19 +152,18 @@ summary(reg)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -0.06890 -0.01295 -0.00172  0.01082  0.09542 
+## -0.06886 -0.01294 -0.00169  0.01080  0.09545 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 0.000373   0.000723    0.52     0.61    
-## rm          1.761433   0.090739   19.41   <2e-16 ***
+## (Intercept) 0.000345   0.000721    0.48     0.63    
+## rm          1.762249   0.090619   19.45   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.0195 on 727 degrees of freedom
-##   (2 observations deleted due to missingness)
-## Multiple R-squared:  0.341,	Adjusted R-squared:  0.34 
-## F-statistic:  377 on 1 and 727 DF,  p-value: <2e-16
+## Residual standard error: 0.0195 on 729 degrees of freedom
+## Multiple R-squared:  0.342,	Adjusted R-squared:  0.341 
+## F-statistic:  378 on 1 and 729 DF,  p-value: <2e-16
 ```
 
 증권주를 대상으로 베타를 구하기 위한 회귀분석을 실시합니다. 자산가격결정모형의 수식인 $R_i = R_f + \beta_i \times [R_m - R_f]$ 에서 편의를 위해 무위험 수익률인 $R_f$를 0으로 가정하면, $R_i = \beta_i \times R_m$의 형태로 나타낼 수 있습니다. 이 중 $R_m$는 독립변수인 주식시장의 수익률을 의미하고, $R_i$는 종속변수인 개별 주식의 수익률을 의미합니다.
@@ -174,7 +173,7 @@ summary(reg)
 3. `summary()` 함수는 데이터의 요약 정보를 나타내며, 해당 예시에서는 회귀분석 결과에 대한 정보를 보여줍니다.
 
 회귀분석의 결과 중 가장 중요한 부분은 계수를 나타내는 Coefficients입니다. Intercept는 회귀분석의 상수항에 해당하는 부분으로서, 값이 거의 0에 가깝고 t값 또한 매우 작아 유의하지 않음이 보입니다. 우리가 원하는 베타에 해당하는 부분
-은 $x$의 Estimate로서, 베타값이 1.76으로 증권주의 특성인 고베타주임이 확인되며, t값 또한 19.41로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.
+은 $x$의 Estimate로서, 베타값이 1.76으로 증권주의 특성인 고베타주임이 확인되며, t값 또한 19.45로 매우 유의한 결과입니다. 조정된 결정계수(Adjusted R-square)는 0.34를 보입니다.
 
 ### 베타 시각화 ###
 

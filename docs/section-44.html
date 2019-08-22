@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-08-22" />
+<meta name="date" content="2019-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -686,17 +686,17 @@ data_market <span class="op">%&gt;%</span>
 <pre><code>## # A tibble: 11 x 2
 ##    SEC_NM_KOR         `n()`
 ##    &lt;chr&gt;              &lt;int&gt;
-##  1 &lt;NA&gt;                  87
-##  2 IT                   570
-##  3 건강관리             226
-##  4 경기관련소비재       391
-##  5 금융                  77
-##  6 산업재               330
-##  7 소재                 216
-##  8 에너지                22
-##  9 유틸리티              19
-## 10 커뮤니케이션서비스     7
-## 11 필수소비재            96</code></pre>
+##  1 IT                   570
+##  2 건강관리             226
+##  3 경기관련소비재       391
+##  4 금융                  77
+##  5 산업재               330
+##  6 소재                 216
+##  7 에너지                22
+##  8 유틸리티              19
+##  9 커뮤니케이션서비스     7
+## 10 필수소비재            96
+## 11 &lt;NA&gt;                  87</code></pre>
 <p><code>group_by()</code> 함수는 선택한 열 중 동일한 데이터를 기준으로 데이터를 묶어줍니다. 위 예제에서는 섹터를 나타내는 SEC_NM_KOR 기준으로 데이터를 묶었으며, <code>n()</code> 함수를 통해 해당 그룹 내 데이터의 개수를 구할 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">data_market <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">SEC_NM_KOR</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>

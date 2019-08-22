@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-08-22" />
+<meta name="date" content="2019-08-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -970,7 +970,7 @@ rets =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">
 ##  [99] 2052 2074 2095 2115 2137 2159 2180 2201 2223 2243 2265 2284 2304 2326
 ## [113] 2347 2368 2390 2410 2433 2454 2475 2496 2517 2537 2556 2579 2598 2620
 ## [127] 2642 2662 2685 2705 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
-## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123 3143 3165 3180</code></pre>
+## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123 3143 3165 3181</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">wts =<span class="st"> </span><span class="kw">list</span>()
 lookback =<span class="st"> </span><span class="dv">10</span></code></pre>
 <p>먼저 xts 패키지의 <code>endpoints()</code> 함수를 이용해 매월 말일의 위치를 구합니다. 해당 함수는 <code>endpoints(x, on= 'months', k=1)</code>의 형태로 이루어지며 x는 시계열 데이터, on은 원하는 기간, k는 구간 길이를 의미합니다. 즉, 시계열 데이터에서 월말에 해당하는 부분의 위치를 반환하며, 매월이 아닌 weeks, quarters, years도 입력이 가능합니다. 결과적으로 ep에는 rets의 인덱스 중 매월 말일에 해당하는 부분의 위치가 구해집니다.</p>

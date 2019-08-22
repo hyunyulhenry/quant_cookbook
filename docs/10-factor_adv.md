@@ -210,7 +210,6 @@ Table: (\#tab:unnamed-chunk-10)마법공식의 구성 요소
 
 재무제표 항목을 통해 이율과 투하자본 수익률을 계산하고, 이를 통해 마법공식 포트폴리오를 구성하겠습니다. 먼저 밸류 지표에 해당하는 이익수익률을 계산해보겠습니다. 이익수익률은 이자 및 법인세 차감전이익(EBIT)을 기업가치(시가총액 + 순차입금)로 나눈 값입니다. 이를 분해하면 다음과 같습니다.
 
-\begin{small}
 \begin{equation*} 
 \begin{split}
  이익수익률 & = \frac{이자\,및\,법인세\,차감전이익}{기업\,가치} \\
@@ -218,8 +217,7 @@ Table: (\#tab:unnamed-chunk-10)마법공식의 구성 요소
 & = \frac{당기순이익 + 법인세 + 이자비용}{시가총액 + 총부채 - 여유자금} \\
 & = \frac{당기순이익 + 법인세 + 이자비용}{시가총액 + 총부채 - (현금 - max(0, 유동부채 - 유동자산 + 현금))}
 \end{split}
-\end{equation*} 
-\end{small}
+\end{equation*}
 
 
 ```r
@@ -276,14 +274,12 @@ PER \times Earnings & = \frac{Price}{Earnings/Shares} \times Earnings \\
 
 다음으로 퀄리티 지표에 해당하는 투하자본 수익률을 계산하겠습니다. 해당 값은 이자 및 법인세 차감전이익(EBIT)를 투하자본(IC)으로 나누어 계산되며, 이를 분해하면 다음과 같습니다.
 
-\begin{small}
 \begin{equation*} 
 \begin{split}
 투하자본\,수익률 & = \frac{이자\,및\,법인세\,차감전이익}{투하자본} \\
 & = \frac{당기순이익 + 법인세 + 이자비용}{(유동자산 - 유동부채) + (비유동자산 - 감가상각비)}
 \end{split}
-\end{equation*} 
-\end{small}
+\end{equation*}
 
 
 ```r
