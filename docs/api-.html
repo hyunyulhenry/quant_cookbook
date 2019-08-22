@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 API를 이용한 데이터 수집 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</title>
-  <meta name="description" content="Chapter 3 API를 이용한 데이터 수집 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <title>Chapter 3 API를 이용한 데이터 수집 | R을 이용한 퀀트 투자 포트폴리오 만들기</title>
+  <meta name="description" content="Chapter 3 API를 이용한 데이터 수집 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 API를 이용한 데이터 수집 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta property="og:title" content="Chapter 3 API를 이용한 데이터 수집 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 API를 이용한 데이터 수집 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta name="twitter:title" content="Chapter 3 API를 이용한 데이터 수집 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   
   
   
@@ -24,15 +24,15 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-07-07" />
+<meta name="date" content="2019-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="section-4.html">
-<link rel="next" href="section-12.html">
+<link rel="prev" href="section-10.html">
+<link rel="next" href="section-18.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -128,190 +128,199 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">퀀트 투자 쿡북</a></li>
+<li><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>여는 글</a></li>
-<li class="chapter" data-level="1" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
-<li class="chapter" data-level="1.1" data-path="section-1.html"><a href="section-1.html#section-2"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
-<li class="chapter" data-level="1.2" data-path="section-1.html"><a href="section-1.html#section-3"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
-<li class="chapter" data-level="1.3" data-path="section-1.html"><a href="section-1.html#r-"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
-<li class="chapter" data-level="1.4" data-path="section-1.html"><a href="section-1.html#r--1"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section"><i class="fa fa-check"></i>지은이 소개</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-1"><i class="fa fa-check"></i>머리말</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-2"><i class="fa fa-check"></i>이 책의 구성</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-3"><i class="fa fa-check"></i>이 책에서 다루지 않은 주제</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-4"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-5"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-6"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
-<li class="chapter" data-level="2.1" data-path="section-4.html"><a href="section-4.html#r-utf-8-"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="section-4.html"><a href="section-4.html#ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
-<li class="chapter" data-level="2.1.2" data-path="section-4.html"><a href="section-4.html#section-5"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩의 종류</a></li>
-<li class="chapter" data-level="2.1.3" data-path="section-4.html"><a href="section-4.html#r-utf-8--1"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
+<li class="chapter" data-level="1" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
+<li class="chapter" data-level="1.1" data-path="section-7.html"><a href="section-7.html#section-8"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
+<li class="chapter" data-level="1.2" data-path="section-7.html"><a href="section-7.html#section-9"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
+<li class="chapter" data-level="1.3" data-path="section-7.html"><a href="section-7.html#r-"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
+<li class="chapter" data-level="1.4" data-path="section-7.html"><a href="section-7.html#r--1"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="section-4.html"><a href="section-4.html#section-6"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="section-4.html"><a href="section-4.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
+<li class="chapter" data-level="2" data-path="section-10.html"><a href="section-10.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
+<li class="chapter" data-level="2.1" data-path="section-10.html"><a href="section-10.html#r-utf-8-"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="section-10.html"><a href="section-10.html#ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
+<li class="chapter" data-level="2.1.2" data-path="section-10.html"><a href="section-10.html#section-11"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩 방식의 종류</a></li>
+<li class="chapter" data-level="2.1.3" data-path="section-10.html"><a href="section-10.html#r-utf-8--1"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="section-4.html"><a href="section-4.html#html-css-"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS 이해하기</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="section-4.html"><a href="section-4.html#html--"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
-<li class="chapter" data-level="2.3.2" data-path="section-4.html"><a href="section-4.html#section-7"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
-<li class="chapter" data-level="2.3.3" data-path="section-4.html"><a href="section-4.html#h--p-"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
-<li class="chapter" data-level="2.3.4" data-path="section-4.html"><a href="section-4.html#ul-ol-"><i class="fa fa-check"></i><b>2.3.4</b> 리스트: ul과 ol 태그</a></li>
-<li class="chapter" data-level="2.3.5" data-path="section-4.html"><a href="section-4.html#table-"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
-<li class="chapter" data-level="2.3.6" data-path="section-4.html"><a href="section-4.html#a-src--"><i class="fa fa-check"></i><b>2.3.6</b> a, src 태그와 속성</a></li>
-<li class="chapter" data-level="2.3.7" data-path="section-4.html"><a href="section-4.html#div-"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
-<li class="chapter" data-level="2.3.8" data-path="section-4.html"><a href="section-4.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
-<li class="chapter" data-level="2.3.9" data-path="section-4.html"><a href="section-4.html#class-id"><i class="fa fa-check"></i><b>2.3.9</b> class와 id</a></li>
+<li class="chapter" data-level="2.2" data-path="section-10.html"><a href="section-10.html#section-12"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="section-10.html"><a href="section-10.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (<code>%&gt;%</code>)</a></li>
-<li class="chapter" data-level="2.5" data-path="section-4.html"><a href="section-4.html#section-9"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
+<li class="chapter" data-level="2.3" data-path="section-10.html"><a href="section-10.html#html-css"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="section-10.html"><a href="section-10.html#html--"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
+<li class="chapter" data-level="2.3.2" data-path="section-10.html"><a href="section-10.html#section-13"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.3" data-path="section-10.html"><a href="section-10.html#h--p-"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
+<li class="chapter" data-level="2.3.4" data-path="section-10.html"><a href="section-10.html#ul--ol-"><i class="fa fa-check"></i><b>2.3.4</b> 리스트를 나타내는 ul 태그와 ol 태그</a></li>
+<li class="chapter" data-level="2.3.5" data-path="section-10.html"><a href="section-10.html#table-"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
+<li class="chapter" data-level="2.3.6" data-path="section-10.html"><a href="section-10.html#a--src---"><i class="fa fa-check"></i><b>2.3.6</b> a 태그와 src 태그 및 속성</a></li>
+<li class="chapter" data-level="2.3.7" data-path="section-10.html"><a href="section-10.html#div-"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
+<li class="chapter" data-level="2.3.8" data-path="section-10.html"><a href="section-10.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
+<li class="chapter" data-level="2.3.9" data-path="section-10.html"><a href="section-10.html#id"><i class="fa fa-check"></i><b>2.3.9</b> 클래스와 id</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="section-10.html"><a href="section-10.html#section-14"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터(<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="2.5" data-path="section-10.html"><a href="section-10.html#section-15"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
 <li class="chapter" data-level="3.1" data-path="api-.html"><a href="api-.html#api--quandl--"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
 <li class="chapter" data-level="3.2" data-path="api-.html"><a href="api-.html#getsymbols---api-"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="api-.html"><a href="api-.html#section-10"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
-<li class="chapter" data-level="3.2.2" data-path="api-.html"><a href="api-.html#section-11"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.1" data-path="api-.html"><a href="api-.html#section-16"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.2" data-path="api-.html"><a href="api-.html#section-17"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
 <li class="chapter" data-level="3.2.3" data-path="api-.html"><a href="api-.html#fred--"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="section-12.html"><a href="section-12.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
-<li class="chapter" data-level="4.1" data-path="section-12.html"><a href="section-12.html#get-post--"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="section-12.html"><a href="section-12.html#get-"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
-<li class="chapter" data-level="4.1.2" data-path="section-12.html"><a href="section-12.html#post-"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
+<li class="chapter" data-level="4" data-path="section-18.html"><a href="section-18.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-18.html"><a href="section-18.html#get-post--"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="section-18.html"><a href="section-18.html#get-"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
+<li class="chapter" data-level="4.1.2" data-path="section-18.html"><a href="section-18.html#post-"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="section-12.html"><a href="section-12.html#section-13"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="section-12.html"><a href="section-12.html#section-14"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
-<li class="chapter" data-level="4.2.2" data-path="section-12.html"><a href="section-12.html#section-15"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
-<li class="chapter" data-level="4.2.3" data-path="section-12.html"><a href="section-12.html#section-16"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="section-17.html"><a href="section-17.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
-<li class="chapter" data-level="5.1" data-path="section-17.html"><a href="section-17.html#section-18"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="section-17.html"><a href="section-17.html#section-19"><i class="fa fa-check"></i><b>5.1.1</b> 산업별 현황 크롤링</a></li>
-<li class="chapter" data-level="5.1.2" data-path="section-17.html"><a href="section-17.html#section-20"><i class="fa fa-check"></i><b>5.1.2</b> 개별종목 지표 크롤링</a></li>
-<li class="chapter" data-level="5.1.3" data-path="section-17.html"><a href="section-17.html#section-21"><i class="fa fa-check"></i><b>5.1.3</b> 최근 영업일 기준 데이터 받기</a></li>
-<li class="chapter" data-level="5.1.4" data-path="section-17.html"><a href="section-17.html#section-22"><i class="fa fa-check"></i><b>5.1.4</b> 데이터 정리하기</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="section-17.html"><a href="section-17.html#wics---"><i class="fa fa-check"></i><b>5.2</b> WICS 기준 섹터정보 크롤링</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="section-23.html"><a href="section-23.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
-<li class="chapter" data-level="6.1" data-path="section-23.html"><a href="section-23.html#section-24"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="section-23.html"><a href="section-23.html#section-25"><i class="fa fa-check"></i><b>6.1.1</b> 개별 종목 주가 크롤링</a></li>
-<li class="chapter" data-level="6.1.2" data-path="section-23.html"><a href="section-23.html#section-26"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="section-23.html"><a href="section-23.html#section-27"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="section-23.html"><a href="section-23.html#section-28"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
-<li class="chapter" data-level="6.2.2" data-path="section-23.html"><a href="section-23.html#section-29"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
-<li class="chapter" data-level="6.2.3" data-path="section-23.html"><a href="section-23.html#section-30"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="section-23.html"><a href="section-23.html#section-31"><i class="fa fa-check"></i><b>6.3</b> 야후 파이낸스 데이터 구하기</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="section-23.html"><a href="section-23.html#section-32"><i class="fa fa-check"></i><b>6.3.1</b> 재무제표 다운로드</a></li>
-<li class="chapter" data-level="6.3.2" data-path="section-23.html"><a href="section-23.html#section-33"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="4.2" data-path="section-18.html"><a href="section-18.html#section-19"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="section-18.html"><a href="section-18.html#section-20"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
+<li class="chapter" data-level="4.2.2" data-path="section-18.html"><a href="section-18.html#section-21"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
+<li class="chapter" data-level="4.2.3" data-path="section-18.html"><a href="section-18.html#section-22"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="section-34.html"><a href="section-34.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
-<li class="chapter" data-level="7.1" data-path="section-34.html"><a href="section-34.html#section-35"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
-<li class="chapter" data-level="7.2" data-path="section-34.html"><a href="section-34.html#section-36"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
-<li class="chapter" data-level="7.3" data-path="section-34.html"><a href="section-34.html#section-37"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+<li class="chapter" data-level="5" data-path="section-23.html"><a href="section-23.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-23.html"><a href="section-23.html#section-24"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="section-23.html"><a href="section-23.html#section-25"><i class="fa fa-check"></i><b>5.1.1</b> 산업별 현황 크롤링</a></li>
+<li class="chapter" data-level="5.1.2" data-path="section-23.html"><a href="section-23.html#section-26"><i class="fa fa-check"></i><b>5.1.2</b> 개별종목 지표 크롤링</a></li>
+<li class="chapter" data-level="5.1.3" data-path="section-23.html"><a href="section-23.html#section-27"><i class="fa fa-check"></i><b>5.1.3</b> 최근 영업일 기준 데이터 받기</a></li>
+<li class="chapter" data-level="5.1.4" data-path="section-23.html"><a href="section-23.html#section-28"><i class="fa fa-check"></i><b>5.1.4</b> 거래소 데이터 정리하기</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="section-38.html"><a href="section-38.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
-<li class="chapter" data-level="8.1" data-path="section-38.html"><a href="section-38.html#section-39"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="section-38.html"><a href="section-38.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
-<li class="chapter" data-level="8.1.2" data-path="section-38.html"><a href="section-38.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
-<li class="chapter" data-level="8.1.3" data-path="section-38.html"><a href="section-38.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
-<li class="chapter" data-level="8.1.4" data-path="section-38.html"><a href="section-38.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
-<li class="chapter" data-level="8.1.5" data-path="section-38.html"><a href="section-38.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
-<li class="chapter" data-level="8.1.6" data-path="section-38.html"><a href="section-38.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
-<li class="chapter" data-level="8.1.7" data-path="section-38.html"><a href="section-38.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
-<li class="chapter" data-level="8.1.8" data-path="section-38.html"><a href="section-38.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통계값 계산</a></li>
-<li class="chapter" data-level="8.1.9" data-path="section-38.html"><a href="section-38.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
-<li class="chapter" data-level="8.1.10" data-path="section-38.html"><a href="section-38.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
-<li class="chapter" data-level="8.1.11" data-path="section-38.html"><a href="section-38.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
-<li class="chapter" data-level="8.1.12" data-path="section-38.html"><a href="section-38.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶음</a></li>
+<li class="chapter" data-level="5.2" data-path="section-23.html"><a href="section-23.html#wics---"><i class="fa fa-check"></i><b>5.2</b> WICS 기준 섹터정보 크롤링</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="section-38.html"><a href="section-38.html#section-40"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="section-38.html"><a href="section-38.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
-<li class="chapter" data-level="8.2.2" data-path="section-38.html"><a href="section-38.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
-<li class="chapter" data-level="8.2.3" data-path="section-38.html"><a href="section-38.html#geom_boxplot--"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스플롯 나타내기</a></li>
-<li class="chapter" data-level="8.2.4" data-path="section-38.html"><a href="section-38.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
-<li class="chapter" data-level="8.2.5" data-path="section-38.html"><a href="section-38.html#geom_bar--"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대그래프를 나타내기</a></li>
+<li class="chapter" data-level="6" data-path="section-29.html"><a href="section-29.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-29.html"><a href="section-29.html#section-30"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="section-29.html"><a href="section-29.html#section-31"><i class="fa fa-check"></i><b>6.1.1</b> 개별종목 주가 크롤링</a></li>
+<li class="chapter" data-level="6.1.2" data-path="section-29.html"><a href="section-29.html#section-32"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="section-38.html"><a href="section-38.html#section-41"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="section-38.html"><a href="section-38.html#section-42"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.2" data-path="section-38.html"><a href="section-38.html#section-43"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.3" data-path="section-38.html"><a href="section-38.html#section-44"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+<li class="chapter" data-level="6.2" data-path="section-29.html"><a href="section-29.html#section-33"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="section-29.html"><a href="section-29.html#section-34"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.2.2" data-path="section-29.html"><a href="section-29.html#section-35"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="6.2.3" data-path="section-29.html"><a href="section-29.html#section-36"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="section-29.html"><a href="section-29.html#section-37"><i class="fa fa-check"></i><b>6.3</b> 야후 파이낸스 데이터 구하기</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="section-29.html"><a href="section-29.html#section-38"><i class="fa fa-check"></i><b>6.3.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.3.2" data-path="section-29.html"><a href="section-29.html#section-39"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="section-45.html"><a href="section-45.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
-<li class="chapter" data-level="9.1" data-path="section-45.html"><a href="section-45.html#section-46"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="section-45.html"><a href="section-45.html#section-47"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
-<li class="chapter" data-level="9.1.2" data-path="section-45.html"><a href="section-45.html#section-48"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+<li class="chapter" data-level="7" data-path="section-40.html"><a href="section-40.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-40.html"><a href="section-40.html#section-41"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-40.html"><a href="section-40.html#section-42"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="section-40.html"><a href="section-40.html#section-43"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="section-45.html"><a href="section-45.html#section-49"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="section-45.html"><a href="section-45.html#section-50"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
-<li class="chapter" data-level="9.2.2" data-path="section-45.html"><a href="section-45.html#section-51"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+<li class="chapter" data-level="8" data-path="section-44.html"><a href="section-44.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-44.html"><a href="section-44.html#section-45"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-44.html"><a href="section-44.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-44.html"><a href="section-44.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-44.html"><a href="section-44.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-44.html"><a href="section-44.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="section-44.html"><a href="section-44.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="section-44.html"><a href="section-44.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
+<li class="chapter" data-level="8.1.7" data-path="section-44.html"><a href="section-44.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="section-44.html"><a href="section-44.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="section-44.html"><a href="section-44.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="section-44.html"><a href="section-44.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="section-44.html"><a href="section-44.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="section-44.html"><a href="section-44.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="section-45.html"><a href="section-45.html#section-52"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="section-45.html"><a href="section-45.html#section-53"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
-<li class="chapter" data-level="9.3.2" data-path="section-45.html"><a href="section-45.html#section-54"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+<li class="chapter" data-level="8.2" data-path="section-44.html"><a href="section-44.html#section-46"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-44.html"><a href="section-44.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-44.html"><a href="section-44.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
+<li class="chapter" data-level="8.2.3" data-path="section-44.html"><a href="section-44.html#geom_boxplot---"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
+<li class="chapter" data-level="8.2.4" data-path="section-44.html"><a href="section-44.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
+<li class="chapter" data-level="8.2.5" data-path="section-44.html"><a href="section-44.html#geom_bar---"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="section-45.html"><a href="section-45.html#section-55"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="section-45.html"><a href="section-45.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
-<li class="chapter" data-level="9.4.2" data-path="section-45.html"><a href="section-45.html#section-56"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="section-45.html"><a href="section-45.html#section-57"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="section-45.html"><a href="section-45.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
-<li class="chapter" data-level="9.5.2" data-path="section-45.html"><a href="section-45.html#section-58"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="section-59.html"><a href="section-59.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
-<li class="chapter" data-level="10.1" data-path="section-59.html"><a href="section-59.html#section-60"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
-<li class="chapter" data-level="10.2" data-path="section-59.html"><a href="section-59.html#section-61"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="section-59.html"><a href="section-59.html#section-62"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
-<li class="chapter" data-level="10.2.2" data-path="section-59.html"><a href="section-59.html#section-63"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
-<li class="chapter" data-level="10.2.3" data-path="section-59.html"><a href="section-59.html#section-64"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
-</ul></li>
-<li class="chapter" data-level="10.3" data-path="section-59.html"><a href="section-59.html#section-65"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="section-59.html"><a href="section-59.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
-<li class="chapter" data-level="10.3.2" data-path="section-59.html"><a href="section-59.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
-<li class="chapter" data-level="10.3.3" data-path="section-59.html"><a href="section-59.html#section-66"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="section-59.html"><a href="section-59.html#section-67"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="section-68.html"><a href="section-68.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
-<li class="chapter" data-level="11.1" data-path="section-68.html"><a href="section-68.html#section-69"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="section-68.html"><a href="section-68.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.2" data-path="section-68.html"><a href="section-68.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.3" data-path="section-68.html"><a href="section-68.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.4" data-path="section-68.html"><a href="section-68.html#section-70"><i class="fa fa-check"></i><b>11.1.4</b> 결과값들의 비교</a></li>
-<li class="chapter" data-level="11.1.5" data-path="section-68.html"><a href="section-68.html#section-71"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.1.6" data-path="section-68.html"><a href="section-68.html#section-72"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산 별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="section-68.html"><a href="section-68.html#section-73"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="section-68.html"><a href="section-68.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.2" data-path="section-68.html"><a href="section-68.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.3" data-path="section-68.html"><a href="section-68.html#section-74"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.2.4" data-path="section-68.html"><a href="section-68.html#section-75"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.3" data-path="section-68.html"><a href="section-68.html#section-76"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="section-68.html"><a href="section-68.html#section-77"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
-<li class="chapter" data-level="11.3.2" data-path="section-68.html"><a href="section-68.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.3.3" data-path="section-68.html"><a href="section-68.html#section-78"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+<li class="chapter" data-level="8.3" data-path="section-44.html"><a href="section-44.html#section-47"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="section-44.html"><a href="section-44.html#section-48"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="section-44.html"><a href="section-44.html#section-49"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="section-44.html"><a href="section-44.html#section-50"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="section-79.html"><a href="section-79.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
-<li class="chapter" data-level="12.1" data-path="section-79.html"><a href="section-79.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="section-79.html"><a href="section-79.html#section-80"><i class="fa fa-check"></i><b>12.1.1</b> 인자목록 살펴보기</a></li>
-<li class="chapter" data-level="12.1.2" data-path="section-79.html"><a href="section-79.html#section-81"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+<li class="chapter" data-level="9" data-path="section-51.html"><a href="section-51.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-51.html"><a href="section-51.html#section-52"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section-51.html"><a href="section-51.html#section-53"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section-51.html"><a href="section-51.html#section-54"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="section-79.html"><a href="section-79.html#section-82"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
-<li class="chapter" data-level="12.3" data-path="section-79.html"><a href="section-79.html#section-83"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
-<li class="chapter" data-level="12.4" data-path="section-79.html"><a href="section-79.html#section-84"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+<li class="chapter" data-level="9.2" data-path="section-51.html"><a href="section-51.html#section-55"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="section-51.html"><a href="section-51.html#section-56"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="section-51.html"><a href="section-51.html#section-57"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="section-85.html"><a href="section-85.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
-<li class="chapter" data-level="13.1" data-path="section-85.html"><a href="section-85.html#section-86"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="section-85.html"><a href="section-85.html#section-87"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
-<li class="chapter" data-level="13.1.2" data-path="section-85.html"><a href="section-85.html#section-88"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
-<li class="chapter" data-level="13.1.3" data-path="section-85.html"><a href="section-85.html#section-89"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
-<li class="chapter" data-level="13.1.4" data-path="section-85.html"><a href="section-85.html#section-90"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+<li class="chapter" data-level="9.3" data-path="section-51.html"><a href="section-51.html#section-58"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="section-51.html"><a href="section-51.html#section-59"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="section-51.html"><a href="section-51.html#section-60"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="section-85.html"><a href="section-85.html#section-91"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+<li class="chapter" data-level="9.4" data-path="section-51.html"><a href="section-51.html#section-61"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="section-51.html"><a href="section-51.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="section-51.html"><a href="section-51.html#section-62"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
 </ul></li>
+<li class="chapter" data-level="9.5" data-path="section-51.html"><a href="section-51.html#section-63"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-51.html"><a href="section-51.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-51.html"><a href="section-51.html#section-64"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="section-65.html"><a href="section-65.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-65.html"><a href="section-65.html#section-66"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-65.html"><a href="section-65.html#section-67"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-65.html"><a href="section-65.html#section-68"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-65.html"><a href="section-65.html#section-69"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-65.html"><a href="section-65.html#section-70"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="section-65.html"><a href="section-65.html#section-71"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-65.html"><a href="section-65.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-65.html"><a href="section-65.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-65.html"><a href="section-65.html#section-72"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="section-65.html"><a href="section-65.html#section-73"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="section-74.html"><a href="section-74.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-74.html"><a href="section-74.html#section-75"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-74.html"><a href="section-74.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-74.html"><a href="section-74.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-74.html"><a href="section-74.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-74.html"><a href="section-74.html#section-76"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-74.html"><a href="section-74.html#section-77"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-74.html"><a href="section-74.html#section-78"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="section-74.html"><a href="section-74.html#section-79"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="section-74.html"><a href="section-74.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="section-74.html"><a href="section-74.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="section-74.html"><a href="section-74.html#section-80"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="section-74.html"><a href="section-74.html#section-81"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="section-74.html"><a href="section-74.html#section-82"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="section-74.html"><a href="section-74.html#section-83"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
+<li class="chapter" data-level="11.3.2" data-path="section-74.html"><a href="section-74.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="section-74.html"><a href="section-74.html#section-84"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="section-85.html"><a href="section-85.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-85.html"><a href="section-85.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-85.html"><a href="section-85.html#section-86"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-85.html"><a href="section-85.html#section-87"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="section-85.html"><a href="section-85.html#section-88"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-85.html"><a href="section-85.html#section-89"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="section-85.html"><a href="section-85.html#section-90"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="section-91.html"><a href="section-91.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="section-91.html"><a href="section-91.html#section-92"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="section-91.html"><a href="section-91.html#section-93"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="section-91.html"><a href="section-91.html#section-94"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="section-91.html"><a href="section-91.html#section-95"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="section-91.html"><a href="section-91.html#section-96"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="section-91.html"><a href="section-91.html#section-97"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -324,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a>
           </h1>
         </div>
 
@@ -334,7 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="api---" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> API를 이용한 데이터 수집</h1>
-<p>본 장과 다음 장에서는 본격적으로 데이터를 수집하는 방법에 대해 배우도록 하겠습니다. 그 중 해당 장에서는 API를 이용하여 데이터를 수집하는 방법에 대해 살펴보도록 합니다.</p>
+<p>이 CHAPTER와 다음 CHAPTER에서는 본격적으로 데이터를 수집하는 방법을 배우겠습니다. 먼저 API를 이용해 데이터를 수집하는 방법을 살펴봅니다.</p>
 <p>API 제공자는 본인이 가진 데이터베이스를 다른 누군가가 쉽게 사용할 수 있는 형태로 가지고 있으며, 해당 데이터베이스에 접근할 수 있는 열쇠인 API 주소를 가진 사람은 이를 언제든지 사용할 수 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="images/api_api.png" alt="API 개념" width="70%" />
@@ -342,20 +351,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 그림 1.3: API 개념
 </p>
 </div>
-<p>API 주소만 가지고 있다면 데이터를 언제, 어디서, 누구나 쉽게 이용할 수 있다는 장점이 있습니다. 또한 대부분의 경우 사용자가 필요한 데이터만을 가지고 있으므로 접속 속도가 빠르며, 데이터를 가공하는 번거로움도 줄어듭니다.
-해외의 경우 금융 데이터를 API의 형태로 제공하는 업체가 많으므로, 이를 잘만 활용한다면 매우 손쉽게 퀀트 투자에 필요한 데이터를 수집할 수 있습니다.</p>
+<p>API는 API 주소만 가지고 있다면 데이터를 언제, 어디서, 누구나 쉽게 이용할 수 있다는 장점이 있습니다. 또한 대부분의 경우 사용자가 필요한 데이터만을 가지고 있으므로 접속 속도가 빠르며, 데이터를 가공하는 번거로움도 줄어듭니다. 해외에는 금융 데이터를 API의 형태로 제공하는 업체가 많으므로, 이를 잘만 활용한다면 매우 손쉽게 퀀트 투자에 필요한 데이터를 수집할 수 있습니다.</p>
 <div id="api--quandl--" class="section level2">
 <h2><span class="header-section-number">3.1</span> API를 이용한 Quandl 데이터 다운로드</h2>
-<p>데이터 제공업체 Quandl은 일부 데이터를 무료로 제공하며, API를 통해서 이를 다운로드 받을 수 있습니다.<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a> 해당 책에서는 예제로써 애플(AAPL)의 주가를 다운로드 받도록 하겠습니다. csv 형식의 API 주소는 다음과 같습니다.</p>
+<p>데이터 제공업체 Quandl은 일부 데이터를 무료로 제공하며 API를 통해서 다운로드할 수 있습니다.<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> 이 책에서는 예제로 애플(AAPL)의 주가를 다운로드해보겠습니다. csv 형식의 API 주소는 다음과 같습니다.</p>
 <p><strong><a href="https://www.quandl.com/api/v3/datasets/WIKI/AAPL/data.csv?api_key=xw3NU3xLUZ7vZgrz5QnG" class="uri">https://www.quandl.com/api/v3/datasets/WIKI/AAPL/data.csv?api_key=xw3NU3xLUZ7vZgrz5QnG</a></strong></p>
-<p>위 주소를 웹 브라우저 주소 창에 직접 입력하면 csv 형식의 파일이 다운로드 되며, 이를 열어보면 애플의 주가에 해당하는 데이터가 있습니다.</p>
+<p>위 주소를 웹 브라우저 주소 창에 직접 입력하면 csv 형식의 파일이 다운로드되며, 파일을 열어보면 애플의 주가 데이터가 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="images/api_apple_csv.png" alt="API 주소를 이용한 데이터 다운로드" width="100%" />
 <p class="caption">
 그림 2.1: API 주소를 이용한 데이터 다운로드
 </p>
 </div>
-<p>그러나 웹 브라우저에 해당 주소를 입력하여 csv 파일을 다운로드 받고, 이를 다시 R에서 불러오는 작업은 무척이나 비효율 적입니다. R 내에서 API 주소를 이용하여 직접 데이터를 다운로드 받아올 수 있습니다.</p>
+<p>그러나 웹 브라우저에 해당 주소를 입력해 csv 파일을 다운로드하고 csv 파일을 다시 R에서 불러오는 작업은 무척이나 비효율적입니다. R에서 API 주소를 이용해 직접 데이터를 다운로드할 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">url.aapl =<span class="st"> &quot;https://www.quandl.com/api/v3/datasets/WIKI/AAPL/</span>
 <span class="st">data.csv?api_key=xw3NU3xLUZ7vZgrz5QnG&quot;</span>
 data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
@@ -375,15 +383,15 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
 ## 4     170.0     172.7    168.6      168.8    41051076
 ## 5     175.0     175.1    171.3      171.3    35247358
 ## 6     175.2     176.8    174.9      175.2    19314039</code></pre>
-<p>url1에 해당 주소를 입력한 후, <code>read.csv()</code> 함수를 이용하여 간단하게 csv 파일을 불러올 수 있습니다.</p>
+<p>url에 해당 주소를 입력한 후 <code>read.csv()</code> 함수를 이용해 간단하게 csv 파일을 불러올 수 있습니다.</p>
 </div>
 <div id="getsymbols---api-" class="section level2">
 <h2><span class="header-section-number">3.2</span> <code>getSymbols()</code> 함수를 이용한 API 다운로드</h2>
-<p>앞선 예에서 API 주소를 이용할 경우 매우 간단하게 데이터를 수집할 있음을 살펴 보았습니다. 그러나 해당 방법에는 여러 단점 또한 존재합니다. 먼저, 원하는 항목에 대한 API를 일일이 얻는 것은 힘든 일입니다. 또한 Quandl의 경우 무료로 얻을 수 있는 정보에 제한이 있으며, 다운로드 양에 대한 제한도 있습니다. 한 두 종목의 경우 해당 방법으로 데이터를 수집할 수 있지만, 전 종목의 데이터를 해당 방법으로 구하는 것은 사실상 불가능 합니다.</p>
-<p>다행히 야후 파이낸스 역시 주가 데이터를 무료로 제공하며, <code>quantmod</code> 패키지의 <code>getSymbols()</code> 함수는 해당 API에 접속하여 데이터를 다운로드 받습니다.</p>
-<div id="section-10" class="section level3">
+<p>이전 예에서 API 주소를 이용하면 매우 간단하게 데이터를 수집할 수 있음을 살펴보았습니다. 그러나 이 방법에는 단점도 있습니다. 먼저 원하는 항목에 대한 API를 일일이 얻기가 힘듭니다. 또한 Quandl의 경우 무료로 얻을 수 있는 정보에 제한이 있으며, 다운로드 양에도 제한이 있습니다. 이 방법으로 한두 종목의 데이터를 수집할 수 있지만, 전 종목의 데이터를 구하기는 사실상 불가능합니다.</p>
+<p>다행히 야후 파이낸스 역시 주가 데이터를 무료로 제공하며, quantmod 패키지의 <code>getSymbols()</code> 함수는 해당 API에 접속해 데이터를 다운로드합니다.</p>
+<div id="section-16" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> 주가 다운로드</h3>
-<p><code>getSymbols()</code> 함수의 기본적인 사용법은 매우 간단합니다. 괄호 안에 다운로드 받고자 하는 종목의 티커를 입력하면 됩니다.</p>
+<p><code>getSymbols()</code> 함수의 기본적인 사용법은 매우 간단합니다. 괄호 안에 다운로드하려는 종목의 티커를 입력하면 됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
 <span class="kw">getSymbols</span>(<span class="st">&#39;AAPL&#39;</span>)</code></pre>
 <pre><code>## [1] &quot;AAPL&quot;</code></pre>
@@ -396,17 +404,17 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
 ## 2007-01-09     12.35     13.28    12.16      13.22   837324600
 ## 2007-01-10     13.54     13.97    13.35      13.86   738220000
 ##            AAPL.Adjusted
-## 2007-01-03         10.49
-## 2007-01-04         10.72
-## 2007-01-05         10.64
-## 2007-01-08         10.70
-## 2007-01-09         11.58
-## 2007-01-10         12.14</code></pre>
-<p>먼저 <code>getSymbols()</code> 함수 내에 애플의 티커인 <strong>AAPL</strong>을 입력합니다. 티커와 동일한 변수인 AAPL이 생성되며, 주가 데이터가 다운로드 된 후 xts 형태로 입력됩니다.</p>
-<p>다운로드 결과로써 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한, Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다.</p>
+## 2007-01-03         10.45
+## 2007-01-04         10.68
+## 2007-01-05         10.60
+## 2007-01-08         10.66
+## 2007-01-09         11.54
+## 2007-01-10         12.09</code></pre>
+<p>먼저 <code>getSymbols()</code> 함수 내에 애플의 티커인 AAPL을 입력합니다. 티커와 동일한 변수인 AAPL이 생성되며, 주가 데이터가 다운로드된 후 xts 형태로 입력됩니다.</p>
+<p>다운로드 결과로 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한 Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chart_Series</span>(<span class="kw">Ad</span>(AAPL))</code></pre>
 <p><img src="03-api_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><code>Ad()</code> 함수를 통해 다운로드 받은 데이터에서 수정주가만을 선택한 후, <code>chart_Series()</code> 함수를 이용하여 시계열 그래프를 그려줄 수도 있습니다. 시계열 기간을 입력하지 않을 경우 2007년 1월부터 현재까지의 데이터가 다운로드 되며, 추가적인 입력 변수를 통해 원하는 기간의 데이터를 다운로드 받을 수도 있습니다.</p>
+<p><code>Ad()</code> 함수를 통해 다운로드한 데이터에서 수정주가만을 선택한 후 <code>chart_Series()</code> 함수를 이용해 시계열 그래프를 그릴 수도 있습니다. 시계열 기간을 입력하지 않으면 2007년 1월부터 현재까지의 데이터가 다운로드되며, 입력 변수를 추가해서 원하는 기간의 데이터를 다운로드할 수도 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span><span class="kw">getSymbols</span>(<span class="st">&#39;AAPL&#39;</span>,
                   <span class="dt">from =</span> <span class="st">&#39;2000-01-01&#39;</span>, <span class="dt">to =</span> <span class="st">&#39;2018-12-31&#39;</span>,
                   <span class="dt">auto.assign =</span> <span class="ot">FALSE</span>)
@@ -419,14 +427,14 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
 ## 2000-01-07     3.446     3.607    3.411      3.554   115183600
 ## 2000-01-10     3.643     3.652    3.384      3.491   126266000
 ##            AAPL.Adjusted
-## 2000-01-03         3.502
-## 2000-01-04         3.207
-## 2000-01-05         3.254
-## 2000-01-06         2.972
-## 2000-01-07         3.113
-## 2000-01-10         3.058</code></pre>
-<p>from에는 시작 시점을, to에는 종료 시점을 입력하여 주면, 해당 시점의 데이터가 다운로드 받아집니다.</p>
-<p><code>getSymbols()</code> 함수를 통해 다운로드 받은 데이터는 자동으로 티커와 동일한 변수명에 저장됩니다. 만일 티커명이 아닌 원하는 변수명에 데이터를 저장하고 싶을 경우, auto.assign 인자를 FALSE로 설정해주면 다운로드 받은 데이터가 원하는 변수에 저장됩니다.</p>
+## 2000-01-03         3.489
+## 2000-01-04         3.195
+## 2000-01-05         3.242
+## 2000-01-06         2.961
+## 2000-01-07         3.101
+## 2000-01-10         3.047</code></pre>
+<p>from에는 시작시점을 입력하고 to에는 종료시점을 입력하면 해당 기간의 데이터가 다운로드됩니다.</p>
+<p><code>getSymbols()</code> 함수를 통해 다운로드한 데이터는 자동으로 티커와 동일한 변수명에 저장됩니다. 만일 티커명이 아닌 원하는 변수명에 데이터를 저장하려면 auto.assign 인자를 FALSE로 설정해주면 다운로드한 데이터가 원하는 변수에 저장됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;FB&#39;</span>, <span class="st">&#39;NVDA&#39;</span>) 
 <span class="kw">getSymbols</span>(ticker)</code></pre>
 <pre><code>## [1] &quot;FB&quot;   &quot;NVDA&quot;</code></pre>
@@ -453,12 +461,12 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
 ## 2007-01-08         20.86
 ## 2007-01-09         20.45
 ## 2007-01-10         21.46</code></pre>
-<p>한번에 여러 종목의 주가를 다운로드 받을 수도 있습니다. 위 예제와 같이 페이스북과 엔비디아의 티커인 FB와 NVDA를 ticker 변수에 입력하여 주고, <code>getSymbols()</code> 함수에 티커들을 입력한 변수를 넣어주면 두 종목의 주가가 동시에 다운로드 됩니다.</p>
+<p>한 번에 여러 종목의 주가를 다운로드할 수도 있습니다. 위 예제와 같이 페이스북과 엔비디아의 티커인 FB와 NVDA를 ticker 변수에 입력하고 <code>getSymbols()</code> 함수에 티커를 입력한 변수를 넣으면 두 종목의 주가가 순차적으로 다운로드됩니다.</p>
 </div>
-<div id="section-11" class="section level3">
+<div id="section-17" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> 국내 종목 주가 다운로드</h3>
-<p><code>getSymbols()</code> 함수를 이용하면 미국뿐 아니라 국내 종목의 주가를 다운로드 받을 수도 있습니다. 국내 종목의 티커는 총 6자리로 구성되어 있으며, 해당 함수에 입력되는 티커는 코스피 상장 종목의 경우 <strong>티커.KS</strong>, 코스닥 상장 종목의 경우 <strong>티커.KQ</strong>의 형태로 입력해 주어야 합니다.</p>
-<p>먼저 코스피 상장종목인 삼성전자 데이터의 다운로드 예시입니다.</p>
+<p><code>getSymbols()</code> 함수를 이용하면 미국뿐 아니라 국내 종목의 주가도 다운로드할 수 있습니다. 국내 종목의 티커는 총 6자리로 구성되어 있으며, 해당 함수에 입력되는 티커는 코스피 상장 종목의 경우 <strong>티커.KS</strong>, 코스닥 상장 종목의 경우 <strong>티커.KQ</strong>의 형태로 입력해야 합니다.</p>
+<p>다음은 코스피 상장 종목인 삼성전자 데이터의 다운로드 예시입니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getSymbols</span>(<span class="st">&#39;005930.KS&#39;</span>,
            <span class="dt">from =</span> <span class="st">&#39;2000-01-01&#39;</span>, <span class="dt">to =</span> <span class="st">&#39;2018-12-31&#39;</span>)</code></pre>
 <pre><code>## [1] &quot;005930.KS&quot;</code></pre>
@@ -470,8 +478,8 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
 ## 2018-12-26              37996
 ## 2018-12-27              38250
 ## 2018-12-28              38700</code></pre>
-<p>삼성전자의 티커인 005930에 .KS를 붙여 함수에 입력할 경우, 티커명에 해당하는 005930.KS 변수명에 데이터가 저장됩니다. 변수명에 콤마(.)가 있는 관계로, <code>Ad</code> 함수를 통해 수정주가를 확인하고자 할 때는 변수명의 앞뒤에 억음부호를 붙여주어야 합니다.</p>
-<p>국내 종목의 경우 종종 수정주가에 오류가 발생하는 경우가 많기에, 배당이 반영된 값 보다는 단순 종가(Close) 데이터를 사용하기를 권장합니다.</p>
+<p>삼성전자의 티커인 005930에 .KS를 붙여 <code>getSymbols()</code> 함수에 입력하면 티커명에 해당하는 005930.KS 변수명에 데이터가 저장됩니다. 변수명에 마침표(.)가 있으므로 <code>Ad()</code> 함수를 통해 수정주가를 확인하려면 변수명 앞뒤에 억음 부호(`)를 붙여야 합니다.</p>
+<p>국내 종목은 종종 수정주가에 오류가 발생하는 경우가 많아서 배당이 반영된 값보다는 단순 종가(Close) 데이터를 사용하기를 권장합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(<span class="kw">Cl</span>(<span class="st">`</span><span class="dt">005930.KS</span><span class="st">`</span>))</code></pre>
 <pre><code>##            005930.KS.Close
 ## 2018-12-20           38650
@@ -480,8 +488,8 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
 ## 2018-12-26           38350
 ## 2018-12-27           38250
 ## 2018-12-28           38700</code></pre>
-<p><code>Cl()</code> 함수는 Close, 즉 종가만을 선택하여 주며, 사용 방법은 기존 <code>Ad()</code> 함수와 동일합니다. 비록 배당을 고려할 수는 없지만, 전반적으로 오류가 없는 데이터를 사용할 수 있습니다.</p>
-<p>다음은 코스닥 상장종목인 셀트리온제약의 예시이며, 티커인 068670에 .KQ를 붙여 함수에 입력합니다. 역시나 데이터가 다운로드 되어 티커명의 변수에 저장됩니다.</p>
+<p><code>Cl()</code> 함수는 Close, 즉 종가만을 선택하며, 사용 방법은 <code>Ad()</code> 함수와 동일합니다. 비록 배당을 고려할 수는 없지만, 전반적으로 오류가 없는 데이터를 사용할 수 있습니다.</p>
+<p>다음은 코스닥 상장종목인 셀트리온제약의 예시이며, 티커인 068670에 .KQ를 붙여 함수에 입력합니다. 역시나 데이터가 다운로드되어 티커명의 변수에 저장됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getSymbols</span>(<span class="st">&quot;068760.KQ&quot;</span>,
            <span class="dt">from =</span> <span class="st">&#39;2000-01-01&#39;</span>, <span class="dt">to =</span> <span class="st">&#39;2018-12-31&#39;</span>)</code></pre>
 <pre><code>## [1] &quot;068760.KQ&quot;</code></pre>
@@ -496,13 +504,14 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
 </div>
 <div id="fred--" class="section level3">
 <h3><span class="header-section-number">3.2.3</span> FRED 데이터 다운로드</h3>
-<p>미국 및 각국의 중요 경제지표 데이터를 살펴볼 때 가장 많이 참조되는 곳 중 하나가 미 연방 준비 은행에서 관리하는 Fred Economic Date 이며, <code>getSymbols()</code> 함수를 통해 FRED 데이터를 다운로드 받을 수 있습니다. 먼저 미 국채 10년물 금리를 다운로드 받는 예제를 살펴보도록 하겠습니다.</p>
+<p>미국 연방준비은행에서 관리하는 Federal Reserve Economic Data(FRED)는 미국 및 각국의 중요 경제지표 데이터를 살펴볼 때 가장 많이 참조되는 곳 중 하나입니다. <code>getSymbols()</code> 함수를 통해 FRED 데이터를 다운로드할 수 있습니다. 먼저 미 국채 10년물 금리를 다운로드하는 예제를 살펴보겠습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getSymbols</span>(<span class="st">&#39;DGS10&#39;</span>, <span class="dt">src=</span><span class="st">&#39;FRED&#39;</span>)</code></pre>
 <pre><code>## [1] &quot;DGS10&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chart_Series</span>(DGS10)</code></pre>
 <p><img src="03-api_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>미 국채 10년물 금리에 해당하는 티커인 <strong>DGS10</strong>을 입력해주며, 데이터 출처에 해당하는 src에 <strong>FRED</strong>를 입력해줍니다. FRED 에서 제공하는 API를 이용하여 데이터가 다운로드 되었으며, <code>chart_Series()</code> 함수를 통해 금리 추이를 살펴볼 수 있습니다.</p>
-<p>각 항목 별 티커를 찾는 방법은 매우 간단합니다. 먼저 FRED의 홈페이지<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>에 접속하여, 원하는 데이터를 검색합니다. 만일 원/달러 환율에 해당하는 티커를 찾고자 할 경우, 그림 <a href="api-.html#fig:fred">3.1</a>와 같이 이에 해당하는 <strong>South Korea / U.S. Foreign Exchange Rate</strong>를 검색하여 원하는 페이지에 접속합니다. 이 중 페이지 주소에서 /series/ 다음에 위치하는 DEXKOUS 가 해당 항목의 티커입니다.</p>
+<p>미 국채 10년물 금리에 해당하는 티커인 DGS10을 입력해주며, 데이터 출처에 해당하는 src에 FRED를 입력해줍니다. FRED에서 제공하는 API를 이용해 데이터가 다운로드되며, <code>chart_Series()</code> 함수를 통해 금리 추이를 살펴볼 수 있습니다.</p>
+<p>각 항목별 티커를 찾는 방법은 매우 간단합니다. 먼저 FRED의 웹사이트<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>원
+하는 데이터를 검색합니다. 만일 원/달러 환율에 해당하는 티커를 찾고자 한다면 그림 <a href="api-.html#fig:fred">3.1</a>와 같이 이에 해당하는 <strong>South Korea / U.S. Foreign Exchange Rate</strong>를 검색해 원하는 페이지에 접속합니다. 이 중 페이지 주소에서 /series/ 다음에 위치하는 DEXKOUS가 해당 항목의 티커입니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:fred"></span>
 <img src="images/api_fred.png" alt="FRED 사이트 내 원/달러 환율의 티커 확인" width="70%" />
 <p class="caption">
@@ -513,22 +522,22 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
 <pre><code>## [1] &quot;DEXKOUS&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(DEXKOUS)</code></pre>
 <pre><code>##            DEXKOUS
-## 2019-06-21    1163
-## 2019-06-24    1156
-## 2019-06-25    1156
-## 2019-06-26    1156
-## 2019-06-27    1158
-## 2019-06-28    1155</code></pre>
-<p>해당 티커를 입력하면, 홈페이지와 동일한 데이터가 다운로드 됩니다. 이 외에도 509,000 여개의 방대한 FRED 데이터를 해당 함수를 통해 손쉽게 R에서 다운로드 받을 수 있습니다.</p>
+## 2019-08-09    1214
+## 2019-08-12    1216
+## 2019-08-13    1221
+## 2019-08-14    1212
+## 2019-08-15    1214
+## 2019-08-16    1206</code></pre>
+<p>해당 티커를 입력하면, FRED 웹사이트와 동일한 데이터가 다운로드됩니다. 이 외에도 509,000여 개의 방대한 FRED 데이터를 해당 함수를 통해 손쉽게 R에서 다운로드할 수 있습니다.</p>
 
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="7">
-<li id="fn7"><p>자세한 내용은 <a href="https://docs.quandl.com/" class="uri">https://docs.quandl.com/</a> 에서 확인할 수 있습니다.<a href="api-.html#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p><a href="https://fred.stlouisfed.org/" class="uri">https://fred.stlouisfed.org/</a><a href="api-.html#fnref8" class="footnote-back">↩</a></p></li>
+<ol start="6">
+<li id="fn6"><p>자세한 내용은 <a href="https://docs.quandl.com/" class="uri">https://docs.quandl.com/</a> 에서 확인할 수 있습니다.<a href="api-.html#fnref6" class="footnote-back">↩</a></p></li>
+<li id="fn7"><p><a href="https://fred.stlouisfed.org/" class="uri">https://fred.stlouisfed.org/</a><a href="api-.html#fnref7" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -536,8 +545,8 @@ data.aapl =<span class="st"> </span><span class="kw">read.csv</span>(url.aapl)
           </div>
         </div>
       </div>
-<a href="section-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-12.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="section-10.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-18.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

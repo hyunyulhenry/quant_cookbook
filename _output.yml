@@ -5,7 +5,7 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">퀀트 투자 쿡북</a></li>
+        <li><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a></li>
       after: |
         <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
     edit: null

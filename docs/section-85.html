@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 13 성과 및 위험 평가 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</title>
-  <meta name="description" content="Chapter 13 성과 및 위험 평가 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <title>Chapter 12 포트폴리오 백테스트 | R을 이용한 퀀트 투자 포트폴리오 만들기</title>
+  <meta name="description" content="Chapter 12 포트폴리오 백테스트 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 13 성과 및 위험 평가 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta property="og:title" content="Chapter 12 포트폴리오 백테스트 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 13 성과 및 위험 평가 | 퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기" />
+  <meta name="twitter:title" content="Chapter 12 포트폴리오 백테스트 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   
   
   
@@ -24,15 +24,15 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-07-07" />
+<meta name="date" content="2019-08-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="section-79.html">
-
+<link rel="prev" href="section-74.html">
+<link rel="next" href="section-91.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -128,190 +128,199 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">퀀트 투자 쿡북</a></li>
+<li><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>여는 글</a></li>
-<li class="chapter" data-level="1" data-path="section-1.html"><a href="section-1.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
-<li class="chapter" data-level="1.1" data-path="section-1.html"><a href="section-1.html#section-2"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
-<li class="chapter" data-level="1.2" data-path="section-1.html"><a href="section-1.html#section-3"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
-<li class="chapter" data-level="1.3" data-path="section-1.html"><a href="section-1.html#r-"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
-<li class="chapter" data-level="1.4" data-path="section-1.html"><a href="section-1.html#r--1"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section"><i class="fa fa-check"></i>지은이 소개</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-1"><i class="fa fa-check"></i>머리말</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-2"><i class="fa fa-check"></i>이 책의 구성</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-3"><i class="fa fa-check"></i>이 책에서 다루지 않은 주제</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-4"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-5"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-6"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="section-4.html"><a href="section-4.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
-<li class="chapter" data-level="2.1" data-path="section-4.html"><a href="section-4.html#r-utf-8-"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="section-4.html"><a href="section-4.html#ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
-<li class="chapter" data-level="2.1.2" data-path="section-4.html"><a href="section-4.html#section-5"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩의 종류</a></li>
-<li class="chapter" data-level="2.1.3" data-path="section-4.html"><a href="section-4.html#r-utf-8--1"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
+<li class="chapter" data-level="1" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
+<li class="chapter" data-level="1.1" data-path="section-7.html"><a href="section-7.html#section-8"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
+<li class="chapter" data-level="1.2" data-path="section-7.html"><a href="section-7.html#section-9"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
+<li class="chapter" data-level="1.3" data-path="section-7.html"><a href="section-7.html#r-"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
+<li class="chapter" data-level="1.4" data-path="section-7.html"><a href="section-7.html#r--1"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="section-4.html"><a href="section-4.html#section-6"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="section-4.html"><a href="section-4.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
+<li class="chapter" data-level="2" data-path="section-10.html"><a href="section-10.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
+<li class="chapter" data-level="2.1" data-path="section-10.html"><a href="section-10.html#r-utf-8-"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="section-10.html"><a href="section-10.html#ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
+<li class="chapter" data-level="2.1.2" data-path="section-10.html"><a href="section-10.html#section-11"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩 방식의 종류</a></li>
+<li class="chapter" data-level="2.1.3" data-path="section-10.html"><a href="section-10.html#r-utf-8--1"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="section-4.html"><a href="section-4.html#html-css-"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS 이해하기</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="section-4.html"><a href="section-4.html#html--"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
-<li class="chapter" data-level="2.3.2" data-path="section-4.html"><a href="section-4.html#section-7"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
-<li class="chapter" data-level="2.3.3" data-path="section-4.html"><a href="section-4.html#h--p-"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
-<li class="chapter" data-level="2.3.4" data-path="section-4.html"><a href="section-4.html#ul-ol-"><i class="fa fa-check"></i><b>2.3.4</b> 리스트: ul과 ol 태그</a></li>
-<li class="chapter" data-level="2.3.5" data-path="section-4.html"><a href="section-4.html#table-"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
-<li class="chapter" data-level="2.3.6" data-path="section-4.html"><a href="section-4.html#a-src--"><i class="fa fa-check"></i><b>2.3.6</b> a, src 태그와 속성</a></li>
-<li class="chapter" data-level="2.3.7" data-path="section-4.html"><a href="section-4.html#div-"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
-<li class="chapter" data-level="2.3.8" data-path="section-4.html"><a href="section-4.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
-<li class="chapter" data-level="2.3.9" data-path="section-4.html"><a href="section-4.html#class-id"><i class="fa fa-check"></i><b>2.3.9</b> class와 id</a></li>
+<li class="chapter" data-level="2.2" data-path="section-10.html"><a href="section-10.html#section-12"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="section-10.html"><a href="section-10.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="section-4.html"><a href="section-4.html#section-8"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터 (<code>%&gt;%</code>)</a></li>
-<li class="chapter" data-level="2.5" data-path="section-4.html"><a href="section-4.html#section-9"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
+<li class="chapter" data-level="2.3" data-path="section-10.html"><a href="section-10.html#html-css"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="section-10.html"><a href="section-10.html#html--"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
+<li class="chapter" data-level="2.3.2" data-path="section-10.html"><a href="section-10.html#section-13"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.3" data-path="section-10.html"><a href="section-10.html#h--p-"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
+<li class="chapter" data-level="2.3.4" data-path="section-10.html"><a href="section-10.html#ul--ol-"><i class="fa fa-check"></i><b>2.3.4</b> 리스트를 나타내는 ul 태그와 ol 태그</a></li>
+<li class="chapter" data-level="2.3.5" data-path="section-10.html"><a href="section-10.html#table-"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
+<li class="chapter" data-level="2.3.6" data-path="section-10.html"><a href="section-10.html#a--src---"><i class="fa fa-check"></i><b>2.3.6</b> a 태그와 src 태그 및 속성</a></li>
+<li class="chapter" data-level="2.3.7" data-path="section-10.html"><a href="section-10.html#div-"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
+<li class="chapter" data-level="2.3.8" data-path="section-10.html"><a href="section-10.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
+<li class="chapter" data-level="2.3.9" data-path="section-10.html"><a href="section-10.html#id"><i class="fa fa-check"></i><b>2.3.9</b> 클래스와 id</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="section-10.html"><a href="section-10.html#section-14"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터(<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="2.5" data-path="section-10.html"><a href="section-10.html#section-15"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
 <li class="chapter" data-level="3.1" data-path="api-.html"><a href="api-.html#api--quandl--"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
 <li class="chapter" data-level="3.2" data-path="api-.html"><a href="api-.html#getsymbols---api-"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="api-.html"><a href="api-.html#section-10"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
-<li class="chapter" data-level="3.2.2" data-path="api-.html"><a href="api-.html#section-11"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.1" data-path="api-.html"><a href="api-.html#section-16"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.2" data-path="api-.html"><a href="api-.html#section-17"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
 <li class="chapter" data-level="3.2.3" data-path="api-.html"><a href="api-.html#fred--"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="section-12.html"><a href="section-12.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
-<li class="chapter" data-level="4.1" data-path="section-12.html"><a href="section-12.html#get-post--"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="section-12.html"><a href="section-12.html#get-"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
-<li class="chapter" data-level="4.1.2" data-path="section-12.html"><a href="section-12.html#post-"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
+<li class="chapter" data-level="4" data-path="section-18.html"><a href="section-18.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
+<li class="chapter" data-level="4.1" data-path="section-18.html"><a href="section-18.html#get-post--"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="section-18.html"><a href="section-18.html#get-"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
+<li class="chapter" data-level="4.1.2" data-path="section-18.html"><a href="section-18.html#post-"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="section-12.html"><a href="section-12.html#section-13"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="section-12.html"><a href="section-12.html#section-14"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
-<li class="chapter" data-level="4.2.2" data-path="section-12.html"><a href="section-12.html#section-15"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
-<li class="chapter" data-level="4.2.3" data-path="section-12.html"><a href="section-12.html#section-16"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="section-17.html"><a href="section-17.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
-<li class="chapter" data-level="5.1" data-path="section-17.html"><a href="section-17.html#section-18"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="section-17.html"><a href="section-17.html#section-19"><i class="fa fa-check"></i><b>5.1.1</b> 산업별 현황 크롤링</a></li>
-<li class="chapter" data-level="5.1.2" data-path="section-17.html"><a href="section-17.html#section-20"><i class="fa fa-check"></i><b>5.1.2</b> 개별종목 지표 크롤링</a></li>
-<li class="chapter" data-level="5.1.3" data-path="section-17.html"><a href="section-17.html#section-21"><i class="fa fa-check"></i><b>5.1.3</b> 최근 영업일 기준 데이터 받기</a></li>
-<li class="chapter" data-level="5.1.4" data-path="section-17.html"><a href="section-17.html#section-22"><i class="fa fa-check"></i><b>5.1.4</b> 데이터 정리하기</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="section-17.html"><a href="section-17.html#wics---"><i class="fa fa-check"></i><b>5.2</b> WICS 기준 섹터정보 크롤링</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="section-23.html"><a href="section-23.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
-<li class="chapter" data-level="6.1" data-path="section-23.html"><a href="section-23.html#section-24"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="section-23.html"><a href="section-23.html#section-25"><i class="fa fa-check"></i><b>6.1.1</b> 개별 종목 주가 크롤링</a></li>
-<li class="chapter" data-level="6.1.2" data-path="section-23.html"><a href="section-23.html#section-26"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="section-23.html"><a href="section-23.html#section-27"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="section-23.html"><a href="section-23.html#section-28"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
-<li class="chapter" data-level="6.2.2" data-path="section-23.html"><a href="section-23.html#section-29"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
-<li class="chapter" data-level="6.2.3" data-path="section-23.html"><a href="section-23.html#section-30"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="section-23.html"><a href="section-23.html#section-31"><i class="fa fa-check"></i><b>6.3</b> 야후 파이낸스 데이터 구하기</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="section-23.html"><a href="section-23.html#section-32"><i class="fa fa-check"></i><b>6.3.1</b> 재무제표 다운로드</a></li>
-<li class="chapter" data-level="6.3.2" data-path="section-23.html"><a href="section-23.html#section-33"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="4.2" data-path="section-18.html"><a href="section-18.html#section-19"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="section-18.html"><a href="section-18.html#section-20"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
+<li class="chapter" data-level="4.2.2" data-path="section-18.html"><a href="section-18.html#section-21"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
+<li class="chapter" data-level="4.2.3" data-path="section-18.html"><a href="section-18.html#section-22"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="section-34.html"><a href="section-34.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
-<li class="chapter" data-level="7.1" data-path="section-34.html"><a href="section-34.html#section-35"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
-<li class="chapter" data-level="7.2" data-path="section-34.html"><a href="section-34.html#section-36"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
-<li class="chapter" data-level="7.3" data-path="section-34.html"><a href="section-34.html#section-37"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+<li class="chapter" data-level="5" data-path="section-23.html"><a href="section-23.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
+<li class="chapter" data-level="5.1" data-path="section-23.html"><a href="section-23.html#section-24"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="section-23.html"><a href="section-23.html#section-25"><i class="fa fa-check"></i><b>5.1.1</b> 산업별 현황 크롤링</a></li>
+<li class="chapter" data-level="5.1.2" data-path="section-23.html"><a href="section-23.html#section-26"><i class="fa fa-check"></i><b>5.1.2</b> 개별종목 지표 크롤링</a></li>
+<li class="chapter" data-level="5.1.3" data-path="section-23.html"><a href="section-23.html#section-27"><i class="fa fa-check"></i><b>5.1.3</b> 최근 영업일 기준 데이터 받기</a></li>
+<li class="chapter" data-level="5.1.4" data-path="section-23.html"><a href="section-23.html#section-28"><i class="fa fa-check"></i><b>5.1.4</b> 거래소 데이터 정리하기</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="section-38.html"><a href="section-38.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
-<li class="chapter" data-level="8.1" data-path="section-38.html"><a href="section-38.html#section-39"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="section-38.html"><a href="section-38.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
-<li class="chapter" data-level="8.1.2" data-path="section-38.html"><a href="section-38.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
-<li class="chapter" data-level="8.1.3" data-path="section-38.html"><a href="section-38.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
-<li class="chapter" data-level="8.1.4" data-path="section-38.html"><a href="section-38.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
-<li class="chapter" data-level="8.1.5" data-path="section-38.html"><a href="section-38.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
-<li class="chapter" data-level="8.1.6" data-path="section-38.html"><a href="section-38.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
-<li class="chapter" data-level="8.1.7" data-path="section-38.html"><a href="section-38.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
-<li class="chapter" data-level="8.1.8" data-path="section-38.html"><a href="section-38.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통계값 계산</a></li>
-<li class="chapter" data-level="8.1.9" data-path="section-38.html"><a href="section-38.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
-<li class="chapter" data-level="8.1.10" data-path="section-38.html"><a href="section-38.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
-<li class="chapter" data-level="8.1.11" data-path="section-38.html"><a href="section-38.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
-<li class="chapter" data-level="8.1.12" data-path="section-38.html"><a href="section-38.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶음</a></li>
+<li class="chapter" data-level="5.2" data-path="section-23.html"><a href="section-23.html#wics---"><i class="fa fa-check"></i><b>5.2</b> WICS 기준 섹터정보 크롤링</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="section-38.html"><a href="section-38.html#section-40"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="section-38.html"><a href="section-38.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
-<li class="chapter" data-level="8.2.2" data-path="section-38.html"><a href="section-38.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
-<li class="chapter" data-level="8.2.3" data-path="section-38.html"><a href="section-38.html#geom_boxplot--"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스플롯 나타내기</a></li>
-<li class="chapter" data-level="8.2.4" data-path="section-38.html"><a href="section-38.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
-<li class="chapter" data-level="8.2.5" data-path="section-38.html"><a href="section-38.html#geom_bar--"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대그래프를 나타내기</a></li>
+<li class="chapter" data-level="6" data-path="section-29.html"><a href="section-29.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
+<li class="chapter" data-level="6.1" data-path="section-29.html"><a href="section-29.html#section-30"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="section-29.html"><a href="section-29.html#section-31"><i class="fa fa-check"></i><b>6.1.1</b> 개별종목 주가 크롤링</a></li>
+<li class="chapter" data-level="6.1.2" data-path="section-29.html"><a href="section-29.html#section-32"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="section-38.html"><a href="section-38.html#section-41"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="section-38.html"><a href="section-38.html#section-42"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.2" data-path="section-38.html"><a href="section-38.html#section-43"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.3" data-path="section-38.html"><a href="section-38.html#section-44"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+<li class="chapter" data-level="6.2" data-path="section-29.html"><a href="section-29.html#section-33"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="section-29.html"><a href="section-29.html#section-34"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.2.2" data-path="section-29.html"><a href="section-29.html#section-35"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="6.2.3" data-path="section-29.html"><a href="section-29.html#section-36"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="section-29.html"><a href="section-29.html#section-37"><i class="fa fa-check"></i><b>6.3</b> 야후 파이낸스 데이터 구하기</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="section-29.html"><a href="section-29.html#section-38"><i class="fa fa-check"></i><b>6.3.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.3.2" data-path="section-29.html"><a href="section-29.html#section-39"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="section-45.html"><a href="section-45.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
-<li class="chapter" data-level="9.1" data-path="section-45.html"><a href="section-45.html#section-46"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="section-45.html"><a href="section-45.html#section-47"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
-<li class="chapter" data-level="9.1.2" data-path="section-45.html"><a href="section-45.html#section-48"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+<li class="chapter" data-level="7" data-path="section-40.html"><a href="section-40.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-40.html"><a href="section-40.html#section-41"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-40.html"><a href="section-40.html#section-42"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="section-40.html"><a href="section-40.html#section-43"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="section-45.html"><a href="section-45.html#section-49"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="section-45.html"><a href="section-45.html#section-50"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
-<li class="chapter" data-level="9.2.2" data-path="section-45.html"><a href="section-45.html#section-51"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+<li class="chapter" data-level="8" data-path="section-44.html"><a href="section-44.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-44.html"><a href="section-44.html#section-45"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-44.html"><a href="section-44.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-44.html"><a href="section-44.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-44.html"><a href="section-44.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-44.html"><a href="section-44.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="section-44.html"><a href="section-44.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="section-44.html"><a href="section-44.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
+<li class="chapter" data-level="8.1.7" data-path="section-44.html"><a href="section-44.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="section-44.html"><a href="section-44.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="section-44.html"><a href="section-44.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="section-44.html"><a href="section-44.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="section-44.html"><a href="section-44.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="section-44.html"><a href="section-44.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="section-45.html"><a href="section-45.html#section-52"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="section-45.html"><a href="section-45.html#section-53"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
-<li class="chapter" data-level="9.3.2" data-path="section-45.html"><a href="section-45.html#section-54"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+<li class="chapter" data-level="8.2" data-path="section-44.html"><a href="section-44.html#section-46"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-44.html"><a href="section-44.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-44.html"><a href="section-44.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
+<li class="chapter" data-level="8.2.3" data-path="section-44.html"><a href="section-44.html#geom_boxplot---"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
+<li class="chapter" data-level="8.2.4" data-path="section-44.html"><a href="section-44.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
+<li class="chapter" data-level="8.2.5" data-path="section-44.html"><a href="section-44.html#geom_bar---"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="section-45.html"><a href="section-45.html#section-55"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="section-45.html"><a href="section-45.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저 PBR</a></li>
-<li class="chapter" data-level="9.4.2" data-path="section-45.html"><a href="section-45.html#section-56"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표를 결합하기</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="section-45.html"><a href="section-45.html#section-57"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="section-45.html"><a href="section-45.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
-<li class="chapter" data-level="9.5.2" data-path="section-45.html"><a href="section-45.html#section-58"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="section-59.html"><a href="section-59.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
-<li class="chapter" data-level="10.1" data-path="section-59.html"><a href="section-59.html#section-60"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
-<li class="chapter" data-level="10.2" data-path="section-59.html"><a href="section-59.html#section-61"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="section-59.html"><a href="section-59.html#section-62"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
-<li class="chapter" data-level="10.2.2" data-path="section-59.html"><a href="section-59.html#section-63"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
-<li class="chapter" data-level="10.2.3" data-path="section-59.html"><a href="section-59.html#section-64"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
-</ul></li>
-<li class="chapter" data-level="10.3" data-path="section-59.html"><a href="section-59.html#section-65"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="section-59.html"><a href="section-59.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
-<li class="chapter" data-level="10.3.2" data-path="section-59.html"><a href="section-59.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
-<li class="chapter" data-level="10.3.3" data-path="section-59.html"><a href="section-59.html#section-66"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="section-59.html"><a href="section-59.html#section-67"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="section-68.html"><a href="section-68.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
-<li class="chapter" data-level="11.1" data-path="section-68.html"><a href="section-68.html#section-69"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="section-68.html"><a href="section-68.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.2" data-path="section-68.html"><a href="section-68.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.3" data-path="section-68.html"><a href="section-68.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.4" data-path="section-68.html"><a href="section-68.html#section-70"><i class="fa fa-check"></i><b>11.1.4</b> 결과값들의 비교</a></li>
-<li class="chapter" data-level="11.1.5" data-path="section-68.html"><a href="section-68.html#section-71"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.1.6" data-path="section-68.html"><a href="section-68.html#section-72"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산 별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="section-68.html"><a href="section-68.html#section-73"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="section-68.html"><a href="section-68.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.2" data-path="section-68.html"><a href="section-68.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.3" data-path="section-68.html"><a href="section-68.html#section-74"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.2.4" data-path="section-68.html"><a href="section-68.html#section-75"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.3" data-path="section-68.html"><a href="section-68.html#section-76"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="section-68.html"><a href="section-68.html#section-77"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
-<li class="chapter" data-level="11.3.2" data-path="section-68.html"><a href="section-68.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.3.3" data-path="section-68.html"><a href="section-68.html#section-78"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+<li class="chapter" data-level="8.3" data-path="section-44.html"><a href="section-44.html#section-47"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="section-44.html"><a href="section-44.html#section-48"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="section-44.html"><a href="section-44.html#section-49"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="section-44.html"><a href="section-44.html#section-50"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="section-79.html"><a href="section-79.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
-<li class="chapter" data-level="12.1" data-path="section-79.html"><a href="section-79.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="section-79.html"><a href="section-79.html#section-80"><i class="fa fa-check"></i><b>12.1.1</b> 인자목록 살펴보기</a></li>
-<li class="chapter" data-level="12.1.2" data-path="section-79.html"><a href="section-79.html#section-81"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+<li class="chapter" data-level="9" data-path="section-51.html"><a href="section-51.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-51.html"><a href="section-51.html#section-52"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section-51.html"><a href="section-51.html#section-53"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section-51.html"><a href="section-51.html#section-54"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="section-79.html"><a href="section-79.html#section-82"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
-<li class="chapter" data-level="12.3" data-path="section-79.html"><a href="section-79.html#section-83"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
-<li class="chapter" data-level="12.4" data-path="section-79.html"><a href="section-79.html#section-84"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+<li class="chapter" data-level="9.2" data-path="section-51.html"><a href="section-51.html#section-55"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="section-51.html"><a href="section-51.html#section-56"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="section-51.html"><a href="section-51.html#section-57"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="section-85.html"><a href="section-85.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
-<li class="chapter" data-level="13.1" data-path="section-85.html"><a href="section-85.html#section-86"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="section-85.html"><a href="section-85.html#section-87"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
-<li class="chapter" data-level="13.1.2" data-path="section-85.html"><a href="section-85.html#section-88"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
-<li class="chapter" data-level="13.1.3" data-path="section-85.html"><a href="section-85.html#section-89"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
-<li class="chapter" data-level="13.1.4" data-path="section-85.html"><a href="section-85.html#section-90"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+<li class="chapter" data-level="9.3" data-path="section-51.html"><a href="section-51.html#section-58"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="section-51.html"><a href="section-51.html#section-59"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="section-51.html"><a href="section-51.html#section-60"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="section-85.html"><a href="section-85.html#section-91"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+<li class="chapter" data-level="9.4" data-path="section-51.html"><a href="section-51.html#section-61"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="section-51.html"><a href="section-51.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="section-51.html"><a href="section-51.html#section-62"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
 </ul></li>
+<li class="chapter" data-level="9.5" data-path="section-51.html"><a href="section-51.html#section-63"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-51.html"><a href="section-51.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-51.html"><a href="section-51.html#section-64"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="section-65.html"><a href="section-65.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-65.html"><a href="section-65.html#section-66"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-65.html"><a href="section-65.html#section-67"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-65.html"><a href="section-65.html#section-68"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-65.html"><a href="section-65.html#section-69"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-65.html"><a href="section-65.html#section-70"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="section-65.html"><a href="section-65.html#section-71"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-65.html"><a href="section-65.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-65.html"><a href="section-65.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-65.html"><a href="section-65.html#section-72"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="section-65.html"><a href="section-65.html#section-73"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="section-74.html"><a href="section-74.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-74.html"><a href="section-74.html#section-75"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-74.html"><a href="section-74.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-74.html"><a href="section-74.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-74.html"><a href="section-74.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-74.html"><a href="section-74.html#section-76"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-74.html"><a href="section-74.html#section-77"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-74.html"><a href="section-74.html#section-78"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="section-74.html"><a href="section-74.html#section-79"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="section-74.html"><a href="section-74.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="section-74.html"><a href="section-74.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="section-74.html"><a href="section-74.html#section-80"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="section-74.html"><a href="section-74.html#section-81"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="section-74.html"><a href="section-74.html#section-82"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="section-74.html"><a href="section-74.html#section-83"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
+<li class="chapter" data-level="11.3.2" data-path="section-74.html"><a href="section-74.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="section-74.html"><a href="section-74.html#section-84"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="section-85.html"><a href="section-85.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-85.html"><a href="section-85.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-85.html"><a href="section-85.html#section-86"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-85.html"><a href="section-85.html#section-87"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="section-85.html"><a href="section-85.html#section-88"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-85.html"><a href="section-85.html#section-89"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="section-85.html"><a href="section-85.html#section-90"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="section-91.html"><a href="section-91.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="section-91.html"><a href="section-91.html#section-92"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="section-91.html"><a href="section-91.html#section-93"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="section-91.html"><a href="section-91.html#section-94"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="section-91.html"><a href="section-91.html#section-95"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="section-91.html"><a href="section-91.html#section-96"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="section-91.html"><a href="section-91.html#section-97"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
 
@@ -324,7 +333,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">퀀트 투자 쿡북: R을 이용한 투자 포트폴리오 만들기</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a>
           </h1>
         </div>
 
@@ -333,346 +342,886 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="section-85" class="section level1">
-<h1><span class="header-section-number">Chapter 13</span> 성과 및 위험 평가</h1>
-<p>백테스트를 통해 포트폴리오 수익률을 구했다면, 이를 바탕으로 각종 성과 및 위험을 평가해야 합니다. 아무리 성과가 좋은 전략이라도 위험이 너무 크다면 투자를 하기 부담스럽습니다. 또한 전략의 수익률이 지속적으로 감소하는 추세라면 경쟁이 치열해져 더이상 작동하지 않는 전략일 가능성도 있습니다.</p>
-<p>본 장에서는 포트폴리오의 예시로 퀄리티 팩터를 종합적으로 고려한 QMJ(Quality Minus Junk) 팩터<a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>의 수익률을 이용하겠습니다. QMJ 팩터란 우량성이 높은 종목들을 매수, 우량성이 낮은 종목들을 공매도한 전략을 지수의 형태로 나타낸 것입니다. 해당 팩터의 수익률을 통해 성과 및 위험을 평가해보고, 회귀분석을 통해 다른 팩터와의 관계도 살펴보도록 하겠습니다.</p>
-<p>QMJ 팩터의 수익률은 저자들의 회사인 AQR Capital Management의 Datasets<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a>에서 엑셀 파일을 다운로드 받은 후 가공할 수도 있습니다. 그러나 해당 작업을 매번 하는 것은 지나치게 번거로우므로, R 내에서 엑셀 파일을 다운로드 받은 후 가공하도록 하겠습니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(readxl)
-<span class="kw">library</span>(xts)
-<span class="kw">library</span>(timetk)
-
-url =<span class="st"> </span><span class="kw">paste0</span>(
-  <span class="st">&#39;https://images.aqr.com/-/media/AQR/Documents/Insights/&#39;</span>,
-  <span class="st">&#39;Data-Sets/Quality-Minus-Junk-Factors-Monthly.xlsx&#39;</span>)
-
-tf =<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&#39;.xlsx&#39;</span>)
-<span class="kw">download.file</span>(url, tf, <span class="dt">mode =</span> <span class="st">&#39;wb&#39;</span>)
-
-<span class="kw">excel_sheets</span>(tf)</code></pre>
-<pre><code>##  [1] &quot;QMJ Factors&quot;                   &quot;Definition&quot;                   
-##  [3] &quot;Data Sources&quot;                  &quot;--&gt; Additional Global Factors&quot;
-##  [5] &quot;MKT&quot;                           &quot;SMB&quot;                          
-##  [7] &quot;HML FF&quot;                        &quot;HML Devil&quot;                    
-##  [9] &quot;UMD&quot;                           &quot;ME(t-1)&quot;                      
-## [11] &quot;RF&quot;                            &quot;Sources and Definitions&quot;      
-## [13] &quot;Disclosures&quot;</code></pre>
+<h1><span class="header-section-number">Chapter 12</span> 포트폴리오 백테스트</h1>
+<p>백테스트란 현재 생각하는 전략을 과거부터 실행했을 때 어떠한 성과가 발생하는지 테스트해보는 과정입니다. 과거의 데이터를 기반으로 전략을 실행하는 퀀트 투자에 있어서 이는 핵심 단계이기도 합니다. 백테스트 결과를 통해 해당 전략의 손익뿐만 아니라 각종 위험을 대략적으로 판단할 수 있으며, 어떤 구간에서 전략이 좋았는지 혹은 나빴는지에 대한 이해도 키울 수 있습니다. 이러한 이해를 바탕으로 퀀트 투자를 지속한다면 단기적으로 수익이 나쁜 구간에서도 그 이유에 대한 객관적인 안목을 키울 수 있으며, 확신을 가지고 전략을 지속할 수 있습니다.</p>
+<p>그러나 백테스트를 아무리 보수적으로 혹은 엄밀하게 진행하더라도 이미 일어난 결과를 대상으로 한다는 사실은 변하지 않습니다. 백테스트 수익률만을 보고 투자에 대해 판단하거나, 혹은 동일한 수익률이 미래에도 반복될 것이라고 믿는다면 이는 백미러만 보고 운전하는 것처럼 매우 위험한 결과를 초래할 수도 있습니다.</p>
+<p>R에서 백테스트는 PerformanceAnalytics 패키지의 <code>Return.portfolio()</code> 함수를 사용해 매우 간단하게 수행할 수 있습니다. 이 CHAPTER에서는 해당 함수를 알아보고 구체적인 사용 방법에 대한 예시로서 전통적인 주식 60% &amp; 채권 40% 포트폴리오, 시점 선택 전략, 동적 자산배분에 대한 백테스트를 실시합니다.</p>
+<div id="return.portfolio-" class="section level2">
+<h2><span class="header-section-number">12.1</span> <code>Return.Portfolio()</code> 함수</h2>
+<p>프로그래밍을 이용해 백테스트할 때 전략이 단순하다면 단 몇 줄만으로도 테스트가 가능합니다. 그러나 전략이 복잡해지거나 적용해야 할 요소가 많아질 경우, 패키지를 이용하는 것이 효율적인 방법입니다.</p>
+<p>PerformanceAnalytics 패키지의 <code>Return.portfolio()</code> 함수는 백테스트를 수행하는데 가장 대중적으로 사용되는 함수입니다. 해당 함수의 가장 큰 장점은 각 자산의 수익률과 리밸런싱 비중만 있으면 백테스트 수익률, 회전율 등을 쉽게 계산할 수 있으며, 리밸런싱 시점과 수익률의 시점이 일치하지 않아도 된다는 점입니다. 즉, 수익률 데이터는 일간, 리밸런싱 시점은 분기 혹은 연간으로 된 경우에도 매우 쉽게 백테스트를 수행할 수 있습니다.</p>
+<div id="section-86" class="section level3">
+<h3><span class="header-section-number">12.1.1</span> 인자 목록 살펴보기</h3>
+<p>먼저 <code>Return.portfolio()</code> 함수는 다음과 같은 형태로 구성되어 있으며, 표 <a href="section-85.html#tab:returnportarg">12.1</a>는 인자의 내용을 정리한 것입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Return.portfolio</span>(R, <span class="dt">weights =</span> <span class="ot">NULL</span>, <span class="dt">wealth.index =</span> <span class="ot">FALSE</span>,
+  <span class="dt">contribution =</span> <span class="ot">FALSE</span>, <span class="dt">geometric =</span> <span class="ot">TRUE</span>,
+  <span class="dt">rebalance_on =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;years&quot;</span>, <span class="st">&quot;quarters&quot;</span>, 
+                   <span class="st">&quot;months&quot;</span>, <span class="st">&quot;weeks&quot;</span>, <span class="st">&quot;days&quot;</span>),
+  <span class="dt">value =</span> <span class="dv">1</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>, ...)</code></pre>
+<table>
+<caption><span id="tab:returnportarg">표 12.1: </span>Return.portfolio() 함수 내 인자 설명</caption>
+<thead>
+<tr class="header">
+<th align="center">인자</th>
+<th align="center">내용</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">R</td>
+<td align="center">각 자산 수익률 데이터</td>
+</tr>
+<tr class="even">
+<td align="center">weights</td>
+<td align="center">리밸런싱 시기의 자산별 목표 비중. 미 입력시 동일비중 포트폴리오를 가정해 백테스트가 이루어짐</td>
+</tr>
+<tr class="odd">
+<td align="center">wealth.index</td>
+<td align="center">포트폴리오 시작점이 1인 wealth index에 대한 생성 여부이며, 디폴트는 FALSE로 설정</td>
+</tr>
+<tr class="even">
+<td align="center">contribution</td>
+<td align="center">포트폴리오 내에서 자산별 성과기여를 나타내는지에 대한 여부이며, 디폴트는 FALSE로 설정</td>
+</tr>
+<tr class="odd">
+<td align="center">geometric</td>
+<td align="center">포트폴리오 수익률 계산시 복리(기하)수익률 적용 여부이며, 디폴트는 TRUE로서 복리수익률을 계산</td>
+</tr>
+<tr class="even">
+<td align="center">rebalance_on</td>
+<td align="center">weight 값이 미입력 혹은 매번 같은 비중일 경우, 리밸런싱 주기를 선택할 수 있음</td>
+</tr>
+<tr class="odd">
+<td align="center">value</td>
+<td align="center">초기 포트폴리오 가치를 의미하며, 디폴트는 1</td>
+</tr>
+<tr class="even">
+<td align="center">verbose</td>
+<td align="center">부가적인 결과를 표시할지에 대한 여부. 디폴트인 FALSE를 입력하면 포트폴리오 수익률만이 시계열 형태로 계산되며, TRUE를 입력하면 수익률 외에 자산 별 성과기여, 비중, 성과 등이 리스트 형태로 계산됨</td>
+</tr>
+</tbody>
+</table>
+<p>이 중 가장 중요한 인자는 개별 자산의 수익률인 R과 리밸런싱 시기의 자산별 목표 비중인 weights입니다. 매 리밸런싱 시점마다 적용되는 자산별 비중이 동일할 경우(예: 매월 말 60%대 40% 비중으로 리밸런싱) 상수 형태로 입력해도 되지만, 시점마다 자산별 목표비중이 다를 경우 weights는 시계열 형태로 입력되어야 합니다.</p>
+<p>목표 비중을 시계열 형태로 입력할 때 주의해야 할 점은 다음과 같습니다.</p>
 <ol style="list-style-type: decimal">
-<li>해당 데이터의 엑셀 url을 저장합니다.</li>
-<li><code>tempfile()</code> 함수 내 .xlsx 인자를 입력함으로써, 임시로 엑셀 파일을 만들도록 합니다.</li>
-<li><code>download.file()</code> 함수를 통해 url 파일을 tf 파일명에 저장하도록 하며, 엑셀의 경우 바이너리 파일이므로 wb 인자를 입력합니다.</li>
-<li><code>readxl</code> 패키지의 <code>excel_sheets()</code> 함수를 통해 해당 엑셀의 시트명들을 확인합니다.</li>
+<li>시계열 형태로 인식할 수 있도록 행 이름 혹은 인덱스가 날짜 형태로 입력되어야 합니다.</li>
+<li>수익률 데이터와 비중 데이터의 열 개수는 동일해야 하며, 각 열에 해당하는 자산은 동일해야 합니다. 즉, 수익률 데이터의 첫 번째 열에 A주식 데이터가 있다면, 비중 데이터의 첫 번째 열도 A주식의 목표 비중을 입력해야 합니다.</li>
+<li>각 시점의 비중의 합은 1이 되어야 합니다. 그렇지 않을 경우 제대로 된 수익률이 계산되지 않습니다.</li>
 </ol>
-<p>우리가 필요한 데이터는 수익률을 계산할 QMJ Factors, 회귀분석에 필요한 MKT, SMB, HML Devil, UMD, 무위험 이자율인 RF 시트의 데이터 입니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">df_QMJ =<span class="st"> </span><span class="kw">read_xlsx</span>(tf, <span class="dt">sheet =</span> <span class="st">&#39;QMJ Factors&#39;</span>, <span class="dt">skip =</span> <span class="dv">18</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(DATE, Global)
-df_MKT =<span class="st"> </span><span class="kw">read_xlsx</span>(tf, <span class="dt">sheet =</span> <span class="st">&#39;MKT&#39;</span>, <span class="dt">skip =</span> <span class="dv">18</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(DATE, Global)
-df_SMB =<span class="st"> </span><span class="kw">read_xlsx</span>(tf, <span class="dt">sheet =</span> <span class="st">&#39;SMB&#39;</span>, <span class="dt">skip =</span> <span class="dv">18</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(DATE, Global)
-df_HML_Devil =<span class="st"> </span><span class="kw">read_xlsx</span>(tf, <span class="dt">sheet =</span> <span class="st">&#39;HML Devil&#39;</span>,
-                         <span class="dt">skip =</span> <span class="dv">18</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(DATE, Global)
-df_UMD =<span class="st"> </span><span class="kw">read_xlsx</span>(tf, <span class="dt">sheet =</span> <span class="st">&#39;UMD&#39;</span>, <span class="dt">skip =</span> <span class="dv">18</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(DATE, Global)
-df_RF =<span class="st"> </span><span class="kw">read_xlsx</span>(tf, <span class="dt">sheet =</span> <span class="st">&#39;RF&#39;</span>, <span class="dt">skip =</span> <span class="dv">18</span>) </code></pre>
-<p><code>readxl</code> 패키지의 <code>read_xlsx()</code> 함수를 통해 엑셀 데이터를 읽어올 수 있으며, 시트명을 정해줄 수도 있습니다. 또한 각 시트 내 18행 까지는 데이터를 설명하는 텍스트이므로, skip 인자를 통해 해당 부분은 읽어오지 않도록 합니다. 그 후 <code>select()</code> 함수를 통해 날짜에 해당하는 DATE와 수익률에 해당하는 Global 열만을 선택해 줍니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">df =<span class="st"> </span><span class="kw">Reduce</span>(<span class="cf">function</span>(x, y) <span class="kw">inner_join</span>(x, y, <span class="dt">by =</span> <span class="st">&#39;DATE&#39;</span>),
-       <span class="kw">list</span>(df_QMJ, df_MKT, df_SMB,
-            df_HML_Devil,df_UMD, df_RF)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;DATE&#39;</span>,<span class="st">&#39;QMJ&#39;</span>, <span class="st">&#39;MKT&#39;</span>, <span class="st">&#39;SMB&#39;</span>,
-             <span class="st">&#39;HML&#39;</span>, <span class="st">&#39;UMD&#39;</span>, <span class="st">&#39;RF&#39;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">DATE =</span> <span class="kw">as.Date</span>(DATE, <span class="st">&quot;%m/%d/%Y&quot;</span>),
-         <span class="dt">R_excess =</span> QMJ <span class="op">-</span><span class="st"> </span>RF,
-         <span class="dt">Mkt_excess =</span> MKT <span class="op">-</span><span class="st"> </span>RF) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">tk_xts</span>(<span class="dt">date_var =</span> DATE)</code></pre>
-<ol style="list-style-type: decimal">
-<li><code>inner_join()</code> 함수를 통해 DATE를 기준으로 데이터를 묶어주어야 합니다. 해당 함수는 한 번에 두개 테이블만을 선택할 수 있으므로, <code>Reduce()</code> 함수를 통해 모든 데이터에 <code>inner_join()</code> 함수를 적용합니다.</li>
-<li><code>setNames()</code> 함수를 통해 열이름을 입력합니다.</li>
-<li>각 팩터별 시작시점이 다르므로 <code>na.omit()</code> 함수를 통해 NA 데이터를 삭제해줍니다.</li>
-<li><code>mutate()</code> 함수를 통해 데이터를 변형해줍니다. DATE 열의 경우
-mm/dd/yy의 문자열 형식이므로 이를 날짜 형식으로 변경해줍니다. QMJ 팩터 수익률에서 무위험 수익률을 차감하여 초과수익률을 구해주며, 시장 수익률에서 무위험 수익률을 차감하여 시장위험 프리미엄을 계산해줍니다.</li>
-<li><code>tk_xts()</code> 함수를 이용해 티블 형태를 시계열 형태로 변경해주며, 인덱스는 DATE 열을 설정해줍니다. 형태 변경 후 해당 열은 자동으로 삭제됩니다.</li>
-</ol>
-<p>위 과정을 통해 구한 데이터를 바탕으로 성과 및 위험을 평가하도록 하겠습니다.</p>
-<div id="section-86" class="section level2">
-<h2><span class="header-section-number">13.1</span> 결과 측정 지표</h2>
-<p>포트폴리오의 평가에서 가장 중요한 지표는 수익률과 위험입니다. 수익률은 누적수익률과 연율화 수익률, 연도별 수익률이 주요 지표이며, 위험의 경우 변동성과 낙폭이 주요 지표입니다.</p>
-<p>이 외에도 승률, 롤링 윈도우 값 등 다양한 지표를 살펴보기도 합니다. 이러한 지표를 수식을 이용하여 직접 계산할 수도 있지만, <code>PerformanceAnalytics</code> 패키지에서 제공하는 다양한 함수들을 이용해 편하게 계산할 수q 있습니다.</p>
+<p>weights에 값을 입력하지 않을 경우 동일비중 포트폴리오를 구성하며, 포트폴리오 리밸런싱은 하지 않습니다.</p>
+</div>
 <div id="section-87" class="section level3">
-<h3><span class="header-section-number">13.1.1</span> 수익률 및 변동성</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(PerformanceAnalytics)
-<span class="kw">chart.CumReturns</span>(df<span class="op">$</span>QMJ)</code></pre>
-<p><img src="13-evaluation_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>먼저 <code>chart.CumReturns()</code> 함수를 이용해 QMJ 팩터의 누적수익률을 그래프로 나타내봅니다. 1989-07-31 부터 2019-05-31까지 장기간동안 우상향 하는 모습을 보이고 있습니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">prod</span>((<span class="dv">1</span><span class="op">+</span>df<span class="op">$</span>QMJ)) <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="co"># 누적수익률</span></code></pre>
-<pre><code>## [1] 4.082</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(df<span class="op">$</span>QMJ) <span class="op">*</span><span class="st"> </span><span class="dv">12</span> <span class="co"># 연율화 수익률(산술)</span></code></pre>
-<pre><code>## [1] 0.05709</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">(<span class="kw">prod</span>((<span class="dv">1</span><span class="op">+</span>df<span class="op">$</span>QMJ)))<span class="op">^</span>(<span class="dv">12</span> <span class="op">/</span><span class="st"> </span><span class="kw">nrow</span>(df<span class="op">$</span>QMJ)) <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="co"># 연율화 수익률(기하)</span></code></pre>
-<pre><code>## [1] 0.05585</code></pre>
-<p>수익률 중 가장 많이보는 지표는 누적 수익률, 연율화 수익률(산술), 연율화 수익률(기하) 입니다. 각 수익률을 구하는 법은 다음과 같습니다.</p>
+<h3><span class="header-section-number">12.1.2</span> 출력값 살펴보기</h3>
+<p>해당 함수는 verbose를 TRUE로 설정하면 다양한 결괏값을 리스트 형태로 반환합니다</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-3">표 12.2: </span>Return.portfolio() 함수 반환값
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+결과
+</th>
+<th style="text-align:center;">
+내용
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 2cm; ">
+returns
+</td>
+<td style="text-align:center;width: 10cm; ">
+포트폴리오 수익률
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 2cm; ">
+contribution
+</td>
+<td style="text-align:center;width: 10cm; ">
+일자별 개별 자산의 포트폴리오 수익률 기여도
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 2cm; ">
+BOP.Weight
+</td>
+<td style="text-align:center;width: 10cm; ">
+일자별 개별 자산의 포트폴리오 내 비중(시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Weight와 동일
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 2cm; ">
+EOP.Weight
+</td>
+<td style="text-align:center;width: 10cm; ">
+일자별 개별 자산의 포트폴리오 내 비중(종료시점)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 2cm; ">
+BOP.Value
+</td>
+<td style="text-align:center;width: 10cm; ">
+일자별 개별 자산의 가치(시작시점). 리밸런싱이 없을 시 직전 기간 EOP.Value와 동일
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 2cm; ">
+EOP.Value
+</td>
+<td style="text-align:center;width: 10cm; ">
+일자별 개별 자산의 가치(종료시점)
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="section-88" class="section level2">
+<h2><span class="header-section-number">12.2</span> 전통적인 60대 40 포트폴리오 백테스트</h2>
+<p><code>Return.portfolio()</code> 함수의 가장 간단한 예제로서 전통적인 60대 40 포트폴리오를 백테스트합니다. 해당 포트폴리오는 주식과 채권에 각각 60%와 40%를 투자하며, 특정 시점마다 해당 비중을 맞춰주기 위해 리밸런싱을 수행합니다. 매해 말 리밸런싱을 가정하는 예제를 살펴보겠습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(magrittr)
+
+ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;TLT&#39;</span>)
+<span class="kw">getSymbols</span>(ticker)</code></pre>
+<pre><code>## [1] &quot;SPY&quot; &quot;TLT&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,
+                 <span class="kw">lapply</span>(ticker, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))
+rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</code></pre>
+<p>글로벌 자산의 ETF 데이터 중 주식(S&amp;P 500)과 채권(미국 장기채)에 해당하는 데이터를 다운로드한 후 수익률을 계산합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(rets)</code></pre>
+<pre><code>##              SPY.Adjusted TLT.Adjusted
+## SPY.Adjusted       1.0000      -0.4359
+## TLT.Adjusted      -0.4359       1.0000</code></pre>
+<p><code>cor()</code> 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.44로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">portfolio =<span class="st"> </span><span class="kw">Return.portfolio</span>(<span class="dt">R =</span> rets,
+                             <span class="dt">weights =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),
+                             <span class="dt">rebalance_on =</span> <span class="st">&#39;years&#39;</span>,
+                             <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><code>Return.portfolio()</code> 함수를 이용하여 백테스트를 실행합니다.</p>
 <ol style="list-style-type: decimal">
-<li>누적 수익률: <span class="math inline">\((1+r_1) \times (1+r_2) \times \dots \ \times (1+r_n) = \{\prod_{i=1}^n(1+r_i)\}-1\)</span>,</li>
-<li>연율화 수익률(산술): <span class="math inline">\(\frac{(r_1 + r_2 + \dots + r_i)}{n} \times scale\)</span></li>
-<li>연율화 수익률(기하): <span class="math inline">\(\{\prod_{i=1}^n(1+r_i)\}^{scale / Days} - 1\)</span></li>
+<li>자산의 수익률인 R에는 수익률 테이블인 rets를 입력합니다.</li>
+<li>리밸런싱 비중인 weights에는 60%와 40%를 의미하는 c(0.6, 0.4)를 입력합니다.</li>
+<li>리밸런싱 시기인 rebalance_on에는 연간 리밸런싱에 해당하는 years를 입력합니다. 리밸런싱 주기는 이 외에도 quarters, months, weeks, days도 입력이 가능합니다.</li>
+<li>결과물들을 리스트로 확인하기 위해 verbose를 TRUE로 설정합니다.</li>
 </ol>
-<p>먼저 누적 수익률은 각 수익률에 1을 더한 값을 모두 곱한 후 1을 빼면 됩니다. 연율화 수익률(산술)의 경우 단순히 수익률의 평균을 구한 후, 연율화를 위한 조정값(scale)을 곱해주면 됩니다. 데이터가 일간일 경우 조정값은 252, 주간일 경우 52, 월간일 경우 12 입니다. 현재 데이터는 월간 기준이므로 조정값은 12가 됩니다.</p>
-<p>마지막으로 연율화 수익률(기하)의 경우 각 수익률에 1을 더한 값의 곱을 구한 후, 연율화를 위해 승수를 곱한 후 1을 빼주면 되며, <span class="math inline">\(Days\)</span>는 시계열의 관측 기간입니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Return.cumulative</span>(df<span class="op">$</span>QMJ) <span class="co"># 누적수익률</span></code></pre>
-<pre><code>##                     QMJ
-## Cumulative Return 4.082</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Return.annualized</span>(df<span class="op">$</span>QMJ, <span class="dt">geometric =</span> <span class="ot">FALSE</span>) <span class="co"># 연율화 수익률(산술)</span></code></pre>
-<pre><code>##                       QMJ
-## Annualized Return 0.05709</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Return.annualized</span>(df<span class="op">$</span>QMJ) <span class="co"># 연율화 수익률(기하)</span></code></pre>
-<pre><code>##                       QMJ
-## Annualized Return 0.05585</code></pre>
-<p>수식에 맞게 값을 입력하여 계산할 수도 있지만, 함수를 이용할 경우 더욱 손쉽게 계산이 가능하며 실수를 할 가능성도 줄어들게 됩니다. 누적 수익률은 <code>Return.cumulative()</code> 함수를 통해, 연율화 수익률(산술)은 <code>Return.annualized()</code> 함수 내 geometric 인자를 FALSE로 선택해줌으로써, 연율화 수익률(기하)는 <code>Return.annualized()</code> 함수를 통해 계산이 가능합니다. 수식으로 계산한 값과 함수를 통해 계산한 값을 비교하면 동일함이 확인됩니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(df<span class="op">$</span>QMJ) <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="dv">12</span>) <span class="co"># 연율화 변동성</span></code></pre>
-<pre><code>## [1] 0.07275</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">StdDev.annualized</span>(df<span class="op">$</span>QMJ) <span class="co"># 연율화 변동성</span></code></pre>
-<pre><code>##                                   QMJ
-## Annualized Standard Deviation 0.07275</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SharpeRatio.annualized</span>(df<span class="op">$</span>QMJ, <span class="dt">Rf =</span> df<span class="op">$</span>RF, <span class="dt">geometric =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>##                                     QMJ
-## Annualized Sharpe Ratio (Rf=2.8%) 0.366</code></pre>
-<p>위험으로 가장 많이 사용되는 지표는 변동성입니다. 연율화 변동성의 경우 <code>sd()</code> 함수를 통해 변동성을 계산한 후 조정값을 곱헤 계산합니다. 그러나 <code>StdDev.annualized()</code> 함수를 사용하여 더욱 쉽게 계산할 수도 있습니다.</p>
-<p>수익을 위험으로 나누어 위험 조정 수익률을 보는 지표가 샤프지수 입니다. 해당 지수는 <span class="math inline">\(\frac {R_i - R_f}{\sigma_i}\)</span>로 계산되며, 분자에는 포트폴리오 수익률에서 무위험 수익률을 차감한 값이, 분모에는 포트폴리오의 변동성이 오게 됩니다.</p>
-<p><code>SharpeRatio.annualized()</code> 함수를 이용할 경우 포트폴리오 수익률에서 무위험 수익률을 차감한 값을 연율화로 변경한 후, 연율화 변동성으로 나누어 샤프지수를 계산합니다. geometric를 TRUE로 설정할 경우 기하평균 기준 연율화 수익률을, FALSE로 설정할 경우 산술평균 기준 연율화 수익률을 계산합니다.</p>
+<p>위 과정을 통해 주식과 채권 투자비중을 매해 60%와 40%로 리밸런싱하는 포트폴리오의 백테스트가 실행됩니다. 표 <a href="section-85.html#tab:portreturn">12.3</a>은 함수 내에서 포트폴리오의 수익률이 어떻게 계산되는지를 요약한 과정입니다.</p>
+<table class="table table-striped table-hover table-bordered table-condensed table table" style="margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto; font-size: 7px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:portreturn">표 12.3: </span>Return.portfolio() 계산 과정
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작금액
 </div>
-<div id="section-88" class="section level3">
-<h3><span class="header-section-number">13.1.2</span> 낙폭과 최대낙폭</h3>
-<p>먼저 낙폭(Drawdown)은 수익률이 하락한 후 반등하기 전까지 얼마나 하락하였는지를 나타냅니다. 최대낙폭(Maximum Drawdown)은 이러한 낙폭 중 가장 값이 큰 값으로써, 최고점에서 최저점까지 얼마나 손실을 보는지를 나타냅니다. 투자를 함에 있어 수익률이 하락하는 것은 어쩔 수 없지만, 최대낙폭이 지나치게 큰 전략에 투자하는 것은 매우 위험한 선택이 될 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="images/drawdown.png" alt="낙폭과 최대낙폭" width="70%" />
-<p class="caption">
-그림 10.1: 낙폭과 최대낙폭
-</p>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작합계
 </div>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table.Drawdowns</span>(df<span class="op">$</span>QMJ)</code></pre>
-<pre><code>##         From     Trough         To   Depth Length To Trough Recovery
-## 1 2002-10-31 2004-01-31 2008-08-31 -0.2118     71        16       55
-## 2 2009-03-31 2009-09-30 2012-05-31 -0.2013     39         7       32
-## 3 1992-11-30 1993-08-31 1997-01-31 -0.1404     51        10       41
-## 4 1998-10-31 1999-04-30 2000-05-31 -0.0868     20         7       13
-## 5 2012-08-31 2013-01-31 2014-10-31 -0.0666     27         6       21</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">maxDrawdown</span>(df<span class="op">$</span>QMJ)</code></pre>
-<pre><code>## [1] 0.2118</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">chart.Drawdown</span>(df<span class="op">$</span>QMJ)</code></pre>
-<p><img src="13-evaluation_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>이러한 낙폭에 대한 지표들은 손으로 계산하기 번거롭지만, 패키지 내 함수를 사용한다면 매우 손쉽게 계산할 수 있습니다.</p>
-<p>먼저 <code>table.Drawdowns()</code> 함수를 이용하면 역대 낙폭이 가장 심했던 순서대로 낙폭 정도, 하락 기간과 상승 기간, 원금 회복 기간 등을 테이블로 나타내줍니다. <code>maxDrawdown()</code> 함수는 포트폴리오의 최대 낙폭을 계산해주며, <code>chart.Drawdown()</code> 함수는 낙폭 만을 그래프로 그려줍니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">CalmarRatio</span>(df<span class="op">$</span>QMJ)</code></pre>
-<pre><code>##                 QMJ
-## Calmar Ratio 0.2637</code></pre>
-<p>위험 조정 수익률 중 사용되는 지표 중 칼마 지수도 있습니다. 해당 지표는 연율화 수익률을 최대낙폭으로 나눈 값으로써, 특히나 안정적인 절대 수익률을 추구하는 헤지펀드에서 많이 참조하는 지표입니다.</p>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+시작비중
 </div>
-<div id="section-89" class="section level3">
-<h3><span class="header-section-number">13.1.3</span> 연도별 수익률</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply.yearly</span>(df<span class="op">$</span>QMJ, Return.cumulative) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre>
-<pre><code>##                 QMJ
-## 1989-12-31  0.07555
-## 1990-12-31  0.22043
-## 1991-12-31  0.01088
-## 1992-12-31  0.02998
-## 1993-12-31 -0.09244
-## 1994-12-31  0.03970</code></pre>
-<p><code>apply.yearly()</code> 함수 내 계산함수를 <code>Return.cumulative</code>로 설정할 경우, 연도 별 수익률을 계산할 수 있습니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+수익률
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료금액
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료합계
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+종료비중
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+최종수익률
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+1.주식
+</th>
+<th style="text-align:center;">
+2.채권
+</th>
+<th style="text-align:center;">
+3.1+2
+</th>
+<th style="text-align:center;">
+4.주식
+</th>
+<th style="text-align:center;">
+5.채권
+</th>
+<th style="text-align:center;">
+6.주식
+</th>
+<th style="text-align:center;">
+7.채권
+</th>
+<th style="text-align:center;">
+8.주식
+</th>
+<th style="text-align:center;">
+9.채권
+</th>
+<th style="text-align:center;">
+10.8+9
+</th>
+<th style="text-align:center;">
+11.주식
+</th>
+<th style="text-align:center;">
+12.채권
+</th>
+<th style="text-align:center;">
+13.최종
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 1.4cm; ">
+2017-12-26
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.603
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.940
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.543
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.630
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.370
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+-0.001
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.003
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.601
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.943
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.544
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.629
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.371
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.4cm; ">
+2017-12-27
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.601
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.943
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.544
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.629
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.371
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.000
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.013
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.602
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.956
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.557
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.626
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.374
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.4cm; ">
+2017-12-28
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.602
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.956
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.557
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.626
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.374
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.002
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+-0.001
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.605
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.955
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.560
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.627
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.373
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.4cm; ">
+2017-12-29
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.605
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.955
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.560
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.627
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.373
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+-0.004
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.002
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.599
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.956
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.555
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.626
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.374
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+-0.002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;color: white !important;background-color: #D7261E !important;width: 1.4cm; ">
+2018-01-02
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+1.533
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+1.022
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+2.555
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+0.600
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+0.400
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+0.007
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+-0.011
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+1.544
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+1.011
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+2.555
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+0.604
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+0.396
+</td>
+<td style="text-align:center;color: white !important;background-color: #D7261E !important;width: 1.0cm; ">
+0.000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.4cm; ">
+2018-01-03
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.544
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.011
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.555
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.604
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.396
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.006
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.005
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.554
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.016
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.570
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.605
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.395
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.006
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.4cm; ">
+2018-01-04
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.554
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.016
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.570
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.605
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.395
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.004
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.000
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.560
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+1.016
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+2.576
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.606
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.394
+</td>
+<td style="text-align:center;width: 1.0cm; ">
+0.002
+</td>
+</tr>
+</tbody>
+</table>
+<p>먼저 2017-12-27에 해당하는 데이터를 보면 시작시점에 주식과 채권에는 각각 1.601과 0.943이 투자되어 있으며, 이를 합하면 2.544이 됩니다. 이를 포트폴리오 내 비중으로 환산하면 비중은 각각 0.629와 0.371가 됩니다.</p>
+<p>해당일의 주식과 채권의 수익률은 각각 0, 0.013이 되며, 이를 시작금액에 곱하면 종료시점의 금액은 1.602와 0.956이 됩니다. 각각의 금액을 종료금액의 합인 2.557로 나누게 되면, 포트폴리오 내 비중은 0.626, 0.374로 변하게 됩니다. 포트폴리오 수익률은 2017-12-27 포트폴리오 금액인 2.557을 전일의 포트폴리오 금액인 2.544로 나누어 계산된 값인 0.005가 됩니다.</p>
+<p>리밸런싱이 없다면 2017-12-27일의 종료금액과 종료비중은 다음 날인 2017-12-28의 시작금액과 시작비중에 그대로 적용되며, 위와 동일한 단계를 통해 포트폴리오 수익률이 계산됩니다.</p>
+<p>그러나 매해 리밸런싱을 가정했으므로, 첫 영업일인 2018-01-02에는 포트폴리오 리밸런싱이 이루어집니다. 따라서 전일 2017-12-29의 종료금액의 합인 2.555를 사전에 정의한 0.6과 0.4에 맞게 각 자산을 시작시점에 매수 혹은 매도하게 됩니다. 이후에는 기존과 동일하게 해당일의 수익률을 곱해 종료시점의 금액과 비중을 구한 후 포트폴리오 수익률을 계산하게 됩니다.</p>
+<p>리밸런싱 전일 종료시점의 비중과 리밸런싱 당일 시작시점의 비중 차이의 절대값을 합하면, 포트폴리오의 회전율을 계산할 수도 있습니다. 해당 예제에서는 2017-12-29 종료시점의 비중인 0.626, 0.374와 2018-01-02 시작시점의 비중인 0.6, 0.4의 차이인 0.026, -0.026의 절대값의 합계인 0.052가 회전율이 됩니다.</p>
+<p>이처럼 리밸런싱을 원하는 시점과 비중을 정의하면, <code>Return.portfolio()</code> 함수 내에서는 이러한 단계를 거쳐 포트폴리오의 수익률, 시작과 종료시점의 금액 및 비중이 계산되며, 이를 응용하여 회전율을 계산할 수도 있습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">portfolios =<span class="st"> </span><span class="kw">cbind</span>(rets, portfolio<span class="op">$</span>returns) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;주식&#39;</span>, <span class="st">&#39;채권&#39;</span>, <span class="st">&#39;60대 40&#39;</span>))
+
+<span class="kw">charts.PerformanceSummary</span>(portfolios,
+                          <span class="dt">main =</span> <span class="st">&#39;60대 40 포트폴리오&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>PerformanceAnalytics 패키지의 <code>charts.PerformanceSummary()</code> 함수는 기간별 수익률을 입력 시 누적수익률, 일별 수익률, 드로우다운(낙폭) 그래프를 자동으로 그려줍니다.</p>
+<p>그래프는 색으로 구분되어 각각 주식 수익률(SPY), 채권 수익률(TLT), 60대 40 포트폴리오 수익률을 나타냅니다. 주식과 채권은 상반되는 움직임을 보이며 상승하며, 분산 투자 포트폴리오는 각 개별 자산에 비해 훨씬 안정적인 수익률을 보입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(
+  <span class="kw">rowSums</span>(<span class="kw">abs</span>(portfolio<span class="op">$</span>BOP.Weight <span class="op">-</span>
+<span class="st">                </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(portfolio<span class="op">$</span>EOP.Weight)),
+          <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+  <span class="dt">order.by =</span> <span class="kw">index</span>(portfolio<span class="op">$</span>BOP.Weight))
+
+<span class="kw">chart.TimeSeries</span>(turnover)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>전일 종료시점의 비중인 EOP.Weight를 <code>lag()</code> 함수를 이용해 한 단계씩 내린 후 시작시점의 비중인 BOP.Weight와의 차이의 절댓값을 더해주면 해당 시점에서의 회전율이 계산됩니다. <code>lag()</code> 함수의 경우 dplyr 패키지에도 동일한 이름의 함수가 있으므로, 충돌을 방지하기 위해 timeSeries 패키지의 함수임을 선언해줍니다. 이를 <code>xts()</code> 함수를 이용해 시계열 형태로 만든 후 <code>chart.TimeSeries()</code> 함수를 이용해 그래프로 나타내줍니다.</p>
+<p>리밸런싱 시점에 해당하는 매해 첫 영업일에 회전율이 발생하며, 그렇지 않은 날은 매수 혹은 매도가 없으므로 회전율 역시 0을 기록합니다. 2008년에는 주식과 채권의 등락폭이 심했으므로 이듬해엔 2009년 리밸런싱으로 인한 회전율이 심하지만, 이를 제외한 해는 회전율이 그리 심하지 않습니다.</p>
+</div>
+<div id="section-89" class="section level2">
+<h2><span class="header-section-number">12.3</span> 시점 선택 전략 백테스트</h2>
+<p>이전 테스트가 리밸런싱 시점별 비중이 60%와 40%로 고정되어 있었다면, 이번에는 시점별 비중이 다른 형태의 예제를 살펴보겠습니다.</p>
+<p>메브 파버(Meb Faber)는 본인의 논문<span class="citation">(Faber <a href="#ref-faber2007quantitative">2007</a>)</span>을 통해, 시점 선택(Market Timing) 전략을 사용할 경우 단순 매수 후 보유 대비 극심한 하락장에서 낙폭을 줄일 수 있으며, 이로 인해 위험 대비 수익률을 올릴 수 있다고 설명합니다. 논문에서 말하는 시점 선택의 투자 규칙은 다음과 같습니다.</p>
+<p><span class="math display">\[주가 &gt; 10개월\,이동평균 \to 매수\]</span>
+<span class="math display">\[주가 &lt; 10개월\,이동평균 \to 매도\,및\,현금\,보유\]</span></p>
+<p>해당 규칙을 미국 S&amp;P 500에 적용하는 예제를 살펴보겠습니다. 현재 주식 가격이 과거 10개월 주식 가격의 단순 평균 대비 이상이면 매수, 그렇지 않으면 전량 매도 후 현금을 보유하는 전략이며, 리밸런싱은 매월 실행합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+
+symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;SHY&#39;</span>)
+<span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</code></pre>
+<pre><code>## [1] &quot;SPY&quot; &quot;SHY&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,
+                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))
+rets =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">Return.calculate</span>(prices))</code></pre>
+<p>먼저 주식과 현금에 해당하는 ETF 데이터를 다운로드합니다. 주식에 해당하는 ETF로 는 S&amp;P 500 수익률을 추종하는 SPY를 사용하며, 현금에 해당하는 ETF로는 미국 단기채 수익률을 추종하는 SHY를 사용합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)
+
+<span class="kw">print</span>(ep)</code></pre>
+<pre><code>##   [1]    0   19   38   60   80  102  123  144  167  186  209  230  250  271
+##  [15]  291  311  333  354  375  397  418  439  462  481  503  523  542  564
+##  [29]  585  605  627  649  670  691  713  733  755  774  793  816  837  857
+##  [43]  879  900  922  943  964  985 1007 1027 1046 1069 1089 1110 1132 1152
+##  [57] 1175 1196 1217 1238 1259 1279 1299 1321 1341 1363 1384 1405 1428 1447
+##  [71] 1468 1489 1509 1530 1549 1569 1591 1613 1633 1655 1677 1697 1720 1740
+##  [85] 1761 1782 1801 1822 1843 1864 1885 1907 1928 1949 1972 1991 2013 2033
+##  [99] 2052 2074 2095 2115 2137 2159 2180 2201 2223 2243 2265 2284 2304 2326
+## [113] 2347 2368 2390 2410 2433 2454 2475 2496 2517 2537 2556 2579 2598 2620
+## [127] 2642 2662 2685 2705 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
+## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123 3143 3165 3180</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">wts =<span class="st"> </span><span class="kw">list</span>()
+lookback =<span class="st"> </span><span class="dv">10</span></code></pre>
+<p>먼저 xts 패키지의 <code>endpoints()</code> 함수를 이용해 매월 말일의 위치를 구합니다. 해당 함수는 <code>endpoints(x, on= 'months', k=1)</code>의 형태로 이루어지며 x는 시계열 데이터, on은 원하는 기간, k는 구간 길이를 의미합니다. 즉, 시계열 데이터에서 월말에 해당하는 부분의 위치를 반환하며, 매월이 아닌 weeks, quarters, years도 입력이 가능합니다. 결과적으로 ep에는 rets의 인덱스 중 매월 말일에 해당하는 부분의 위치가 구해집니다.</p>
+<p>각 시점별 비중이 입력될 wts를 공백의 리스트 형식으로 저장해주며, n개월 이동평균값에 해당하는 lookback 변수는 10을 입력합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">i =<span class="st"> </span>lookback <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]
+
+<span class="kw">head</span>(sub_price, <span class="dv">3</span>)</code></pre>
+<pre><code>##            SPY.Adjusted
+## 2007-01-03        109.5
+## 2007-01-04        109.7
+## 2007-01-05        108.9</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tail</span>(sub_price, <span class="dv">3</span>)</code></pre>
+<pre><code>##            SPY.Adjusted
+## 2007-10-26        120.5
+## 2007-10-29        120.9
+## 2007-10-30        120.1</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)
+
+wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)
+wt[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">last</span>(sub_price) <span class="op">&gt;</span><span class="st"> </span>sma, <span class="dv">1</span>, <span class="dv">0</span>)
+wt[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>wt[<span class="dv">1</span>]
+
+wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))</code></pre>
+<p>해당 전략은 for loop 구문을 통해, 매월 말 과거 10개월 이동평균을 구한 후 매수 혹은 매도를 선택한 후 비중을 계산합니다. 예시를 위해 첫 번째 시점의 테스트 과정을 살펴보며, 과거 10개월에 해당하는 가격의 이동평균이 필요하므로 처음 시작은 i+1 인 11부터 가능합니다.</p>
+<ol style="list-style-type: decimal">
+<li>주가는 일별 데이터이며, 현재부터 과거 10개월에 해당하는 주가를 선택해야 합니다. 앞서 <code>endpoints()</code> 함수를 통해 주가에서 월말 기준점의 위치를 찾았으며, ep[i]는 현재시점 주가의 위치를, ep[i-lookback]는 현재부터 10개월 전
+주가 위치를 의미합니다. 이를 통해 과거 10개월 간 주가를 찾은 후 sub_price에 저장합니다.</li>
+<li><code>mean()</code>을 통해 10개월 주가의 평균을 계산합니다.</li>
+<li><code>rep(0, 2)</code>를 통해 비중이 들어갈 0벡터를 생성합니다.</li>
+<li><code>ifelse()</code> 구문을 통해 해당 전략의 조건에 맞는 비중을 계산합니다. wt[1]은 주식의 투자비중이며, 만일 현재 주가가 10개월 이동평균보다 클 경우 주식에 해당하는 비중은 1을, 그렇지 않을 경우 0을 부여합니다. wt[2]는 현금의 투자비중이며, 1에서 주식의 투자비중을 뺀 값을 입력합니다. 표 <a href="section-85.html#tab:sma">12.4</a>는 해당 규칙이 요약되어 있습니다.</li>
+<li>위에서 만들어진 벡터를 <code>xts()</code>를 통해 시계열 형태로 바꾼 후, wts의 i번째 리스트에 저장해줍니다.</li>
+</ol>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:sma">표 12.4: </span>시점선택 조건 별 비중
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+자산
+</th>
+<th style="text-align:center;">
+현재주가 &gt; 10개월 이동평균
+</th>
+<th style="text-align:center;">
+현재 주가 &lt; 10개월 이동평균
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+주식비중
+</td>
+<td style="text-align:center;">
+wt[1] = 1
+</td>
+<td style="text-align:center;">
+wt[1] = 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+현금비중
+</td>
+<td style="text-align:center;">
+wt[2] = 0
+</td>
+<td style="text-align:center;">
+wt[2] = 1
+</td>
+</tr>
+</tbody>
+</table>
+<p>위 과정을 for loop 구문을 통해 전체 기간에 적용한 백테스트는 다음과 같습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)
+wts =<span class="st"> </span><span class="kw">list</span>()
+lookback =<span class="st"> </span><span class="dv">10</span>
+
+<span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {
+  sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]
+  sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)
+  wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)
+  wt[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">last</span>(sub_price) <span class="op">&gt;</span><span class="st"> </span>sma, <span class="dv">1</span>, <span class="dv">0</span>)
+  wt[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>wt[<span class="dv">1</span>]
+  
+  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))
+}
+
+wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</code></pre>
+<p>매월 말 과거 10개월 이동평균을 구한 후 현재 주가와 비교해 주식 혹은 현금 투자비중을 구한 후 wts 리스트에 저장합니다. 그 후 <code>do.call()</code> 함수를 통해 리스트를 테이블로 묶어줍니다.</p>
+<p>수익률 데이터와 비중 데이터가 구해졌으므로 <code>Return.portfolio()</code> 함수를 통해 포트폴리오의 수익률을 계산합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">Tactical =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)
+portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">cbind</span>(rets[,<span class="dv">1</span>], Tactical<span class="op">$</span>returns)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;매수 후 보유&#39;</span>, <span class="st">&#39;시점 선택 전략&#39;</span>))
+
+<span class="kw">charts.PerformanceSummary</span>(portfolios,
+                          <span class="dt">main =</span> <span class="st">&quot;Buy &amp; Hold vs Tactical&quot;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<ol style="list-style-type: decimal">
+<li>수익률 데이터와 비중 데이터의 입력을 통해 백테스트를 실행합니다.</li>
+<li><code>cbind()</code> 함수를 통해 SPY 데이터와 포트폴리오 수익률을 합쳐줍니다. 시점 선택 포트폴리오의 경우 lookback 기간인 초기 10개월에 대한 수익률이 없어 NA로 표시되므로 <code>na.omit()</code>을 통해 해당 부분을 제거합니다.</li>
+<li><code>charts.PerformanceSummary()</code> 함수를 통해 수익률을 그래프로 나타냅니다.</li>
+</ol>
+<p>검은색 그래프는 S&amp;P 500 에 매수 후 보유 시 수익률이고, 주황색 그래프는 시점 선택 전략을 적용한 수익률입니다. 2008년과 같은 하락장에서 낙폭이 훨씬 낮음이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(Tactical<span class="op">$</span>BOP.Weight <span class="op">-</span>
+<span class="st">                             </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(Tactical<span class="op">$</span>EOP.Weight)),
+                       <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+               <span class="dt">order.by =</span> <span class="kw">index</span>(Tactical<span class="op">$</span>BOP.Weight))
+
+<span class="kw">chart.TimeSeries</span>(turnover)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>해당 전략의 회전율을 확인해보면, 몇 년간 매매가 없는 경우도 있습니다. 그러나 매매가 발생할 시 매수와 매도 포지션 양쪽의 매매로 인해 200%의 회전율이 발생하게 됩니다.</p>
+</div>
+<div id="section-90" class="section level2">
+<h2><span class="header-section-number">12.4</span> 동적 자산배분 백테스트</h2>
+<p>마지막으로 기존에 배웠던 것들을 응용해 동적 자산배분의 백테스트를 수행하겠습니다. 일반적인 자산배분이 주식과 채권, 대체자산에 투자비중을 사전에 정해놓고 약간의 비율만 수정하는 정적 자산배분인 반면, 동적 자산배분이란 투자비중에 대한 제한이 없이 동적으로 포트폴리오를 구성하는 방법입니다.</p>
+<p>동적 자산배분을 이용한 포트폴리오는 다음과 같이 구성됩니다.</p>
+<ol style="list-style-type: decimal">
+<li>글로벌 10개 자산 중 과거 12개월 수익률이 높은 5개 자산을 선택합니다.</li>
+<li>포트폴리오를 구성하며, 개별 투자비중은 최소 10%, 최대 30% 제약조건을 설정합니다.</li>
+<li>매월 리밸런싱을 실시합니다.</li>
+</ol>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantmod)
+<span class="kw">library</span>(PerformanceAnalytics)
+<span class="kw">library</span>(RiskPortfolios)
 <span class="kw">library</span>(tidyr)
+<span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(ggplot2)
 
-R.yr =<span class="st"> </span><span class="kw">apply.yearly</span>(df<span class="op">$</span>QMJ, Return.cumulative) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Index =</span> <span class="kw">year</span>(Index)) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">gather</span>(key, value, <span class="op">-</span>Index) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">key =</span> <span class="kw">factor</span>(key, <span class="dt">levels =</span> <span class="kw">unique</span>(key)))
+symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="co"># 미국 주식</span>
+            <span class="st">&#39;IEV&#39;</span>, <span class="co"># 유럽 주식 </span>
+            <span class="st">&#39;EWJ&#39;</span>, <span class="co"># 일본 주식</span>
+            <span class="st">&#39;EEM&#39;</span>, <span class="co"># 이머징 주식</span>
+            <span class="st">&#39;TLT&#39;</span>, <span class="co"># 미국 장기채</span>
+            <span class="st">&#39;IEF&#39;</span>, <span class="co"># 미국 중기채</span>
+            <span class="st">&#39;IYR&#39;</span>, <span class="co"># 미국 리츠</span>
+            <span class="st">&#39;RWX&#39;</span>, <span class="co"># 글로벌 리츠</span>
+            <span class="st">&#39;GLD&#39;</span>, <span class="co"># 금</span>
+            <span class="st">&#39;DBC&#39;</span>  <span class="co"># 상품</span>
+            )
+<span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</code></pre>
+<pre><code>##  [1] &quot;SPY&quot; &quot;IEV&quot; &quot;EWJ&quot; &quot;EEM&quot; &quot;TLT&quot; &quot;IEF&quot; &quot;IYR&quot; &quot;RWX&quot; &quot;GLD&quot; &quot;DBC&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,
+                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x)))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(symbols)
 
-<span class="kw">ggplot</span>(R.yr, <span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> value, <span class="dt">fill =</span> key)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>, <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;Yearly Return&#39;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.03</span>, <span class="fl">0.03</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> R.yr<span class="op">$</span>Index,
-                     <span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.01</span>)) <span class="op">+</span>
+rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</code></pre>
+<p>먼저 이전 CHAPTER와 동일하게 글로벌 자산을 대표하는 ETF 데이터를 다운로드한
+후 수정주가의 수익률을 계산합니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)
+wts =<span class="st"> </span><span class="kw">list</span>()
+lookback =<span class="st"> </span><span class="dv">12</span>
+wt_zero =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</code></pre>
+<p>백테스트에 사용되는 각종 값을 사전에 정의합니다.</p>
+<ol style="list-style-type: decimal">
+<li><code>endpoints()</code> 함수를 통해 매월 말일의 위치를 구합니다.</li>
+<li>매월의 투자비중이 들어갈 빈 리스트를 wts에 설정합니다.</li>
+<li>수익률을 측정할 과거 n기간을 12개월로 설정합니다.</li>
+<li><code>rep()</code> 함수를 통해 비중이 들어갈 0으로 이루어진 벡터를 만들며 이름을 설정합니다.</li>
+</ol>
+<p>다음은 매월 말 투자 규칙에 따라 포트폴리오의 비중을 구하는 백테스트 과정입니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {
+  sub_ret =<span class="st"> </span>rets[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , ]
+  cum =<span class="st"> </span><span class="kw">Return.cumulative</span>(sub_ret)
+  
+  K =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>cum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>
+  covmat =<span class="st"> </span><span class="kw">cov</span>(sub_ret[, K])
+  
+  wt =<span class="st"> </span>wt_zero
+  wt[K] =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,
+                           <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>,
+                                          <span class="dt">constraint =</span> <span class="st">&#39;user&#39;</span>,
+                                          <span class="dt">LB =</span> <span class="kw">rep</span>(<span class="fl">0.10</span>, <span class="dv">5</span>),
+                                          <span class="dt">UB =</span> <span class="kw">rep</span>(<span class="fl">0.30</span>, <span class="dv">5</span>)))
+  
+  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))
+}
+
+wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</code></pre>
+<p>for loop 구문을 통해 매월 말 과거 12개월 수익률을 구한 후 비중을 계산하므로, 처음 시작은 i+1인 13부터 가능합니다.</p>
+<ol style="list-style-type: decimal">
+<li>ep[i]는 현재시점 수익률의 위치를, ep[i-lookback]는 현재부터 12개월 전 수익률의 위치를 의미합니다. 이를 통해 과거 12개월 간 수익률을 찾은 후 sub_ret에 저장합니다.</li>
+<li><code>Return.cumulative()</code> 함수를 통해 해당 기간의 자산별 누적수익률을 구합니다.</li>
+<li><code>rank()</code> 함수를 통해 수익률 상위 5개 자산을 선택하며, 내림차순으로 정렬해야하므로 마이너스(-)를 붙여줍니다.</li>
+<li><code>cov()</code> 함수를 통해 수익률 상위 5개 자산의 분산-공분산 행렬을 구하도록 합니다.</li>
+<li>임시로 비중이 저장될 wt 변수에 위에서 만든 0벡터(wt_zero)를 입력한 후 <code>optimalPortfolio()</code> 함수를 통해 최소분산 포트폴리오를 구성하는 해를 찾습니다. 개별 투자비중의 제한은 최소 10%, 최대 30%를 설정하며, 구해진 해를 wt의 K번째 값에 입력합니다.</li>
+<li>위에서 만들어진 벡터를 <code>xts()</code>를 통해 시계열 형태로 바꾼 후 wts의 i번째 리스트에 저장합니다.</li>
+<li>for loop 구문이 끝난 후 <code>do.call()</code> 함수를 통해 투자비중이 저장된 리스트를 테이블 형태로 바꿔줍니다.</li>
+</ol>
+<p>이를 통해 동적 자산배분의 투자 규칙에 맞는 매월 말 투자비중이 계산되었습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">GDAA =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)
+<span class="kw">charts.PerformanceSummary</span>(GDAA<span class="op">$</span>returns, <span class="dt">main =</span> <span class="st">&#39;동적자산배분&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>수익률과 비중 데이터가 있으므로 <code>Return.portfolio()</code> 함수를 통해 백테스트 수익률을 계산할 수 있습니다. <code>charts.PerformanceSummary()</code> 함수를 통해 누적수익률을 확인하면 해당 전략을 이용한 포트폴리오가 꾸준히 우상향하는 모습을 보이게됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">wts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(key, value, <span class="op">-</span>Index) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Index =</span> <span class="kw">as.Date</span>(Index)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">key =</span> <span class="kw">factor</span>(key, <span class="dt">levels =</span> <span class="kw">unique</span>(key))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> value)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">color =</span> key, <span class="dt">fill =</span> key),
+            <span class="dt">position =</span> <span class="st">&#39;stack&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks=</span><span class="st">&quot;years&quot;</span>, <span class="dt">date_labels=</span><span class="st">&quot;%Y&quot;</span>,
+               <span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>,
                                   <span class="dt">size =</span> <span class="dv">12</span>),
         <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>,
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
-        <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">7</span>),
         <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>,
                                    <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">8</span>),
-        <span class="dt">panel.grid.minor.x =</span> <span class="kw">element_blank</span>() ) <span class="op">+</span>
-<span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">byrow =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">paste</span>(<span class="kw">round</span>(value <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>), <span class="st">&quot;%&quot;</span>),
-                    <span class="dt">vjust =</span> <span class="kw">ifelse</span>(value <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="fl">-0.5</span>, <span class="fl">1.5</span>)),
-                <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="dv">1</span>),
-                <span class="dt">size =</span> <span class="dv">3</span>)</code></pre>
-<p><img src="13-evaluation_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p><code>apply.yearly()</code> 함수를 통해 계산한 연도별 수익률에 <code>ggplot()</code> 함수를 응용할 경우 막대그래프로 나타낼 수도 있으며, 시각화를 통해 포트폴리오의 수익률 추이가 더욱 쉽게 확인됩니다.</p>
-</div>
-<div id="section-90" class="section level3">
-<h3><span class="header-section-number">13.1.4</span> 승률 및 롤링 윈도우 값</h3>
-<p>승률이란 포트폴리오가 벤치마크를 대비 높은 성과를 기록한 비율을 의미하며 다음과 같이 계산됩니다.</p>
-<p><span class="math display">\[\frac {(포트폴리오\,수익률 &gt; 벤치마크)\,일수}{전체\,기간}\]</span></p>
-<p>벤치마크가 S&amp;P 500 지수, KOSPI 200 지수처럼 구체적으로 존재하는 경우도 있지만, 절대수익을 추구하는 경우에는 이러한 벤치마크가 0 혹은 무위험 수익률이 되기도 합니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">UpsideFrequency</span>(df<span class="op">$</span>QMJ, <span class="dt">MAR =</span> <span class="dv">0</span>)</code></pre>
-<pre><code>## [1] 0.5961</code></pre>
-<p><code>UpsideFrequency()</code> 함수는 벤치마크 대비 승률을 계산해줍니다. MAR 인자는 0이 기본값으로 설정되어 있으며, 원하는 벤치마크가 있을시 이를 입력해주면 됩니다. QMJ 팩터는 월간 기준 수익률이 플러스를 기록했던 비율이 59.61% 입니다.</p>
-<p>위에서 구한 각종 지표들은 투자자가 포트폴리오의 시작부터 현재까지 투자를 하였다는 전제하에 계산됩니다. 그러나 투자를 시작하는 시점은 사람마다 다르기에, 무작위 시점에 투자했을 시 향후 n개월 후 승률 혹은 연율화 수익률 등을 계산할 필요도 있습니다. 이러한 기법을 롤링 윈도우라 합니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">roll_<span class="dv">12</span> =<span class="st"> </span>df<span class="op">$</span>QMJ <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply.monthly</span>(., Return.cumulative) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rollapply</span>(., <span class="dv">12</span>, Return.annualized) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">UpsideFrequency</span>()
+        <span class="dt">panel.grid.minor.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span>
+<span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">byrow =</span> <span class="ot">TRUE</span>))</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>반면 자산별 투자비중의 변화가 많은 것을 알 수 있습니다. 그 원인은 수익률 상위 5개에 해당하는 자산이 매월 말 바뀌며, 최소분산 포트폴리오를 구성하는 비중이 계속해서 바뀌기 때문입니다.</p>
+<p>회전율이 상대적으로 낮았던 기존 백테스트에서는 매매비용, 세금, 기타비용 등을 고려하지 않아도 수익률에 크게 영향이 없지만, 회전율이 상대적으로 높은 전략에서는 이러한 것들을 무시하지 않을 수 없습니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">GDAA<span class="op">$</span>turnover =<span class="st"> </span><span class="kw">xts</span>(
+  <span class="kw">rowSums</span>(<span class="kw">abs</span>(GDAA<span class="op">$</span>BOP.Weight <span class="op">-</span>
+<span class="st">                </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(GDAA<span class="op">$</span>EOP.Weight)),
+          <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+  <span class="dt">order.by =</span> <span class="kw">index</span>(GDAA<span class="op">$</span>BOP.Weight))
 
-roll_<span class="dv">24</span> =<span class="st"> </span>df<span class="op">$</span>QMJ <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply.monthly</span>(., Return.cumulative) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rollapply</span>(., <span class="dv">24</span>, Return.annualized) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">UpsideFrequency</span>()
-
-roll_<span class="dv">36</span> =<span class="st"> </span>df<span class="op">$</span>QMJ <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply.monthly</span>(., Return.cumulative) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rollapply</span>(., <span class="dv">36</span>, Return.annualized) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">UpsideFrequency</span>()
-
-roll_win =<span class="st"> </span><span class="kw">cbind</span>(roll_<span class="dv">12</span>, roll_<span class="dv">24</span>, roll_<span class="dv">36</span>)
-<span class="kw">print</span>(roll_win)</code></pre>
-<pre><code>##      roll_12 roll_24 roll_36
-## [1,]  0.7644  0.7917  0.8673</code></pre>
-<p>롤링 윈도우 승률은 무작위 시점에 투자했을 시 미래 n기간 동안의 연율화 수익률을 구하고, 해당 값이 벤치마크 대비 수익이 높았던 비율을 계산합니다. 만일 12개월 롤링 윈도우 승률이 100% 라면, 어떠한 시점에 투자하여도 12개월 후에는 언제나 벤치마크를 이겼음을 의미합니다. 반면 아무리 연율화 수익률이 높은 전략도 이러한 롤링 윈도우 승률이 지나치게 낮다면, 단순히 한번의 운으로 인해 수익률이 높아보이는 것처럼 보일 수 있습니다.</p>
-<p>함수를 이용해 해당 값을 구하는 과정은 다음과 같습니다.</p>
-<ol style="list-style-type: decimal">
-<li><code>apply.*()</code> 함수를 이용해 원하는 기간 수익률로 변경하며, 위 예제에서는 월간 수익률로 변경했습니다.</li>
-<li><code>rollapply()</code> 함수를 통해 원하는 기간의 롤링 윈도우 통계값을 구해줍니다. 각각 12개월, 24개월, 36개월 기간에 대해 연율화 수익률을 계산해줍니다.</li>
-<li>계산에 필요한 n기간 동안은 수익률이 없으므로 <code>na.omit()</code>을 통해 삭제해줍니다.</li>
-<li><code>UpsideFrequency()</code> 함수를 통해 승률을 계산해 줍니다.</li>
-</ol>
-<p>해당 과정을 통해 계산된 12개월, 24개월, 36개월 롤링 승률은 각각 76.44%, 79.17%, 86.73%이며, 투자 기간이 길어질수록 승률이 높아짐이 확인됩니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>QMJ <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply.monthly</span>(., Return.cumulative) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rollapply</span>(., <span class="dv">12</span>, Return.annualized) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> QMJ)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</code></pre>
-<p><img src="13-evaluation_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>롤링 윈도우 연율화 수익률 역시 매우 중요한 지표입니다. 해당 값이 지속적으로 하락할 경우, 전략이 더이상 동작하지 않는 것인지 혹은 가장 험난한 시기를 지났기에 인내심을 갖고 기다려야 할지 판단해야 합니다.</p>
-</div>
-</div>
-<div id="section-91" class="section level2">
-<h2><span class="header-section-number">13.2</span> 팩터 회귀분석 및 테이블로 나타내기</h2>
-<p>포트폴리오 수익률에 대한 성과 평가만큼 중요한 것이, 수익률이 어디에서 발생했는가에 대한 요인을 분석하는 것입니다. 베타를 통한 개별 주식과 주식시장과의 관계를 시작으로, 수익률을 설명하기 위한 여러 모형들이 개발되고 발표되었습니다. 그 중 일반적으로 많이 사용되는 모형은 기존의 CAPM에 사이즈 팩터(SMB), 밸류 팩터(HML)를 추가한 파마-프렌치의 쓰리팩터 모형, 그리고 쓰리팩터 모형에 모멘텀 팩터(UMD)를 추가한 카하트의 포팩터 모형입니다.</p>
-<p>QMJ 팩터를 위 4개 팩터에 회귀분석한 결과를 토대로, 퀄리티 팩터의 수익률에 대한 요인 분석을 해보도록 하겠습니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r">reg =<span class="st"> </span><span class="kw">lm</span>(R_excess <span class="op">~</span><span class="st"> </span>Mkt_excess <span class="op">+</span><span class="st"> </span>SMB <span class="op">+</span><span class="st"> </span>HML <span class="op">+</span><span class="st"> </span>UMD, <span class="dt">data =</span> df)
-<span class="co"># summary(reg)</span>
-<span class="kw">summary</span>(reg)<span class="op">$</span>coefficient</code></pre>
-<pre><code>##              Estimate Std. Error t value  Pr(&gt;|t|)
-## (Intercept)  0.002882  0.0007185   4.011 7.374e-05
-## Mkt_excess  -0.275879  0.0167008 -16.519 7.565e-46
-## SMB         -0.364831  0.0364337 -10.014 6.023e-21
-## HML         -0.129366  0.0342693  -3.775 1.876e-04
-## UMD          0.063467  0.0267821   2.370 1.834e-02</code></pre>
-<p>먼저 우리가 구한 데이터를 통해 다음과 같은 회귀분석을 실시합니다. 즉 QMJ 팩터의 초과수익률을 시장위험 프리미엄, 사이즈 팩터, 밸류 팩터, 모멘텀 팩터에 회귀분석 합니다.</p>
-<p><span class="math display">\[QMJ - R_f= \beta_m \times \ [R_m - R_f] + \beta_{SMB} \times R_{SMB} + \beta_{HML} \times R_{HML} + \beta_{UMD} \times R_{UMD}\]</span></p>
-<p><code>lm()</code> 함수 내에서 R_excess는 <span class="math inline">\(QMJ - R_f\)</span>와 동일하며, Mkt_excess는 <span class="math inline">\(R_m - R_f\)</span>와 동일합니다. 베타의 절대값이 크다는 의미는 QMJ 팩터의 수익률이 해당 팩터와의 관계가 높다는 의미이며, 양수일 경우에는 양의 관계가, 음수일 경우에는 음의 관계가 높다는 의미입니다. 또한 t value 혹은 P value를 통해 관계가 얼마나 유의한지도 확인할 수 있습니다.</p>
-<ol style="list-style-type: decimal">
-<li>시장 베타에 해당하는 <span class="math inline">\(\beta_m\)</span>은 -0.276로 음수값을 보이며, 우량주의 경우 베타가 낮다고 볼 수 있습니다. 또한 t-value가 -16.519로 충분히 유의합니다.</li>
-<li>사이즈 베타에 해당하는 <span class="math inline">\(\beta_{SMB}\)</span>는 -0.365로써 역시나 음수값을 보입니다. 즉 우량주는 주로 대형주, 비우량주는 주로 소형주일 가능성이 있습니다. t-value 역시 -10.014로 충분히 유의합니다.</li>
-<li>밸류 베타에 해당하는 <span class="math inline">\(\beta_{HML}\)</span>은 -0.129로써 이 역시 음수값을 보입니다. 즉 퀄리티와 밸류 간의 관계에서 살펴본것 처럼, 우량주는 주로 밸류가 높은 경향이 있습니다. t-value 역시 -3.775로 유의합니다.</li>
-<li>모멘텀 베타에 해당하는 <span class="math inline">\(\beta_{UMD}\)</span>는 0.063로 양의 관계가 있습니다. 즉 우량주는 주로 과거 수익률이 높았던 주식, 비우량주는 과거 수익률이 낮았던 주식인 경향이 있습니다. t-value는 2.37로 유의하다고 볼 수 있습니다.</li>
-<li>이러한 설명변수를 제외하고도 월간 초과수익률에 해당하는 계수값이 0.003이며, t-value는 4.011로 유의합니다. 즉, 퀄리티 팩터는 기존의 여러 팩터들로 설명되지 않는 새로운 팩터라고도 볼 수 있습니다.</li>
-</ol>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
-<span class="kw">tidy</span>(reg)</code></pre>
-<pre><code>## # A tibble: 5 x 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)  0.00288  0.000719      4.01 7.37e- 5
-## 2 Mkt_excess  -0.276    0.0167      -16.5  7.56e-46
-## 3 SMB         -0.365    0.0364      -10.0  6.02e-21
-## 4 HML         -0.129    0.0343       -3.77 1.88e- 4
-## 5 UMD          0.0635   0.0268        2.37 1.83e- 2</code></pre>
-<p><code>broom()</code> 패키지의 <code>tidy()</code> 함수를 사용하면 분석 결과 중 계수에 해당하는 값만을 요약해서 볼 수 있습니다.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stargazer)
-<span class="kw">stargazer</span>(reg, <span class="dt">type =</span> <span class="st">&#39;text&#39;</span>, <span class="dt">out =</span> <span class="st">&#39;data/reg_table.html&#39;</span>)</code></pre>
-<pre><code>## 
-## ===============================================
-##                         Dependent variable:    
-##                     ---------------------------
-##                              R_excess          
-## -----------------------------------------------
-## Mkt_excess                   -0.276***         
-##                               (0.017)          
-##                                                
-## SMB                          -0.365***         
-##                               (0.036)          
-##                                                
-## HML                          -0.129***         
-##                               (0.034)          
-##                                                
-## UMD                           0.063**          
-##                               (0.027)          
-##                                                
-## Constant                     0.003***          
-##                               (0.001)          
-##                                                
-## -----------------------------------------------
-## Observations                    359            
-## R2                             0.639           
-## Adjusted R2                    0.635           
-## Residual Std. Error      0.013 (df = 354)      
-## F Statistic          156.800*** (df = 4; 354)  
-## ===============================================
-## Note:               *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
-<p><code>stargazer</code> 패키지를 사용하면, 회귀분석 결과를 논문에서 많이 사용되는 테이블 형식으로 손쉽게 출력과 저장을 할 수 있습니다.테이블이 출력과 함께 data 폴더 내에 <strong>reg_table.html</strong> 이름으로 html 파일 역시 저장이 됩니다.</p>
+<span class="kw">chart.TimeSeries</span>(GDAA<span class="op">$</span>turnover)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>기존에 살펴본 방법으로 회전율을 계산한다면 매월 상당한 매매회전이 발생함이 확인됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r">fee =<span class="st"> </span><span class="fl">0.0030</span>
+GDAA<span class="op">$</span>net =<span class="st"> </span>GDAA<span class="op">$</span>returns <span class="op">-</span><span class="st"> </span>GDAA<span class="op">$</span>turnover<span class="op">*</span>fee</code></pre>
+<p>매수 혹은 매도당 발생하는 세금, 수수료, 시장충격 등 총 비용을 0.3%로 가정합니다. 포트폴리오 수익률에서 회전율과 총 비용의 곱을 빼면, 비용 후 포트폴리오의 순수익률이 계산됩니다.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(GDAA<span class="op">$</span>returns, GDAA<span class="op">$</span>net) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;No Fee&#39;</span>, <span class="st">&#39;After Fee&#39;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">charts.PerformanceSummary</span>(<span class="dt">main =</span> <span class="st">&#39;GDAA&#39;</span>)</code></pre>
+<p><img src="12-backtest_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>기존 비용을 고려하지 않은 포트폴리오(검은색)에 비해, 비용을 차감한 포트폴리오(붉은색)의 수익률이 시간이 지남에 따라 서서히 감소합니다. 이러한 차이는 비용이 크거나 매매회전율이 높을수록 더욱 벌어지게 됩니다.</p>
 
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="footnotes">
-<hr />
-<ol start="24">
-<li id="fn24"><p>Asness, C. S., Frazzini, A., &amp; Pedersen, L. H. (2019). Quality minus junk. Review of Accounting Studies, 24(1), 34-112.<a href="section-85.html#fnref24" class="footnote-back">↩</a></p></li>
-<li id="fn25"><p><a href="https://www.aqr.com/Insights/Datasets/Quality-Minus-Junk-Factors-Monthly" class="uri">https://www.aqr.com/Insights/Datasets/Quality-Minus-Junk-Factors-Monthly</a><a href="section-85.html#fnref25" class="footnote-back">↩</a></p></li>
-</ol>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-faber2007quantitative">
+<p>Faber, Mebane T. 2007. “A Quantitative Approach to Tactical Asset Allocation.” <em>The Journal of Wealth Management</em> 9 (4): 69–79.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="section-79.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="section-74.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-91.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

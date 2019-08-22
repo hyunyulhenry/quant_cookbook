@@ -1,56 +1,13 @@
-\BOOKMARK [0][-]{Doc-Start}{여는 글}{}% 1
-\BOOKMARK [0][-]{chapter.1}{퀀트 투자의 심장: 데이터와 프로그래밍}{}% 2
-\BOOKMARK [1][-]{section.1.1}{데이터 구하기}{chapter.1}% 3
-\BOOKMARK [1][-]{section.1.2}{퀀트 투자와 프로그래밍}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.3}{R 프로그램}{chapter.1}% 5
-\BOOKMARK [1][-]{section.1.4}{퀀트 투자에 유용한 R 패키지}{chapter.1}% 6
-\BOOKMARK [0][-]{chapter.2}{크롤링을 위한 기본 지식}{}% 7
-\BOOKMARK [1][-]{section.2.1}{인코딩의 이해와 R에서 UTF-8 설정하기}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.2}{웹의 동작 방식}{chapter.2}% 9
-\BOOKMARK [1][-]{section.2.3}{HTML과 CSS 이해하기}{chapter.2}% 10
-\BOOKMARK [1][-]{section.2.4}{파이프 오퍼레이터 \(\045>\045\)}{chapter.2}% 11
-\BOOKMARK [1][-]{section.2.5}{오류에 대한 예외처리}{chapter.2}% 12
-\BOOKMARK [0][-]{chapter.3}{API를 이용한 데이터 수집}{}% 13
-\BOOKMARK [1][-]{section.3.1}{API를 이용한 Quandl 데이터 다운로드}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.2}{getSymbols\(\) 함수를 이용한 API 다운로드}{chapter.3}% 15
-\BOOKMARK [0][-]{chapter.4}{크롤링 이해하기}{}% 16
-\BOOKMARK [1][-]{section.4.1}{GET과 POST 방식 이해하기}{chapter.4}% 17
-\BOOKMARK [1][-]{section.4.2}{크롤링 예제}{chapter.4}% 18
-\BOOKMARK [0][-]{chapter.5}{금융 데이터 수집하기 \(기본\)}{}% 19
-\BOOKMARK [1][-]{section.5.1}{한국거래소의 산업별 현황 및 개별지표 크롤링}{chapter.5}% 20
-\BOOKMARK [1][-]{section.5.2}{WICS 기준 섹터정보 크롤링}{chapter.5}% 21
-\BOOKMARK [0][-]{chapter.6}{금융 데이터 수집하기 \(심화\)}{}% 22
-\BOOKMARK [1][-]{section.6.1}{수정주가 크롤링}{chapter.6}% 23
-\BOOKMARK [1][-]{section.6.2}{재무제표 및 가치지표 크롤링}{chapter.6}% 24
-\BOOKMARK [1][-]{section.6.3}{야후 파이낸스 데이터 구하기}{chapter.6}% 25
-\BOOKMARK [0][-]{chapter.7}{데이터 정리하기}{}% 26
-\BOOKMARK [1][-]{section.7.1}{주가 정리하기}{chapter.7}% 27
-\BOOKMARK [1][-]{section.7.2}{재무제표 정리하기}{chapter.7}% 28
-\BOOKMARK [1][-]{section.7.3}{가치지표 정리하기}{chapter.7}% 29
-\BOOKMARK [0][-]{chapter.8}{데이터 분석 및 시각화하기}{}% 30
-\BOOKMARK [1][-]{section.8.1}{종목정보 데이터 분석}{chapter.8}% 31
-\BOOKMARK [1][-]{section.8.2}{종목정보 시각화}{chapter.8}% 32
-\BOOKMARK [1][-]{section.8.3}{주가 및 수익률 시각화}{chapter.8}% 33
-\BOOKMARK [0][-]{chapter.9}{퀀트 전략을 이용한 종목선정 \(기본\)}{}% 34
-\BOOKMARK [1][-]{section.9.1}{베타 이해하기}{chapter.9}% 35
-\BOOKMARK [1][-]{section.9.2}{저변동성 전략}{chapter.9}% 36
-\BOOKMARK [1][-]{section.9.3}{모멘텀 전략}{chapter.9}% 37
-\BOOKMARK [1][-]{section.9.4}{밸류 전략}{chapter.9}% 38
-\BOOKMARK [1][-]{section.9.5}{퀄리티 전략}{chapter.9}% 39
-\BOOKMARK [0][-]{chapter.10}{퀀트 전략을 이용한 종목선정 \(심화\)}{}% 40
-\BOOKMARK [1][-]{section.10.1}{섹터 중립 포트폴리오}{chapter.10}% 41
-\BOOKMARK [1][-]{section.10.2}{마법공식}{chapter.10}% 42
-\BOOKMARK [1][-]{section.10.3}{이상치 데이터 제거 및 팩터의 결합}{chapter.10}% 43
-\BOOKMARK [1][-]{section.10.4}{멀티팩터 포트폴리오}{chapter.10}% 44
-\BOOKMARK [0][-]{chapter.11}{포트폴리오 구성}{}% 45
-\BOOKMARK [1][-]{section.11.1}{최소분산 포트폴리오}{chapter.11}% 46
-\BOOKMARK [1][-]{section.11.2}{최대분산효과 포트폴리오}{chapter.11}% 47
-\BOOKMARK [1][-]{section.11.3}{위험균형 포트폴리오}{chapter.11}% 48
-\BOOKMARK [0][-]{chapter.12}{포트폴리오 백테스트}{}% 49
-\BOOKMARK [1][-]{section.12.1}{Return.Portfolio\(\) 함수}{chapter.12}% 50
-\BOOKMARK [1][-]{section.12.2}{전통적인 60대 40 포트폴리오 백테스트}{chapter.12}% 51
-\BOOKMARK [1][-]{section.12.3}{시점 선택 전략 백테스트}{chapter.12}% 52
-\BOOKMARK [1][-]{section.12.4}{동적 자산배분 백테스트}{chapter.12}% 53
-\BOOKMARK [0][-]{chapter.13}{성과 및 위험 평가}{}% 54
-\BOOKMARK [1][-]{section.13.1}{결과 측정 지표}{chapter.13}% 55
-\BOOKMARK [1][-]{section.13.2}{팩터 회귀분석 및 테이블로 나타내기}{chapter.13}% 56
+\BOOKMARK [0][-]{Doc-Start}{Welcome}{}% 1
+\BOOKMARK [1][-]{section*.1}{지은이 소개}{Doc-Start}% 2
+\BOOKMARK [1][-]{section*.2}{머리말}{Doc-Start}% 3
+\BOOKMARK [1][-]{section*.3}{이 책의 구성}{Doc-Start}% 4
+\BOOKMARK [1][-]{section*.4}{이 책에서 다루지 않은 주제}{Doc-Start}% 5
+\BOOKMARK [1][-]{section*.5}{도움이 될 만한 자료들}{Doc-Start}% 6
+\BOOKMARK [1][-]{section*.6}{이 책의 지원 페이지}{Doc-Start}% 7
+\BOOKMARK [1][-]{section*.7}{종목과 관련된 유의사항}{Doc-Start}% 8
+\BOOKMARK [0][-]{chapter.1}{퀀트 투자의 심장: 데이터와 프로그래밍}{}% 9
+\BOOKMARK [1][-]{section.1.1}{데이터 구하기}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.2}{퀀트 투자와 프로그래밍}{chapter.1}% 11
+\BOOKMARK [1][-]{section.1.3}{R 프로그램}{chapter.1}% 12
+\BOOKMARK [1][-]{section.1.4}{퀀트 투자에 유용한 R 패키지}{chapter.1}% 13

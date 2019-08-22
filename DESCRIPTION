@@ -1,6 +1,6 @@
 Package: placeholder
 Type: Book
-Title: Quant Cookbook
+Title: R을 이용한 퀀트 투자 포트폴리오 만들기
 Version: 0.0.1
 Imports: bookdown
 Remotes: rstudio/bookdown
