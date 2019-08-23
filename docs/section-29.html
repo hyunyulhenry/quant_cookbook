@@ -405,12 +405,12 @@ data_html =<span class="st"> </span><span class="kw">read_html</span>(data, <spa
 <span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&#39;data&#39;</span>) 
 
 <span class="kw">print</span>(<span class="kw">head</span>(data_html))</code></pre>
-<pre><code>## [1] &quot;20170804|48160|48180|47500|47700|167184&quot;
-## [2] &quot;20170807|47500|48080|47440|47580|144365&quot;
-## [3] &quot;20170808|47980|48260|47480|47720|159592&quot;
-## [4] &quot;20170809|47400|47400|46240|46280|291108&quot;
-## [5] &quot;20170810|46200|46320|45460|45900|459723&quot;
-## [6] &quot;20170811|45120|45300|44220|44620|508146&quot;</code></pre>
+<pre><code>## [1] &quot;20170807|47500|48080|47440|47580|144365&quot;
+## [2] &quot;20170808|47980|48260|47480|47720|159592&quot;
+## [3] &quot;20170809|47400|47400|46240|46280|291108&quot;
+## [4] &quot;20170810|46200|46320|45460|45900|459723&quot;
+## [5] &quot;20170811|45120|45300|44220|44620|508146&quot;
+## [6] &quot;20170814|45120|45400|44720|45000|383712&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>paste0()</code> 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.</li>
 <li><code>GET()</code> 함수를 통해 페이지의 데이터를 불러옵니다.</li>
@@ -423,14 +423,14 @@ data_html =<span class="st"> </span><span class="kw">read_html</span>(data, <spa
 price =<span class="st"> </span><span class="kw">read_delim</span>(data_html, <span class="dt">delim =</span> <span class="st">&#39;|&#39;</span>)
 <span class="kw">print</span>(<span class="kw">head</span>(price))</code></pre>
 <pre><code>## # A tibble: 6 x 6
-##   `20170804` `48160` `48180` `47500` `47700` `167184`
+##   `20170807` `47500` `48080` `47440` `47580` `144365`
 ##        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-## 1   20170807   47500   48080   47440   47580   144365
-## 2   20170808   47980   48260   47480   47720   159592
-## 3   20170809   47400   47400   46240   46280   291108
-## 4   20170810   46200   46320   45460   45900   459723
-## 5   20170811   45120   45300   44220   44620   508146
-## 6   20170814   45120   45400   44720   45000   383712</code></pre>
+## 1   20170808   47980   48260   47480   47720   159592
+## 2   20170809   47400   47400   46240   46280   291108
+## 3   20170810   46200   46320   45460   45900   459723
+## 4   20170811   45120   45300   44220   44620   508146
+## 5   20170814   45120   45400   44720   45000   383712
+## 6   20170816   46220   46380   46000   46200   438273</code></pre>
 <p>readr 패키지의 <code>read_delim()</code> 함수를 쓰면 구분자로 이루어진 데이터를 테이블로 쉽게 변경할 수 있습니다. 데이터를 확인해보면 테이블 형태로 변경되었으며 각 열은 날짜, 시가, 고가, 저가, 종가, 거래량을 의미합니다. 이 중 우리가 필요한 날짜와 종가를 선택한 후 데이터 클렌징을 해줍니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
 <span class="kw">library</span>(timetk)
@@ -443,12 +443,12 @@ price =<span class="st"> </span><span class="kw">tk_xts</span>(price, <span clas
  
 <span class="kw">print</span>(<span class="kw">tail</span>(price))</code></pre>
 <pre><code>##            Price
-## 2019-08-14 43700
 ## 2019-08-16 43900
 ## 2019-08-19 43600
 ## 2019-08-20 44450
 ## 2019-08-21 44500
-## 2019-08-22 44050</code></pre>
+## 2019-08-22 44050
+## 2019-08-23 44000</code></pre>
 <ol style="list-style-type: decimal">
 <li>날짜에 해당하는 첫 번째 열과, 종가에 해당하는 다섯 번째 열만 선택해 저장합니다.</li>
 <li>티블 형태의 데이터를 데이터 프레임 형태로 변경합니다.</li>
@@ -1178,7 +1178,7 @@ price =<span class="st"> </span><span class="kw">read_html</span>(data) <span cl
 <span class="st">  </span><span class="kw">parse_number</span>()
 
 <span class="kw">print</span>(price)</code></pre>
-<pre><code>## [1] 44050</code></pre>
+<pre><code>## [1] 44100</code></pre>
 <ol style="list-style-type: decimal">
 <li>해당 페이지 url을 저장한 후 <code>GET()</code> 함수를 통해 페이지 정보를 받습니다.</li>
 <li><code>read_html()</code> 함수를 이용해 HTML 데이터를 받고, <code>html_node()</code> 함수와 Xpath를 이용해 현재 주가에 해당하는 부분을 추출합니다. 주가는 페이지 상단에서 확인할 수 있습니다.</li>
@@ -1278,7 +1278,7 @@ share_yahoo =<span class="st"> </span>share_yahoo <span class="op">*</span><span
 data_value_yahoo[data_value_yahoo <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span>
 <span class="kw">print</span>(data_value_yahoo)</code></pre>
 <pre><code>##   PER   PBR   PCR   PSR 
-## 5.992 1.095 3.923 1.079</code></pre>
+## 5.998 1.097 3.928 1.080</code></pre>
 <p>분자에는 주가를 입력하고 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 야후 파이낸스의 재무 데이터는 천 원 단위이므로, 둘 사이에 단위를 동일하게 맞춰주기 위해 분모에 천을 곱합니다. 또한 가치지표가 음수인 경우는 NA로 변경해줍니다.</p>
 <p>결과를 확인해보면 네 가지 가치지표가 잘 계산되었습니다. Company Guide에서 구한값 5.99, 1.06, 3.92, 1.08와 재무 데이터의 차이로 인해 미세한 오차가 있지만, 이는 무시해도 될 정도입니다.</p>
 <p>이 방법 또한 URL의 티커 부분만 변경하면 전 종목의 재무제표와 가치지표 데이터를 다운로드할 수 있습니다. 그러나 코스피 종목은 끝이 .KS, 코스닥 종목은 끝이 .KQ가 되어야 합니다. 자세한 코드는 생략하겠습니다.</p>

@@ -458,11 +458,9 @@ KOR_value %>%
 
 이처럼 여러 팩터를 결합해 포트폴리오를 구성하고자 하는 경우, 먼저 각 팩터(지표)별 랭킹을 정규화한 뒤 더해야 왜곡 효과가 제거되어 안정적입니다.
 
-\begin{scriptsize}
 \begin{equation*} 
 Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Rank(Factor\,N))
 \end{equation*} 
-\end{scriptsize}
 
 ## 멀티팩터 포트폴리오
 

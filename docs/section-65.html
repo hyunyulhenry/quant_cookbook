@@ -697,7 +697,9 @@ KOR_value <span class="op">%&gt;%</span>
 <p><img src="10-factor_adv_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><code>min_rank()</code> 함수를 통해 랭킹을 구한 후, <code>scale()</code> 함수를 통해 정규화를 해주었습니다. 기본적으로 랭킹의 분포가 가진 극단치 효과가 사라지는 점과 균등 분포의 장점을 유지하고 있으며, 분포의 범위 역시 거의 동일하게 바뀌었습니다.</p>
 <p>이처럼 여러 팩터를 결합해 포트폴리오를 구성하고자 하는 경우, 먼저 각 팩터(지표)별 랭킹을 정규화한 뒤 더해야 왜곡 효과가 제거되어 안정적입니다.</p>
-
+<p><span class="math display">\[\begin{equation*} 
+Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Rank(Factor\,N))
+\end{equation*}\]</span></p>
 </div>
 </div>
 <div id="section-73" class="section level2">
