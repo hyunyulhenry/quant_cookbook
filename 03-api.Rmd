@@ -4,7 +4,6 @@
 
 API 제공자는 본인이 가진 데이터베이스를 다른 누군가가 쉽게 사용할 수 있는 형태로 가지고 있으며, 해당 데이터베이스에 접근할 수 있는 열쇠인 API 주소를 가진 사람은 이를 언제든지 사용할 수 있습니다.
 
-
 ```{r fig.cap='API 개념', fig.align='center', echo = FALSE}
 knitr::include_graphics('images/api_api.png')
 ```

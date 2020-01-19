@@ -13,7 +13,7 @@
   
   
   
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta name="github-repo" content="hyunyulhenry/quant_cookbook" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 5 금융 데이터 수집하기 (기본) | R을 이용한 퀀트 투자 포트폴리오 만들기" />
@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-08-23" />
+<meta name="date" content="2020-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -48,6 +48,60 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
+<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="libs/highcharts-7.0.1/highcharts.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
+<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
+<script src="libs/highcharts-7.0.1/modules/map.js"></script>
+<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
+<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
+<script src="libs/highcharts-7.0.1/modules/data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
+<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
+<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
+<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
+<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
+<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
+<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
+<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
+<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
+<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
+<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
+<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
+<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
+<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
+<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
+<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 
 
@@ -207,118 +261,114 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.2" data-path="section-29.html"><a href="section-29.html#section-35"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
 <li class="chapter" data-level="6.2.3" data-path="section-29.html"><a href="section-29.html#section-36"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="section-29.html"><a href="section-29.html#section-37"><i class="fa fa-check"></i><b>6.3</b> 야후 파이낸스 데이터 구하기</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="section-29.html"><a href="section-29.html#section-38"><i class="fa fa-check"></i><b>6.3.1</b> 재무제표 다운로드</a></li>
-<li class="chapter" data-level="6.3.2" data-path="section-29.html"><a href="section-29.html#section-39"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="section-37.html"><a href="section-37.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-37.html"><a href="section-37.html#section-38"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-37.html"><a href="section-37.html#section-39"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="section-37.html"><a href="section-37.html#section-40"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-41.html"><a href="section-41.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-41.html"><a href="section-41.html#section-42"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-41.html"><a href="section-41.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-41.html"><a href="section-41.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-41.html"><a href="section-41.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-41.html"><a href="section-41.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="section-41.html"><a href="section-41.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="section-41.html"><a href="section-41.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
+<li class="chapter" data-level="8.1.7" data-path="section-41.html"><a href="section-41.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="section-41.html"><a href="section-41.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="section-41.html"><a href="section-41.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="section-41.html"><a href="section-41.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="section-41.html"><a href="section-41.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="section-41.html"><a href="section-41.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="section-41.html"><a href="section-41.html#section-43"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-41.html"><a href="section-41.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-41.html"><a href="section-41.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
+<li class="chapter" data-level="8.2.3" data-path="section-41.html"><a href="section-41.html#geom_boxplot---"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
+<li class="chapter" data-level="8.2.4" data-path="section-41.html"><a href="section-41.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
+<li class="chapter" data-level="8.2.5" data-path="section-41.html"><a href="section-41.html#geom_bar---"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="section-41.html"><a href="section-41.html#section-44"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="section-41.html"><a href="section-41.html#section-45"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="section-41.html"><a href="section-41.html#section-46"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="section-41.html"><a href="section-41.html#section-47"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="section-40.html"><a href="section-40.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
-<li class="chapter" data-level="7.1" data-path="section-40.html"><a href="section-40.html#section-41"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
-<li class="chapter" data-level="7.2" data-path="section-40.html"><a href="section-40.html#section-42"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
-<li class="chapter" data-level="7.3" data-path="section-40.html"><a href="section-40.html#section-43"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+<li class="chapter" data-level="9" data-path="section-48.html"><a href="section-48.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-48.html"><a href="section-48.html#section-49"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section-48.html"><a href="section-48.html#section-50"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section-48.html"><a href="section-48.html#section-51"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="section-44.html"><a href="section-44.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
-<li class="chapter" data-level="8.1" data-path="section-44.html"><a href="section-44.html#section-45"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="section-44.html"><a href="section-44.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
-<li class="chapter" data-level="8.1.2" data-path="section-44.html"><a href="section-44.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
-<li class="chapter" data-level="8.1.3" data-path="section-44.html"><a href="section-44.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
-<li class="chapter" data-level="8.1.4" data-path="section-44.html"><a href="section-44.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
-<li class="chapter" data-level="8.1.5" data-path="section-44.html"><a href="section-44.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
-<li class="chapter" data-level="8.1.6" data-path="section-44.html"><a href="section-44.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
-<li class="chapter" data-level="8.1.7" data-path="section-44.html"><a href="section-44.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
-<li class="chapter" data-level="8.1.8" data-path="section-44.html"><a href="section-44.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
-<li class="chapter" data-level="8.1.9" data-path="section-44.html"><a href="section-44.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
-<li class="chapter" data-level="8.1.10" data-path="section-44.html"><a href="section-44.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
-<li class="chapter" data-level="8.1.11" data-path="section-44.html"><a href="section-44.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
-<li class="chapter" data-level="8.1.12" data-path="section-44.html"><a href="section-44.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
+<li class="chapter" data-level="9.2" data-path="section-48.html"><a href="section-48.html#section-52"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="section-48.html"><a href="section-48.html#section-53"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="section-48.html"><a href="section-48.html#section-54"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="section-44.html"><a href="section-44.html#section-46"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="section-44.html"><a href="section-44.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
-<li class="chapter" data-level="8.2.2" data-path="section-44.html"><a href="section-44.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
-<li class="chapter" data-level="8.2.3" data-path="section-44.html"><a href="section-44.html#geom_boxplot---"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
-<li class="chapter" data-level="8.2.4" data-path="section-44.html"><a href="section-44.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
-<li class="chapter" data-level="8.2.5" data-path="section-44.html"><a href="section-44.html#geom_bar---"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
+<li class="chapter" data-level="9.3" data-path="section-48.html"><a href="section-48.html#section-55"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="section-48.html"><a href="section-48.html#section-56"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="section-48.html"><a href="section-48.html#section-57"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="section-44.html"><a href="section-44.html#section-47"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="section-44.html"><a href="section-44.html#section-48"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.2" data-path="section-44.html"><a href="section-44.html#section-49"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.3" data-path="section-44.html"><a href="section-44.html#section-50"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+<li class="chapter" data-level="9.4" data-path="section-48.html"><a href="section-48.html#section-58"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="section-48.html"><a href="section-48.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="section-48.html"><a href="section-48.html#section-59"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="section-48.html"><a href="section-48.html#section-60"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-48.html"><a href="section-48.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-48.html"><a href="section-48.html#section-61"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="section-51.html"><a href="section-51.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
-<li class="chapter" data-level="9.1" data-path="section-51.html"><a href="section-51.html#section-52"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="section-51.html"><a href="section-51.html#section-53"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
-<li class="chapter" data-level="9.1.2" data-path="section-51.html"><a href="section-51.html#section-54"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+<li class="chapter" data-level="10" data-path="section-62.html"><a href="section-62.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-62.html"><a href="section-62.html#section-63"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-62.html"><a href="section-62.html#section-64"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-62.html"><a href="section-62.html#section-65"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-62.html"><a href="section-62.html#section-66"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-62.html"><a href="section-62.html#section-67"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="section-51.html"><a href="section-51.html#section-55"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="section-51.html"><a href="section-51.html#section-56"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
-<li class="chapter" data-level="9.2.2" data-path="section-51.html"><a href="section-51.html#section-57"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+<li class="chapter" data-level="10.3" data-path="section-62.html"><a href="section-62.html#section-68"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-62.html"><a href="section-62.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-62.html"><a href="section-62.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-62.html"><a href="section-62.html#section-69"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="section-51.html"><a href="section-51.html#section-58"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="section-51.html"><a href="section-51.html#section-59"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
-<li class="chapter" data-level="9.3.2" data-path="section-51.html"><a href="section-51.html#section-60"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+<li class="chapter" data-level="10.4" data-path="section-62.html"><a href="section-62.html#section-70"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="section-51.html"><a href="section-51.html#section-61"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="section-51.html"><a href="section-51.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
-<li class="chapter" data-level="9.4.2" data-path="section-51.html"><a href="section-51.html#section-62"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
+<li class="chapter" data-level="11" data-path="section-71.html"><a href="section-71.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-71.html"><a href="section-71.html#section-72"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-71.html"><a href="section-71.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-71.html"><a href="section-71.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-71.html"><a href="section-71.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-71.html"><a href="section-71.html#section-73"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-71.html"><a href="section-71.html#section-74"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-71.html"><a href="section-71.html#section-75"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="section-51.html"><a href="section-51.html#section-63"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="section-51.html"><a href="section-51.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
-<li class="chapter" data-level="9.5.2" data-path="section-51.html"><a href="section-51.html#section-64"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+<li class="chapter" data-level="11.2" data-path="section-71.html"><a href="section-71.html#section-76"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="section-71.html"><a href="section-71.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="section-71.html"><a href="section-71.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="section-71.html"><a href="section-71.html#section-77"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="section-71.html"><a href="section-71.html#section-78"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="section-65.html"><a href="section-65.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
-<li class="chapter" data-level="10.1" data-path="section-65.html"><a href="section-65.html#section-66"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
-<li class="chapter" data-level="10.2" data-path="section-65.html"><a href="section-65.html#section-67"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="section-65.html"><a href="section-65.html#section-68"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
-<li class="chapter" data-level="10.2.2" data-path="section-65.html"><a href="section-65.html#section-69"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
-<li class="chapter" data-level="10.2.3" data-path="section-65.html"><a href="section-65.html#section-70"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
-</ul></li>
-<li class="chapter" data-level="10.3" data-path="section-65.html"><a href="section-65.html#section-71"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="section-65.html"><a href="section-65.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
-<li class="chapter" data-level="10.3.2" data-path="section-65.html"><a href="section-65.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
-<li class="chapter" data-level="10.3.3" data-path="section-65.html"><a href="section-65.html#section-72"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="section-65.html"><a href="section-65.html#section-73"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="section-74.html"><a href="section-74.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
-<li class="chapter" data-level="11.1" data-path="section-74.html"><a href="section-74.html#section-75"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="section-74.html"><a href="section-74.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.2" data-path="section-74.html"><a href="section-74.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.3" data-path="section-74.html"><a href="section-74.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.4" data-path="section-74.html"><a href="section-74.html#section-76"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
-<li class="chapter" data-level="11.1.5" data-path="section-74.html"><a href="section-74.html#section-77"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.1.6" data-path="section-74.html"><a href="section-74.html#section-78"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="section-74.html"><a href="section-74.html#section-79"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="section-74.html"><a href="section-74.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.2" data-path="section-74.html"><a href="section-74.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.3" data-path="section-74.html"><a href="section-74.html#section-80"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.2.4" data-path="section-74.html"><a href="section-74.html#section-81"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.3" data-path="section-74.html"><a href="section-74.html#section-82"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="section-74.html"><a href="section-74.html#section-83"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
-<li class="chapter" data-level="11.3.2" data-path="section-74.html"><a href="section-74.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.3.3" data-path="section-74.html"><a href="section-74.html#section-84"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+<li class="chapter" data-level="11.3" data-path="section-71.html"><a href="section-71.html#section-79"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="section-71.html"><a href="section-71.html#section-80"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
+<li class="chapter" data-level="11.3.2" data-path="section-71.html"><a href="section-71.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="section-71.html"><a href="section-71.html#section-81"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="section-85.html"><a href="section-85.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
-<li class="chapter" data-level="12.1" data-path="section-85.html"><a href="section-85.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="section-85.html"><a href="section-85.html#section-86"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
-<li class="chapter" data-level="12.1.2" data-path="section-85.html"><a href="section-85.html#section-87"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+<li class="chapter" data-level="12" data-path="section-82.html"><a href="section-82.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-82.html"><a href="section-82.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-82.html"><a href="section-82.html#section-83"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-82.html"><a href="section-82.html#section-84"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="section-85.html"><a href="section-85.html#section-88"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
-<li class="chapter" data-level="12.3" data-path="section-85.html"><a href="section-85.html#section-89"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
-<li class="chapter" data-level="12.4" data-path="section-85.html"><a href="section-85.html#section-90"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+<li class="chapter" data-level="12.2" data-path="section-82.html"><a href="section-82.html#section-85"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-82.html"><a href="section-82.html#section-86"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="section-82.html"><a href="section-82.html#section-87"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="section-91.html"><a href="section-91.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
-<li class="chapter" data-level="13.1" data-path="section-91.html"><a href="section-91.html#section-92"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="section-91.html"><a href="section-91.html#section-93"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
-<li class="chapter" data-level="13.1.2" data-path="section-91.html"><a href="section-91.html#section-94"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
-<li class="chapter" data-level="13.1.3" data-path="section-91.html"><a href="section-91.html#section-95"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
-<li class="chapter" data-level="13.1.4" data-path="section-91.html"><a href="section-91.html#section-96"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+<li class="chapter" data-level="13" data-path="section-88.html"><a href="section-88.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="section-88.html"><a href="section-88.html#section-89"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="section-88.html"><a href="section-88.html#section-90"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="section-88.html"><a href="section-88.html#section-91"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="section-88.html"><a href="section-88.html#section-92"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="section-88.html"><a href="section-88.html#section-93"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="section-91.html"><a href="section-91.html#section-97"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+<li class="chapter" data-level="13.2" data-path="section-88.html"><a href="section-88.html#section-94"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -527,7 +577,7 @@ biz_day =<span class="st"> </span><span class="kw">GET</span>(url) <span class="
 <span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)
 
 <span class="kw">print</span>(biz_day)</code></pre>
-<pre><code>## [1] &quot;20190821&quot;</code></pre>
+<pre><code>## [1] &quot;20200115&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li>페이지의 url을 저장합니다.</li>
 <li><code>GET()</code> 함수를 통해 해당 페이지 내용을 받습니다.</li>
@@ -620,17 +670,18 @@ down_ind =<span class="st"> </span><span class="kw">read.csv</span>(<span class=
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setdiff</span>(down_sector[, <span class="st">&#39;종목명&#39;</span>], down_ind[ ,<span class="st">&#39;종목명&#39;</span>])</code></pre>
 <pre><code>##  [1] &quot;엘브이엠씨홀딩스&quot;   &quot;한국패러랠&quot;         &quot;한국ANKOR유전&quot;     
 ##  [4] &quot;맵스리얼티1&quot;        &quot;맥쿼리인프라&quot;       &quot;하나니켈2호&quot;       
-##  [7] &quot;하나니켈1호&quot;        &quot;베트남개발1&quot;        &quot;신한알파리츠&quot;      
-## [10] &quot;이리츠코크렙&quot;       &quot;모두투어리츠&quot;       &quot;하이골드12호&quot;      
-## [13] &quot;하이골드8호&quot;        &quot;바다로19호&quot;         &quot;하이골드3호&quot;       
-## [16] &quot;케이탑리츠&quot;         &quot;에이리츠&quot;           &quot;동북아13호&quot;        
-## [19] &quot;동북아12호&quot;         &quot;컬러레이&quot;           &quot;JTC&quot;               
-## [22] &quot;뉴프라이드&quot;         &quot;윙입푸드&quot;           &quot;글로벌에스엠&quot;      
-## [25] &quot;크리스탈신소재&quot;     &quot;씨케이에이치&quot;       &quot;차이나그레이트&quot;    
-## [28] &quot;골든센츄리&quot;         &quot;오가닉티코스메틱&quot;   &quot;GRT&quot;               
-## [31] &quot;로스웰&quot;             &quot;헝셩그룹&quot;           &quot;이스트아시아홀딩스&quot;
-## [34] &quot;에스앤씨엔진그룹&quot;   &quot;SNK&quot;                &quot;SBI핀테크솔루션즈&quot; 
-## [37] &quot;잉글우드랩&quot;         &quot;코오롱티슈진&quot;       &quot;엑세스바이오&quot;</code></pre>
+##  [7] &quot;하나니켈1호&quot;        &quot;베트남개발1&quot;        &quot;NH프라임리츠&quot;      
+## [10] &quot;롯데리츠&quot;           &quot;신한알파리츠&quot;       &quot;이리츠코크렙&quot;      
+## [13] &quot;모두투어리츠&quot;       &quot;하이골드12호&quot;       &quot;하이골드8호&quot;       
+## [16] &quot;바다로19호&quot;         &quot;하이골드3호&quot;        &quot;케이탑리츠&quot;        
+## [19] &quot;에이리츠&quot;           &quot;동북아13호&quot;         &quot;동북아12호&quot;        
+## [22] &quot;컬러레이&quot;           &quot;JTC&quot;                &quot;뉴프라이드&quot;        
+## [25] &quot;윙입푸드&quot;           &quot;글로벌에스엠&quot;       &quot;크리스탈신소재&quot;    
+## [28] &quot;씨케이에이치&quot;       &quot;차이나그레이트&quot;     &quot;골든센츄리&quot;        
+## [31] &quot;오가닉티코스메틱&quot;   &quot;GRT&quot;                &quot;로스웰&quot;            
+## [34] &quot;헝셩그룹&quot;           &quot;이스트아시아홀딩스&quot; &quot;에스앤씨엔진그룹&quot;  
+## [37] &quot;SNK&quot;                &quot;SBI핀테크솔루션즈&quot;  &quot;잉글우드랩&quot;        
+## [40] &quot;코오롱티슈진&quot;       &quot;엑세스바이오&quot;</code></pre>
 <p><code>setdiff()</code> 함수를 통해 두 데이터에 공통적으로 없는 종목명, 즉 하나의 데이터에만 있는 종목을 살펴보면 위와 같습니다. 해당 종목들은 선박펀드, 광물펀드, 해외종목 등 일반적이지 않은 종목들이므로 제외하는 것이 좋습니다. 따라서 둘 사이에 공통적으로 존재하는 종목을 기준으로 데이터를 합쳐주겠습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">KOR_ticker =<span class="st"> </span><span class="kw">merge</span>(down_sector, down_ind,
                    <span class="dt">by =</span> <span class="kw">intersect</span>(<span class="kw">names</span>(down_sector),
@@ -641,98 +692,93 @@ down_ind =<span class="st"> </span><span class="kw">read.csv</span>(<span class=
 환하고, FALSE로 설정하면 교집합을 반환합니다. 공통으로 존재하는 항목을 원하므로 여기서는 FALSE를 입력합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">order</span>(<span class="op">-</span>KOR_ticker[<span class="st">&#39;시가총액.원.&#39;</span>]), ]
 <span class="kw">print</span>(<span class="kw">head</span>(KOR_ticker))</code></pre>
-<pre><code>##      종목코드     종목명 시장구분 산업분류 현재가.종가. 전일대비
-## 330    005930   삼성전자   코스피 전기전자        45400     -850
-## 45     000660 SK하이닉스   코스피 전기전자        69100    -2300
-## 331    005935 삼성전자우   코스피 전기전자        37800     -350
-## 301    005380     현대차   코스피 운수장비       136000    -1000
-## 1278   068270   셀트리온   코스피   의약품       206000     1000
-## 1082   051910     LG화학   코스피     화학       355500     7000
-##      시가총액.원.       일자 관리여부   종가    EPS   PER     BPS   PBR
-## 330     2.710e+14 2019-07-03        -  45400  6,461  7.03  35,342  1.28
-## 45      5.030e+13 2019-07-03        -  69100 22,255   3.1  64,348  1.07
-## 331     3.111e+13 2019-07-03        -  37800      -     -       -     -
-## 301     2.906e+13 2019-07-03        - 136000  5,632 24.15 245,447  0.55
-## 1278    2.644e+13 2019-07-03        - 206000  2,063 99.85  19,766 10.42
-## 1082    2.510e+13 2019-07-03        - 355500 19,217  18.5 218,227  1.63
+<pre><code>##      종목코드           종목명 시장구분 산업분류 현재가.종가. 전일대비
+## 332    005930         삼성전자   코스피 전기전자        59000    -1000
+## 45     000660       SK하이닉스   코스피 전기전자        98200    -2300
+## 333    005935       삼성전자우   코스피 전기전자        49250     -500
+## 852    035420            NAVER   코스피 서비스업       191500     1000
+## 1938   207940 삼성바이오로직스   코스피   의약품       434500     -500
+## 303    005380           현대차   코스피 운수장비       115000    -1000
+##      시가총액.원.       일자 관리여부   종가    EPS    PER     BPS  PBR
+## 332     3.522e+14 2020-01-15        -  59000  6,461   9.13  35,342 1.67
+## 45      7.149e+13 2020-01-15        -  98200 22,255   4.41  64,348 1.53
+## 333     4.053e+13 2020-01-15        -  49250      -      -       -    -
+## 852     3.156e+13 2020-01-15        - 191500  4,437  43.16  31,795 6.02
+## 1938    2.875e+13 2020-01-15        - 434500  3,387 128.28  62,805 6.92
+## 303     2.457e+13 2020-01-15        - 115000  5,632  20.42 245,447 0.47
 ##      주당배당금 배당수익률 게시물..일련번호 총카운트
-## 330        1416       3.12             2165       NA
-## 45         1500       2.17             1885       NA
-## 331        1417       3.75             2166       NA
-## 301        4000       2.94             2159       NA
-## 1278          0       0.00             2049       NA
-## 1082       6000       1.69             2041       NA</code></pre>
+## 332        1416       2.40             1446       NA
+## 45         1500       1.53             1399       NA
+## 333        1417       2.88             1829       NA
+## 852         314       0.16             1518       NA
+## 1938          0       0.00             1577       NA
+## 303        4000       3.48             1440       NA</code></pre>
 <p>데이터를 시가총액 기준으로 내림차순 정렬할 필요도 있습니다. <code>order()</code> 함수를 통해 상대적인 순서를 구할 수 있습니다. R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꿉니다. 결과적으로 시가총액 기준 내림차
 순으로 해당 데이터가 정렬됩니다.</p>
 <p>마지막으로 스팩, 우선주 종목 역시 제외해야 합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(stringr)
 
 KOR_ticker[<span class="kw">grepl</span>(<span class="st">&#39;스팩&#39;</span>, KOR_ticker[, <span class="st">&#39;종목명&#39;</span>]), <span class="st">&#39;종목명&#39;</span>]  </code></pre>
-<pre><code>##  [1] &quot;엔에이치스팩10호&quot;    &quot;케이비제10호스팩&quot;    &quot;엔에이치스팩14호&quot;   
-##  [4] &quot;대신밸런스제5호스팩&quot; &quot;케이비제18호스팩&quot;    &quot;삼성스팩2호&quot;        
-##  [7] &quot;엔에이치스팩12호&quot;    &quot;한화에스비아이스팩&quot;  &quot;엔에이치스팩11호&quot;   
-## [10] &quot;신한제4호스팩&quot;       &quot;케이비17호스팩&quot;      &quot;IBKS제9호스팩&quot;      
-## [13] &quot;하나금융11호스팩&quot;    &quot;SK4호스팩&quot;           &quot;신한제5호스팩&quot;      
-## [16] &quot;한국제7호스팩&quot;       &quot;대신밸런스제6호스팩&quot; &quot;미래에셋대우스팩1호&quot;
-## [19] &quot;IBKS제6호스팩&quot;       &quot;대신밸런스제4호스팩&quot; &quot;동부스팩5호&quot;        
-## [22] &quot;IBKS제5호스팩&quot;       &quot;DB금융스팩6호&quot;       &quot;삼성머스트스팩3호&quot;  
-## [25] &quot;상상인이안1호스팩&quot;   &quot;하나머스트제6호스팩&quot; &quot;하나금융10호스팩&quot;   
-## [28] &quot;유안타제4호스팩&quot;     &quot;교보7호스팩&quot;         &quot;DB금융스팩7호&quot;      
-## [31] &quot;한국제6호스팩&quot;       &quot;IBKS제10호스팩&quot;      &quot;한화수성스팩&quot;       
-## [34] &quot;신영스팩4호&quot;         &quot;하이제4호스팩&quot;       &quot;하나금융9호스팩&quot;    
-## [37] &quot;유안타제3호스팩&quot;     &quot;한국제5호스팩&quot;       &quot;신영스팩5호&quot;        
-## [40] &quot;유진스팩4호&quot;         &quot;교보8호스팩&quot;         &quot;IBKS제7호스팩&quot;      
-## [43] &quot;신한제3호스팩&quot;       &quot;키움제5호스팩&quot;       &quot;엔에이치스팩13호&quot;   
-## [46] &quot;SK3호스팩&quot;           &quot;미래에셋대우스팩2호&quot; &quot;한국제8호스팩&quot;      
-## [49] &quot;한화에이스스팩4호&quot;   &quot;케이비제11호스팩&quot;    &quot;한화에이스스팩3호&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목명&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">==</span><span class="st"> &#39;우&#39;</span>, <span class="st">&#39;종목명&#39;</span>]</code></pre>
-<pre><code>##  [1] &quot;삼성전자우&quot;         &quot;미래에셋대우&quot;       &quot;현대차우&quot;          
-##  [4] &quot;LG생활건강우&quot;       &quot;LG화학우&quot;           &quot;아모레퍼시픽우&quot;    
-##  [7] &quot;삼성화재우&quot;         &quot;LG전자우&quot;           &quot;신영증권우&quot;        
-## [10] &quot;두산우&quot;             &quot;연우&quot;               &quot;한국금융지주우&quot;    
-## [13] &quot;대신증권우&quot;         &quot;S-Oil우&quot;            &quot;NH투자증권우&quot;      
-## [16] &quot;아모레G우&quot;          &quot;대림산업우&quot;         &quot;CJ제일제당 우&quot;     
-## [19] &quot;LG우&quot;               &quot;SK이노베이션우&quot;     &quot;삼성SDI우&quot;         
-## [22] &quot;삼성전기우&quot;         &quot;CJ우&quot;               &quot;금호석유우&quot;        
-## [25] &quot;SK우&quot;               &quot;미래에셋대우우&quot;     &quot;GS우&quot;              
-## [28] &quot;롯데칠성우&quot;         &quot;코오롱인더우&quot;       &quot;부국증권우&quot;        
-## [31] &quot;롯데지주우&quot;         &quot;유한양행우&quot;         &quot;유화증권우&quot;        
-## [34] &quot;호텔신라우&quot;         &quot;SK케미칼우&quot;         &quot;남양유업우&quot;        
-## [37] &quot;LG하우시스우&quot;       &quot;BYC우&quot;              &quot;유안타증권우&quot;      
-## [40] &quot;세방우&quot;             &quot;SK디스커버리우&quot;     &quot;대덕전자1우&quot;       
-## [43] &quot;태영건설우&quot;         &quot;한진칼우&quot;           &quot;대상우&quot;            
-## [46] &quot;대한항공우&quot;         &quot;현대건설우&quot;         &quot;금호산업우&quot;        
-## [49] &quot;한화케미칼우&quot;       &quot;한화우&quot;             &quot;삼양홀딩스우&quot;      
-## [52] &quot;녹십자홀딩스2우&quot;    &quot;넥센우&quot;             &quot;신풍제약우&quot;        
-## [55] &quot;삼양사우&quot;           &quot;SK증권우&quot;           &quot;코오롱우&quot;          
-## [58] &quot;NPC우&quot;              &quot;계양전기우&quot;         &quot;한화투자증권우&quot;    
-## [61] &quot;남선알미우&quot;         &quot;SK네트웍스우&quot;       &quot;태양금속우&quot;        
-## [64] &quot;쌍용양회우&quot;         &quot;서울식품우&quot;         &quot;대원전선우&quot;        
-## [67] &quot;일양약품우&quot;         &quot;유유제약1우&quot;        &quot;대한제당우&quot;        
-## [70] &quot;동원시스템즈우&quot;     &quot;크라운해태홀딩스우&quot; &quot;성신양회우&quot;        
-## [73] &quot;코리아써우&quot;         &quot;성문전자우&quot;         &quot;현대비앤지스틸우&quot;  
-## [76] &quot;삼성중공우&quot;         &quot;대호피앤씨우&quot;       &quot;CJ씨푸드1우&quot;       
-## [79] &quot;금강공업우&quot;         &quot;크라운제과우&quot;       &quot;깨끗한나라우&quot;      
-## [82] &quot;덕성우&quot;             &quot;대상홀딩스우&quot;       &quot;동부제철우&quot;        
-## [85] &quot;동양우&quot;             &quot;노루페인트우&quot;       &quot;신원우&quot;            
-## [88] &quot;코오롱글로벌우&quot;     &quot;하이트진로홀딩스우&quot; &quot;DB하이텍1우&quot;       
-## [91] &quot;흥국화재우&quot;         &quot;JW중외제약우&quot;       &quot;한양증권우&quot;        
-## [94] &quot;동부건설우&quot;         &quot;노루홀딩스우&quot;       &quot;소프트센우&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목명&#39;</span>], <span class="dv">-2</span>, <span class="dv">-1</span>) <span class="op">==</span><span class="st"> &#39;우B&#39;</span>, <span class="st">&#39;종목명&#39;</span>]</code></pre>
-<pre><code>##  [1] &quot;현대차2우B&quot;       &quot;미래에셋대우2우B&quot; &quot;한화3우B&quot;        
-##  [4] &quot;현대차3우B&quot;       &quot;삼성물산우B&quot;      &quot;대교우B&quot;         
-##  [7] &quot;대신증권2우B&quot;     &quot;두산2우B&quot;         &quot;넥센타이어1우B&quot;  
-## [10] &quot;하이트진로2우B&quot;   &quot;진흥기업우B&quot;      &quot;진흥기업2우B&quot;    
-## [13] &quot;JW중외제약2우B&quot;   &quot;흥국화재2우B&quot;     &quot;코리아써키트2우B&quot;
-## [16] &quot;동양2우B&quot;         &quot;유유제약2우B&quot;     &quot;대한제당3우B&quot;    
-## [19] &quot;동양3우B&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목명&#39;</span>], <span class="dv">-2</span>, <span class="dv">-1</span>) <span class="op">==</span><span class="st"> &#39;우C&#39;</span>, <span class="st">&#39;종목명&#39;</span>]</code></pre>
-<pre><code>## [1] &quot;루트로닉3우C&quot;</code></pre>
-<p><code>grepl()</code> 함수를 통해 종목명에 ‘스팩’이 들어가는 종목을 찾고, <code>stringr</code> 패키지의 <code>str_sub()</code> 함수를 통해 종목명 끝이 <strong>우</strong>, <strong>우B</strong>, <strong>우C</strong>인 우선주 종목을 찾을 수 있습니다. 데이터 내에서 해당 데이터들을 제거<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>하겠습니다.</p>
+<pre><code>##  [1] &quot;엔에이치스팩14호&quot;    &quot;케이비제18호스팩&quot;    &quot;삼성스팩2호&quot;        
+##  [4] &quot;엔에이치스팩12호&quot;    &quot;한화에스비아이스팩&quot;  &quot;미래에셋대우스팩3호&quot;
+##  [7] &quot;신한제4호스팩&quot;       &quot;유안타제5호스팩&quot;     &quot;하나금융11호스팩&quot;   
+## [10] &quot;케이비17호스팩&quot;      &quot;한국제7호스팩&quot;       &quot;대신밸런스제7호스팩&quot;
+## [13] &quot;SK4호스팩&quot;           &quot;대신밸런스제6호스팩&quot; &quot;신한제6호스팩&quot;      
+## [16] &quot;DB금융스팩6호&quot;       &quot;동부스팩5호&quot;         &quot;IBKS제11호스팩&quot;     
+## [19] &quot;상상인이안1호스팩&quot;   &quot;하나금융10호스팩&quot;    &quot;삼성머스트스팩3호&quot;  
+## [22] &quot;하나머스트제6호스팩&quot; &quot;유안타제4호스팩&quot;     &quot;한국제6호스팩&quot;      
+## [25] &quot;DB금융스팩7호&quot;       &quot;하이제4호스팩&quot;       &quot;하나금융9호스팩&quot;    
+## [28] &quot;하나금융14호스팩&quot;    &quot;IBKS제10호스팩&quot;      &quot;미래에셋대우스팩4호&quot;
+## [31] &quot;유안타제3호스팩&quot;     &quot;신한제5호스팩&quot;       &quot;케이비제19호스팩&quot;   
+## [34] &quot;SK5호스팩&quot;           &quot;교보7호스팩&quot;         &quot;한국제5호스팩&quot;      
+## [37] &quot;유진스팩5호&quot;         &quot;상상인이안제2호스팩&quot; &quot;교보8호스팩&quot;        
+## [40] &quot;IBKS제7호스팩&quot;       &quot;키움제5호스팩&quot;       &quot;유진스팩4호&quot;        
+## [43] &quot;신영스팩5호&quot;         &quot;한화에이스스팩4호&quot;   &quot;엔에이치스팩13호&quot;   
+## [46] &quot;한국제8호스팩&quot;       &quot;IBKS제12호스팩&quot;      &quot;미래에셋대우스팩2호&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;종목명&#39;</span>]</code></pre>
+<pre><code>##   [1] &quot;삼성전자우&quot;         &quot;현대차2우B&quot;         &quot;LG생활건강우&quot;      
+##   [4] &quot;현대차우&quot;           &quot;LG화학우&quot;           &quot;아모레퍼시픽우&quot;    
+##   [7] &quot;미래에셋대우2우B&quot;   &quot;삼성화재우&quot;         &quot;LG전자우&quot;          
+##  [10] &quot;아모레G3우(전환)&quot;   &quot;신영증권우&quot;         &quot;한화3우B&quot;          
+##  [13] &quot;CJ4우(전환)&quot;        &quot;한국금융지주우&quot;     &quot;두산우&quot;            
+##  [16] &quot;대신증권우&quot;         &quot;아모레G우&quot;          &quot;S-Oil우&quot;           
+##  [19] &quot;현대차3우B&quot;         &quot;NH투자증권우&quot;       &quot;삼성SDI우&quot;         
+##  [22] &quot;LG우&quot;               &quot;대림산업우&quot;         &quot;삼성전기우&quot;        
+##  [25] &quot;CJ제일제당 우&quot;      &quot;SK이노베이션우&quot;     &quot;삼성물산우B&quot;       
+##  [28] &quot;SK우&quot;               &quot;CJ우&quot;               &quot;금호석유우&quot;        
+##  [31] &quot;대신증권2우B&quot;       &quot;대교우B&quot;            &quot;미래에셋대우우&quot;    
+##  [34] &quot;GS우&quot;               &quot;코오롱인더우&quot;       &quot;롯데지주우&quot;        
+##  [37] &quot;두산퓨얼셀1우&quot;      &quot;두산솔루스1우&quot;      &quot;부국증권우&quot;        
+##  [40] &quot;두산2우B&quot;           &quot;롯데칠성우&quot;         &quot;유한양행우&quot;        
+##  [43] &quot;SK케미칼우&quot;         &quot;유화증권우&quot;         &quot;호텔신라우&quot;        
+##  [46] &quot;한진칼우&quot;           &quot;두산솔루스2우B&quot;     &quot;두산퓨얼셀2우B&quot;    
+##  [49] &quot;유안타증권우&quot;       &quot;LG하우시스우&quot;       &quot;BYC우&quot;             
+##  [52] &quot;남양유업우&quot;         &quot;세방우&quot;             &quot;대한항공우&quot;        
+##  [55] &quot;SK디스커버리우&quot;     &quot;넥센타이어1우B&quot;     &quot;대덕전자1우&quot;       
+##  [58] &quot;하이트진로2우B&quot;     &quot;태영건설우&quot;         &quot;쌍용양회우&quot;        
+##  [61] &quot;대상우&quot;             &quot;녹십자홀딩스2우&quot;    &quot;한화솔루션우&quot;      
+##  [64] &quot;삼양사우&quot;           &quot;한화우&quot;             &quot;신풍제약우&quot;        
+##  [67] &quot;삼양홀딩스우&quot;       &quot;넥센우&quot;             &quot;현대건설우&quot;        
+##  [70] &quot;NPC우&quot;              &quot;남선알미우&quot;         &quot;코리아써우&quot;        
+##  [73] &quot;SK증권우&quot;           &quot;코오롱우&quot;           &quot;금호산업우&quot;        
+##  [76] &quot;태양금속우&quot;         &quot;한화투자증권우&quot;     &quot;계양전기우&quot;        
+##  [79] &quot;루트로닉3우C&quot;       &quot;SK네트웍스우&quot;       &quot;대한제당우&quot;        
+##  [82] &quot;동원시스템즈우&quot;     &quot;크라운해태홀딩스우&quot; &quot;유유제약1우&quot;       
+##  [85] &quot;서울식품우&quot;         &quot;일양약품우&quot;         &quot;성문전자우&quot;        
+##  [88] &quot;하이트진로홀딩스우&quot; &quot;삼성중공우&quot;         &quot;대원전선우&quot;        
+##  [91] &quot;성신양회우&quot;         &quot;현대비앤지스틸우&quot;   &quot;깨끗한나라우&quot;      
+##  [94] &quot;CJ씨푸드1우&quot;        &quot;노루페인트우&quot;       &quot;DB하이텍1우&quot;       
+##  [97] &quot;크라운제과우&quot;       &quot;소프트센우&quot;         &quot;대호피앤씨우&quot;      
+## [100] &quot;코오롱글로벌우&quot;     &quot;대상홀딩스우&quot;       &quot;금강공업우&quot;        
+## [103] &quot;한양증권우&quot;         &quot;덕성우&quot;             &quot;동부건설우&quot;        
+## [106] &quot;JW중외제약우&quot;       &quot;진흥기업2우B&quot;       &quot;진흥기업우B&quot;       
+## [109] &quot;신원우&quot;             &quot;동양우&quot;             &quot;동부제철우&quot;        
+## [112] &quot;코리아써키트2우B&quot;   &quot;JW중외제약2우B&quot;     &quot;흥국화재우&quot;        
+## [115] &quot;노루홀딩스우&quot;       &quot;대한제당3우B&quot;       &quot;흥국화재2우B&quot;      
+## [118] &quot;유유제약2우B&quot;       &quot;동양2우B&quot;           &quot;동양3우B&quot;</code></pre>
+<p><code>grepl()</code> 함수를 통해 종목명에 ‘스팩’이 들어가는 종목을 찾고, <code>stringr</code> 패키지의 <code>str_sub()</code> 함수를 통해 종목코드 끝이 0이 아닌 우선주 종목을 찾을 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="op">!</span><span class="kw">grepl</span>(<span class="st">&#39;스팩&#39;</span>, KOR_ticker[, <span class="st">&#39;종목명&#39;</span>]), ]  
-KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목명&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">!=</span><span class="st"> &#39;우&#39;</span>, ]
-KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목명&#39;</span>], <span class="dv">-2</span>, <span class="dv">-1</span>) <span class="op">!=</span><span class="st"> &#39;우B&#39;</span>, ]
-KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목명&#39;</span>], <span class="dv">-2</span>, <span class="dv">-1</span>) <span class="op">!=</span><span class="st"> &#39;우C&#39;</span>, ]</code></pre>
+KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, ]</code></pre>
 <p>마지막으로 행 이름을 초기화한 후 정리된 데이터를 csv 파일로 저장합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(KOR_ticker) =<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">write.csv</span>(KOR_ticker, <span class="st">&#39;data/KOR_ticker.csv&#39;</span>)</code></pre>
@@ -740,7 +786,7 @@ KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(
 </div>
 <div id="wics---" class="section level2">
 <h2><span class="header-section-number">5.2</span> WICS 기준 섹터정보 크롤링</h2>
-<p>일반적으로 주식의 섹터를 나누는 기준은 MSCI와 S&amp;P가 개발한 GICS<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>를 가장 많이 사용합니다. 국내 종목의 GICS 기준 정보 역시 한국거래소에서 제공하고 있으나, 이는 독점적 지적재산으로 명시했기에 사용하는 데 무리가 있습니다. 그러나 지수제공업체인 와이즈인덱스<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>에서는 GICS와 비슷한 WICS 산업분류를 발표하고 있습니다. WICS를 크롤링해 필요한 정보를 수집해보겠습니다.</p>
+<p>일반적으로 주식의 섹터를 나누는 기준은 MSCI와 S&amp;P가 개발한 GICS<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>를 가장 많이 사용합니다. 국내 종목의 GICS 기준 정보 역시 한국거래소에서 제공하고 있으나, 이는 독점적 지적재산으로 명시했기에 사용하는 데 무리가 있습니다. 그러나 지수제공업체인 와이즈인덱스<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>에서는 GICS와 비슷한 WICS 산업분류를 발표하고 있습니다. WICS를 크롤링해 필요한 정보를 수집해보겠습니다.</p>
 <p>먼저 웹페이지에 접속해 [Index → WISE SECTOR INDEX → WICS → 에너지]를 클릭합니다. 그 후 [Components] 탭을 클릭하면 해당 섹터의 구성종목을 확인할 수 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-25"></span>
 <img src="images/crawl_practice_wics.png" alt="WICS 기준 구성종목" width="100%" />
@@ -772,9 +818,7 @@ KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(
 <p>글자들은 페이지에 출력된 내용이지만 매우 특이한 형태로 구성되어 있는데 이것은 JSON 형식의 데이터입니다. 기존에 우리가 살펴보았던 대부분의 웹페이지는 XML 형식으로 표현되어 있습니다. XML 형식은 문법이 복잡하고 표현 규칙이 엄격해 데이터의 용량이 커지는 단점이 있습니다. 반면 JSON 형식은 문법이 단순하고 데이터의 용량이 작아 빠른 속도로 데이터를 교환할 수 있습니다. R에서는 jsonlite 패키지의 <code>fromJSON()</code> 함수를 사용해 매우 손쉽게 JSON 형식의 데이터를 크롤링할 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(jsonlite)
 
-url =<span class="st"> </span><span class="kw">paste0</span>(
-  <span class="st">&#39;http://www.wiseindex.com/Index/GetIndexComponets&#39;</span>,
-  <span class="st">&#39;?ceil_yn=0&amp;dt=20190607&amp;sec_cd=G10&#39;</span>)
+url =<span class="st"> &#39;http://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&amp;dt=20190607&amp;sec_cd=G10&#39;</span>
 data =<span class="st"> </span><span class="kw">fromJSON</span>(url)
 
 <span class="kw">lapply</span>(data, head)</code></pre>
@@ -850,9 +894,8 @@ data_sector =<span class="st"> </span><span class="kw">do.call</span>(rbind, dat
 <hr />
 <ol start="11">
 <li id="fn11"><p>특정한 규칙을 가진 문자열의 집합을 표현하는데 사용하는 형식 언어<a href="section-23.html#fnref11" class="footnote-back">↩</a></p></li>
-<li id="fn12"><p>해당 과정에서 미래에셋대우, 연우 등 의도치 않은 종목 역시 제거됩니다. 그러나 이러한 종목수가 그리 많지 않으므로 투자에 있어 중요하지는 않습니다.<a href="section-23.html#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p><a href="https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard" class="uri">https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard</a><a href="section-23.html#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p><a href="http://www.wiseindex.com/" class="uri">http://www.wiseindex.com/</a><a href="section-23.html#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p><a href="https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard" class="uri">https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard</a><a href="section-23.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p><a href="http://www.wiseindex.com/" class="uri">http://www.wiseindex.com/</a><a href="section-23.html#fnref13" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -898,7 +941,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "section"
-}
+},
+"split_bib": false
 });
 });
 </script>

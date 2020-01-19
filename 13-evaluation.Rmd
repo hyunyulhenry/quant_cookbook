@@ -13,9 +13,7 @@ library(readxl)
 library(xts)
 library(timetk)
 
-url = paste0(
-  'https://images.aqr.com/-/media/AQR/Documents/Insights/',
-  'Data-Sets/Quality-Minus-Junk-Factors-Monthly.xlsx')
+url = 'https://images.aqr.com/-/media/AQR/Documents/Insights/Data-Sets/Quality-Minus-Junk-Factors-Monthly.xlsx'
 
 tf = tempfile(fileext = '.xlsx')
 download.file(url, tf, mode = 'wb')
@@ -247,7 +245,7 @@ df$QMJ %>% apply.monthly(., Return.cumulative) %>%
 
 ## 팩터 회귀분석 및 테이블로 나타내기
 
-포트폴리오 수익률에 대한 성과 평가만큼 중요한 것이, 수익률이 어디에서 발생했는가에 대한 요인을 분석하는 것입니다. 베타를 통한 개별 주식과 주식시장과의 관계를 시작으로, 수익률을 설명하기 위한 여러 모형들이 개발되고 발표되었습니다. 그중 일반적으로 많이 사용되는 모형은 기존의 CAPM에 사이즈 팩터(SMB), 밸류 팩터(HML)를 추가한 파마-프렌치의 3팩터 모형, 그리고 3팩터 모형에 모멘텀 팩터(UMD)를 추가한 카하트의 4팩터 모형입니다.
+포트폴리오 수익률에 대한 성과 평가만큼 중요한 것이, 수익률이 어디에서 발생했는가에 대한 요인을 분석하는 것입니다. 베타를 통한 개별 주식과 주식시장과의 관계를 시작으로, 수익률을 설명하기 위한 여러 모형들이 개발되고 발표되었습니다. 그중 일반적으로 많이 사용되는 모형은 기존의 CAPM에 사이즈 팩터(SMB), 밸류 팩터(HML)를 추가한 파마-프렌치의 3팩터 모형[@fama1993common], 그리고 3팩터 모형에 모멘텀 팩터(UMD)를 추가한 카하트의 4팩터 모형[@carhart1997persistence]입니다.
 
 QMJ 팩터를 위 4개 팩터에 회귀분석한 결과를 토대로, 퀄리티 팩터의 수익률에 대한 요인 분석을 해보겠습니다.
 

@@ -1,3 +1,29 @@
+```{r include=FALSE, cache=FALSE}
+set.seed(123)
+
+knitr::opts_chunk$set(
+  out.width = "70%",
+  fig.align = 'center',
+  fig.width = 6,
+  fig.asp = 0.618,  # 1 / phi
+  fig.show = 'hold',
+  warning = FALSE,
+  message = FALSE
+)
+
+if(!knitr:::is_html_output()) {
+  options("width"=56)
+  knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE
+    )
+  knitr::opts_chunk$set(fig.pos = 'h')
+}
+
+pdf.options(family = "Korea1deb")
+options(scipen = 5)
+options(digits = 4)
+```
 # 포트폴리오 구성
 
 종목별로 비중을 어떻게 배분하느냐에 따라 성과가 달라지므로, 종목의 선택 못지 않게 중요한 것이 포트폴리오를 구성하는 방법입니다. 최적 포트폴리오의 구성은 수식을 기반으로 최적화된 해를 찾습니다. 물론 엑셀의 해 찾기와 같은 기능을 사용해 간단한 형태의 최적화 구현이 가능하지만, 방대한 데이터를 다룰 경우에는 속도가 지나치게
@@ -380,8 +406,7 @@ knitr::kable(
   align = "c",
   caption = '최적화 결과 비교'
 ) %>%
-  kableExtra::kable_styling(latex_options = c("striped", "hold_position")) %>%
-  kableExtra::kable_styling(font_size = 7)
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
 세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 `r max(w_1)*100`%를 투자하는 편중된 결과가 나옵니다. 
@@ -468,8 +493,7 @@ knitr::kable(
   align = "c",
   caption = '최소 및 최대 비중제약 조건 후 결과 비교'
 ) %>%
-  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))  %>%
-  kableExtra::kable_styling(font_size = 8)
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
 최소 및 최대 제약조건을 추가한 경우도 세 가지 방법 모두 동일한 결과가 나오게 되며, 비중도 각각 5%와 20%로 제한되어 구석해 문제 또한 해결되었음이 확인됩니다.
@@ -596,7 +620,7 @@ dt = data.frame(
              '불필요')
 )
 
-dt %>% mutate_all(linebreak) %>% 
+dt %>%
   knitr::kable(
     col.names = c('방법', '목적함수', '제약조건', '표준화'),
     booktabs = TRUE,
@@ -604,8 +628,7 @@ dt %>% mutate_all(linebreak) %>%
     align = "c",
     caption = 'MDP 방법 비교'
 ) %>%
-  kableExtra::kable_styling(latex_options = c("striped", "hold_position")) %>%
-  kableExtra::kable_styling(font_size = 8)
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
 
@@ -636,8 +659,7 @@ knitr::kable(
   align = "c",
   caption = 'Amat과 bvec 차이 비교'
 ) %>%
-  kableExtra::kable_styling(latex_options = c("striped", "hold_position")) %>%
-  kableExtra::kable_styling(font_size = 8)
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```
 
 이해를 위해 Duality 방법의 제약조건을 행렬의 형태로 표현하면 다음과 같습니다.
@@ -909,7 +931,7 @@ rets 데이터에서 첫 번째 행은 미국 주식 수익률을, 다섯 번째
 
 ### `rp()` 함수를 이용한 최적화
 
-앞의 예제와 같이 특정 자산이 포트폴리오의 위험을 대부분 차지하는 문제를 막고, 모든 자산이 동일한 위험기여도를 가지는 포트폴리오가 위험균형 포트폴리오(Risk Parity Portfolio) 혹은 동일 위험기여도 포트폴리오(Equal Risk Contribution Portfolio)입니다. 이를 수식으로 쓰면 다음과 같습니다.
+앞의 예제와 같이 특정 자산이 포트폴리오의 위험을 대부분 차지하는 문제를 막고, 모든 자산이 동일한 위험기여도를 가지는 포트폴리오가 위험균형 포트폴리오(Risk Parity Portfolio)[@qian2011risk] 혹은 동일 위험기여도 포트폴리오(Equal Risk Contribution Portfolio)입니다. 이를 수식으로 쓰면 다음과 같습니다.
 
 $$RC_1 = RC_2 = \dots = RC_n$$
 $$\frac{\partial\sigma_p}{\partial w_1} \times w_1 = \frac{\partial\sigma_p}{\partial w_2} \times w_2

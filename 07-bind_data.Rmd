@@ -220,16 +220,17 @@ print(head(data_value))
 ```{r}
 data_value = data_value[colnames(data_value) %in%
                           c('PER', 'PBR', 'PCR', 'PSR')]
-rownames(data_value) = KOR_ticker[, '종목코드']
-
-print(head(data_value))
 
 data_value = data_value %>%
   mutate_all(list(~na_if(., Inf)))
 
+rownames(data_value) = KOR_ticker[, '종목코드']
+print(head(data_value))
+
 write.csv(data_value, 'data/KOR_value.csv')
 ```
 
-1. 열 이름이 가치지표에 해당하는 부분만 선택한 후 행 이름을 티커들로 변경합니다.
+1. 열 이름이 가치지표에 해당하는 부분만 선택합니다.
 2. 일부 종목은 재무 데이터가 0으로 표기되어 가치지표가 Inf로 계산되는 경우가 있습니다. `mutate_all()` 내에 `na_if()` 함수를 이용해 Inf 데이터를 NA로 변경합니다.
-3. data 폴더 내에 KOR_value.csv 파일로 저장합니다.
+3. 행 이름을 티커들로 변경합니다.
+4. data 폴더 내에 KOR_value.csv 파일로 저장합니다.

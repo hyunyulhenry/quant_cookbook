@@ -83,8 +83,7 @@ knitr::include_graphics('images/crawl_naver_news.png')
 library(rvest)
 library(httr)
 
-url = paste0('https://finance.naver.com/news/news_list.nhn?',
-             'mode=LSS2D&section_id=101&section_id2=258')
+url = 'https://finance.naver.com/news/news_list.nhn?mode=LSS2D&section_id=101&section_id2=258'
 data = GET(url)
 
 print(data)

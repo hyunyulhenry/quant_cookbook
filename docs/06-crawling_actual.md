@@ -72,7 +72,7 @@ print(price)
 
 ```
 ##            [,1]
-## 2019-08-23   NA
+## 2020-01-19   NA
 ```
 
 1. data 폴더 내에 KOR_price 폴더를 생성합니다.
@@ -97,12 +97,12 @@ print(head(data_html))
 ```
 
 ```
-## [1] "20170807|47500|48080|47440|47580|144365"
-## [2] "20170808|47980|48260|47480|47720|159592"
-## [3] "20170809|47400|47400|46240|46280|291108"
-## [4] "20170810|46200|46320|45460|45900|459723"
-## [5] "20170811|45120|45300|44220|44620|508146"
-## [6] "20170814|45120|45400|44720|45000|383712"
+## [1] "20180104|52120|52180|50640|51080|233909"
+## [2] "20180105|51300|52120|51200|52120|189623"
+## [3] "20180108|52400|52520|51500|52020|167673"
+## [4] "20180109|51460|51720|49980|50400|360272"
+## [5] "20180110|50500|50520|48640|48840|371336"
+## [6] "20180111|48200|49260|48020|48240|502476"
 ```
 
 1. `paste0()` 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.
@@ -122,14 +122,14 @@ print(head(price))
 
 ```
 ## # A tibble: 6 x 6
-##   `20170807` `47500` `48080` `47440` `47580` `144365`
+##   `20180104` `52120` `52180` `50640` `51080` `233909`
 ##        <dbl>   <dbl>   <dbl>   <dbl>   <dbl>    <dbl>
-## 1   20170808   47980   48260   47480   47720   159592
-## 2   20170809   47400   47400   46240   46280   291108
-## 3   20170810   46200   46320   45460   45900   459723
-## 4   20170811   45120   45300   44220   44620   508146
-## 5   20170814   45120   45400   44720   45000   383712
-## 6   20170816   46220   46380   46000   46200   438273
+## 1   20180105   51300   52120   51200   52120   189623
+## 2   20180108   52400   52520   51500   52020   167673
+## 3   20180109   51460   51720   49980   50400   360272
+## 4   20180110   50500   50520   48640   48840   371336
+## 5   20180111   48200   49260   48020   48240   502476
+## 6   20180112   48240   48480   46760   48200   545409
 ```
 
 readr 패키지의 `read_delim()` 함수를 쓰면 구분자로 이루어진 데이터를 테이블로 쉽게 변경할 수 있습니다. 데이터를 확인해보면 테이블 형태로 변경되었으며 각 열은 날짜, 시가, 고가, 저가, 종가, 거래량을 의미합니다. 이 중 우리가 필요한 날짜와 종가를 선택한 후 데이터 클렌징을 해줍니다.
@@ -150,12 +150,12 @@ print(tail(price))
 
 ```
 ##            Price
-## 2019-08-16 43900
-## 2019-08-19 43600
-## 2019-08-20 44450
-## 2019-08-21 44500
-## 2019-08-22 44050
-## 2019-08-23 44000
+## 2020-01-10 59500
+## 2020-01-13 60000
+## 2020-01-14 60000
+## 2020-01-15 59000
+## 2020-01-16 60700
+## 2020-01-17 61300
 ```
 
 1. 날짜에 해당하는 첫 번째 열과, 종가에 해당하는 다섯 번째 열만 선택해 저장합니다.
@@ -270,8 +270,7 @@ ifelse(dir.exists('data/KOR_fs'), FALSE,
 
 Sys.setlocale("LC_ALL", "English")
 
-url = paste0('http://comp.fnguide.com/SVO2/ASP/',
-             'SVD_Finance.asp?pGB=1&gicode=A005930')
+url = paste0('http://comp.fnguide.com/SVO2/ASP/SVD_Finance.asp?pGB=1&gicode=A005930')
 
 data = GET(url)
 data = data %>%
@@ -288,47 +287,47 @@ lapply(data, function(x) {
 
 ```
 ## [[1]]
-##   IFRS(연결)   2016/12   2017/12   2018/12   2019/06  전년동기 전년동기(%)
-## 1     매출액 2,018,667 2,395,754 2,437,714 1,085,127 1,190,464        -8.8
-## 2   매출원가 1,202,777 1,292,907 1,323,944   686,911   631,841         8.7
-## 3 매출총이익   815,890 1,102,847 1,113,770   398,215   558,623       -28.7
+##   IFRS(연결)   2016/12   2017/12   2018/12   2019/09  전년동기 전년동기(%)
+## 1     매출액 2,018,667 2,395,754 2,437,714 1,705,161 1,845,064        -7.6
+## 2   매출원가 1,202,777 1,292,907 1,323,944 1,086,850   983,784        10.5
+## 3 매출총이익   815,890 1,102,847 1,113,770   618,311   861,279       -28.2
 ## 
 ## [[2]]
-##   IFRS(연결) 2018/09 2018/12 2019/03 2019/06 전년동기 전년동기(%)
-## 1     매출액 654,600 592,651 523,855 561,271  584,827        -4.0
-## 2   매출원가 351,944 340,160 327,465 359,447  312,746        14.9
-## 3 매출총이익 302,656 252,491 196,391 201,824  272,081       -25.8
+##   IFRS(연결) 2018/12 2019/03 2019/06 2019/09 전년동기 전년동기(%)
+## 1     매출액 592,651 523,855 561,271 620,035  654,600        -5.3
+## 2   매출원가 340,160 327,465 359,447 399,939  351,944        13.6
+## 3 매출총이익 252,491 196,391 201,824 220,096  302,656       -27.3
 ## 
 ## [[3]]
 ##                          IFRS(연결)   2016/12   2017/12   2018/12
 ## 1                              자산 2,621,743 3,017,521 3,393,572
 ## 2 유동자산계산에 참여한 계정 펼치기 1,414,297 1,469,825 1,746,974
 ## 3                          재고자산   183,535   249,834   289,847
-##     2019/06
-## 1 3,429,401
-## 2 1,734,335
-## 3   312,470
+##     2019/09
+## 1 3,533,860
+## 2 1,860,421
+## 3   309,088
 ## 
 ## [[4]]
-##                          IFRS(연결)   2018/09   2018/12   2019/03
-## 1                              자산 3,371,958 3,393,572 3,450,679
-## 2 유동자산계산에 참여한 계정 펼치기 1,762,820 1,746,974 1,773,885
-## 3                          재고자산   282,428   289,847   314,560
-##     2019/06
-## 1 3,429,401
-## 2 1,734,335
-## 3   312,470
+##                          IFRS(연결)   2018/12   2019/03   2019/06
+## 1                              자산 3,393,572 3,450,679 3,429,401
+## 2 유동자산계산에 참여한 계정 펼치기 1,746,974 1,773,885 1,734,335
+## 3                          재고자산   289,847   314,560   312,470
+##     2019/09
+## 1 3,533,860
+## 2 1,860,421
+## 3   309,088
 ## 
 ## [[5]]
-##                     IFRS(연결) 2016/12 2017/12 2018/12 2019/06
-## 1     영업활동으로인한현금흐름 473,856 621,620 670,319 118,392
-## 2                   당기순손익 227,261 421,867 443,449 102,242
+##                     IFRS(연결) 2016/12 2017/12 2018/12 2019/09
+## 1     영업활동으로인한현금흐름 473,856 621,620 670,319 256,658
+## 2                   당기순손익 227,261 421,867 443,449 165,118
 ## 3 법인세비용차감전계속사업이익                                
 ## 
 ## [[6]]
-##                     IFRS(연결) 2018/09 2018/12 2019/03 2019/06
-## 1     영업활동으로인한현금흐름 155,497 224,281  52,443  65,949
-## 2                   당기순손익 131,507  84,622  50,436  51,806
+##                     IFRS(연결) 2018/12 2019/03 2019/06 2019/09
+## 1     영업활동으로인한현금흐름 224,281  52,443  65,949 138,266
+## 2                   당기순손익  84,622  50,436  51,806  62,877
 ## 3 법인세비용차감전계속사업이익
 ```
 
@@ -364,7 +363,7 @@ print(names(data_IS))
 ```
 
 ```
-## [1] "IFRS(연결)"  "2016/12"     "2017/12"     "2018/12"     "2019/06"    
+## [1] "IFRS(연결)"  "2016/12"     "2017/12"     "2018/12"     "2019/09"    
 ## [6] "전년동기"    "전년동기(%)"
 ```
 
@@ -555,9 +554,7 @@ print(value_index)
 ```r
 library(readr)
 
-url =
-  paste0('http://comp.fnguide.com/SVO2/ASP/SVD_main.asp',
-         '?pGB=1&gicode=A005930')
+url = 'http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&gicode=A005930'
 data = GET(url)
 
 price = read_html(data) %>%
@@ -569,7 +566,7 @@ print(price)
 ```
 
 ```
-## [1] 44050
+## [1] 61300
 ```
 
 1. url을 입력한 후, `GET()` 함수를 이용해 데이터를 불러옵니다.
@@ -644,7 +641,7 @@ print(data_value)
 
 ```
 ##   PER   PBR   PCR   PSR 
-## 5.991 1.061 3.923 1.079
+## 8.338 1.477 5.459 1.501
 ```
 
 분자에는 현재 주가를 입력하며, 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 단, 주가는 원 단위, 재무 데이터는 억 원 단위이므로, 둘 사이에 단위를 동일하게 맞춰주기 위해 분모에 억을 곱합니다. 또한 가치지표가 음수인 경우는 NA로 변경해줍니다.
@@ -795,342 +792,3 @@ for(i in 1 : nrow(KOR_ticker) ) {
 ```
 
 전 종목 주가 데이터를 받는 과정과 동일하게 KOR_ticker.csv 파일을 불러온 후 for loop를 통해 i 값이 변함에 따라 티커를 변경해가며 모든 종목의 재무제표 및 가치지표를 다운로드합니다. `tryCatch()` 함수를 이용해 오류가 발생하면 NA로 이루어진 빈 데이터를 저장한 후 다음 루프로 넘어가게 됩니다. data/KOR_fs 폴더에는 전 종목의 재무제표 데이터가 저장되고, data/KOR_value 폴더에는 전 종목의 가치지표 데이터가 csv 형태로 저장됩니다.
-
-## 야후 파이낸스 데이터 구하기
-
-크롤링을 이용해 데이터를 수집할 때 웹페이지 구조가 변경되는 경우에 주의해야 합니다. 이런 경우에는 변경된 구조에 맞게 코드를 다시 짜야 합니다. 최악의 경우는 웹사이트가 폐쇄되는 경우입니다. 실제로 투자자들이 많이 사용하던 구글 파이낸스가 2018년 서비스를 중단함에 따라 이를 이용하던 많은 사용자들이 혼란을 겪기도 했습니다.
-
-이러한 상황에 대비해 데이터를 구할 수 있는 예비 웹사이트를 알아두어 테스트 코드를 작성해둘 필요가 있습니다. 이를 위해 야후 파이낸스에서 데이터 구하는 법을 살펴보겠습니다. 주가 데이터는 `getSymbols()` 함수를 통해 다운로드하는 방법을 이미 살펴보았으며, 웹페이지에서 재무제표를 크롤링하는 방법 및 가치지표를 계산하는 방법을 알아보겠습니다.
-
-
-### 재무제표 다운로드
-
-먼저 야후 파이낸스에 접속해 삼성전자 티커에 해당하는 005930.KS를 입력합니다. 그 후 재무제표 데이터에 해당하는 [Financials] 항목을 선택합니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_yahoo.png" alt="야후 파이낸스 재무제표" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-29)야후 파이낸스 재무제표</p>
-</div>
-
-손익계산서(Income Statement), 재무상태표(Balance Sheet), 현금흐름표(Cash Flow) 총 세 개
-지표가 있습니다. 각각의 url은 표 \@ref(tab:yahoofs)와 같습니다.
-
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 7px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:yahoofs)야후 파이낸스 재무제표 url</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 항목 </th>
-   <th style="text-align:center;"> url </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> Income Statement </td>
-   <td style="text-align:center;"> https://finance.yahoo.com/quote/005930.KS/financials?p=005930.KS </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> Balance Sheet </td>
-   <td style="text-align:center;"> https://finance.yahoo.com/quote/005930.KS/balance-sheet?p=005930.KS </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> Cash Flow </td>
-   <td style="text-align:center;"> https://finance.yahoo.com/quote/005930.KS/cash-flow?p=005930.KS </td>
-  </tr>
-</tbody>
-</table>
-
-각 페이지에서 Xpath를 이용해 재무제표에 해당하는 테이블 부분만을 선택해 추출할 수 있습니다. 세 개 페이지의 해당 Xpath는 모두 아래와 같이 동일합니다.
-
-
-```css
-//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/table
-```
-
-
-<style type="text/css">
-//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/table
-</style>
-
-위 정보를 이용해 재무제표를 다운로드하는 과정은 다음과 같습니다.
-
-
-```r
-library(httr)
-library(rvest)
-
-url_IS = paste0(
-  'https://finance.yahoo.com/quote/005930.KS/financials?p=',
-  '005930.KS')
-
-url_BS = paste0(
-  'https://finance.yahoo.com/quote/005930.KS/balance-sheet?p=',
-  '005930.KS')
-
-url_CF = paste0(
-  'https://finance.yahoo.com/quote/005930.KS/cash-flow?p=',
-  '005930.KS')
-
-yahoo_finance_xpath =
-  '//*[@id="Col1-1-Financials-Proxy"]/section/div[3]/table'
-
-data_IS = GET(url_IS) %>%
-  read_html() %>%
-  html_node(xpath = yahoo_finance_xpath) %>%
-  html_table()
-
-data_BS = GET(url_BS) %>%
-  read_html() %>%
-  html_node(xpath = yahoo_finance_xpath) %>%
-  html_table()
-
-data_CF = GET(url_CF) %>%
-  read_html() %>%
-  html_node(xpath = yahoo_finance_xpath) %>%
-  html_table()
-
-data_fs = rbind(data_IS, data_BS, data_CF)
-
-print(head(data_fs))
-```
-
-```
-##                     X1                 X2                 X3
-## 1              Revenue         12/31/2018         12/31/2017
-## 2        Total Revenue    243,771,415,000    239,575,376,000
-## 3      Cost of Revenue    132,394,411,000    129,290,661,000
-## 4         Gross Profit    111,377,004,000    110,284,715,000
-## 5   Operating Expenses Operating Expenses Operating Expenses
-## 6 Research Development     18,354,080,000     16,355,612,000
-##                   X4                 X5
-## 1         12/31/2016         12/31/2015
-## 2    201,866,745,000    200,653,482,000
-## 3    120,277,715,000    123,482,118,000
-## 4     81,589,030,000     77,171,364,000
-## 5 Operating Expenses Operating Expenses
-## 6     14,111,381,000     13,705,695,000
-```
-
-1. 앞서 구한 URL을 저장합니다.
-2. `GET()` 함수를 통해 페이지 정보를 받아온 후 `read_html()` 함 수를 통해 HTML 정보를 받아옵니다.
-3. `html_node()` 함수 내에서 앞서 구한 Xpath를 이용해 테이블 부분의 HTML을 선택한 후 `html_table()`을 통해 테이블 형태만 추출합니다.
-4. 세 개 페이지에 위 내용을 동일하게 적용한 후 `rbind()`를 이용해 행으로 묶어줍니다.
-
-다운로드한 데이터를 클렌징합니다. 데이터 클렌징 과정은 앞 예시와 거의 동일합니다.
-
-
-```r
-library(stringr)
-
-data_fs = data_fs[!duplicated(data_fs[, 1]), ]
-rownames(data_fs) = NULL
-rownames(data_fs) = data_fs[, 1]
-
-colnames(data_fs) = data_fs[1, ]
-data_fs = data_fs[-1, ]
-
-data_fs = data_fs[, substr(colnames(data_fs), 1,2) == "12"]
-
-data_fs = sapply(data_fs, function(x) {
-  str_replace_all(x, ',', '') %>%
-    as.numeric()
-  }) %>%
-  data.frame(., row.names = rownames(data_fs))
-
-print(head(data_fs))
-```
-
-```
-##                                     X12.31.2018  X12.31.2017  X12.31.2016
-## Total Revenue                      243771415000 239575376000 201866745000
-## Cost of Revenue                    132394411000 129290661000 120277715000
-## Gross Profit                       111377004000 110284715000  81589030000
-## Operating Expenses                           NA           NA           NA
-## Research Development                18354080000  16355612000  14111381000
-## Selling General and Administrative  32688565000  38947445000  37235161000
-##                                     X12.31.2015
-## Total Revenue                      200653482000
-## Cost of Revenue                    123482118000
-## Gross Profit                        77171364000
-## Operating Expenses                           NA
-## Research Development                13705695000
-## Selling General and Administrative  36081636000
-```
-
-1. `!duplicated()` 함수를 사용해 중복되지 않는 계정명만 선택합니다.
-2. 행 이름을 초기화한 후 첫 번째 열의 계정명을 행 이름으로 변경합니다. 그 후 첫 번째 열은 삭제합니다.
-3. 열 이름을 첫 번째 행으로 변경한 후 해당 행은 삭제합니다.
-4. `substr()` 함수를 이용해 처음 두 글자가 12인 열, 즉 12월 결산 데이터만 선택
-합니다. 
-5. `sapply()` 함수를 이용해 각 열에 stringr 패키지의 `str_replace_all()` 함수를 적용해 콤마(,)를 제거한 후 `as.numeric()` 함수를 통해 숫자형 데이터로 변경합니다.
-6. `data.frame()` 함수를 이용해 데이터 프레임 형태로 만들어주며, 행 이름은 기존 내용을 그대로 유지합니다.
-
-### 가치지표 계산하기
-
-가치지표를 계산하는 과정도 앞선 예시와 거의 동일합니다.
-
-
-```r
-value_type =
-  c('Net Income Applicable To Common Shares', # Earnings
-    "Total stockholders' equity", # Book Value
-    'Total Cash Flow From Operating Activities', # Cash Flow
-    'Total Revenue') # Sales
-
-value_index = data_fs[match(value_type, rownames(data_fs)), 1]
-
-print(value_index)
-```
-
-```
-## [1]  43890877000 240068993000  67031863000 243771415000
-```
-
-먼저 분모에 해당하는 항목을 저장한 후 `match()` 함수를 이용해 해당 항목이 위치하는 지점을 찾아 데이터를 선택합니다. 기존 예제와 달리 야후 파이낸스의 경우 최근년도 데이터가 가장 왼쪽에 있으므로 첫 번째 열을 선택합니다.
-
-다음으로 현재 주가 및 상장주식수는 [Statistics] 항목에서 구할 수 있습니다. 먼저 현재 주가를 크롤링하는 방법입니다.
-
-
-```r
-url = paste0(
-  'https://finance.yahoo.com/quote/005930.KS/',
-  'key-statistics?p=005930.KS')
-
-data = GET(url)
-
-price = read_html(data) %>%
-  html_node(
-    xpath =
-    '//*[@id="quote-header-info"]/div[3]/div/div/span[1]') %>%
-  html_text() %>%
-  parse_number()
-
-print(price)
-```
-
-```
-## [1] 44100
-```
-
-1. 해당 페이지 url을 저장한 후 `GET()` 함수를 통해 페이지 정보를 받습니다.
-2. `read_html()` 함수를 이용해 HTML 데이터를 받고, `html_node()` 함수와 Xpath를 이용해 현재 주가에 해당하는 부분을 추출합니다. 주가는 페이지 상단에서 확인할 수 있습니다.
-3. `html_text()` 함수를 이용해 텍스트 데이터만 추출한 후 `parse_number()` 함수를 통해 콤마(,)를 삭제하고 숫자형으로 변경합니다.
-
-이처럼 주가 데이터는 상대적으로 쉽게 구할 수 있습니다. 다음은 상장주식수 데이터를 크롤링하는 방법입니다.
-
-
-```r
-share_xpath = 
-  paste0('//*[@id="Col1-0-KeyStatistics-Proxy"]/section',
-  '/div[2]/div[2]/div/div[2]/div/table/tbody/tr[3]/td[2]')
-
-share_yahoo = read_html(data) %>% 
-  html_node(xpath = share_xpath) %>%
-  html_text() 
-
-print(share_yahoo)
-```
-
-```
-## [1] "5.97B"
-```
-
-상장주식수는 Shares Outstanding 부분에서 찾을 수 있습니다. 해당 지점의 Xpath를 이용해 데이터를 찾으면 5.97B가 추출됩니다. 이 중 숫자 뒤 알파벳 부분이 단위에 해당하며, 각 문자별 단위는 다음과 같습니다.
-
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-36)발행주식수 단위</caption>
- <thead>
-  <tr>
-   <th style="text-align:center;"> 알파벳 </th>
-   <th style="text-align:center;"> 단위 </th>
-   <th style="text-align:center;"> 숫자 </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:center;"> M </td>
-   <td style="text-align:center;"> 백만 (Million) </td>
-   <td style="text-align:center;"> 1,000,000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> B </td>
-   <td style="text-align:center;"> 십억 (Billion) </td>
-   <td style="text-align:center;"> 1,000,000,000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:center;"> T </td>
-   <td style="text-align:center;"> 일조 (Triliion) </td>
-   <td style="text-align:center;"> 1,000,000,000,000 </td>
-  </tr>
-</tbody>
-</table>
-
-따라서 알파벳을 해당하는 숫자로 변경한 후 앞의 숫자에 곱해야 제대로 된 상장주식수가 계산됩니다.
-
-
-
-
-```r
-library(stringr)
-
-share_unit = str_match(share_yahoo, '[a-zA-Z]')
-print(share_unit)
-```
-
-```
-##      [,1]
-## [1,] "B"
-```
-
-```r
-share_multiplier = switch(share_unit, 
-       'M' = { 1000000 },
-       'B' = { 1000000000 },
-       'T' = { 1000000000000 }
-)
-print(share_multiplier)
-```
-
-```
-## [1] 1000000000
-```
-
-먼저 `str_match()` 함수 내에서 정규표현식을 사용해 알파벳을 추출한 후 share_unit에 저장합니다. 그 후 switch 구문을 이용해 알파벳에 해당하는 숫자를 share_multiplier에 저장합니다.
-
-
-
-
-```r
-share_yahoo = share_yahoo %>% 
-  str_match('[0-9.0-9]*') %>% as.numeric()
-share_yahoo = share_yahoo * share_multiplier
-
-print(share_yahoo)
-```
-
-```
-## [1] 5970000000
-```
-
-숫자 부분과 위에서 구한 단위 부분을 곱해 최종 발행주식수를 구하겠습니다. 먼저 `str_match()` 함수 내에 정규표현식을 이용해 숫자에 해당하는 부분만 추출한 후 `as.numeric()`을 통해 숫자 형태로 변경합니다. 그 후 단위에 해당하는 숫자를 곱해 최종값을 구합니다.
-
-위에서 구한 재무 데이터, 현재 주가, 발행주식수를 이용해 가치지표를 계산하도록 하겠습니다.
-
-
-```r
-data_value_yahoo = price / (value_index * 1000 / share_yahoo)
-names(data_value_yahoo) = c('PER', 'PBR', 'PCR', 'PSR')
-
-data_value_yahoo[data_value_yahoo < 0] = NA
-print(data_value_yahoo)
-```
-
-```
-##   PER   PBR   PCR   PSR 
-## 5.998 1.097 3.928 1.080
-```
-
-분자에는 주가를 입력하고 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 야후 파이낸스의 재무 데이터는 천 원 단위이므로, 둘 사이에 단위를 동일하게 맞춰주기 위해 분모에 천을 곱합니다. 또한 가치지표가 음수인 경우는 NA로 변경해줍니다.
-
-결과를 확인해보면 네 가지 가치지표가 잘 계산되었습니다. Company Guide에서 구한값 5.99, 1.06, 3.92, 1.08와 재무 데이터의 차이로 인해 미세한 오차가 있지만, 이는 무시해도 될 정도입니다.
-
-이 방법 또한 URL의 티커 부분만 변경하면 전 종목의 재무제표와 가치지표 데이터를 다운로드할 수 있습니다. 그러나 코스피 종목은 끝이 .KS, 코스닥 종목은 끝이 .KQ가 되어야 합니다. 자세한 코드는 생략하겠습니다.

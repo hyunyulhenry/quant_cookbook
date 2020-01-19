@@ -7,10 +7,10 @@ output: bookdown::gitbook
 documentclass: book
 fontsize: 12pt
 bibliography: [book.bib, article.bib]
-biblio-style: apalike
+biblio-style: "apalike"
 link-citations: yes
 latex_engine: xelatex
-github-repo: rstudio/bookdown-demo
+github-repo: hyunyulhenry/quant_cookbook
 ---
 
 # Welcome {-}
@@ -21,9 +21,17 @@ knitr::include_graphics('images/cover.png')
 
 [R을 이용한 퀀트 투자 포트폴리오 만들기 구매 링크](https://book.naver.com/bookdb/book_detail.nhn?bid=15369836)
 
-본 페이지는 **R을 이용한 퀀트 투자 포트폴리오 만들기**의 웹사이트 입니다. 책의 수정 사항이 있을시 즉시 반영할 예정이며, 책에서 다루지 못했던 추가적인 내용도 지속적으로 업데이트 할 예정입니다. 책 발간 이후 업데이트 내용은 다음과 같습니다.
+본 페이지는 **R을 이용한 퀀트 투자 포트폴리오 만들기**의 웹사이트 입니다. 책의 수정 사항이 있을시 즉시 반영할 예정이며, 책에서 다루지 못했던 추가적인 내용도 지속적으로 업데이트 할 예정입니다.
 
-- 2019년 7월 29일: [거래소 데이터 정리하기] 부분에서 `substr()` 함수 대신 stringr 패키지의 `str_sub()` 함수를 사용하여 코드를 훨씬 간결하게 표현했습니다.
+<div style="background-color:#F7F7F7;padding: 20px">
+
+책 발간 이후 업데이트 내용은 다음과 같습니다.
+
+- 2020년 1월 19일: [거래소 데이터 정리하기] 부분에서 `substr()` 함수 대신 stringr 패키지의 `str_sub()` 함수를 사용하여 코드를 훨씬 간결하게 표현했습니다. 또한 종목코드 끝이 0이 아닐 경우 우선주인 점을 이용하여 더욱 쉽게 클렌징 처리를 하였습니다.
+
+- 2020년 1월 18일: 야후 파이낸스 웹페이지의 구조가 바뀌어 동적 크롤링을 통해서만 데이터 수집이 가능하게 되었습니다. 이는 본 책에서는 다루지 않으므로, [금융 데이터 수집하기 (심화)]에서 해당 부분을 삭제하였습니다.
+
+</div>
 
 ## 지은이 소개 {-}
 

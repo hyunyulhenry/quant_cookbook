@@ -10,12 +10,5 @@ bookdown::gitbook:
         <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
     edit: null
     download: no
-    # download: ["pdf", "epub"]
-#bookdown::pdf_book:
-  #includes:
-    #in_header: preamble.tex
-  #latex_engine: xelatex
-  #citation_package: natbib
-  #toc: TRUE
-  #keep_tex: yes
-  #pandoc_args: --top-level-division=chapter
+    split_bib: no
+

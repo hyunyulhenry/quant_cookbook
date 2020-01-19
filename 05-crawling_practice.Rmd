@@ -314,18 +314,14 @@ print(head(KOR_ticker))
 library(stringr)
 
 KOR_ticker[grepl('스팩', KOR_ticker[, '종목명']), '종목명']  
-KOR_ticker[str_sub(KOR_ticker[, '종목명'], -1, -1) == '우', '종목명']
-KOR_ticker[str_sub(KOR_ticker[, '종목명'], -2, -1) == '우B', '종목명']
-KOR_ticker[str_sub(KOR_ticker[, '종목명'], -2, -1) == '우C', '종목명']
+KOR_ticker[str_sub(KOR_ticker[, '종목코드'], -1, -1) != 0, '종목명']
 ```
 
-`grepl()` 함수를 통해 종목명에 ‘스팩’이 들어가는 종목을 찾고, `stringr` 패키지의 `str_sub()` 함수를 통해 종목명 끝이 **우**, **우B**, **우C**인 우선주 종목을 찾을 수 있습니다. 데이터 내에서 해당 데이터들을 제거^[해당 과정에서 미래에셋대우, 연우 등 의도치 않은 종목 역시 제거됩니다. 그러나 이러한 종목수가 그리 많지 않으므로 투자에 있어 중요하지는 않습니다.]하겠습니다.
+`grepl()` 함수를 통해 종목명에 ‘스팩’이 들어가는 종목을 찾고, `stringr` 패키지의 `str_sub()` 함수를 통해 종목코드 끝이 0이 아닌 우선주 종목을 찾을 수 있습니다.
 
 ```{r}
 KOR_ticker = KOR_ticker[!grepl('스팩', KOR_ticker[, '종목명']), ]  
-KOR_ticker = KOR_ticker[str_sub(KOR_ticker[, '종목명'], -1, -1) != '우', ]
-KOR_ticker = KOR_ticker[str_sub(KOR_ticker[, '종목명'], -2, -1) != '우B', ]
-KOR_ticker = KOR_ticker[str_sub(KOR_ticker[, '종목명'], -2, -1) != '우C', ]
+KOR_ticker = KOR_ticker[str_sub(KOR_ticker[, '종목코드'], -1, -1) == 0, ]
 ```
 
 마지막으로 행 이름을 초기화한 후 정리된 데이터를 csv 파일로 저장합니다.
@@ -369,9 +365,7 @@ knitr::include_graphics('images/crawl_practice_wics3.png')
 ```{r message = FALSE}
 library(jsonlite)
 
-url = paste0(
-  'http://www.wiseindex.com/Index/GetIndexComponets',
-  '?ceil_yn=0&dt=20190607&sec_cd=G10')
+url = 'http://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt=20190607&sec_cd=G10'
 data = fromJSON(url)
 
 lapply(data, head)

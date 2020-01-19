@@ -1,4 +1,5 @@
 
+
 # 포트폴리오 구성
 
 종목별로 비중을 어떻게 배분하느냐에 따라 성과가 달라지므로, 종목의 선택 못지 않게 중요한 것이 포트폴리오를 구성하는 방법입니다. 최적 포트폴리오의 구성은 수식을 기반으로 최적화된 해를 찾습니다. 물론 엑셀의 해 찾기와 같은 기능을 사용해 간단한 형태의 최적화 구현이 가능하지만, 방대한 데이터를 다룰 경우에는 속도가 지나치게
@@ -57,7 +58,7 @@ cor(rets) %>%
            mar = c(0,0,0.5,0))
 ```
 
-<img src="11-portfolio_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="11-portfolio_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
 
 각 ETF의 수익률 간 상관관계를 살펴보면 같은 자산군 내에서는 강한 상관관계를 보이며, 주식과 채권 간에는 매우 낮은 상관관계를 보입니다. 또한 주식과 리츠 간에도 꽤 높은 상관관계를 보입니다.
 
@@ -87,7 +88,7 @@ R에서 가장 손쉽게 최적화 작업을 수행하는 방법은 nloptr 패�
 
 
 
-Table: (\#tab:unnamed-chunk-5)`slsqp()` 함수 목적함수와 제약조건
+Table: (\#tab:unnamed-chunk-6)`slsqp()` 함수 목적함수와 제약조건
 
   목적함수           제약조건      
 -------------  --------------------
@@ -190,8 +191,8 @@ print(result$par)
 ```
 
 ```
-##  [1]  1.527e-01 -1.195e-17 -1.114e-16  1.039e-17 -2.941e-17  7.838e-01
-##  [7]  1.406e-18  4.758e-17  4.534e-19  6.354e-02
+##  [1]  1.543e-01  1.168e-21 -5.397e-21  7.174e-22 -1.891e-21  7.824e-01
+##  [7]  6.540e-21  3.777e-22 -5.644e-22  6.324e-02
 ```
 
 ```r
@@ -199,7 +200,7 @@ print(result$value)
 ```
 
 ```
-## [1] 0.000009639
+## [1] 0.000009552
 ```
 
 위에서 만들어진 함수들을 바탕으로 최적화 작업을 실행합니다. 초기값인 x0에는 먼저 동일한 비중들을 입력합니다. 예제에서는 종목이 10개 이므로, x0값에는 `rep(0.1, 10)` 인 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1을 입력합니다. 최소화하고자 하는 목적함수 fn에는 위에서 구성한 objective 함수를 입력합니다. 부등위 제약조건과 등위 제약조건에도 각각 위에서 구성한 hin.objective와 heq.objective 함수를 입력합니다.
@@ -218,7 +219,7 @@ print(w_1)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.1527 0.0000 0.0000 0.0000 0.0000 0.7838 0.0000 0.0000 0.0000 0.0635
+## 0.1543 0.0000 0.0000 0.0000 0.0000 0.7824 0.0000 0.0000 0.0000 0.0632
 ```
 
 자산들의 투자비중은 result$par를 통해 추출한 후, `round()` 함수를 이용해 반올림합니다. 마지막으로 이름에 종목명을 입력합니다. 계산된 비중으로 포트폴리오를 구성하면 포트폴리오의 비중이 최소가 됩니다.
@@ -370,8 +371,8 @@ print(result$solution)
 ```
 
 ```
-##  [1]  1.527e-01  6.200e-18 -4.454e-19  6.558e-18  5.011e-18  7.838e-01
-##  [7]  4.614e-18  3.114e-18  0.000e+00  6.354e-02
+##  [1]  1.543e-01 -1.288e-18  5.106e-19  5.570e-19 -7.890e-18  7.824e-01
+##  [7] -4.459e-18 -9.018e-19  0.000e+00  6.324e-02
 ```
 
 ```r
@@ -379,7 +380,7 @@ print(result$value)
 ```
 
 ```
-## [1] 0.000004819
+## [1] 0.000004776
 ```
 
 위에 입력된 내역들을 `solve.QP()` 함수에 넣어 최적화 값을 찾아줍니다. 결과 중 \$solution은 최적화된 지점의 해, 즉 최소분산 포트폴리오를 구성하는 자산들의 투자비중을 의미합니다. \$value는 \$solution에서 산출된 값을 목적함수에 입력했을때 나오는 결괏값으로서, 포트폴리오의 분산을 의미합니다.
@@ -395,7 +396,7 @@ print(w_2)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.1527 0.0000 0.0000 0.0000 0.0000 0.7838 0.0000 0.0000 0.0000 0.0635
+## 0.1543 0.0000 0.0000 0.0000 0.0000 0.7824 0.0000 0.0000 0.0000 0.0632
 ```
 
 자산들의 투자비중은 result$solution을 통해 추출한 후 `round()` 함수를 이용해 반올림합니다. 마지막으로 이름에 종목명을 입력합니다. 계산된 비중으로 포트폴리오를 구성하면 포트폴리오의 비중이 최소화됩니다.
@@ -477,7 +478,7 @@ print(w_3)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.1527 0.0000 0.0000 0.0000 0.0000 0.7838 0.0000 0.0000 0.0000 0.0635
+## 0.1543 0.0000 0.0000 0.0000 0.0000 0.7824 0.0000 0.0000 0.0000 0.0632
 ```
 
 `optimalPortfolio()` 함수 내부에 분산-공분산 행렬을 입력합니다. type 부분에 최소분산 포트폴리오에 해당하는 minvol을 입력하며, constraint에는 각 자산의 비중이 0보다 큰 제약조건인 lo(Long Only)를 입력합니다. 비중의 합이 1인 제약조건은 자동적으로 적용이 됩니다.
@@ -488,8 +489,8 @@ print(w_3)
 
 아래 표는 `slsqp()`, `solve.QP()`, `optimalPortfolio()`를 이용하여 구한 값들의 비교입니다.
 
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 7px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-18)최적화 결과 비교</caption>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:unnamed-chunk-19)최적화 결과 비교</caption>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -508,47 +509,47 @@ print(w_3)
 <tbody>
   <tr>
    <td style="text-align:left;"> slsqp </td>
-   <td style="text-align:center;"> 0.1527 </td>
+   <td style="text-align:center;"> 0.1543 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.7838 </td>
+   <td style="text-align:center;"> 0.7824 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.0635 </td>
+   <td style="text-align:center;"> 0.0632 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> solve.QP </td>
-   <td style="text-align:center;"> 0.1527 </td>
+   <td style="text-align:center;"> 0.1543 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.7838 </td>
+   <td style="text-align:center;"> 0.7824 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.0635 </td>
+   <td style="text-align:center;"> 0.0632 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> optimalPortfolio </td>
-   <td style="text-align:center;"> 0.1527 </td>
+   <td style="text-align:center;"> 0.1543 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.7838 </td>
+   <td style="text-align:center;"> 0.7824 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.0635 </td>
+   <td style="text-align:center;"> 0.0632 </td>
   </tr>
 </tbody>
 </table>
 
-세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.38%를 투자하는 편중된 결과가 나옵니다. 
+세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.24%를 투자하는 편중된 결과가 나옵니다. 
 
 
 ```r
@@ -561,7 +562,7 @@ data.frame(w_1) %>%
   xlab(NULL) + ylab(NULL)
 ```
 
-<img src="11-portfolio_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="11-portfolio_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
 
 이처럼 변동성이 가장 낮은 종목에 대부분의 비중이 투자되는 구석해(Corner Solution) 문제를 해결하기 위해 각 자산의 최소 및 최대 투자비중 제약조건을 추가해 줄 필요가 있습니다.
 
@@ -585,8 +586,8 @@ print(w_4)
 ```
 
 ```
-##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
-## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10
+##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
+## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1997 0.1003
 ```
 
 함수의 마지막에 lower와 upper 제약조건을 추가로 입력하면 해당 값 사이에서 최적화를 만족하는 해를 찾게 되며, 해당 예에서는 5%와 20% 사이에서 해를 찾게 됩니다. 추가로 입력한 제약조건에 맞게, 최소 투자비중은 5%이며, 최대 투자비중은 20%임을 확인할 수 있습니다.
@@ -617,8 +618,8 @@ print(w_5)
 ```
 
 ```
-##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
-## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10
+##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
+## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1997 0.1003
 ```
 
 bvec 항목을 제외한 모든 코드는 기존과 동일하며, 조건함수의 우변인 bvec만 각각 최소 투자비중과 최대 투자비중이 [0, 1]에서 [0.05, 0.20]으로 변경되었습니다. 해당 방법 역시 추가적인 투자비중 제약이 잘 적용되었음이 확인됩니다.
@@ -639,14 +640,14 @@ print(w_6)
 ```
 
 ```
-##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
-## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10
+##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
+## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1997 0.1003
 ```
 
 constraint 부분에 롱온리 제약조건에 해당하는 lo 대신 직접 제약값들을 입력할 수 있는 user를 입력하며, LB에는 최소 투자비중 벡터를, UB에는 최대 투자비중 벡터를 입력합니다. 따라서 원하는 제약조건 내에서 결괏값이 계산됩니다.
 
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 8px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:unnamed-chunk-23)최소 및 최대 비중제약 조건 후 결과 비교</caption>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:unnamed-chunk-24)최소 및 최대 비중제약 조건 후 결과 비교</caption>
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
@@ -673,8 +674,8 @@ constraint 부분에 롱온리 제약조건에 해당하는 lo 대신 직접 제
    <td style="text-align:center;"> 0.2 </td>
    <td style="text-align:center;"> 0.05 </td>
    <td style="text-align:center;"> 0.05 </td>
-   <td style="text-align:center;"> 0.2 </td>
-   <td style="text-align:center;"> 0.1 </td>
+   <td style="text-align:center;"> 0.1997 </td>
+   <td style="text-align:center;"> 0.1003 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> solve.QP </td>
@@ -686,8 +687,8 @@ constraint 부분에 롱온리 제약조건에 해당하는 lo 대신 직접 제
    <td style="text-align:center;"> 0.2 </td>
    <td style="text-align:center;"> 0.05 </td>
    <td style="text-align:center;"> 0.05 </td>
-   <td style="text-align:center;"> 0.2 </td>
-   <td style="text-align:center;"> 0.1 </td>
+   <td style="text-align:center;"> 0.1997 </td>
+   <td style="text-align:center;"> 0.1003 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> optimalPortfolio </td>
@@ -699,8 +700,8 @@ constraint 부분에 롱온리 제약조건에 해당하는 lo 대신 직접 제
    <td style="text-align:center;"> 0.2 </td>
    <td style="text-align:center;"> 0.05 </td>
    <td style="text-align:center;"> 0.05 </td>
-   <td style="text-align:center;"> 0.2 </td>
-   <td style="text-align:center;"> 0.1 </td>
+   <td style="text-align:center;"> 0.1997 </td>
+   <td style="text-align:center;"> 0.1003 </td>
   </tr>
 </tbody>
 </table>
@@ -718,7 +719,7 @@ data.frame(w_4) %>%
   xlab(NULL) + ylab(NULL)
 ```
 
-<img src="11-portfolio_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="11-portfolio_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### 각 자산별 제약조건의 추가
 
@@ -845,8 +846,8 @@ Duality 방법의 목적함수는 최소분산 포트폴리오와 동일한 $min
 
 기존 두 방법이 수학적 증명에 의해 $maxDR$을 최소화하는 형태로 풀어준 반면, 간단하게 목적함수를 $min(-DR)$의 형태로 바꾸어 풀 수도 있습니다. 표 \@ref(tab:solveqp)는 세 가지 방법을 요약한 내용입니다.
 
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 8px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:mdp)MDP 방법 비교</caption>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:mdp)MDP 방법 비교</caption>
  <thead>
   <tr>
    <th style="text-align:center;"> 방법 </th>
@@ -859,19 +860,23 @@ Duality 방법의 목적함수는 최소분산 포트폴리오와 동일한 $min
   <tr>
    <td style="text-align:center;"> Transformation </td>
    <td style="text-align:center;"> $min\,w_s'cw_s$ </td>
-   <td style="text-align:center;"> \makecell[l]{$\sum_{i=1}^n w_i = 1$ \\ $w_i \ge 0$} </td>
-   <td style="text-align:center;"> \makecell[l]{비중을 각각의 표준편차로 나눈 후 \\ 비중의 합으로 표준화} </td>
+   <td style="text-align:center;"> $\sum_{i=1}^n w_i = 1$ 
+ $w_i \ge 0$ </td>
+   <td style="text-align:center;"> 비중을 각각의 표준편차로 나눈 후 
+ 비중의 합으로 표준화 </td>
   </tr>
   <tr>
    <td style="text-align:center;"> Duality </td>
    <td style="text-align:center;"> $min\,^1/_2w'\sigma w$ </td>
-   <td style="text-align:center;"> \makecell[l]{$\sum_{i=1}^n w_i \sigma_i = 1$ \\ $w_i \ge 0$} </td>
+   <td style="text-align:center;"> $\sum_{i=1}^n w_i \sigma_i = 1$ 
+ $w_i \ge 0$ </td>
    <td style="text-align:center;"> 비중의 합으로 표준화 </td>
   </tr>
   <tr>
    <td style="text-align:center;"> -DR </td>
    <td style="text-align:center;"> min(-DR) </td>
-   <td style="text-align:center;"> \makecell[l]{$\sum_{i=1}^n w_i = 1$ \\ $w_i \ge0$} </td>
+   <td style="text-align:center;"> $\sum_{i=1}^n w_i = 1$ 
+ $w_i \ge0$ </td>
    <td style="text-align:center;"> 불필요 </td>
   </tr>
 </tbody>
@@ -895,8 +900,8 @@ meq = 1
 
 제약조건에 해당하는 Amat 부분과 bvec 부분은 최소분산 포트폴리오와 다소 다릅니다. 표 \@ref(tab:mvmdp)에는 둘 간에 코드가 어떻게 다른지 나타나 있습니다.
 
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 8px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">(\#tab:mvmdp)Amat과 bvec 차이 비교</caption>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:mvmdp)Amat과 bvec 차이 비교</caption>
  <thead>
   <tr>
    <th style="text-align:center;"> 인자 </th>
@@ -945,7 +950,7 @@ print(w)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 17.659  2.234  3.717  0.000 27.884 36.267  2.954  0.000  8.272 11.883
+## 18.214  2.102  3.972  0.000 27.408 37.358  2.804  0.000  8.302 11.997
 ```
 
 입력된 목적함수와 제약조건들을 바탕으로 `solve.QP()` 함수를 통해 최적화를 수행한 후 최대분산효과를 만족하는 해를 구해보면, 비중의 합이 1을 초과하게 됩니다. $w_i = \frac{w_i}{\sum_{i=1}^nw_i}$를 통해 비중의 합이 1이 되도록 표준화를 해줍니다.
@@ -960,7 +965,7 @@ print(w)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.1593 0.0201 0.0335 0.0000 0.2515 0.3271 0.0266 0.0000 0.0746 0.1072
+## 0.1624 0.0187 0.0354 0.0000 0.2444 0.3331 0.0250 0.0000 0.0740 0.1070
 ```
 
 표준화 과정을 통해 비중의 합이 1이 되었습니다.
@@ -975,7 +980,7 @@ data.frame(w) %>%
   xlab(NULL) + ylab(NULL)
 ```
 
-<img src="11-portfolio_files/figure-html/unnamed-chunk-29-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="11-portfolio_files/figure-html/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" />
 
 ### `optimalPortfolio()` 함수를 이용한 최적화
 
@@ -992,7 +997,7 @@ print(w)
 ```
 
 ```
-##  [1] 0.1593 0.0201 0.0335 0.0000 0.2515 0.3271 0.0266 0.0000 0.0746 0.1072
+##  [1] 0.1624 0.0187 0.0354 0.0000 0.2444 0.3331 0.0250 0.0000 0.0740 0.1070
 ```
 
 control 항목의 type에 maximum diversification을 의미하는 'maxdiv'를 입력해주며, 제약조건에는 투자비중이 0보다 큰 lo(Long Only) 조건을 입력합니다. 패키지를 활용해 매우 간단하게 최대분산효과 포트폴리오를 구현할 수 있으며, 그 결과 또한 앞에서 계산한 것과 동일합니다. 해당 함수의 코드를 확인해보면, 최대분산효과 포트폴리오 계산 시 Min -DR 방법을 사용합니다.
@@ -1083,7 +1088,7 @@ print(w)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1905 0.1095
+## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1884 0.1116
 ```
  
 Alb의 -rep(0.05, 10)는 $-lb$ 부분, matrix(1, 1, 10)은 $e^T$ 부분, diag(10)부분은 $I$ 부분을 의미하며, 이는 최소비중 제약조건의 좌변($-lb \times e^T + I$)과 같습니다. 동일하게 Aub는 최대비중 제약조건의 좌변($ub \times e^T - I$)과 같으며, 결과를 확인하면 최소 및 최대비중 제약조건인 [5%, 20%]가 제대로 반영되었습니다.
@@ -1099,7 +1104,7 @@ data.frame(w) %>%
   xlab(NULL) + ylab(NULL)
 ```
 
-<img src="11-portfolio_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="11-portfolio_files/figure-html/unnamed-chunk-33-1.png" width="70%" style="display: block; margin: auto;" />
  
 ### 각 자산 별 제약조건의 추가
 
@@ -1252,16 +1257,16 @@ print(RC_stock_bond)
 ```
 
 ```
-## [1] 0.9698 0.0302
+## [1] 0.965 0.035
 ```
 
 rets 데이터에서 첫 번째 행은 미국 주식 수익률을, 다섯 번째 행은 미국 장기채를 의미하므로, 해당 부분을 ret_stock_bond 변수에 지정합니다. 그 후 `cov()` 함수를 이용해 두 자산의 분산-공분산 행렬을 만들어주며, 위에서 만든 get_RC 함수를 통해 자산별 위험기여도를 계산합니다.
 
-주식과 채권이 가지는 위험기여도는 각각 96.98%, 3.02%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.
+주식과 채권이 가지는 위험기여도는 각각 96.5%, 3.5%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.
 
 ### `rp()` 함수를 이용한 최적화
 
-앞의 예제와 같이 특정 자산이 포트폴리오의 위험을 대부분 차지하는 문제를 막고, 모든 자산이 동일한 위험기여도를 가지는 포트폴리오가 위험균형 포트폴리오(Risk Parity Portfolio) 혹은 동일 위험기여도 포트폴리오(Equal Risk Contribution Portfolio)입니다. 이를 수식으로 쓰면 다음과 같습니다.
+앞의 예제와 같이 특정 자산이 포트폴리오의 위험을 대부분 차지하는 문제를 막고, 모든 자산이 동일한 위험기여도를 가지는 포트폴리오가 위험균형 포트폴리오(Risk Parity Portfolio)[@qian2011risk] 혹은 동일 위험기여도 포트폴리오(Equal Risk Contribution Portfolio)입니다. 이를 수식으로 쓰면 다음과 같습니다.
 
 $$RC_1 = RC_2 = \dots = RC_n$$
 $$\frac{\partial\sigma_p}{\partial w_1} \times w_1 = \frac{\partial\sigma_p}{\partial w_2} \times w_2
@@ -1290,7 +1295,7 @@ print(w)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.0622 0.0470 0.0556 0.0361 0.1806 0.3649 0.0397 0.0515 0.0865 0.0759
+## 0.0628 0.0474 0.0562 0.0365 0.1785 0.3638 0.0399 0.0519 0.0867 0.0763
 ```
 
 1. x0은 최적화를 위한 초기 입력값이며 동일 비중인 10%씩을 입력합니다.
@@ -1307,8 +1312,8 @@ get_RC(w, covmat)
 ```
 
 ```
-##  [1] 0.09991 0.09990 0.09998 0.10001 0.09999 0.10000 0.10007 0.10003
-##  [9] 0.10006 0.10005
+##  [1] 0.10001 0.09992 0.09991 0.10002 0.10002 0.10004 0.09999 0.10004
+##  [9] 0.09998 0.10008
 ```
 
 `get_RC()` 함수를 통해 위험기여도를 확인해보면, 모든 자산이 거의 동일한 위험기여도를 가지는 것을 알 수 있습니다.
@@ -1376,7 +1381,7 @@ print(w)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.0874 0.0672 0.0769 0.0516 0.1881 0.3853 0.0198 0.0254 0.0545 0.0438
+## 0.0880 0.0676 0.0777 0.0521 0.1860 0.3844 0.0199 0.0256 0.0546 0.0440
 ```
 
 mrc에 목표로 하는 각 자산별 위험기여도를 입력하며, 나머지는 기존 위험균형 포트폴리오와 동일하게 입력합니다.
@@ -1387,8 +1392,8 @@ get_RC(w, covmat)
 ```
 
 ```
-##  [1] 0.14996 0.15004 0.14998 0.14996 0.10009 0.10006 0.04994 0.04997
-##  [9] 0.04997 0.05003
+##  [1] 0.14998 0.14991 0.15010 0.15002 0.10000 0.10001 0.04992 0.05002
+##  [9] 0.04999 0.05004
 ```
 
 `get_RC()` 함수를 통해 위험기여도를 확인해보면 우리가 원하던 자산별 위험예산과 거의 동일한 것을 알 수 있습니다.
