@@ -13,7 +13,7 @@
   
   
   
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta name="github-repo" content="hyunyulhenry/quant_cookbook" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 11 포트폴리오 구성 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
@@ -24,15 +24,15 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2019-08-23" />
+<meta name="date" content="2020-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="section-65.html">
-<link rel="next" href="section-85.html">
+<link rel="prev" href="section-62.html">
+<link rel="next" href="section-82.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -48,6 +48,60 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
+<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="libs/highcharts-7.0.1/highcharts.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
+<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
+<script src="libs/highcharts-7.0.1/modules/map.js"></script>
+<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
+<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
+<script src="libs/highcharts-7.0.1/modules/data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
+<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
+<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
+<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
+<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
+<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
+<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
+<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
+<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
+<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
+<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
+<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
+<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
+<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
+<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
+<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 
 
@@ -207,118 +261,114 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.2" data-path="section-29.html"><a href="section-29.html#section-35"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
 <li class="chapter" data-level="6.2.3" data-path="section-29.html"><a href="section-29.html#section-36"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="section-29.html"><a href="section-29.html#section-37"><i class="fa fa-check"></i><b>6.3</b> 야후 파이낸스 데이터 구하기</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="section-29.html"><a href="section-29.html#section-38"><i class="fa fa-check"></i><b>6.3.1</b> 재무제표 다운로드</a></li>
-<li class="chapter" data-level="6.3.2" data-path="section-29.html"><a href="section-29.html#section-39"><i class="fa fa-check"></i><b>6.3.2</b> 가치지표 계산하기</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="section-37.html"><a href="section-37.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="section-37.html"><a href="section-37.html#section-38"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="section-37.html"><a href="section-37.html#section-39"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="section-37.html"><a href="section-37.html#section-40"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="section-41.html"><a href="section-41.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="section-41.html"><a href="section-41.html#section-42"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="section-41.html"><a href="section-41.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="section-41.html"><a href="section-41.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="section-41.html"><a href="section-41.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="section-41.html"><a href="section-41.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="section-41.html"><a href="section-41.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="section-41.html"><a href="section-41.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
+<li class="chapter" data-level="8.1.7" data-path="section-41.html"><a href="section-41.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="section-41.html"><a href="section-41.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="section-41.html"><a href="section-41.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="section-41.html"><a href="section-41.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="section-41.html"><a href="section-41.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="section-41.html"><a href="section-41.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="section-41.html"><a href="section-41.html#section-43"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="section-41.html"><a href="section-41.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
+<li class="chapter" data-level="8.2.2" data-path="section-41.html"><a href="section-41.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
+<li class="chapter" data-level="8.2.3" data-path="section-41.html"><a href="section-41.html#geom_boxplot---"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
+<li class="chapter" data-level="8.2.4" data-path="section-41.html"><a href="section-41.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
+<li class="chapter" data-level="8.2.5" data-path="section-41.html"><a href="section-41.html#geom_bar---"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="section-41.html"><a href="section-41.html#section-44"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="section-41.html"><a href="section-41.html#section-45"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="section-41.html"><a href="section-41.html#section-46"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="section-41.html"><a href="section-41.html#section-47"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="section-40.html"><a href="section-40.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
-<li class="chapter" data-level="7.1" data-path="section-40.html"><a href="section-40.html#section-41"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
-<li class="chapter" data-level="7.2" data-path="section-40.html"><a href="section-40.html#section-42"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
-<li class="chapter" data-level="7.3" data-path="section-40.html"><a href="section-40.html#section-43"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+<li class="chapter" data-level="9" data-path="section-48.html"><a href="section-48.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="section-48.html"><a href="section-48.html#section-49"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section-48.html"><a href="section-48.html#section-50"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section-48.html"><a href="section-48.html#section-51"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="section-44.html"><a href="section-44.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
-<li class="chapter" data-level="8.1" data-path="section-44.html"><a href="section-44.html#section-45"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="section-44.html"><a href="section-44.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
-<li class="chapter" data-level="8.1.2" data-path="section-44.html"><a href="section-44.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
-<li class="chapter" data-level="8.1.3" data-path="section-44.html"><a href="section-44.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
-<li class="chapter" data-level="8.1.4" data-path="section-44.html"><a href="section-44.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
-<li class="chapter" data-level="8.1.5" data-path="section-44.html"><a href="section-44.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
-<li class="chapter" data-level="8.1.6" data-path="section-44.html"><a href="section-44.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
-<li class="chapter" data-level="8.1.7" data-path="section-44.html"><a href="section-44.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
-<li class="chapter" data-level="8.1.8" data-path="section-44.html"><a href="section-44.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
-<li class="chapter" data-level="8.1.9" data-path="section-44.html"><a href="section-44.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
-<li class="chapter" data-level="8.1.10" data-path="section-44.html"><a href="section-44.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
-<li class="chapter" data-level="8.1.11" data-path="section-44.html"><a href="section-44.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
-<li class="chapter" data-level="8.1.12" data-path="section-44.html"><a href="section-44.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
+<li class="chapter" data-level="9.2" data-path="section-48.html"><a href="section-48.html#section-52"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="section-48.html"><a href="section-48.html#section-53"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="section-48.html"><a href="section-48.html#section-54"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="section-44.html"><a href="section-44.html#section-46"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="section-44.html"><a href="section-44.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
-<li class="chapter" data-level="8.2.2" data-path="section-44.html"><a href="section-44.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
-<li class="chapter" data-level="8.2.3" data-path="section-44.html"><a href="section-44.html#geom_boxplot---"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
-<li class="chapter" data-level="8.2.4" data-path="section-44.html"><a href="section-44.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
-<li class="chapter" data-level="8.2.5" data-path="section-44.html"><a href="section-44.html#geom_bar---"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
+<li class="chapter" data-level="9.3" data-path="section-48.html"><a href="section-48.html#section-55"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="section-48.html"><a href="section-48.html#section-56"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="section-48.html"><a href="section-48.html#section-57"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="section-44.html"><a href="section-44.html#section-47"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="section-44.html"><a href="section-44.html#section-48"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.2" data-path="section-44.html"><a href="section-44.html#section-49"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.3" data-path="section-44.html"><a href="section-44.html#section-50"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+<li class="chapter" data-level="9.4" data-path="section-48.html"><a href="section-48.html#section-58"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="section-48.html"><a href="section-48.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="section-48.html"><a href="section-48.html#section-59"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="section-48.html"><a href="section-48.html#section-60"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="section-48.html"><a href="section-48.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="section-48.html"><a href="section-48.html#section-61"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="section-51.html"><a href="section-51.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
-<li class="chapter" data-level="9.1" data-path="section-51.html"><a href="section-51.html#section-52"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="section-51.html"><a href="section-51.html#section-53"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
-<li class="chapter" data-level="9.1.2" data-path="section-51.html"><a href="section-51.html#section-54"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+<li class="chapter" data-level="10" data-path="section-62.html"><a href="section-62.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="section-62.html"><a href="section-62.html#section-63"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="section-62.html"><a href="section-62.html#section-64"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="section-62.html"><a href="section-62.html#section-65"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="section-62.html"><a href="section-62.html#section-66"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="section-62.html"><a href="section-62.html#section-67"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="section-51.html"><a href="section-51.html#section-55"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="section-51.html"><a href="section-51.html#section-56"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
-<li class="chapter" data-level="9.2.2" data-path="section-51.html"><a href="section-51.html#section-57"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+<li class="chapter" data-level="10.3" data-path="section-62.html"><a href="section-62.html#section-68"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="section-62.html"><a href="section-62.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="section-62.html"><a href="section-62.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="section-62.html"><a href="section-62.html#section-69"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="section-51.html"><a href="section-51.html#section-58"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="section-51.html"><a href="section-51.html#section-59"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
-<li class="chapter" data-level="9.3.2" data-path="section-51.html"><a href="section-51.html#section-60"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+<li class="chapter" data-level="10.4" data-path="section-62.html"><a href="section-62.html#section-70"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="section-51.html"><a href="section-51.html#section-61"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="section-51.html"><a href="section-51.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
-<li class="chapter" data-level="9.4.2" data-path="section-51.html"><a href="section-51.html#section-62"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
+<li class="chapter" data-level="11" data-path="section-71.html"><a href="section-71.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="section-71.html"><a href="section-71.html#section-72"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="section-71.html"><a href="section-71.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="section-71.html"><a href="section-71.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="section-71.html"><a href="section-71.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="section-71.html"><a href="section-71.html#section-73"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="section-71.html"><a href="section-71.html#section-74"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="section-71.html"><a href="section-71.html#section-75"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="section-51.html"><a href="section-51.html#section-63"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="section-51.html"><a href="section-51.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
-<li class="chapter" data-level="9.5.2" data-path="section-51.html"><a href="section-51.html#section-64"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+<li class="chapter" data-level="11.2" data-path="section-71.html"><a href="section-71.html#section-76"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="section-71.html"><a href="section-71.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="section-71.html"><a href="section-71.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="section-71.html"><a href="section-71.html#section-77"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="section-71.html"><a href="section-71.html#section-78"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="section-65.html"><a href="section-65.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
-<li class="chapter" data-level="10.1" data-path="section-65.html"><a href="section-65.html#section-66"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
-<li class="chapter" data-level="10.2" data-path="section-65.html"><a href="section-65.html#section-67"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="section-65.html"><a href="section-65.html#section-68"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
-<li class="chapter" data-level="10.2.2" data-path="section-65.html"><a href="section-65.html#section-69"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
-<li class="chapter" data-level="10.2.3" data-path="section-65.html"><a href="section-65.html#section-70"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
-</ul></li>
-<li class="chapter" data-level="10.3" data-path="section-65.html"><a href="section-65.html#section-71"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="section-65.html"><a href="section-65.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
-<li class="chapter" data-level="10.3.2" data-path="section-65.html"><a href="section-65.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
-<li class="chapter" data-level="10.3.3" data-path="section-65.html"><a href="section-65.html#section-72"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="section-65.html"><a href="section-65.html#section-73"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="section-74.html"><a href="section-74.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
-<li class="chapter" data-level="11.1" data-path="section-74.html"><a href="section-74.html#section-75"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="section-74.html"><a href="section-74.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.2" data-path="section-74.html"><a href="section-74.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.3" data-path="section-74.html"><a href="section-74.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.4" data-path="section-74.html"><a href="section-74.html#section-76"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
-<li class="chapter" data-level="11.1.5" data-path="section-74.html"><a href="section-74.html#section-77"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.1.6" data-path="section-74.html"><a href="section-74.html#section-78"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="section-74.html"><a href="section-74.html#section-79"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="section-74.html"><a href="section-74.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.2" data-path="section-74.html"><a href="section-74.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.3" data-path="section-74.html"><a href="section-74.html#section-80"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.2.4" data-path="section-74.html"><a href="section-74.html#section-81"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.3" data-path="section-74.html"><a href="section-74.html#section-82"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="section-74.html"><a href="section-74.html#section-83"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
-<li class="chapter" data-level="11.3.2" data-path="section-74.html"><a href="section-74.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.3.3" data-path="section-74.html"><a href="section-74.html#section-84"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+<li class="chapter" data-level="11.3" data-path="section-71.html"><a href="section-71.html#section-79"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="section-71.html"><a href="section-71.html#section-80"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
+<li class="chapter" data-level="11.3.2" data-path="section-71.html"><a href="section-71.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="section-71.html"><a href="section-71.html#section-81"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="section-85.html"><a href="section-85.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
-<li class="chapter" data-level="12.1" data-path="section-85.html"><a href="section-85.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="section-85.html"><a href="section-85.html#section-86"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
-<li class="chapter" data-level="12.1.2" data-path="section-85.html"><a href="section-85.html#section-87"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+<li class="chapter" data-level="12" data-path="section-82.html"><a href="section-82.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="section-82.html"><a href="section-82.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="section-82.html"><a href="section-82.html#section-83"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="section-82.html"><a href="section-82.html#section-84"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="section-85.html"><a href="section-85.html#section-88"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
-<li class="chapter" data-level="12.3" data-path="section-85.html"><a href="section-85.html#section-89"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
-<li class="chapter" data-level="12.4" data-path="section-85.html"><a href="section-85.html#section-90"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+<li class="chapter" data-level="12.2" data-path="section-82.html"><a href="section-82.html#section-85"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="section-82.html"><a href="section-82.html#section-86"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="section-82.html"><a href="section-82.html#section-87"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="section-91.html"><a href="section-91.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
-<li class="chapter" data-level="13.1" data-path="section-91.html"><a href="section-91.html#section-92"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="section-91.html"><a href="section-91.html#section-93"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
-<li class="chapter" data-level="13.1.2" data-path="section-91.html"><a href="section-91.html#section-94"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
-<li class="chapter" data-level="13.1.3" data-path="section-91.html"><a href="section-91.html#section-95"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
-<li class="chapter" data-level="13.1.4" data-path="section-91.html"><a href="section-91.html#section-96"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+<li class="chapter" data-level="13" data-path="section-88.html"><a href="section-88.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="section-88.html"><a href="section-88.html#section-89"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="section-88.html"><a href="section-88.html#section-90"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="section-88.html"><a href="section-88.html#section-91"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="section-88.html"><a href="section-88.html#section-92"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="section-88.html"><a href="section-88.html#section-93"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="section-91.html"><a href="section-91.html#section-97"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+<li class="chapter" data-level="13.2" data-path="section-88.html"><a href="section-88.html#section-94"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -341,7 +391,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="section-74" class="section level1">
+<div id="section-71" class="section level1">
 <h1><span class="header-section-number">Chapter 11</span> 포트폴리오 구성</h1>
 <p>종목별로 비중을 어떻게 배분하느냐에 따라 성과가 달라지므로, 종목의 선택 못지 않게 중요한 것이 포트폴리오를 구성하는 방법입니다. 최적 포트폴리오의 구성은 수식을 기반으로 최적화된 해를 찾습니다. 물론 엑셀의 해 찾기와 같은 기능을 사용해 간단한 형태의 최적화 구현이 가능하지만, 방대한 데이터를 다룰 경우에는 속도가 지나치게
 느려지거나 계산할 수 없게 되기도 합니다.</p>
@@ -381,11 +431,11 @@ rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) 
            <span class="dt">col =</span>
              <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),
            <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</code></pre>
-<p><img src="11-portfolio_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="11-portfolio_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>각 ETF의 수익률 간 상관관계를 살펴보면 같은 자산군 내에서는 강한 상관관계를 보이며, 주식과 채권 간에는 매우 낮은 상관관계를 보입니다. 또한 주식과 리츠 간에도 꽤 높은 상관관계를 보입니다.</p>
 <p>포트폴리오 최적화에는 분산-공분산 행렬이 대부분 사용되며, 이는 <code>cov()</code> 함수를 통해 손쉽게 계산할 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">covmat =<span class="st"> </span><span class="kw">cov</span>(rets)</code></pre>
-<div id="section-75" class="section level2">
+<div id="section-72" class="section level2">
 <h2><span class="header-section-number">11.1</span> 최소분산 포트폴리오</h2>
 <p>최소분산 포트폴리오(Minimum Variance Portfolio)는 변동성이 최소인 포트폴리오입니다. 포트폴리오의 변동성은 일반적으로 <span class="math inline">\(\sum_{i=1}^{n}\sum_{j=1}^{n}w_iw_j\sigma_{ij}\)</span>의 형태로 표현되지만, 최적화 작업을 위해서는 행렬의 형태인 <span class="math inline">\(w&#39;\Omega w\)</span>로 표현하는 것이 더욱 편리합니다. 이 중 <span class="math inline">\(w\)</span>는 각 자산들의 비중을 행렬의 형태로 나타낸 것이며, <span class="math inline">\(\Omega\)</span>는 분산-공분산 행렬을 나타낸 것입니다. 분산-공분산 행렬은 사전에 고정되어 있는 값이므로, 각 자산들의 비중인 <span class="math inline">\(w\)</span>를 변화시킴으로써 포트폴리오의 변동성이 최소인 지점을 찾을 수 있습니다.</p>
 <p>최소분산 포트폴리오의 목적함수는 아래의 수식으로 표현할 수 있습니다. 이 중 <span class="math inline">\(^1/_2\)</span>은 단지 미분했을 때 계산을 용이하게 하기 위한 장치일 뿐 결과에는 영향을 미치지 않습니다.</p>
@@ -397,7 +447,7 @@ rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) 
 <h3><span class="header-section-number">11.1.1</span> <code>slsqp()</code> 함수를 이용한 최적화</h3>
 <p>R에서 가장 손쉽게 최적화 작업을 수행하는 방법은 nloptr 패키지의 <code>slsqp()</code> 함수를 이용하는 것입니다. slsqp() 함수는 순차적 이차 계획(Sequential Quadratic Programming)을 이용해 해를 찾으며, 목적함수와 제약조건은 다음과 같습니다.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-5">표 2.2: </span><code>slsqp()</code> 함수 목적함수와 제약조건</caption>
+<caption><span id="tab:unnamed-chunk-6">표 11.1: </span><code>slsqp()</code> 함수 목적함수와 제약조건</caption>
 <thead>
 <tr class="header">
 <th align="center">목적함수</th>
@@ -422,10 +472,10 @@ rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) 
 <li>hin은 부등위 제약조건(inequality constraints)을 의미하며, 프로그래밍 내에서는 hin &gt;= 0로 인식하며, 각 자산의 비중이 0보다 크다는 제약조건과 연결됩니다.</li>
 <li>heq는 등위 제약조건(equality constraints)을 의미하며, 프로그래밍 내에서는 heq == 0을 의미합니다. <strong>투자비중의 합 - 1</strong>의 형태를 입력한다면 투자비중의 합이 1 이라는 제약조건과 연결됩니다.</li>
 </ol>
-<p>표 <a href="section-74.html#tab:slsqp">11.1</a>는 최소분산 포트폴리오를 구할 때 필요한 주요 변수에 대한 내용입니다.</p>
+<p>표 <a href="section-71.html#tab:slsqp">11.2</a>는 최소분산 포트폴리오를 구할 때 필요한 주요 변수에 대한 내용입니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:slsqp">표 11.1: </span>slsqp() 함수의 인자와 포트폴리오 내 변수
+<span id="tab:slsqp">표 11.2: </span>slsqp() 함수의 인자와 포트폴리오 내 변수
 </caption>
 <thead>
 <tr>
@@ -510,10 +560,10 @@ result =<span class="st"> </span><span class="kw">slsqp</span>( <span class="dt"
                 <span class="dt">heq =</span> heq.objective)
 
 <span class="kw">print</span>(result<span class="op">$</span>par)</code></pre>
-<pre><code>##  [1]  1.527e-01 -1.195e-17 -1.114e-16  1.039e-17 -2.941e-17  7.838e-01
-##  [7]  1.406e-18  4.758e-17  4.534e-19  6.354e-02</code></pre>
+<pre><code>##  [1]  1.543e-01  1.168e-21 -5.397e-21  7.174e-22 -1.891e-21  7.824e-01
+##  [7]  6.540e-21  3.777e-22 -5.644e-22  6.324e-02</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(result<span class="op">$</span>value)</code></pre>
-<pre><code>## [1] 0.000009639</code></pre>
+<pre><code>## [1] 0.000009552</code></pre>
 <p>위에서 만들어진 함수들을 바탕으로 최적화 작업을 실행합니다. 초기값인 x0에는 먼저 동일한 비중들을 입력합니다. 예제에서는 종목이 10개 이므로, x0값에는 <code>rep(0.1, 10)</code> 인 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1을 입력합니다. 최소화하고자 하는 목적함수 fn에는 위에서 구성한 objective 함수를 입력합니다. 부등위 제약조건과 등위 제약조건에도 각각 위에서 구성한 hin.objective와 heq.objective 함수를 입력합니다.</p>
 <p>즉, 해당 함수는 초기값을 시작점으로 해 주어진 제약조건을 만족하는 해를 찾기 위해 <span class="math inline">\(w\)</span>값들을 조정하는 작업을 반복한 후 목적함수가 최소가 되는 지점의 <span class="math inline">\(w\)</span>를 반환합니다.</p>
 <p>result 값 중 $par는 최적화된 지점의 해를 의미하며, 최소분산 포트폴리오를 구성하는 자산들의 투자 비중을 의미합니다. $value는 $par에서 산출된 값을 목적함수 fn에 입력하였을 때 나오는 결괏값으로써, 포트폴리오의 분산을 의미합니다.</p>
@@ -522,15 +572,15 @@ result =<span class="st"> </span><span class="kw">slsqp</span>( <span class="dt"
 
 <span class="kw">print</span>(w_<span class="dv">1</span>)</code></pre>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.1527 0.0000 0.0000 0.0000 0.0000 0.7838 0.0000 0.0000 0.0000 0.0635</code></pre>
+## 0.1543 0.0000 0.0000 0.0000 0.0000 0.7824 0.0000 0.0000 0.0000 0.0632</code></pre>
 <p>자산들의 투자비중은 result$par를 통해 추출한 후, <code>round()</code> 함수를 이용해 반올림합니다. 마지막으로 이름에 종목명을 입력합니다. 계산된 비중으로 포트폴리오를 구성하면 포트폴리오의 비중이 최소가 됩니다.</p>
 </div>
 <div id="solve.qp---" class="section level3">
 <h3><span class="header-section-number">11.1.2</span> <code>solve.QP()</code> 함수를 이용한 최적화</h3>
-<p>다음으로는 quadprog 패키지 내의 <code>solve.QP()</code> 함수를 이용해 포트폴리오 최적화를 하는 방법이 있습니다. 해당 함수는 쌍대기법(Dual Method)을 이용해 제약조건 내에서 목적함수가 최소화되는 해를 구합니다. 해당 함수의 목적함수와 제약조건은 표 <a href="section-74.html#tab:solveqp">11.2</a>과 같습니다.</p>
+<p>다음으로는 quadprog 패키지 내의 <code>solve.QP()</code> 함수를 이용해 포트폴리오 최적화를 하는 방법이 있습니다. 해당 함수는 쌍대기법(Dual Method)을 이용해 제약조건 내에서 목적함수가 최소화되는 해를 구합니다. 해당 함수의 목적함수와 제약조건은 표 <a href="section-71.html#tab:solveqp">11.3</a>과 같습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:solveqp">표 11.2: </span>solve.QP 함수 목적함수와 제약조건
+<span id="tab:solveqp">표 11.3: </span>solve.QP 함수 목적함수와 제약조건
 </caption>
 <thead>
 <tr>
@@ -563,10 +613,10 @@ result =<span class="st"> </span><span class="kw">slsqp</span>( <span class="dt"
 <li>bvec은 제약조건 중 <span class="math inline">\(b_0\)</span>에 해당하는 부분으로써, 제약조건 중 우변에 위치하는 항목입니다.</li>
 <li>meq는 bvec의 몇 번째까지를 등위 제약조건으로 설정할지에 대한 부분입니다.</li>
 </ol>
-<p>표 <a href="section-74.html#tab:solveqp2">11.3</a>는 위의 내용을 요약한 것이며, 각 변수를 입력한 후 함수를 실행하면 위의 목적함수와 제약조건을 만족하는 <span class="math inline">\(b\)</span> 값을 찾습니다.</p>
+<p>표 <a href="section-71.html#tab:solveqp2">11.4</a>는 위의 내용을 요약한 것이며, 각 변수를 입력한 후 함수를 실행하면 위의 목적함수와 제약조건을 만족하는 <span class="math inline">\(b\)</span> 값을 찾습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:solveqp2">표 11.3: </span><code>solve.QP</code> 함수의 인자와 포트폴리오 내 변수
+<span id="tab:solveqp2">표 11.4: </span><code>solve.QP</code> 함수의 인자와 포트폴리오 내 변수
 </caption>
 <thead>
 <tr>
@@ -682,17 +732,17 @@ meq =<span class="st"> </span><span class="dv">1</span></code></pre>
 result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)
 
 <span class="kw">print</span>(result<span class="op">$</span>solution)</code></pre>
-<pre><code>##  [1]  1.527e-01  6.200e-18 -4.454e-19  6.558e-18  5.011e-18  7.838e-01
-##  [7]  4.614e-18  3.114e-18  0.000e+00  6.354e-02</code></pre>
+<pre><code>##  [1]  1.543e-01 -1.288e-18  5.106e-19  5.570e-19 -7.890e-18  7.824e-01
+##  [7] -4.459e-18 -9.018e-19  0.000e+00  6.324e-02</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(result<span class="op">$</span>value)</code></pre>
-<pre><code>## [1] 0.000004819</code></pre>
+<pre><code>## [1] 0.000004776</code></pre>
 <p>위에 입력된 내역들을 <code>solve.QP()</code> 함수에 넣어 최적화 값을 찾아줍니다. 결과 중 $solution은 최적화된 지점의 해, 즉 최소분산 포트폴리오를 구성하는 자산들의 투자비중을 의미합니다. $value는 $solution에서 산출된 값을 목적함수에 입력했을때 나오는 결괏값으로서, 포트폴리오의 분산을 의미합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">w_<span class="dv">2</span> =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))
 
 <span class="kw">print</span>(w_<span class="dv">2</span>)</code></pre>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.1527 0.0000 0.0000 0.0000 0.0000 0.7838 0.0000 0.0000 0.0000 0.0635</code></pre>
+## 0.1543 0.0000 0.0000 0.0000 0.0000 0.7824 0.0000 0.0000 0.0000 0.0632</code></pre>
 <p>자산들의 투자비중은 result$solution을 통해 추출한 후 <code>round()</code> 함수를 이용해 반올림합니다. 마지막으로 이름에 종목명을 입력합니다. 계산된 비중으로 포트폴리오를 구성하면 포트폴리오의 비중이 최소화됩니다.</p>
 </div>
 <div id="optimalportfolio---" class="section level3">
@@ -700,10 +750,10 @@ result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Am
 <p>RiskPortfolios 패키지의 <code>optimalPortfolio()</code> 함수를 이용해 매우 간단하게 최적화 포트폴리오를 구현할 수도 있습니다. 해당 함수의 사용법은 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">optimalPortfolio</span>(Sigma, <span class="dt">mu =</span> <span class="ot">NULL</span>, <span class="dt">semiDev =</span> <span class="ot">NULL</span>,
                  <span class="dt">control =</span> <span class="kw">list</span>())</code></pre>
-<p>Sigma는 분산-공분산 행렬입니다. mu와 semiDev는 각각 기대수익률과 세미 편차(Semi Deviation)로서, 입력하지 않아도 됩니다. control은 포트폴리오 종류 및 제약조건에 해당하는 부분이며, 자세한 내용은 표 <a href="section-74.html#tab:optimal">11.4</a>와 같습니다.</p>
+<p>Sigma는 분산-공분산 행렬입니다. mu와 semiDev는 각각 기대수익률과 세미 편차(Semi Deviation)로서, 입력하지 않아도 됩니다. control은 포트폴리오 종류 및 제약조건에 해당하는 부분이며, 자세한 내용은 표 <a href="section-71.html#tab:optimal">11.5</a>와 같습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:optimal">표 11.4: </span>optimalPortfolio() 포트폴리오 내 control 인자
+<span id="tab:optimal">표 11.5: </span>optimalPortfolio() 포트폴리오 내 control 인자
 </caption>
 <thead>
 <tr>
@@ -794,16 +844,16 @@ w_<span class="dv">3</span> =<span class="st"> </span><span class="kw">optimalPo
 
 <span class="kw">print</span>(w_<span class="dv">3</span>)  </code></pre>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.1527 0.0000 0.0000 0.0000 0.0000 0.7838 0.0000 0.0000 0.0000 0.0635</code></pre>
+## 0.1543 0.0000 0.0000 0.0000 0.0000 0.7824 0.0000 0.0000 0.0000 0.0632</code></pre>
 <p><code>optimalPortfolio()</code> 함수 내부에 분산-공분산 행렬을 입력합니다. type 부분에 최소분산 포트폴리오에 해당하는 minvol을 입력하며, constraint에는 각 자산의 비중이 0보다 큰 제약조건인 lo(Long Only)를 입력합니다. 비중의 합이 1인 제약조건은 자동적으로 적용이 됩니다.</p>
 <p>이처럼 패키지를 이용하면 훨씬 간단하게 원하는 값을 얻을 수 있습니다. GitHub를 통해 해당 함수의 코드를 살펴보면 <code>solve.QP()</code> 함수를 이용해 작성한 방법과 거의 동일합니다. 따라서 위의 과정들을 대략적으로 이해한 후 패키지를 사용해 포트폴리오 최적화를 구현하는 것이 현명한 방법이 될 수도 있습니다.</p>
 </div>
-<div id="section-76" class="section level3">
+<div id="section-73" class="section level3">
 <h3><span class="header-section-number">11.1.4</span> 결괏값들의 비교</h3>
 <p>아래 표는 <code>slsqp()</code>, <code>solve.QP()</code>, <code>optimalPortfolio()</code>를 이용하여 구한 값들의 비교입니다.</p>
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 7px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">
-<span id="tab:unnamed-chunk-18">표 6.2: </span>최적화 결과 비교
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-19">표 11.6: </span>최적화 결과 비교
 </caption>
 <thead>
 <tr>
@@ -847,7 +897,7 @@ DBC
 slsqp
 </td>
 <td style="text-align:center;">
-0.1527
+0.1543
 </td>
 <td style="text-align:center;">
 0
@@ -862,7 +912,7 @@ slsqp
 0
 </td>
 <td style="text-align:center;">
-0.7838
+0.7824
 </td>
 <td style="text-align:center;">
 0
@@ -874,7 +924,7 @@ slsqp
 0
 </td>
 <td style="text-align:center;">
-0.0635
+0.0632
 </td>
 </tr>
 <tr>
@@ -882,7 +932,7 @@ slsqp
 solve.QP
 </td>
 <td style="text-align:center;">
-0.1527
+0.1543
 </td>
 <td style="text-align:center;">
 0
@@ -897,7 +947,7 @@ solve.QP
 0
 </td>
 <td style="text-align:center;">
-0.7838
+0.7824
 </td>
 <td style="text-align:center;">
 0
@@ -909,7 +959,7 @@ solve.QP
 0
 </td>
 <td style="text-align:center;">
-0.0635
+0.0632
 </td>
 </tr>
 <tr>
@@ -917,7 +967,7 @@ solve.QP
 optimalPortfolio
 </td>
 <td style="text-align:center;">
-0.1527
+0.1543
 </td>
 <td style="text-align:center;">
 0
@@ -932,7 +982,7 @@ optimalPortfolio
 0
 </td>
 <td style="text-align:center;">
-0.7838
+0.7824
 </td>
 <td style="text-align:center;">
 0
@@ -944,12 +994,12 @@ optimalPortfolio
 0
 </td>
 <td style="text-align:center;">
-0.0635
+0.0632
 </td>
 </tr>
 </tbody>
 </table>
-<p>세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.38%를 투자하는 편중된 결과가 나옵니다.</p>
+<p>세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.24%를 투자하는 편중된 결과가 나옵니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
 <span class="kw">data.frame</span>(w_<span class="dv">1</span>) <span class="op">%&gt;%</span>
@@ -957,10 +1007,10 @@ optimalPortfolio
                         <span class="dt">y =</span> w_<span class="dv">1</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</code></pre>
-<p><img src="11-portfolio_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="11-portfolio_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>이처럼 변동성이 가장 낮은 종목에 대부분의 비중이 투자되는 구석해(Corner Solution) 문제를 해결하기 위해 각 자산의 최소 및 최대 투자비중 제약조건을 추가해 줄 필요가 있습니다.</p>
 </div>
-<div id="section-77" class="section level3">
+<div id="section-74" class="section level3">
 <h3><span class="header-section-number">11.1.5</span> 최소 및 최대 투자비중 제약조건</h3>
 <p>구석해 문제를 방지하고, 모든 자산에 골고루 투자하기 위해 개별 투자비중을 최소 5%, 최대 20%로 하는 제약조건을 추가하겠습니다. 먼저 <code>slsqp()</code> 함수에서 제약조건을 추가하는 방법은 다음과 같습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">result =<span class="st"> </span><span class="kw">slsqp</span>( <span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),
@@ -974,8 +1024,8 @@ w_<span class="dv">4</span> =<span class="st"> </span>result<span class="op">$</
 <span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))
 
 <span class="kw">print</span>(w_<span class="dv">4</span>)</code></pre>
-<pre><code>##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
-## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10</code></pre>
+<pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
+## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1997 0.1003</code></pre>
 <p>함수의 마지막에 lower와 upper 제약조건을 추가로 입력하면 해당 값 사이에서 최적화를 만족하는 해를 찾게 되며, 해당 예에서는 5%와 20% 사이에서 해를 찾게 됩니다. 추가로 입력한 제약조건에 맞게, 최소 투자비중은 5%이며, 최대 투자비중은 20%임을 확인할 수 있습니다.</p>
 <p>다음은 <code>solve.QP()</code> 함수 내에서 제약조건을 추가하는 방법입니다. 해당 함수 역시 다른 입력값은 모두 동일하며, 제약조건의 우변에 해당하는 bvec 항목만 수정하면 됩니다. 최소, 최대 투자비중 제약조건을 기존 [0, 1]에서 [0.05, 0.20] 로 변경하면, bvec에 해당하는 행렬은 다음과 같이 변경됩니다.</p>
 <p><span class="math display">\[ 기존: \begin{bmatrix} w_1 + w_2 + \dots + w_{10} \\ w_1 \\ \vdots \\ w_{10} \\ -w_1 \\ 
@@ -995,8 +1045,8 @@ w_<span class="dv">5</span> =<span class="st"> </span>result<span class="op">$</
 <span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))
 
 <span class="kw">print</span>(w_<span class="dv">5</span>)</code></pre>
-<pre><code>##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
-## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10</code></pre>
+<pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
+## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1997 0.1003</code></pre>
 <p>bvec 항목을 제외한 모든 코드는 기존과 동일하며, 조건함수의 우변인 bvec만 각각 최소 투자비중과 최대 투자비중이 [0, 1]에서 [0.05, 0.20]으로 변경되었습니다. 해당 방법 역시 추가적인 투자비중 제약이 잘 적용되었음이 확인됩니다.</p>
 <p>마지막으로 <code>optimalPortfolio()</code> 함수 내에서 최소 및 최대 투자비중을 추가하는 방법입니다. 입력변수의 control 항목 중 constraint 부분을 간단하게 수정해 원하는 조건을 입력할 수 있습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">w_<span class="dv">6</span> =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,
@@ -1008,12 +1058,12 @@ w_<span class="dv">5</span> =<span class="st"> </span>result<span class="op">$</
 <span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))
 
 <span class="kw">print</span>(w_<span class="dv">6</span>)</code></pre>
-<pre><code>##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
-## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10</code></pre>
+<pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
+## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1997 0.1003</code></pre>
 <p>constraint 부분에 롱온리 제약조건에 해당하는 lo 대신 직접 제약값들을 입력할 수 있는 user를 입력하며, LB에는 최소 투자비중 벡터를, UB에는 최대 투자비중 벡터를 입력합니다. 따라서 원하는 제약조건 내에서 결괏값이 계산됩니다.</p>
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 8px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">
-<span id="tab:unnamed-chunk-23">표 11.5: </span>최소 및 최대 비중제약 조건 후 결과 비교
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-24">표 11.7: </span>최소 및 최대 비중제약 조건 후 결과 비교
 </caption>
 <thead>
 <tr>
@@ -1081,10 +1131,10 @@ slsqp
 0.05
 </td>
 <td style="text-align:center;">
-0.2
+0.1997
 </td>
 <td style="text-align:center;">
-0.1
+0.1003
 </td>
 </tr>
 <tr>
@@ -1116,10 +1166,10 @@ solve.QP
 0.05
 </td>
 <td style="text-align:center;">
-0.2
+0.1997
 </td>
 <td style="text-align:center;">
-0.1
+0.1003
 </td>
 </tr>
 <tr>
@@ -1151,10 +1201,10 @@ optimalPortfolio
 0.05
 </td>
 <td style="text-align:center;">
-0.2
+0.1997
 </td>
 <td style="text-align:center;">
-0.1
+0.1003
 </td>
 </tr>
 </tbody>
@@ -1167,16 +1217,16 @@ optimalPortfolio
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.20</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</code></pre>
-<p><img src="11-portfolio_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="11-portfolio_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="section-78" class="section level3">
+<div id="section-75" class="section level3">
 <h3><span class="header-section-number">11.1.6</span> 각 자산별 제약조건의 추가</h3>
 <p>투자 규모가 크지 않다면 위에서 추가한 제약조건만으로도 충분히 훌륭한 포트폴리오가 구성됩니다. 그러나 투자 규모가 커지면 추가적인 제약조건들을 고려해야 할 경우가 생깁니다. 벤치마크 비중과의 괴리로 인한 추적오차(Tracking Error)를 고려해야 할 수도 있고, 투자 대상별 거래량을 고려한 제약조건을 추가해야 할 때도 있습니다.</p>
 <p>기존 제약조건에는 자산별로 동일한 최소 및 최대 투자비중 제약조건을 다루었지만, 자산별로 상이한 제약조건이 필요할 경우도 있습니다. <code>slsqp()와</code> <code>optimalPortfolio()</code> 함수에서는 복잡한 제약조건을 다루기가 힘들지만, <code>solve.QP()</code> 함수는 bvec 부분을 간단하게 수정해 어렵지 않게 구현이 가능합니다.</p>
-<p>먼저 표 <a href="section-74.html#tab:assetconst">11.6</a>은 새롭게 설정하고자 하는 각 자산별 최소 및 최대 제약조건입니다.</p>
+<p>먼저 표 <a href="section-71.html#tab:assetconst">11.8</a>은 새롭게 설정하고자 하는 각 자산별 최소 및 최대 제약조건입니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:assetconst">표 11.6: </span>각 자산 별 최소 및 최대 제약조건
+<span id="tab:assetconst">표 11.8: </span>각 자산 별 최소 및 최대 제약조건
 </caption>
 <thead>
 <tr>
@@ -1317,7 +1367,7 @@ result<span class="op">$</span>solution <span class="op">%&gt;%</span>
 <p>결괏값을 확인해보면 각 자산별 제약조건 내에 위치함을 확인할 수 있습니다.</p>
 </div>
 </div>
-<div id="section-79" class="section level2">
+<div id="section-76" class="section level2">
 <h2><span class="header-section-number">11.2</span> 최대분산효과 포트폴리오</h2>
 <p>앞서 설명했듯이 포트폴리오의 변동성은 <span class="math inline">\(\sum_{i=1}^{n}\sum_{j=1}^{n}w_iw_j\sigma_{ij}\)</span> 형태로 나타나며, 이는 다음과 같이 표현할 수도 있습니다.</p>
 <p><span class="math display">\[\sigma_p^2 = \sum_{i=1}^{n}\sum_{j=1}^{n}w_iw_j\sigma_{ij} = \sum_{i=1}^nw_i^2\sigma_i^2 +
@@ -1337,10 +1387,10 @@ result<span class="op">$</span>solution <span class="op">%&gt;%</span>
 </ol>
 <p>먼저 Choueifaty Synthetic Asset Back-Transformation 방법은 목적함수 <span class="math inline">\(min\,w_s&#39;cw_s\)</span>와 제약조건 <span class="math inline">\(\sum_{i=1}^n w_i = 1, w_i \ge 0\)</span>을 만족하는 자산별 비중을 구합니다. 그 후, 구해진 비중을 각각의 표준편차로 나누어주며, 비중의 합이 1이 되도록 표준화해줍니다. 여기서 주의할 점은 목적함수의 <span class="math inline">\(c\)</span>가 우리가 지금까지 사용하던 분산-공분산 행렬이 아닌, <strong>상관관계</strong> 행렬이라는 점입니다.</p>
 <p>Duality 방법의 목적함수는 최소분산 포트폴리오와 동일한 <span class="math inline">\(min^1/_2w&#39;\sigma w\)</span>이며, 제약조건만 <span class="math inline">\(\sum_{i=1}^n w_i \sigma_i = 1, w_i \ge 0\)</span>, 즉 개별 자산의 비중이 0보다 크고 개별 표준편차의 가중합이 1인 조건으로 바뀝니다. 그 후, 비중의 합이 1이 되도록 표준화를 해줍니다.</p>
-<p>기존 두 방법이 수학적 증명에 의해 <span class="math inline">\(maxDR\)</span>을 최소화하는 형태로 풀어준 반면, 간단하게 목적함수를 <span class="math inline">\(min(-DR)\)</span>의 형태로 바꾸어 풀 수도 있습니다. 표 <a href="section-74.html#tab:solveqp">11.2</a>는 세 가지 방법을 요약한 내용입니다.</p>
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 8px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">
-<span id="tab:mdp">표 11.7: </span>MDP 방법 비교
+<p>기존 두 방법이 수학적 증명에 의해 <span class="math inline">\(maxDR\)</span>을 최소화하는 형태로 풀어준 반면, 간단하게 목적함수를 <span class="math inline">\(min(-DR)\)</span>의 형태로 바꾸어 풀 수도 있습니다. 표 <a href="section-71.html#tab:solveqp">11.3</a>는 세 가지 방법을 요약한 내용입니다.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:mdp">표 11.9: </span>MDP 방법 비교
 </caption>
 <thead>
 <tr>
@@ -1367,10 +1417,12 @@ Transformation
 <span class="math inline">\(min\,w_s&#39;cw_s\)</span>
 </td>
 <td style="text-align:center;">
-
+<span class="math inline">\(\sum_{i=1}^n w_i = 1\)</span>
+<span class="math inline">\(w_i \ge 0\)</span>
 </td>
 <td style="text-align:center;">
-
+비중을 각각의 표준편차로 나눈 후
+비중의 합으로 표준화
 </td>
 </tr>
 <tr>
@@ -1381,7 +1433,8 @@ Duality
 <span class="math inline">\(min\,^1/_2w&#39;\sigma w\)</span>
 </td>
 <td style="text-align:center;">
-
+<span class="math inline">\(\sum_{i=1}^n w_i \sigma_i = 1\)</span>
+<span class="math inline">\(w_i \ge 0\)</span>
 </td>
 <td style="text-align:center;">
 비중의 합으로 표준화
@@ -1395,7 +1448,8 @@ Duality
 min(-DR)
 </td>
 <td style="text-align:center;">
-
+<span class="math inline">\(\sum_{i=1}^n w_i = 1\)</span>
+<span class="math inline">\(w_i \ge0\)</span>
 </td>
 <td style="text-align:center;">
 불필요
@@ -1412,10 +1466,10 @@ dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</s
 Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(covmat)), <span class="kw">diag</span>(<span class="dv">10</span>)))
 bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>))
 meq =<span class="st"> </span><span class="dv">1</span></code></pre>
-<p>제약조건에 해당하는 Amat 부분과 bvec 부분은 최소분산 포트폴리오와 다소 다릅니다. 표 <a href="section-74.html#tab:mvmdp">11.8</a>에는 둘 간에 코드가 어떻게 다른지 나타나 있습니다.</p>
-<table class="table table" style="margin-left: auto; margin-right: auto; font-size: 8px; margin-left: auto; margin-right: auto;">
-<caption style="font-size: initial !important;">
-<span id="tab:mvmdp">표 11.8: </span>Amat과 bvec 차이 비교
+<p>제약조건에 해당하는 Amat 부분과 bvec 부분은 최소분산 포트폴리오와 다소 다릅니다. 표 <a href="section-71.html#tab:mvmdp">11.10</a>에는 둘 간에 코드가 어떻게 다른지 나타나 있습니다.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:mvmdp">표 11.10: </span>Amat과 bvec 차이 비교
 </caption>
 <thead>
 <tr>
@@ -1472,14 +1526,14 @@ w =<span class="st"> </span>result<span class="op">$</span>solution <span class=
   
 <span class="kw">print</span>(w)</code></pre>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 17.659  2.234  3.717  0.000 27.884 36.267  2.954  0.000  8.272 11.883</code></pre>
+## 18.214  2.102  3.972  0.000 27.408 37.358  2.804  0.000  8.302 11.997</code></pre>
 <p>입력된 목적함수와 제약조건들을 바탕으로 <code>solve.QP()</code> 함수를 통해 최적화를 수행한 후 최대분산효과를 만족하는 해를 구해보면, 비중의 합이 1을 초과하게 됩니다. <span class="math inline">\(w_i = \frac{w_i}{\sum_{i=1}^nw_i}\)</span>를 통해 비중의 합이 1이 되도록 표준화를 해줍니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)
 
 <span class="kw">print</span>(w)</code></pre>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.1593 0.0201 0.0335 0.0000 0.2515 0.3271 0.0266 0.0000 0.0746 0.1072</code></pre>
+## 0.1624 0.0187 0.0354 0.0000 0.2444 0.3331 0.0250 0.0000 0.0740 0.1070</code></pre>
 <p>표준화 과정을 통해 비중의 합이 1이 되었습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),
@@ -1487,7 +1541,7 @@ w =<span class="st"> </span>result<span class="op">$</span>solution <span class=
 <span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</code></pre>
-<p><img src="11-portfolio_files/figure-html/unnamed-chunk-29-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="11-portfolio_files/figure-html/unnamed-chunk-30-1.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="optimalportfolio----1" class="section level3">
 <h3><span class="header-section-number">11.2.2</span> <code>optimalPortfolio()</code> 함수를 이용한 최적화</h3>
@@ -1498,16 +1552,16 @@ w =<span class="st"> </span>result<span class="op">$</span>solution <span class=
 <span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)
 
 <span class="kw">print</span>(w)</code></pre>
-<pre><code>##  [1] 0.1593 0.0201 0.0335 0.0000 0.2515 0.3271 0.0266 0.0000 0.0746 0.1072</code></pre>
+<pre><code>##  [1] 0.1624 0.0187 0.0354 0.0000 0.2444 0.3331 0.0250 0.0000 0.0740 0.1070</code></pre>
 <p>control 항목의 type에 maximum diversification을 의미하는 ’maxdiv’를 입력해주며, 제약조건에는 투자비중이 0보다 큰 lo(Long Only) 조건을 입력합니다. 패키지를 활용해 매우 간단하게 최대분산효과 포트폴리오를 구현할 수 있으며, 그 결과 또한 앞에서 계산한 것과 동일합니다. 해당 함수의 코드를 확인해보면, 최대분산효과 포트폴리오 계산 시 Min -DR 방법을 사용합니다.</p>
 </div>
-<div id="section-80" class="section level3">
+<div id="section-77" class="section level3">
 <h3><span class="header-section-number">11.2.3</span> 최소 및 최대 투자비중 제약조건</h3>
 <p>최대분산효과 포트폴리오 역시 구석해 문제가 발생하며, 모든 자산에 골고루 투자하기 위해 개별 투자비중을 최소 5%, 최대 20%로 하는 제약조건을 추가하겠습니다.</p>
-<p>Duality 방법에서는 목적함수인 <span class="math inline">\(min\,^1/_2w&#39;\sigma w\)</span>과 제약조건인 <span class="math inline">\(\sum_{i=1}^n w_i \sigma_i = 1, w_i \ge 0\)</span>에 맞게 해를 구한 후 비중의 합이 1이 되도록 표준화하는 과정을 거쳤습니다. 따라서 비중의 최소 및 최대 제약조건은 단순히 <span class="math inline">\(lb \le w_i \le ub\)</span>가 아닌 표준화 과정인 <span class="math inline">\(w_i = \frac{w_i}{\sum_{i=1}^nw_i}\)</span>까지 고려해 적용해야 합니다. 표 <a href="section-74.html#tab:mdpconst">11.9</a>는 이를 수식으로 나타낸 것입니다.</p>
+<p>Duality 방법에서는 목적함수인 <span class="math inline">\(min\,^1/_2w&#39;\sigma w\)</span>과 제약조건인 <span class="math inline">\(\sum_{i=1}^n w_i \sigma_i = 1, w_i \ge 0\)</span>에 맞게 해를 구한 후 비중의 합이 1이 되도록 표준화하는 과정을 거쳤습니다. 따라서 비중의 최소 및 최대 제약조건은 단순히 <span class="math inline">\(lb \le w_i \le ub\)</span>가 아닌 표준화 과정인 <span class="math inline">\(w_i = \frac{w_i}{\sum_{i=1}^nw_i}\)</span>까지 고려해 적용해야 합니다. 표 <a href="section-71.html#tab:mdpconst">11.11</a>는 이를 수식으로 나타낸 것입니다.</p>
 <table class="table table" style="margin-left: auto; margin-right: auto; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:mdpconst">표 11.9: </span>최소 및 최대비중 제약조건
+<span id="tab:mdpconst">표 11.11: </span>최소 및 최대비중 제약조건
 </caption>
 <thead>
 <tr>
@@ -1598,7 +1652,7 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
   
 <span class="kw">print</span>(w)</code></pre>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1905 0.1095</code></pre>
+## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 0.1884 0.1116</code></pre>
 <p>Alb의 -rep(0.05, 10)는 <span class="math inline">\(-lb\)</span> 부분, matrix(1, 1, 10)은 <span class="math inline">\(e^T\)</span> 부분, diag(10)부분은 <span class="math inline">\(I\)</span> 부분을 의미하며, 이는 최소비중 제약조건의 좌변(<span class="math inline">\(-lb \times e^T + I\)</span>)과 같습니다. 동일하게 Aub는 최대비중 제약조건의 좌변(<span class="math inline">\(ub \times e^T - I\)</span>)과 같으며, 결과를 확인하면 최소 및 최대비중 제약조건인 [5%, 20%]가 제대로 반영되었습니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),
@@ -1607,14 +1661,14 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.20</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</code></pre>
-<p><img src="11-portfolio_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p><img src="11-portfolio_files/figure-html/unnamed-chunk-33-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
-<div id="section-81" class="section level3">
+<div id="section-78" class="section level3">
 <h3><span class="header-section-number">11.2.4</span> 각 자산 별 제약조건의 추가</h3>
-<p>최소분산 포트폴리오와 동일하게 자산별로 다른 제약조건을 추가해 포트폴리오를 구성하겠습니다. 표 <a href="section-74.html#tab:mdpconst2">11.10</a>는 각 자산별 최소 및 최대 투자비중 값이며, 변경된 제약조건을 행렬의 형태로 나타내었습니다. 주의해야 할 점은 최소비중과 최대비중의 제약조건 추가 시 <span class="math inline">\(\frac{w_1}{w_1+w_2+\dots+w_{10}} \ge lb\)</span> 형태로 고려해야 한다는 점입니다.</p>
+<p>최소분산 포트폴리오와 동일하게 자산별로 다른 제약조건을 추가해 포트폴리오를 구성하겠습니다. 표 <a href="section-71.html#tab:mdpconst2">11.12</a>는 각 자산별 최소 및 최대 투자비중 값이며, 변경된 제약조건을 행렬의 형태로 나타내었습니다. 주의해야 할 점은 최소비중과 최대비중의 제약조건 추가 시 <span class="math inline">\(\frac{w_1}{w_1+w_2+\dots+w_{10}} \ge lb\)</span> 형태로 고려해야 한다는 점입니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:mdpconst2">표 11.10: </span>각 자산 별 최소 및 최대 제약조건
+<span id="tab:mdpconst2">표 11.12: </span>각 자산 별 최소 및 최대 제약조건
 </caption>
 <thead>
 <tr>
@@ -1762,7 +1816,7 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
 <p>최소 및 최대투자비중 제약조건을 나타내는 Alb와 Aub 부분이 자산별 각각의 제약비중으로 변경되었으며, 나머지 부분은 모두 동일합니다. 결괏값들이 모두 제약조건 내에 위치함을 확인할 수 있습니다.</p>
 </div>
 </div>
-<div id="section-82" class="section level2">
+<div id="section-79" class="section level2">
 <h2><span class="header-section-number">11.3</span> 위험균형 포트폴리오</h2>
 <p>포트폴리오를 구성하는 자산들과 전체 위험의 관계를 이해하기 위해서는, 먼저 한계 위험기여도(MRC: Marginal Risk Contribution)와 위험기여도(RC: Risk Contribution)에 대해 알아야 합니다. 한계 위험기여도는 특정 자산의 비중을 한 단위 증가시켰을 때 전체 포트폴리오의 위험의 증가를 나타내는 단위로서, 수학의 편미분과 같은 개념입니다. <span class="math inline">\(i\)</span>번째 자산의 한계 위험기여도는 아래와 같이 나타낼 수 있습니다.</p>
 <p><span class="math display">\[MRC_i = \frac{\partial\sigma_p}{\partial w_i} \]</span></p>
@@ -1790,7 +1844,7 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
   
   <span class="kw">return</span>(RC)
 }</code></pre>
-<div id="section-83" class="section level3">
+<div id="section-80" class="section level3">
 <h3><span class="header-section-number">11.3.1</span> 주식 60%와 채권 40% 포트폴리오의 위험기여도</h3>
 <p>자산배분에서 가장 많이 사용되는 투자방법은 주식에 60%, 채권에 40% 가량의 비율로 투자하는 것입니다. 주식과 채권이 서로 상관관계가 낮아 분산효과가 있다는 점, 장기적으로 주식이 채권에 비해 장기적으로 수익률이 높다는 점을 감안하면 이는 꽤나 합리적인 방법으로 보입니다.</p>
 <p>그러나 눈에 보이는 비중이 60대 40이라도, 포트폴리오 내에서 각 자산이 가지고 있는 위험기여도 60대 40의 비중이 아닌 전혀 다른 비중을 가지고 있습니다.</p>
@@ -1800,13 +1854,13 @@ RC_stock_bond =<span class="st"> </span><span class="kw">get_RC</span>(<span cla
 RC_stock_bond =<span class="st"> </span><span class="kw">round</span>(RC_stock_bond, <span class="dv">4</span>)
 
 <span class="kw">print</span>(RC_stock_bond)</code></pre>
-<pre><code>## [1] 0.9698 0.0302</code></pre>
+<pre><code>## [1] 0.965 0.035</code></pre>
 <p>rets 데이터에서 첫 번째 행은 미국 주식 수익률을, 다섯 번째 행은 미국 장기채를 의미하므로, 해당 부분을 ret_stock_bond 변수에 지정합니다. 그 후 <code>cov()</code> 함수를 이용해 두 자산의 분산-공분산 행렬을 만들어주며, 위에서 만든 get_RC 함수를 통해 자산별 위험기여도를 계산합니다.</p>
-<p>주식과 채권이 가지는 위험기여도는 각각 96.98%, 3.02%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.</p>
+<p>주식과 채권이 가지는 위험기여도는 각각 96.5%, 3.5%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.</p>
 </div>
 <div id="rp---" class="section level3">
 <h3><span class="header-section-number">11.3.2</span> <code>rp()</code> 함수를 이용한 최적화</h3>
-<p>앞의 예제와 같이 특정 자산이 포트폴리오의 위험을 대부분 차지하는 문제를 막고, 모든 자산이 동일한 위험기여도를 가지는 포트폴리오가 위험균형 포트폴리오(Risk Parity Portfolio) 혹은 동일 위험기여도 포트폴리오(Equal Risk Contribution Portfolio)입니다. 이를 수식으로 쓰면 다음과 같습니다.</p>
+<p>앞의 예제와 같이 특정 자산이 포트폴리오의 위험을 대부분 차지하는 문제를 막고, 모든 자산이 동일한 위험기여도를 가지는 포트폴리오가 위험균형 포트폴리오(Risk Parity Portfolio)<span class="citation">(Qian <a href="#ref-qian2011risk">2011</a>)</span> 혹은 동일 위험기여도 포트폴리오(Equal Risk Contribution Portfolio)입니다. 이를 수식으로 쓰면 다음과 같습니다.</p>
 <p><span class="math display">\[RC_1 = RC_2 = \dots = RC_n\]</span>
 <span class="math display">\[\frac{\partial\sigma_p}{\partial w_1} \times w_1 = \frac{\partial\sigma_p}{\partial w_2} \times w_2
 = \dots = \frac{\partial\sigma_p}{\partial w_n} \times w_n = \frac{1}{n}\]</span></p>
@@ -1823,26 +1877,26 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
 
 <span class="kw">print</span>(w)</code></pre>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.0622 0.0470 0.0556 0.0361 0.1806 0.3649 0.0397 0.0515 0.0865 0.0759</code></pre>
+## 0.0628 0.0474 0.0562 0.0365 0.1785 0.3638 0.0399 0.0519 0.0867 0.0763</code></pre>
 <ol style="list-style-type: decimal">
 <li>x0은 최적화를 위한 초기 입력값이며 동일 비중인 10%씩을 입력합니다.</li>
 <li>P는 분산-공분산 행렬을 입력해줍니다.</li>
-<li>mrc는 목표로 하는 각 자산별 위험기여도 값<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a>이며, 위험균형 포트폴리오의 경우 모든 자산의 위험기여도가 동일해야 하므로 10%씩을 입력합니다.</li>
+<li>mrc는 목표로 하는 각 자산별 위험기여도 값<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>이며, 위험균형 포트폴리오의 경우 모든 자산의 위험기여도가 동일해야 하므로 10%씩을 입력합니다.</li>
 </ol>
 <p><code>rp()</code> 함수는 위 입력 변수를 바탕으로 최적해를 찾아줍니다. <code>getx()</code> 함수를 통해 해를 추출할 수 있으며, <code>drop()</code>을 통해 벡터 형태로 변환합니다. 마지막으로 비중의 합이 1이 되기 위해 비중들의 합으로 나눠줍니다.</p>
 <p>최종적으로 계산된 비중이 위험균형 포트폴리오를 만족하는 해가 됩니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_RC</span>(w, covmat)</code></pre>
-<pre><code>##  [1] 0.09991 0.09990 0.09998 0.10001 0.09999 0.10000 0.10007 0.10003
-##  [9] 0.10006 0.10005</code></pre>
+<pre><code>##  [1] 0.10001 0.09992 0.09991 0.10002 0.10002 0.10004 0.09999 0.10004
+##  [9] 0.09998 0.10008</code></pre>
 <p><code>get_RC()</code> 함수를 통해 위험기여도를 확인해보면, 모든 자산이 거의 동일한 위험기여도를 가지는 것을 알 수 있습니다.</p>
 </div>
-<div id="section-84" class="section level3">
+<div id="section-81" class="section level3">
 <h3><span class="header-section-number">11.3.3</span> 위험예산 포트폴리오</h3>
 <p>모든 자산의 위험기여도가 동일한 값이 아닌, 자산별로 다른 위험기여도를 가지는 포트폴리오를 구성해야 할 경우도 있습니다. 이러한 포트폴리오를 위험예산 포트폴리오(Risk Budget Portfolio)라고 합니다. 위험균형 포트폴리오 역시 각 자산의 위험예산이 <span class="math inline">\(\frac{1}{n}\)</span>로 동일한 특수 형태이며, <code>rp()</code> 함수를 이용하면 위험예산 포트폴리오 역시 손쉽게 구현할 수 있습니다.</p>
-<p>먼저 각 자산 별 위험예산을 표 <a href="section-74.html#tab:rb">11.11</a>과 같이 정합니다. 1~4번 자산은 각각 15%씩, 5~6번 자산은 각각 10%씩, 7~10번 자산은 각각 5%씩 위험예산을 부여하고자 합니다.</p>
+<p>먼저 각 자산 별 위험예산을 표 <a href="section-71.html#tab:rb">11.13</a>과 같이 정합니다. 1~4번 자산은 각각 15%씩, 5~6번 자산은 각각 10%씩, 7~10번 자산은 각각 5%씩 위험예산을 부여하고자 합니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:rb">표 11.11: </span>위험예산 포트폴리오 예시
+<span id="tab:rb">표 11.13: </span>위험예산 포트폴리오 예시
 </caption>
 <thead>
 <tr>
@@ -1932,11 +1986,11 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
 
 <span class="kw">print</span>(w)</code></pre>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 0.0874 0.0672 0.0769 0.0516 0.1881 0.3853 0.0198 0.0254 0.0545 0.0438</code></pre>
+## 0.0880 0.0676 0.0777 0.0521 0.1860 0.3844 0.0199 0.0256 0.0546 0.0440</code></pre>
 <p>mrc에 목표로 하는 각 자산별 위험기여도를 입력하며, 나머지는 기존 위험균형 포트폴리오와 동일하게 입력합니다.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get_RC</span>(w, covmat)</code></pre>
-<pre><code>##  [1] 0.14996 0.15004 0.14998 0.14996 0.10009 0.10006 0.04994 0.04997
-##  [9] 0.04997 0.05003</code></pre>
+<pre><code>##  [1] 0.14998 0.14991 0.15010 0.15002 0.10000 0.10001 0.04992 0.05002
+##  [9] 0.04999 0.05004</code></pre>
 <p><code>get_RC()</code> 함수를 통해 위험기여도를 확인해보면 우리가 원하던 자산별 위험예산과 거의 동일한 것을 알 수 있습니다.</p>
 
 </div>
@@ -1950,11 +2004,14 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
 <div id="ref-choueifaty2013properties">
 <p>Choueifaty, Yves, Tristan Froidure, and Julien Reynier. 2013. “Properties of the Most Diversified Portfolio.” <em>Journal of Investment Strategies</em> 2 (2): 49–70.</p>
 </div>
+<div id="ref-qian2011risk">
+<p>Qian, Edward. 2011. “Risk Parity and Diversification.” <em>The Journal of Investing</em> 20 (1): 119–27.</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="19">
-<li id="fn19"><p>엄밀하게는 mrc가 아닌 rc가 맞는 용어입니다.<a href="section-74.html#fnref19" class="footnote-back">↩</a></p></li>
+<ol start="18">
+<li id="fn18"><p>엄밀하게는 mrc가 아닌 rc가 맞는 용어입니다.<a href="section-71.html#fnref18" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1962,8 +2019,8 @@ w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span
           </div>
         </div>
       </div>
-<a href="section-65.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="section-85.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="section-62.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="section-82.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -2000,7 +2057,8 @@ gitbook.start({
 "download": null,
 "toc": {
 "collapse": "section"
-}
+},
+"split_bib": false
 });
 });
 </script>
