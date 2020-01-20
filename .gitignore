@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+.Renviron
 data/KOR_price/
 data/KOR_value/
 data/KOR_fs/
