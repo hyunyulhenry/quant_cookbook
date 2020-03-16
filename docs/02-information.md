@@ -1,4 +1,3 @@
-
 # 크롤링을 위한 기본 지식
 
 프로그래밍에 익숙한 분들도 크롤링은 생소한 경우가 많습니다. 기본적인 프로그래밍에 관한 책과 강의가 굉장히 많지만 크롤링을 다루는 자료는 접하기 힘들기 때문입니다. 크롤링은 기계적인 단계가 많기 때문에 조금만 연습해도 활용할 수 있는 기술입니다. 그러나 복잡한 웹페이지나 데이터 내용을 수집하려면 인코딩, 통신 구조에 대한 지
@@ -17,7 +16,7 @@ R에서 스크립트를 한글로 작성해 저장한 후 이를 다시 불러�
 
 <div class="figure" style="text-align: center">
 <img src="images/ascii_code.jpg" alt="아스키 코드 표" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-2)아스키 코드 표</p>
+<p class="caption">(\#fig:unnamed-chunk-1)아스키 코드 표</p>
 </div>
 
 ### 한글 인코딩 방식의 종류
@@ -30,7 +29,7 @@ R에서 스크립트를 한글로 작성해 저장한 후 이를 다시 불러�
 
 <div class="figure" style="text-align: center">
 <img src="images/encoding_ratio.jpg" alt="웹페이지에서 사용되는 인코딩 비율" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-3)웹페이지에서 사용되는 인코딩 비율</p>
+<p class="caption">(\#fig:unnamed-chunk-2)웹페이지에서 사용되는 인코딩 비율</p>
 </div>
 
 ### R에서 UTF-8 설정하기
@@ -57,7 +56,7 @@ R에서 스크립트를 한글로 작성해 저장한 후 이를 다시 불러�
 
 <div class="figure" style="text-align: center">
 <img src="images/web_str.png" alt="웹 환경 구조" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-4)웹 환경 구조</p>
+<p class="caption">(\#fig:unnamed-chunk-3)웹 환경 구조</p>
 </div>
 
 먼저 클라이언트란 여러분의 데스크톱이나 휴대폰과 같은 장치와 크롬이나 파이어폭스와 같은 소프트웨어를 의미합니다. 서버는 웹사이트와 앱을 저장하는 컴퓨터를 의미합니다. 클라이언트가 특정 정보를 요구하는 과정을 ‘요청’이라고 하며, 서버가 해당 정보를 제공하는 과정을 ‘응답’이라고 합니다. 그러나 클라이언트와 서버가 연결되어 있지 않다면 둘 사이에 정보를 주고받을 수 없으며, 이를 연결하는 공간이 바로 인터넷입니다. 또한 건물에도 고유의 주소가 있는 것처럼, 각 서버에도 고유의 주소가 있는데 이것이 인터넷 주소 혹은 URL입니다.
@@ -86,7 +85,7 @@ Table: (\#tab:http)HTTP 요청 방식과 설명
 HTTP 상태 코드는 100번대부터 500번대까지 있으며, 성공적으로 응답을 받을 시 200번 코드를 받게 됩니다. 각 코드에 대한 내용은 HTTP 상태 코드를 검색하면 확인할 수 있으며, 크롤링 과정에서 오류가 발생할 시 해당 코드를 통해 어떤 부분에서 오류가 발생했는지 확인이 가능합니다.
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-5)HTTP 상태 코드 그룹 별 내용</caption>
+<caption>(\#tab:unnamed-chunk-4)HTTP 상태 코드 그룹 별 내용</caption>
  <thead>
   <tr>
    <th style="text-align:center;"> 코드 </th>
@@ -166,7 +165,7 @@ HTML은 크게 메타 데이터를 나타내는 head와 본문을 나타내는 b
 
 <div class="figure" style="text-align: center">
 <img src="images/html_1.png" alt="HTML 기본 구조" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-7)HTML 기본 구조</p>
+<p class="caption">(\#fig:unnamed-chunk-6)HTML 기본 구조</p>
 </div>
 
 ### 태그와 속성
@@ -175,7 +174,7 @@ HTML 코드는 태그와 속성, 내용으로 이루어져 있습니다. 크롤�
 
 <div class="figure" style="text-align: center">
 <img src="images/html_2.png" alt="HTML 구성 요소 분석" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-8)HTML 구성 요소 분석</p>
+<p class="caption">(\#fig:unnamed-chunk-7)HTML 구성 요소 분석</p>
 </div>
 
 꺾쇠(<>)로 감싸져 있는 부분을 태그라고 하며, 여는 태그 <>가 있으면 반드시 이를 닫는 태그인 </>가 쌍으로 있어야 합니다. 속성은 해당 태그에 대한 추가적인 정보를 제공해주는 것으로, 뒤에 속성값이 따라와야 합니다. 내용은 우리가 눈으로 보는 텍스트 부분을 의미합니다. 앞의 HTML 코드는 문단을 나타내는 \<p\> 그, 정렬을 나타내는 align 속성과 center를 통해 가운데 정렬을 지정하며, 내용에는 ‘퀀트 투자 Cookbook’을 나타내고, \</p\> 태그를 통해 태그를 마쳤습니다.
@@ -218,7 +217,7 @@ h 태그는 폰트의 크기를 나타내는 태그이며, p 태그는 문단을
 
 <div class="figure" style="text-align: center">
 <img src="images/html_3.png" alt="h 태그와 p 태그 예제" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-10)h 태그와 p 태그 예제</p>
+<p class="caption">(\#fig:unnamed-chunk-9)h 태그와 p 태그 예제</p>
 </div>
 
 ### 리스트를 나타내는 ul 태그와 ol 태그
@@ -275,7 +274,7 @@ ul과 ol 태그는 리스트(글머리 기호)를 만들 때 사용됩니다. ul
 
 <div class="figure" style="text-align: center">
 <img src="images/html_4.png" alt="리스트 관련 태그 예제" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-12)리스트 관련 태그 예제</p>
+<p class="caption">(\#fig:unnamed-chunk-11)리스트 관련 태그 예제</p>
 </div>
 
 ul 태그로 감싼 부분은 글머리 기호가 순서가 없는 •으로 표현되며, ol 태그로 감싼 부분은 숫자가 순서대로 표현됩니다. 각각의 리스트는 li를 통해 생성됩니다.
@@ -364,7 +363,7 @@ table 태그는 표를 만드는 태그입니다.
 
 <div class="figure" style="text-align: center">
 <img src="images/html_5.png" alt="table 태그 예제" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-14)table 태그 예제</p>
+<p class="caption">(\#fig:unnamed-chunk-13)table 태그 예제</p>
 </div>
 
 table 태그 내의 tr 태그는 각 행을 의미합니다. 각 셀의 구분은 th 혹은 td 태그를 통해 구분할 수 있습니다. th 태그는 진하게 표현되므로 주로 테이블의 제목에 사용되고, td 태그는 테이블의 내용에 사용됩니다.
@@ -421,7 +420,7 @@ width="180",height="140">
 
 <div class="figure" style="text-align: center">
 <img src="images/html_6.png" alt="a 태그와 src 태그 예제" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-16)a 태그와 src 태그 예제</p>
+<p class="caption">(\#fig:unnamed-chunk-15)a 태그와 src 태그 예제</p>
 </div>
 
 a 태그 뒤 href 속성의 속성값으로 연결하려는 웹페이지 주소를 입력한 후 내용을 입력하면, 내용 텍스트에 웹페이지의 링크가 추가됩니다. img 태그 뒤 src 속성의 속성값에는 불러오려는 이미지 주소를 입력하며, width 속성과 height 속성을 통해 이미지의 가로세로 길이를 조절할 수도 있습니다. 페이지 내에서 링크된 주소를 모두 찾거나, 모든 이미지를 저장하려고 할 때 속성값을 찾으면 손쉽게 원하는 작업을 할 수 있습니다.
@@ -480,7 +479,7 @@ div 태그는 화면의 전체적인 틀(레이아웃)을 만들 때 주로 사�
 
 <div class="figure" style="text-align: center">
 <img src="images/html_7.png" alt="div 태그 예제" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-18)div 태그 예제</p>
+<p class="caption">(\#fig:unnamed-chunk-17)div 태그 예제</p>
 </div>
 
 div 태그를 통해 총 세 개의 레이아웃으로 나누어진 것을 알 수 있습니다. style 속성 중 background-color는 배경 색상을, color는 글자 색상을 의미하며, 각 레이아웃마다 다른 스타일이 적용되었습니다.
@@ -529,7 +528,7 @@ h4   {color: blue;}
 
 <div class="figure" style="text-align: center">
 <img src="images/html_8.png" alt="css 예제" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-20)css 예제</p>
+<p class="caption">(\#fig:unnamed-chunk-19)css 예제</p>
 </div>
 
 head 태그 사이에 여러 태그에 대한 CSS 효과가 정의되었습니다. 먼저 body의 전체 배경 색상을 powderblue로 설정했으며, h4 태그의 글자 색상은 파란색(blue)으로 설정했습니다. body 태그 내에서 style에 태그를 주지 않더라도, CSS 효과가 모두 적용되었음이 확인됩니다.
@@ -614,7 +613,7 @@ heavily weighted towards information technology companies</p>
 
 <div class="figure" style="text-align: center">
 <img src="images/html_9.png" alt="class 예제" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-22)class 예제</p>
+<p class="caption">(\#fig:unnamed-chunk-21)class 예제</p>
 </div>
 
 셀렉터를 클래스에 적용할 때는 클래스명 앞에 마침표(.)를 붙여 표현합니다. 위 예제에서 index 클래스는 배경 색상이 tomato, 글자 색상은 흰색, 여백은 10px로 정의되었습니다. desc 클래스는 배경 색상이 moccasin, 글자 색상은 검은색, 여백은 10px로 정의되었습니다. 본문의 첫 번째(S&P 500)와 세 번째(NASDAQ Composite) 레이아웃의 h2 태그 뒤에는 index 클래스를, p 태그 뒤에는 desc 클래스를 속성으로 입력했습니다. 따라서 해당 레이아웃에만 CSS 효과가 적용되며, 클래스 값이 없는 두 번째 레이아웃에는 효과가 적용되지 않습니다.
@@ -671,7 +670,7 @@ id 또한 이와 비슷한 역할을 하며, HTML 내에서 여러 개의 클래
 
 <div class="figure" style="text-align: center">
 <img src="images/html_10.png" alt="id 예제" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-24)id 예제</p>
+<p class="caption">(\#fig:unnamed-chunk-23)id 예제</p>
 </div>
 
 셀렉터를 id에 적용할 때는 클래스명 앞에 샵(#)를 붙여 표현하며, 페이지에서 한 번만 사용된다는 점을 제외하면 클래스와 사용 방법이 거의 동일합니다. 클래스나 id 값을 통해 원하는 내용을 크롤링하는 경우도 많으므로, 각각의 이름 앞에 마침표(.)와 샵(#)
@@ -819,7 +818,7 @@ for (i in number) {
 ```
 
 ```
-## Error in i^2: 이항연산자에 수치가 아닌 인수입니다
+## Error in i^2: non-numeric argument to binary operator
 ```
 
 `for loop` 구문을 통해 순서대로 값들의 제곱을 출력하는 명령어를 실행하면 문자 4는 제곱을 할 수 없어 오류가 발생하게 됩니다. `tryCatch()` 함수를 사용하면 이처럼 오류가 발생하는 루프를 무시하고 다음 루프로 넘어갈 수 있게 됩니다.

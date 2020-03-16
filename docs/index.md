@@ -1,16 +1,13 @@
-
 --- 
 title: "R을 이용한 퀀트 투자 포트폴리오 만들기"
 author: "이현열"
-date: "2020-01-20"
-site: bookdown::bookdown_site
+date: "2020-03-16"
 output: bookdown::gitbook
+site: bookdown::bookdown_site
 documentclass: book
-fontsize: 12pt
 bibliography: [book.bib, article.bib]
-biblio-style: "apalike"
+biblio-style: apalike
 link-citations: yes
-latex_engine: xelatex
 github-repo: hyunyulhenry/quant_cookbook
 ---
 
@@ -22,11 +19,13 @@ github-repo: hyunyulhenry/quant_cookbook
 
 본 페이지는 **R을 이용한 퀀트 투자 포트폴리오 만들기**의 웹사이트 입니다. 책의 수정 사항이 있을시 즉시 반영할 예정이며, 책에서 다루지 못했던 추가적인 내용도 지속적으로 업데이트 할 예정입니다.
 
-<div style="background-color:#F7F7F7;padding: 20px">
+<div style="background-color:#F7F7F7;padding: 20px 20px 20px 20px">
 
 책 발간 이후 업데이트 내용은 다음과 같습니다.
 
-- 2020년 1월 20일: [금융 데이터 수집하기 (심화)]에 [DART 데이터 수집하기] 부분을 추가하였습니다.
+- 2020년 3월 16일: [퀀트 전략을 이용한 종목선정 (기본)]과 [퀀트 전략을 이용한 종목선정 (심화)]에서 재무제표를 이용한 전략의 경우, 1~4월에는 최근년도 데이터가 일부 종목에 대해서만 들어옵니다. 따라서 해당 기간에는 전전년도 데이터를 사용해야 하며, 이를 고려하도록 코드를 변경하였습니다.
+
+- 2020년 3월 15일: [금융 데이터 수집하기 (심화)]에 [재무제표 및 가치지표 크롤링]에서 사용하는 페이지가 크롤러의 접근을 막음에 따라, `user_agent()` 를 이용하여 웹브라우저 인자를 추가해 주었습니다.
 
 - 2020년 1월 19일: [거래소 데이터 정리하기] 부분에서 `substr()` 함수 대신 stringr 패키지의 `str_sub()` 함수를 사용하여 코드를 훨씬 간결하게 표현했습니다. 또한 종목코드 끝이 0이 아닐 경우 우선주인 점을 이용하여 더욱 쉽게 클렌징 처리를 하였습니다.
 

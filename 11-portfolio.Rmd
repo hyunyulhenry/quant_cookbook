@@ -1,29 +1,3 @@
-```{r include=FALSE, cache=FALSE}
-set.seed(123)
-
-knitr::opts_chunk$set(
-  out.width = "70%",
-  fig.align = 'center',
-  fig.width = 6,
-  fig.asp = 0.618,  # 1 / phi
-  fig.show = 'hold',
-  warning = FALSE,
-  message = FALSE
-)
-
-if(!knitr:::is_html_output()) {
-  options("width"=56)
-  knitr::opts_chunk$set(
-    warning = FALSE,
-    message = FALSE
-    )
-  knitr::opts_chunk$set(fig.pos = 'h')
-}
-
-pdf.options(family = "Korea1deb")
-options(scipen = 5)
-options(digits = 4)
-```
 # 포트폴리오 구성
 
 종목별로 비중을 어떻게 배분하느냐에 따라 성과가 달라지므로, 종목의 선택 못지 않게 중요한 것이 포트폴리오를 구성하는 방법입니다. 최적 포트폴리오의 구성은 수식을 기반으로 최적화된 해를 찾습니다. 물론 엑셀의 해 찾기와 같은 기능을 사용해 간단한 형태의 최적화 구현이 가능하지만, 방대한 데이터를 다룰 경우에는 속도가 지나치게
@@ -57,6 +31,11 @@ prices = do.call(cbind,
 
 rets = Return.calculate(prices) %>% na.omit()
 ```
+
+```{r echo = FALSE}
+write.csv(rets, 'data/global_data.sv')
+```
+
 
 `getSymbols()` 함수를 통해 일반적으로 자산배분에서 많이 사용되는 주식과 채권, 대체자산에 해당하는 ETF 가격 데이터를 받은 후 `lapply()`와 `Ad()`, `get()` 함수의 조합을 통해 수정주가만을 선택하고 열의 형태로 묶어줍니다. 그 후 `Return.calculate()` 함수를 통해 수익률을 계산합니다.
 

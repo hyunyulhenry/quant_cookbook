@@ -130,8 +130,15 @@ KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
                       stringsAsFactors = FALSE) 
 
 data_pbr = KOR_value['PBR']
+
+if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
+  num_col = ncol(KOR_fs[[1]]) - 1
+} else {
+  num_col = ncol(KOR_fs[[1]]) 
+}
+
 data_gpa =
-  (KOR_fs$'매출총이익' / KOR_fs$'자산')[ncol(KOR_fs[[1]])] %>%
+  (KOR_fs$'매출총이익' / KOR_fs$'자산')[num_col] %>%
   setNames('GPA')
 
 cbind(data_pbr, -data_gpa) %>%
@@ -223,7 +230,11 @@ KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
 KOR_ticker$'종목코드' =
   str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
-num_col = ncol(KOR_fs[[1]])
+if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
+  num_col = ncol(KOR_fs[[1]]) - 1
+} else {
+  num_col = ncol(KOR_fs[[1]]) 
+}
 
 # 분자
 magic_ebit = (KOR_fs$'지배주주순이익' + KOR_fs$'법인세비용' +
@@ -423,7 +434,12 @@ KOR_ticker$'종목코드' =
 먼저 재무제표, 가치지표, 주가 데이터를 불러옵니다.
 
 ```{r warning = FALSE, message = FALSE, out.width='50%'}
-num_col = ncol(KOR_fs[[1]])
+if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
+  num_col = ncol(KOR_fs[[1]]) - 1
+} else {
+  num_col = ncol(KOR_fs[[1]]) 
+}
+
 quality_roe = (KOR_fs$'지배주주순이익' / KOR_fs$'자본')[num_col]
 quality_gpa = (KOR_fs$'매출총이익' / KOR_fs$'자산')[num_col]
 quality_cfo =

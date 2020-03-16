@@ -341,7 +341,7 @@ chart.TimeSeries(turnover)
 2. 포트폴리오를 구성하며, 개별 투자비중은 최소 10%, 최대 30% 제약조건을 설정합니다.
 3. 매월 리밸런싱을 실시합니다.
 
-```{r message = FALSE, warning = FALSE}
+```{r message = FALSE, warning = FALSE, eval = FALSE}
 library(quantmod)
 library(PerformanceAnalytics)
 library(RiskPortfolios)
@@ -367,6 +367,18 @@ prices = do.call(cbind, lapply(symbols, function(x) Ad(get(x)))) %>%
 
 rets = Return.calculate(prices) %>% na.omit()
 ```
+
+```{r echo = FALSE}
+library(quantmod)
+library(PerformanceAnalytics)
+library(RiskPortfolios)
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+
+rets = read.csv('data/data_global.csv', row.names = 1) %>% as.xts()
+```
+
 
 먼저 이전 CHAPTER와 동일하게 글로벌 자산을 대표하는 ETF 데이터를 다운로드한
 후 수정주가의 수익률을 계산합니다.

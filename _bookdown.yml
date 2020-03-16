@@ -13,3 +13,23 @@ output_dir: docs
 
 before_chapter_script: "_common.R"
 
+rmd_files: [
+  "index.Rmd",
+  "01-data_programming.Rmd",
+  "02-information.Rmd",
+  "03-api.Rmd",
+  "04-crawling.Rmd",
+  "05-crawling_practice.Rmd",
+  "06-crawling_actual.Rmd",
+  "07-bind_data.Rmd",
+  "08-data_analysis.Rmd",
+  
+  "09-factor_basic.Rmd",
+  "10-factor_adv.Rmd",
+  
+  "11-portfolio.Rmd",
+  "12-backtest.Rmd",
+  "13-evaluation.Rmd",
+  
+  "14-reference.Rmd"
+]

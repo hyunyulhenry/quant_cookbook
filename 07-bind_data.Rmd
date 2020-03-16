@@ -1,12 +1,19 @@
 # 데이터 정리하기
 
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+library(magrittr)
+library(dplyr)
+
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
+```
+
 앞 CHAPTER에서는 API와 크롤링을 통해 주가, 재무제표, 가치지표를 수집하는 방법을 배웠습니다. 이번 CHAPTER에서는 각각 csv 파일로 저장된 데이터들을 하나로 합친 후 저장하는 과정을 살펴보겠습니다.
 
 ## 주가 정리하기
 
 주가는 data/KOR_price 폴더 내에 티커_price.csv 파일로 저장되어 있습니다. 해당 파일들을 불러온 후 데이터를 묶는 작업을 통해 하나의 파일로 합치는 방법을 알아보겠습니다.
 
-```{r message = FALSE, warning = FALSE}
+```{r message = FALSE, warning = FALSE, eval = FALSE}
 library(stringr)
 library(xts)
 library(magrittr)
@@ -29,8 +36,16 @@ for (i in 1 : nrow(KOR_ticker)) {
 
 price_list = do.call(cbind, price_list) %>% na.locf()
 colnames(price_list) = KOR_ticker$'종목코드'
+```
 
+```{r echo = FALSE}
+# 저장된 데이터 불러오기
+price_list = read.csv('data/KOR_price.csv')
+```
+
+```{r}
 head(price_list[, 1:5])
+tail(price_list[, 1:5])
 ```
 
 1. 티커가 저장된 csv 파일을 불러온 후 티커를 6자리로 맞춰줍니다.
@@ -42,7 +57,7 @@ head(price_list[, 1:5])
 
 해당 작업을 통해 개별 csv 파일로 흩어져 있던 가격 데이터가 하나의 데이터로 묶이게 됩니다.
 
-```{r}
+```{r eval = FALSE}
 write.csv(data.frame(price_list), 'data/KOR_price.csv')
 ```
 
@@ -52,7 +67,7 @@ write.csv(data.frame(price_list), 'data/KOR_price.csv')
 
 재무제표는 data/KOR_fs 폴더 내 티커_fs.csv 파일로 저장되어 있습니다. 주가는 하나의 열로 이루어져 있어 데이터를 정리하는 것이 간단했지만, 재무제표는 각 종목별 재무 항목이 모두 달라 정리하기 번거롭습니다.
 
-```{r message = FALSE}
+```{r message = FALSE, eval = FALSE}
 library(stringr)
 library(magrittr)
 library(dplyr)
@@ -69,6 +84,15 @@ for (i in 1 : nrow(KOR_ticker)){
   data_fs[[i]] = read.csv(paste0('data/KOR_fs/', name,
                                  '_fs.csv'), row.names = 1)
 }
+```
+
+```{r eval = FALSE, echo = FALSE}
+saveRDS(data_fs, 'data/data_fs.Rds')
+```
+
+```{r echo = FALSE}
+# 저장된 데이터 불러오기
+data_fs = readRDS('data/data_fs.Rds')
 ```
 
 위와 동일하게 티커 데이터를 읽어옵니다. 이를 바탕으로 종목별 재무제표 데이터를 읽어온 후 리스트에 저장합니다.
@@ -121,7 +145,7 @@ print(head(select_fs))
 
 해당 과정을 통해 전 종목의 매출액 데이터가 연도별로 정리되었습니다. for loop 구문을 이용해 모든 재무 항목에 대한 데이터를 정리하는 방법은 다음과 같습니다.
 
-```{r}
+```{r eval = FALSE}
 fs_list = list()
 
 for (i in 1 : length(fs_item)) {
@@ -160,7 +184,7 @@ names(fs_list) = fs_item
 
 위 과정을 거치면 fs_list에 총 `r length(fs_item)`리스트가 생성됩니다. 각 리스트에는 해당 재무 항목에 대한 전 종목의 연도별 데이터가 정리되어 있습니다.
 
-```{r}
+```{r eval = FALSE} 
 saveRDS(fs_list, 'data/KOR_fs.Rds')
 ```
 
@@ -226,7 +250,10 @@ data_value = data_value %>%
 
 rownames(data_value) = KOR_ticker[, '종목코드']
 print(head(data_value))
+```
 
+
+```{r eval = FALSE}
 write.csv(data_value, 'data/KOR_value.csv')
 ```
 

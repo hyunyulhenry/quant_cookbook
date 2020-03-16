@@ -1,4 +1,3 @@
-
 # 포트폴리오 백테스트
 
 백테스트란 현재 생각하는 전략을 과거부터 실행했을 때 어떠한 성과가 발생하는지 테스트해보는 과정입니다. 과거의 데이터를 기반으로 전략을 실행하는 퀀트 투자에 있어서 이는 핵심 단계이기도 합니다. 백테스트 결과를 통해 해당 전략의 손익뿐만 아니라 각종 위험을 대략적으로 판단할 수 있으며, 어떤 구간에서 전략이 좋았는지 혹은 나빴는지에 대한 이해도 키울 수 있습니다. 이러한 이해를 바탕으로 퀀트 투자를 지속한다면 단기적으로 수익이 나쁜 구간에서도 그 이유에 대한 객관적인 안목을 키울 수 있으며, 확신을 가지고 전략을 지속할 수 있습니다.
@@ -55,7 +54,7 @@ weights에 값을 입력하지 않을 경우 동일비중 포트폴리오를 구
 해당 함수는 verbose를 TRUE로 설정하면 다양한 결괏값을 리스트 형태로 반환합니다
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-3)Return.portfolio() 함수 반환값</caption>
+<caption>(\#tab:unnamed-chunk-2)Return.portfolio() 함수 반환값</caption>
  <thead>
   <tr>
    <th style="text-align:center;"> 결과 </th>
@@ -123,11 +122,11 @@ cor(rets)
 
 ```
 ##              SPY.Adjusted TLT.Adjusted
-## SPY.Adjusted       1.0000      -0.4335
-## TLT.Adjusted      -0.4335       1.0000
+## SPY.Adjusted       1.0000      -0.4366
+## TLT.Adjusted      -0.4366       1.0000
 ```
 
-`cor()` 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.43로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.
+`cor()` 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.44로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.
 
 
 ```r
@@ -317,7 +316,7 @@ charts.PerformanceSummary(portfolios,
                           main = '60대 40 포트폴리오')
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="12-backtest_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" />
 
 PerformanceAnalytics 패키지의 `charts.PerformanceSummary()` 함수는 기간별 수익률을 입력 시 누적수익률, 일별 수익률, 드로우다운(낙폭) 그래프를 자동으로 그려줍니다.
 
@@ -334,7 +333,7 @@ turnover = xts(
 chart.TimeSeries(turnover)
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
 
 전일 종료시점의 비중인 EOP.Weight를 `lag()` 함수를 이용해 한 단계씩 내린 후 시작시점의 비중인 BOP.Weight와의 차이의 절댓값을 더해주면 해당 시점에서의 회전율이 계산됩니다. `lag()` 함수의 경우 dplyr 패키지에도 동일한 이름의 함수가 있으므로, 충돌을 방지하기 위해 timeSeries 패키지의 함수임을 선언해줍니다. 이를 `xts()` 함수를 이용해 시계열 형태로 만든 후 `chart.TimeSeries()` 함수를 이용해 그래프로 나타내줍니다.
 
@@ -380,18 +379,22 @@ print(ep)
 ```
 
 ```
-##   [1]    0   19   38   60   80  102  123  144  167  186  209  230  250  271
-##  [15]  291  311  333  354  375  397  418  439  462  481  503  523  542  564
-##  [29]  585  605  627  649  670  691  713  733  755  774  793  816  837  857
-##  [43]  879  900  922  943  964  985 1007 1027 1046 1069 1089 1110 1132 1152
-##  [57] 1175 1196 1217 1238 1259 1279 1299 1321 1341 1363 1384 1405 1428 1447
-##  [71] 1468 1489 1509 1530 1549 1569 1591 1613 1633 1655 1677 1697 1720 1740
-##  [85] 1761 1782 1801 1822 1843 1864 1885 1907 1928 1949 1972 1991 2013 2033
-##  [99] 2052 2074 2095 2115 2137 2159 2180 2201 2223 2243 2265 2284 2304 2326
-## [113] 2347 2368 2390 2410 2433 2454 2475 2496 2517 2537 2556 2579 2598 2620
-## [127] 2642 2662 2685 2705 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
-## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123 3143 3165 3187 3207
-## [155] 3230 3250 3271 3283
+##   [1]    0   19   38   60   80  102  123  144  167  186
+##  [11]  209  230  250  271  291  311  333  354  375  397
+##  [21]  418  439  462  481  503  523  542  564  585  605
+##  [31]  627  649  670  691  713  733  755  774  793  816
+##  [41]  837  857  879  900  922  943  964  985 1007 1027
+##  [51] 1046 1069 1089 1110 1132 1152 1175 1196 1217 1238
+##  [61] 1259 1279 1299 1321 1341 1363 1384 1405 1428 1447
+##  [71] 1468 1489 1509 1530 1549 1569 1591 1613 1633 1655
+##  [81] 1677 1697 1720 1740 1761 1782 1801 1822 1843 1864
+##  [91] 1885 1907 1928 1949 1972 1991 2013 2033 2052 2074
+## [101] 2095 2115 2137 2159 2180 2201 2223 2243 2265 2284
+## [111] 2304 2326 2347 2368 2390 2410 2433 2454 2475 2496
+## [121] 2517 2537 2556 2579 2598 2620 2642 2662 2685 2705
+## [131] 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
+## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123
+## [151] 3143 3165 3187 3207 3230 3250 3271 3292 3311 3321
 ```
 
 ```r
@@ -506,7 +509,7 @@ charts.PerformanceSummary(portfolios,
                           main = "Buy & Hold vs Tactical")
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="12-backtest_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" />
 
 1. 수익률 데이터와 비중 데이터의 입력을 통해 백테스트를 실행합니다.
 2. `cbind()` 함수를 통해 SPY 데이터와 포트폴리오 수익률을 합쳐줍니다. 시점 선택 포트폴리오의 경우 lookback 기간인 초기 10개월에 대한 수익률이 없어 NA로 표시되므로 `na.omit()`을 통해 해당 부분을 제거합니다.
@@ -524,7 +527,7 @@ turnover = xts(rowSums(abs(Tactical$BOP.Weight -
 chart.TimeSeries(turnover)
 ```
 
-<img src="12-backtest_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" />
 
 해당 전략의 회전율을 확인해보면, 몇 년간 매매가 없는 경우도 있습니다. 그러나 매매가 발생할 시 매수와 매도 포지션 양쪽의 매매로 인해 200%의 회전율이 발생하게 됩니다.
 
@@ -559,18 +562,15 @@ symbols = c('SPY', # 미국 주식
             'DBC'  # 상품
             )
 getSymbols(symbols, src = 'yahoo')
-```
 
-```
-##  [1] "SPY" "IEV" "EWJ" "EEM" "TLT" "IEF" "IYR" "RWX" "GLD" "DBC"
-```
-
-```r
 prices = do.call(cbind, lapply(symbols, function(x) Ad(get(x)))) %>%
   setNames(symbols)
 
 rets = Return.calculate(prices) %>% na.omit()
 ```
+
+
+
 
 먼저 이전 CHAPTER와 동일하게 글로벌 자산을 대표하는 ETF 데이터를 다운로드한
 후 수정주가의 수익률을 계산합니다.

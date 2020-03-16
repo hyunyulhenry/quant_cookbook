@@ -74,10 +74,9 @@ knitr::kable(
   ),
   booktabs = TRUE,
   align = "c",
-  caption = 'HTTP 요청 방식과 설명'
+  caption = 'HTTP 요청 방식과 설명',
 ) %>%
-  kableExtra::kable_styling(latex_options = c("striped", "hold_position")) %>%
-  kableExtra::column_spec(2, width = "5cm")
+  kableExtra::kable_styling(latex_options = c("striped", "hold_position")) 
 ```
 
 인터넷을 사용하다 보면 한 번쯤 ‘이 페이지를 볼 수 있는 권한이 없음(HTTP 오류 403 - 사용할 수 없음)’ 혹은 ‘페이지를 찾을 수 없음(HTTP 오류 404 - 파일을 찾을 수 없음)’이라는 오류를 본 적이 있을 겁니다. 여기서 403과 404라는 숫자는 클라이언트의 요청에
@@ -97,7 +96,8 @@ knitr::kable(
   ),
   booktabs = TRUE,
   align = "c",
-  caption = 'HTTP 상태 코드 그룹 별 내용'
+  caption = 'HTTP 상태 코드 그룹 별 내용',
+  escape = FALSE
 ) %>%
   kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
 ```

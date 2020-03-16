@@ -1,4 +1,3 @@
-
 # 퀀트 전략을 이용한 종목선정 (심화)
 
 지난 CHAPTER에서는 팩터를 이용한 투자 전략의 기본이 되는 저변동성, 모멘텀, 밸류, 퀄리티 전략에 대해 알아보았습니다. 물론 이러한 단일 팩터를 이용한 투자도 장기적으로 우수한 성과를 보이지만, 여러 팩터를 결합하거나 정밀하게 전략을 만든다면 더욱 우수한 성과를 거둘 수 있습니다.
@@ -66,7 +65,7 @@ data_market[invest_mom, ] %>%
   theme_classic()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" />
 
 `group_by()` 함수를 이용해 12개월 기준 모멘텀 포트폴리오 종목들의 섹터별 종목수를 계산해준 후 `ggplot()` 함수를 이용해 이를 그림으로 나타냅니다. 그림에서 알 수 있듯이 특정 섹터에 대부분의 종목이 몰려 있습니다.
 
@@ -113,7 +112,7 @@ data_market[invest_mom_neutral, ] %>%
   theme_classic()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" />
 
 정규화된 값의 랭킹이 높은 상위 30종목을 선택하며, 내림차순을 위해 마이너스(-)를 붙여줍니다. 해당 포트폴리오의 섹터별 구성종목을 확인해보면, 단순하게 포트폴리오를 구성한 것에 대비하여 여러 섹터에 종목이 분산되어 있습니다.
 
@@ -141,8 +140,15 @@ KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
                       stringsAsFactors = FALSE) 
 
 data_pbr = KOR_value['PBR']
+
+if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
+  num_col = ncol(KOR_fs[[1]]) - 1
+} else {
+  num_col = ncol(KOR_fs[[1]]) 
+}
+
 data_gpa =
-  (KOR_fs$'매출총이익' / KOR_fs$'자산')[ncol(KOR_fs[[1]])] %>%
+  (KOR_fs$'매출총이익' / KOR_fs$'자산')[num_col] %>%
   setNames('GPA')
 
 cbind(data_pbr, -data_gpa) %>%
@@ -151,8 +157,8 @@ cbind(data_pbr, -data_gpa) %>%
 
 ```
 ##         PBR     GPA
-## PBR  1.0000 -0.2289
-## GPA -0.2289  1.0000
+## PBR  1.0000 -0.2307
+## GPA -0.2307  1.0000
 ```
 
 데이터를 불러온 후 PBR과 GPA(매출총이익/자산)를 구합니다. 그 후 랭킹의 상관관계인 스피어만 상관관계를 구해보면, 서로 간에 반대 관계가 있음이 확인됩니다. PBR은 오름차순, GPA는 내림차순이므로 GPA 앞에 마이너스(-)를 붙여주었습니다.
@@ -169,7 +175,7 @@ cbind(data_pbr, data_gpa) %>%
   xlab('PBR') + ylab('GPA')
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" />
 
 이번에는 PBR의 분위수별 GPA 평균값을 구하겠습니다.
 
@@ -185,7 +191,7 @@ cbind(data_pbr, data_gpa) %>%
 
 <div class="figure" style="text-align: center">
 <img src="images/tableqv.png" alt="밸류 팩터와 퀄리티 팩터간의 관계" width="50%" />
-<p class="caption">(\#fig:unnamed-chunk-9)밸류 팩터와 퀄리티 팩터간의 관계</p>
+<p class="caption">(\#fig:unnamed-chunk-8)밸류 팩터와 퀄리티 팩터간의 관계</p>
 </div>
 
 주가가 쌀수록 기업의 우량성은 떨어지며(①번), 반대로 기업의 우량성이 좋으면 주식은 비싼 경향(③번)이 있습니다. 물론 우량성도 떨어지고 비싸기만한 주식(②번)을 사려는 사람들 아마 없을 겁니다. 결과적으로 우리가 원하는 최고의 주식은 우량성이 있으면서도 가격은 싼 주식(④번)입니다.
@@ -199,7 +205,7 @@ cbind(data_pbr, data_gpa) %>%
 해당 전략은 국내 투자자들에게도 많이 사랑받는 전략이지만 두 지표를 계산하기 위한 데이터를 수집하기 어려워 많은 투자자들이 이율 대신 PER를 사용하고, 투하자본 수익률 대신 ROE를 사용합니다. 그러나 우리가 수집한 데이터를 통해 충분히 원래의 마법공식을 구현할 수 있습니다.
 
 
-Table: (\#tab:unnamed-chunk-10)마법공식의 구성 요소
+Table: (\#tab:unnamed-chunk-9)마법공식의 구성 요소
 
  팩터                          Value                                              Quality                     
 ------  ---------------------------------------------------  -------------------------------------------------
@@ -232,7 +238,11 @@ KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
 KOR_ticker$'종목코드' =
   str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
-num_col = ncol(KOR_fs[[1]])
+if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
+  num_col = ncol(KOR_fs[[1]]) - 1
+} else {
+  num_col = ncol(KOR_fs[[1]]) 
+}
 
 # 분자
 magic_ebit = (KOR_fs$'지배주주순이익' + KOR_fs$'법인세비용' +
@@ -304,36 +314,35 @@ KOR_ticker[invest_magic, ] %>%
 
 ```
 ##    종목코드         종목명 이익수익률 투하자본수익률
-## 1    000660     SK하이닉스     0.2477         0.4793
-## 2    004800           효성     0.5696         1.8508
-## 3    010780   아이에스동서     0.2091         0.2914
-## 4    008060       대덕전자     0.3067         0.2936
-## 5    006650       대한유화     0.3589         0.1984
-## 6    012630            HDC     0.5731         0.3623
-## 7    001820     삼화콘덴서     0.1176         0.6383
-## 8    086390     유니테스트     0.2345         0.4580
-## 9    121800         비덴트     0.2650         0.3265
-## 10   255440           야스     0.1288         0.3193
-## 11   003300     한일홀딩스     0.4119         0.2164
-## 12   029460         케이씨     0.7949         0.5832
-## 13   045100     한양이엔지     0.2801         0.3235
-## 14   110790 크리스에프앤씨     0.2139         0.2266
-## 15   003030   세아제강지주     0.3132         0.2303
-## 16   036190   금화피에스시     0.2714         0.2316
-## 17   004960       한신공영     0.1894         0.3066
-## 18   290740         액트로     0.1430         0.3194
-## 19   225190     삼양옵틱스     0.1227         0.4102
-## 20   035620 바른손이앤에이     0.7900         0.9668
-## 21   001570           금양     0.1393         0.3548
-## 22   089230        THE E&M     0.1166         0.7804
-## 23   083930         아바코     0.1726         0.2599
-## 24   042040   케이피엠테크     0.3055         0.2939
-## 25   006580       대양제지     0.2185         0.2779
-## 26   010280   쌍용정보통신     0.2406         0.3963
-## 27   036010     아비코전자     0.4391         0.2416
-## 28   094970       제이엠티     0.1858         0.2700
-## 29   127710     아시아경제     0.3744         0.2409
-## 30   194510     파티게임즈     0.2171         0.5069
+## 1    004800           효성     0.5853         1.8508
+## 2    010780   아이에스동서     0.2429         0.2914
+## 3    008060       대덕전자     0.3909         0.2936
+## 4    001820     삼화콘덴서     0.1499         0.6383
+## 5    012630            HDC     0.6515         0.3623
+## 6    086390     유니테스트     0.3213         0.4580
+## 7    192440   슈피겐코리아     0.2755         0.2092
+## 8    003300     한일홀딩스     0.4297         0.2164
+## 9    110790 크리스에프앤씨     0.2378         0.2266
+## 10   121800         비덴트     0.4601         0.3265
+## 11   045100     한양이엔지     0.3438         0.3235
+## 12   029460         케이씨     1.0966         0.5832
+## 13   255440           야스     0.1953         0.3193
+## 14   091810     티웨이항공     0.2631         0.2043
+## 15   036200         유니셈     0.1723         0.2694
+## 16   004960       한신공영     0.1931         0.3066
+## 17   036190   금화피에스시     0.3342         0.2316
+## 18   003030   세아제강지주     0.3363         0.2303
+## 19   290740         액트로     0.2128         0.3194
+## 20   251630       브이원텍     0.2415         0.2510
+## 21   225190     삼양옵틱스     0.1683         0.4102
+## 22   241790     오션브릿지     0.1747         0.3109
+## 23   089230        THE E&M     0.1463         0.7804
+## 24   006580       대양제지     0.2569         0.2779
+## 25   042040   케이피엠테크     0.4041         0.2939
+## 26   093520         매커스     0.2211         0.2333
+## 27   094970       제이엠티     0.3256         0.2700
+## 28   127710     아시아경제     0.4760         0.2409
+## 29   194510     파티게임즈     0.2171         0.5069
 ```
 
 이익수익률과 투하자본 수익률의 랭킹을 각각 구해주며, 내림차순으로 값을 구하기 위해 마이너스(-)를 붙여줍니다. 그 후 두 값의 합의 랭킹 기준 상위 30종목을 선택한 후 종목코드, 종목명과 각 지표를 확인합니다.
@@ -358,7 +367,7 @@ max(KOR_value$PBR, na.rm = TRUE)
 ```
 
 ```
-## [1] 155.7
+## [1] 108.8
 ```
 
 ```r
@@ -367,9 +376,9 @@ KOR_value %>%
   geom_histogram(binwidth = 0.1)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" />
 
-국내 종목들의 PBR 히스토그램을 그려보면 오른쪽으로 꼬리가 매우 긴 분포를 보이고 있습니다. 이는 PBR이 무려 155.69인 이상치 데이터가 있기 때문입니다. 이처럼 모든 팩터 지표에는 극단치 데이터가 있기 마련이며, 이를 처리하는 방법을 알아보겠습니다.
+국내 종목들의 PBR 히스토그램을 그려보면 오른쪽으로 꼬리가 매우 긴 분포를 보이고 있습니다. 이는 PBR이 무려 108.78인 이상치 데이터가 있기 때문입니다. 이처럼 모든 팩터 지표에는 극단치 데이터가 있기 마련이며, 이를 처리하는 방법을 알아보겠습니다.
 
 ### 트림(Trim): 이상치 데이터 삭제
 
@@ -389,7 +398,7 @@ value_trim %>%
   geom_histogram(binwidth = 0.1)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" />
 
 `percent_rank()` 함수를 통해 백분위를 구한 후 상하위 1%에 해당하는 데이터들은 NA로 변경했습니다. 결과적으로 지나치게 PBR이 낮은 종목과 높은 종목은 제거되어 x축의 스케일이 많이 줄어든 모습입니다.
 
@@ -413,7 +422,7 @@ value_winsor %>%
   geom_histogram(binwidth = 0.1)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" />
 
 역시나 `percent_rank()` 함수를 통해 백분위를 구한 후 해당 범위를 초과할 경우 각각 상하위 1% 데이터로 변형해줍니다. 그림을 살펴보면 x축 양 끝부분의 막대가 길어진 것을 확인할 수 있습니다.
 
@@ -433,7 +442,7 @@ KOR_value %>%
   facet_wrap(. ~ key)  
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" />
 
 앞의 그림은 각 밸류 지표의 랭킹을 구한 후 히스토그램으로 나타낸 것입니다. 랭킹을 구하는 것의 가장 큰 장점은 극단치로 인한 효과가 사라진다는 점과 균등한 분포를 가진다는 점입니다.
 
@@ -452,7 +461,7 @@ KOR_value %>%
   facet_wrap(. ~ key)  
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-17-1.png" width="70%" style="display: block; margin: auto;" />
 
 `min_rank()` 함수를 통해 랭킹을 구한 후, `scale()` 함수를 통해 정규화를 해주었습니다. 기본적으로 랭킹의 분포가 가진 극단치 효과가 사라지는 점과 균등 분포의 장점을 유지하고 있으며, 분포의 범위 역시 거의 동일하게 바뀌었습니다.
 
@@ -491,7 +500,12 @@ KOR_ticker$'종목코드' =
 
 
 ```r
-num_col = ncol(KOR_fs[[1]])
+if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
+  num_col = ncol(KOR_fs[[1]]) - 1
+} else {
+  num_col = ncol(KOR_fs[[1]]) 
+}
+
 quality_roe = (KOR_fs$'지배주주순이익' / KOR_fs$'자본')[num_col]
 quality_gpa = (KOR_fs$'매출총이익' / KOR_fs$'자산')[num_col]
 quality_cfo =
@@ -512,7 +526,7 @@ factor_quality %>%
   geom_histogram()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" />
 
 첫 번째로 퀄리티 지표를 계산해줍니다. 코드는 앞에서 살펴본 것과 거의 비슷하며, 자기자본이익률, 매출총이익, 영업활동현금흐름을 계산해줍니다. 그 후 `mutate_all()` 함수를 통해 랭킹을 구한 후 다시 표준화하며, 내림차순으로 정리하기 위해 랭킹 부분에 `desc()`를 붙여줍니다.
 
@@ -531,7 +545,7 @@ factor_value %>%
   geom_histogram()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-20-1.png" width="50%" style="display: block; margin: auto;" />
 
 두 번째로 밸류 지표를 계산해줍니다. 밸류 지표는 이미 테이블 형태로 들어와 있으며, 랭킹과 표준화를 거쳐 합을 구해줍니다. 역시나 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.
 
@@ -559,7 +573,7 @@ factor_mom %>%
   geom_histogram()
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-22-1.png" width="50%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-21-1.png" width="50%" style="display: block; margin: auto;" />
 
 마지막으로 모멘텀 지표를 계산해줍니다. 최근 60일, 120일, 252일 주가를 통해 3개월, 6개월, 12개월 수익률을 구해준 후 `cbind()` 함수를 통해 열로 묶어줍니다. 그 후 내림차순 기준 랭킹과 표준화를 거쳐 합을 구합니다.
 
@@ -580,7 +594,7 @@ cbind(factor_quality, factor_value, factor_mom) %>%
            mar=c(0,0,0.5,0))
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
 
 퀄리티, 밸류, 모멘텀 팩터 간의 랭크의 서로 간 상관관계가 매우 낮으며, 여러 팩터를 동시에 고려함으로서 분산효과를 기대할 수 있습니다.
 
@@ -616,7 +630,7 @@ quality_profit[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
 
 먼저 선택된 종목의 퀄리티 지표별 분포를 살펴보겠습니다. 대부분 종목의 수익성이 높음이 확인됩니다.
 
@@ -630,7 +644,7 @@ KOR_value[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
 
 이번에는 선택된 종목의 가치지표별 분포입니다. 대부분 종목의 값이 낮아 밸류 종목임이 확인됩니다.
 
@@ -644,7 +658,7 @@ ret_bind[invest_qvm, ] %>%
   xlab(NULL)
 ```
 
-<img src="10-factor_adv_files/figure-html/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="10-factor_adv_files/figure-html/unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" />
 
 마지막으로 각 종목들의 기간별 수익률 분포입니다. 역시나 대부분의 종목들이 높은 수익률을 보입니다.
 
@@ -659,37 +673,37 @@ KOR_ticker[invest_qvm, ] %>%
 ```
 
 ```
-##      종목코드           종목명  ROE  PBR   12M
-## 1      005930         삼성전자 0.18 1.48  0.55
-## 2      000660       SK하이닉스 0.33 1.54  0.56
-## 264    097520         엠씨넥스 0.23 5.10  1.89
-## 313    215200   메가스터디교육 0.19 2.46  0.68
-## 460    086390       유니테스트 0.37 2.38  0.49
-## 485    040910         아이씨디 0.23 2.45  1.60
-## 528    232140     와이아이케이 0.25 2.36  0.62
-## 543    161000         애경유화 0.16 0.80  0.11
-## 604    029460           케이씨 0.47 0.60  0.58
-## 668    045100       한양이엔지 0.25 0.74  0.01
-## 692    126700   하이비젼시스템 0.19 1.69  0.61
-## 781    036810       에프에스티 0.18 1.92  1.43
-## 821    131290         티에스이 0.07 1.00  1.37
-## 825    051360           토비스 0.11 0.90  0.45
-## 828    065130     탑엔지니어링 0.06 0.54  0.45
-## 844    248170         샘표식품 0.14 1.17  0.16
-## 936    290740           액트로 0.22 2.17  1.15
-## 968    083310       엘오티베큠 0.13 1.16  0.64
-## 997    160980         싸이맥스 0.12 1.31  0.82
-## 1035   096630         에스코넥 0.14 1.23  0.13
-## 1074   241790       오션브릿지 0.24 2.26  0.58
-## 1197   091340        S&K폴리텍 0.11 1.37  1.42
-## 1228   002410         범양건영 0.11 1.81  1.10
-## 1279   016740             두올 0.09 0.57  0.16
-## 1367   090410       덕신하우징 0.12 1.15  0.24
-## 1426   006740         영풍제지 0.13 0.69  0.03
-## 1464   010280     쌍용정보통신 0.40 1.66  0.30
-## 1519   024120       KB오토시스 0.14 0.74  0.16
-## 1598   094970         제이엠티 0.19 1.16  0.33
-## 1793   031980 피에스케이홀딩스 0.20 0.20 -0.05
+##      종목코드         종목명  ROE  PBR   12M
+## 38     030200             KT 0.05 0.36 -0.24
+## 39     032640     LG유플러스 0.07 0.70 -0.20
+## 201    034310           NICE 0.06 0.70  0.01
+## 244    090460       비에이치 0.43 2.83 -0.14
+## 275    215200 메가스터디교육 0.19 2.26  0.18
+## 434    086390     유니테스트 0.37 1.80 -0.21
+## 530    002310     아세아제지 0.15 0.41 -0.30
+## 606    232140   와이아이케이 0.25 1.45 -0.18
+## 660    067990   도이치모터스 0.17 0.77 -0.17
+## 661    045100     한양이엔지 0.25 0.53 -0.35
+## 665    029460         케이씨 0.47 0.37 -0.15
+## 689    005960       동부건설 0.20 0.46 -0.02
+## 730    065130   탑엔지니어링 0.06 0.46 -0.02
+## 755    036810     에프에스티 0.18 1.39  0.14
+## 795    083310     엘오티베큠 0.13 0.97  0.11
+## 825    016710     대성홀딩스 0.04 0.25  0.20
+## 841    001340       백광산업 0.14 0.70 -0.11
+## 870    096630       에스코넥 0.14 0.99 -0.30
+## 911    248170       샘표식품 0.14 0.70 -0.20
+## 914    023600       삼보판지 0.16 0.28 -0.28
+## 921    001570           금양 0.25 1.30  0.03
+## 1124   241790     오션브릿지 0.24 1.49 -0.12
+## 1137   091340      S&K폴리텍 0.11 1.00  0.50
+## 1229   290120     대유에이피 0.19 1.92  0.38
+## 1346   002200       수출포장 0.07 0.27 -0.26
+## 1352   004140           동방 0.12 0.43  0.03
+## 1388   006740       영풍제지 0.13 0.52 -0.26
+## 1434   002410       범양건영 0.11 1.10  0.23
+## 1511   024120     KB오토시스 0.14 0.62 -0.11
+## 1725   046310        백금T&A 0.10 0.71 -0.19
 ```
 
 포트폴리오 내 종목들을 대상으로 팩터별 대표적인 지표인 ROE, PBR, 12개월 수익률을 나타냈습니다. 전반적으로 ROE는 높고 PBR은 낮으며, 12개월 수익률이 높은 모습을 보입니다. 물론 특정 팩터의 강도가 약하더라도 나머지 팩터의 강도가 충분히 강하다면, 포트폴리오에 편입되는 모습을 보이기도 합니다.
@@ -701,8 +715,10 @@ cbind(quality_profit, KOR_value, ret_bind)[invest_qvm, ] %>%
 ```
 
 ```
-##        ROE   GPA   CFO   PER   PBR   PCR  PSR ret_3m ret_6m ret_12m
-## [1,] 0.191 0.289 0.182 8.648 1.487 5.474 0.79  0.297  0.357   0.619
+##       ROE   GPA   CFO   PER   PBR   PCR   PSR ret_3m
+## [1,] 0.17 0.308 0.161 6.644 0.925 3.064 0.437 -0.107
+##      ret_6m ret_12m
+## [1,] -0.089  -0.067
 ```
 
 마지막으로 포트폴리오 내 종목들의 지표별 평균을 계산한 값입니다.

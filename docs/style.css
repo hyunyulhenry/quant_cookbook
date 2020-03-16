@@ -1,0 +1,74 @@
+.rmdknit {
+  color:white;
+  background-size: 80px 60px;
+}
+
+/*
+  p.date {
+    color:transparent;
+  }
+*/
+  
+  .caption {
+    color: #777;
+      margin-top: 10px;
+  }
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+.sourceCode, pre {
+  border-radius: 10px 10px 10px 10px;
+}
+
+/* TOC */
+  
+  /* 전체 배경 색상 */
+  .book .book-summary {
+    position: absolute;
+    top: 0;
+    left: -300px;
+    bottom: 0;
+    z-index: 1;
+    width: 300px;
+    color: #FFFFFF;
+      background: #4b6cb4;
+      border-right: 1px solid rgba(0,0,0,.15);
+  }
+
+.book .book-summary ul.summary li a, .book .book-summary ul.summary li span {
+  margin: 5px 5px 5px 5px;
+  display: block;
+  padding: 10px 20px 10px 20px;
+  color: #FFFFFF;
+    background: 0 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.book .book-summary ul.summary li.active>a {
+  padding-left: 5px;
+  border-radius: 10px 10px 10px 10px;
+  color: #FFFFFF;
+    font-weight: bold;
+  background: rgba(0,173,238,.35);
+  text-decoration: none;
+}
+
+.book .book-summary ul.summary li a:hover {
+  padding-left: 5px;
+  border-radius: 10px 10px 10px 10px;
+  font-weight: bold;
+  color: #FFFFFF;
+    background: rgba(0,173,238,.40);
+  text-decoration: none;
+}

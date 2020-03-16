@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | R을 이용한 퀀트 투자 포트폴리오 만들기</title>
+  <meta name="description" content="Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="hyunyulhenry/quant_cookbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
+  
+  
+  
+
+<meta name="author" content="이현열" />
+
+
+<meta name="date" content="2020-03-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="크롤링을-위한-기본-지식.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
+<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="libs/highcharts-7.0.1/highcharts.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
+<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
+<script src="libs/highcharts-7.0.1/modules/map.js"></script>
+<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
+<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
+<script src="libs/highcharts-7.0.1/modules/data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
+<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
+<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
+<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
+<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
+<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
+<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
+<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
+<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
+<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
+<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
+<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
+<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
+<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
+<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
+<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#지은이-소개"><i class="fa fa-check"></i>지은이 소개</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#머리말"><i class="fa fa-check"></i>머리말</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-구성"><i class="fa fa-check"></i>이 책의 구성</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책에서-다루지-않은-주제"><i class="fa fa-check"></i>이 책에서 다루지 않은 주제</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#도움이-될-만한-자료들"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-지원-페이지"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#종목과-관련된-유의사항"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
+<li class="chapter" data-level="1.1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#데이터-구하기"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
+<li class="chapter" data-level="1.2" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#퀀트-투자와-프로그래밍"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
+<li class="chapter" data-level="1.3" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#r-프로그램"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
+<li class="chapter" data-level="1.4" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#퀀트-투자에-유용한-r-패키지"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
+<li class="chapter" data-level="2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인코딩의-이해와-r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인간과-컴퓨터-간-번역의-시작-ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
+<li class="chapter" data-level="2.1.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#한글-인코딩-방식의-종류"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩 방식의 종류</a></li>
+<li class="chapter" data-level="2.1.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#웹의-동작-방식"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html과-css"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html-기본-구조"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
+<li class="chapter" data-level="2.3.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#태그와-속성"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#h-태그와-p-태그"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
+<li class="chapter" data-level="2.3.4" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#리스트를-나타내는-ul-태그와-ol-태그"><i class="fa fa-check"></i><b>2.3.4</b> 리스트를 나타내는 ul 태그와 ol 태그</a></li>
+<li class="chapter" data-level="2.3.5" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#table-태그"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
+<li class="chapter" data-level="2.3.6" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#a-태그와-src-태그-및-속성"><i class="fa fa-check"></i><b>2.3.6</b> a 태그와 src 태그 및 속성</a></li>
+<li class="chapter" data-level="2.3.7" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#div-태그"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
+<li class="chapter" data-level="2.3.8" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
+<li class="chapter" data-level="2.3.9" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#클래스와-id"><i class="fa fa-check"></i><b>2.3.9</b> 클래스와 id</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#파이프-오퍼레이터"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터(<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="2.5" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#오류에-대한-예외처리"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
+<li class="chapter" data-level="3.1" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#api를-이용한-quandl-데이터-다운로드"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
+<li class="chapter" data-level="3.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#getsymbols-함수를-이용한-api-다운로드"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#주가-다운로드"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#국내-종목-주가-다운로드"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#fred-데이터-다운로드"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
+<li class="chapter" data-level="4.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get과-post-방식-이해하기"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get-방식"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
+<li class="chapter" data-level="4.1.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#post-방식"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#크롤링-예제"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#금융-속보-크롤링"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
+<li class="chapter" data-level="4.2.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#기업공시채널에서-오늘의-공시-불러오기"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
+<li class="chapter" data-level="4.2.3" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#네이버-금융에서-주식티커-크롤링"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html"><i class="fa fa-check"></i><b>5</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="5.1" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#주가-정리하기"><i class="fa fa-check"></i><b>5.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="5.2" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#재무제표-정리하기"><i class="fa fa-check"></i><b>5.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="5.3" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#가치지표-정리하기"><i class="fa fa-check"></i><b>5.3</b> 가치지표 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
+<li class="chapter" data-level="6.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#수정주가-크롤링"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#개별종목-주가-크롤링"><i class="fa fa-check"></i><b>6.1.1</b> 개별종목 주가 크롤링</a></li>
+<li class="chapter" data-level="6.1.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-주가-크롤링"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-및-가치지표-크롤링"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-다운로드"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.2.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#가치지표-계산하기"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="6.2.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-재무제표-및-가치지표-다운로드"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#주가-정리하기-1"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#재무제표-정리하기-1"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#가치지표-정리하기-1"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-데이터-분석"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#glimpse-데이터-구조-확인하기"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#rename-열-이름-바꾸기"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#distinct-고유한-값-확인"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#select-원하는-열만-선택"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#mutate-열-생성-및-데이터-변형"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
+<li class="chapter" data-level="8.1.7" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#filter-조건을-충족하는-행-선택"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#summarize-요약-통곗값-계산"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#arrange-데이터-정렬"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#row_number-순위-계산"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#ntile-분위수-계산"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#group_by-그룹별로-데이터를-묶기"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-시각화"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_point-산점도-나타내기"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
+<li class="chapter" data-level="8.2.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_histogram-히스토그램-나타내기"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
+<li class="chapter" data-level="8.2.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_boxplot-박스-플롯-나타내기"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
+<li class="chapter" data-level="8.2.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#dplyr과-ggplot을-연결하여-사용하기"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
+<li class="chapter" data-level="8.2.5" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_bar-막대-그래프-나타내기"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-및-수익률-시각화"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-그래프-나타내기"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#인터랙티브-그래프-나타내기"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#연도별-수익률-나타내기"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-이해하기"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-계산하기"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-시각화"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-전략"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-포트폴리오-구하기-일간-기준"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-포트폴리오-구하기-주간-기준"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-전략"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-포트폴리오-구하기-12개월-모멘텀"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-포트폴리오-구하기-위험조정-수익률"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-전략"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-포트폴리오-구하기-저pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#각-지표-결합하기"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#퀄리티-전략"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#각-지표를-결합하기"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#섹터-중립-포트폴리오"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#퀄리티와-밸류-간의-관계"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식-이해하기"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식-구성하기"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#이상치-데이터-제거-및-팩터의-결합"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#트림trim-이상치-데이터-삭제"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#윈저라이징winsorizing-이상치-데이터-대체"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#팩터의-결합-방법"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#멀티팩터-포트폴리오"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소분산-포트폴리오"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#slsqp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#solve.qp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#optimalportfolio-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#결괏값들의-비교"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소-및-최대-투자비중-제약조건"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#각-자산별-제약조건의-추가"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최대분산효과-포트폴리오"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#solve.qp-함수를-이용한-최적화-1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#optimalportfolio-함수를-이용한-최적화-1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소-및-최대-투자비중-제약조건-1"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#각-자산-별-제약조건의-추가"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험균형-포트폴리오"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#주식-60와-채권-40-포트폴리오의-위험기여도"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
+<li class="chapter" data-level="11.3.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#rp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험예산-포트폴리오"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#return.portfolio-함수"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#인자-목록-살펴보기"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#출력값-살펴보기"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#전통적인-60대-40-포트폴리오-백테스트"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#시점-선택-전략-백테스트"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#동적-자산배분-백테스트"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#결과-측정-지표"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#수익률-및-변동성"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#낙폭과-최대낙폭"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#연도별-수익률"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#승률-및-롤링-윈도우-값"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#팩터-회귀분석-및-테이블로-나타내기"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="퀀트-투자의-심장-데이터와-프로그래밍" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> 퀀트 투자의 심장: 데이터와 프로그래밍</h1>
+<p>몇 년 전까지만 하더라도 <strong>퀀트 투자</strong>는 일반 투자자들에게 매우 낯선 영역이었지만, 최근에는 각종 커뮤니티와 매체를 통해 많은 사람들에게 익숙한 단어가 되었습니다. 퀀트 투자에서 ‘퀀트’란 모형을 기반으로 금융상품의 가격을 산정하거나, 이를 바탕으로투자를 하는 사람을 말합니다. 퀀트(Quant)라는 단어가 ‘계량적’을 의미하는 퀀티터티브(Quantitative)의 앞 글자를 따왔음을 생각하면 쉽게 이해가 될 것입니다.</p>
+<p>일반적으로 투자자들이 산업과 기업을 분석해 가치를 매기는 정성적인 투자법과는 달리, 퀀트 투자는 수학과 통계를 기반으로 전략을 만들고 이를 바탕으로 투자하는 정량적인 투자법을 의미합니다. 이처럼 데이터를 수집·가공한 후 이를 바탕으로 모델을 만들고 실행하는 단계는 데이터 과학의 업무 흐름도와 매우 유사합니다. 해들리 위컴
+(Hadley Wickham)<span class="citation">(Grolemund and Wickham <a href="#ref-grolemund2018r">2018</a>)</span>에 따르면 데이터 과학의 업무 과정은 그림 <a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fig:ds">1.1</a>과 같습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:ds"></span>
+<img src="images/ds_flow.png" alt="데이터 과학 업무 과정" width="70%" />
+<p class="caption">
+그림 1.1: 데이터 과학 업무 과정
+</p>
+</div>
+<p>데이터 과학자들은 프로그래밍을 통해 데이터를 불러온 후 이를 정리하고, 원하는 결과를 찾기 위해 데이터를 변형하거나 시각화하고 모델링합니다. 이러한 결과를 바탕으로 타인과 소통하는 일련의 과정을 거칩니다.</p>
+<p>퀀트 투자의 단계 역시 이와 매우 유사합니다. 투자에 필요한 주가, 재무제표 등의 데이터를 수집해 정리한 후 필요한 지표를 얻기 위해 가공합니다. 그 후 각종 모형을 이용해 투자 종목을 선택하거나 백테스트를 수행하며, 이를 바탕으로 실제로 투자하고 성과를 평가합니다. 따라서 퀀트 투자는 데이터 과학이 금융에 응용된 사례라고도 볼수 있으며, 퀀트 투자의 중심에는 데이터와 프로그래밍이 있습니다.</p>
+<p>이 책에서도 데이터 과학의 업무 단계와 동일하게 데이터 불러오기, 데이터별로 정리하고 가공하기, 시각화를 통해 데이터의 특징 파악하기, 퀀트 모델을 이용해 종목 선택하기, 백테스트를 실시한 후 성과 및 위험 평가하기에 대해 알아보겠습니다. 이에 앞서 이 CHAPTER에서는 퀀트 투자의 심장이라고 할 수 있는 데이터를 어떻게 얻을 수 있
+는지, 왜 프로그래밍을 해야 하는지, 그중에서도 R이 무엇인지에 대해 간략히 살펴보겠습니다.</p>
+<div id="데이터-구하기" class="section level2">
+<h2><span class="header-section-number">1.1</span> 데이터 구하기</h2>
+<p>퀀트 투자에 필요한 데이터는 여러 데이터 제공업체의 서비스를 이용해서 매우 쉽게 구할 수 있습니다. 해외 데이터 수집에는 블룸버그 혹은 Factset, 국내 데이터 수집에는 DataGuide가 흔히 사용됩니다. 물론 비용을 더 지불한다면 단순 데이터 수집뿐만 아니라 즉석에서 백테스트 및 성과 평가까지 가능합니다. Factset에서 판매하는 Alpha Testing 혹은 S&amp;P Global에서 판매하는 ClariFI(그림 <a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fig:clarifi">1.2</a>)를 사용한다면, 전 세계 주식을 대상으로 원하는 전략의 백테스트 결과를 마우스 몇 번 클릭해서 얻을 수 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:clarifi"></span>
+<img src="images/ClariFI_backtest.png" alt="ClariFI®의 백테스트 기능" width="70%" />
+<p class="caption">
+그림 1.2: ClariFI®의 백테스트 기능
+</p>
+</div>
+<p>데이터 제공업체를 이용하는 방법의 최대 단점은 바로 비용입니다. 블룸버그 단말기는 1년 사용료가 대리 한 명의 연봉과 비슷해, 흔히 ‘블대리’라고 부르기도 합니다. 국내 데이터 업체의 사용료는 이보다 저렴하기는 하지만, 역시 1년 사용료가 수백만 원 정도로, 일반 개인 투자자가 감당하기에는 부담이 됩니다.</p>
+<p>해외데이터는 Quandl<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>이나 tiingo<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>등의 업체가 제공하는 서비스를 이용하면 상대적으로 저렴한 가격에 데이터를 구할 수 있습니다. 물론 대형 데이터 제공업체에 비해 데
+이터의 종류가 적고 기간은 짧은 편이지만, 대부분의 일반 투자자가 사용하기에는 충분한 데이터를 얻을 수 있습니다. tiingo에서는 전 세계 64,386개 주식의 30년 이상 가격 정보, 21,352개 주식의 12년 이상 재무정보를 월 $10에 받을 수 있으며, 한정된 종목과 용량에 대해서는 무료로 데이터를 받을 수도 있습니다. 더군다나 API를 통해 프로그램 내에서 직접 데이터를 받을 수 있어 편리합니다.</p>
+<p>그러나 아쉽게도 이러한 데이터에서 한국 시장의 정보는 소외되어 있습니다. 따라서 돈을 들이지 않고 국내 데이터를 얻기 위해서는 직접 발품을 파는 수밖에 없습니다.<a href="https://finance.yahoo.com/" target="blank">야후 파이낸스<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></a> 혹은 국내 금융 웹사이트에서 제공하는 정보를 크롤링해 데이터를 수집할 수 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="images/naver_finance_table.jpg" alt="NAVER 금융 제공 재무정보" width="70%" />
+<p class="caption">
+그림 1.3: NAVER 금융 제공 재무정보
+</p>
+</div>
+<p>이러한 정보를 잘만 활용한다면 장기간의 주가 및 재무정보를 무료로 수집할 수 있습니다. 물론 데이터 제공업체가 제공하는 깔끔한 형태의 데이터가 아니므로 클렌징 작업이 필요하고 상장폐지된 기업의 데이터를 구하기 힘들다는 단점이 있습니다. 그러나 비용이 들지 않는 데다 현재 시점에서 투자 종목을 선택할 때는 상장폐지된 기업의 정
+보가 필요하지 않는다는 점을 고려하면 이는 큰 문제가 되지 않습니다.</p>
+</div>
+<div id="퀀트-투자와-프로그래밍" class="section level2">
+<h2><span class="header-section-number">1.2</span> 퀀트 투자와 프로그래밍</h2>
+<p>우리가 구한 데이터는 연구나 투자에 바로 사용할 수 있는 형태로 주어지는 경우가 거의 없습니다. 따라서 데이터를 목적에 맞게 처리하는 과정을 거쳐야 하며, 이를 흔히 데이터 클렌징 작업이라고 합니다. 또한 정제된 데이터를 활용한 투자 전략의 백테스트나 종목 선정을 위해서 프로그래밍은 필수입니다. 물론 모든 퀀트 투자에서 프로그래
+밍이 필수인 것은 아닙니다. 엑셀을 이용해도 간단한 형태의 백테스트 및 종목 선정은 얼마든지 가능합니다. 그러나 응용성 및 효율성의 측면에서 엑셀은 매우 비효율적입니다.</p>
+<p>데이터를 수집하고 클렌징 작업을 할 때 대상이 몇 종목 되지 않는다면 엑셀을 이용해도 충분히 가능합니다. 그러나 종목 수가 수천 종목을 넘어간다면 데이터를 손으로 일일이 처리하기가 사실상 불가능에 가깝습니다. 이러한 단순 반복 작업은 프로그래밍을 이용한다면 훨씬 효율적으로 수행할 수 있습니다.</p>
+<p>백테스트에서도 프로그래밍이 훨씬 효율적입니다. 과거 12개월 누적수익률이 높은 종목에 투자하는 모멘텀 전략의 백테스트를 한다고 가정합시다. 처음에는 엑셀로 백테스트를 하는 것이 편하다고 생각할 수 있습니다. 그러나 만일 12개월이 아닌 6개월 누적 수익률로 백테스트를 하고자 한다면 어떨까요? 엑셀에서 다시 6개월 누적수익률을 구하기 위해 명령어를 바꾸고 드래그하는 작업을 반복해야 할 것입니다. 그러나 프로그래밍을 이용한다면 <code>n = 12</code>였던 부분을 <code>n = 6</code>으로 변경한 후 단지 클릭 한 번만으로 새로운 백테스트가 완료됩니다.</p>
+<p>전체 데이터가 100MB 정도라고 가정할 때, 투자 전략이 계속해서 늘어날 경우는 어떨까요? 엑셀에서 A라는 전략을 백테스트하기 위해서는 해당 데이터로 작업한 후 저장할 것입니다. 그 후 B라는 전략을 새롭게 백테스트하려면 해당 데이터를 새로운 엑셀 파일에 복사해 작업한 후 다시 저장해야 합니다. 결과적으로 10개의 전략만 백테스트 하더라도 100MB짜리 엑셀 파일이 10개, 즉 1GB 정도의 엑셀 파일이 쌓이게 됩니다. 만일 데이터가 바뀔 경우 다시 10개 엑셀 시트의 데이터를 일일이 바꿔야 하는 귀찮음도 감수해야 합니다. 물론 하나의 엑셀 파일 내에서 모든 전략을 수행할 수도 있지만, 이러한 경우 속도가 상당히 저하되는 문제가 있습니다.</p>
+<p>프로그래밍을 이용한다면 어떨까요? 백테스트를 수행하는 프로그래밍 스크립트는 불과 몇 KB에 불과하므로, 10개의 전략에 대한 스크립트 파일을 합해도 1MB가 되지 않습니다. 데이터가 바뀌더라도 원본 데이터 파일 하나만 수정해주면 됩니다.</p>
+<p>물론 대부분의 사람들에게 프로그래밍은 낯선 도구입니다. 그러나 퀀트 투자에 필요한 프로그래밍은 매우 한정적이고 몇 가지 기능을 반복적으로 쓰기 때문에 몇 개의 단어와 구문만 익숙해지면 사용하는 데 큰 어려움이 없습니다. 또한 전문 개발자들의 프로그래밍에 비하면 상당히 쉬운 수준이므로, 비교적 빠른 시간 내에 원하는 전략을 테스트하고 수행하는 정도의 능력을 갖출 수도 있습니다.</p>
+</div>
+<div id="r-프로그램" class="section level2">
+<h2><span class="header-section-number">1.3</span> R 프로그램</h2>
+<p>인간이 사용하는 언어의 종류가 다양하듯이, 프로그래밍 언어의 종류 역시 다양합니다. 대략 700여 개 이상의 프로그래밍 언어 중<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> 대중적으로 사용하는 언어는 그리 많지 않으므로, 대중성과 효율성을 위해 사용량이 많은 언어를 이용하는 것이 좋습니다.</p>
+<p>그림 <a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fig:tiobe">1.5</a>는 프로그래밍 언어의 사용 순위<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>입니다. 이 중 R과 Python은 매우 대중적인 언어입니다. 해당 언어가 많이 사용되는 가장 큰 이유는 무료인 데다 일반인들이 사용하기에도 매우 편한 형태로 구성되어 있기 때문입니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:pkg"></span>
+<img src="images/tiobe_index.png" alt="2017년 기준 프로그래밍 언어 사용 통계 순위" width="50%" />
+<p class="caption">
+그림 1.4: 2017년 기준 프로그래밍 언어 사용 통계 순위
+</p>
+</div>
+<p>이러한 프로그래밍 언어 중 이 책에서는 R을 이용합니다. R의 장점은 무료라는 점 이외에도 타 언어와 비교할 수 없이 다양한 패키지가 있다는 점입니다. R은 두터운 사용자층을 기반으로 두고 있어 상상할 수 없을 정도로 패키지가 많으며, 특히 통계나 계량분석과 관련된 패키지는 독보적이라고 할 수 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:tiobe"></span>
+<img src="images/cran_pkgs.png" alt="CRAN 등록 패키지 수" width="70%" />
+<p class="caption">
+그림 1.5: CRAN 등록 패키지 수
+</p>
+</div>
+</div>
+<div id="퀀트-투자에-유용한-r-패키지" class="section level2">
+<h2><span class="header-section-number">1.4</span> 퀀트 투자에 유용한 R 패키지</h2>
+<p>R에는 여러 연구자와 실무자의 헌신적인 노력 덕분에 금융 연구와 퀀트 투자를 위한 다양한 패키지가 만들어져 있으며, 누구나 무료로 이용할 수 있습니다. 이 책에서 사용되는 패키지 중 중요한 것은 다음과 같습니다. 각 패키지에 대한 자세한 설명은 구글에서 패키지명을 검색한 후 PDF 파일을 통해 확인할 수 있습니다.</p>
+<ul>
+<li><p><strong>quantmod</strong>: 이름에서 알 수 있듯이 퀀트 투자에 매우 유용한 패키지입니다. API를 이용해 데이터를 다운로드하는 <code>getSymbols()</code> 함수는 대단히 많이 사용됩니다. 이 외에도 볼린저밴드, 이동평균선, 상대강도지수(RSI) 등 여러 기술적 지표를 주가 차트에 나타낼 수도 있습니다.</p></li>
+<li><p><strong>PerformanceAnalytics</strong>: 포트폴리오의 성과와 위험을 측정하는 데 매우 유용한 패키지입니다. <code>Return.portfolio()</code> 함수는 포트폴리오 백테스트에 필수적인 함수입니다.</p></li>
+<li><p><strong>xts</strong>: 기본적으로 금융 데이터는 시계열 형태이며, xts 패키지는 여러 데이터를 시계열 형태(eXtensible TimeSeries)로 변형해줍니다. 일별 수익률을 월별 수익률 혹은 연도별 수익률로 변환하는 <code>apply.monthly()</code>와 <code>apply.yearly()</code> 함수, 데이터들의 특정 시점을 찾아주는 <code>endpoints()</code> 함수 역시 백테스트에 필수적으로 사용되는 함수입니다. 이 패키지는 PerformanceAnalytics 패키지 설치 시 자동으로 설치됩니다.</p></li>
+<li><p><strong>zoo</strong>: zoo 패키지 역시 시계열 데이터를 다루는 데 유용한 함수가 있습니다. <code>rollapply()</code> 함수는 <code>apply()</code> 함수를 전체 데이터가 아닌 롤링 윈도우 기법으로 활용할 수 있게 해주며, NA 데이터를 채워주는 <code>na.locf()</code> 함수는 시계열 데이터의 결측치를 보정할 때 매우 유용합니다.</p></li>
+<li><p><strong>httr</strong> &amp; <strong>rvest</strong>: 데이터를 웹에서 수집하기 위해서는 크롤링이 필수이며, httr과 rvest는 크롤링에 사용되는 패키지입니다. httr은 http의 표준 요청을 수행하는 패키지로서 단순히 데이터를 받는 <code>GET()</code> 함수와 사용자가 필요한 값을 선택해 요청하는 <code>POST()</code> 함수가 대표적으로 사용됩니다. rvest는 HTML 문서의 데이터를 가져오는 패키지이며, 웹페이지에서 데이터를 크롤링한 후 원하는 데이터만 뽑는데 필요한 여러 함수가 포함되어 있습니다.</p></li>
+<li><p><strong>dplyr</strong>: 데이터 처리에 특화되어 R을 이용한 데이터 과학 분야에서 많이 사용되는 패키지입니다. C++로 작성되어 매우 빠른 처리 속도를 보이며, API나 크롤링을 통해 수집한 데이터들을 정리할 때도 매우 유용합니다.</p></li>
+<li><p><strong>ggplot2</strong>: 데이터를 시각화할 때 가장 많이 사용되는 패키지입니다. 물론 R에서 기본적으로 내장된 <code>plot()</code> 함수를 이용해도 시각화가 가능하지만, 해당 패키지를 이용하면 훨씬 다양하고 깔끔하게 데이터를 그림으로 표현할 수 있습니다.</p></li>
+</ul>
+<p>이 외에도 이 책에서는 다양한 패키지를 사용했으며, 아래의 코드를 실행하면 설치되지 않은 패키지를 설치할 수 있습니다.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">pkg =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;magrittr&#39;</span>, <span class="st">&#39;quantmod&#39;</span>, <span class="st">&#39;rvest&#39;</span>, <span class="st">&#39;httr&#39;</span>, <span class="st">&#39;jsonlite&#39;</span>,</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">        <span class="st">&#39;readr&#39;</span>, <span class="st">&#39;readxl&#39;</span>, <span class="st">&#39;stringr&#39;</span>, <span class="st">&#39;lubridate&#39;</span>, <span class="st">&#39;dplyr&#39;</span>,</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">        <span class="st">&#39;tidyr&#39;</span>, <span class="st">&#39;ggplot2&#39;</span>, <span class="st">&#39;corrplot&#39;</span>, <span class="st">&#39;dygraphs&#39;</span>,</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">        <span class="st">&#39;highcharter&#39;</span>, <span class="st">&#39;plotly&#39;</span>, <span class="st">&#39;PerformanceAnalytics&#39;</span>,</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">        <span class="st">&#39;nloptr&#39;</span>, <span class="st">&#39;quadprog&#39;</span>, <span class="st">&#39;RiskPortfolios&#39;</span>, <span class="st">&#39;cccp&#39;</span>,</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">        <span class="st">&#39;timetk&#39;</span>, <span class="st">&#39;broom&#39;</span>, <span class="st">&#39;stargazer&#39;</span>)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">new.pkg =<span class="st"> </span>pkg[<span class="op">!</span>(pkg <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="st">&quot;Package&quot;</span>])]</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="cf">if</span> (<span class="kw">length</span>(new.pkg)) {</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="kw">install.packages</span>(new.pkg, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)}</a></code></pre></div>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-grolemund2018r">
+<p>Grolemund, Garrett, and Hadley Wickham. 2018. “R for Data Science.”</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p><a href="https://www.quandl.com/" class="uri">https://www.quandl.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p><a href="https://www.tiingo.com/" class="uri">https://www.tiingo.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p><a href="https://finance.yahoo.com/" class="uri">https://finance.yahoo.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p><a href="https://en.wikipedia.org/wiki/List_of_programming_languages" class="uri">https://en.wikipedia.org/wiki/List_of_programming_languages</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p><a href="https://www.tiobe.com/tiobe-index/" class="uri">https://www.tiobe.com/tiobe-index/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref5" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="크롤링을-위한-기본-지식.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"split_bib": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>R을 이용한 퀀트 투자 포트폴리오 만들기</title>
   <meta name="description" content="R을 이용한 퀀트 투자 포트폴리오 만들기" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="R을 이용한 퀀트 투자 포트폴리오 만들기" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-01-20" />
+<meta name="date" content="2020-03-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 
-<link rel="next" href="section-7.html">
+<link rel="next" href="퀀트-투자의-심장-데이터와-프로그래밍.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -48,7 +51,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -96,78 +99,15 @@
 <script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
 <script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
 <script src="libs/highchart-binding-0.7.0/highchart.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 
 
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -186,194 +126,185 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section"><i class="fa fa-check"></i>지은이 소개</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-1"><i class="fa fa-check"></i>머리말</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-2"><i class="fa fa-check"></i>이 책의 구성</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-3"><i class="fa fa-check"></i>이 책에서 다루지 않은 주제</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-4"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-5"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#section-6"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#지은이-소개"><i class="fa fa-check"></i>지은이 소개</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#머리말"><i class="fa fa-check"></i>머리말</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-구성"><i class="fa fa-check"></i>이 책의 구성</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책에서-다루지-않은-주제"><i class="fa fa-check"></i>이 책에서 다루지 않은 주제</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#도움이-될-만한-자료들"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-지원-페이지"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#종목과-관련된-유의사항"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="section-7.html"><a href="section-7.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
-<li class="chapter" data-level="1.1" data-path="section-7.html"><a href="section-7.html#section-8"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
-<li class="chapter" data-level="1.2" data-path="section-7.html"><a href="section-7.html#section-9"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
-<li class="chapter" data-level="1.3" data-path="section-7.html"><a href="section-7.html#r-"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
-<li class="chapter" data-level="1.4" data-path="section-7.html"><a href="section-7.html#r--1"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
+<li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
+<li class="chapter" data-level="1.1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#데이터-구하기"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
+<li class="chapter" data-level="1.2" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#퀀트-투자와-프로그래밍"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
+<li class="chapter" data-level="1.3" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#r-프로그램"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
+<li class="chapter" data-level="1.4" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#퀀트-투자에-유용한-r-패키지"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="section-10.html"><a href="section-10.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
-<li class="chapter" data-level="2.1" data-path="section-10.html"><a href="section-10.html#r-utf-8-"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="section-10.html"><a href="section-10.html#ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
-<li class="chapter" data-level="2.1.2" data-path="section-10.html"><a href="section-10.html#section-11"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩 방식의 종류</a></li>
-<li class="chapter" data-level="2.1.3" data-path="section-10.html"><a href="section-10.html#r-utf-8--1"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
+<li class="chapter" data-level="2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
+<li class="chapter" data-level="2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인코딩의-이해와-r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인간과-컴퓨터-간-번역의-시작-ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
+<li class="chapter" data-level="2.1.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#한글-인코딩-방식의-종류"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩 방식의 종류</a></li>
+<li class="chapter" data-level="2.1.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="section-10.html"><a href="section-10.html#section-12"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="section-10.html"><a href="section-10.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
+<li class="chapter" data-level="2.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#웹의-동작-방식"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="section-10.html"><a href="section-10.html#html-css"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="section-10.html"><a href="section-10.html#html--"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
-<li class="chapter" data-level="2.3.2" data-path="section-10.html"><a href="section-10.html#section-13"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
-<li class="chapter" data-level="2.3.3" data-path="section-10.html"><a href="section-10.html#h--p-"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
-<li class="chapter" data-level="2.3.4" data-path="section-10.html"><a href="section-10.html#ul--ol-"><i class="fa fa-check"></i><b>2.3.4</b> 리스트를 나타내는 ul 태그와 ol 태그</a></li>
-<li class="chapter" data-level="2.3.5" data-path="section-10.html"><a href="section-10.html#table-"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
-<li class="chapter" data-level="2.3.6" data-path="section-10.html"><a href="section-10.html#a--src---"><i class="fa fa-check"></i><b>2.3.6</b> a 태그와 src 태그 및 속성</a></li>
-<li class="chapter" data-level="2.3.7" data-path="section-10.html"><a href="section-10.html#div-"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
-<li class="chapter" data-level="2.3.8" data-path="section-10.html"><a href="section-10.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
-<li class="chapter" data-level="2.3.9" data-path="section-10.html"><a href="section-10.html#id"><i class="fa fa-check"></i><b>2.3.9</b> 클래스와 id</a></li>
+<li class="chapter" data-level="2.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html과-css"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html-기본-구조"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
+<li class="chapter" data-level="2.3.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#태그와-속성"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#h-태그와-p-태그"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
+<li class="chapter" data-level="2.3.4" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#리스트를-나타내는-ul-태그와-ol-태그"><i class="fa fa-check"></i><b>2.3.4</b> 리스트를 나타내는 ul 태그와 ol 태그</a></li>
+<li class="chapter" data-level="2.3.5" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#table-태그"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
+<li class="chapter" data-level="2.3.6" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#a-태그와-src-태그-및-속성"><i class="fa fa-check"></i><b>2.3.6</b> a 태그와 src 태그 및 속성</a></li>
+<li class="chapter" data-level="2.3.7" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#div-태그"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
+<li class="chapter" data-level="2.3.8" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
+<li class="chapter" data-level="2.3.9" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#클래스와-id"><i class="fa fa-check"></i><b>2.3.9</b> 클래스와 id</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="section-10.html"><a href="section-10.html#section-14"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터(<code>%&gt;%</code>)</a></li>
-<li class="chapter" data-level="2.5" data-path="section-10.html"><a href="section-10.html#section-15"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
+<li class="chapter" data-level="2.4" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#파이프-오퍼레이터"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터(<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="2.5" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#오류에-대한-예외처리"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="api-.html"><a href="api-.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
-<li class="chapter" data-level="3.1" data-path="api-.html"><a href="api-.html#api--quandl--"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
-<li class="chapter" data-level="3.2" data-path="api-.html"><a href="api-.html#getsymbols---api-"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="api-.html"><a href="api-.html#section-16"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
-<li class="chapter" data-level="3.2.2" data-path="api-.html"><a href="api-.html#section-17"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
-<li class="chapter" data-level="3.2.3" data-path="api-.html"><a href="api-.html#fred--"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="section-18.html"><a href="section-18.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
-<li class="chapter" data-level="4.1" data-path="section-18.html"><a href="section-18.html#get-post--"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="section-18.html"><a href="section-18.html#get-"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
-<li class="chapter" data-level="4.1.2" data-path="section-18.html"><a href="section-18.html#post-"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="section-18.html"><a href="section-18.html#section-19"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="section-18.html"><a href="section-18.html#section-20"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
-<li class="chapter" data-level="4.2.2" data-path="section-18.html"><a href="section-18.html#section-21"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
-<li class="chapter" data-level="4.2.3" data-path="section-18.html"><a href="section-18.html#section-22"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
+<li class="chapter" data-level="3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
+<li class="chapter" data-level="3.1" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#api를-이용한-quandl-데이터-다운로드"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
+<li class="chapter" data-level="3.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#getsymbols-함수를-이용한-api-다운로드"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#주가-다운로드"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#국내-종목-주가-다운로드"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#fred-데이터-다운로드"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="section-23.html"><a href="section-23.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
-<li class="chapter" data-level="5.1" data-path="section-23.html"><a href="section-23.html#section-24"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="section-23.html"><a href="section-23.html#section-25"><i class="fa fa-check"></i><b>5.1.1</b> 산업별 현황 크롤링</a></li>
-<li class="chapter" data-level="5.1.2" data-path="section-23.html"><a href="section-23.html#section-26"><i class="fa fa-check"></i><b>5.1.2</b> 개별종목 지표 크롤링</a></li>
-<li class="chapter" data-level="5.1.3" data-path="section-23.html"><a href="section-23.html#section-27"><i class="fa fa-check"></i><b>5.1.3</b> 최근 영업일 기준 데이터 받기</a></li>
-<li class="chapter" data-level="5.1.4" data-path="section-23.html"><a href="section-23.html#section-28"><i class="fa fa-check"></i><b>5.1.4</b> 거래소 데이터 정리하기</a></li>
+<li class="chapter" data-level="4" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
+<li class="chapter" data-level="4.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get과-post-방식-이해하기"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get-방식"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
+<li class="chapter" data-level="4.1.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#post-방식"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="section-23.html"><a href="section-23.html#wics---"><i class="fa fa-check"></i><b>5.2</b> WICS 기준 섹터정보 크롤링</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="section-29.html"><a href="section-29.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
-<li class="chapter" data-level="6.1" data-path="section-29.html"><a href="section-29.html#section-30"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="section-29.html"><a href="section-29.html#section-31"><i class="fa fa-check"></i><b>6.1.1</b> 개별종목 주가 크롤링</a></li>
-<li class="chapter" data-level="6.1.2" data-path="section-29.html"><a href="section-29.html#section-32"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
-</ul></li>
-<li class="chapter" data-level="6.2" data-path="section-29.html"><a href="section-29.html#section-33"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="section-29.html"><a href="section-29.html#section-34"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
-<li class="chapter" data-level="6.2.2" data-path="section-29.html"><a href="section-29.html#section-35"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
-<li class="chapter" data-level="6.2.3" data-path="section-29.html"><a href="section-29.html#section-36"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="section-29.html"><a href="section-29.html#dart--"><i class="fa fa-check"></i><b>6.3</b> DART 데이터 수집하기</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="section-29.html"><a href="section-29.html#section-37"><i class="fa fa-check"></i><b>6.3.1</b> 인증키 발급받기</a></li>
-<li class="chapter" data-level="6.3.2" data-path="section-29.html"><a href="section-29.html#section-38"><i class="fa fa-check"></i><b>6.3.2</b> 오늘의 공시 확인하기</a></li>
-<li class="chapter" data-level="6.3.3" data-path="section-29.html"><a href="section-29.html#section-40"><i class="fa fa-check"></i><b>6.3.3</b> 사업보고서의 재무제표 다운로드</a></li>
+<li class="chapter" data-level="4.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#크롤링-예제"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#금융-속보-크롤링"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
+<li class="chapter" data-level="4.2.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#기업공시채널에서-오늘의-공시-불러오기"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
+<li class="chapter" data-level="4.2.3" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#네이버-금융에서-주식티커-크롤링"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="section-42.html"><a href="section-42.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
-<li class="chapter" data-level="7.1" data-path="section-42.html"><a href="section-42.html#section-43"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
-<li class="chapter" data-level="7.2" data-path="section-42.html"><a href="section-42.html#section-44"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
-<li class="chapter" data-level="7.3" data-path="section-42.html"><a href="section-42.html#section-45"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+<li class="chapter" data-level="5" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html"><i class="fa fa-check"></i><b>5</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="5.1" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#주가-정리하기"><i class="fa fa-check"></i><b>5.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="5.2" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#재무제표-정리하기"><i class="fa fa-check"></i><b>5.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="5.3" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#가치지표-정리하기"><i class="fa fa-check"></i><b>5.3</b> 가치지표 정리하기</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="section-46.html"><a href="section-46.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
-<li class="chapter" data-level="8.1" data-path="section-46.html"><a href="section-46.html#section-47"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="section-46.html"><a href="section-46.html#join--"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
-<li class="chapter" data-level="8.1.2" data-path="section-46.html"><a href="section-46.html#glimpse---"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
-<li class="chapter" data-level="8.1.3" data-path="section-46.html"><a href="section-46.html#rename---"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
-<li class="chapter" data-level="8.1.4" data-path="section-46.html"><a href="section-46.html#distinct---"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
-<li class="chapter" data-level="8.1.5" data-path="section-46.html"><a href="section-46.html#select---"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
-<li class="chapter" data-level="8.1.6" data-path="section-46.html"><a href="section-46.html#mutate-----"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
-<li class="chapter" data-level="8.1.7" data-path="section-46.html"><a href="section-46.html#filter----"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
-<li class="chapter" data-level="8.1.8" data-path="section-46.html"><a href="section-46.html#summarize---"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
-<li class="chapter" data-level="8.1.9" data-path="section-46.html"><a href="section-46.html#arrange--"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
-<li class="chapter" data-level="8.1.10" data-path="section-46.html"><a href="section-46.html#row_number--"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
-<li class="chapter" data-level="8.1.11" data-path="section-46.html"><a href="section-46.html#ntile--"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
-<li class="chapter" data-level="8.1.12" data-path="section-46.html"><a href="section-46.html#group_by---"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
+<li class="chapter" data-level="6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
+<li class="chapter" data-level="6.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#수정주가-크롤링"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#개별종목-주가-크롤링"><i class="fa fa-check"></i><b>6.1.1</b> 개별종목 주가 크롤링</a></li>
+<li class="chapter" data-level="6.1.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-주가-크롤링"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="section-46.html"><a href="section-46.html#section-48"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="section-46.html"><a href="section-46.html#geom_point--"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
-<li class="chapter" data-level="8.2.2" data-path="section-46.html"><a href="section-46.html#geom_histogram--"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
-<li class="chapter" data-level="8.2.3" data-path="section-46.html"><a href="section-46.html#geom_boxplot---"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
-<li class="chapter" data-level="8.2.4" data-path="section-46.html"><a href="section-46.html#dplyr-ggplot--"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
-<li class="chapter" data-level="8.2.5" data-path="section-46.html"><a href="section-46.html#geom_bar---"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="section-46.html"><a href="section-46.html#section-49"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="section-46.html"><a href="section-46.html#section-50"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.2" data-path="section-46.html"><a href="section-46.html#section-51"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
-<li class="chapter" data-level="8.3.3" data-path="section-46.html"><a href="section-46.html#section-52"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+<li class="chapter" data-level="6.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-및-가치지표-크롤링"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-다운로드"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.2.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#가치지표-계산하기"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="6.2.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-재무제표-및-가치지표-다운로드"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="section-53.html"><a href="section-53.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
-<li class="chapter" data-level="9.1" data-path="section-53.html"><a href="section-53.html#section-54"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="section-53.html"><a href="section-53.html#section-55"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
-<li class="chapter" data-level="9.1.2" data-path="section-53.html"><a href="section-53.html#section-56"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+<li class="chapter" data-level="7" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#주가-정리하기-1"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#재무제표-정리하기-1"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#가치지표-정리하기-1"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="section-53.html"><a href="section-53.html#section-57"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="section-53.html"><a href="section-53.html#section-58"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
-<li class="chapter" data-level="9.2.2" data-path="section-53.html"><a href="section-53.html#section-59"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+<li class="chapter" data-level="8" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-데이터-분석"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#glimpse-데이터-구조-확인하기"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#rename-열-이름-바꾸기"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#distinct-고유한-값-확인"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#select-원하는-열만-선택"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#mutate-열-생성-및-데이터-변형"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
+<li class="chapter" data-level="8.1.7" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#filter-조건을-충족하는-행-선택"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#summarize-요약-통곗값-계산"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#arrange-데이터-정렬"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#row_number-순위-계산"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#ntile-분위수-계산"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#group_by-그룹별로-데이터를-묶기"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="section-53.html"><a href="section-53.html#section-60"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="section-53.html"><a href="section-53.html#section-61"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
-<li class="chapter" data-level="9.3.2" data-path="section-53.html"><a href="section-53.html#section-62"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+<li class="chapter" data-level="8.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-시각화"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_point-산점도-나타내기"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
+<li class="chapter" data-level="8.2.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_histogram-히스토그램-나타내기"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
+<li class="chapter" data-level="8.2.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_boxplot-박스-플롯-나타내기"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
+<li class="chapter" data-level="8.2.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#dplyr과-ggplot을-연결하여-사용하기"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
+<li class="chapter" data-level="8.2.5" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_bar-막대-그래프-나타내기"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="section-53.html"><a href="section-53.html#section-63"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="section-53.html"><a href="section-53.html#pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
-<li class="chapter" data-level="9.4.2" data-path="section-53.html"><a href="section-53.html#section-64"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
-</ul></li>
-<li class="chapter" data-level="9.5" data-path="section-53.html"><a href="section-53.html#section-65"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
-<li class="chapter" data-level="9.5.1" data-path="section-53.html"><a href="section-53.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
-<li class="chapter" data-level="9.5.2" data-path="section-53.html"><a href="section-53.html#section-66"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="section-67.html"><a href="section-67.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
-<li class="chapter" data-level="10.1" data-path="section-67.html"><a href="section-67.html#section-68"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
-<li class="chapter" data-level="10.2" data-path="section-67.html"><a href="section-67.html#section-69"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="section-67.html"><a href="section-67.html#section-70"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
-<li class="chapter" data-level="10.2.2" data-path="section-67.html"><a href="section-67.html#section-71"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
-<li class="chapter" data-level="10.2.3" data-path="section-67.html"><a href="section-67.html#section-72"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
-</ul></li>
-<li class="chapter" data-level="10.3" data-path="section-67.html"><a href="section-67.html#section-73"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="section-67.html"><a href="section-67.html#trim---"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
-<li class="chapter" data-level="10.3.2" data-path="section-67.html"><a href="section-67.html#winsorizing---"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
-<li class="chapter" data-level="10.3.3" data-path="section-67.html"><a href="section-67.html#section-74"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="section-67.html"><a href="section-67.html#section-75"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="section-76.html"><a href="section-76.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
-<li class="chapter" data-level="11.1" data-path="section-76.html"><a href="section-76.html#section-77"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="section-76.html"><a href="section-76.html#slsqp---"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.2" data-path="section-76.html"><a href="section-76.html#solve.qp---"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.3" data-path="section-76.html"><a href="section-76.html#optimalportfolio---"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.1.4" data-path="section-76.html"><a href="section-76.html#section-78"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
-<li class="chapter" data-level="11.1.5" data-path="section-76.html"><a href="section-76.html#section-79"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.1.6" data-path="section-76.html"><a href="section-76.html#section-80"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.2" data-path="section-76.html"><a href="section-76.html#section-81"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="section-76.html"><a href="section-76.html#solve.qp----1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.2" data-path="section-76.html"><a href="section-76.html#optimalportfolio----1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.2.3" data-path="section-76.html"><a href="section-76.html#section-82"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
-<li class="chapter" data-level="11.2.4" data-path="section-76.html"><a href="section-76.html#section-83"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
-</ul></li>
-<li class="chapter" data-level="11.3" data-path="section-76.html"><a href="section-76.html#section-84"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="section-76.html"><a href="section-76.html#section-85"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
-<li class="chapter" data-level="11.3.2" data-path="section-76.html"><a href="section-76.html#rp---"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
-<li class="chapter" data-level="11.3.3" data-path="section-76.html"><a href="section-76.html#section-86"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+<li class="chapter" data-level="8.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-및-수익률-시각화"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-그래프-나타내기"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#인터랙티브-그래프-나타내기"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#연도별-수익률-나타내기"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="section-87.html"><a href="section-87.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
-<li class="chapter" data-level="12.1" data-path="section-87.html"><a href="section-87.html#return.portfolio-"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="section-87.html"><a href="section-87.html#section-88"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
-<li class="chapter" data-level="12.1.2" data-path="section-87.html"><a href="section-87.html#section-89"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+<li class="chapter" data-level="9" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-이해하기"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-계산하기"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-시각화"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="section-87.html"><a href="section-87.html#section-90"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
-<li class="chapter" data-level="12.3" data-path="section-87.html"><a href="section-87.html#section-91"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
-<li class="chapter" data-level="12.4" data-path="section-87.html"><a href="section-87.html#section-92"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+<li class="chapter" data-level="9.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-전략"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-포트폴리오-구하기-일간-기준"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-포트폴리오-구하기-주간-기준"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="section-93.html"><a href="section-93.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
-<li class="chapter" data-level="13.1" data-path="section-93.html"><a href="section-93.html#section-94"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="section-93.html"><a href="section-93.html#section-95"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
-<li class="chapter" data-level="13.1.2" data-path="section-93.html"><a href="section-93.html#section-96"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
-<li class="chapter" data-level="13.1.3" data-path="section-93.html"><a href="section-93.html#section-97"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
-<li class="chapter" data-level="13.1.4" data-path="section-93.html"><a href="section-93.html#section-98"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+<li class="chapter" data-level="9.3" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-전략"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-포트폴리오-구하기-12개월-모멘텀"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-포트폴리오-구하기-위험조정-수익률"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="section-93.html"><a href="section-93.html#section-99"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+<li class="chapter" data-level="9.4" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-전략"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-포트폴리오-구하기-저pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#각-지표-결합하기"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#퀄리티-전략"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#각-지표를-결합하기"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#섹터-중립-포트폴리오"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#퀄리티와-밸류-간의-관계"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식-이해하기"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식-구성하기"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#이상치-데이터-제거-및-팩터의-결합"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#트림trim-이상치-데이터-삭제"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#윈저라이징winsorizing-이상치-데이터-대체"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#팩터의-결합-방법"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#멀티팩터-포트폴리오"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소분산-포트폴리오"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#slsqp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#solve.qp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#optimalportfolio-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#결괏값들의-비교"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소-및-최대-투자비중-제약조건"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#각-자산별-제약조건의-추가"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최대분산효과-포트폴리오"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#solve.qp-함수를-이용한-최적화-1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#optimalportfolio-함수를-이용한-최적화-1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소-및-최대-투자비중-제약조건-1"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#각-자산-별-제약조건의-추가"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험균형-포트폴리오"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#주식-60와-채권-40-포트폴리오의-위험기여도"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
+<li class="chapter" data-level="11.3.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#rp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험예산-포트폴리오"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#return.portfolio-함수"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#인자-목록-살펴보기"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#출력값-살펴보기"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#전통적인-60대-40-포트폴리오-백테스트"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#시점-선택-전략-백테스트"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#동적-자산배분-백테스트"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#결과-측정-지표"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#수익률-및-변동성"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#낙폭과-최대낙폭"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#연도별-수익률"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#승률-및-롤링-윈도우-값"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#팩터-회귀분석-및-테이블로-나타내기"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -399,27 +330,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">R을 이용한 퀀트 투자 포트폴리오 만들기</h1>
 <p class="author"><em>이현열</em></p>
-<p class="date"><em>2020-01-20</em></p>
+<p class="date"><em>2020-03-16</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered">
 <h1>Welcome</h1>
 <p><img src="images/cover.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><a href="https://book.naver.com/bookdb/book_detail.nhn?bid=15369836">R을 이용한 퀀트 투자 포트폴리오 만들기 구매 링크</a></p>
 <p>본 페이지는 <strong>R을 이용한 퀀트 투자 포트폴리오 만들기</strong>의 웹사이트 입니다. 책의 수정 사항이 있을시 즉시 반영할 예정이며, 책에서 다루지 못했던 추가적인 내용도 지속적으로 업데이트 할 예정입니다.</p>
-<div style="background-color:#F7F7F7;padding: 20px">
+<div style="background-color:#F7F7F7;padding: 20px 20px 20px 20px">
 <p>책 발간 이후 업데이트 내용은 다음과 같습니다.</p>
 <ul>
-<li><p>2020년 1월 20일: <a href="section-29.html#section-29">금융 데이터 수집하기 (심화)</a>에 <a href="section-29.html#dart--">DART 데이터 수집하기</a> 부분을 추가하였습니다.</p></li>
-<li><p>2020년 1월 19일: <a href="section-23.html#section-28">거래소 데이터 정리하기</a> 부분에서 <code>substr()</code> 함수 대신 stringr 패키지의 <code>str_sub()</code> 함수를 사용하여 코드를 훨씬 간결하게 표현했습니다. 또한 종목코드 끝이 0이 아닐 경우 우선주인 점을 이용하여 더욱 쉽게 클렌징 처리를 하였습니다.</p></li>
-<li>2020년 1월 18일: 야후 파이낸스 웹페이지의 구조가 바뀌어 동적 크롤링을 통해서만 데이터 수집이 가능하게 되었습니다. 이는 본 책에서는 다루지 않으므로, <a href="section-29.html#section-29">금융 데이터 수집하기 (심화)</a>에서 해당 부분을 삭제하였습니다.</li>
+<li><p>2020년 3월 16일: <a href="퀀트-전략을-이용한-종목선정-기본.html#퀀트-전략을-이용한-종목선정-기본">퀀트 전략을 이용한 종목선정 (기본)</a>과 <a href="퀀트-전략을-이용한-종목선정-심화.html#퀀트-전략을-이용한-종목선정-심화">퀀트 전략을 이용한 종목선정 (심화)</a>에서 재무제표를 이용한 전략의 경우, 1~4월에는 최근년도 데이터가 일부 종목에 대해서만 들어옵니다. 따라서 해당 기간에는 전전년도 데이터를 사용해야 하며, 이를 고려하도록 코드를 변경하였습니다.</p></li>
+<li><p>2020년 3월 15일: <a href="금융-데이터-수집하기-심화.html#금융-데이터-수집하기-심화">금융 데이터 수집하기 (심화)</a>에 <a href="금융-데이터-수집하기-심화.html#재무제표-및-가치지표-크롤링">재무제표 및 가치지표 크롤링</a>에서 사용하는 페이지가 크롤러의 접근을 막음에 따라, <code>user_agent()</code> 를 이용하여 웹브라우저 인자를 추가해 주었습니다.</p></li>
+<li><p>2020년 1월 19일: [거래소 데이터 정리하기] 부분에서 <code>substr()</code> 함수 대신 stringr 패키지의 <code>str_sub()</code> 함수를 사용하여 코드를 훨씬 간결하게 표현했습니다. 또한 종목코드 끝이 0이 아닐 경우 우선주인 점을 이용하여 더욱 쉽게 클렌징 처리를 하였습니다.</p></li>
+<li>2020년 1월 18일: 야후 파이낸스 웹페이지의 구조가 바뀌어 동적 크롤링을 통해서만 데이터 수집이 가능하게 되었습니다. 이는 본 책에서는 다루지 않으므로, <a href="금융-데이터-수집하기-심화.html#금융-데이터-수집하기-심화">금융 데이터 수집하기 (심화)</a>에서 해당 부분을 삭제하였습니다.</li>
 </ul>
 </div>
-<div id="section" class="section level2 unnumbered">
+<div id="지은이-소개" class="section level2 unnumbered">
 <h2>지은이 소개</h2>
 <p>이현열</p>
 <p>한양대학교에서 경영학을 전공하고, 카이스트 대학원에서 금융공학 석사 학위를 받았다. 졸업 후 증권사에서 주식운용을, 자산운용사에서 퀀트 포트폴리오 매니저 업무를 거쳐 현재는 보험사에서 데이터 분석 업무를 하고 있으며, 평소 꾸준한 SNS와 블로그 활동으로 퀀트 아이디어 및 백테스트 결과 등을 공유하면서 퀀트 투자의 대중화를 위해 노력하고 있다. 현재 한양대학교 재무금융 박사 과정에 재학 중이며, 패스트캠퍼스에서 R과 퀀트 투자 강의를 맡고 있다. 지은 책으로는 《스마트베타》(2017)가 있다.</p>
 </div>
-<div id="section-1" class="section level2 unnumbered">
+<div id="머리말" class="section level2 unnumbered">
 <h2>머리말</h2>
 <p>퀀트 투자 중 팩터에 관한 이론적 내용을 다룬 <a href="http://www.yes24.com/Product/Goods/56018775?Acode=101">《SMART BETA(스마트 베타): 감정을 이기는 퀀트 투자》(김병규, 이현열, 워터베어프레스, 2017)</a> 출간 이후 강의와 세미나를 통해많은 분들을 만났고, 공통적인 어려움을 느낄 수 있었습니다. 기관 투자자들이 손쉽게 데이터를 구할 수 있는 것과는 다르게, 일반 투자자들은 퀀트 투자를 하기 위한 데이터를 구하는 시작점부터 어려움을 겪는다는 것이었습니다.</p>
 <p>이러한 문제로 어려움을 겪고 있는 분들에게 도움을 드리고자 HenryQuant 패키지를 만들어 배포했습니다. HenryQuant 패키지는 투자에 필요한 각종 데이터를 크롤링하여 수집하는 패키지로, 다행히 많은 분이 애용해주시고 있습니다.</p>
@@ -427,7 +359,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>2019년 8월</p>
 <p>이현열(<a href="mailto:leebisu@gmail.com" class="email">leebisu@gmail.com</a>)</p>
 </div>
-<div id="section-2" class="section level2 unnumbered">
+<div id="이-책의-구성" class="section level2 unnumbered">
 <h2>이 책의 구성</h2>
 <p>이 책은 API와 크롤링을 통한 금융 데이터 수집, 투자 종목 선택 및 포트폴리오 구성, 백테스트와 성과 분석으로 이루어져 있습니다.</p>
 <p><strong>CHAPTER 1 퀀트 투자의 심장: 데이터와 프로그래밍</strong>
@@ -457,14 +389,14 @@ API를 통한 데이터 수집과 <code>getSymbols()</code> 함수의 사용 방
 <p><strong>CHAPTER 13 성과 및 위험 평가</strong>
 포트폴리오의 수익률을 바탕으로 성과 및 위험 평가에 사용되는 각종 지표에 대해 알아보며, 4팩터 회귀분석을 통한 요인 분석을 실행합니다.</p>
 </div>
-<div id="section-3" class="section level2 unnumbered">
+<div id="이-책에서-다루지-않은-주제" class="section level2 unnumbered">
 <h2>이 책에서 다루지 않은 주제</h2>
 <p>이 책은 R을 기본적으로 사용할 줄 아는 독자를 대상으로 작성되었습니다. 따라서 내용의 효율적 전달을 위해 R과 R Studio 설치, 기초적인 프로그래밍 등의 내용은 생략했습니다. 따라서 프로그래밍을 처음 접하는 독자라면 프로그래밍 기초를 먼저 익히신후 본 책을 읽으시길 추천드립니다.</p>
 <p>또한 텔레그램 메신저 자동전송, 이메일 자동전송, 전자공시시스템(DART) 크롤링, R마크다운과 샤이니를 이용한 포트폴리오 수익률 관리 등에 대한 주제는 다루지 않았습니다. 해당 내용은 저자의 블로그에 이미 업로드되어 있으므로 궁금한 분은 해당 글들을 참조하길 바라며, 기회가 된다면 추후 개정판에서 다루도록 하겠습니다.</p>
 <p>마지막으로 이 책에서는 프로그램 언어로 R을 이용했기 때문에 Python 혹은 다른 언어를 사용하는 분들에게는 직접적으로 도움이 되지 않을 수 있다고 생각할 수 있습니다. 그러나 투자에 필요한 금융 데이터 수집을 어디서 어떻게 하는지, 종목 선택을 어떻게 하고 포트폴리오를 어떻게 구성하는지에 대한 이론적 내용을 이해한 후 본인들
 이 사용하는 언어로 구현해보는 것도 좋은 도전이 될 것입니다.</p>
 </div>
-<div id="section-4" class="section level2 unnumbered">
+<div id="도움이-될-만한-자료들" class="section level2 unnumbered">
 <h2>도움이 될 만한 자료들</h2>
 <p>먼저 팩터 투자와 관련하여 심화된 내용을 알고 싶은 분은 저의 이전 책 및 책에서 인용된 논문을 읽어볼 것을 권합니다. R 프로그래밍과 관련하여 기초부터 tidyverse 패키지까지 이해하는 데 도움이 될만한 책 목록은 다음과 같습니다.</p>
 <ul>
@@ -476,7 +408,7 @@ API를 통한 데이터 수집과 <code>getSymbols()</code> 함수의 사용 방
 <li>《ggplot2: R로 분석한 데이터를 멋진 그래픽으로》(해들리 위컴, 프리렉, 2017)</li>
 </ul>
 </div>
-<div id="section-5" class="section level2 unnumbered">
+<div id="이-책의-지원-페이지" class="section level2 unnumbered">
 <h2>이 책의 지원 페이지</h2>
 <p>이 책은 R의 bookdown 패키지로 작성되어 웹페이지 및 GitHub 저장소에 공유되어 있습니다. 따라서 책에 포함되어 있는 각종 코드를 웹페이지에 방문하여 얻으실 수 있습니다.</p>
 <ul>
@@ -490,7 +422,7 @@ API를 통한 데이터 수집과 <code>getSymbols()</code> 함수의 사용 방
 <li>Henry’s Quantopia: <a href="http://henryquant.blogspot.com" class="uri">http://henryquant.blogspot.com</a></li>
 </ul>
 </div>
-<div id="section-6" class="section level2 unnumbered">
+<div id="종목과-관련된-유의사항" class="section level2 unnumbered">
 <h2>종목과 관련된 유의사항</h2>
 <p>팩터 모델을 이용한 종목 선택과 관련된 CHAPTER에서는 해당 조건으로 선택된 종목들이 나열되어 있습니다. 그러나 이는 <strong>해당 종목에 대한 매수 추천이 아님을 밝히며, 데이터를 받은 시점의 종목이기에 독자 여러분이 책을 읽는 시점에서 선택된 종목과는 상당한 차이가 있습니다.</strong></p>
 <p>또한 이 책에서 다루는 모델을 이용하여 투자를 할 경우, 이로 인한 이익과 손해는 본인에게 귀속됨을 알립니다.</p>
@@ -503,16 +435,18 @@ API를 통한 데이터 수집과 <code>getSymbols()</code> 함수의 사용 방
         </div>
       </div>
 
-<a href="section-7.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="퀀트-투자의-심장-데이터와-프로그래밍.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -520,12 +454,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -534,6 +467,10 @@ gitbook.start({
 },
 "edit": null,
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -546,19 +483,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

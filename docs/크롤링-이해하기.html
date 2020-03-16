@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 크롤링 이해하기 | R을 이용한 퀀트 투자 포트폴리오 만들기</title>
+  <meta name="description" content="Chapter 4 크롤링 이해하기 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 크롤링 이해하기 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="hyunyulhenry/quant_cookbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 크롤링 이해하기 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
+  
+  
+  
+
+<meta name="author" content="이현열" />
+
+
+<meta name="date" content="2020-03-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="api를-이용한-데이터-수집.html"/>
+<link rel="next" href="데이터-정리하기.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+<script src="libs/proj4js-2.3.15/proj4.js"></script>
+<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
+<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
+<script src="libs/highcharts-7.0.1/highcharts.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
+<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
+<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
+<script src="libs/highcharts-7.0.1/modules/map.js"></script>
+<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
+<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
+<script src="libs/highcharts-7.0.1/modules/data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
+<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
+<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
+<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
+<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
+<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
+<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
+<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
+<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
+<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
+<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
+<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
+<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
+<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
+<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
+<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
+<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
+<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
+<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
+<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
+<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
+<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#지은이-소개"><i class="fa fa-check"></i>지은이 소개</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#머리말"><i class="fa fa-check"></i>머리말</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-구성"><i class="fa fa-check"></i>이 책의 구성</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책에서-다루지-않은-주제"><i class="fa fa-check"></i>이 책에서 다루지 않은 주제</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#도움이-될-만한-자료들"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-지원-페이지"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#종목과-관련된-유의사항"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
+<li class="chapter" data-level="1.1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#데이터-구하기"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
+<li class="chapter" data-level="1.2" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#퀀트-투자와-프로그래밍"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
+<li class="chapter" data-level="1.3" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#r-프로그램"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
+<li class="chapter" data-level="1.4" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#퀀트-투자에-유용한-r-패키지"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
+<li class="chapter" data-level="2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인코딩의-이해와-r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인간과-컴퓨터-간-번역의-시작-ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
+<li class="chapter" data-level="2.1.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#한글-인코딩-방식의-종류"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩 방식의 종류</a></li>
+<li class="chapter" data-level="2.1.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#웹의-동작-방식"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html과-css"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html-기본-구조"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
+<li class="chapter" data-level="2.3.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#태그와-속성"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
+<li class="chapter" data-level="2.3.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#h-태그와-p-태그"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
+<li class="chapter" data-level="2.3.4" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#리스트를-나타내는-ul-태그와-ol-태그"><i class="fa fa-check"></i><b>2.3.4</b> 리스트를 나타내는 ul 태그와 ol 태그</a></li>
+<li class="chapter" data-level="2.3.5" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#table-태그"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
+<li class="chapter" data-level="2.3.6" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#a-태그와-src-태그-및-속성"><i class="fa fa-check"></i><b>2.3.6</b> a 태그와 src 태그 및 속성</a></li>
+<li class="chapter" data-level="2.3.7" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#div-태그"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
+<li class="chapter" data-level="2.3.8" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
+<li class="chapter" data-level="2.3.9" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#클래스와-id"><i class="fa fa-check"></i><b>2.3.9</b> 클래스와 id</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#파이프-오퍼레이터"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터(<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="2.5" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#오류에-대한-예외처리"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
+<li class="chapter" data-level="3.1" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#api를-이용한-quandl-데이터-다운로드"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
+<li class="chapter" data-level="3.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#getsymbols-함수를-이용한-api-다운로드"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#주가-다운로드"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#국내-종목-주가-다운로드"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
+<li class="chapter" data-level="3.2.3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#fred-데이터-다운로드"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
+<li class="chapter" data-level="4.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get과-post-방식-이해하기"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get-방식"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
+<li class="chapter" data-level="4.1.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#post-방식"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#크롤링-예제"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#금융-속보-크롤링"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
+<li class="chapter" data-level="4.2.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#기업공시채널에서-오늘의-공시-불러오기"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
+<li class="chapter" data-level="4.2.3" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#네이버-금융에서-주식티커-크롤링"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html"><i class="fa fa-check"></i><b>5</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="5.1" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#주가-정리하기"><i class="fa fa-check"></i><b>5.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="5.2" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#재무제표-정리하기"><i class="fa fa-check"></i><b>5.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="5.3" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#가치지표-정리하기"><i class="fa fa-check"></i><b>5.3</b> 가치지표 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
+<li class="chapter" data-level="6.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#수정주가-크롤링"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#개별종목-주가-크롤링"><i class="fa fa-check"></i><b>6.1.1</b> 개별종목 주가 크롤링</a></li>
+<li class="chapter" data-level="6.1.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-주가-크롤링"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-및-가치지표-크롤링"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-다운로드"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
+<li class="chapter" data-level="6.2.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#가치지표-계산하기"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
+<li class="chapter" data-level="6.2.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-재무제표-및-가치지표-다운로드"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7.1" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#주가-정리하기-1"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
+<li class="chapter" data-level="7.2" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#재무제표-정리하기-1"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
+<li class="chapter" data-level="7.3" data-path="데이터-정리하기-1.html"><a href="데이터-정리하기-1.html#가치지표-정리하기-1"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
+<li class="chapter" data-level="8.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-데이터-분석"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
+<li class="chapter" data-level="8.1.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#glimpse-데이터-구조-확인하기"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
+<li class="chapter" data-level="8.1.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#rename-열-이름-바꾸기"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
+<li class="chapter" data-level="8.1.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#distinct-고유한-값-확인"><i class="fa fa-check"></i><b>8.1.4</b> distinct(): 고유한 값 확인</a></li>
+<li class="chapter" data-level="8.1.5" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#select-원하는-열만-선택"><i class="fa fa-check"></i><b>8.1.5</b> <code>select()</code>: 원하는 열만 선택</a></li>
+<li class="chapter" data-level="8.1.6" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#mutate-열-생성-및-데이터-변형"><i class="fa fa-check"></i><b>8.1.6</b> <code>mutate()</code>: 열 생성 및 데이터 변형</a></li>
+<li class="chapter" data-level="8.1.7" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#filter-조건을-충족하는-행-선택"><i class="fa fa-check"></i><b>8.1.7</b> <code>filter()</code>: 조건을 충족하는 행 선택</a></li>
+<li class="chapter" data-level="8.1.8" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#summarize-요약-통곗값-계산"><i class="fa fa-check"></i><b>8.1.8</b> <code>summarize()</code>: 요약 통곗값 계산</a></li>
+<li class="chapter" data-level="8.1.9" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#arrange-데이터-정렬"><i class="fa fa-check"></i><b>8.1.9</b> <code>arrange()</code>: 데이터 정렬</a></li>
+<li class="chapter" data-level="8.1.10" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#row_number-순위-계산"><i class="fa fa-check"></i><b>8.1.10</b> <code>row_number()</code>: 순위 계산</a></li>
+<li class="chapter" data-level="8.1.11" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#ntile-분위수-계산"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
+<li class="chapter" data-level="8.1.12" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#group_by-그룹별로-데이터를-묶기"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-시각화"><i class="fa fa-check"></i><b>8.2</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_point-산점도-나타내기"><i class="fa fa-check"></i><b>8.2.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
+<li class="chapter" data-level="8.2.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_histogram-히스토그램-나타내기"><i class="fa fa-check"></i><b>8.2.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
+<li class="chapter" data-level="8.2.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_boxplot-박스-플롯-나타내기"><i class="fa fa-check"></i><b>8.2.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
+<li class="chapter" data-level="8.2.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#dplyr과-ggplot을-연결하여-사용하기"><i class="fa fa-check"></i><b>8.2.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
+<li class="chapter" data-level="8.2.5" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_bar-막대-그래프-나타내기"><i class="fa fa-check"></i><b>8.2.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-및-수익률-시각화"><i class="fa fa-check"></i><b>8.3</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-그래프-나타내기"><i class="fa fa-check"></i><b>8.3.1</b> 주가 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#인터랙티브-그래프-나타내기"><i class="fa fa-check"></i><b>8.3.2</b> 인터랙티브 그래프 나타내기</a></li>
+<li class="chapter" data-level="8.3.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#연도별-수익률-나타내기"><i class="fa fa-check"></i><b>8.3.3</b> 연도별 수익률 나타내기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
+<li class="chapter" data-level="9.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-이해하기"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-계산하기"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
+<li class="chapter" data-level="9.1.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-시각화"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-전략"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-포트폴리오-구하기-일간-기준"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
+<li class="chapter" data-level="9.2.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-포트폴리오-구하기-주간-기준"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-전략"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-포트폴리오-구하기-12개월-모멘텀"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
+<li class="chapter" data-level="9.3.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-포트폴리오-구하기-위험조정-수익률"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-전략"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-포트폴리오-구하기-저pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
+<li class="chapter" data-level="9.4.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#각-지표-결합하기"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#퀄리티-전략"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
+<li class="chapter" data-level="9.5.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#각-지표를-결합하기"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#섹터-중립-포트폴리오"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
+<li class="chapter" data-level="10.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#퀄리티와-밸류-간의-관계"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
+<li class="chapter" data-level="10.2.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식-이해하기"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
+<li class="chapter" data-level="10.2.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식-구성하기"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#이상치-데이터-제거-및-팩터의-결합"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#트림trim-이상치-데이터-삭제"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
+<li class="chapter" data-level="10.3.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#윈저라이징winsorizing-이상치-데이터-대체"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
+<li class="chapter" data-level="10.3.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#팩터의-결합-방법"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#멀티팩터-포트폴리오"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
+<li class="chapter" data-level="11.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소분산-포트폴리오"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#slsqp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#solve.qp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#optimalportfolio-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.1.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#결괏값들의-비교"><i class="fa fa-check"></i><b>11.1.4</b> 결괏값들의 비교</a></li>
+<li class="chapter" data-level="11.1.5" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소-및-최대-투자비중-제약조건"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.1.6" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#각-자산별-제약조건의-추가"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최대분산효과-포트폴리오"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#solve.qp-함수를-이용한-최적화-1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#optimalportfolio-함수를-이용한-최적화-1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.2.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소-및-최대-투자비중-제약조건-1"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
+<li class="chapter" data-level="11.2.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#각-자산-별-제약조건의-추가"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험균형-포트폴리오"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#주식-60와-채권-40-포트폴리오의-위험기여도"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
+<li class="chapter" data-level="11.3.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#rp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
+<li class="chapter" data-level="11.3.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험예산-포트폴리오"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
+<li class="chapter" data-level="12.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#return.portfolio-함수"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#인자-목록-살펴보기"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
+<li class="chapter" data-level="12.1.2" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#출력값-살펴보기"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#전통적인-60대-40-포트폴리오-백테스트"><i class="fa fa-check"></i><b>12.2</b> 전통적인 60대 40 포트폴리오 백테스트</a></li>
+<li class="chapter" data-level="12.3" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#시점-선택-전략-백테스트"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
+<li class="chapter" data-level="12.4" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#동적-자산배분-백테스트"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
+<li class="chapter" data-level="13.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#결과-측정-지표"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#수익률-및-변동성"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
+<li class="chapter" data-level="13.1.2" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#낙폭과-최대낙폭"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
+<li class="chapter" data-level="13.1.3" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#연도별-수익률"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
+<li class="chapter" data-level="13.1.4" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#승률-및-롤링-윈도우-값"><i class="fa fa-check"></i><b>13.1.4</b> 승률 및 롤링 윈도우 값</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#팩터-회귀분석-및-테이블로-나타내기"><i class="fa fa-check"></i><b>13.2</b> 팩터 회귀분석 및 테이블로 나타내기</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="크롤링-이해하기" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> 크롤링 이해하기</h1>
+<p>API를 이용하면 데이터를 매우 쉽게 수집할 수 있지만, 국내 주식 데이터를 다운로드 하기에는 한계가 있으며, 원하는 데이터가 API의 형태로 제공된다는 보장도 없습니다. 따라서 우리는 필요한 데이터를 얻기 위해 직접 찾아 나서야 합니다.</p>
+<p>각종 금융 웹사이트에는 주가, 재무정보 등 우리가 원하는 대부분의 주식 정보가 제공되고 있으며, API를 활용할 수 없는 경우에도 크롤링을 통해 이러한 데이터를 수집할 수 있습니다. 크롤링 혹은 스크래핑이란 웹사이트에서 원하는 정보를 수집하는 기술입니다. 대부분의 금융 웹사이트는 간단한 형태로 작성되어 있어, 몇 가지 기술만 익히면 어렵지 않게 데이터를 크롤링할 수 있습니다. 이 CHAPTER에서는 크롤링에 대한 간단한 설명과 예제를 살펴보겠습니다.</p>
+<p>크롤링을 할 때 주의해야 할 점이 있습니다. 특정 웹사이트의 페이지를 쉬지 않고 크롤링하는 행위를 무한 크롤링이라고 합니다. 무한 크롤링은 해당 웹사이트의 자원을 독점하게 되어 타인의 사용을 막게 되며 웹사이트에 부하를 주게 됩니다. 일부 웹사이트에서는 동일한 IP로 쉬지 않고 크롤링을 할 경우 접속을 막아버리는 경우도 있습니다. 따라서 하나의 페이지를 크롤링한 후 1~2초 가량 정지하고 다시 다음 페이지를 크롤링하는 것이 좋습니다.</p>
+<div id="get과-post-방식-이해하기" class="section level2">
+<h2><span class="header-section-number">4.1</span> GET과 POST 방식 이해하기</h2>
+<p>우리가 인터넷에 접속해 서버에 파일을 요청하면, 서버는 이에 해당하는 파일을 우리에게 보내줍니다. 크롬과 같은 웹 브라우저는 이러한 과정을 사람이 수행하기 편하고 시각적으로 보기 편하도록 만들어진 것이며, 인터넷 주소는 서버의 주소를 기억하기 쉽게 만든 것입니다. 우리가 서버에 데이터를 요청하는 형태는 다양하지만 크롤링에서는 주로 GET과 POST 방식을 사용합니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="images/crawl_flow.png" alt="클라이언트와 서버 간의 요청/응답 과정" width="70%" />
+<p class="caption">
+그림 1.3: 클라이언트와 서버 간의 요청/응답 과정
+</p>
+</div>
+<div id="get-방식" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> GET 방식</h3>
+<p>GET 방식은 인터넷 주소를 기준으로 이에 해당하는 데이터나 파일을 요청하는 것입니다. 주로 클라이언트가 요청하는 쿼리를 앰퍼샌드(&amp;) 혹은 물음표(?) 형식으로 결합해 서버에 전달합니다.</p>
+<p>한경컨센서스<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>에 접속한 후 상단 탭에서 [기업] 탭을 선택하면, 주소 끝부분에
+?skinType=business가 추가되며 이에 해당하는 페이지의 내용을 보여줍니다. 즉, 해당 페이지는 GET 방식을 사용하고 있으며 입력 종류는 skinType, 이에 해당하는 [기업] 탭의 입력값은 business임을 알 수 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="images/crawl_hk.png" alt="한경 컨센서스 기업 REPORT 페이지" width="100%" />
+<p class="caption">
+그림 2.1: 한경 컨센서스 기업 REPORT 페이지
+</p>
+</div>
+<p>이번에는 [파생] 탭을 선택해봅니다. 역시나 웹사이트 주소 끝부분이 ?skinType=derivative로 변경되며, 해당 주소에 맞는 내용이 나타납니다. 여러 다른 탭들을 클릭해보면 ?skinType= 뒷부분의 입력값이 변함에 따라 이에 해당하는 페이지로 내용
+이 변경되는 것을 알 수 있습니다.</p>
+<p>다시 [기업] 탭을 선택한 후 다음 페이지를 확인하기 위해 하단의 [2]를 클릭합니다. 기존 주소인 ?skinType=business 뒤에 추가로 sdate와 edate, now_page 쿼리가 추가됩니다. sdate는 검색 기간의 시작시점, edate는 검색 기간의 종료시점, now_
+page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입력해도 이에 해당하는 페이지의 데이터를 보여줍니다. 이처럼 GET 방식으로 데이터를 요청하면 웹페이지 주소를 수정해 원하는 종류의 데이터를 받아올 수 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="images/crawl_hk2.png" alt="쿼리 추가로 인한 url의 변경" width="100%" />
+<p class="caption">
+그림 2.4: 쿼리 추가로 인한 url의 변경
+</p>
+</div>
+</div>
+<div id="post-방식" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> POST 방식</h3>
+<p>POST 방식은 사용자가 필요한 값을 추가해서 요청하는 방법입니다. GET 방식과 달리 클라이언트가 요청하는 쿼리를 body에 넣어서 전송하므로 요청 내역을 직접 볼 수 없습니다.</p>
+<p>한국거래소 상장공시시스템<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>에 접속해 [전체메뉴보기]를 클릭하고 [상장법인상세정보] 중
+[상장종목현황]을 선택합니다. 웹페이지 주소가 바뀌며, 상장종목현황이 나타납니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="images/crawl_corp_list.png" alt="상장공시시스템의 상장종목현황 메뉴" width="70%" />
+<p class="caption">
+그림 4.1: 상장공시시스템의 상장종목현황 메뉴
+</p>
+</div>
+<p>이번엔 조회일자를 [2017-12-28]로 선택한 후 [검색]을 클릭합니다. 페이지의 내용은 선택일 기준으로 변경되었지만, 주소는 변경되지 않고 그대로 남아 있습니다. GET 방식에서는 선택 항목에 따라 웹페이지 주소가 변경되었지만, POST 방식을 사용해 서버에 데이터를 요청하는 해당 웹사이트는 그렇지 않은 것을 알 수 있습니다.</p>
+<p>POST 방식의 데이터 요청 과정을 살펴보려면 개발자 도구를 이용해야 하며, 크롬에서는 [F12]키를 눌러 개발자 도구 화면을 열 수 있습니다. 개발자 도구 화면에서 다시 한번 [검색]을 클릭해봅니다. [Network] 탭을 클릭하면, [검색]을 클릭함과 동시에 브라우저와 서버 간의 통신 과정을 살펴볼 수 있습니다. 이 중 listedIssueStatus.do라는 항목이 POST 형태임을 알 수 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="images/crawl_corp_list_2.png" alt="크롬 개발자도구의 Network 화면" width="100%" />
+<p class="caption">
+그림 4.2: 크롬 개발자도구의 Network 화면
+</p>
+</div>
+<p>해당 메뉴를 클릭하면 통신 과정을 좀 더 자세히 알 수 있습니다. 가장 하단의 Form Data에는 서버에 데이터를 요청하는 내역이 있습니다. method에는 readListIssueStatus, selDate에는 2017-12-28이라는 값이 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="images/crawl_corp_list_3.png" alt="POST 방식의 서버 요청 내역" width="70%" />
+<p class="caption">
+그림 2.5: POST 방식의 서버 요청 내역
+</p>
+</div>
+<p>이처럼 POST 방식은 요청하는 데이터에 대한 쿼리가 GET 방식처럼 URL을 통해 전송되는 것이 아닌 body를 통해 전송되므로, 이에 대한 정보는 웹 브라우저를 통해 확인할 수 없습니다.</p>
+</div>
+</div>
+<div id="크롤링-예제" class="section level2">
+<h2><span class="header-section-number">4.2</span> 크롤링 예제</h2>
+<p>일반적인 크롤링은 httr 패키지의 <code>GET()</code> 혹은 <code>POST()</code> 함수를 이용해 데이터를 다운로드한 후 rvest 패키지의 함수들을 이용해 원하는 데이터를 찾는 과정으로 이루어집니다. 이 CHAPTER에서는 GET 방식으로 금융 실시간 속보의 제목을 추출하는 예제, POST 방식으로 기업공시채널에서 오늘의 공시를 추출하는 예제, 태그와 속성, 페이지 내비게이션 값을 결합해 국내 상장주식의 종목명 및 티커를 추출하는 예제를 학습해 보겠습니다.</p>
+<div id="금융-속보-크롤링" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> 금융 속보 크롤링</h3>
+<p>크롤링의 간단한 예제로 금융 속보의 제목을 추출해보겠습니다. 먼저 네이버 금융에
+접속한 후 [뉴스 → 실시간 속보]<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>를 선택합니다. 이 중 뉴스의 제목에 해당하는 텍스트만 추출하고자 합니다.</p>
+<p>뉴스 제목 부분에 마우스 커서를 올려둔 후 마우스 오른쪽 버튼을 클릭하고 [검사]를 선택하면 개발자 도구 화면이 나타납니다. 여기서 해당 글자가 HTML 내에서 어떤 부분에 위치하는지 확인할 수 있습니다. 해당 제목은 dl 태그 → dd 태그의 articleSubject 클래스 → a 태그 중 title 속성에 위치하고 있습니다. 태그와 속성의 차이가 이해되지 않은 분은 CHAPTER 2를 다시 살펴보기 바랍니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="images/crawl_naver_news.png" alt="실시간 속보의 제목 부분 html" width="100%" />
+<p class="caption">
+그림 2.6: 실시간 속보의 제목 부분 html
+</p>
+</div>
+<p>먼저 해당 페이지의 내용을 R로 불러옵니다.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">library</span>(rvest)</a>
+<a class="sourceLine" id="cb58-2" data-line-number="2"><span class="kw">library</span>(httr)</a>
+<a class="sourceLine" id="cb58-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb58-4" data-line-number="4">url =<span class="st"> &#39;https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258&#39;</span></a>
+<a class="sourceLine" id="cb58-5" data-line-number="5">data =<span class="st"> </span><span class="kw">GET</span>(url)</a>
+<a class="sourceLine" id="cb58-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb58-7" data-line-number="7"><span class="kw">print</span>(data)</a></code></pre></div>
+<p>먼저 url 변수에 해당 주소를 입력한 후 GET() 함수를 이용해 해당 페이지의 내용을 받아 data 변수에 저장합니다. data 변수를 확인해보면 Status가 200, 즉 데이터가 이상 없이 받아졌으며, 인코딩(charset)은 EUC-KR 타입으로 되어 있습니다.</p>
+<p>우리는 개발자 도구 화면을 통해 제목에 해당하는 부분이 dl 태그 → dd 태그의 articleSubject 클래스 → a 태그 중 title 속성에 위치하고 있음을 살펴보았습니다. 이를 활용해 제목 부분만을 추출하는 방법은 다음과 같습니다.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">data_title =<span class="st"> </span>data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-2" data-line-number="2"><span class="st">  </span><span class="kw">read_html</span>(<span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-3" data-line-number="3"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&#39;dl&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-4" data-line-number="4"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&#39;.articleSubject&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-5" data-line-number="5"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&#39;a&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb59-6" data-line-number="6"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&#39;title&#39;</span>)</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>read_html()</code> 함수를 이용해 해당 페이지의 HTML 내용을 읽어오며, 인코딩은 EUC-KR로 설정합니다.</li>
+<li><code>html_nodes()</code> 함수는 해당 태그를 추출하는 함수이며 dl 태그에 해당하는 부분을 추출합니다.</li>
+<li><code>html_nodes()</code> 함수를 이용해 articleSubject 클래스에 해당하는 부분을 추출할 수 있으며, 클래스 속성의 경우 이름 앞에 마침표(.)를 붙여주어야 합니다.</li>
+<li><code>html_nodes()</code> 함수를 이용해 a 태그를 추출합니다.</li>
+<li><code>html_attr()</code> 함수는 속성을 추출하는 함수이며 title에 해당하는 부분만을 추출합니다.</li>
+</ol>
+<p>위 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장됩니다. 이처럼 개발자 도구 화면을 통해 내가 추출하고자 하는 데이터가 HTML 중 어디에 위치하고 있는지 먼저 확인하면 어렵지 않게 해당 데이터를 읽어올 수 있습니다.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">print</span>(data_title)</a></code></pre></div>
+<pre><code>##  [1] &quot;한영회계법인, 코오롱티슈진 감사의견 &quot;
+##  [2] &quot;멈추지 않는 주가 급락…증시안정펀드 &quot; 
+##  [3] &quot;코로나 충격 장기화 판단…비정상적 급&quot; 
+##  [4] &quot;무디스, 한화생명·한화손보도 신용등급&quot;
+##  [5] &quot;코오롱티슈진, 감사의견 거절로 또 상&quot; 
+##  [6] &quot;&#39;인보사&#39; 코오롱티슈진, 감사의견 거&quot;  
+##  [7] &quot;\&quot;일할 수 있는 건 좋은데\&quot; 택배기사&quot; 
+##  [8] &quot;코로나19 경제충격에 글로벌 중앙은행&quot; 
+##  [9] &quot;\&quot;동네 식당 살리자\&quot;…도시락 단체 주&quot; 
+## [10] &quot;노는 여객기를 화물기로…항공사 &#39;고육&quot; 
+## [11] &quot;코오롱티슈진, 상장폐지 위기…감사 의&quot; 
+## [12] &quot;&#39;인보사&#39; 코오롱티슈진, 감사의견 거&quot;  
+## [13] &quot;[일문일답]이주열 총재 \&quot;추가 인하 &quot;  
+## [14] &quot;각국 중앙은행 공조 불구 유럽 주요국&quot; 
+## [15] &quot;코로나 쇼크에 우량기업 채권도 외면…&quot; 
+## [16] &quot;생산차질에 후진한 현대차…\&quot;판매 경쟁&quot;
+## [17] &quot;한은, 기준금리 &#39;0.5%P&#39; 인하…&quot;        
+## [18] &quot;[마켓인사이트] 앵커PE, 카카오M &quot;     
+## [19] &quot;미국 &#39;제로금리&#39;로 전격 인하…줄줄이&quot;  
+## [20] &quot;중국 생산 첫 마이너스…돈 풀기 효과&quot;</code></pre>
+</div>
+<div id="기업공시채널에서-오늘의-공시-불러오기" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
+<p>한국거래소 상장공시시스템에 접속한 후 [오늘의 공시 → 전체 → 더보기]를 선택해 전체 공시내용을 확인할 수 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="images/crawl_kind.png" alt="오늘의공시 확인하기" width="70%" />
+<p class="caption">
+그림 4.3: 오늘의공시 확인하기
+</p>
+</div>
+<p>해당 페이지에서 날짜를 변경하면 페이지의 내용은 해당일의 공시로 변경되지만 URL은 변경되지 않습니다. 이처럼 POST 방식은 요청하는 데이터에 대한 쿼리가 body의 형태를 통해 전송되므로, 개발자 도구 화면을 통해 해당 쿼리에 대한 내용을 확인해야 합니다.</p>
+<p>개발자 도구 화면을 연 상태에서 조회일자를 [2018-12-28]로 선택한 후 [검색]을 클릭하고 [Network] 탭의 todaydisclosure.do 항목을 살펴보면 Form Data를 통해 서버에 데이터를 요청하는 내역을 확인할 수 있습니다. 여러 항목 중 selDate 부분이 우리가 선택한 일자로 설정되어 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="images/crawl_kind_post.png" alt="POST 방식의 데이터 요청" width="100%" />
+<p class="caption">
+그림 2.9: POST 방식의 데이터 요청
+</p>
+</div>
+<p>POST 방식으로 쿼리를 요청하는 방법을 코드로 나타내면 다음과 같습니다.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">library</span>(httr)</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">library</span>(rvest)</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb62-4" data-line-number="4"><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;English&quot;</span>)</a>
+<a class="sourceLine" id="cb62-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb62-6" data-line-number="6">url =<span class="st"> &#39;http://kind.krx.co.kr/disclosure/todaydisclosure.do&#39;</span></a>
+<a class="sourceLine" id="cb62-7" data-line-number="7">data =<span class="st"> </span><span class="kw">POST</span>(url, <span class="dt">body =</span> </a>
+<a class="sourceLine" id="cb62-8" data-line-number="8">              <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb62-9" data-line-number="9">                <span class="dt">method =</span> <span class="st">&#39;searchTodayDisclosureSub&#39;</span>,</a>
+<a class="sourceLine" id="cb62-10" data-line-number="10">                <span class="dt">currentPageSize =</span> <span class="st">&#39;15&#39;</span>,</a>
+<a class="sourceLine" id="cb62-11" data-line-number="11">                <span class="dt">pageIndex =</span> <span class="st">&#39;1&#39;</span>,</a>
+<a class="sourceLine" id="cb62-12" data-line-number="12">                <span class="dt">orderMode =</span> <span class="st">&#39;0&#39;</span>,</a>
+<a class="sourceLine" id="cb62-13" data-line-number="13">                <span class="dt">orderStat =</span> <span class="st">&#39;D&#39;</span>,</a>
+<a class="sourceLine" id="cb62-14" data-line-number="14">                <span class="dt">forward =</span> <span class="st">&#39;todaydisclosure_sub&#39;</span>,</a>
+<a class="sourceLine" id="cb62-15" data-line-number="15">                <span class="dt">chose =</span> <span class="st">&#39;S&#39;</span>,</a>
+<a class="sourceLine" id="cb62-16" data-line-number="16">                <span class="dt">todayFlag =</span> <span class="st">&#39;Y&#39;</span>,</a>
+<a class="sourceLine" id="cb62-17" data-line-number="17">                <span class="dt">selDate =</span> <span class="st">&#39;2018-12-28&#39;</span></a>
+<a class="sourceLine" id="cb62-18" data-line-number="18">                ))</a>
+<a class="sourceLine" id="cb62-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb62-20" data-line-number="20">data =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb62-21" data-line-number="21"><span class="st">  </span><span class="kw">html_table</span>(<span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb62-22" data-line-number="22"><span class="st">  </span>.[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb62-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb62-24" data-line-number="24"><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;Korean&quot;</span>)</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>한글(korean)로 작성된 페이지를 크롤링하면 오류가 발생하는 경우가 종종 있으므로 <code>Sys.setlocale()</code> 함수를 통해 로케일 언어를 영어(English)로 설정합니다.</li>
+<li><code>POST()</code> 함수를 통해 해당 url에 원하는 쿼리를 요청하며, 쿼리는 body 내에 리스트 형태로 입력해줍니다. 해당 값은 개발자 도구 화면의 Form Data와 동일하게 입력해주며, marketType과 같이 값이 없는 항목은 입력하지 않아도 됩니다.</li>
+<li><code>read_html()</code> 함수를 이용해 해당 페이지의 HTML 내용을 읽어옵니다.</li>
+<li><code>html_table()</code> 함수는 테이블 형태의 데이터를 읽어오는 함수입니다. 셀 병합이
+된 열이 있으므로 <code>fill=TRUE</code>를 추가합니다.</li>
+<li>.[[1]]를 통해 첫 번째 리스트를 선택합니다.</li>
+<li>한글을 읽기 위해 <code>Sys.setlocale()</code> 함수를 통해 로케일 언어를 다시 Korean으로 변경합니다.</li>
+</ol>
+<p>저장된 데이터를 확인하면 화면과 동일한 내용이 출력됩니다.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">head</span>(data))</a></code></pre></div>
+<pre><code>##      NA           NA
+## 1 18:32   이노와이즈
+## 2 18:26 에스제이케이
+## 3 18:11     아이엠텍
+## 4 18:10 시그넷이브이
+## 5 18:09             
+## 6 18:09             
+##                                            NA
+## 1                                최대주주변경
+## 2 증권 발행결과(자율공시)(제3자배정 유상증자)
+## 3               [정정]유상증자결정(제3자배정)
+## 4                          유형자산 양수 결정
+## 5            자기주식매매신청내역(코스닥시장)
+## 6                    대량매매내역(코스닥시장)
+##               NA                             NA
+## 1     이노와이즈 공시차트\r\n\t\t\t\t\t주가차트
+## 2   에스제이케이 공시차트\r\n\t\t\t\t\t주가차트
+## 3       아이엠텍 공시차트\r\n\t\t\t\t\t주가차트
+## 4   시그넷이브이 공시차트\r\n\t\t\t\t\t주가차트
+## 5 코스닥시장본부                               
+## 6 코스닥시장본부</code></pre>
+<p>POST 형식의 경우 body에 들어가는 쿼리 내용을 바꾸어 원하는 데이터를 받을 수 있습니다. 만일 2019년 1월 8일 공시를 확인하고자 한다면 위의 코드에서 selDate만 2019-01-08로 변경해주면 됩니다. 아래 코드의 출력 결과물을 2019년 1월 8일 공시와 비교하면 동일한 결과임을 확인할 수 있습니다.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;English&quot;</span>)</a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb65-3" data-line-number="3">url =<span class="st"> &#39;http://kind.krx.co.kr/disclosure/todaydisclosure.do&#39;</span></a>
+<a class="sourceLine" id="cb65-4" data-line-number="4">data =<span class="st"> </span><span class="kw">POST</span>(url, <span class="dt">body =</span></a>
+<a class="sourceLine" id="cb65-5" data-line-number="5">              <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb65-6" data-line-number="6">                <span class="dt">method =</span> <span class="st">&#39;searchTodayDisclosureSub&#39;</span>,</a>
+<a class="sourceLine" id="cb65-7" data-line-number="7">                <span class="dt">currentPageSize =</span> <span class="st">&#39;15&#39;</span>,</a>
+<a class="sourceLine" id="cb65-8" data-line-number="8">                <span class="dt">pageIndex =</span> <span class="st">&#39;1&#39;</span>,</a>
+<a class="sourceLine" id="cb65-9" data-line-number="9">                <span class="dt">orderMode =</span> <span class="st">&#39;0&#39;</span>,</a>
+<a class="sourceLine" id="cb65-10" data-line-number="10">                <span class="dt">orderStat =</span> <span class="st">&#39;D&#39;</span>,</a>
+<a class="sourceLine" id="cb65-11" data-line-number="11">                <span class="dt">forward =</span> <span class="st">&#39;todaydisclosure_sub&#39;</span>,</a>
+<a class="sourceLine" id="cb65-12" data-line-number="12">                <span class="dt">chose =</span> <span class="st">&#39;S&#39;</span>,</a>
+<a class="sourceLine" id="cb65-13" data-line-number="13">                <span class="dt">todayFlag =</span> <span class="st">&#39;Y&#39;</span>,</a>
+<a class="sourceLine" id="cb65-14" data-line-number="14">                <span class="dt">selDate =</span> <span class="st">&#39;2019-01-08&#39;</span></a>
+<a class="sourceLine" id="cb65-15" data-line-number="15">                ))</a>
+<a class="sourceLine" id="cb65-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb65-17" data-line-number="17">data =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb65-18" data-line-number="18"><span class="st">  </span><span class="kw">html_table</span>(<span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb65-19" data-line-number="19"><span class="st">  </span>.[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb65-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb65-21" data-line-number="21"><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;Korean&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">head</span>(data))</a></code></pre></div>
+<pre><code>##      NA             NA
+## 1 18:58   해덕파워웨이
+## 2 18:57   해덕파워웨이
+## 3 18:57           퓨전
+## 4 18:56   해덕파워웨이
+## 5 18:52 한국테크놀로지
+## 6 18:52 한국테크놀로지
+##                                                        NA
+## 1                                              소속부변경
+## 2 주권매매거래정지기간변경(상장적격성 실질심사 대상 결정)
+## 3                                            최대주주변경
+## 4            관리종목지정(상장적격성 실질심사 대상 결정 )
+## 5                            전환사채권발행결정(제18회차)
+## 6                            전환사채권발행결정(제17회차)
+##               NA                             NA
+## 1 코스닥시장본부 공시차트\r\n\t\t\t\t\t주가차트
+## 2 코스닥시장본부 공시차트\r\n\t\t\t\t\t주가차트
+## 3           퓨전 공시차트\r\n\t\t\t\t\t주가차트
+## 4 코스닥시장본부 공시차트\r\n\t\t\t\t\t주가차트
+## 5 한국테크놀로지 공시차트\r\n\t\t\t\t\t주가차트
+## 6 한국테크놀로지 공시차트\r\n\t\t\t\t\t주가차트</code></pre>
+</div>
+<div id="네이버-금융에서-주식티커-크롤링" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> 네이버 금융에서 주식티커 크롤링</h3>
+<p>태그와 속성, 페이지 내비게이션 값을 결합해 국내 상장주식의 종목명 및 티커를 추출하는 방법을 알아보겠습니다. 네이버 금융에서 [국내증시 → 시가총액] 페이지에는 코스피와 코스닥의 시가총액별 정보가 나타나 있습니다.</p>
+<ul>
+<li>코스피: <a href="https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&amp;page=1" class="uri">https://finance.naver.com/sise/sise_market_sum.nhn?sosok=0&amp;page=1</a></li>
+<li>코스닥: <a href="https://finance.naver.com/sise/sise_market_sum.nhn?sosok=1&amp;page=1" class="uri">https://finance.naver.com/sise/sise_market_sum.nhn?sosok=1&amp;page=1</a></li>
+</ul>
+<p>또한 종목명을 클릭해 이동하는 페이지의 URL을 확인해보면, 끝 6자리가 각 종목의 거래소 티커임도 확인이 됩니다.</p>
+<p>티커 정리를 위해 HTML에서 확인해야 할 부분은 총 두 가지입니다. 먼저 하단의 페이지 내비게이션을 통해 코스피와 코스닥 시가총액에 해당하는 페이지가 각각 몇 번째 페이지까지 있는지 알아야 합니다. 아래와 같은 항목 중 [맨뒤]에 해당하는 페이지가 가장 마지막 페이지입니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
+<img src="images/crawl_page_navi.png" alt="페이지 네비게이션" width="70%" />
+<p class="caption">
+그림 4.4: 페이지 네비게이션
+</p>
+</div>
+<p>[맨뒤]에 마우스 커서를 올려두고 마우스 오른쪽 버튼을 클릭한 후 [검사]를 선택하면 개발자 도구 화면이 열립니다. 여기서 해당 글자가 HTML 내에서 어떤 부분에 위치하는지 확인할 수 있습니다. 해당 링크는 pgRR 클래스 → a 태그 중 href 속성에 위치하며, page= 뒷부분의 숫자에 위치하는 페이지로 링크가 걸려 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<img src="images/crawl_page_navi2.png" alt="HTML 내 페이지 네비게이션 부분" width="100%" />
+<p class="caption">
+그림 2.12: HTML 내 페이지 네비게이션 부분
+</p>
+</div>
+<p>종목명 링크에 해당하는 주소 중 끝 6자리는 티커에 해당합니다. 따라서 각 링크들의 주소를 알아야 할 필요도 있습니다.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
+<img src="images/crawl_naver_corp.png" alt="네이버 금융 시가총액 페이지" width="100%" />
+<p class="caption">
+그림 4.5: 네이버 금융 시가총액 페이지
+</p>
+</div>
+<p>삼성전자에 마우스 커서를 올려둔 후 마우스 오른쪽 버튼을 클릭하고 [검사]를 선택합니다. 개발자 도구 화면을 살펴보면 해당 링크가 tbody → td → a 태그의 href 속성에 위치하고 있음을 알 수 있습니다.</p>
+<p>위 정보들을 이용해 데이터를 다운로드하겠습니다. 아래 코드에서 i = 0일 경우 코스피에 해당하는 URL이 생성되고, i = 1일 경우 코스닥에 해당하는 URL이 생성됩니다. 먼저 코스피에 해당하는 데이터를 다운로드하겠습니다.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">library</span>(httr)</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="kw">library</span>(rvest)</a>
+<a class="sourceLine" id="cb68-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb68-4" data-line-number="4">i =<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb68-5" data-line-number="5">ticker =<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb68-6" data-line-number="6">url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://finance.naver.com/sise/&#39;</span>,</a>
+<a class="sourceLine" id="cb68-7" data-line-number="7">             <span class="st">&#39;sise_market_sum.nhn?sosok=&#39;</span>,i,<span class="st">&#39;&amp;page=1&#39;</span>)</a>
+<a class="sourceLine" id="cb68-8" data-line-number="8">down_table =<span class="st"> </span><span class="kw">GET</span>(url)</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>빈 리스트인 ticker 변수를 만들어줍니다.</li>
+<li><code>paste0()</code> 함수를 이용해 코스피 시가총액 페이지의 url을 만듭니다.</li>
+<li><code>GET()</code> 함수를 통해 해당 페이지 내용을 받아 down_table 변수에 저장합니다.</li>
+</ol>
+<p>가장 먼저 해야 할 작업은 마지막 페이지가 몇 번째 페이지인지 찾아내는 작업입니다. 우리는 이미 개발자 도구 화면을 통해 해당 정보가 pgRR 클래스의 a 태그 중 href 속성에 위치하고 있음을 알고 있습니다.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">navi.final =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="st">      </span><span class="kw">html_nodes</span>(., <span class="st">&#39;.pgRR&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="st">      </span><span class="kw">html_nodes</span>(., <span class="st">&#39;a&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb69-4" data-line-number="4"><span class="st">      </span><span class="kw">html_attr</span>(., <span class="st">&#39;href&#39;</span>)</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>read_html()</code> 함수를 이용해 해당 페이지의 HTML 내용을 읽어오며, 인코딩은 EUC-KR로 설정합니다.</li>
+<li><code>html_nodes()</code> 함수를 이용해 pgRR 클래스 정보만 불러오며, 클래스 속성이므로 앞에 마침표(.)를 붙입니다.</li>
+<li><code>html_nodes()</code> 함수를 통해 a 태그 정보만 불러옵니다.</li>
+<li><code>html_attr()</code> 함수를 통해 href 속성을 불러옵니다.</li>
+</ol>
+<p>이를 통해 navi.final에는 해당 부분에 해당하는 내용이 저장됩니다.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">print</span>(navi.final)</a></code></pre></div>
+<pre><code>## [1] &quot;/sise/sise_market_sum.nhn?sosok=0&amp;page=32&quot;</code></pre>
+<p>이 중 우리가 알고 싶은 내용은 page= 뒤에 있는 숫자입니다. 해당 내용을 추출하는 코드는 다음과 같습니다.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">navi.final =<span class="st"> </span>navi.final <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2"><span class="st">  </span><span class="kw">strsplit</span>(., <span class="st">&#39;=&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb72-3" data-line-number="3"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb72-4" data-line-number="4"><span class="st">  </span><span class="kw">tail</span>(., <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="st">  </span><span class="kw">as.numeric</span>()</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>strsplit()</code> 함수는 전체 문장을 특정 글자 기준으로 나눕니다. page= 뒷부분 의 데이터만 필요하므로 =를 기준으로 문장을 나눠줍니다.</li>
+<li><code>unlist()</code> 함수를 통해 결과를 벡터 형태로 변환합니다.</li>
+<li><code>tail()</code> 함수를 통해 뒤에서 첫 번째 데이터만 선택합니다.</li>
+<li><code>as.numeric()</code> 함수를 통해 해당 값을 숫자 형태로 바꾸어줍니다.</li>
+</ol>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">print</span>(navi.final)</a></code></pre></div>
+<pre><code>## [1] 32</code></pre>
+<p>코스피 시가총액 페이지는 32번째 페이지까지 있으며, for loop 구문을 이용하면 1페이지부터 navi.final, 즉 32 페이지까지 모든 내용을 읽어올 수 있습니다. 먼저 코스피의 첫 번째 페이지에서 우리가 원하는 데이터를 추출하는 방법을 살펴보겠습니다.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1">i =<span class="st"> </span><span class="dv">0</span> <span class="co"># 코스피</span></a>
+<a class="sourceLine" id="cb75-2" data-line-number="2">j =<span class="st"> </span><span class="dv">1</span> <span class="co"># 첫번째 페이지</span></a>
+<a class="sourceLine" id="cb75-3" data-line-number="3">url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://finance.naver.com/sise/&#39;</span>,</a>
+<a class="sourceLine" id="cb75-4" data-line-number="4">             <span class="st">&#39;sise_market_sum.nhn?sosok=&#39;</span>,i,<span class="st">&quot;&amp;page=&quot;</span>,j)</a>
+<a class="sourceLine" id="cb75-5" data-line-number="5">down_table =<span class="st"> </span><span class="kw">GET</span>(url)</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>i와 j에 각각 0과 1을 입력해 코스피 첫 번째 페이지에 해당하는 url을 생성합니다.</li>
+<li><code>GET()</code> 함수를 이용해 해당 페이지의 데이터를 다운로드합니다.</li>
+</ol>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;English&quot;</span>)</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb76-3" data-line-number="3">table =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&quot;EUC-KR&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="st">  </span><span class="kw">html_table</span>(<span class="dt">fill =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb76-5" data-line-number="5">table =<span class="st"> </span>table[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb76-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb76-7" data-line-number="7"><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;Korean&quot;</span>)</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><code>Sys.setlocale()</code> 함수를 통해 로케일 언어를 English로 설정합니다.</li>
+<li><code>read_html()</code> 함수를 통해 HTML 정보를 읽어옵니다.</li>
+<li><code>html_table()</code> 함수를 통해 테이블 정보를 읽어오며, fill=TRUE를 추가해줍니다.</li>
+<li>table 변수에는 리스트 형태로 총 세 가지 테이블이 저장되어 있습니다. 첫 번째 리스트에는 거래량, 시가, 고가 등 적용 항목이 저장되어 있고 세 번째 리스트에는 페이지 내비게이션 테이블이 저장되어 있으므로, 우리에게 필요한 두 번째 리스트만을 table 변수에 다시 저장합니다.</li>
+<li>한글을 읽기 위해 <code>Sys.setlocale()</code> 함수를 통해 로케일 언어를 다시 Korean으로 변경합니다.</li>
+</ol>
+<p>저장된 테이블 내용을 확인하면 다음과 같습니다.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
+<pre><code>##    N           종목명  현재가 전일비 등락률 액면가
+## 1 NA                                              
+## 2  1         삼성전자  48,900  1,050 -2.10%    100
+## 3  2       SK하이닉스  80,600  1,900 -2.30%  5,000
+## 4  3       삼성전자우  41,000  1,700 -3.98%    100
+## 5  4 삼성바이오로직스 430,000 26,500 -5.81%  2,500
+## 6  5            NAVER 155,000 11,000 -6.63%    100
+##    시가총액 상장주식수 외국인비율     거래량    PER
+## 1                              NA              &lt;NA&gt;
+## 2 2,919,224  5,969,783      55.64 33,064,192  15.45
+## 3   586,770    728,002      49.39  5,066,022  29.15
+## 4   337,384    822,887      89.51  4,500,112  12.95
+## 5   284,510     66,165      10.47    216,366 140.20
+## 6   255,461    164,813      57.80    806,384  43.81
+##     ROE 토론실
+## 1  &lt;NA&gt;     NA
+## 2  8.69     NA
+## 3  4.25     NA
+## 4   N/A     NA
+## 5  4.77     NA
+## 6 10.56     NA</code></pre>
+<p>이 중 마지막 열인 토론실은 필요 없는 열이며, 첫 번째 행과 같이 아무런 정보가 없는 행도 있습니다. 이를 다음과 같이 정리해줍니다.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">table[, <span class="kw">ncol</span>(table)] =<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb79-2" data-line-number="2">table =<span class="st"> </span><span class="kw">na.omit</span>(table)</a>
+<a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
+<pre><code>##    N           종목명  현재가 전일비 등락률 액면가
+## 2  1         삼성전자  48,900  1,050 -2.10%    100
+## 3  2       SK하이닉스  80,600  1,900 -2.30%  5,000
+## 4  3       삼성전자우  41,000  1,700 -3.98%    100
+## 5  4 삼성바이오로직스 430,000 26,500 -5.81%  2,500
+## 6  5            NAVER 155,000 11,000 -6.63%    100
+## 10 6           LG화학 312,500 28,000 -8.22%  5,000
+##     시가총액 상장주식수 외국인비율     거래량    PER
+## 2  2,919,224  5,969,783      55.64 33,064,192  15.45
+## 3    586,770    728,002      49.39  5,066,022  29.15
+## 4    337,384    822,887      89.51  4,500,112  12.95
+## 5    284,510     66,165      10.47    216,366 140.20
+## 6    255,461    164,813      57.80    806,384  43.81
+## 10   220,601     70,592      38.60    744,783  78.07
+##      ROE
+## 2   8.69
+## 3   4.25
+## 4    N/A
+## 5   4.77
+## 6  10.56
+## 10  1.84</code></pre>
+<p>이제 필요한 정보는 6자리 티커입니다. 티커 역시 개발자 도구 화면을 통해 tbody → td → a 태그의 href 속성에 위치하고 있음을 알고 있습니다. 티커를 추출하는 코드는 다음과 같습니다.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">symbol =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(., <span class="st">&#39;tbody&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb81-3" data-line-number="3"><span class="st">  </span><span class="kw">html_nodes</span>(., <span class="st">&#39;td&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb81-4" data-line-number="4"><span class="st">  </span><span class="kw">html_nodes</span>(., <span class="st">&#39;a&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb81-5" data-line-number="5"><span class="st">  </span><span class="kw">html_attr</span>(., <span class="st">&#39;href&#39;</span>)</a>
+<a class="sourceLine" id="cb81-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb81-7" data-line-number="7"><span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</a></code></pre></div>
+<pre><code>##  [1] &quot;/item/main.nhn?code=005930&quot; 
+##  [2] &quot;/item/board.nhn?code=005930&quot;
+##  [3] &quot;/item/main.nhn?code=000660&quot; 
+##  [4] &quot;/item/board.nhn?code=000660&quot;
+##  [5] &quot;/item/main.nhn?code=005935&quot; 
+##  [6] &quot;/item/board.nhn?code=005935&quot;
+##  [7] &quot;/item/main.nhn?code=207940&quot; 
+##  [8] &quot;/item/board.nhn?code=207940&quot;
+##  [9] &quot;/item/main.nhn?code=035420&quot; 
+## [10] &quot;/item/board.nhn?code=035420&quot;</code></pre>
+<ol style="list-style-type: decimal">
+<li><code>read_html()</code> 함수를 통해 HTML 정보를 읽어오며, 인코딩은 EUC-KR로 설정합니다.</li>
+<li><code>html_nodes()</code> 함수를 통해 tbody 태그 정보를 불러옵니다.</li>
+<li>다시 <code>html_nodes()</code> 함수를 통해 td와 a 태그 정보를 불러옵니다.</li>
+<li><code>html_attr()</code> 함수를 이용해 href 속성을 불러옵니다.</li>
+</ol>
+<p>이를 통해 symbol에는 href 속성에 해당하는 링크 주소들이 저장됩니다. 이 중 마지막 6자리 글자만 추출하는 코드는 다음과 같습니다.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">symbol =<span class="st"> </span><span class="kw">sapply</span>(symbol, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2">        <span class="kw">substr</span>(x, <span class="kw">nchar</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="kw">nchar</span>(x)) </a>
+<a class="sourceLine" id="cb83-3" data-line-number="3">      })</a>
+<a class="sourceLine" id="cb83-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb83-5" data-line-number="5"><span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</a></code></pre></div>
+<pre><code>##  /item/main.nhn?code=005930 /item/board.nhn?code=005930 
+##                    &quot;005930&quot;                    &quot;005930&quot; 
+##  /item/main.nhn?code=000660 /item/board.nhn?code=000660 
+##                    &quot;000660&quot;                    &quot;000660&quot; 
+##  /item/main.nhn?code=005935 /item/board.nhn?code=005935 
+##                    &quot;005935&quot;                    &quot;005935&quot; 
+##  /item/main.nhn?code=207940 /item/board.nhn?code=207940 
+##                    &quot;207940&quot;                    &quot;207940&quot; 
+##  /item/main.nhn?code=035420 /item/board.nhn?code=035420 
+##                    &quot;035420&quot;                    &quot;035420&quot;</code></pre>
+<p><code>sapply()</code> 함수를 통해 symbol 변수의 내용들에 <code>function()</code>을 적용하며, <code>substr()</code> 함수 내에 <code>nchar()</code> 함수를 적용해 마지막 6자리 글자만 추출합니다.</p>
+<p>결과를 살펴보면 티커에 해당하는 마지막 6글자만 추출되지만 동일한 내용이 두 번 연속해 추출됩니다. 이는 main.nhn?code=에 해당하는 부분은 종목명에 설정된 링크, board.nhn?code=에 해당하는 부분은 토론실에 설정된 링크이기 때문입니다.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">symbol =<span class="st"> </span><span class="kw">unique</span>(symbol)</a>
+<a class="sourceLine" id="cb85-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</a></code></pre></div>
+<pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;005935&quot; &quot;207940&quot; &quot;035420&quot;
+##  [6] &quot;051910&quot; &quot;068270&quot; &quot;005380&quot; &quot;006400&quot; &quot;051900&quot;</code></pre>
+<p><code>unique()</code> 함수를 이용해 중복되는 티커를 제거하면 우리가 원하는 티커 부분만 깔끔하게 정리됩니다. 해당 내용을 위에서 구한 테이블에 입력한 후 데이터를 다듬는 과정은 다음과 같습니다.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">table<span class="op">$</span>N =<span class="st"> </span>symbol</a>
+<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &#39;종목코드&#39;</span></a>
+<a class="sourceLine" id="cb87-3" data-line-number="3"> </a>
+<a class="sourceLine" id="cb87-4" data-line-number="4"><span class="kw">rownames</span>(table) =<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb87-5" data-line-number="5">ticker[[j]] =<span class="st"> </span>table</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>위에서 구한 티커를 N열에 입력합니다.</li>
+<li>해당 열 이름을 종목코드로 변경합니다.</li>
+<li><code>na.omit()</code> 함수를 통해 특정 행을 삭제했으므로, 행 이름을 초기화해줍니다.</li>
+<li>ticker의 j번째 리스트에 정리된 데이터를 입력합니다.</li>
+</ol>
+<p>위의 코드에서 i와 j 값을 for loop 구문에 이용하면 코스피와 코스닥 전 종목의 티커가 정리된 테이블을 만들 수 있습니다. 이를 전체 코드로 나타내면 다음과 같습니다.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">data =<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb88-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb88-3" data-line-number="3"><span class="co"># i = 0 은 코스피, i = 1 은 코스닥 종목</span></a>
+<a class="sourceLine" id="cb88-4" data-line-number="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">0</span><span class="op">:</span><span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb88-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb88-6" data-line-number="6">  ticker =<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb88-7" data-line-number="7">  url =</a>
+<a class="sourceLine" id="cb88-8" data-line-number="8"><span class="st">    </span><span class="kw">paste0</span>(<span class="st">&#39;https://finance.naver.com/sise/&#39;</span>,</a>
+<a class="sourceLine" id="cb88-9" data-line-number="9">             <span class="st">&#39;sise_market_sum.nhn?sosok=&#39;</span>,i,<span class="st">&#39;&amp;page=1&#39;</span>)</a>
+<a class="sourceLine" id="cb88-10" data-line-number="10">  </a>
+<a class="sourceLine" id="cb88-11" data-line-number="11">  down_table =<span class="st"> </span><span class="kw">GET</span>(url)</a>
+<a class="sourceLine" id="cb88-12" data-line-number="12">  </a>
+<a class="sourceLine" id="cb88-13" data-line-number="13">  <span class="co"># 최종 페이지 번호 찾아주기</span></a>
+<a class="sourceLine" id="cb88-14" data-line-number="14">  navi.final =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&quot;EUC-KR&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-15" data-line-number="15"><span class="st">      </span><span class="kw">html_nodes</span>(., <span class="st">&quot;.pgRR&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-16" data-line-number="16"><span class="st">      </span><span class="kw">html_nodes</span>(., <span class="st">&quot;a&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-17" data-line-number="17"><span class="st">      </span><span class="kw">html_attr</span>(.,<span class="st">&quot;href&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-18" data-line-number="18"><span class="st">      </span><span class="kw">strsplit</span>(., <span class="st">&quot;=&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-19" data-line-number="19"><span class="st">      </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-20" data-line-number="20"><span class="st">      </span><span class="kw">tail</span>(., <span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-21" data-line-number="21"><span class="st">      </span><span class="kw">as.numeric</span>()</a>
+<a class="sourceLine" id="cb88-22" data-line-number="22">  </a>
+<a class="sourceLine" id="cb88-23" data-line-number="23">  <span class="co"># 첫번째 부터 마지막 페이지까지 for loop를 이용하여 테이블 추출하기</span></a>
+<a class="sourceLine" id="cb88-24" data-line-number="24">  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>navi.final) {</a>
+<a class="sourceLine" id="cb88-25" data-line-number="25">    </a>
+<a class="sourceLine" id="cb88-26" data-line-number="26">    <span class="co"># 각 페이지에 해당하는 url 생성</span></a>
+<a class="sourceLine" id="cb88-27" data-line-number="27">    url =<span class="st"> </span><span class="kw">paste0</span>(</a>
+<a class="sourceLine" id="cb88-28" data-line-number="28">      <span class="st">&#39;https://finance.naver.com/sise/&#39;</span>,</a>
+<a class="sourceLine" id="cb88-29" data-line-number="29">      <span class="st">&#39;sise_market_sum.nhn?sosok=&#39;</span>,i,<span class="st">&quot;&amp;page=&quot;</span>,j)</a>
+<a class="sourceLine" id="cb88-30" data-line-number="30">    down_table =<span class="st"> </span><span class="kw">GET</span>(url)</a>
+<a class="sourceLine" id="cb88-31" data-line-number="31"> </a>
+<a class="sourceLine" id="cb88-32" data-line-number="32">    <span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;English&quot;</span>)</a>
+<a class="sourceLine" id="cb88-33" data-line-number="33">    <span class="co"># 한글 오류 방지를 위해 영어로 로케일 언어 변경</span></a>
+<a class="sourceLine" id="cb88-34" data-line-number="34"> </a>
+<a class="sourceLine" id="cb88-35" data-line-number="35">    table =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&quot;EUC-KR&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-36" data-line-number="36"><span class="st">      </span><span class="kw">html_table</span>(<span class="dt">fill =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb88-37" data-line-number="37">    table =<span class="st"> </span>table[[<span class="dv">2</span>]] <span class="co"># 원하는 테이블 추출</span></a>
+<a class="sourceLine" id="cb88-38" data-line-number="38"> </a>
+<a class="sourceLine" id="cb88-39" data-line-number="39">    <span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;Korean&quot;</span>)</a>
+<a class="sourceLine" id="cb88-40" data-line-number="40">    <span class="co"># 한글을 읽기위해 로케일 언어 재변경</span></a>
+<a class="sourceLine" id="cb88-41" data-line-number="41"> </a>
+<a class="sourceLine" id="cb88-42" data-line-number="42">    table[, <span class="kw">ncol</span>(table)] =<span class="st"> </span><span class="ot">NULL</span> <span class="co"># 토론식 부분 삭제</span></a>
+<a class="sourceLine" id="cb88-43" data-line-number="43">    table =<span class="st"> </span><span class="kw">na.omit</span>(table) <span class="co"># 빈 행 삭제</span></a>
+<a class="sourceLine" id="cb88-44" data-line-number="44">    </a>
+<a class="sourceLine" id="cb88-45" data-line-number="45">    <span class="co"># 6자리 티커만 추출</span></a>
+<a class="sourceLine" id="cb88-46" data-line-number="46">    symbol =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&quot;EUC-KR&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-47" data-line-number="47"><span class="st">      </span><span class="kw">html_nodes</span>(., <span class="st">&quot;tbody&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-48" data-line-number="48"><span class="st">      </span><span class="kw">html_nodes</span>(., <span class="st">&quot;td&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-49" data-line-number="49"><span class="st">      </span><span class="kw">html_nodes</span>(., <span class="st">&quot;a&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb88-50" data-line-number="50"><span class="st">      </span><span class="kw">html_attr</span>(., <span class="st">&quot;href&quot;</span>)</a>
+<a class="sourceLine" id="cb88-51" data-line-number="51"> </a>
+<a class="sourceLine" id="cb88-52" data-line-number="52">    symbol =<span class="st"> </span><span class="kw">sapply</span>(symbol, <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb88-53" data-line-number="53">      <span class="kw">substr</span>(x, <span class="kw">nchar</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>, <span class="kw">nchar</span>(x)) </a>
+<a class="sourceLine" id="cb88-54" data-line-number="54">      }) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>()</a>
+<a class="sourceLine" id="cb88-55" data-line-number="55">    </a>
+<a class="sourceLine" id="cb88-56" data-line-number="56">    <span class="co"># 테이블에 티커 넣어준 후, 테이블 정리</span></a>
+<a class="sourceLine" id="cb88-57" data-line-number="57">    table<span class="op">$</span>N =<span class="st"> </span>symbol</a>
+<a class="sourceLine" id="cb88-58" data-line-number="58">    <span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &quot;종목코드&quot;</span></a>
+<a class="sourceLine" id="cb88-59" data-line-number="59"></a>
+<a class="sourceLine" id="cb88-60" data-line-number="60">    <span class="kw">rownames</span>(table) =<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb88-61" data-line-number="61">    ticker[[j]] =<span class="st"> </span>table</a>
+<a class="sourceLine" id="cb88-62" data-line-number="62"> </a>
+<a class="sourceLine" id="cb88-63" data-line-number="63">    <span class="kw">Sys.sleep</span>(<span class="fl">0.5</span>) <span class="co"># 페이지 당 0.5초의 슬립 적용</span></a>
+<a class="sourceLine" id="cb88-64" data-line-number="64">  }</a>
+<a class="sourceLine" id="cb88-65" data-line-number="65">  </a>
+<a class="sourceLine" id="cb88-66" data-line-number="66">  <span class="co"># do.call을 통해 리스트를 데이터 프레임으로 묶기</span></a>
+<a class="sourceLine" id="cb88-67" data-line-number="67">  ticker =<span class="st"> </span><span class="kw">do.call</span>(rbind, ticker)</a>
+<a class="sourceLine" id="cb88-68" data-line-number="68">  data[[i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]] =<span class="st"> </span>ticker</a>
+<a class="sourceLine" id="cb88-69" data-line-number="69">}</a>
+<a class="sourceLine" id="cb88-70" data-line-number="70"></a>
+<a class="sourceLine" id="cb88-71" data-line-number="71"><span class="co"># 코스피와 코스닥 테이블 묶기</span></a>
+<a class="sourceLine" id="cb88-72" data-line-number="72">data =<span class="st"> </span><span class="kw">do.call</span>(rbind, data)</a></code></pre></div>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p><a href="http://hkconsensus.hankyung.com/" class="uri">http://hkconsensus.hankyung.com/</a><a href="크롤링-이해하기.html#fnref8" class="footnote-back">↩</a></p></li>
+<li id="fn9"><p><a href="http://kind.krx.co.kr/" class="uri">http://kind.krx.co.kr/</a><a href="크롤링-이해하기.html#fnref9" class="footnote-back">↩</a></p></li>
+<li id="fn10"><p><a href="https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258" class="uri">https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258</a><a href="크롤링-이해하기.html#fnref10" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="api를-이용한-데이터-수집.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="데이터-정리하기.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"split_bib": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

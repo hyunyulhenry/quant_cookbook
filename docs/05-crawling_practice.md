@@ -1,632 +1,335 @@
+# 데이터 정리하기
 
-# 금융 데이터 수집하기 (기본)
 
-API와 크롤링을 이용한다면 비용을 지불하지 않고 얼마든지 금융 데이터를 수집할 수있습니다. 이 CHAPTER에서는 금융 데이터를 받기 위해 필요한 주식티커를 구하는 방법과 섹터별 구성종목을 크롤링하는 방법을 알아보겠습니다.
 
-## 한국거래소의 산업별 현황 및 개별지표 크롤링
+앞 CHAPTER에서는 API와 크롤링을 통해 주가, 재무제표, 가치지표를 수집하는 방법을 배웠습니다. 이번 CHAPTER에서는 각각 csv 파일로 저장된 데이터들을 하나로 합친 후 저장하는 과정을 살펴보겠습니다.
 
-앞 CHAPTER의 예제를 통해 네이버 금융에서 주식티커를 크롤링하는 방법을 살펴보았습니다. 그러나 이 방법은 지나치게 복잡하고 시간이 오래 걸립니다. 반면 한국거래소에서 제공하는 산업별 현황과 개별종목 지표 데이터를 이용하면 훨씬 간단하게 주식티커 데이터를 수집할 수 있습니다.
+## 주가 정리하기
 
-- 산업별 현황: http://marketdata.krx.co.kr/mdi#document=03030103
-- 개별지표: http://marketdata.krx.co.kr/mdi#document=13020401
-
-해당 데이터들을 크롤링이 아닌 [Excel] 버튼을 클릭해 엑셀 파일로 받을 수도 있습니다. 그러나 매번 엑셀 파일을 다운로드하고 이를 R로 불러오는 작업은 상당히 비효율적이며, 크롤링을 이용한다면 해당 데이터를 R로 직접 불러올 수 있습니다.
-
-### 산업별 현황 크롤링
-
-먼저 산업별 현황에 해당하는 페이지에 접속한 후 개발자 도구 화면을 열고 [Excel] 버튼을 클릭합니다. [Network] 탭에는 GenerateOTP.jspx와 download.jspx 두 가지 항목이 있습니다. 거래소에서 엑셀 데이터를 받는 과정은 다음과 같습니다.
-
-1. http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx 에 원하는 항목을쿼리로 발송하면 해당 쿼리에 해당하는 OTP(GenerateOTP.jspx)를 받게 됩니다.
-
-2. 부여받은 OTP를 **http://file.krx.co.kr/download.jspx**에 제출하면 이에 해당하는 데이터(download.jspx)를 다운로드하게 됩니다.
-
-먼저 1번 단계를 살펴보겠습니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_krx_sector.png" alt="OTP 생성 부분" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-2)OTP 생성 부분</p>
-</div>
-
-General 항목의 Request URL의 앞부분이 원하는 항목을 제출할 주소입니다. Query String Parameters에는 우리가 원하는 항목들이 적혀 있습니다. 이를 통해 POST 방식으로 데이터를 요청함을 알 수 있습니다.
-
-다음으로 2번 단계를 살펴보겠습니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_krx_sector2.png" alt="OTP 제출 부분" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-3)OTP 제출 부분</p>
-</div>
-
-General 항목의 Request URL은 OTP를 제출할 주소입니다. Form Data의 OTP는 1번 단계에서 부여받은 OTP에 해당합니다. 이 역시 POST 방식으로 데이터를 요청합니다.
-
-위 과정을 코드로 나타내면 다음과 같습니다.
-
-
-```r
-library(httr)
-library(rvest)
-library(readr)
-
-gen_otp_url =
-  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
-gen_otp_data = list(
-  name = 'fileDown',
-  filetype = 'csv',
-  url = 'MKD/03/0303/03030103/mkd03030103',
-  tp_cd = 'ALL',
-  date = '20190607',
-  lang = 'ko',
-  pagePath = '/contents/MKD/03/0303/03030103/MKD03030103.jsp')
-otp = POST(gen_otp_url, query = gen_otp_data) %>%
-  read_html() %>%
-  html_text()
-```
-
-1. gen_otp_url에 원하는 항목을 제출할 URL을 입력합니다.
-2. 개발자 도구 화면에 나타는 쿼리 내용들을 리스트 형태로 입력합니다. **단, filetype은 xls이 아닌 csv로 변경하는데**, csv 형태로 다운로드하면 데이터를 처리하기 훨씬 쉽기 때문입니다.
-3. `POST()` 함수를 통해 해당 URL에 쿼리를 전송하면 이에 해당하는 데이터를 받게 됩니다.
-4. `read_html()`함수를 통해 HTML 내용을 읽어옵니다.
-5. `html_text()` 함수는 HTML 내에서 텍스트에 해당하는 부분만을 추출합니다. 이를 통해 OTP 값만 추출하게 됩니다.
-
-위의 과정을 거쳐 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드할 수 있습니다.
-
-
-```r
-down_url = 'http://file.krx.co.kr/download.jspx'
-down_sector = POST(down_url, query = list(code = otp),
-                   add_headers(referer = gen_otp_url)) %>%
-  read_html() %>%
-  html_text() %>%
-  read_csv()
-```
-
-1. OTP를 제출할 URL을 down_url에 입력합니다.
-2. `POST()` 함수를 통해 위에서 부여받은 OTP 코드를 해당 URL에 제출합니다.
-3. `add_headers()` 구문을 통해 리퍼러(referer)를 추가해야 합니다. 리퍼러란 링크를 통해서 각각의 웹사이트로 방문할 때 남는 흔적입니다. 거래소 데이터를 다운로드하는 과정을 살펴보면 첫 번째 URL에서 OTP를 부여받고, 이를 다시 두번째 URL에 제출했습니다. 그런데 이러한 과정의 흔적이 없이 OTP를 바로 두번째 URL에 제출하면 서버는 이를 로봇으로 인식해 데이터를 반환하지 않습니다. 따라서 `add_headers()` 함수를 통해 우리가 거쳐온 과정을 흔적으로 남겨
-야 데이터를 반환하게 되며 첫 번째 URL을 리퍼러로 지정해줍니다.
-4. `read_html()`과 `html_text()` 함수를 통해 텍스트 데이터만 추출합니다.
-5. `read_csv()` 함수는 csv 형태의 데이터를 불러옵니다. 위의 요청 쿼리에서 filetype을 csv로 지정했으므로 손쉽게 데이터를 읽어올 수 있습니다.
-
-
-```r
-print(down_sector)
-```
-
-```
-## # A tibble: 2,243 x 7
-##    시장구분 종목코드 종목명 산업분류 `현재가(종가)` 전일대비 `시가총액(원)`
-##    <chr>    <chr>    <chr>  <chr>             <dbl>    <dbl>          <dbl>
-##  1 코스피   030720   동원수산~ 어업               8940      -20    41605016700
-##  2 코스피   007160   사조산업~ 어업              54400      800   272000000000
-##  3 코스피   006040   동원산업~ 어업             246500      500   829028800000
-##  4 코스피   004970   신라교역~ 어업              14350      350   229600000000
-##  5 코스피   012320   경동인베스~ 광업              40300     1350    95310426900
-##  6 코스피   003580   넥스트사이~ 광업               5200      260   122099322800
-##  7 코스피   017810   풀무원 음식료품          11300      200   430427735000
-##  8 코스피   280360   롯데제과~ 음식료품         159500     -500  1023466361500
-##  9 코스피   271560   오리온 음식료품          83300     1400  3293359795600
-## 10 코스피   006090   사조오양~ 음식료품           8220       30    77454914580
-## # ... with 2,233 more rows
-```
-
-위 과정을 통해 down_sector 변수에는 산업별 현황 데이터가 저장되었습니다. 이를 csv 파일로 저장하겠습니다.
-
-
-```r
-ifelse(dir.exists('data'), FALSE, dir.create('data'))
-write.csv(down_sector, 'data/krx_sector.csv')
-```
-
-먼저 `ifelse()` 함수를 통해 data라는 이름의 폴더가 있으면 FALSE를 반환하고, 없으면 해당 이름으로 폴더를 생성해줍니다. 그 후 앞서 다운로드한 데이터를 data 폴더 안에 krx_sector.csv 이름으로 저장합니다. 해당 폴더를 확인해보면 데이터가 csv 형태로 저장되어 있습니다.
-
-### 개별종목 지표 크롤링
-
-개별종목 데이터를 크롤링하는 방법은 위와 매우 유사하며, 요청하는 쿼리 값에만 차이가 있습니다. 개발자 도구 화면을 열고 [CSV] 버튼을 클릭해 어떠한 쿼리를 요청하는지 확인합니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_krx_ind.png" alt="개별지표 OTP 생성 부분" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-8)개별지표 OTP 생성 부분</p>
-</div>
-
-이 중 isu_cdnm, isu_cd, isu_nm, isu_srt_cd, fromdate 항목은 종목 구분의 개별 탭에 해당하는 부분이므로 우리가 원하는 전체 데이터를 받을 때는 필요하지 않은 요청값입니다. 이를 제외한 요청값을 산업별 현황 예제에 적용하면 해당 데이터 역시 손쉽게 다운로드할 수 있습니다.
-
-
-```r
-library(httr)
-library(rvest)
-library(readr)
-
-gen_otp_url =
-  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
-gen_otp_data = list(
-  name = 'fileDown',
-  filetype = 'csv',
-  url = "MKD/13/1302/13020401/mkd13020401",
-  market_gubun = 'ALL',
-  gubun = '1',
-  schdate = '20190607',
-  pagePath = "/contents/MKD/13/1302/13020401/MKD13020401.jsp")
-
-otp = POST(gen_otp_url, query = gen_otp_data) %>%
-  read_html() %>%
-  html_text()
-
-down_url = 'http://file.krx.co.kr/download.jspx'
-down_ind = POST(down_url, query = list(code = otp),
-                add_headers(referer = gen_otp_url)) %>%
-  read_html() %>%
-  html_text() %>%
-  read_csv()
-```
-
-
-```r
-print(down_ind)
-```
-
-```
-## # A tibble: 2,204 x 13
-##    일자       종목코드 종목명 관리여부  종가 EPS   PER   BPS   PBR  
-##    <date>     <chr>    <chr>  <chr>    <dbl> <chr> <chr> <chr> <chr>
-##  1 2019-06-07 000250   삼천당제약~ -        39650 409   96.94 6,719 5.9  
-##  2 2019-06-07 000440   중앙에너비~ -         6880 958   7.18  7,269 0.95 
-##  3 2019-06-07 001000   신라섬유~ -         2225 7     317.~ 587   3.79 
-##  4 2019-06-07 001540   안국약품~ -        11350 1,154 9.84  11,2~ 1.01 
-##  5 2019-06-07 001810   무림SP -         2795 505   5.53  9,212 0.3  
-##  6 2019-06-07 001840   이화공영~ -         5290 24    220.~ 2,164 2.44 
-##  7 2019-06-07 002230   피에스텍~ -         4275 -     -     7,283 0.59 
-##  8 2019-06-07 002290   삼일기업공~ -         3185 250   12.74 4,578 0.7  
-##  9 2019-06-07 002680   한탑   -         2435 -     -     2,135 1.14 
-## 10 2019-06-07 002800   신신제약~ -         7050 191   36.91 3,595 1.96 
-## # ... with 2,194 more rows, and 4 more variables: 주당배당금 <dbl>,
-## #   배당수익률 <dbl>, `게시물 일련번호` <dbl>, 총카운트 <dbl>
-```
-
-위 과정을 통해 down_ind 변수에는 개별종목 지표 데이터가 저장되었습니다. 해당 데이터 역시 csv 파일로 저장하겠습니다.
-
-
-```r
-write.csv(down_ind, 'data/krx_ind.csv')
-```
-
-### 최근 영업일 기준 데이터 받기
-
-위 예제의 쿼리 항목 중 date와 schdate 부분을 원하는 일자로 입력하면(예: 20190104) 해당일의 데이터를 다운로드할 수 있으며, 전 영업일 날짜를 입력하면 가장 최근의 데이터를 받을 수 있습니다. 그러나 매번 해당 항목을 입력하기는 번거로우므로 자동으로 반영되게 할 필요가 있습니다.
-
-네이버 금융의 [국내증시 → 증시자금동향]에는 이전 2영업일에 해당하는 날짜가 있으며, 자동으로 날짜가 업데이트되어 편리합니다. 따라서 해당 부분을 크롤링해 쿼리 항목에 사용할 수 있습니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_recentdate.png" alt="최근 영업일 부분" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-12)최근 영업일 부분</p>
-</div>
-
-크롤링하고자 하는 데이터가 하나거나 소수일때는 HTML 구조를 모두 분해한 후 데이터를 추출하는 것보다 Xpath를 이용하는 것이 훨씬 효율적입니다. Xpath란 XML 중 특정 값의 태그나 속성을 찾기 쉽게 만든 주소라 생각하면 됩니다. 예를 들어 R 프로그램이 저장된 곳을 윈도우 탐색기를 이용해 이용하면 C:\\Program Files\\R\\R-3.4.2 형태의 주소를 보이는데 이것은 윈도우의 path 문법입니다. XML 역시 이와 동일한 개념의 Xpath가 있습니다. 웹페이지에서 Xpath를 찾는 법은 다음과 같습니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_xpath.png" alt="Xpath 복사하기" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-13)Xpath 복사하기</p>
-</div>
-
-먼저 크롤링하고자 하는 내용에 마우스 커서를 올린 채 마우스 오른쪽 버튼을 클릭한 후 [검사]를 선택합니다. 그러면 개발자 도구 화면이 열리며 해당 지점의 HTML 부분이 선택됩니다. 그 후 HTML 화면에서 마우스 오른쪽 버튼을 클릭하고 [Copy → Copy Xpath]를 선택하면 해당 지점의 Xpath가 복사됩니다.
-
-
-```css
-//*[@id="type_0"]/div/ul[2]/li/span
-```
-
-
-<style type="text/css">
-//*[@id="type_0"]/div/ul[2]/li/span
-</style>
-
-위에서 구한 날짜의 Xpath를 이용해 해당 데이터를 크롤링하겠습니다.
-
-
-```r
-library(httr)
-library(rvest)
-library(stringr)
-
-url = 'https://finance.naver.com/sise/sise_deposit.nhn'
-
-biz_day = GET(url) %>%
-  read_html(encoding = 'EUC-KR') %>%
-  html_nodes(xpath =
-               '//*[@id="type_1"]/div/ul[2]/li/span') %>%
-  html_text() %>%
-  str_match(('[0-9]+.[0-9]+.[0-9]+') ) %>%
-  str_replace_all('\\.', '')
-
-print(biz_day)
-```
-
-```
-## [1] "20200116"
-```
-
-1. 페이지의 url을 저장합니다.
-2. `GET()` 함수를 통해 해당 페이지 내용을 받습니다.
-3. `read_html()` 함수를 이용해 해당 페이지의 HTML 내용을 읽어오며, 인코딩은 EUC-KR로 설정합니다.
-4. `html_node()` 함수 내에 위에서 구한 Xpath를 입력해서 해당 지점의 데이터를 추출합니다.
-5. `html_text()` 함수를 통해 텍스트 데이터만을 추출합니다.
-6. `str_match()` 함수 내에서 정규표현식^[특정한 규칙을 가진 문자열의 집합을 표현하는데 사용하는 형식 언어]용해 숫자.숫자.숫자 형식의 데이터를 추출합니다.
-7. `str_replace_all()` 함수를 이용해 마침표(.)를 모두 없애줍니다.
-
-이처럼 Xpath를 이용하면 태그나 속성을 분해하지 않고도 원하는 지점의 데이터를 크롤링할 수 있습니다. 위 과정을 통해 yyyymmdd 형태의 날짜만 남게 되었습니다. 이를 위의 date와 schdate에 입력하면 산업별 현황과 개별종목 지표를 최근일자 기준으로 다운로드하게 됩니다. 전체 코드는 다음과 같습니다.
-
-
-```r
-library(httr)
-library(rvest)
-library(stringr)
-library(readr)
-
-# 최근 영업일 구하기
-url = 'https://finance.naver.com/sise/sise_deposit.nhn'
-
-biz_day = GET(url) %>%
-  read_html(encoding = 'EUC-KR') %>%
-  html_nodes(xpath =
-               '//*[@id="type_1"]/div/ul[2]/li/span') %>%
-  html_text() %>%
-  str_match(('[0-9]+.[0-9]+.[0-9]+') ) %>%
-  str_replace_all('\\.', '')
-
-# 산업별 현황 OTP 발급
-gen_otp_url =
-  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
-gen_otp_data = list(
-  name = 'fileDown',
-  filetype = 'csv',
-  url = 'MKD/03/0303/03030103/mkd03030103',
-  tp_cd = 'ALL',
-  date = biz_day, # 최근영업일로 변경
-  lang = 'ko',
-  pagePath = '/contents/MKD/03/0303/03030103/MKD03030103.jsp')
-otp = POST(gen_otp_url, query = gen_otp_data) %>%
-  read_html() %>%
-  html_text()
-
-# 산업별 현황 데이터 다운로드
-down_url = 'http://file.krx.co.kr/download.jspx'
-down_sector = POST(down_url, query = list(code = otp),
-                   add_headers(referer = gen_otp_url)) %>%
-  read_html() %>%
-  html_text() %>%
-  read_csv()
-
-ifelse(dir.exists('data'), FALSE, dir.create('data'))
-write.csv(down_sector, 'data/krx_sector.csv')
-
-# 개별종목 지표 OTP 발급
-gen_otp_url =
-  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
-gen_otp_data = list(
-  name = 'fileDown',
-  filetype = 'csv',
-  url = "MKD/13/1302/13020401/mkd13020401",
-  market_gubun = 'ALL',
-  gubun = '1',
-  schdate = biz_day, # 최근영업일로 변경
-  pagePath = "/contents/MKD/13/1302/13020401/MKD13020401.jsp")
-
-otp = POST(gen_otp_url, query = gen_otp_data) %>%
-  read_html() %>%
-  html_text()
-
-# 개별종목 지표 데이터 다운로드
-down_url = 'http://file.krx.co.kr/download.jspx'
-down_ind = POST(down_url, query = list(code = otp),
-                add_headers(referer = gen_otp_url)) %>%
-  read_html() %>%
-  html_text() %>%
-  read_csv()
-
-write.csv(down_ind, 'data/krx_ind.csv')
-```
-
-### 거래소 데이터 정리하기
-
-위에서 다운로드한 데이터는 중복된 열이 있으며, 불필요한 데이터 역시 있습니다. 따라서 하나의 테이블로 합친 후 정리할 필요가 있습니다. 먼저 다운로드한 csv 파일을 읽어옵니다.
-
-
-```r
-down_sector = read.csv('data/krx_sector.csv', row.names = 1,
-                       stringsAsFactors = FALSE)
-down_ind = read.csv('data/krx_ind.csv',  row.names = 1,
-                    stringsAsFactors = FALSE)
-```
-
-`read.csv()` 함수를 이용해 csv 파일을 불러옵니다. `row.names = 1`을 통해 첫 번째 열을 행 이름으로 지정하고, `stringsAsFactors = FALSE`를 통해 문자열 데이터가 팩터 형태로 변형되지 않게 합니다.
-
-
-```r
-intersect(names(down_sector), names(down_ind))
-```
-
-```
-## [1] "종목코드" "종목명"
-```
-
-먼저 `intersect()` 함수를 통해 두 데이터 간 중복되는 열 이름을 살펴보면 종목코드와 종목명이 동일한 위치에 있습니다.
-
-
-```r
-setdiff(down_sector[, '종목명'], down_ind[ ,'종목명'])
-```
-
-```
-##  [1] "엘브이엠씨홀딩스"   "한국패러랠"         "한국ANKOR유전"     
-##  [4] "맵스리얼티1"        "맥쿼리인프라"       "하나니켈2호"       
-##  [7] "하나니켈1호"        "베트남개발1"        "NH프라임리츠"      
-## [10] "롯데리츠"           "신한알파리츠"       "이리츠코크렙"      
-## [13] "모두투어리츠"       "하이골드12호"       "하이골드8호"       
-## [16] "바다로19호"         "하이골드3호"        "케이탑리츠"        
-## [19] "에이리츠"           "동북아13호"         "동북아12호"        
-## [22] "컬러레이"           "JTC"                "뉴프라이드"        
-## [25] "윙입푸드"           "글로벌에스엠"       "크리스탈신소재"    
-## [28] "씨케이에이치"       "차이나그레이트"     "골든센츄리"        
-## [31] "오가닉티코스메틱"   "GRT"                "로스웰"            
-## [34] "헝셩그룹"           "이스트아시아홀딩스" "에스앤씨엔진그룹"  
-## [37] "SNK"                "SBI핀테크솔루션즈"  "잉글우드랩"        
-## [40] "코오롱티슈진"       "엑세스바이오"
-```
-
-`setdiff()` 함수를 통해 두 데이터에 공통적으로 없는 종목명, 즉 하나의 데이터에만 있는 종목을 살펴보면 위와 같습니다. 해당 종목들은 선박펀드, 광물펀드, 해외종목 등 일반적이지 않은 종목들이므로 제외하는 것이 좋습니다. 따라서 둘 사이에 공통적으로 존재하는 종목을 기준으로 데이터를 합쳐주겠습니다.
-
-
-```r
-KOR_ticker = merge(down_sector, down_ind,
-                   by = intersect(names(down_sector),
-                                  names(down_ind)),
-                   all = FALSE
-                   )
-```
-
-`merge()` 함수는 by를 기준으로 두 데이터를 하나로 합치며, 공통으로 존재하는 종목코드, 종목명을 기준으로 입력해줍니다. 또한 all 값을 TRUE로 설정하면 합집합을 반
-환하고, FALSE로 설정하면 교집합을 반환합니다. 공통으로 존재하는 항목을 원하므로 여기서는 FALSE를 입력합니다.
-
-
-```r
-KOR_ticker = KOR_ticker[order(-KOR_ticker['시가총액.원.']), ]
-print(head(KOR_ticker))
-```
-
-```
-##      종목코드           종목명 시장구분 산업분류 현재가.종가. 전일대비
-## 332    005930         삼성전자   코스피 전기전자        59000    -1000
-## 45     000660       SK하이닉스   코스피 전기전자        98200    -2300
-## 333    005935       삼성전자우   코스피 전기전자        49250     -500
-## 852    035420            NAVER   코스피 서비스업       191500     1000
-## 1938   207940 삼성바이오로직스   코스피   의약품       434500     -500
-## 303    005380           현대차   코스피 운수장비       115000    -1000
-##      시가총액.원.       일자 관리여부   종가    EPS    PER     BPS  PBR
-## 332     3.522e+14 2020-01-15        -  59000  6,461   9.13  35,342 1.67
-## 45      7.149e+13 2020-01-15        -  98200 22,255   4.41  64,348 1.53
-## 333     4.053e+13 2020-01-15        -  49250      -      -       -    -
-## 852     3.156e+13 2020-01-15        - 191500  4,437  43.16  31,795 6.02
-## 1938    2.875e+13 2020-01-15        - 434500  3,387 128.28  62,805 6.92
-## 303     2.457e+13 2020-01-15        - 115000  5,632  20.42 245,447 0.47
-##      주당배당금 배당수익률 게시물..일련번호 총카운트
-## 332        1416       2.40             1446       NA
-## 45         1500       1.53             1399       NA
-## 333        1417       2.88             1829       NA
-## 852         314       0.16             1518       NA
-## 1938          0       0.00             1577       NA
-## 303        4000       3.48             1440       NA
-```
-
-데이터를 시가총액 기준으로 내림차순 정렬할 필요도 있습니다. `order()` 함수를 통해 상대적인 순서를 구할 수 있습니다. R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꿉니다. 결과적으로 시가총액 기준 내림차
-순으로 해당 데이터가 정렬됩니다.
-
-마지막으로 스팩, 우선주 종목 역시 제외해야 합니다.
+주가는 data/KOR_price 폴더 내에 티커_price.csv 파일로 저장되어 있습니다. 해당 파일들을 불러온 후 데이터를 묶는 작업을 통해 하나의 파일로 합치는 방법을 알아보겠습니다.
 
 
 ```r
 library(stringr)
+library(xts)
+library(magrittr)
 
-KOR_ticker[grepl('스팩', KOR_ticker[, '종목명']), '종목명']  
-```
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, side = c('left'), pad = '0')
 
-```
-##  [1] "엔에이치스팩14호"    "케이비제18호스팩"    "삼성스팩2호"        
-##  [4] "엔에이치스팩12호"    "한화에스비아이스팩"  "미래에셋대우스팩3호"
-##  [7] "신한제4호스팩"       "유안타제5호스팩"     "하나금융11호스팩"   
-## [10] "케이비17호스팩"      "한국제7호스팩"       "대신밸런스제7호스팩"
-## [13] "SK4호스팩"           "대신밸런스제6호스팩" "신한제6호스팩"      
-## [16] "DB금융스팩6호"       "동부스팩5호"         "IBKS제11호스팩"     
-## [19] "상상인이안1호스팩"   "하나금융10호스팩"    "삼성머스트스팩3호"  
-## [22] "하나머스트제6호스팩" "유안타제4호스팩"     "한국제6호스팩"      
-## [25] "DB금융스팩7호"       "하이제4호스팩"       "하나금융9호스팩"    
-## [28] "하나금융14호스팩"    "IBKS제10호스팩"      "미래에셋대우스팩4호"
-## [31] "유안타제3호스팩"     "신한제5호스팩"       "케이비제19호스팩"   
-## [34] "SK5호스팩"           "교보7호스팩"         "한국제5호스팩"      
-## [37] "유진스팩5호"         "상상인이안제2호스팩" "교보8호스팩"        
-## [40] "IBKS제7호스팩"       "키움제5호스팩"       "유진스팩4호"        
-## [43] "신영스팩5호"         "한화에이스스팩4호"   "엔에이치스팩13호"   
-## [46] "한국제8호스팩"       "IBKS제12호스팩"      "미래에셋대우스팩2호"
-```
+price_list = list()
 
-```r
-KOR_ticker[str_sub(KOR_ticker[, '종목코드'], -1, -1) != 0, '종목명']
-```
-
-```
-##   [1] "삼성전자우"         "현대차2우B"         "LG생활건강우"      
-##   [4] "현대차우"           "LG화학우"           "아모레퍼시픽우"    
-##   [7] "미래에셋대우2우B"   "삼성화재우"         "LG전자우"          
-##  [10] "아모레G3우(전환)"   "신영증권우"         "한화3우B"          
-##  [13] "CJ4우(전환)"        "한국금융지주우"     "두산우"            
-##  [16] "대신증권우"         "아모레G우"          "S-Oil우"           
-##  [19] "현대차3우B"         "NH투자증권우"       "삼성SDI우"         
-##  [22] "LG우"               "대림산업우"         "삼성전기우"        
-##  [25] "CJ제일제당 우"      "SK이노베이션우"     "삼성물산우B"       
-##  [28] "SK우"               "CJ우"               "금호석유우"        
-##  [31] "대신증권2우B"       "대교우B"            "미래에셋대우우"    
-##  [34] "GS우"               "코오롱인더우"       "롯데지주우"        
-##  [37] "두산퓨얼셀1우"      "두산솔루스1우"      "부국증권우"        
-##  [40] "두산2우B"           "롯데칠성우"         "유한양행우"        
-##  [43] "SK케미칼우"         "유화증권우"         "호텔신라우"        
-##  [46] "한진칼우"           "두산솔루스2우B"     "두산퓨얼셀2우B"    
-##  [49] "유안타증권우"       "LG하우시스우"       "BYC우"             
-##  [52] "남양유업우"         "세방우"             "대한항공우"        
-##  [55] "SK디스커버리우"     "넥센타이어1우B"     "대덕전자1우"       
-##  [58] "하이트진로2우B"     "태영건설우"         "쌍용양회우"        
-##  [61] "대상우"             "녹십자홀딩스2우"    "한화솔루션우"      
-##  [64] "삼양사우"           "한화우"             "신풍제약우"        
-##  [67] "삼양홀딩스우"       "넥센우"             "현대건설우"        
-##  [70] "NPC우"              "남선알미우"         "코리아써우"        
-##  [73] "SK증권우"           "코오롱우"           "금호산업우"        
-##  [76] "태양금속우"         "한화투자증권우"     "계양전기우"        
-##  [79] "루트로닉3우C"       "SK네트웍스우"       "대한제당우"        
-##  [82] "동원시스템즈우"     "크라운해태홀딩스우" "유유제약1우"       
-##  [85] "서울식품우"         "일양약품우"         "성문전자우"        
-##  [88] "하이트진로홀딩스우" "삼성중공우"         "대원전선우"        
-##  [91] "성신양회우"         "현대비앤지스틸우"   "깨끗한나라우"      
-##  [94] "CJ씨푸드1우"        "노루페인트우"       "DB하이텍1우"       
-##  [97] "크라운제과우"       "소프트센우"         "대호피앤씨우"      
-## [100] "코오롱글로벌우"     "대상홀딩스우"       "금강공업우"        
-## [103] "한양증권우"         "덕성우"             "동부건설우"        
-## [106] "JW중외제약우"       "진흥기업2우B"       "진흥기업우B"       
-## [109] "신원우"             "동양우"             "동부제철우"        
-## [112] "코리아써키트2우B"   "JW중외제약2우B"     "흥국화재우"        
-## [115] "노루홀딩스우"       "대한제당3우B"       "흥국화재2우B"      
-## [118] "유유제약2우B"       "동양2우B"           "동양3우B"
-```
-
-`grepl()` 함수를 통해 종목명에 ‘스팩’이 들어가는 종목을 찾고, `stringr` 패키지의 `str_sub()` 함수를 통해 종목코드 끝이 0이 아닌 우선주 종목을 찾을 수 있습니다.
-
-
-```r
-KOR_ticker = KOR_ticker[!grepl('스팩', KOR_ticker[, '종목명']), ]  
-KOR_ticker = KOR_ticker[str_sub(KOR_ticker[, '종목코드'], -1, -1) == 0, ]
-```
-
-마지막으로 행 이름을 초기화한 후 정리된 데이터를 csv 파일로 저장합니다.
-
-
-```r
-rownames(KOR_ticker) = NULL
-write.csv(KOR_ticker, 'data/KOR_ticker.csv')
-```
-
-## WICS 기준 섹터정보 크롤링
-
-일반적으로 주식의 섹터를 나누는 기준은 MSCI와 S&P가 개발한 GICS^[https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard]를 가장 많이 사용합니다. 국내 종목의 GICS 기준 정보 역시 한국거래소에서 제공하고 있으나, 이는 독점적 지적재산으로 명시했기에 사용하는 데 무리가 있습니다. 그러나 지수제공업체인 와이즈인덱스^[http://www.wiseindex.com/]에서는 GICS와 비슷한 WICS 산업분류를 발표하고 있습니다. WICS를 크롤링해 필요한 정보를 수집해보겠습니다.
-
-먼저 웹페이지에 접속해 [Index → WISE SECTOR INDEX → WICS → 에너지]를 클릭합니다. 그 후 [Components] 탭을 클릭하면 해당 섹터의 구성종목을 확인할 수 있습니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_wics.png" alt="WICS 기준 구성종목" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-25)WICS 기준 구성종목</p>
-</div>
-
-개발자도구 화면(그림 \@ref(fig:wicurl))을 통해 해당 페이지의 데이터전송 과정을 살펴보도록 하겠습니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_wics2.png" alt="WICS 페이지 개발자도구 화면" width="100%" />
-<p class="caption">(\#fig:wicurl)WICS 페이지 개발자도구 화면</p>
-</div>
-
-일자를 선택하면 [Network] 탭의 GetIndexComponets 항목을 통해 데이터 전송 과정이 나타납니다. Request URL의 주소를 살펴보면 다음과 같습니다.
-
-1. http://www.wiseindex.com/Index/GetIndexComponets: 데이터를 요청하는 url 입니다.
-2. ceil_yn = 0: 실링 여부를 나타내며, 0은 비실링을 의미합니다.
-3. dt=20190607: 조회일자를 나타냅니다.
-4. sec_cd=G10: 섹터 코드를 나타냅니다.
-
-이번엔 위 주소의 페이지를 열어보겠습니다.
-
-<div class="figure" style="text-align: center">
-<img src="images/crawl_practice_wics3.png" alt="WICS 데이터 페이지" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-26)WICS 데이터 페이지</p>
-</div>
-
-글자들은 페이지에 출력된 내용이지만 매우 특이한 형태로 구성되어 있는데 이것은 JSON 형식의 데이터입니다. 기존에 우리가 살펴보았던 대부분의 웹페이지는 XML 형식으로 표현되어 있습니다. XML 형식은 문법이 복잡하고 표현 규칙이 엄격해 데이터의 용량이 커지는 단점이 있습니다. 반면 JSON 형식은 문법이 단순하고 데이터의 용량이 작아 빠른 속도로 데이터를 교환할 수 있습니다. R에서는 jsonlite 패키지의 `fromJSON()` 함수를 사용해 매우 손쉽게 JSON 형식의 데이터를 크롤링할 수 있습니다.
-
-
-```r
-library(jsonlite)
-
-url = 'http://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt=20190607&sec_cd=G10'
-data = fromJSON(url)
-
-lapply(data, head)
-```
-
-```
-## $info
-## $info$TRD_DT
-## [1] "/Date(1559833200000)/"
-## 
-## $info$MKT_VAL
-## [1] 19850082
-## 
-## $info$TRD_AMT
-## [1] 70030
-## 
-## $info$CNT
-## [1] 23
-## 
-## 
-## $list
-##   IDX_CD  IDX_NM_KOR ALL_MKT_VAL CMP_CD            CMP_KOR MKT_VAL   WGT
-## 1    G10 WICS 에너지    19850082 096770       SK이노베이션 9052841 45.61
-## 2    G10 WICS 에너지    19850082 010950              S-Oil 3403265 17.14
-## 3    G10 WICS 에너지    19850082 267250     현대중공업지주 2873204 14.47
-## 4    G10 WICS 에너지    19850082 078930                 GS 2491805 12.55
-## 5    G10 WICS 에너지    19850082 067630 에이치엘비생명과학  624986  3.15
-## 6    G10 WICS 에너지    19850082 006120       SK디스커버리  257059  1.30
-##   S_WGT CAL_WGT SEC_CD SEC_NM_KOR SEQ TOP60 APT_SHR_CNT
-## 1 45.61       1    G10     에너지   1     2    56403994
-## 2 62.75       1    G10     에너지   2     2    41655633
-## 3 77.23       1    G10     에너지   3     2     9283372
-## 4 89.78       1    G10     에너지   4     2    49245150
-## 5 92.93       1    G10     에너지   5     2    39307272
-## 6 94.22       1    G10     에너지   6     2    10470820
-## 
-## $sector
-##   SEC_CD         SEC_NM_KOR SEC_RATE IDX_RATE
-## 1    G25     경기관련소비재    16.05        0
-## 2    G35           건강관리     9.27        0
-## 3    G50 커뮤니케이션서비스     2.26        0
-## 4    G40               금융    10.31        0
-## 5    G10             에너지     2.37      100
-## 6    G20             산업재    12.68        0
-## 
-## $size
-##   SEC_CD    SEC_NM_KOR SEC_RATE IDX_RATE
-## 1 WMI510 WMI500 대형주    69.40    89.78
-## 2 WMI520 WMI500 중형주    13.56     4.44
-## 3 WMI530 WMI500 소형주    17.04     5.78
-```
-
-\$list 항목에는 해당 섹터의 구성종목 정보가 있으며, \$sector 항목을 통해 다른 섹터의 코드도 확인할 수 있습니다. for loop 구문을 이용해 URL의 sec_cd=에 해당하는 부분만 변경하면 모든 섹터의 구성종목을 매우 쉽게 얻을 수 있습니다.
-
-
-```r
-sector_code = c('G25', 'G35', 'G50', 'G40', 'G10',
-                'G20', 'G55', 'G30', 'G15', 'G45')
-data_sector = list()
-
-for (i in sector_code) {
+for (i in 1 : nrow(KOR_ticker)) {
   
-  url = paste0(
-    'http://www.wiseindex.com/Index/GetIndexComponets',
-    '?ceil_yn=0&dt=20190607&sec_cd=',i)
-  data = fromJSON(url)
-  data = data$list
+  name = KOR_ticker[i, '종목코드']
+  price_list[[i]] =
+    read.csv(paste0('data/KOR_price/', name,
+                    '_price.csv'),row.names = 1) %>%
+    as.xts()
   
-  data_sector[[i]] = data
-  
-  Sys.sleep(1)
 }
 
-data_sector = do.call(rbind, data_sector)
+price_list = do.call(cbind, price_list) %>% na.locf()
+colnames(price_list) = KOR_ticker$'종목코드'
 ```
 
-해당 데이터를 csv 파일로 저장해주도록 합니다.
+
 
 
 ```r
-write.csv(data_sector, 'data/KOR_sector.csv')
+head(price_list[, 1:5])
 ```
+
+```
+##            X005930 X000660 X207940 X035420 X051910
+## 2018-03-05   45200   78300  465500  156021  375000
+## 2018-03-06   47020   82400  449000  159426  387500
+## 2018-03-07   48620   82700  448000  159226  385000
+## 2018-03-08   49200   83500  451000  160027  387000
+## 2018-03-09   49740   83300  455000  160628  406500
+## 2018-03-12   49740   84900  458500  161429  410500
+```
+
+```r
+tail(price_list[, 1:5])
+```
+
+```
+##            X005930 X000660 X207940 X035420 X051910
+## 2020-03-06   56500   92600  491000  179500  400000
+## 2020-03-09   54200   86900  494000  168000  374000
+## 2020-03-10   54600   89100  496000  172000  373500
+## 2020-03-11   52100   85500  484000  170000  365000
+## 2020-03-12   50800   82800  483000  166500  341500
+## 2020-03-13   49950   82500  456500  166000  340500
+```
+
+1. 티커가 저장된 csv 파일을 불러온 후 티커를 6자리로 맞춰줍니다.
+2. 빈 리스트인 price_list를 생성합니다.
+3. for loop 구문을 이용해 종목별 가격 데이터를 불러온 후 `as.xts()`를 통해 시계열 형태로 데이터를 변경하고 리스트에 저장합니다.
+4. `do.call()` 함수를 통해 리스트를 열 형태로 묶습니다.
+5. 간혹 결측치가 발생할 수 있으므로, `na.locf()` 함수를 통해 결측치에는 전일 데이터를 사용합니다.
+6. 행 이름을 각 종목의 티커로 변경합니다.
+
+해당 작업을 통해 개별 csv 파일로 흩어져 있던 가격 데이터가 하나의 데이터로 묶이게 됩니다.
+
+
+```r
+write.csv(data.frame(price_list), 'data/KOR_price.csv')
+```
+
+마지막으로 해당 데이터를 data 폴더에 KOR_price.csv 파일로 저장합니다. 시계열 형태 그대로 저장하면 인덱스가 삭제되므로 데이터 프레임 형태로 변경한 후 저장해야 합니다.
+
+## 재무제표 정리하기
+
+재무제표는 data/KOR_fs 폴더 내 티커_fs.csv 파일로 저장되어 있습니다. 주가는 하나의 열로 이루어져 있어 데이터를 정리하는 것이 간단했지만, 재무제표는 각 종목별 재무 항목이 모두 달라 정리하기 번거롭습니다.
+
+
+```r
+library(stringr)
+library(magrittr)
+library(dplyr)
+
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, side = c('left'), pad = '0')
+
+data_fs = list()
+
+for (i in 1 : nrow(KOR_ticker)){
+  
+  name = KOR_ticker[i, '종목코드']
+  data_fs[[i]] = read.csv(paste0('data/KOR_fs/', name,
+                                 '_fs.csv'), row.names = 1)
+}
+```
+
+
+
+
+
+위와 동일하게 티커 데이터를 읽어옵니다. 이를 바탕으로 종목별 재무제표 데이터를 읽어온 후 리스트에 저장합니다.
+
+
+```r
+fs_item = data_fs[[1]] %>% rownames()
+length(fs_item)
+```
+
+```
+## [1] 237
+```
+
+```r
+print(head(fs_item))
+```
+
+```
+## [1] "매출액"           "매출원가"        
+## [3] "매출총이익"       "판매비와관리비"  
+## [5] "인건비"           "유무형자산상각비"
+```
+
+다음으로 재무제표 항목의 기준을 정해줄 필요가 있습니다. 재무제표 작성 항목은 각 업종별로 상이하므로, 이를 모두 고려하면 지나치게 데이터가 커지게 됩니다. 또한 퀀트 투자에는 일반적이고 공통적인 항목을 주로 사용하므로 대표적인 재무 항목을 정해 이를 기준으로 데이터를 정리해도 충분합니다.
+
+따라서 기준점으로 첫 번째 리스트, 즉 삼성전자의 재무 항목을 선택하며, 총 237개 재무 항목이 있습니다. 해당 기준을 바탕으로 재무제표 데이터를 정리하며, 전체 항목에 대한 정리 이전에 간단한 예시로 첫 번째 항목인 매출액 기준 데이터 정리를 살펴보겠습니다.
+
+
+```r
+select_fs = lapply(data_fs, function(x) {
+    # 해당 항목이 있을시 데이터를 선택
+    if ( '매출액' %in% rownames(x) ) {
+          x[which(rownames(x) == '매출액'), ]
+      
+    # 해당 항목이 존재하지 않을 시, NA로 된 데이터프레임 생성
+      } else {
+      data.frame(NA)
+    }
+  })
+
+select_fs = bind_rows(select_fs)
+
+print(head(select_fs))
+```
+
+```
+##   X2016.12 X2017.12 X2018.12 X2019.12 NA.
+## 1  2018667  2395754  2437714  2304009  NA
+## 2   171980   301094   404451   269907  NA
+## 3     2946     4646     5358     7016  NA
+## 4    40226    46785    55869    65934  NA
+## 5   206593   256980   281830   286250  NA
+## 6     6706     9491     9821       NA  NA
+```
+
+먼저 `lapply()` 함수를 이용해 모든 재무 데이터가 들어 있는 data_fs 데이터를 대상으로 함수를 적용합니다. `%in%` 함수를 통해 만일 매출액이라는 항목이 행 이름에 있으면 해당 부분의 데이터를 select_fs 리스트에 저장하고, 해당 항목이 없는 경우 NA로 이루어진 데이터 프레임을 저장합니다.
+
+그 후, dplyr 패키지의 `bind_rows()` 함수를 이용해 리스트 내 데이터들을 행으로 묶어줍니다. `rbind()`에서는 리스트 형태를 테이블로 묶으려면 모든 데이터의 열 개수가 동일해야 하는 반면, `bind_rows()`에서는 열 개수가 다를 경우 나머지 부분을 NA로 처리해 합쳐주는 장점이 있습니다.
+
+합쳐진 데이터를 살펴보면, 먼저 열 이름이 . 혹은 NA.인 부분이 있습니다. 이는 매출액 항목이 없는 종목의 경우 NA 데이터 프레임을 저장해 생긴 결과입니다. 또한 연도가 순서대로 저장되지 않은 경우가 있습니다. 이 두 가지를 고려해 데이터를 클렌징합니다.
+
+
+```r
+select_fs = select_fs[!colnames(select_fs) %in%
+                        c('.', 'NA.')]
+select_fs = select_fs[, order(names(select_fs))]
+rownames(select_fs) = KOR_ticker[, '종목코드']
+
+print(head(select_fs))
+```
+
+```
+##        X2016.12 X2017.12 X2018.12 X2019.12
+## 5930    2018667  2395754  2437714  2304009
+## 660      171980   301094   404451   269907
+## 207940     2946     4646     5358     7016
+## 35420     40226    46785    55869    65934
+## 51910    206593   256980   281830   286250
+## 68270      6706     9491     9821       NA
+```
+
+1. `!`와 `%in%` 함수를 이용해, 열 이름에 . 혹은 NA.가 들어가지 않은 열만 선택합니다.
+2. `order()` 함수를 이용해 열 이름의 연도별 순서를 구한 후 이를 바탕으로 열을 다시 정리합니다.
+3. 행 이름을 티커들로 변경합니다.
+
+해당 과정을 통해 전 종목의 매출액 데이터가 연도별로 정리되었습니다. for loop 구문을 이용해 모든 재무 항목에 대한 데이터를 정리하는 방법은 다음과 같습니다.
+
+
+```r
+fs_list = list()
+
+for (i in 1 : length(fs_item)) {
+  select_fs = lapply(data_fs, function(x) {
+    # 해당 항목이 있을시 데이터를 선택
+    if ( fs_item[i] %in% rownames(x) ) {
+          x[which(rownames(x) == fs_item[i]), ]
+      
+    # 해당 항목이 존재하지 않을 시, NA로 된 데이터프레임 생성
+      } else {
+      data.frame(NA)
+    }
+  })
+
+  # 리스트 데이터를 행으로 묶어줌 
+  select_fs = bind_rows(select_fs)
+
+  # 열이름이 '.' 혹은 'NA.'인 지점은 삭제 (NA 데이터)
+  select_fs = select_fs[!colnames(select_fs) %in%
+                          c('.', 'NA.')]
+  
+  # 연도 순별로 정리
+  select_fs = select_fs[, order(names(select_fs))]
+  
+  # 행이름을 티커로 변경
+  rownames(select_fs) = KOR_ticker[, '종목코드']
+  
+  # 리스트에 최종 저장
+  fs_list[[i]] = select_fs
+
+}
+
+# 리스트 이름을 재무 항목으로 변경
+names(fs_list) = fs_item
+```
+
+위 과정을 거치면 fs_list에 총 237리스트가 생성됩니다. 각 리스트에는 해당 재무 항목에 대한 전 종목의 연도별 데이터가 정리되어 있습니다.
+
+
+```r
+saveRDS(fs_list, 'data/KOR_fs.Rds')
+```
+
+마지막으로 해당 데이터를 data 폴더 내에 저장합니다. 리스트 형태 그대로 저장하기 위해 `saveRDS()` 함수를 이용해 KOR_fs.Rds 파일로 저장합니다.
+
+Rds 형식은 파일을 더블 클릭한 후 연결 프로그램을 R Studio로 설정해 파일을 불러올 수 있습니다. 혹은 `readRDS()` 함수를 이용해 파일을 읽어올 수도 있습니다.
+
+## 가치지표 정리하기
+
+가치지표는 data/KOR_value 폴더 내 티커_value.csv 파일로 저장되어 있습니다. 재무제표를 정리하는 방법과 거의 동일합니다.
+
+
+```r
+library(stringr)
+library(magrittr)
+library(dplyr)
+
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, side = c('left'), pad = '0')
+
+data_value = list()
+
+for (i in 1 : nrow(KOR_ticker)){
+  
+  name = KOR_ticker[i, '종목코드']
+  data_value[[i]] =
+    read.csv(paste0('data/KOR_value/', name,
+                    '_value.csv'), row.names = 1) %>%
+    t() %>% data.frame()
+
+}
+```
+
+먼저 티커에 해당하는 파일을 불러온 후 for loop 구문을 통해 가치지표 데이터를 data_value 리스트에 저장합니다. 단, csv 내에 데이터가 \@ref(tab:valuesample)와 같이 행의 형태로 저장되어 있으므로, t() 함수를 이용해 열의 형태로 바꿔주며, 데이터 프레임 형태로 저장합니다.
+
+
+Table: (\#tab:valuesample)가치지표의 저장 예시
+
+ value       x     
+-------  ----------
+  PER     Number 1 
+  PBR     Number 2 
+  PCR     Number 3 
+  PSR     Number 4 
+
+
+```r
+data_value = bind_rows(data_value)
+print(head(data_value))
+```
+
+```
+##     PER   PBR      PCR     PSR X1
+## 1 13.87 1.134    6.571  1.2942 NA
+## 2 29.83 1.253    9.264  2.2252 NA
+## 3    NA 6.936 2961.208 43.0506 NA
+## 4 46.76 4.193   20.097  4.1356 NA
+## 5 76.70 1.383    7.701  0.8397 NA
+## 6 83.59 8.312   57.271 22.2819 NA
+```
+
+`bind_rows()` 함수를 이용하여 리스트 내 데이터들을 행으로 묶어준 후 데이터를 확인해보면 PER, PBR, PCR, PSR 열 외에 불필요한 NA로 이루어진 열이 존재합니다. 해당 열을 삭제한 후 정리 작업을 하겠습니다.
+
+
+```r
+data_value = data_value[colnames(data_value) %in%
+                          c('PER', 'PBR', 'PCR', 'PSR')]
+
+data_value = data_value %>%
+  mutate_all(list(~na_if(., Inf)))
+
+rownames(data_value) = KOR_ticker[, '종목코드']
+print(head(data_value))
+```
+
+```
+##          PER   PBR      PCR     PSR
+## 005930 13.87 1.134    6.571  1.2942
+## 000660 29.83 1.253    9.264  2.2252
+## 207940    NA 6.936 2961.208 43.0506
+## 035420 46.76 4.193   20.097  4.1356
+## 051910 76.70 1.383    7.701  0.8397
+## 068270 83.59 8.312   57.271 22.2819
+```
+
+
+
+```r
+write.csv(data_value, 'data/KOR_value.csv')
+```
+
+1. 열 이름이 가치지표에 해당하는 부분만 선택합니다.
+2. 일부 종목은 재무 데이터가 0으로 표기되어 가치지표가 Inf로 계산되는 경우가 있습니다. `mutate_all()` 내에 `na_if()` 함수를 이용해 Inf 데이터를 NA로 변경합니다.
+3. 행 이름을 티커들로 변경합니다.
+4. data 폴더 내에 KOR_value.csv 파일로 저장합니다.
