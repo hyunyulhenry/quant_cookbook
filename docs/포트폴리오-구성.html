@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-03-16" />
+<meta name="date" content="2020-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -559,11 +559,11 @@ heq
 <a class="sourceLine" id="cb341-6" data-line-number="6">                <span class="dt">heq =</span> heq.objective)</a>
 <a class="sourceLine" id="cb341-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb341-8" data-line-number="8"><span class="kw">print</span>(result<span class="op">$</span>par)</a></code></pre></div>
-<pre><code>##  [1]  1.479e-01 -2.005e-17  9.858e-18  1.364e-18
-##  [5]  1.575e-17  7.870e-01 -2.285e-18  1.144e-18
-##  [9]  3.060e-19  6.512e-02</code></pre>
+<pre><code>##  [1]  1.480e-01 -4.715e-21 -3.800e-21 -1.225e-21
+##  [5]  3.692e-21  7.869e-01 -6.538e-22  3.122e-22
+##  [9]  1.842e-21  6.514e-02</code></pre>
 <div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" data-line-number="1"><span class="kw">print</span>(result<span class="op">$</span>value)</a></code></pre></div>
-<pre><code>## [1] 0.000009741</code></pre>
+<pre><code>## [1] 0.000009738</code></pre>
 <p>위에서 만들어진 함수들을 바탕으로 최적화 작업을 실행합니다. 초기값인 x0에는 먼저 동일한 비중들을 입력합니다. 예제에서는 종목이 10개 이므로, x0값에는 <code>rep(0.1, 10)</code> 인 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1을 입력합니다. 최소화하고자 하는 목적함수 fn에는 위에서 구성한 objective 함수를 입력합니다. 부등위 제약조건과 등위 제약조건에도 각각 위에서 구성한 hin.objective와 heq.objective 함수를 입력합니다.</p>
 <p>즉, 해당 함수는 초기값을 시작점으로 해 주어진 제약조건을 만족하는 해를 찾기 위해 <span class="math inline">\(w\)</span>값들을 조정하는 작업을 반복한 후 목적함수가 최소가 되는 지점의 <span class="math inline">\(w\)</span>를 반환합니다.</p>
 <p>result 값 중 $par는 최적화된 지점의 해를 의미하며, 최소분산 포트폴리오를 구성하는 자산들의 투자 비중을 의미합니다. $value는 $par에서 산출된 값을 목적함수 fn에 입력하였을 때 나오는 결괏값으로써, 포트폴리오의 분산을 의미합니다.</p>
@@ -572,7 +572,7 @@ heq
 <a class="sourceLine" id="cb345-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb345-4" data-line-number="4"><span class="kw">print</span>(w_<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1479 0.0000 0.0000 0.0000 0.0000 0.7870 0.0000 0.0000 
+## 0.1480 0.0000 0.0000 0.0000 0.0000 0.7869 0.0000 0.0000 
 ##    GLD    DBC 
 ## 0.0000 0.0651</code></pre>
 <p>자산들의 투자비중은 result$par를 통해 추출한 후, <code>round()</code> 함수를 이용해 반올림합니다. 마지막으로 이름에 종목명을 입력합니다. 계산된 비중으로 포트폴리오를 구성하면 포트폴리오의 비중이 최소가 됩니다.</p>
@@ -734,18 +734,18 @@ meq
 <a class="sourceLine" id="cb349-2" data-line-number="2">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
 <a class="sourceLine" id="cb349-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb349-4" data-line-number="4"><span class="kw">print</span>(result<span class="op">$</span>solution)</a></code></pre></div>
-<pre><code>##  [1]  1.479e-01  2.392e-18  3.093e-20 -5.036e-18
-##  [5] -9.371e-17  7.870e-01 -5.166e-18 -2.316e-18
-##  [9]  0.000e+00  6.512e-02</code></pre>
+<pre><code>##  [1]  1.480e-01 -1.909e-18 -5.576e-19 -5.089e-19
+##  [5]  1.300e-17  7.869e-01  4.168e-18  4.066e-20
+##  [9]  0.000e+00  6.514e-02</code></pre>
 <div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" data-line-number="1"><span class="kw">print</span>(result<span class="op">$</span>value)</a></code></pre></div>
-<pre><code>## [1] 0.00000487</code></pre>
+<pre><code>## [1] 0.000004869</code></pre>
 <p>위에 입력된 내역들을 <code>solve.QP()</code> 함수에 넣어 최적화 값을 찾아줍니다. 결과 중 $solution은 최적화된 지점의 해, 즉 최소분산 포트폴리오를 구성하는 자산들의 투자비중을 의미합니다. $value는 $solution에서 산출된 값을 목적함수에 입력했을때 나오는 결괏값으로서, 포트폴리오의 분산을 의미합니다.</p>
 <div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" data-line-number="1">w_<span class="dv">2</span> =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb353-2" data-line-number="2"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
 <a class="sourceLine" id="cb353-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb353-4" data-line-number="4"><span class="kw">print</span>(w_<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1479 0.0000 0.0000 0.0000 0.0000 0.7870 0.0000 0.0000 
+## 0.1480 0.0000 0.0000 0.0000 0.0000 0.7869 0.0000 0.0000 
 ##    GLD    DBC 
 ## 0.0000 0.0651</code></pre>
 <p>자산들의 투자비중은 result$solution을 통해 추출한 후 <code>round()</code> 함수를 이용해 반올림합니다. 마지막으로 이름에 종목명을 입력합니다. 계산된 비중으로 포트폴리오를 구성하면 포트폴리오의 비중이 최소화됩니다.</p>
@@ -849,7 +849,7 @@ user
 <a class="sourceLine" id="cb356-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb356-9" data-line-number="9"><span class="kw">print</span>(w_<span class="dv">3</span>)  </a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1479 0.0000 0.0000 0.0000 0.0000 0.7870 0.0000 0.0000 
+## 0.1480 0.0000 0.0000 0.0000 0.0000 0.7869 0.0000 0.0000 
 ##    GLD    DBC 
 ## 0.0000 0.0651</code></pre>
 <p><code>optimalPortfolio()</code> 함수 내부에 분산-공분산 행렬을 입력합니다. type 부분에 최소분산 포트폴리오에 해당하는 minvol을 입력하며, constraint에는 각 자산의 비중이 0보다 큰 제약조건인 lo(Long Only)를 입력합니다. 비중의 합이 1인 제약조건은 자동적으로 적용이 됩니다.</p>
@@ -904,7 +904,7 @@ DBC
 slsqp
 </td>
 <td style="text-align:center;">
-0.1479
+0.148
 </td>
 <td style="text-align:center;">
 0
@@ -919,7 +919,7 @@ slsqp
 0
 </td>
 <td style="text-align:center;">
-0.787
+0.7869
 </td>
 <td style="text-align:center;">
 0
@@ -939,7 +939,7 @@ slsqp
 solve.QP
 </td>
 <td style="text-align:center;">
-0.1479
+0.148
 </td>
 <td style="text-align:center;">
 0
@@ -954,7 +954,7 @@ solve.QP
 0
 </td>
 <td style="text-align:center;">
-0.787
+0.7869
 </td>
 <td style="text-align:center;">
 0
@@ -974,7 +974,7 @@ solve.QP
 optimalPortfolio
 </td>
 <td style="text-align:center;">
-0.1479
+0.148
 </td>
 <td style="text-align:center;">
 0
@@ -989,7 +989,7 @@ optimalPortfolio
 0
 </td>
 <td style="text-align:center;">
-0.787
+0.7869
 </td>
 <td style="text-align:center;">
 0
@@ -1006,7 +1006,7 @@ optimalPortfolio
 </tr>
 </tbody>
 </table>
-<p>세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.7%를 투자하는 편중된 결과가 나옵니다.</p>
+<p>세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.69%를 투자하는 편중된 결과가 나옵니다.</p>
 <div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb358-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb358-3" data-line-number="3"><span class="kw">data.frame</span>(w_<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
@@ -1370,7 +1370,7 @@ w_7\\ w_8\\ w_9\\ w_{10} \\ -w_1 \\ -w_2 \\ -w_3 \\ -w_4 \\ -w_5 \\ -w_6 \\ -w_7
 <a class="sourceLine" id="cb366-13" data-line-number="13"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb366-14" data-line-number="14"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1315 0.1000 0.0585 0.0500 0.2000 0.2000 0.0500 0.0500 
+## 0.1248 0.1000 0.0652 0.0500 0.2000 0.2000 0.0500 0.0500 
 ##    GLD    DBC 
 ## 0.0800 0.0800</code></pre>
 <p>결괏값을 확인해보면 각 자산별 제약조건 내에 위치함을 확인할 수 있습니다.</p>
@@ -1535,18 +1535,18 @@ c(1, rep(0, 10))
 <a class="sourceLine" id="cb369-6" data-line-number="6">  </a>
 <a class="sourceLine" id="cb369-7" data-line-number="7"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 18.114  1.594  3.971  0.000 27.782 35.743  2.642  0.000 
+## 18.239  1.603  3.758  0.000 28.102 35.042  2.549  0.000 
 ##    GLD    DBC 
-##  8.285 12.033</code></pre>
+##  8.100 11.898</code></pre>
 <p>입력된 목적함수와 제약조건들을 바탕으로 <code>solve.QP()</code> 함수를 통해 최적화를 수행한 후 최대분산효과를 만족하는 해를 구해보면, 비중의 합이 1을 초과하게 됩니다. <span class="math inline">\(w_i = \frac{w_i}{\sum_{i=1}^nw_i}\)</span>를 통해 비중의 합이 1이 되도록 표준화를 해줍니다.</p>
 <div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" data-line-number="1">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb371-2" data-line-number="2"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb371-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb371-4" data-line-number="4"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1644 0.0145 0.0361 0.0000 0.2522 0.3245 0.0240 0.0000 
+## 0.1669 0.0147 0.0344 0.0000 0.2571 0.3206 0.0233 0.0000 
 ##    GLD    DBC 
-## 0.0752 0.1092</code></pre>
+## 0.0741 0.1089</code></pre>
 <p>표준화 과정을 통해 비중의 합이 1이 되었습니다.</p>
 <div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" data-line-number="1"><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb373-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
@@ -1565,8 +1565,8 @@ c(1, rep(0, 10))
 <a class="sourceLine" id="cb374-4" data-line-number="4"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb374-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb374-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
-<pre><code>##  [1] 0.1644 0.0145 0.0361 0.0000 0.2522 0.3245 0.0240
-##  [8] 0.0000 0.0752 0.1092</code></pre>
+<pre><code>##  [1] 0.1669 0.0147 0.0344 0.0000 0.2571 0.3206 0.0233
+##  [8] 0.0000 0.0741 0.1089</code></pre>
 <p>control 항목의 type에 maximum diversification을 의미하는 ’maxdiv’를 입력해주며, 제약조건에는 투자비중이 0보다 큰 lo(Long Only) 조건을 입력합니다. 패키지를 활용해 매우 간단하게 최대분산효과 포트폴리오를 구현할 수 있으며, 그 결과 또한 앞에서 계산한 것과 동일합니다. 해당 함수의 코드를 확인해보면, 최대분산효과 포트폴리오 계산 시 Min -DR 방법을 사용합니다.</p>
 </div>
 <div id="최소-및-최대-투자비중-제약조건-1" class="section level3">
@@ -1668,7 +1668,7 @@ ub(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 
 ##    GLD    DBC 
-## 0.1902 0.1098</code></pre>
+## 0.1915 0.1085</code></pre>
 <p>Alb의 -rep(0.05, 10)는 <span class="math inline">\(-lb\)</span> 부분, matrix(1, 1, 10)은 <span class="math inline">\(e^T\)</span> 부분, diag(10)부분은 <span class="math inline">\(I\)</span> 부분을 의미하며, 이는 최소비중 제약조건의 좌변(<span class="math inline">\(-lb \times e^T + I\)</span>)과 같습니다. 동일하게 Aub는 최대비중 제약조건의 좌변(<span class="math inline">\(ub \times e^T - I\)</span>)과 같으며, 결과를 확인하면 최소 및 최대비중 제약조건인 [5%, 20%]가 제대로 반영되었습니다.</p>
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb378-1" data-line-number="1"><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb378-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
@@ -1870,9 +1870,9 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <a class="sourceLine" id="cb382-4" data-line-number="4">RC_stock_bond =<span class="st"> </span><span class="kw">round</span>(RC_stock_bond, <span class="dv">4</span>)</a>
 <a class="sourceLine" id="cb382-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb382-6" data-line-number="6"><span class="kw">print</span>(RC_stock_bond)</a></code></pre></div>
-<pre><code>## [1] 0.9725 0.0275</code></pre>
+<pre><code>## [1] 0.9794 0.0206</code></pre>
 <p>rets 데이터에서 첫 번째 행은 미국 주식 수익률을, 다섯 번째 행은 미국 장기채를 의미하므로, 해당 부분을 ret_stock_bond 변수에 지정합니다. 그 후 <code>cov()</code> 함수를 이용해 두 자산의 분산-공분산 행렬을 만들어주며, 위에서 만든 get_RC 함수를 통해 자산별 위험기여도를 계산합니다.</p>
-<p>주식과 채권이 가지는 위험기여도는 각각 97.25%, 2.75%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.</p>
+<p>주식과 채권이 가지는 위험기여도는 각각 97.94%, 2.06%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.</p>
 </div>
 <div id="rp-함수를-이용한-최적화" class="section level3">
 <h3><span class="header-section-number">11.3.2</span> <code>rp()</code> 함수를 이용한 최적화</h3>
@@ -1893,9 +1893,9 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <a class="sourceLine" id="cb385-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb385-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.0615 0.0469 0.0560 0.0367 0.1786 0.3654 0.0397 0.0517 
+## 0.0610 0.0467 0.0558 0.0366 0.1797 0.3666 0.0394 0.0515 
 ##    GLD    DBC 
-## 0.0872 0.0762</code></pre>
+## 0.0869 0.0759</code></pre>
 <ol style="list-style-type: decimal">
 <li>x0은 최적화를 위한 초기 입력값이며 동일 비중인 10%씩을 입력합니다.</li>
 <li>P는 분산-공분산 행렬을 입력해줍니다.</li>
@@ -1904,8 +1904,8 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <p><code>rp()</code> 함수는 위 입력 변수를 바탕으로 최적해를 찾아줍니다. <code>getx()</code> 함수를 통해 해를 추출할 수 있으며, <code>drop()</code>을 통해 벡터 형태로 변환합니다. 마지막으로 비중의 합이 1이 되기 위해 비중들의 합으로 나눠줍니다.</p>
 <p>최종적으로 계산된 비중이 위험균형 포트폴리오를 만족하는 해가 됩니다.</p>
 <div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1"><span class="kw">get_RC</span>(w, covmat)</a></code></pre></div>
-<pre><code>##  [1] 0.10001 0.10000 0.10003 0.09996 0.10011 0.10008
-##  [7] 0.09987 0.09992 0.10002 0.10000</code></pre>
+<pre><code>##  [1] 0.09992 0.10006 0.09989 0.10006 0.10003 0.10001
+##  [7] 0.10000 0.10007 0.09992 0.10004</code></pre>
 <p><code>get_RC()</code> 함수를 통해 위험기여도를 확인해보면, 모든 자산이 거의 동일한 위험기여도를 가지는 것을 알 수 있습니다.</p>
 </div>
 <div id="위험예산-포트폴리오" class="section level3">
@@ -2004,13 +2004,13 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <a class="sourceLine" id="cb390-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb390-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.0862 0.0669 0.0774 0.0524 0.1862 0.3865 0.0198 0.0256 
+## 0.0856 0.0666 0.0772 0.0522 0.1873 0.3875 0.0197 0.0255 
 ##    GLD    DBC 
-## 0.0550 0.0438</code></pre>
+## 0.0548 0.0436</code></pre>
 <p>mrc에 목표로 하는 각 자산별 위험기여도를 입력하며, 나머지는 기존 위험균형 포트폴리오와 동일하게 입력합니다.</p>
 <div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" data-line-number="1"><span class="kw">get_RC</span>(w, covmat)</a></code></pre></div>
-<pre><code>##  [1] 0.15001 0.14993 0.14999 0.14994 0.10011 0.10015
-##  [7] 0.04989 0.05002 0.05001 0.04996</code></pre>
+<pre><code>##  [1] 0.14994 0.14992 0.14992 0.14988 0.10011 0.10010
+##  [7] 0.05008 0.05009 0.05000 0.04997</code></pre>
 <p><code>get_RC()</code> 함수를 통해 위험기여도를 확인해보면 우리가 원하던 자산별 위험예산과 거의 동일한 것을 알 수 있습니다.</p>
 
 </div>
