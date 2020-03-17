@@ -497,26 +497,26 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>위 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장됩니다. 이처럼 개발자 도구 화면을 통해 내가 추출하고자 하는 데이터가 HTML 중 어디에 위치하고 있는지 먼저 확인하면 어렵지 않게 해당 데이터를 읽어올 수 있습니다.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">print</span>(data_title)</a></code></pre></div>
-<pre><code>##  [1] &quot;아모레G, 전일대비 +5.31% 장중&quot;      
-##  [2] &quot;전기가스업(-4.34%↓)이 약세인 &quot;      
-##  [3] &quot;&#39;유틸렉스&#39; 10% 이상 상승, 최근&quot;     
-##  [4] &quot;[특징주]금리인하로 수익성 둔화 우려&quot;
-##  [5] &quot;아톤, 19억9550만원 규모 자사주&quot;     
-##  [6] &quot;코로나 장세, 미국 주식 직구족 한달&quot; 
-##  [7] &quot;유틸렉스, 장중 반등세, 전일대비 +&quot;  
-##  [8] &quot;제약업(+4.85%↑)이 강세인 가운&quot;      
-##  [9] &quot;[14:00] 외국인 매수 늘면서 코&quot;      
-## [10] &quot;[14:00] 외국인 매도 늘면서 코&quot;      
-## [11] &quot;[fnRASSI]에이리츠(140910&quot;           
-## [12] &quot;&#39;네오위즈&#39; 10% 이상 상승, 전일&quot;     
-## [13] &quot;네오위즈, 장중 반등세, 전일대비 +&quot;  
-## [14] &quot;&#39;한국테크놀로지&#39; 상한가↑ 도달, 주&quot;  
-## [15] &quot;메카로, 17억7200만원 규모 자사&quot;     
-## [16] &quot;이랜텍, 자기주식 90만주 취득 결정&quot;  
-## [17] &quot;세아제강지주, 특별관계자 지분변동&quot;  
-## [18] &quot;에이앤티앤 임시 주총일…\&quot;4월1일서 &quot; 
-## [19] &quot;KTH, 김철수 대표이사 사임&quot;          
-## [20] &quot;김병욱 의원 \&quot;코로나19, 전자투표 &quot;</code></pre>
+<pre><code>##  [1] &quot;원·달러 환율, 10년 만에 최고치…&quot;   
+##  [2] &quot;[fn마켓워치]한진칼 3자연합 이사 &quot;  
+##  [3] &quot;중소·자영업자 자금 조달 쉬워진다…&#39;&quot;
+##  [4] &quot;신세계건설, 600억 규모 채무보증 &quot;  
+##  [5] &quot;레드로버, 윈아시아파트너스 대상 70&quot;
+##  [6] &quot;[머니S포토] &#39;또 코스피 폭락 마감&quot;  
+##  [7] &quot;LG화학 &quot;                           
+##  [8] &quot;[표]코스닥 기관·외국인·개인 순매수&quot;
+##  [9] &quot;포티스, 30대 1 감자 결정&quot;          
+## [10] &quot;서플러스글로벌, 20억 규모 자사주 &quot; 
+## [11] &quot;[표]유가증권 기관·외국인·개인 순매&quot;
+## [12] &quot;코로나19 직격탄, 기업 신용등급 하&quot; 
+## [13] &quot;원달러 환율 10년만에 1240원대 &quot;    
+## [14] &quot;주식시장 마감시황&quot;                 
+## [15] &quot;원달러환율 급등 장 마감&quot;           
+## [16] &quot;코스피 하락, 코스닥 상승 마감&quot;     
+## [17] &quot;원달러 환율 10년만에 1240원대 &quot;    
+## [18] &quot;코스피, 2.5% 하락해 1,670대&quot;       
+## [19] &quot;이스트소프트, 20억 규모 자사주 취&quot; 
+## [20] &quot;[그래픽] 원·달러 환율 추이&quot;</code></pre>
 </div>
 <div id="기업공시채널에서-오늘의-공시-불러오기" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -737,18 +737,18 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
 <pre><code>##    N           종목명  현재가 전일비 등락률 액면가
 ## 1 NA                                              
-## 2  1         삼성전자  48,200    700 -1.43%    100
-## 3  2       SK하이닉스  81,700  1,100 +1.36%  5,000
-## 4  3       삼성전자우  40,600    400 -0.98%    100
-## 5  4 삼성바이오로직스 421,000  9,000 -2.09%  2,500
-## 6  5            NAVER 150,000  5,000 -3.23%    100
+## 2  1         삼성전자  47,300  1,600 -3.27%    100
+## 3  2       SK하이닉스  80,400    200 -0.25%  5,000
+## 4  3       삼성전자우  39,650  1,350 -3.29%    100
+## 5  4 삼성바이오로직스 417,500 12,500 -2.91%  2,500
+## 6  5            NAVER 151,000  4,000 -2.58%    100
 ##    시가총액 상장주식수 외국인비율     거래량    PER
 ## 1                              NA              &lt;NA&gt;
-## 2 2,877,435  5,969,783      55.66 37,022,720  15.22
-## 3   594,778    728,002      49.32  5,767,555  29.55
-## 4   334,092    822,887      89.40  3,309,127  12.82
-## 5   278,555     66,165      10.55    350,289 137.27
-## 6   246,395    164,263      57.92    714,822  42.40
+## 2 2,823,707  5,969,783      55.66 50,591,171  14.94
+## 3   585,314    728,002      49.32  7,077,377  29.08
+## 4   326,275    822,887      89.40  4,636,530  12.52
+## 5   276,239     66,165      10.55    419,463 136.13
+## 6   248,038    164,263      57.92    947,528  42.68
 ##     ROE 토론실
 ## 1  &lt;NA&gt;     NA
 ## 2  8.69     NA
@@ -761,19 +761,19 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <a class="sourceLine" id="cb79-2" data-line-number="2">table =<span class="st"> </span><span class="kw">na.omit</span>(table)</a>
 <a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
 <pre><code>##    N           종목명  현재가 전일비 등락률 액면가
-## 2  1         삼성전자  48,200    700 -1.43%    100
-## 3  2       SK하이닉스  81,700  1,100 +1.36%  5,000
-## 4  3       삼성전자우  40,600    400 -0.98%    100
-## 5  4 삼성바이오로직스 421,000  9,000 -2.09%  2,500
-## 6  5            NAVER 150,000  5,000 -3.23%    100
-## 10 6           LG화학 310,000  2,500 -0.80%  5,000
+## 2  1         삼성전자  47,300  1,600 -3.27%    100
+## 3  2       SK하이닉스  80,400    200 -0.25%  5,000
+## 4  3       삼성전자우  39,650  1,350 -3.29%    100
+## 5  4 삼성바이오로직스 417,500 12,500 -2.91%  2,500
+## 6  5            NAVER 151,000  4,000 -2.58%    100
+## 10 6           LG화학 306,500  6,000 -1.92%  5,000
 ##     시가총액 상장주식수 외국인비율     거래량    PER
-## 2  2,877,435  5,969,783      55.66 37,022,720  15.22
-## 3    594,778    728,002      49.32  5,767,555  29.55
-## 4    334,092    822,887      89.40  3,309,127  12.82
-## 5    278,555     66,165      10.55    350,289 137.27
-## 6    246,395    164,263      57.92    714,822  42.40
-## 10   218,836     70,592      38.63    657,420  77.44
+## 2  2,823,707  5,969,783      55.66 50,591,171  14.94
+## 3    585,314    728,002      49.32  7,077,377  29.08
+## 4    326,275    822,887      89.40  4,636,530  12.52
+## 5    276,239     66,165      10.55    419,463 136.13
+## 6    248,038    164,263      57.92    947,528  42.68
+## 10   216,366     70,592      38.63    816,489  76.57
 ##      ROE
 ## 2   8.69
 ## 3   4.25
@@ -924,6 +924,18 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <li id="fn10"><p><a href="https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258" class="uri">https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258</a><a href="크롤링-이해하기.html#fnref10" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
+<div id="disqus_thread"></div>
+<script>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//quant_cookbook.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the
+<a href="https://disqus.com/?ref_noscript">
+  comments powered by Disqus.</a></noscript>
             </section>
 
           </div>

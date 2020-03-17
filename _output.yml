@@ -11,4 +11,6 @@ bookdown::gitbook:
     edit: null
     download: no
     split_bib: no
+  includes:
+      after_body: disqus.html
 
