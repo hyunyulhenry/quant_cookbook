@@ -1,4 +1,6 @@
 bookdown::gitbook:
+  includes:
+    after_body: disqus.html
   css: style.css
   split_by: chapter
   config:
@@ -11,6 +13,3 @@ bookdown::gitbook:
     edit: null
     download: no
     split_bib: no
-  includes:
-      after_body: disqus.html
-
