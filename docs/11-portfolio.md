@@ -1532,7 +1532,7 @@ get_RC(w, covmat)
 library(stringr)
 library(dplyr)
 
-KOR_ticker = read.csv('/home/henry/quant_cookbook/data/KOR_ticker.csv',
+KOR_ticker = read.csv('data/KOR_ticker.csv',
                       row.names = 1, stringsAsFactors = FALSE) 
 
 KOSPI200 = KOR_ticker %>% filter(시장구분 == '코스피') %>%
