@@ -5,7 +5,9 @@
 
 동일한 최적화 방법을 지속적으로 사용한다면 프로그래밍을 통해 함수를 만들고, 입력 변수만 변경하는 것이 훨씬 효율적인 방법입니다. 또한 포트폴리오 최적화에 관한 좋은 패키지들이 이미 많이 나와 있으므로, 대략적인 내용만 이해하고 실제 구현은 패키지를 이용하는 것도 좋은 방법입니다.
 
-이 CHAPTER에서는 일반적으로 많이 사용되는 최소분산 포트폴리오, 최대분산효과 포트폴리오, 위험균형 포트폴리오를 구현해보도록 합니다. 먼저 포트폴리오 구성을 위해 글로벌 자산을 대표하는 ETF 데이터를 다운로드하겠습니다.
+이 CHAPTER에서는 일반적으로 많이 사용되는 최소분산 포트폴리오, 최대분산효과 포트폴리오, 위험균형 포트폴리오를 구현해보도록 합니다. 또한 실무에서 많이 사용되는 인덱스 포트폴리오를 구성하는 방법에 대해서도 살펴보겠습니다.
+
+먼저 최소분산, 최대분산효과, 위험균형 포트폴리오 구성을 위해 글로벌 자산을 대표하는 ETF 데이터를 다운로드하겠습니다.
 
 
 ```r
@@ -39,7 +41,6 @@ prices = do.call(cbind,
 
 rets = Return.calculate(prices) %>% na.omit()
 ```
-
 
 
 
@@ -193,9 +194,9 @@ print(result$par)
 ```
 
 ```
-##  [1]  1.489e-01 -4.313e-18 -1.695e-17 -3.969e-18
-##  [5] -9.971e-17  7.870e-01 -6.387e-18  7.436e-18
-##  [9] -9.213e-18  6.412e-02
+##  [1]  1.502e-01  8.224e-18  6.297e-19 -1.655e-18
+##  [5] -9.429e-17  7.859e-01  1.391e-18 -3.749e-18
+##  [9] -4.041e-18  6.385e-02
 ```
 
 ```r
@@ -203,7 +204,7 @@ print(result$value)
 ```
 
 ```
-## [1] 0.000009912
+## [1] 0.00000996
 ```
 
 위에서 만들어진 함수들을 바탕으로 최적화 작업을 실행합니다. 초기값인 x0에는 먼저 동일한 비중들을 입력합니다. 예제에서는 종목이 10개 이므로, x0값에는 `rep(0.1, 10)` 인 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1을 입력합니다. 최소화하고자 하는 목적함수 fn에는 위에서 구성한 objective 함수를 입력합니다. 부등위 제약조건과 등위 제약조건에도 각각 위에서 구성한 hin.objective와 heq.objective 함수를 입력합니다.
@@ -222,9 +223,9 @@ print(w_1)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1489 0.0000 0.0000 0.0000 0.0000 0.7870 0.0000 0.0000 
+## 0.1502 0.0000 0.0000 0.0000 0.0000 0.7859 0.0000 0.0000 
 ##    GLD    DBC 
-## 0.0000 0.0641
+## 0.0000 0.0639
 ```
 
 자산들의 투자비중은 result$par를 통해 추출한 후, `round()` 함수를 이용해 반올림합니다. 마지막으로 이름에 종목명을 입력합니다. 계산된 비중으로 포트폴리오를 구성하면 포트폴리오의 비중이 최소가 됩니다.
@@ -376,9 +377,9 @@ print(result$solution)
 ```
 
 ```
-##  [1]  1.489e-01 -1.648e-18 -5.220e-19 -4.833e-18
-##  [5] -1.235e-18  7.870e-01 -3.283e-18 -7.435e-19
-##  [9]  0.000e+00  6.412e-02
+##  [1]  1.502e-01  5.362e-18  3.954e-19  6.887e-19
+##  [5]  1.752e-17  7.859e-01 -8.440e-18 -3.625e-18
+##  [9]  0.000e+00  6.385e-02
 ```
 
 ```r
@@ -386,7 +387,7 @@ print(result$value)
 ```
 
 ```
-## [1] 0.000004956
+## [1] 0.00000498
 ```
 
 위에 입력된 내역들을 `solve.QP()` 함수에 넣어 최적화 값을 찾아줍니다. 결과 중 \$solution은 최적화된 지점의 해, 즉 최소분산 포트폴리오를 구성하는 자산들의 투자비중을 의미합니다. \$value는 \$solution에서 산출된 값을 목적함수에 입력했을때 나오는 결괏값으로서, 포트폴리오의 분산을 의미합니다.
@@ -402,9 +403,9 @@ print(w_2)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1489 0.0000 0.0000 0.0000 0.0000 0.7870 0.0000 0.0000 
+## 0.1502 0.0000 0.0000 0.0000 0.0000 0.7859 0.0000 0.0000 
 ##    GLD    DBC 
-## 0.0000 0.0641
+## 0.0000 0.0639
 ```
 
 자산들의 투자비중은 result$solution을 통해 추출한 후 `round()` 함수를 이용해 반올림합니다. 마지막으로 이름에 종목명을 입력합니다. 계산된 비중으로 포트폴리오를 구성하면 포트폴리오의 비중이 최소화됩니다.
@@ -486,9 +487,9 @@ print(w_3)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1489 0.0000 0.0000 0.0000 0.0000 0.7870 0.0000 0.0000 
+## 0.1502 0.0000 0.0000 0.0000 0.0000 0.7859 0.0000 0.0000 
 ##    GLD    DBC 
-## 0.0000 0.0641
+## 0.0000 0.0639
 ```
 
 `optimalPortfolio()` 함수 내부에 분산-공분산 행렬을 입력합니다. type 부분에 최소분산 포트폴리오에 해당하는 minvol을 입력하며, constraint에는 각 자산의 비중이 0보다 큰 제약조건인 lo(Long Only)를 입력합니다. 비중의 합이 1인 제약조건은 자동적으로 적용이 됩니다.
@@ -519,47 +520,47 @@ print(w_3)
 <tbody>
   <tr>
    <td style="text-align:left;"> slsqp </td>
-   <td style="text-align:center;"> 0.1489 </td>
+   <td style="text-align:center;"> 0.1502 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.787 </td>
+   <td style="text-align:center;"> 0.7859 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.0641 </td>
+   <td style="text-align:center;"> 0.0639 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> solve.QP </td>
-   <td style="text-align:center;"> 0.1489 </td>
+   <td style="text-align:center;"> 0.1502 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.787 </td>
+   <td style="text-align:center;"> 0.7859 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.0641 </td>
+   <td style="text-align:center;"> 0.0639 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> optimalPortfolio </td>
-   <td style="text-align:center;"> 0.1489 </td>
+   <td style="text-align:center;"> 0.1502 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.787 </td>
+   <td style="text-align:center;"> 0.7859 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
    <td style="text-align:center;"> 0 </td>
-   <td style="text-align:center;"> 0.0641 </td>
+   <td style="text-align:center;"> 0.0639 </td>
   </tr>
 </tbody>
 </table>
 
-세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.7%를 투자하는 편중된 결과가 나옵니다. 
+세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.59%를 투자하는 편중된 결과가 나옵니다. 
 
 
 ```r
@@ -818,10 +819,10 @@ result$solution %>%
 ```
 
 ```
-##   SPY   IEV   EWJ   EEM   TLT   IEF   IYR   RWX   GLD 
-## 0.119 0.100 0.071 0.050 0.200 0.200 0.050 0.050 0.080 
-##   DBC 
-## 0.080
+##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
+## 0.1218 0.1000 0.0682 0.0500 0.2000 0.2000 0.0500 0.0500 
+##    GLD    DBC 
+## 0.0800 0.0800
 ```
 
 결괏값을 확인해보면 각 자산별 제약조건 내에 위치함을 확인할 수 있습니다.
@@ -894,7 +895,6 @@ Duality 방법의 목적함수는 최소분산 포트폴리오와 동일한 $min
 </tbody>
 </table>
 
-
 ### `solve.QP()` 함수를 이용한 최적화
 
 먼저 `solve.QP()` 함수를 이용해 Duality 방법을 통해 최대분산효과 포트폴리오를 만족하는 해를 찾도록 하겠습니다.
@@ -962,9 +962,9 @@ print(w)
 
 ```
 ##     SPY     IEV     EWJ     EEM     TLT     IEF     IYR 
-## 18.6821  0.9077  4.3729  0.0000 26.1754 37.8539  2.3687 
+## 19.6783  0.3407  4.0735  0.0000 25.5262 38.4954  2.3383 
 ##     RWX     GLD     DBC 
-##  0.0000  8.4122 11.6236
+##  0.0000  8.5487 11.5173
 ```
 
 입력된 목적함수와 제약조건들을 바탕으로 `solve.QP()` 함수를 통해 최적화를 수행한 후 최대분산효과를 만족하는 해를 구해보면, 비중의 합이 1을 초과하게 됩니다. $w_i = \frac{w_i}{\sum_{i=1}^nw_i}$를 통해 비중의 합이 1이 되도록 표준화를 해줍니다.
@@ -979,9 +979,9 @@ print(w)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1692 0.0082 0.0396 0.0000 0.2371 0.3429 0.0215 0.0000 
+## 0.1781 0.0031 0.0369 0.0000 0.2310 0.3483 0.0212 0.0000 
 ##    GLD    DBC 
-## 0.0762 0.1053
+## 0.0774 0.1042
 ```
 
 표준화 과정을 통해 비중의 합이 1이 되었습니다.
@@ -1013,8 +1013,8 @@ print(w)
 ```
 
 ```
-##  [1] 0.1692 0.0082 0.0396 0.0000 0.2371 0.3429 0.0215
-##  [8] 0.0000 0.0762 0.1053
+##  [1] 0.1781 0.0031 0.0369 0.0000 0.2310 0.3483 0.0212
+##  [8] 0.0000 0.0774 0.1042
 ```
 
 control 항목의 type에 maximum diversification을 의미하는 'maxdiv'를 입력해주며, 제약조건에는 투자비중이 0보다 큰 lo(Long Only) 조건을 입력합니다. 패키지를 활용해 매우 간단하게 최대분산효과 포트폴리오를 구현할 수 있으며, 그 결과 또한 앞에서 계산한 것과 동일합니다. 해당 함수의 코드를 확인해보면, 최대분산효과 포트폴리오 계산 시 Min -DR 방법을 사용합니다.
@@ -1107,7 +1107,7 @@ print(w)
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 
 ##    GLD    DBC 
-## 0.1924 0.1076
+## 0.1919 0.1081
 ```
  
 Alb의 -rep(0.05, 10)는 $-lb$ 부분, matrix(1, 1, 10)은 $e^T$ 부분, diag(10)부분은 $I$ 부분을 의미하며, 이는 최소비중 제약조건의 좌변($-lb \times e^T + I$)과 같습니다. 동일하게 Aub는 최대비중 제약조건의 좌변($ub \times e^T - I$)과 같으며, 결과를 확인하면 최소 및 최대비중 제약조건인 [5%, 20%]가 제대로 반영되었습니다.
@@ -1276,12 +1276,12 @@ print(RC_stock_bond)
 ```
 
 ```
-## [1] 0.973 0.027
+## [1] 0.9715 0.0285
 ```
 
 rets 데이터에서 첫 번째 행은 미국 주식 수익률을, 다섯 번째 행은 미국 장기채를 의미하므로, 해당 부분을 ret_stock_bond 변수에 지정합니다. 그 후 `cov()` 함수를 이용해 두 자산의 분산-공분산 행렬을 만들어주며, 위에서 만든 get_RC 함수를 통해 자산별 위험기여도를 계산합니다.
 
-주식과 채권이 가지는 위험기여도는 각각 97.3%, 2.7%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.
+주식과 채권이 가지는 위험기여도는 각각 97.15%, 2.85%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.
 
 ### `rp()` 함수를 이용한 최적화
 
@@ -1314,9 +1314,9 @@ print(w)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.0613 0.0468 0.0567 0.0367 0.1759 0.3682 0.0394 0.0510 
+## 0.0618 0.0469 0.0568 0.0368 0.1741 0.3681 0.0397 0.0511 
 ##    GLD    DBC 
-## 0.0880 0.0760
+## 0.0885 0.0763
 ```
 
 1. x0은 최적화를 위한 초기 입력값이며 동일 비중인 10%씩을 입력합니다.
@@ -1333,8 +1333,8 @@ get_RC(w, covmat)
 ```
 
 ```
-##  [1] 0.10003 0.10005 0.10010 0.09998 0.09999 0.10001
-##  [7] 0.09994 0.09993 0.09995 0.10001
+##  [1] 0.10005 0.09999 0.10006 0.10011 0.09994 0.09991
+##  [7] 0.09998 0.09993 0.09999 0.10005
 ```
 
 `get_RC()` 함수를 통해 위험기여도를 확인해보면, 모든 자산이 거의 동일한 위험기여도를 가지는 것을 알 수 있습니다.
@@ -1402,9 +1402,9 @@ print(w)
 
 ```
 ##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.0859 0.0667 0.0782 0.0524 0.1836 0.3894 0.0196 0.0252 
+## 0.0865 0.0669 0.0783 0.0525 0.1816 0.3897 0.0198 0.0253 
 ##    GLD    DBC 
-## 0.0554 0.0436
+## 0.0557 0.0437
 ```
 
 mrc에 목표로 하는 각 자산별 위험기여도를 입력하며, 나머지는 기존 위험균형 포트폴리오와 동일하게 입력합니다.
@@ -1415,8 +1415,667 @@ get_RC(w, covmat)
 ```
 
 ```
-##  [1] 0.15010 0.14998 0.15007 0.15013 0.09990 0.09992
-##  [7] 0.04988 0.04994 0.05003 0.05004
+##  [1] 0.14995 0.15001 0.14990 0.15014 0.10000 0.10001
+##  [7] 0.05002 0.04998 0.04998 0.05000
 ```
 
 `get_RC()` 함수를 통해 위험기여도를 확인해보면 우리가 원하던 자산별 위험예산과 거의 동일한 것을 알 수 있습니다.
+
+## 인덱스 포트폴리오 구성하기
+
+이번에는 실제로 운용사에서 많이 사용되는 인덱스 포트폴리오 및 인헨스드 인덱스 포트폴리오 구성법에 대해 살펴보겠습니다.
+
+투자는 크게 액티브 전략과 패시브 전략으로 나뉩니다. 액티브 전략이 벤치마크 대비 초과수익을 거두기 위해 적극적으로 투자를 하는 반면, 패시브 전략은 벤치마크를 그대로 추종하는 것을 목표로 합니다. 예를 들어 벤치마크가 2% 상승하였을 경우 액티브 전략은 이를 넘어서는 수익률을 얻고자 하지만, 패시브 전략은 정확히 2%의 수익률을 얻고자 합니다. 이러한 패시브 전략을 사용하는 펀드가 패시브 펀드 혹은 인덱스 펀드입니다.
+
+흔히 벤치마크가 되는 지수(Index) 중 가장 많이 사용되는 것은 각 국가의 주가지수이며, 우리나라의 경우 **KOSPI200** 지수가 그 예입니다. 이 외에도 여러 국가를 대표하는 주가지수는 표 \@ref(tab:index) 와 같습니다.
+
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:index)각 국가의 대표 주가지수</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> 국가 </th>
+   <th style="text-align:center;"> 지수명 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> 미국 </td>
+   <td style="text-align:center;"> S&amp;P 500 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 영국 </td>
+   <td style="text-align:center;"> FTSE 100 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 일본 </td>
+   <td style="text-align:center;"> Nikkei 225 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 중국 </td>
+   <td style="text-align:center;"> CSI 300 </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 한국 </td>
+   <td style="text-align:center;"> KOSPI 200 </td>
+  </tr>
+</tbody>
+</table>
+
+### 시가총액비중 계산하기
+
+주가지수는 대부분 각 주식의 시가총액비중을 이용해 구성되며, 간단한 예제는 표 \@ref(tab:capexam)와 같습니다.
+
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:capexam)시가총액비중 계산 예시</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> 종목 </th>
+   <th style="text-align:center;"> 주가 </th>
+   <th style="text-align:center;"> 상장 주식수 </th>
+   <th style="text-align:center;"> 유동비 </th>
+   <th style="text-align:center;"> 시가총액 </th>
+   <th style="text-align:center;"> 지수 내 비중 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> A </td>
+   <td style="text-align:center;"> 40,000 </td>
+   <td style="text-align:center;"> 4,000,000 </td>
+   <td style="text-align:center;"> 70% </td>
+   <td style="text-align:center;"> 112,000,000,000 </td>
+   <td style="text-align:center;"> 44.80% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> B </td>
+   <td style="text-align:center;"> 50,000 </td>
+   <td style="text-align:center;"> 3,000,000 </td>
+   <td style="text-align:center;"> 60% </td>
+   <td style="text-align:center;"> 90,000,000,000 </td>
+   <td style="text-align:center;"> 36.00% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> C </td>
+   <td style="text-align:center;"> 30,000 </td>
+   <td style="text-align:center;"> 2,000,000 </td>
+   <td style="text-align:center;"> 80% </td>
+   <td style="text-align:center;"> 48,000,000,000 </td>
+   <td style="text-align:center;"> 19.20% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> 합계 </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;">  </td>
+   <td style="text-align:center;"> 250,000,000,000 </td>
+   <td style="text-align:center;"> 100.00% </td>
+  </tr>
+</tbody>
+</table>
+
+일반적으로 시가총액은 [주가 X 상장 주식수]로 계산됩니다. 그러나 자사주 등의 이유로 기업의 상장된 모든 주식이 거래가 되는 것은 아니며, 상장된 주식 중 유동적으로 거래되는 비율을 **유동비**라고 합니다. 따라서 지수를 구성할 때는 시가총액을 [주가 X 상장 주식수 X 유동비]로 계산합니다. 이렇게 계산된 각 기업의 시가총액을 전체 시가총액의 합으로 나누어 지수 내 비중을 계산합니다.
+
+### 인덱스 포트폴리오 복제하기
+
+이번에는 앞서 구한 데이터를 바탕으로 KOSPI 200 지수를 복제하는 예제를 살펴보겠습니다. 해당 지수의 산출 방법은 다음과 같습니다.
+
+<div style="color:blue">
+한국거래소 유가증권시장(Stock Market)의 보통주 전 종목 가운데 시장 대표성, 유동성(거래량), 업종 대표성(업종은 9개 업종으로 구분)을 기준으로 한다. 즉 시가총액이 상위군에 속하고 거래량이 많은 종목 서열에 따른 200 종목이 편입된다. 
+</div>
+
+즉 일정 규칙에 따라 200 종목이 선정되고, 각 종목들의 시가총액비중 만큼을 지수 내 비중으로 가지고 갑니다. 물론 선정된 200 종목이 단순하게 시가총액의 순서대로 선택되는 것은 아니며, 유동비의 경우 지수제공업체인 한국거래소에서 유료로 제공하므로 이를 구매하지 않는 이상 정확하게 알 수 없습니다. 그러나 지수 내 종목 및 대략의 시가총액비중은 해당 지수를 추종하는 ETF(예: KODEX 200)의 PDF를 통해 확인할 수 있으며, 본 책에서는 편의를 위해 시가총액상위 200 종목을 선택하고 유동비는 모두 100%로 가정하겠습니다. 
+
+앞서 구한 데이터를 이용해 상위 200 종목의 시가총액비중을 계산해보도록 하겠습니다.
+
+
+```r
+library(stringr)
+library(dplyr)
+
+KOR_ticker = read.csv('/home/henry/quant_cookbook/data/KOR_ticker.csv',
+                      row.names = 1, stringsAsFactors = FALSE) 
+
+KOSPI200 = KOR_ticker %>% filter(시장구분 == '코스피') %>%
+  slice(1:200) %>%
+  rename(`시가총액` = `시가총액.원.`) %>%
+  mutate(시가총액비중 = 시가총액 / sum(시가총액))
+```
+
+1. 저장해둔 티커 정보를 불러옵니다.
+2. `filter()` 함수를 통해 코스피 시장에 해당하는 종목만을 선택합니다.
+3. `slice()` 함수를 통해 1번부터 200번 행 까지 데이터를 선택합니다.
+4. `rename()` 함수를 통해 열 이름을 바꿔 줍니다.
+5. 각 주식의 시가총액을 전체 시가총액으로 나눈 후, 시가총액비중에 저장합니다.
+
+계산된 시가총액비중을 시각화하도록 하겠습니다.
+
+
+```r
+library(ggplot2)
+
+KOSPI200 %>% 
+  ggplot(aes(x = reorder(종목명, -시가총액비중), y = 시가총액비중)) +
+  geom_point() +
+  xlab('종목명') +
+  ylab('시가총액비중(%)') +
+  scale_y_continuous(labels = scales::percent)
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-43-1.png" width="70%" style="display: block; margin: auto;" />
+
+1. `ggplot()` 함수를 이용해 시각화를 해주도록 하며, `reorder()`를 통해 시가총액비중으로 $x$축을 정리합니다. 
+2. `geom_point()` 함수를 통해 산점도를 나타냅니다.
+3. $x$축과 $y$축의 이름을 변경합니다.
+4. `scale_y_continuous()` 함수 내 scales::percent 인자를 입력하여 $y$ 축을 퍼센트 형식으로 변경합니다.
+
+위 과정을 통해 코스피 시가총액 상위 200 종목의 시가총액비중을 계산 및 시각화 하였습니다. 그러나 $x$축에 해당하는 종목이 200개나 되어 종목명이 잘 보이지 않으며, 국내의 경우 삼성전자의 시가총액비중이 지나치게 커 다른 종목들의 비중이 잘 보이지 않습니다. 이를 고려하여 그림을 다시 수정해주도록 합니다.
+
+
+```r
+KOSPI200 %>% 
+  ggplot(aes(x = reorder(종목명, -시가총액비중), y = 시가총액비중)) +
+  geom_point() +
+  xlab('종목명') +
+  ylab('시가총액비중(로그 스케일링)') +
+  scale_y_log10() +
+  scale_x_discrete(breaks = KOSPI200[seq(1, 200, by = 5), '종목명']) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) 
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;" />
+
+1. `scale_y_log10()` 함수를 통해 $y$축을 로그값으로 스케일링 하였습니다.
+2. `scale_x_discrete()` 함수를 통해 $x$축에 일부 종목만을 표현하였습니다.
+3. `theme()` 내부에 `element_text()` 인자를 통해 $x$축 글자를 회전시키고 위치를 조정하였습니다.
+
+다음으로 만일 여러분에게 1억이 있을 경우 KOSPI 200을 복제하는 방법을 알아보겠습니다.
+
+
+```r
+KOSPI200 = KOSPI200 %>%
+  mutate(매수금액 = 100000000 * 시가총액비중,
+             매수주수 = 매수금액 / `현재가.종가.`)
+
+KOSPI200 %>% select(매수금액, 매수주수) %>% head()
+```
+
+```
+##   매수금액 매수주수
+## 1 27435163  526.587
+## 2  5490479   64.216
+## 3  2824782    5.836
+## 4  2471455   14.538
+## 5  2272803    6.227
+## 6  1981184   11.321
+```
+
+여러분이 가지고 있는 금액에 시가총액비중을 곱해 각 주식당 매수해야 하는 금액을 구합니다. 그 후 각 금액을 현재가로 나누어 매수해야 하는 주식의 수를 계산합니다.
+
+이론적으로는 계산된 주식수만큼 매수하여야 인덱스를 정확히 복제합니다. 그러나 주식은 1주 단위로 거래할 수 있으므로 소수점 단위로는 거래할 수는 없습니다. 만일 매수주수를 올림처리할 경우 총 매수금액이 보유금액보다 많이질 수 있으므로, 내림처리를 통해 매수주수를 수정해줍니다.
+
+
+```r
+KOSPI200 = KOSPI200 %>% mutate(매수주수 = floor(매수주수))
+KOSPI200 %>% select(매수금액, 매수주수) %>% head()
+```
+
+```
+##   매수금액 매수주수
+## 1 27435163      526
+## 2  5490479       64
+## 3  2824782        5
+## 4  2471455       14
+## 5  2272803        6
+## 6  1981184       11
+```
+
+`floor()` 함수를 통해 내림처리를 하였으며, 각 주수만큼 매수할 경우 KOSPI 200 지수를 매우 유사하게 복제할 수 있습니다.
+
+
+```r
+inv_money = KOSPI200 %>% mutate(실제매수금액 = `현재가.종가.` * 매수주수) %>%
+  summarize(sum(실제매수금액))
+
+print(inv_money)
+```
+
+```
+##   sum(실제매수금액)
+## 1          92764855
+```
+
+주수를 내림 처리하였으므로 실제 매수에 사용되는 금액은 1억원 보다 약간 모자르게 되며, 1억과 해당금액의 차이는 현금으로 보유하거나 해당 지수를 추종하는 ETF 및 펀드 투자에 사용해도 됩니다.
+
+### 팩터를 이용한 인핸스드 포트폴리오 구성하기
+
+위 방법을 통해 포트폴리오를 구성할 경우 이론적으로는 벤치마크와 수익률이 거의 동일합니다. 그러나 약간의 위험을 감수하여 벤치마크 대비 미세한 초과수익을 원하는 수요가 존재하며, 이러한 펀드가 **인핸스드 인덱스 펀드**입니다. 이를 위해 층화추출법, 비중조절법, 차익거래 등의 전략이 활용되며, 본 책에서는 가장 널리 사용되는 비중조절법에 대해 알아보겠습니다. 그 예제로써 PBR을 이용해 시가총액비중을 조절해보도록 하겠습니다.
+
+
+```r
+KOSPI200 = KOSPI200 %>% select(종목명, PBR, 시가총액비중) %>%
+  mutate(PBR = as.numeric(PBR)) 
+```
+
+먼저 필요한 종목코드, 종목명, PBR, 시가총액비중 열만 선택합니다. 그 후 문자열 형태의 PBR을 숫자 형태로 변경해주며, PBR 데이터가 없어 [-]로 표시되었던 종목의 PBR은 NA로 변경됩니다.
+
+#### 단순 가감법
+
+먼저 가장 손쉬운 방법은 PBR의 랭킹을 구한 후, PBR이 낮은 상위 n개 종목에는 일정 비중씩을 더하며, 나머지 종목들에서 해당 비중만큼을 빼는 방법입니다. 몇개의 종목에서 얼마씩의 비중을 조절할지는 투자자의 재량에 달렸으며, 본 예제에서는 상위 100 종목에 각각 5bp를 더해주며, 나머지 100 종목에서 각각 5bp를 빼주도록 하겠습니다.
+
+
+```r
+KOSPI200 = KOSPI200 %>%
+  mutate(랭킹 = rank(PBR),
+           조절비중 = ifelse(랭킹 <= 100, 시가총액비중 + 0.0005, 시가총액비중 - 0.0005),
+           조절비중 = ifelse(조절비중 < 0, 0, 조절비중),
+           조절비중 = 조절비중 / sum(조절비중),
+           차이 = 조절비중 - 시가총액비중) 
+```
+
+
+```r
+library(tidyr)
+
+head(KOSPI200)
+```
+
+```
+##             종목명  PBR 시가총액비중 랭킹 조절비중
+## 1         삼성전자 1.47      0.27435  137  0.27384
+## 2       SK하이닉스 1.33      0.05490  129  0.05440
+## 3 삼성바이오로직스 7.71      0.02825  194  0.02775
+## 4            NAVER 5.35      0.02471  190  0.02421
+## 5           LG화학 1.67      0.02273  142  0.02223
+## 6         셀트리온 9.27      0.01981  195  0.01931
+##         차이
+## 1 -0.0005084
+## 2 -0.0005017
+## 3 -0.0005009
+## 4 -0.0005007
+## 5 -0.0005007
+## 6 -0.0005006
+```
+
+```r
+tail(KOSPI200)
+```
+
+```
+##         종목명  PBR 시가총액비중  랭킹  조절비중
+## 195 넥센타이어 0.42    0.0004980  33.0 0.0009979
+## 196       대웅 0.99    0.0004970 109.5 0.0000000
+## 197       풍산 0.41    0.0004944  30.0 0.0009944
+## 198    SPC삼립 1.78    0.0004940 148.0 0.0000000
+## 199       한섬 0.56    0.0004877  58.5 0.0009877
+## 200 씨에스윈드 1.80    0.0004795 149.5 0.0000000
+##           차이
+## 195  0.0005000
+## 196 -0.0004970
+## 197  0.0005000
+## 198 -0.0004940
+## 199  0.0005000
+## 200 -0.0004795
+```
+
+1. `rank()` 함수를 통해 PBR의 랭킹을 구합니다.
+2. 랭킹이 100 이하일 시, 즉 저PBR 100개 종목에는 시가총액비중에서 5bp씩을 더해주며, 반대로 고PBR 100개 종목에는 5bp 씩을 빼줍니다.
+3. 시가총액비중이 5bp 미만인 종목에서 5bp를 차감할 경우 비중이 0 미만이 되므로, 이러한 경우는 투자비중을 0으로 만들어 줍니다.
+4. 3번 결과에 따라 비중의 합이 1과 다르게 되므로, 각각의 비중을 합으로 나누어 값을 다시 계산해 줍니다.
+5. 시가총액비중과 조절비중의 차이를 계산합니다.
+
+PBR 랭킹이 100 미만인 종목, 즉 저PBR 종목은 시가총액비중 대비 투자비중이 많으며, 이와 반대로 고PBR 종목은 시가총액비중 대비 투자비중이 작습니다. 즉 장기적으로 저PBR 종목이 고PBR 종목 대비 우수한 성과를 보일 경우, 저PBR 종목에 더 높은 비중을 준 해당 포트폴리오 역시 벤치마크 대비 우수한 성과를 기록할 수 있을 것입니다.
+
+
+```r
+KOSPI200 %>% 
+  ggplot(aes(x = reorder(종목명, -시가총액비중), y = 시가총액비중)) +
+  geom_point() +
+  geom_point(data = KOSPI200, aes(x = reorder(종목명, -시가총액비중), y = 조절비중),
+             color = 'red', shape = 4) +
+  xlab('종목명') +
+  ylab('비중(%)') +
+  coord_cartesian(ylim = c(0, 0.03)) +
+  scale_x_discrete(breaks = KOSPI200[seq(1, 200, by = 5), '종목명']) +
+  scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) 
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-51-1.png" width="70%" style="display: block; margin: auto;" />
+
+검은색 점은 인덱스 내 시가총액비중이며, 붉은색 엑스표시는 5bp씩 더하거나 뺀 투자비중입니다. 약간씩의 베팅만 했으므로 기초지수와 크게 차이가 없습니다.
+
+
+```r
+KOSPI200_mod = KOSPI200 %>% arrange(PBR)
+
+KOSPI200_mod %>% 
+  ggplot(aes(x = reorder(종목명, PBR), y = 차이)) +
+  geom_point() +
+  geom_col(aes(x = reorder(종목명, PBR), y = PBR /10000), fill = 'blue', alpha = 0.2) +
+  xlab('종목명') +
+  ylab('차이(%)') +
+  scale_y_continuous(labels = scales::percent, 
+                     sec.axis = sec_axis(~. * 10000, name = "PBR")) +
+  scale_x_discrete(breaks = KOSPI200_mod[seq(1, 200, by = 10), '종목명']) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-52-1.png" width="70%" style="display: block; margin: auto;" />
+
+PBR 기준 오름차순을 한 후 그림을 그려보면, PBR이 낮은 종목에는 비중이 추가되며 PBR이 높은 종목에는 비중이 감소되는 것이 쉽게 확인됩니다.
+
+#### 팩터에 대한 전체 종목의 틸트
+
+위 방법의 경우 상위 종목과 하위 종목에 동일한 비중을 더하거나 빼주었습니다. 그러나 팩터가 강한 종목의 경우 더욱 많은 비중을 더하고, 팩터가 약한 종목의 경우 더욱 많은 비중을 빼는 등 훨씬 적극적으로 포트폴리오를 구성할 수도 있습니다. 이를 위해서는 먼저 확률밀도함수와 누적분포함수를 이해해야 합니다.
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-53-1.png" width="70%" style="display: block; margin: auto;" />
+
+파란색 선은 확률밀도함수로써, 각 $x$축에 대한 확률값을 나타냅니다. 빨간색 선은 누적분포함수로써, 각 $x$축이 오른쪽으로 이동함에 따른 분포의 누적확률을 계산합니다. 확률의 합은 1이므로 가장 오른쪽은 1의 값을 가지게 됩니다.
+
+이를 [팩터의 결합 방법]에서 계산한 Z-Score에 응용할 수도 있으며, 이 과정은 표 \@ref(tab:cdfexam)에 나와있습니다.
+
+<table class="table table-striped table-hover table-condensed table" style="margin-left: auto; margin-right: auto; font-size: 8px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">(\#tab:cdfexam)누적분포함수를 이용한 비중 조절</caption>
+ <thead>
+  <tr>
+   <th style="text-align:center;"> 종목 </th>
+   <th style="text-align:center;"> PBR </th>
+   <th style="text-align:center;"> 랭킹 </th>
+   <th style="text-align:center;"> Z-Score X (-1) </th>
+   <th style="text-align:center;"> 누적확률 </th>
+   <th style="text-align:center;"> 시가총액비중 </th>
+   <th style="text-align:center;"> 시총 X 누적확률 </th>
+   <th style="text-align:center;"> 비중 재계산 </th>
+   <th style="text-align:center;"> 차이 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:center;"> A </td>
+   <td style="text-align:center;"> 0.50 </td>
+   <td style="text-align:center;"> 1 </td>
+   <td style="text-align:center;"> 1.26 </td>
+   <td style="text-align:center;"> 0.90 </td>
+   <td style="text-align:center;"> 20.69% </td>
+   <td style="text-align:center;"> 18.56% </td>
+   <td style="text-align:center;"> 33.10% </td>
+   <td style="text-align:center;"> 12.38% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> B </td>
+   <td style="text-align:center;"> 0.70 </td>
+   <td style="text-align:center;"> 2 </td>
+   <td style="text-align:center;"> 0.63 </td>
+   <td style="text-align:center;"> 0.74 </td>
+   <td style="text-align:center;"> 31.03% </td>
+   <td style="text-align:center;"> 22.86% </td>
+   <td style="text-align:center;"> 40.72% </td>
+   <td style="text-align:center;"> 9.68% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> C </td>
+   <td style="text-align:center;"> 1.00 </td>
+   <td style="text-align:center;"> 3 </td>
+   <td style="text-align:center;"> 0.00 </td>
+   <td style="text-align:center;"> 0.50 </td>
+   <td style="text-align:center;"> 18.97% </td>
+   <td style="text-align:center;"> 9.48% </td>
+   <td style="text-align:center;"> 16.89% </td>
+   <td style="text-align:center;"> -2.07% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> D </td>
+   <td style="text-align:center;"> 1.20 </td>
+   <td style="text-align:center;"> 4 </td>
+   <td style="text-align:center;"> -0.63 </td>
+   <td style="text-align:center;"> 0.26 </td>
+   <td style="text-align:center;"> 13.79% </td>
+   <td style="text-align:center;"> 3.64% </td>
+   <td style="text-align:center;"> 6.48% </td>
+   <td style="text-align:center;"> -7.32% </td>
+  </tr>
+  <tr>
+   <td style="text-align:center;"> E </td>
+   <td style="text-align:center;"> 1.50 </td>
+   <td style="text-align:center;"> 5 </td>
+   <td style="text-align:center;"> -1.26 </td>
+   <td style="text-align:center;"> 0.10 </td>
+   <td style="text-align:center;"> 15.52% </td>
+   <td style="text-align:center;"> 1.60% </td>
+   <td style="text-align:center;"> 2.85% </td>
+   <td style="text-align:center;"> -12.67% </td>
+  </tr>
+</tbody>
+</table>
+
+1. 각각의 PBR에 대해 랭킹을 구합니다.
+2. 랭킹을 바탕으로 Z-Score를 구하며, 결과에 (-1)을 곱해줍니다. 이는 랭킹이 높은 종목의 경우 Z-Score가 음수로 나오므로, 해당 종목의 누적확률 값을 높게하기 위해 양수로 전환해주는 것입니다. 
+3. 구해진 Z-Score를 바탕으로 누적확률을 구합니다. 랭킹이 높은 종목, 즉 저PBR일 수록 해당 값이 크게 나옵니다.
+4. 지수 내 시가총액비중에 누적확률값을 곱해줍니다. 저PBR 종목일수록 원래의 시가총액비중과 비슷하게 유지되며, 고PBR 종목의 경우 시가총액비중 대비 훨씬 낮을 값을 보입니다.
+5. 투자비중의 합이 1이 되도록 재표준화를 해줍니다.
+6. 각 종목의 차이를 보면, PBR이 낮을수록 증가되는 비중이 크며, PBR아 높을수록 감소되는 비중 역시 큽니다.
+
+이처럼 Z-Score와 누적확률을 이용할 경우 훨씬 팩터에 대한 노출을 크게 할 수 있습니다. 이번에는 KOSPI 200 전 종목을 대상으로 PBR 대상 팩터 틸트 포트폴리오를 구성하도록 하겠습니다.
+
+
+```r
+KOSPI200_tilt = KOSPI200 %>%
+  select(종목명, PBR, 시가총액비중, 랭킹) %>%
+  mutate(zscore = -scale(랭킹),
+         cdf = pnorm(zscore),
+         투자비중 = 시가총액비중 * cdf,
+         투자비중 = 투자비중 / sum(투자비중),
+         차이 = 투자비중 - 시가총액비중)
+```
+
+
+```r
+head(KOSPI200_tilt)
+```
+
+```
+##             종목명  PBR 시가총액비중 랭킹  zscore
+## 1         삼성전자 1.47      0.27435  137 -0.6307
+## 2       SK하이닉스 1.33      0.05490  129 -0.4924
+## 3 삼성바이오로직스 7.71      0.02825  194 -1.6155
+## 4            NAVER 5.35      0.02471  190 -1.5464
+## 5           LG화학 1.67      0.02273  142 -0.7170
+## 6         셀트리온 9.27      0.01981  195 -1.6328
+##       cdf 투자비중      차이
+## 1 0.26413 0.181098 -0.093254
+## 2 0.31121 0.042702 -0.012203
+## 3 0.05310 0.003749 -0.024499
+## 4 0.06100 0.003768 -0.020947
+## 5 0.23667 0.013443 -0.009285
+## 6 0.05126 0.002538 -0.017274
+```
+
+```r
+tail(KOSPI200_tilt)
+```
+
+```
+##         종목명  PBR 시가총액비중  랭킹  zscore    cdf
+## 195 넥센타이어 0.42    0.0004980  33.0  1.1663 0.8782
+## 196       대웅 0.99    0.0004970 109.5 -0.1555 0.4382
+## 197       풍산 0.41    0.0004944  30.0  1.2181 0.8884
+## 198    SPC삼립 1.78    0.0004940 148.0 -0.8207 0.2059
+## 199       한섬 0.56    0.0004877  58.5  0.7257 0.7660
+## 200 씨에스윈드 1.80    0.0004795 149.5 -0.8466 0.1986
+##      투자비중        차이
+## 195 0.0010929  0.00059497
+## 196 0.0005442  0.00004728
+## 197 0.0010977  0.00060327
+## 198 0.0002542 -0.00023979
+## 199 0.0009337  0.00044593
+## 200 0.0002380 -0.00024153
+```
+
+1. 먼저 필요한 열만 선택합니다.
+2. `scale()` 함수를 통해 Z-Score를 구하며, (-1)을 곱해줍니다.
+3. `pnorm()` 함수를 통해 누적확률 값을 구해집니다.
+4. 시가총액비중에 누적확률을 곱해 새로운 투자비중을 구한 후, 이를 재표준화 해줍니다.
+5. 틸트된 비중과 기존 비중간의 차이를 구합니다.
+
+위 방법은 시가총액비중이 클수록, 그리고 Z-Score의 절대값이 클수록 비중의 차이가 많이 발생하게 됩니다. 각 종목의 투자비중을 그림으로 나타내겠습니다.
+
+
+```r
+KOSPI200 %>% 
+  ggplot(aes(x = reorder(종목명, -시가총액비중), y = 시가총액비중)) +
+  geom_point() +
+  geom_point(data = KOSPI200_tilt, aes(x = reorder(종목명, -시가총액비중), y = 투자비중),
+             color = 'red', shape = 4) +
+  xlab('종목명') +
+  ylab('비중(%)') +
+  coord_cartesian(ylim = c(0, 0.03)) +
+  scale_x_discrete(breaks = KOSPI200[seq(1, 200, by = 5), '종목명']) +
+  scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) 
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-56-1.png" width="70%" style="display: block; margin: auto;" />
+
+검은색 점은 인덱스 내 시가총액비중이며, 붉은색 엑스표시는 새롭게 구한 투자비중입니다. 단순이 동일한 비중을 더하거나 빼는것 보다 비중 차이의 폭이 훨씬 크며, 이는 전체 포트폴리오가 팩터에 노출된 정도가 크다는 것을 의미합니다.
+
+그러나 실무에서는 이러한 차이가 지나치게 벌어지는 것을 방지하기 위한 제약이 있습니다. 그 예로써 종목당 시가총액비중과 투자비중의 차이가 50bp 이상이 되지 않는 제약이 있는 경우를 생각해봅시다. (제약을 더 크게 설정할 수록, 지수 대비 베팅의 크기가 커집니다.)
+
+
+```r
+KOSPI200_tilt %>%
+  ggplot(aes(x = reorder(종목명, -시가총액비중), y = 차이)) +
+  geom_point() +
+  geom_hline(aes(yintercept = 0.005), color = 'red') + 
+  geom_hline(aes(yintercept = -0.005), color = 'red') +
+  xlab('종목명') +
+  ylab('비중 차이(%)') +
+  scale_x_discrete(breaks = KOSPI200[seq(1, 200, by = 5), '종목명']) +
+  scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) 
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-57-1.png" width="70%" style="display: block; margin: auto;" />
+
+시가총액이 큰 종목의 경우 허용치인 50bp를 넘어가는 경우가 다수 존재합니다. 이를 방지하기 위해 비중에 제약조건을 두어야 합니다. 예를 들어 삼성전자의 경우 둘 간의 비중의 차이가 -0.0933 로 지나치게 크므로 [시가총액비중 - 50bp] 가 투자되도록 변경해 줍니다. 타 종목 역시 이와 동일하게 제약조건을 추가해 줍니다.
+
+
+```r
+KOSPI200_tilt = KOSPI200_tilt %>%
+    mutate_at(vars(투자비중), list(~ifelse(차이 < -0.005, 시가총액비중 - 0.005, 투자비중))) %>%
+    mutate_at(vars(투자비중), list(~ifelse(차이 > 0.005, 시가총액비중 + 0.005, 투자비중))) %>%
+    mutate(투자비중 = 투자비중 / sum(투자비중), 
+               차이 = 투자비중 - 시가총액비중)
+
+head(KOSPI200_tilt)
+```
+
+```
+##             종목명  PBR 시가총액비중 랭킹  zscore
+## 1         삼성전자 1.47      0.27435  137 -0.6307
+## 2       SK하이닉스 1.33      0.05490  129 -0.4924
+## 3 삼성바이오로직스 7.71      0.02825  194 -1.6155
+## 4            NAVER 5.35      0.02471  190 -1.5464
+## 5           LG화학 1.67      0.02273  142 -0.7170
+## 6         셀트리온 9.27      0.01981  195 -1.6328
+##       cdf 투자비중      차이
+## 1 0.26413  0.25053 -0.023817
+## 2 0.31121  0.04642 -0.008486
+## 3 0.05310  0.02162 -0.006624
+## 4 0.06100  0.01834 -0.006377
+## 5 0.23667  0.01649 -0.006238
+## 6 0.05126  0.01378 -0.006035
+```
+
+1. `mutate_at()` 함수를 이용해 시가총액비중과 투자비중의 차이가 50bp 미만일 경우 투자비중을 [시가총액 - 50bp]로 변경해주며, 50bp 초과일 경우 [시가총액 + 50bp]로 변경해줍니다.
+2. 재표준화 작업을 거쳐준 후 차이를 다시 계산합니다.
+
+위 방법을 통해 차이가 50bp가 되도록 강제로 설정하였으나, 재표준화를 거치는 과정에서 차이가 50bp를 넘는 종목이 다시 발생하게 됩니다. 모든 종목의 차이가 50bp 이내가 되도록 해당 작업을 반복해줍니다.
+
+
+```r
+while (max(abs(KOSPI200_tilt$차이)) > (0.005 + 0.00001)) {
+  KOSPI200_tilt = KOSPI200_tilt %>%
+    mutate_at(vars(투자비중), list(~ifelse(차이 < -0.005, 시가총액비중 - 0.005, 투자비중))) %>%
+    mutate_at(vars(투자비중), list(~ifelse(차이 > 0.005, 시가총액비중 + 0.005, 투자비중))) %>%
+    mutate(투자비중 = 투자비중 / sum(투자비중), 
+               차이 = 투자비중 - 시가총액비중)
+}
+
+head(KOSPI200_tilt)
+```
+
+```
+##             종목명  PBR 시가총액비중 랭킹  zscore
+## 1         삼성전자 1.47      0.27435  137 -0.6307
+## 2       SK하이닉스 1.33      0.05490  129 -0.4924
+## 3 삼성바이오로직스 7.71      0.02825  194 -1.6155
+## 4            NAVER 5.35      0.02471  190 -1.5464
+## 5           LG화학 1.67      0.02273  142 -0.7170
+## 6         셀트리온 9.27      0.01981  195 -1.6328
+##       cdf 투자비중      차이
+## 1 0.26413  0.26935 -0.005005
+## 2 0.31121  0.04990 -0.005001
+## 3 0.05310  0.02325 -0.005000
+## 4 0.06100  0.01971 -0.005000
+## 5 0.23667  0.01773 -0.005000
+## 6 0.05126  0.01481 -0.005000
+```
+
+위와 동일한 코드에 `while()` 구문을 활용하여 둘 간의 차이가 50bp 보다 클 경우 해당 작업을 계속해서 반복하며, 결과적으로 차이가 거의 50bp에 수렴합니다.
+
+
+```r
+KOSPI200_tilt %>%
+  ggplot(aes(x = reorder(종목명, -시가총액비중), y = 차이)) +
+  geom_point() +
+  geom_hline(aes(yintercept = 0.005), color = 'red') + 
+  geom_hline(aes(yintercept = -0.005), color = 'red') +
+  xlab('종목명') +
+  ylab('비중 차이(%)') +
+  scale_x_discrete(breaks = KOSPI200[seq(1, 200, by = 5), '종목명']) +
+  scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) 
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-60-1.png" width="70%" style="display: block; margin: auto;" />
+
+모든 종목이 제약조건 내에 들어오게 되었습니다.
+
+
+```r
+KOSPI200 %>% 
+  ggplot(aes(x = reorder(종목명, -시가총액비중), y = 시가총액비중)) +
+  geom_point() +
+  geom_point(data = KOSPI200_tilt, aes(x = reorder(종목명, -시가총액비중), y = 투자비중),
+             color = 'red', shape = 4) +
+  xlab('종목명') +
+  ylab('비중(%)') +
+  coord_cartesian(ylim = c(0, 0.03)) +
+  scale_x_discrete(breaks = KOSPI200[seq(1, 200, by = 5), '종목명']) +
+  scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) 
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-61-1.png" width="70%" style="display: block; margin: auto;" />
+
+제약조건으로 인해 기초지수와의 차이가 줄어들었지만, 기존 단순가감법 보다는 적극적으로 베팅이 되었습니다.
+
+
+```r
+KOSPI200_tilt_mod = KOSPI200_tilt %>% arrange(PBR)
+
+KOSPI200_tilt_mod %>% 
+  ggplot(aes(x = reorder(종목명, PBR), y = 차이)) +
+  geom_point() +
+  geom_col(aes(x = reorder(종목명, PBR), y = PBR /2000), fill = 'blue', alpha = 0.2) +
+  xlab('종목명') +
+  ylab('차이(%)') +
+  scale_y_continuous(labels = scales::percent, 
+                     sec.axis = sec_axis(~. * 2000, name = "PBR")) +
+  scale_x_discrete(breaks = KOSPI200_mod[seq(1, 200, by = 10), '종목명']) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+<img src="11-portfolio_files/figure-html/unnamed-chunk-62-1.png" width="70%" style="display: block; margin: auto;" />
+
+PBR에 따른 비중의 차이 역시 단순 가감법보다 훨씬 증가했습니다. 실무에서는 단순히 PBR처럼 하나의 지표만 살펴보기 보다는 앞서 살펴본 멀티팩터를 이용해 비중을 틸트하기도 하며, 좀 더 다양한 제약조건을 추가하기도 합니다.

@@ -551,7 +551,7 @@ for(i in 1 : nrow(KOR_ticker) ) {
       html_text() %>%
       parse_number()
     
-    # 보통주 발행장주식수 크롤링
+    # 보통주 발행주식수 크롤링
     share = read_html(data) %>%
       html_node(
         xpath =
