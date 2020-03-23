@@ -1,7 +1,7 @@
 --- 
 title: "R을 이용한 퀀트 투자 포트폴리오 만들기"
 author: "이현열"
-date: "2020-03-22"
+date: "2020-03-23"
 output: bookdown::gitbook
 site: bookdown::bookdown_site
 documentclass: book
@@ -18,6 +18,8 @@ github-repo: hyunyulhenry/quant_cookbook
 [R을 이용한 퀀트 투자 포트폴리오 만들기 구매 링크](https://book.naver.com/bookdb/book_detail.nhn?bid=15369836)
 
 본 페이지는 **R을 이용한 퀀트 투자 포트폴리오 만들기**의 웹사이트 입니다. 책의 수정 사항이 있을시 즉시 반영할 예정이며, 책에서 다루지 못했던 추가적인 내용도 지속적으로 업데이트 할 예정입니다.
+
+패스트캠퍼스에서 본 책의 내용을 바탕으로 강의가 진행중이니, 수강을 원하시는 분은 참조하시기 바랍니다. [강의 링크](https://bit.ly/2WMwLpF)
 
 <div style="background-color:#F7F7F7;padding: 20px 20px 20px 20px">
 
