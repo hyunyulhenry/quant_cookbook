@@ -2,7 +2,10 @@
 title: "R을 이용한 퀀트 투자 포트폴리오 만들기"
 author: "이현열"
 date: "`r Sys.Date()`"
-output: bookdown::gitbook
+output:
+  bookdown::gitbook:
+    includes:
+      after_body: disqus.html
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, article.bib]
@@ -23,9 +26,11 @@ knitr::include_graphics('images/cover.png')
 
 <div style="background-color:#F7F7F7;padding: 20px 20px 20px 20px">
 
-패스트캠퍼스에서 본 책의 내용을 바탕으로 강의가 진행중이니, 수강을 원하시는 분은 참조하시기 바랍니다. [강의 링크](https://bit.ly/2WMwLpF)
+**패스트캠퍼스에서 본 책의 내용을 바탕으로 강의가 진행중이니, 수강을 원하시는 분은 참조하시기 바랍니다. [강의 링크](https://bit.ly/2WMwLpF)**
 
 책 발간 이후 업데이트 내용은 다음과 같습니다.
+
+- 2020년 4월 7일: 각 페이지 하단에 질문/답변 기능을 추가하였습니다. 이제 블로그나 이메일, SNS 보다는 웹북에 질문을 남겨주시기 바랍니다.
 
 - 2020년 3월 22일: 11장 [포트폴리오 구성]에 실무에서 많이 사용되는 인덱스 포트폴리오 및 인헨스드 인덱스 포트폴리오 구성 방법을 추가하였습니다.
 

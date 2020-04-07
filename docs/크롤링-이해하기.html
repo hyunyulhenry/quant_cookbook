@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-03-22" />
+<meta name="date" content="2020-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -510,26 +510,26 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>위 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장됩니다. 이처럼 개발자 도구 화면을 통해 내가 추출하고자 하는 데이터가 HTML 중 어디에 위치하고 있는지 먼저 확인하면 어렵지 않게 해당 데이터를 읽어올 수 있습니다.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">print</span>(data_title)</a></code></pre></div>
-<pre><code>##  [1] &quot;&quot;                                     
-##  [2] &quot;기업 신용등급 `뚝뚝`…4월 만기도래&quot;    
-##  [3] &quot;증권사 ELS發 CP시장 경색 우려 &quot;       
-##  [4] &quot;\&quot;우한 신규환자 100명 보고 못 해&quot;     
-##  [5] &quot;오늘 유럽서 1,300명 입국…전원 &quot;       
-##  [6] &quot;중학교 1학년 자유학년제 대비, 스마&quot;   
-##  [7] &quot;신한금융투자, &#39;손실우려&#39; 독일헤리티&quot;  
-##  [8] &quot;SK·CJ·포스코 등 561개사, 2&quot;           
-##  [9] &quot;&#39;이런 주가는 10년만&#39;…현대차 반등&quot;     
-## [10] &quot;알짜부동산 분산투자 `메리츠글로벌리츠&quot;
-## [11] &quot;증권사 반대매매 완화 `제각각`… 금&quot;    
-## [12] &quot;내달 회사채 만기 6.5兆… 기업 자&quot;      
-## [13] &quot;신한금투, 독일 헤리티지 DLS 고객&quot;     
-## [14] &quot;美 대규모 재정정책 의회통과 주목..&quot;   
-## [15] &quot;변동성 장세 속 안정적 성과… 초저금&quot;   
-## [16] &quot;정년퇴직 3개월 남은 60대 \&quot;모아둔&quot;    
-## [17] &quot;4월 회사채만기 6.5조…역대 최대&quot;       
-## [18] &quot;증시 불안에 ELS 발행 줄취소&quot;          
-## [19] &quot;글로벌증시 급등락에 울고 웃는 ETN&quot;    
-## [20] &quot;증안기금, 급락때 `4·3·3` 세차&quot;</code></pre>
+<pre><code>##  [1] &quot;[표]채권 수익률 현황(4월 7일)&quot;       
+##  [2] &quot;[마켓인사이트]올해는 용두사미로 끝났&quot;
+##  [3] &quot;코로나에도 잘 버틴 삼성·LG전자…2&quot;    
+##  [4] &quot;씨엠에스에듀, 특별관계자 지분변동&quot;   
+##  [5] &quot;美 셰일기업 화이팅 &#39;파산&#39;…다음 타&quot;   
+##  [6] &quot;3월 대구·경북 상장사 시가총액 2월&quot;   
+##  [7] &quot;MMF 자금 유출·증시 하락...3월&quot;       
+##  [8] &quot;플랜코리아, 4월 7일 세계보건의날 &quot;   
+##  [9] &quot;[표]증시주변 자금동향 (4/6)&quot;         
+## [10] &quot;투에이비, 중국 왕홍마케팅 재개 \&quot;중&quot; 
+## [11] &quot;㈜아우로라, ‘티쿤’ 통해 칠레에 스&quot;   
+## [12] &quot;성호전자, 30억원 규모 유상증자 결&quot;   
+## [13] &quot;동학개미의 승리? 삼성전자·LG전자 &quot;   
+## [14] &quot;회사채 거래 소폭 회복...기업 자금&quot;   
+## [15] &quot;하이소닉, 20억원 규모 사모 CB &quot;      
+## [16] &quot;코스닥 600선 회복 마감&quot;              
+## [17] &quot;코스닥, 600선 회복 마감&quot;             
+## [18] &quot;오늘의 마감 시황&quot;                    
+## [19] &quot;오른 코스피, 내린 환율&quot;              
+## [20] &quot;4거래일 연속 상승해 1800선 회복&quot;</code></pre>
 </div>
 <div id="기업공시채널에서-오늘의-공시-불러오기" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -748,20 +748,20 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>저장된 테이블 내용을 확인하면 다음과 같습니다.</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
-<pre><code>##    N           종목명  현재가 전일비  등락률 액면가
-## 1 NA                                               
-## 2  1         삼성전자  45,400  2,450  +5.70%    100
-## 3  2       SK하이닉스  74,800  5,800  +8.41%  5,000
-## 4  3       삼성전자우  38,000  2,550  +7.19%    100
-## 5  4 삼성바이오로직스 430,000 64,000 +17.49%  2,500
-## 6  5            NAVER 154,000 10,000  +6.94%    100
+<pre><code>##    N           종목명  현재가 전일비 등락률 액면가
+## 1 NA                                              
+## 2  1         삼성전자  49,600    900 +1.85%    100
+## 3  2       SK하이닉스  85,800  2,700 +3.25%  5,000
+## 4  3       삼성전자우  41,800    850 +2.08%    100
+## 5  4 삼성바이오로직스 482,500  5,500 +1.15%  2,500
+## 6  5            NAVER 169,500  3,500 -2.02%    100
 ##    시가총액 상장주식수 외국인비율     거래량    PER
 ## 1                              NA              &lt;NA&gt;
-## 2 2,710,281  5,969,783      55.41 49,164,641  14.34
-## 3   544,546    728,002      49.21  8,677,465  27.05
-## 4   312,697    822,887      89.18  4,592,347  12.00
-## 5   284,510     66,165      10.64    582,163 140.20
-## 6   252,966    164,263      57.94    996,000  43.53
+## 2 2,961,012  5,969,783      55.01 31,240,192  15.67
+## 3   624,626    728,002      49.21  5,588,316  31.03
+## 4   343,967    822,887      88.67  2,905,257  13.20
+## 5   319,246     66,165      10.27    175,570 157.32
+## 6   278,426    164,263      57.99    865,375  47.91
 ##     ROE 토론실
 ## 1  &lt;NA&gt;     NA
 ## 2  8.69     NA
@@ -773,27 +773,27 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">table[, <span class="kw">ncol</span>(table)] =<span class="st"> </span><span class="ot">NULL</span></a>
 <a class="sourceLine" id="cb79-2" data-line-number="2">table =<span class="st"> </span><span class="kw">na.omit</span>(table)</a>
 <a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
-<pre><code>##    N           종목명  현재가 전일비  등락률 액면가
-## 2  1         삼성전자  45,400  2,450  +5.70%    100
-## 3  2       SK하이닉스  74,800  5,800  +8.41%  5,000
-## 4  3       삼성전자우  38,000  2,550  +7.19%    100
-## 5  4 삼성바이오로직스 430,000 64,000 +17.49%  2,500
-## 6  5            NAVER 154,000 10,000  +6.94%    100
-## 10 6         셀트리온 152,500 12,500  +8.93%  1,000
+<pre><code>##    N           종목명  현재가 전일비 등락률 액면가
+## 2  1         삼성전자  49,600    900 +1.85%    100
+## 3  2       SK하이닉스  85,800  2,700 +3.25%  5,000
+## 4  3       삼성전자우  41,800    850 +2.08%    100
+## 5  4 삼성바이오로직스 482,500  5,500 +1.15%  2,500
+## 6  5            NAVER 169,500  3,500 -2.02%    100
+## 10 6         셀트리온 210,000  1,000 +0.48%  1,000
 ##     시가총액 상장주식수 외국인비율     거래량    PER
-## 2  2,710,281  5,969,783      55.41 49,164,641  14.34
-## 3    544,546    728,002      49.21  8,677,465  27.05
-## 4    312,697    822,887      89.18  4,592,347  12.00
-## 5    284,510     66,165      10.64    582,163 140.20
-## 6    252,966    164,263      57.94    996,000  43.53
-## 10   195,729    128,347      20.56  1,984,495  83.20
+## 2  2,961,012  5,969,783      55.01 31,240,192  15.67
+## 3    624,626    728,002      49.21  5,588,316  31.03
+## 4    343,967    822,887      88.67  2,905,257  13.20
+## 5    319,246     66,165      10.27    175,570 157.32
+## 6    278,426    164,263      57.99    865,375  47.91
+## 10   269,528    128,347      20.21  2,187,668  94.98
 ##      ROE
 ## 2   8.69
 ## 3   4.25
 ## 4    N/A
 ## 5   4.77
 ## 6  10.56
-## 10 10.84</code></pre>
+## 10 11.19</code></pre>
 <p>이제 필요한 정보는 6자리 티커입니다. 티커 역시 개발자 도구 화면을 통해 tbody → td → a 태그의 href 속성에 위치하고 있음을 알고 있습니다. 티커를 추출하는 코드는 다음과 같습니다.</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">symbol =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb81-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(., <span class="st">&#39;tbody&#39;</span>) <span class="op">%&gt;%</span></a>
@@ -841,7 +841,7 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">symbol =<span class="st"> </span><span class="kw">unique</span>(symbol)</a>
 <a class="sourceLine" id="cb85-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</a></code></pre></div>
 <pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;005935&quot; &quot;207940&quot; &quot;035420&quot;
-##  [6] &quot;068270&quot; &quot;051910&quot; &quot;051900&quot; &quot;028260&quot; &quot;005380&quot;</code></pre>
+##  [6] &quot;068270&quot; &quot;051910&quot; &quot;005380&quot; &quot;051900&quot; &quot;028260&quot;</code></pre>
 <p><code>unique()</code> 함수를 이용해 중복되는 티커를 제거하면 우리가 원하는 티커 부분만 깔끔하게 정리됩니다. 해당 내용을 위에서 구한 테이블에 입력한 후 데이터를 다듬는 과정은 다음과 같습니다.</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">table<span class="op">$</span>N =<span class="st"> </span>symbol</a>
 <a class="sourceLine" id="cb87-2" data-line-number="2"><span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &#39;종목코드&#39;</span></a>
@@ -939,6 +939,17 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <li id="fn10"><p><a href="https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258" class="uri">https://finance.naver.com/news/news_list.nhn?mode=LSS2D&amp;section_id=101&amp;section_id2=258</a><a href="크롤링-이해하기.html#fnref10" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
+<div id="disqus_thread"></div>
+<script>
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://quant-cookbook.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             </section>
 
           </div>

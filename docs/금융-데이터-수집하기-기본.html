@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-03-22" />
+<meta name="date" content="2020-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -490,10 +490,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  4 코스피   004970   신라교역… 어업              14350
 ##  5 코스피   012320   경동인베스… 광업              40300
 ##  6 코스피   003580   넥스트사이… 광업               5200
-##  7 코스피   017810   풀무원 음식료품          11300
-##  8 코스피   280360   롯데제과… 음식료품         159500
-##  9 코스피   271560   오리온 음식료품          83300
-## 10 코스피   006090   사조오양… 음식료품           8220
+##  7 코스피   271560   오리온 음식료품          83300
+##  8 코스피   006090   사조오양… 음식료품           8220
+##  9 코스피   014710   사조씨푸드… 음식료품           6220
+## 10 코스피   000087   하이트진로… 음식료품          16650
 ## # … with 2,233 more rows, and 2 more variables:
 ## #   전일대비 &lt;dbl&gt;, `시가총액(원)` &lt;dbl&gt;</code></pre>
 <p>위 과정을 통해 down_sector 변수에는 산업별 현황 데이터가 저장되었습니다. 이를 csv 파일로 저장하겠습니다.</p>
@@ -595,7 +595,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb99-13" data-line-number="13"><span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)</a>
 <a class="sourceLine" id="cb99-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb99-15" data-line-number="15"><span class="kw">print</span>(biz_day)</a></code></pre></div>
-<pre><code>## [1] &quot;20200318&quot;</code></pre>
+<pre><code>## [1] &quot;20200403&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li>페이지의 url을 저장합니다.</li>
 <li><code>GET()</code> 함수를 통해 해당 페이지 내용을 받습니다.</li>
@@ -940,7 +940,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb118-6" data-line-number="6">  </a>
 <a class="sourceLine" id="cb118-7" data-line-number="7">  url =<span class="st"> </span><span class="kw">paste0</span>(</a>
 <a class="sourceLine" id="cb118-8" data-line-number="8">    <span class="st">&#39;http://www.wiseindex.com/Index/GetIndexComponets&#39;</span>,</a>
-<a class="sourceLine" id="cb118-9" data-line-number="9">    <span class="st">&#39;?ceil_yn=0&amp;dt=20190607&amp;sec_cd=&#39;</span>,i)</a>
+<a class="sourceLine" id="cb118-9" data-line-number="9">    <span class="st">&#39;?ceil_yn=0&amp;dt=&#39;</span>,biz_day,<span class="st">&#39;&amp;sec_cd=&#39;</span>,i)</a>
 <a class="sourceLine" id="cb118-10" data-line-number="10">  data =<span class="st"> </span><span class="kw">fromJSON</span>(url)</a>
 <a class="sourceLine" id="cb118-11" data-line-number="11">  data =<span class="st"> </span>data<span class="op">$</span>list</a>
 <a class="sourceLine" id="cb118-12" data-line-number="12">  </a>
@@ -963,6 +963,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li id="fn13"><p><a href="http://www.wiseindex.com/" class="uri">http://www.wiseindex.com/</a><a href="금융-데이터-수집하기-기본.html#fnref13" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
+<div id="disqus_thread"></div>
+<script>
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://quant-cookbook.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
             </section>
 
           </div>

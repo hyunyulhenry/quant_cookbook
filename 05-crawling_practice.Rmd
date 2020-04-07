@@ -381,7 +381,7 @@ for (i in sector_code) {
   
   url = paste0(
     'http://www.wiseindex.com/Index/GetIndexComponets',
-    '?ceil_yn=0&dt=20190607&sec_cd=',i)
+    '?ceil_yn=0&dt=',biz_day,'&sec_cd=',i)
   data = fromJSON(url)
   data = data$list
   
