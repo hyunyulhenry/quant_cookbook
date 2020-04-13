@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-07" />
+<meta name="date" content="2020-04-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -510,26 +510,26 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>위 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장됩니다. 이처럼 개발자 도구 화면을 통해 내가 추출하고자 하는 데이터가 HTML 중 어디에 위치하고 있는지 먼저 확인하면 어렵지 않게 해당 데이터를 읽어올 수 있습니다.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">print</span>(data_title)</a></code></pre></div>
-<pre><code>##  [1] &quot;[표]채권 수익률 현황(4월 7일)&quot;       
-##  [2] &quot;[마켓인사이트]올해는 용두사미로 끝났&quot;
-##  [3] &quot;코로나에도 잘 버틴 삼성·LG전자…2&quot;    
-##  [4] &quot;씨엠에스에듀, 특별관계자 지분변동&quot;   
-##  [5] &quot;美 셰일기업 화이팅 &#39;파산&#39;…다음 타&quot;   
-##  [6] &quot;3월 대구·경북 상장사 시가총액 2월&quot;   
-##  [7] &quot;MMF 자금 유출·증시 하락...3월&quot;       
-##  [8] &quot;플랜코리아, 4월 7일 세계보건의날 &quot;   
-##  [9] &quot;[표]증시주변 자금동향 (4/6)&quot;         
-## [10] &quot;투에이비, 중국 왕홍마케팅 재개 \&quot;중&quot; 
-## [11] &quot;㈜아우로라, ‘티쿤’ 통해 칠레에 스&quot;   
-## [12] &quot;성호전자, 30억원 규모 유상증자 결&quot;   
-## [13] &quot;동학개미의 승리? 삼성전자·LG전자 &quot;   
-## [14] &quot;회사채 거래 소폭 회복...기업 자금&quot;   
-## [15] &quot;하이소닉, 20억원 규모 사모 CB &quot;      
-## [16] &quot;코스닥 600선 회복 마감&quot;              
-## [17] &quot;코스닥, 600선 회복 마감&quot;             
-## [18] &quot;오늘의 마감 시황&quot;                    
-## [19] &quot;오른 코스피, 내린 환율&quot;              
-## [20] &quot;4거래일 연속 상승해 1800선 회복&quot;</code></pre>
+<pre><code>##  [1] &quot;드림씨아이에스, 증권신고서 제출…5월&quot; 
+##  [2] &quot;[fnRASSI]LS네트웍스(0006&quot;            
+##  [3] &quot;웰크론한텍, 294억 규모 오피스텔 &quot;    
+##  [4] &quot;[마켓인사이트]이지스자산운용 다음 달&quot;
+##  [5] &quot;브이티지엠피-케이블리, IHQ 콘텐츠&quot;   
+##  [6] &quot;&#39;현대상선&#39; 5% 이상 상승, 전일 &quot;      
+##  [7] &quot;외국인 3월 국내주식 13조4500억&quot;      
+##  [8] &quot;현대상선, 장시작 후 꾸준히 올라 +&quot;   
+##  [9] &quot;[실전재테크] 자산가들 머니머니해도 &quot; 
+## [10] &quot;[실전재테크]제로금리시대 새는 돈 막&quot; 
+## [11] &quot;셀트리온제약, 전일대비 11.94% &quot;      
+## [12] &quot;코로나19 위기 속 ‘3세대 인공지능&quot;    
+## [13] &quot;[특징주] 셀트리온3대장, 코로나19&quot;    
+## [14] &quot;키움증권, 해외선물옵션 첫 거래 이벤&quot; 
+## [15] &quot;개인은 바이오주 살때…外人은 미디어주&quot;
+## [16] &quot;4월 하반기 증시 키워드 15일 美 &quot;     
+## [17] &quot;코스피 하락 출발, 1830대까지 밀&quot;     
+## [18] &quot;&#39;보령제약&#39; 5% 이상 상승, 주가 &quot;      
+## [19] &quot;달러-엔 108.110엔(11시10분&quot;          
+## [20] &quot;유가 30달러대 되면…원유선물 비중 &quot;</code></pre>
 </div>
 <div id="기업공시채널에서-오늘의-공시-불러오기" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -750,50 +750,50 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
 <pre><code>##    N           종목명  현재가 전일비 등락률 액면가
 ## 1 NA                                              
-## 2  1         삼성전자  49,600    900 +1.85%    100
-## 3  2       SK하이닉스  85,800  2,700 +3.25%  5,000
-## 4  3       삼성전자우  41,800    850 +2.08%    100
-## 5  4 삼성바이오로직스 482,500  5,500 +1.15%  2,500
-## 6  5            NAVER 169,500  3,500 -2.02%    100
-##    시가총액 상장주식수 외국인비율     거래량    PER
-## 1                              NA              &lt;NA&gt;
-## 2 2,961,012  5,969,783      55.01 31,240,192  15.67
-## 3   624,626    728,002      49.21  5,588,316  31.03
-## 4   343,967    822,887      88.67  2,905,257  13.20
-## 5   319,246     66,165      10.27    175,570 157.32
-## 6   278,426    164,263      57.99    865,375  47.91
+## 2  1         삼성전자  48,700    550 -1.12%    100
+## 3  2       SK하이닉스  81,900  2,200 -2.62%  5,000
+## 4  3 삼성바이오로직스 554,000  5,000 -0.89%  2,500
+## 5  4       삼성전자우  41,700    500 -1.18%    100
+## 6  5         셀트리온 222,000 12,500 +5.97%  1,000
+##    시가총액 상장주식수 외국인비율    거래량    PER
+## 1                              NA             &lt;NA&gt;
+## 2 2,907,284  5,969,783      55.09 6,528,728  15.38
+## 3   596,234    728,002      49.23 1,768,215  29.62
+## 4   366,554     66,165      10.62   869,684 180.63
+## 5   343,144    822,887      88.75   563,351  13.17
+## 6   284,929    128,347      19.91 2,222,921 100.41
 ##     ROE 토론실
 ## 1  &lt;NA&gt;     NA
 ## 2  8.69     NA
 ## 3  4.25     NA
-## 4   N/A     NA
-## 5  4.77     NA
-## 6 10.56     NA</code></pre>
+## 4  4.77     NA
+## 5   N/A     NA
+## 6 11.19     NA</code></pre>
 <p>이 중 마지막 열인 토론실은 필요 없는 열이며, 첫 번째 행과 같이 아무런 정보가 없는 행도 있습니다. 이를 다음과 같이 정리해줍니다.</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">table[, <span class="kw">ncol</span>(table)] =<span class="st"> </span><span class="ot">NULL</span></a>
 <a class="sourceLine" id="cb79-2" data-line-number="2">table =<span class="st"> </span><span class="kw">na.omit</span>(table)</a>
 <a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
 <pre><code>##    N           종목명  현재가 전일비 등락률 액면가
-## 2  1         삼성전자  49,600    900 +1.85%    100
-## 3  2       SK하이닉스  85,800  2,700 +3.25%  5,000
-## 4  3       삼성전자우  41,800    850 +2.08%    100
-## 5  4 삼성바이오로직스 482,500  5,500 +1.15%  2,500
-## 6  5            NAVER 169,500  3,500 -2.02%    100
-## 10 6         셀트리온 210,000  1,000 +0.48%  1,000
-##     시가총액 상장주식수 외국인비율     거래량    PER
-## 2  2,961,012  5,969,783      55.01 31,240,192  15.67
-## 3    624,626    728,002      49.21  5,588,316  31.03
-## 4    343,967    822,887      88.67  2,905,257  13.20
-## 5    319,246     66,165      10.27    175,570 157.32
-## 6    278,426    164,263      57.99    865,375  47.91
-## 10   269,528    128,347      20.21  2,187,668  94.98
+## 2  1         삼성전자  48,700    550 -1.12%    100
+## 3  2       SK하이닉스  81,900  2,200 -2.62%  5,000
+## 4  3 삼성바이오로직스 554,000  5,000 -0.89%  2,500
+## 5  4       삼성전자우  41,700    500 -1.18%    100
+## 6  5         셀트리온 222,000 12,500 +5.97%  1,000
+## 10 6            NAVER 167,000    500 +0.30%    100
+##     시가총액 상장주식수 외국인비율    거래량    PER
+## 2  2,907,284  5,969,783      55.09 6,528,728  15.38
+## 3    596,234    728,002      49.23 1,768,215  29.62
+## 4    366,554     66,165      10.62   869,684 180.63
+## 5    343,144    822,887      88.75   563,351  13.17
+## 6    284,929    128,347      19.91 2,222,921 100.41
+## 10   274,320    164,263      57.78   190,052  47.20
 ##      ROE
 ## 2   8.69
 ## 3   4.25
-## 4    N/A
-## 5   4.77
-## 6  10.56
-## 10 11.19</code></pre>
+## 4   4.77
+## 5    N/A
+## 6  11.19
+## 10 10.56</code></pre>
 <p>이제 필요한 정보는 6자리 티커입니다. 티커 역시 개발자 도구 화면을 통해 tbody → td → a 태그의 href 속성에 위치하고 있음을 알고 있습니다. 티커를 추출하는 코드는 다음과 같습니다.</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">symbol =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb81-2" data-line-number="2"><span class="st">  </span><span class="kw">html_nodes</span>(., <span class="st">&#39;tbody&#39;</span>) <span class="op">%&gt;%</span></a>
@@ -806,12 +806,12 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 ##  [2] &quot;/item/board.nhn?code=005930&quot;
 ##  [3] &quot;/item/main.nhn?code=000660&quot; 
 ##  [4] &quot;/item/board.nhn?code=000660&quot;
-##  [5] &quot;/item/main.nhn?code=005935&quot; 
-##  [6] &quot;/item/board.nhn?code=005935&quot;
-##  [7] &quot;/item/main.nhn?code=207940&quot; 
-##  [8] &quot;/item/board.nhn?code=207940&quot;
-##  [9] &quot;/item/main.nhn?code=035420&quot; 
-## [10] &quot;/item/board.nhn?code=035420&quot;</code></pre>
+##  [5] &quot;/item/main.nhn?code=207940&quot; 
+##  [6] &quot;/item/board.nhn?code=207940&quot;
+##  [7] &quot;/item/main.nhn?code=005935&quot; 
+##  [8] &quot;/item/board.nhn?code=005935&quot;
+##  [9] &quot;/item/main.nhn?code=068270&quot; 
+## [10] &quot;/item/board.nhn?code=068270&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>read_html()</code> 함수를 통해 HTML 정보를 읽어오며, 인코딩은 EUC-KR로 설정합니다.</li>
 <li><code>html_nodes()</code> 함수를 통해 tbody 태그 정보를 불러옵니다.</li>
@@ -830,18 +830,18 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 ##                    &quot;005930&quot;                    &quot;005930&quot; 
 ##  /item/main.nhn?code=000660 /item/board.nhn?code=000660 
 ##                    &quot;000660&quot;                    &quot;000660&quot; 
-##  /item/main.nhn?code=005935 /item/board.nhn?code=005935 
-##                    &quot;005935&quot;                    &quot;005935&quot; 
 ##  /item/main.nhn?code=207940 /item/board.nhn?code=207940 
 ##                    &quot;207940&quot;                    &quot;207940&quot; 
-##  /item/main.nhn?code=035420 /item/board.nhn?code=035420 
-##                    &quot;035420&quot;                    &quot;035420&quot;</code></pre>
+##  /item/main.nhn?code=005935 /item/board.nhn?code=005935 
+##                    &quot;005935&quot;                    &quot;005935&quot; 
+##  /item/main.nhn?code=068270 /item/board.nhn?code=068270 
+##                    &quot;068270&quot;                    &quot;068270&quot;</code></pre>
 <p><code>sapply()</code> 함수를 통해 symbol 변수의 내용들에 <code>function()</code>을 적용하며, <code>stringr</code> 패키지의 <code>str_sub()</code> 함수를 이용해 마지막6자리 글자만 추출합니다.</p>
 <p>결과를 살펴보면 티커에 해당하는 마지막 6글자만 추출되지만 동일한 내용이 두 번 연속해 추출됩니다. 이는 main.nhn?code=에 해당하는 부분은 종목명에 설정된 링크, board.nhn?code=에 해당하는 부분은 토론실에 설정된 링크이기 때문입니다.</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1">symbol =<span class="st"> </span><span class="kw">unique</span>(symbol)</a>
 <a class="sourceLine" id="cb85-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</a></code></pre></div>
-<pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;005935&quot; &quot;207940&quot; &quot;035420&quot;
-##  [6] &quot;068270&quot; &quot;051910&quot; &quot;005380&quot; &quot;051900&quot; &quot;028260&quot;</code></pre>
+<pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;207940&quot; &quot;005935&quot; &quot;068270&quot;
+##  [6] &quot;035420&quot; &quot;051910&quot; &quot;005380&quot; &quot;051900&quot; &quot;028260&quot;</code></pre>
 <p><code>unique()</code> 함수를 이용해 중복되는 티커를 제거하면 우리가 원하는 티커 부분만 깔끔하게 정리됩니다. 해당 내용을 위에서 구한 테이블에 입력한 후 데이터를 다듬는 과정은 다음과 같습니다.</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">table<span class="op">$</span>N =<span class="st"> </span>symbol</a>
 <a class="sourceLine" id="cb87-2" data-line-number="2"><span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &#39;종목코드&#39;</span></a>
@@ -910,23 +910,25 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <a class="sourceLine" id="cb88-53" data-line-number="53">        <span class="kw">str_sub</span>(x, <span class="dv">-6</span>, <span class="dv">-1</span>) </a>
 <a class="sourceLine" id="cb88-54" data-line-number="54">      })</a>
 <a class="sourceLine" id="cb88-55" data-line-number="55">    </a>
-<a class="sourceLine" id="cb88-56" data-line-number="56">    <span class="co"># 테이블에 티커 넣어준 후, 테이블 정리</span></a>
-<a class="sourceLine" id="cb88-57" data-line-number="57">    table<span class="op">$</span>N =<span class="st"> </span>symbol</a>
-<a class="sourceLine" id="cb88-58" data-line-number="58">    <span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &quot;종목코드&quot;</span></a>
-<a class="sourceLine" id="cb88-59" data-line-number="59"></a>
-<a class="sourceLine" id="cb88-60" data-line-number="60">    <span class="kw">rownames</span>(table) =<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb88-61" data-line-number="61">    ticker[[j]] =<span class="st"> </span>table</a>
-<a class="sourceLine" id="cb88-62" data-line-number="62"> </a>
-<a class="sourceLine" id="cb88-63" data-line-number="63">    <span class="kw">Sys.sleep</span>(<span class="fl">0.5</span>) <span class="co"># 페이지 당 0.5초의 슬립 적용</span></a>
-<a class="sourceLine" id="cb88-64" data-line-number="64">  }</a>
-<a class="sourceLine" id="cb88-65" data-line-number="65">  </a>
-<a class="sourceLine" id="cb88-66" data-line-number="66">  <span class="co"># do.call을 통해 리스트를 데이터 프레임으로 묶기</span></a>
-<a class="sourceLine" id="cb88-67" data-line-number="67">  ticker =<span class="st"> </span><span class="kw">do.call</span>(rbind, ticker)</a>
-<a class="sourceLine" id="cb88-68" data-line-number="68">  data[[i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]] =<span class="st"> </span>ticker</a>
-<a class="sourceLine" id="cb88-69" data-line-number="69">}</a>
-<a class="sourceLine" id="cb88-70" data-line-number="70"></a>
-<a class="sourceLine" id="cb88-71" data-line-number="71"><span class="co"># 코스피와 코스닥 테이블 묶기</span></a>
-<a class="sourceLine" id="cb88-72" data-line-number="72">data =<span class="st"> </span><span class="kw">do.call</span>(rbind, data)</a></code></pre></div>
+<a class="sourceLine" id="cb88-56" data-line-number="56">    symbol =<span class="st"> </span><span class="kw">unique</span>(symbol)</a>
+<a class="sourceLine" id="cb88-57" data-line-number="57">    </a>
+<a class="sourceLine" id="cb88-58" data-line-number="58">    <span class="co"># 테이블에 티커 넣어준 후, 테이블 정리</span></a>
+<a class="sourceLine" id="cb88-59" data-line-number="59">    table<span class="op">$</span>N =<span class="st"> </span>symbol</a>
+<a class="sourceLine" id="cb88-60" data-line-number="60">    <span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &quot;종목코드&quot;</span></a>
+<a class="sourceLine" id="cb88-61" data-line-number="61"></a>
+<a class="sourceLine" id="cb88-62" data-line-number="62">    <span class="kw">rownames</span>(table) =<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb88-63" data-line-number="63">    ticker[[j]] =<span class="st"> </span>table</a>
+<a class="sourceLine" id="cb88-64" data-line-number="64"> </a>
+<a class="sourceLine" id="cb88-65" data-line-number="65">    <span class="kw">Sys.sleep</span>(<span class="fl">0.5</span>) <span class="co"># 페이지 당 0.5초의 슬립 적용</span></a>
+<a class="sourceLine" id="cb88-66" data-line-number="66">  }</a>
+<a class="sourceLine" id="cb88-67" data-line-number="67">  </a>
+<a class="sourceLine" id="cb88-68" data-line-number="68">  <span class="co"># do.call을 통해 리스트를 데이터 프레임으로 묶기</span></a>
+<a class="sourceLine" id="cb88-69" data-line-number="69">  ticker =<span class="st"> </span><span class="kw">do.call</span>(rbind, ticker)</a>
+<a class="sourceLine" id="cb88-70" data-line-number="70">  data[[i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>]] =<span class="st"> </span>ticker</a>
+<a class="sourceLine" id="cb88-71" data-line-number="71">}</a>
+<a class="sourceLine" id="cb88-72" data-line-number="72"></a>
+<a class="sourceLine" id="cb88-73" data-line-number="73"><span class="co"># 코스피와 코스닥 테이블 묶기</span></a>
+<a class="sourceLine" id="cb88-74" data-line-number="74">data =<span class="st"> </span><span class="kw">do.call</span>(rbind, data)</a></code></pre></div>
 
 </div>
 </div>

@@ -445,6 +445,8 @@ for (i in 0:1) {
         str_sub(x, -6, -1) 
       })
     
+    symbol = unique(symbol)
+    
     # 테이블에 티커 넣어준 후, 테이블 정리
     table$N = symbol
     colnames(table)[1] = "종목코드"
