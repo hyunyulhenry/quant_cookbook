@@ -265,7 +265,7 @@ magic_ey = magic_ebit / magic_ev
 \begin{split}
 PER \times Earnings & = \frac{Price}{Earnings/Shares} \times Earnings \\
 & = \frac{Price \times Shares}{Earnings} \times Earnings \\
-& = Price \times Earnings = Market\,Cap
+& = Price \times Shares = Market\,Cap
 \end{split}
 \end{equation*} 
 

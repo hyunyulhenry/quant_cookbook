@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-13" />
+<meta name="date" content="2020-04-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1401,7 +1401,7 @@ Operating Efficiency
 <a class="sourceLine" id="cb314-12" data-line-number="12">quality_profit =</a>
 <a class="sourceLine" id="cb314-13" data-line-number="13"><span class="st">  </span><span class="kw">cbind</span>(quality_roe, quality_gpa, quality_cfo) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb314-14" data-line-number="14"><span class="st">  </span><span class="kw">setNames</span>(., <span class="kw">c</span>(<span class="st">&#39;ROE&#39;</span>, <span class="st">&#39;GPA&#39;</span>, <span class="st">&#39;CFO&#39;</span>))</a></code></pre></div>
-<p>먼저 재무제표와 티커 파일을 불러온 후 세 가지 지표에 해당하는 값을 구한 뒤 최근년도 데이터만 선택합니다. 그런 다음 <code>cbind()</code> 함수를 이용해 지표들을 하나로 묶어줍니다. <strong>역시나 1~4월의 경우 <code>ncol(KOR_fs[[1]]) - 1</code>를 통해 보수적으로 전년도가 아닌 전전녀도 회계 데이터를 사용합니다.</strong></p>
+<p>먼저 재무제표와 티커 파일을 불러온 후 세 가지 지표에 해당하는 값을 구한 뒤 최근년도 데이터만 선택합니다. 그런 다음 <code>cbind()</code> 함수를 이용해 지표들을 하나로 묶어줍니다. <strong>역시나 1~4월의 경우 <code>ncol(KOR_fs[[1]]) - 1</code>를 통해 보수적으로 전년도가 아닌 전전년도 회계 데이터를 사용합니다.</strong></p>
 <div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" data-line-number="1">rank_quality =<span class="st"> </span>quality_profit <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb315-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(<span class="kw">desc</span>(.))))</a>
 <a class="sourceLine" id="cb315-3" data-line-number="3"></a>
