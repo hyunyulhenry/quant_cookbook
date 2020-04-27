@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-26" />
+<meta name="date" content="2020-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -263,6 +263,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#가치지표-계산하기"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
 <li class="chapter" data-level="6.2.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-재무제표-및-가치지표-다운로드"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
 </ul></li>
+<li class="chapter" data-level="6.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#dart의-open-api를-이용한-데이터-수집하기"><i class="fa fa-check"></i><b>6.3</b> DART의 Open API를 이용한 데이터 수집하기</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#api-key발급-및-추가하기"><i class="fa fa-check"></i><b>6.3.1</b> API Key발급 및 추가하기</a></li>
+<li class="chapter" data-level="6.3.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#고유번호-다운로드"><i class="fa fa-check"></i><b>6.3.2</b> 고유번호 다운로드</a></li>
+<li class="chapter" data-level="6.3.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#공시검색"><i class="fa fa-check"></i><b>6.3.3</b> 공시검색</a></li>
+<li class="chapter" data-level="6.3.4" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#사업보고서-주요-정보"><i class="fa fa-check"></i><b>6.3.4</b> 사업보고서 주요 정보</a></li>
+<li class="chapter" data-level="6.3.5" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#상장기업-재무정보"><i class="fa fa-check"></i><b>6.3.5</b> 상장기업 재무정보</a></li>
+<li class="chapter" data-level="6.3.6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#단일회사-전체-재무제표"><i class="fa fa-check"></i><b>6.3.6</b> 단일회사 전체 재무제표</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
 <li class="chapter" data-level="7.1" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#주가-정리하기"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
@@ -413,45 +421,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>동일한 최적화 방법을 지속적으로 사용한다면 프로그래밍을 통해 함수를 만들고, 입력 변수만 변경하는 것이 훨씬 효율적인 방법입니다. 또한 포트폴리오 최적화에 관한 좋은 패키지들이 이미 많이 나와 있으므로, 대략적인 내용만 이해하고 실제 구현은 패키지를 이용하는 것도 좋은 방법입니다.</p>
 <p>이 CHAPTER에서는 일반적으로 많이 사용되는 최소분산 포트폴리오, 최대분산효과 포트폴리오, 위험균형 포트폴리오를 구현해보도록 합니다. 또한 실무에서 많이 사용되는 인덱스 포트폴리오를 구성하는 방법에 대해서도 살펴보겠습니다.</p>
 <p>먼저 최소분산, 최대분산효과, 위험균형 포트폴리오 구성을 위해 글로벌 자산을 대표하는 ETF 데이터를 다운로드하겠습니다.</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" data-line-number="1"><span class="kw">library</span>(quantmod)</a>
-<a class="sourceLine" id="cb350-2" data-line-number="2"><span class="kw">library</span>(PerformanceAnalytics)</a>
-<a class="sourceLine" id="cb350-3" data-line-number="3"><span class="kw">library</span>(magrittr)</a>
-<a class="sourceLine" id="cb350-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb350-5" data-line-number="5">symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="co"># 미국 주식</span></a>
-<a class="sourceLine" id="cb350-6" data-line-number="6">            <span class="st">&#39;IEV&#39;</span>, <span class="co"># 유럽 주식 </span></a>
-<a class="sourceLine" id="cb350-7" data-line-number="7">            <span class="st">&#39;EWJ&#39;</span>, <span class="co"># 일본 주식</span></a>
-<a class="sourceLine" id="cb350-8" data-line-number="8">            <span class="st">&#39;EEM&#39;</span>, <span class="co"># 이머징 주식</span></a>
-<a class="sourceLine" id="cb350-9" data-line-number="9">            <span class="st">&#39;TLT&#39;</span>, <span class="co"># 미국 장기채</span></a>
-<a class="sourceLine" id="cb350-10" data-line-number="10">            <span class="st">&#39;IEF&#39;</span>, <span class="co"># 미국 중기채</span></a>
-<a class="sourceLine" id="cb350-11" data-line-number="11">            <span class="st">&#39;IYR&#39;</span>, <span class="co"># 미국 리츠</span></a>
-<a class="sourceLine" id="cb350-12" data-line-number="12">            <span class="st">&#39;RWX&#39;</span>, <span class="co"># 글로벌 리츠</span></a>
-<a class="sourceLine" id="cb350-13" data-line-number="13">            <span class="st">&#39;GLD&#39;</span>, <span class="co"># 금</span></a>
-<a class="sourceLine" id="cb350-14" data-line-number="14">            <span class="st">&#39;DBC&#39;</span>  <span class="co"># 상품</span></a>
-<a class="sourceLine" id="cb350-15" data-line-number="15">            )</a>
-<a class="sourceLine" id="cb350-16" data-line-number="16"><span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" data-line-number="1"><span class="kw">library</span>(quantmod)</a>
+<a class="sourceLine" id="cb393-2" data-line-number="2"><span class="kw">library</span>(PerformanceAnalytics)</a>
+<a class="sourceLine" id="cb393-3" data-line-number="3"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb393-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb393-5" data-line-number="5">symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="co"># 미국 주식</span></a>
+<a class="sourceLine" id="cb393-6" data-line-number="6">            <span class="st">&#39;IEV&#39;</span>, <span class="co"># 유럽 주식 </span></a>
+<a class="sourceLine" id="cb393-7" data-line-number="7">            <span class="st">&#39;EWJ&#39;</span>, <span class="co"># 일본 주식</span></a>
+<a class="sourceLine" id="cb393-8" data-line-number="8">            <span class="st">&#39;EEM&#39;</span>, <span class="co"># 이머징 주식</span></a>
+<a class="sourceLine" id="cb393-9" data-line-number="9">            <span class="st">&#39;TLT&#39;</span>, <span class="co"># 미국 장기채</span></a>
+<a class="sourceLine" id="cb393-10" data-line-number="10">            <span class="st">&#39;IEF&#39;</span>, <span class="co"># 미국 중기채</span></a>
+<a class="sourceLine" id="cb393-11" data-line-number="11">            <span class="st">&#39;IYR&#39;</span>, <span class="co"># 미국 리츠</span></a>
+<a class="sourceLine" id="cb393-12" data-line-number="12">            <span class="st">&#39;RWX&#39;</span>, <span class="co"># 글로벌 리츠</span></a>
+<a class="sourceLine" id="cb393-13" data-line-number="13">            <span class="st">&#39;GLD&#39;</span>, <span class="co"># 금</span></a>
+<a class="sourceLine" id="cb393-14" data-line-number="14">            <span class="st">&#39;DBC&#39;</span>  <span class="co"># 상품</span></a>
+<a class="sourceLine" id="cb393-15" data-line-number="15">            )</a>
+<a class="sourceLine" id="cb393-16" data-line-number="16"><span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</a></code></pre></div>
 <pre><code>##  [1] &quot;SPY&quot; &quot;IEV&quot; &quot;EWJ&quot; &quot;EEM&quot; &quot;TLT&quot; &quot;IEF&quot; &quot;IYR&quot; &quot;RWX&quot;
 ##  [9] &quot;GLD&quot; &quot;DBC&quot;</code></pre>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" data-line-number="1">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,</a>
-<a class="sourceLine" id="cb352-2" data-line-number="2">                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x)))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb352-3" data-line-number="3"><span class="st">  </span><span class="kw">setNames</span>(symbols)</a>
-<a class="sourceLine" id="cb352-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb352-5" data-line-number="5">rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" data-line-number="1">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,</a>
+<a class="sourceLine" id="cb395-2" data-line-number="2">                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x)))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb395-3" data-line-number="3"><span class="st">  </span><span class="kw">setNames</span>(symbols)</a>
+<a class="sourceLine" id="cb395-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb395-5" data-line-number="5">rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a></code></pre></div>
 <p><code>getSymbols()</code> 함수를 통해 일반적으로 자산배분에서 많이 사용되는 주식과 채권, 대체자산에 해당하는 ETF 가격 데이터를 받은 후 <code>lapply()</code>와 <code>Ad()</code>, <code>get()</code> 함수의 조합을 통해 수정주가만을 선택하고 열의 형태로 묶어줍니다. 그 후 <code>Return.calculate()</code> 함수를 통해 수익률을 계산합니다.</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb353-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb353-3" data-line-number="3"><span class="kw">library</span>(corrplot)</a>
-<a class="sourceLine" id="cb353-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb353-5" data-line-number="5"><span class="kw">cor</span>(rets) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb353-6" data-line-number="6"><span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,</a>
-<a class="sourceLine" id="cb353-7" data-line-number="7">           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="fl">0.7</span>,</a>
-<a class="sourceLine" id="cb353-8" data-line-number="8">           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt=</span><span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,</a>
-<a class="sourceLine" id="cb353-9" data-line-number="9">           <span class="dt">col =</span></a>
-<a class="sourceLine" id="cb353-10" data-line-number="10">             <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),</a>
-<a class="sourceLine" id="cb353-11" data-line-number="11">           <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb396-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb396-3" data-line-number="3"><span class="kw">library</span>(corrplot)</a>
+<a class="sourceLine" id="cb396-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb396-5" data-line-number="5"><span class="kw">cor</span>(rets) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb396-6" data-line-number="6"><span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,</a>
+<a class="sourceLine" id="cb396-7" data-line-number="7">           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="fl">0.7</span>,</a>
+<a class="sourceLine" id="cb396-8" data-line-number="8">           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt=</span><span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,</a>
+<a class="sourceLine" id="cb396-9" data-line-number="9">           <span class="dt">col =</span></a>
+<a class="sourceLine" id="cb396-10" data-line-number="10">             <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),</a>
+<a class="sourceLine" id="cb396-11" data-line-number="11">           <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-3-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>각 ETF의 수익률 간 상관관계를 살펴보면 같은 자산군 내에서는 강한 상관관계를 보이며, 주식과 채권 간에는 매우 낮은 상관관계를 보입니다. 또한 주식과 리츠 간에도 꽤 높은 상관관계를 보입니다.</p>
 <p>포트폴리오 최적화에는 분산-공분산 행렬이 대부분 사용되며, 이는 <code>cov()</code> 함수를 통해 손쉽게 계산할 수 있습니다.</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" data-line-number="1">covmat =<span class="st"> </span><span class="kw">cov</span>(rets)</a></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" data-line-number="1">covmat =<span class="st"> </span><span class="kw">cov</span>(rets)</a></code></pre></div>
 <div id="최소분산-포트폴리오" class="section level2">
 <h2><span class="header-section-number">11.1</span> 최소분산 포트폴리오</h2>
 <p>최소분산 포트폴리오(Minimum Variance Portfolio)는 변동성이 최소인 포트폴리오입니다. 포트폴리오의 변동성은 일반적으로 <span class="math inline">\(\sum_{i=1}^{n}\sum_{j=1}^{n}w_iw_j\sigma_{ij}\)</span>의 형태로 표현되지만, 최적화 작업을 위해서는 행렬의 형태인 <span class="math inline">\(w&#39;\Omega w\)</span>로 표현하는 것이 더욱 편리합니다. 이 중 <span class="math inline">\(w\)</span>는 각 자산들의 비중을 행렬의 형태로 나타낸 것이며, <span class="math inline">\(\Omega\)</span>는 분산-공분산 행렬을 나타낸 것입니다. 분산-공분산 행렬은 사전에 고정되어 있는 값이므로, 각 자산들의 비중인 <span class="math inline">\(w\)</span>를 변화시킴으로써 포트폴리오의 변동성이 최소인 지점을 찾을 수 있습니다.</p>
@@ -479,9 +487,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>목적함수에서 <span class="math inline">\(f(x)\)</span> 는 최소화하고자 하는 값, 즉 포트폴리오의 변동성입니다. 제약조건은 크게 개별 자산의 투자 비중이 0 이상인 것과, 투자 비중의 합이 1이 되도록 하는 것입니다. 첫 번째 제약조건은 자연스럽게 개별 자산의 투자비중이 0 이상인 것을 의미합니다. 두 번째 제약조건은 약간의 변형을 통해 투자비중의 합이 1이 되는 제약조건을 만들 수 있습니다. <span class="math inline">\(c(x)\)</span>를 <strong>투자비중의 합 – 1</strong> 로 변형할 경우 -1을 우변으로 넘기면 결국 <strong>투자비중의 합 = 1</strong>의 형태로 나타낼 수 있습니다. <code>slsqp()</code> 함수의 구성은 다음과 같습니다.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" data-line-number="1"><span class="kw">slsqp</span>(x0, fn, <span class="dt">gr =</span> <span class="ot">NULL</span>, <span class="dt">lower =</span> <span class="ot">NULL</span>, <span class="dt">upper =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb355-2" data-line-number="2">      <span class="dt">hin =</span> <span class="ot">NULL</span>, <span class="dt">hinjac =</span> <span class="ot">NULL</span>, <span class="dt">heq =</span> <span class="ot">NULL</span>, <span class="dt">heqjac =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb355-3" data-line-number="3">      <span class="dt">nl.info =</span> <span class="ot">FALSE</span>, <span class="dt">control =</span> <span class="kw">list</span>(), ...)</a></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" data-line-number="1"><span class="kw">slsqp</span>(x0, fn, <span class="dt">gr =</span> <span class="ot">NULL</span>, <span class="dt">lower =</span> <span class="ot">NULL</span>, <span class="dt">upper =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb398-2" data-line-number="2">      <span class="dt">hin =</span> <span class="ot">NULL</span>, <span class="dt">hinjac =</span> <span class="ot">NULL</span>, <span class="dt">heq =</span> <span class="ot">NULL</span>, <span class="dt">heqjac =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb398-3" data-line-number="3">      <span class="dt">nl.info =</span> <span class="ot">FALSE</span>, <span class="dt">control =</span> <span class="kw">list</span>(), ...)</a></code></pre></div>
 <p>이 중 우리가 구체적으로 입력해야 할 값은 x0, fn, hin, heq 항목 입니다.</p>
 <ol style="list-style-type: decimal">
 <li>x0은 초기값이며, 일반적으로 모든 x에 대해 동일한 값을 입력합니다.</li>
@@ -555,40 +563,40 @@ heq
 </tbody>
 </table>
 <p><code>slsqp()</code> 함수를 이용해 최소분산 포트폴리오를 만족하는 자산의 투자비중을 구하는 과정은 다음과 같습니다. 먼저 fn, hin, heq에 해당하는 함수들을 각각 만든 후 이를 <code>slsqp()</code> 함수와 결합해 최적화된 결괏값을 얻을 수 있습니다. 구체적인 과정은 아래와 같습니다.</p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" data-line-number="1">objective =<span class="st"> </span><span class="cf">function</span>(w) {</a>
-<a class="sourceLine" id="cb356-2" data-line-number="2">  obj =<span class="st"> </span><span class="kw">t</span>(w) <span class="op">%*%</span><span class="st"> </span>covmat <span class="op">%*%</span><span class="st"> </span>w</a>
-<a class="sourceLine" id="cb356-3" data-line-number="3">  <span class="kw">return</span>(obj)</a>
-<a class="sourceLine" id="cb356-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" data-line-number="1">objective =<span class="st"> </span><span class="cf">function</span>(w) {</a>
+<a class="sourceLine" id="cb399-2" data-line-number="2">  obj =<span class="st"> </span><span class="kw">t</span>(w) <span class="op">%*%</span><span class="st"> </span>covmat <span class="op">%*%</span><span class="st"> </span>w</a>
+<a class="sourceLine" id="cb399-3" data-line-number="3">  <span class="kw">return</span>(obj)</a>
+<a class="sourceLine" id="cb399-4" data-line-number="4">}</a></code></pre></div>
 <p>먼저 목적함수에 해당하는 부분입니다. covmat은 사전에 계산된 분산-공분산 행렬이며, <span class="math inline">\(w\)</span>는 각 자산의 투자비중입니다. obj는 포트폴리오의 변동성인 <span class="math inline">\(w&#39;\Omega w\)</span>를 계산한 것입니다. 즉, 해당 함수는 계산된 <span class="math inline">\(w\)</span>를 바탕으로 포트폴리오의 변동성을 반환하고, 우리의 목적은 해당 값이 최소가 되도록 하는 것입니다.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" data-line-number="1">hin.objective =<span class="st"> </span><span class="cf">function</span>(w) {</a>
-<a class="sourceLine" id="cb357-2" data-line-number="2">  <span class="kw">return</span>(w)</a>
-<a class="sourceLine" id="cb357-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" data-line-number="1">hin.objective =<span class="st"> </span><span class="cf">function</span>(w) {</a>
+<a class="sourceLine" id="cb400-2" data-line-number="2">  <span class="kw">return</span>(w)</a>
+<a class="sourceLine" id="cb400-3" data-line-number="3">}</a></code></pre></div>
 <p><span class="math inline">\(w_i \ge 0\)</span> 제약조건에 해당하는 부등위 제약조건입니다. 패키지 내에서는 hin &gt;= 0 의 형태로 인식하므로, 계산된 비중인 <span class="math inline">\(w\)</span>를 단순히 입력하기만 하면 됩니다.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" data-line-number="1">heq.objective =<span class="st"> </span><span class="cf">function</span>(w) {</a>
-<a class="sourceLine" id="cb358-2" data-line-number="2">  sum_w =<span class="st"> </span><span class="kw">sum</span>(w)</a>
-<a class="sourceLine" id="cb358-3" data-line-number="3">  <span class="kw">return</span>( sum_w <span class="op">-</span><span class="st"> </span><span class="dv">1</span> )</a>
-<a class="sourceLine" id="cb358-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" data-line-number="1">heq.objective =<span class="st"> </span><span class="cf">function</span>(w) {</a>
+<a class="sourceLine" id="cb401-2" data-line-number="2">  sum_w =<span class="st"> </span><span class="kw">sum</span>(w)</a>
+<a class="sourceLine" id="cb401-3" data-line-number="3">  <span class="kw">return</span>( sum_w <span class="op">-</span><span class="st"> </span><span class="dv">1</span> )</a>
+<a class="sourceLine" id="cb401-4" data-line-number="4">}</a></code></pre></div>
 <p><span class="math inline">\(\sum_{i=1}^{n}w_i = 1\)</span> 제약조건에 해당하는 등위 제약조건입니다. 먼저 계산된 비중인 <span class="math inline">\(w\)</span>들의 합계를 구한 후 해당 값에서 1을 빼주는 값을 반환하도록 합니다. 프로그래밍 내에서는 heq == 0 의 형태로 인식을 하므로 결국 (sum_w – 1) == 0, 즉 sum_w == 1의 제약조건과 동일합니다.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" data-line-number="1"><span class="kw">library</span>(nloptr)</a>
-<a class="sourceLine" id="cb359-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb359-3" data-line-number="3">result =<span class="st"> </span><span class="kw">slsqp</span>( <span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb359-4" data-line-number="4">                <span class="dt">fn =</span> objective,</a>
-<a class="sourceLine" id="cb359-5" data-line-number="5">                <span class="dt">hin =</span> hin.objective,</a>
-<a class="sourceLine" id="cb359-6" data-line-number="6">                <span class="dt">heq =</span> heq.objective)</a>
-<a class="sourceLine" id="cb359-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb359-8" data-line-number="8"><span class="kw">print</span>(result<span class="op">$</span>par)</a></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" data-line-number="1"><span class="kw">library</span>(nloptr)</a>
+<a class="sourceLine" id="cb402-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb402-3" data-line-number="3">result =<span class="st"> </span><span class="kw">slsqp</span>( <span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb402-4" data-line-number="4">                <span class="dt">fn =</span> objective,</a>
+<a class="sourceLine" id="cb402-5" data-line-number="5">                <span class="dt">hin =</span> hin.objective,</a>
+<a class="sourceLine" id="cb402-6" data-line-number="6">                <span class="dt">heq =</span> heq.objective)</a>
+<a class="sourceLine" id="cb402-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb402-8" data-line-number="8"><span class="kw">print</span>(result<span class="op">$</span>par)</a></code></pre></div>
 <pre><code>##  [1]  1.453e-01 -1.926e-17 -7.471e-18 -1.423e-18
 ##  [5] -9.425e-17  7.887e-01  1.502e-17 -8.493e-19
 ##  [9] -4.549e-18  6.597e-02</code></pre>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" data-line-number="1"><span class="kw">print</span>(result<span class="op">$</span>value)</a></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb404-1" data-line-number="1"><span class="kw">print</span>(result<span class="op">$</span>value)</a></code></pre></div>
 <pre><code>## [1] 0.00001003</code></pre>
 <p>위에서 만들어진 함수들을 바탕으로 최적화 작업을 실행합니다. 초기값인 x0에는 먼저 동일한 비중들을 입력합니다. 예제에서는 종목이 10개 이므로, x0값에는 <code>rep(0.1, 10)</code> 인 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1을 입력합니다. 최소화하고자 하는 목적함수 fn에는 위에서 구성한 objective 함수를 입력합니다. 부등위 제약조건과 등위 제약조건에도 각각 위에서 구성한 hin.objective와 heq.objective 함수를 입력합니다.</p>
 <p>즉, 해당 함수는 초기값을 시작점으로 해 주어진 제약조건을 만족하는 해를 찾기 위해 <span class="math inline">\(w\)</span>값들을 조정하는 작업을 반복한 후 목적함수가 최소가 되는 지점의 <span class="math inline">\(w\)</span>를 반환합니다.</p>
 <p>result 값 중 $par는 최적화된 지점의 해를 의미하며, 최소분산 포트폴리오를 구성하는 자산들의 투자 비중을 의미합니다. $value는 $par에서 산출된 값을 목적함수 fn에 입력하였을 때 나오는 결괏값으로써, 포트폴리오의 분산을 의미합니다.</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" data-line-number="1">w_<span class="dv">1</span> =<span class="st"> </span>result<span class="op">$</span>par <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb363-2" data-line-number="2"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb363-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb363-4" data-line-number="4"><span class="kw">print</span>(w_<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb406-1" data-line-number="1">w_<span class="dv">1</span> =<span class="st"> </span>result<span class="op">$</span>par <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb406-2" data-line-number="2"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb406-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb406-4" data-line-number="4"><span class="kw">print</span>(w_<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.1453 0.0000 0.0000 0.0000 0.0000 0.7887 0.0000 0.0000 
 ##    GLD    DBC 
@@ -625,7 +633,7 @@ heq
 </table>
 <p>최소분산 포트폴리오의 목적함수가 <span class="math inline">\(min\,^1/_2\,w&#39;\Omega w\)</span>로 표시된다는 점을 생각하면, 해당 함수는 매우 이해하기 쉽게 구성되어 있습니다. <span class="math inline">\(b\)</span>를 각 개별 자산의 투자 비중인 <span class="math inline">\(w\)</span>, <span class="math inline">\(D\)</span>를 분산-공분산 행렬인 <span class="math inline">\(\Omega\)</span>라 생각하면, 목적함수 중 <span class="math inline">\(min\,^1/_2\,wDw\)</span>는 최소분산 포트폴리오의 목적함수와 정확히 동일합니다. <span class="math inline">\(d\)</span>를 0으로 생각하면 <span class="math inline">\(-d^Tb\)</span> 또한 0이 되어 목적함수에 아무런 영향도 미치지 않습니다.</p>
 <p>제약조건 역시 <span class="math inline">\(A^T\)</span> 항목을 적절하게 수정한다면, 개별 자산의 투자비중이 0 이상인 것과, 투자비중의 합이 1이 되도록 만들 수 있습니다. 이에 대해서는 뒤에서 구체적으로 다루도록 합니다. <code>solve.QP()</code> 함수의 사용법은 아래와 같습니다.</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" data-line-number="1"><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, <span class="dt">meq =</span> <span class="dv">0</span>, <span class="dt">factorized =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" data-line-number="1"><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, <span class="dt">meq =</span> <span class="dv">0</span>, <span class="dt">factorized =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Dmat은 목적함수 중 <span class="math inline">\(D\)</span>에 해당하는 행렬 부분으로서 분산-공분산 행렬과 일치합니다.</li>
 <li>dvec은 목적함수 중 <span class="math inline">\(d\)</span>에 해당하는 벡터 부분이며, 포트폴리오 최적화에서는 역할이 없습니다.</li>
@@ -710,11 +718,11 @@ meq
 </tbody>
 </table>
 <p><code>solve.QP()</code> 함수를 이용해 최소분산 포트폴리오 비중을 구할 때는 Amat 항목을 제대로 입력하는 것이 가장 중요하며, 나머지 항목은 매우 손쉽게 입력이 가능합니다. 설명된 내용에 해당하는 행렬을 손으로 직접 써가며 계산해본다면 훨씬 이해하기가 쉬울 것입니다. 구체적인 과정은 아래와 같습니다.</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
-<a class="sourceLine" id="cb366-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb366-3" data-line-number="3">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="kw">diag</span>(<span class="dv">10</span>), <span class="op">-</span><span class="kw">diag</span>(<span class="dv">10</span>)))</a>
-<a class="sourceLine" id="cb366-4" data-line-number="4">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="op">-</span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb366-5" data-line-number="5">meq =<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb409-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
+<a class="sourceLine" id="cb409-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb409-3" data-line-number="3">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="kw">diag</span>(<span class="dv">10</span>), <span class="op">-</span><span class="kw">diag</span>(<span class="dv">10</span>)))</a>
+<a class="sourceLine" id="cb409-4" data-line-number="4">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="op">-</span><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb409-5" data-line-number="5">meq =<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <p>Dmat에는 분산-공분산 행렬을 입력하며,dvec은 최소분산 포트폴리오를 구하는데는 필요한 값이 아니므로 0벡터를 입력합니다. 등위 제약조건과 부등위 제약조건(<span class="math inline">\(A^Tb \ge b_0\)</span>)을 행렬의 형태로 표현하면 다음과 같습니다.</p>
 <p><span class="math display">\[ \begin{bmatrix}
 1 &amp;  \dots &amp; 1 \\ 1 &amp;  \dots &amp; 0 \\ \vdots &amp;  \ddots &amp; \vdots \\
@@ -748,20 +756,20 @@ meq
 <p><span class="math display">\[ -diag(10) = \begin{bmatrix} -1 &amp; \dots &amp; 0 \\ \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; \dots &amp;\ -1\end{bmatrix}\]</span>
 <code>rbind()</code> 함수를 통해 세 개의 행렬을 행으로 묶어주면 제약조건의 맨 왼쪽 행렬과 동일한 형태가 됩니다. 이를 <code>t()</code> 함수를 통해 전치행렬을 만들어 준 뒤 Amat에 입력합니다.</p>
 <p>제약조건에 해당하는 bvec은 1, 0, -1로 이루어진 벡터를 통해 손쉽게 만들 수 있습니다.</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" data-line-number="1"><span class="kw">library</span>(quadprog)</a>
-<a class="sourceLine" id="cb367-2" data-line-number="2">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
-<a class="sourceLine" id="cb367-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb367-4" data-line-number="4"><span class="kw">print</span>(result<span class="op">$</span>solution)</a></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb410-1" data-line-number="1"><span class="kw">library</span>(quadprog)</a>
+<a class="sourceLine" id="cb410-2" data-line-number="2">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
+<a class="sourceLine" id="cb410-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb410-4" data-line-number="4"><span class="kw">print</span>(result<span class="op">$</span>solution)</a></code></pre></div>
 <pre><code>##  [1]  1.453e-01  9.153e-19  0.000e+00 -8.698e-18
 ##  [5] -7.009e-18  7.887e-01 -6.199e-18  2.525e-19
 ##  [9]  4.728e-20  6.597e-02</code></pre>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" data-line-number="1"><span class="kw">print</span>(result<span class="op">$</span>value)</a></code></pre></div>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb412-1" data-line-number="1"><span class="kw">print</span>(result<span class="op">$</span>value)</a></code></pre></div>
 <pre><code>## [1] 0.000005017</code></pre>
 <p>위에 입력된 내역들을 <code>solve.QP()</code> 함수에 넣어 최적화 값을 찾아줍니다. 결과 중 $solution은 최적화된 지점의 해, 즉 최소분산 포트폴리오를 구성하는 자산들의 투자비중을 의미합니다. $value는 $solution에서 산출된 값을 목적함수에 입력했을때 나오는 결괏값으로서, 포트폴리오의 분산을 의미합니다.</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" data-line-number="1">w_<span class="dv">2</span> =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb371-2" data-line-number="2"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb371-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb371-4" data-line-number="4"><span class="kw">print</span>(w_<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb414-1" data-line-number="1">w_<span class="dv">2</span> =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb414-2" data-line-number="2"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb414-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb414-4" data-line-number="4"><span class="kw">print</span>(w_<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.1453 0.0000 0.0000 0.0000 0.0000 0.7887 0.0000 0.0000 
 ##    GLD    DBC 
@@ -771,8 +779,8 @@ meq
 <div id="optimalportfolio-함수를-이용한-최적화" class="section level3">
 <h3><span class="header-section-number">11.1.3</span> <code>optimalPortfolio()</code> 함수를 이용한 최적화</h3>
 <p>RiskPortfolios 패키지의 <code>optimalPortfolio()</code> 함수를 이용해 매우 간단하게 최적화 포트폴리오를 구현할 수도 있습니다. 해당 함수의 사용법은 다음과 같습니다.</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" data-line-number="1"><span class="kw">optimalPortfolio</span>(Sigma, <span class="dt">mu =</span> <span class="ot">NULL</span>, <span class="dt">semiDev =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb373-2" data-line-number="2">                 <span class="dt">control =</span> <span class="kw">list</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb416-1" data-line-number="1"><span class="kw">optimalPortfolio</span>(Sigma, <span class="dt">mu =</span> <span class="ot">NULL</span>, <span class="dt">semiDev =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb416-2" data-line-number="2">                 <span class="dt">control =</span> <span class="kw">list</span>())</a></code></pre></div>
 <p>Sigma는 분산-공분산 행렬입니다. mu와 semiDev는 각각 기대수익률과 세미 편차(Semi Deviation)로서, 입력하지 않아도 됩니다. control은 포트폴리오 종류 및 제약조건에 해당하는 부분이며, 자세한 내용은 표 <a href="포트폴리오-구성.html#tab:optimal">11.5</a>와 같습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -857,15 +865,15 @@ user
 </tbody>
 </table>
 <p>control 항목에서 원하는 포트폴리오 타입과 제약조건을 입력해주면, 매우 손쉽게 최적화 포트폴리오를 구현할 수 있습니다.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" data-line-number="1"><span class="kw">library</span>(RiskPortfolios)</a>
-<a class="sourceLine" id="cb374-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb374-3" data-line-number="3">w_<span class="dv">3</span> =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,</a>
-<a class="sourceLine" id="cb374-4" data-line-number="4">                       <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>,</a>
-<a class="sourceLine" id="cb374-5" data-line-number="5">                                      <span class="dt">constraint =</span> <span class="st">&#39;lo&#39;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb374-6" data-line-number="6"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb374-7" data-line-number="7"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb374-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb374-9" data-line-number="9"><span class="kw">print</span>(w_<span class="dv">3</span>)  </a></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" data-line-number="1"><span class="kw">library</span>(RiskPortfolios)</a>
+<a class="sourceLine" id="cb417-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb417-3" data-line-number="3">w_<span class="dv">3</span> =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,</a>
+<a class="sourceLine" id="cb417-4" data-line-number="4">                       <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>,</a>
+<a class="sourceLine" id="cb417-5" data-line-number="5">                                      <span class="dt">constraint =</span> <span class="st">&#39;lo&#39;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb417-6" data-line-number="6"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb417-7" data-line-number="7"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb417-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb417-9" data-line-number="9"><span class="kw">print</span>(w_<span class="dv">3</span>)  </a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.1453 0.0000 0.0000 0.0000 0.0000 0.7887 0.0000 0.0000 
 ##    GLD    DBC 
@@ -1025,30 +1033,30 @@ optimalPortfolio
 </tbody>
 </table>
 <p>세 가지 방법 모두 결과가 동일합니다. 그러나 여기서 나온 결과를 이용해 그대로 투자하기에는 문제가 있습니다. 일부 자산은 투자비중이 0%, 즉 전혀 투자하지 않는 반면, 특정 자산에 대부분의 비중인 78.87%를 투자하는 편중된 결과가 나옵니다.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb376-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb376-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb376-3" data-line-number="3"><span class="kw">data.frame</span>(w_<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb376-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
-<a class="sourceLine" id="cb376-5" data-line-number="5">                        <span class="dt">y =</span> w_<span class="dv">1</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb376-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb376-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb419-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb419-3" data-line-number="3"><span class="kw">data.frame</span>(w_<span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb419-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
+<a class="sourceLine" id="cb419-5" data-line-number="5">                        <span class="dt">y =</span> w_<span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb419-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb419-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-19-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>이처럼 변동성이 가장 낮은 종목에 대부분의 비중이 투자되는 구석해(Corner Solution) 문제를 해결하기 위해 각 자산의 최소 및 최대 투자비중 제약조건을 추가해 줄 필요가 있습니다.</p>
 </div>
 <div id="최소-및-최대-투자비중-제약조건" class="section level3">
 <h3><span class="header-section-number">11.1.5</span> 최소 및 최대 투자비중 제약조건</h3>
 <p>구석해 문제를 방지하고, 모든 자산에 골고루 투자하기 위해 개별 투자비중을 최소 5%, 최대 20%로 하는 제약조건을 추가하겠습니다. 먼저 <code>slsqp()</code> 함수에서 제약조건을 추가하는 방법은 다음과 같습니다.</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" data-line-number="1">result =<span class="st"> </span><span class="kw">slsqp</span>( <span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb377-2" data-line-number="2">                <span class="dt">fn =</span> objective,</a>
-<a class="sourceLine" id="cb377-3" data-line-number="3">                <span class="dt">hin =</span> hin.objective,</a>
-<a class="sourceLine" id="cb377-4" data-line-number="4">                <span class="dt">heq =</span> heq.objective,</a>
-<a class="sourceLine" id="cb377-5" data-line-number="5">                <span class="dt">lower =</span> <span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb377-6" data-line-number="6">                <span class="dt">upper =</span> <span class="kw">rep</span>(<span class="fl">0.20</span>, <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb377-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb377-8" data-line-number="8">w_<span class="dv">4</span> =<span class="st"> </span>result<span class="op">$</span>par <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb377-9" data-line-number="9"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb377-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb377-11" data-line-number="11"><span class="kw">print</span>(w_<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" data-line-number="1">result =<span class="st"> </span><span class="kw">slsqp</span>( <span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb420-2" data-line-number="2">                <span class="dt">fn =</span> objective,</a>
+<a class="sourceLine" id="cb420-3" data-line-number="3">                <span class="dt">hin =</span> hin.objective,</a>
+<a class="sourceLine" id="cb420-4" data-line-number="4">                <span class="dt">heq =</span> heq.objective,</a>
+<a class="sourceLine" id="cb420-5" data-line-number="5">                <span class="dt">lower =</span> <span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb420-6" data-line-number="6">                <span class="dt">upper =</span> <span class="kw">rep</span>(<span class="fl">0.20</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb420-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb420-8" data-line-number="8">w_<span class="dv">4</span> =<span class="st"> </span>result<span class="op">$</span>par <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb420-9" data-line-number="9"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb420-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb420-11" data-line-number="11"><span class="kw">print</span>(w_<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
 ## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10</code></pre>
 <p>함수의 마지막에 lower와 upper 제약조건을 추가로 입력하면 해당 값 사이에서 최적화를 만족하는 해를 찾게 되며, 해당 예에서는 5%와 20% 사이에서 해를 찾게 됩니다. 추가로 입력한 제약조건에 맞게, 최소 투자비중은 5%이며, 최대 투자비중은 20%임을 확인할 수 있습니다.</p>
@@ -1058,31 +1066,31 @@ optimalPortfolio
 <span class="math display">\[변경: \begin{bmatrix} w_1 + w_2 + \dots + w_{10} \\ w_1 \\ \vdots \\ w_{10} \\ -w_1 \\ 
 \vdots \\ -w_{10}
 \end{bmatrix} \ge \begin{bmatrix} 1 \\ 0.05 \\ \vdots \\ 0.05 \\ -0.20 \\ \vdots \\ -0.20 \end{bmatrix} \]</span></p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
-<a class="sourceLine" id="cb379-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb379-3" data-line-number="3">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="kw">diag</span>(<span class="dv">10</span>), <span class="op">-</span><span class="kw">diag</span>(<span class="dv">10</span>)))</a>
-<a class="sourceLine" id="cb379-4" data-line-number="4">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">10</span>), <span class="op">-</span><span class="kw">rep</span>(<span class="fl">0.20</span>, <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb379-5" data-line-number="5">meq =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb379-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb379-7" data-line-number="7">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
-<a class="sourceLine" id="cb379-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb379-9" data-line-number="9">w_<span class="dv">5</span> =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb379-10" data-line-number="10"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb379-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb379-12" data-line-number="12"><span class="kw">print</span>(w_<span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb422-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
+<a class="sourceLine" id="cb422-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb422-3" data-line-number="3">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="kw">diag</span>(<span class="dv">10</span>), <span class="op">-</span><span class="kw">diag</span>(<span class="dv">10</span>)))</a>
+<a class="sourceLine" id="cb422-4" data-line-number="4">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">10</span>), <span class="op">-</span><span class="kw">rep</span>(<span class="fl">0.20</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb422-5" data-line-number="5">meq =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb422-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb422-7" data-line-number="7">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
+<a class="sourceLine" id="cb422-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb422-9" data-line-number="9">w_<span class="dv">5</span> =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb422-10" data-line-number="10"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb422-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb422-12" data-line-number="12"><span class="kw">print</span>(w_<span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
 ## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10</code></pre>
 <p>bvec 항목을 제외한 모든 코드는 기존과 동일하며, 조건함수의 우변인 bvec만 각각 최소 투자비중과 최대 투자비중이 [0, 1]에서 [0.05, 0.20]으로 변경되었습니다. 해당 방법 역시 추가적인 투자비중 제약이 잘 적용되었음이 확인됩니다.</p>
 <p>마지막으로 <code>optimalPortfolio()</code> 함수 내에서 최소 및 최대 투자비중을 추가하는 방법입니다. 입력변수의 control 항목 중 constraint 부분을 간단하게 수정해 원하는 조건을 입력할 수 있습니다.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" data-line-number="1">w_<span class="dv">6</span> =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,</a>
-<a class="sourceLine" id="cb381-2" data-line-number="2">                       <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>,</a>
-<a class="sourceLine" id="cb381-3" data-line-number="3">                                      <span class="dt">constraint =</span> <span class="st">&#39;user&#39;</span>,</a>
-<a class="sourceLine" id="cb381-4" data-line-number="4">                                      <span class="dt">LB =</span> <span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb381-5" data-line-number="5">                                      <span class="dt">UB =</span> <span class="kw">rep</span>(<span class="fl">0.20</span>, <span class="dv">10</span>))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb381-6" data-line-number="6"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb381-7" data-line-number="7"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb381-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb381-9" data-line-number="9"><span class="kw">print</span>(w_<span class="dv">6</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb424-1" data-line-number="1">w_<span class="dv">6</span> =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,</a>
+<a class="sourceLine" id="cb424-2" data-line-number="2">                       <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>,</a>
+<a class="sourceLine" id="cb424-3" data-line-number="3">                                      <span class="dt">constraint =</span> <span class="st">&#39;user&#39;</span>,</a>
+<a class="sourceLine" id="cb424-4" data-line-number="4">                                      <span class="dt">LB =</span> <span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb424-5" data-line-number="5">                                      <span class="dt">UB =</span> <span class="kw">rep</span>(<span class="fl">0.20</span>, <span class="dv">10</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb424-6" data-line-number="6"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb424-7" data-line-number="7"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb424-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb424-9" data-line-number="9"><span class="kw">print</span>(w_<span class="dv">6</span>)</a></code></pre></div>
 <pre><code>##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
 ## 0.05 0.05 0.05 0.05 0.20 0.20 0.05 0.05 0.20 0.10</code></pre>
 <p>constraint 부분에 롱온리 제약조건에 해당하는 lo 대신 직접 제약값들을 입력할 수 있는 user를 입력하며, LB에는 최소 투자비중 벡터를, UB에는 최대 투자비중 벡터를 입력합니다. 따라서 원하는 제약조건 내에서 결괏값이 계산됩니다.</p>
@@ -1235,13 +1243,13 @@ optimalPortfolio
 </tbody>
 </table>
 <p>최소 및 최대 제약조건을 추가한 경우도 세 가지 방법 모두 동일한 결과가 나오게 되며, 비중도 각각 5%와 20%로 제한되어 구석해 문제 또한 해결되었음이 확인됩니다.</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb383-1" data-line-number="1"><span class="kw">data.frame</span>(w_<span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb383-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
-<a class="sourceLine" id="cb383-3" data-line-number="3">                        <span class="dt">y =</span> w_<span class="dv">4</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb383-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb383-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb383-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.20</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb383-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" data-line-number="1"><span class="kw">data.frame</span>(w_<span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb426-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
+<a class="sourceLine" id="cb426-3" data-line-number="3">                        <span class="dt">y =</span> w_<span class="dv">4</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb426-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb426-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb426-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.20</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb426-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="각-자산별-제약조건의-추가" class="section level3">
@@ -1373,20 +1381,20 @@ w_7\\ w_8\\ w_9\\ w_{10} \\ -w_1 \\ -w_2 \\ -w_3 \\ -w_4 \\ -w_5 \\ -w_6 \\ -w_7
 \end{bmatrix} \ge \begin{bmatrix} 1 \\ 0.10 \\ 0.10 \\ 0.05 \\ 0.05 \\ 0.10 \\ 0.10 \\ 0.05 \\ 0.05 \\ 0.03 \\ 0.03 \\ -0.25 \\ -0.25 \\ -0.20 \\ -0.20 \\ -0.20 \\ -0.20 \\ -0.10 \\ -0.10 \\ -0.08 \\ -0.08
 \end{bmatrix} \]</span></p>
 <p>위의 행렬 중 오른쪽 부분을 bvec에 그대로 입력합니다.</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
-<a class="sourceLine" id="cb384-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb384-3" data-line-number="3">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="kw">diag</span>(<span class="dv">10</span>), <span class="op">-</span><span class="kw">diag</span>(<span class="dv">10</span>))) </a>
-<a class="sourceLine" id="cb384-4" data-line-number="4">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">c</span>(<span class="fl">0.10</span>, <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.10</span>,</a>
-<a class="sourceLine" id="cb384-5" data-line-number="5">              <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.03</span>, <span class="fl">0.03</span>),</a>
-<a class="sourceLine" id="cb384-6" data-line-number="6">         <span class="op">-</span><span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>,</a>
-<a class="sourceLine" id="cb384-7" data-line-number="7">            <span class="fl">0.20</span>, <span class="fl">0.10</span>, <span class="fl">0.10</span>, <span class="fl">0.08</span>, <span class="fl">0.08</span>))</a>
-<a class="sourceLine" id="cb384-8" data-line-number="8">meq =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb384-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb384-10" data-line-number="10">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
-<a class="sourceLine" id="cb384-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb384-12" data-line-number="12">result<span class="op">$</span>solution <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb384-13" data-line-number="13"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb384-14" data-line-number="14"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb427-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
+<a class="sourceLine" id="cb427-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb427-3" data-line-number="3">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="kw">diag</span>(<span class="dv">10</span>), <span class="op">-</span><span class="kw">diag</span>(<span class="dv">10</span>))) </a>
+<a class="sourceLine" id="cb427-4" data-line-number="4">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">c</span>(<span class="fl">0.10</span>, <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.10</span>,</a>
+<a class="sourceLine" id="cb427-5" data-line-number="5">              <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.03</span>, <span class="fl">0.03</span>),</a>
+<a class="sourceLine" id="cb427-6" data-line-number="6">         <span class="op">-</span><span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>,</a>
+<a class="sourceLine" id="cb427-7" data-line-number="7">            <span class="fl">0.20</span>, <span class="fl">0.10</span>, <span class="fl">0.10</span>, <span class="fl">0.08</span>, <span class="fl">0.08</span>))</a>
+<a class="sourceLine" id="cb427-8" data-line-number="8">meq =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb427-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb427-10" data-line-number="10">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
+<a class="sourceLine" id="cb427-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb427-12" data-line-number="12">result<span class="op">$</span>solution <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb427-13" data-line-number="13"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb427-14" data-line-number="14"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.1116 0.1000 0.0784 0.0500 0.2000 0.2000 0.0500 0.0500 
 ##    GLD    DBC 
@@ -1488,11 +1496,11 @@ min(-DR)
 <h3><span class="header-section-number">11.2.1</span> <code>solve.QP()</code> 함수를 이용한 최적화</h3>
 <p>먼저 <code>solve.QP()</code> 함수를 이용해 Duality 방법을 통해 최대분산효과 포트폴리오를 만족하는 해를 찾도록 하겠습니다.</p>
 <p>Duality 방법에서 목적함수는 <span class="math inline">\(min\,^1/_2w&#39;\sigma w\)</span>로 최소분산 포트폴리오와 동일하며, 제약조건은 <span class="math inline">\(\sum_{i=1}^n w_i \sigma_i = 1, w_i \ge 0\)</span>입니다. 제약조건 부분인 Amat과 bvec 부분을 입력할 때 이 부분을 고려해야 합니다.</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
-<a class="sourceLine" id="cb386-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb386-3" data-line-number="3">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(covmat)), <span class="kw">diag</span>(<span class="dv">10</span>)))</a>
-<a class="sourceLine" id="cb386-4" data-line-number="4">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb386-5" data-line-number="5">meq =<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
+<a class="sourceLine" id="cb429-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb429-3" data-line-number="3">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(covmat)), <span class="kw">diag</span>(<span class="dv">10</span>)))</a>
+<a class="sourceLine" id="cb429-4" data-line-number="4">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb429-5" data-line-number="5">meq =<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <p>제약조건에 해당하는 Amat 부분과 bvec 부분은 최소분산 포트폴리오와 다소 다릅니다. 표 <a href="포트폴리오-구성.html#tab:mvmdp">11.10</a>에는 둘 간에 코드가 어떻게 다른지 나타나 있습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -1545,44 +1553,44 @@ c(1, rep(0, 10))
 <p>1행의 <span class="math inline">\(\sigma_1w_1 + \sigma_2w_2 + \dots + \sigma_{10}w_{10}\)</span>은 <span class="math inline">\(\sum_{i=1}^n w_i \sigma_i = 1\)</span>과 같으며, 해당 식은 등위제약조건으로서 <span class="math inline">\(\sum_{i=1}^n w_i \sigma_i = \sigma_1w_1 + \sigma_2w_2 + \dots + \sigma_{10}w_{10} = 1\)</span>을 의미합니다. 2행부터 마지막 행까지는 모두 <span class="math inline">\(w_i \ge 0\)</span> 조건으로써, 개별 자산의 투자비중이 0보다 큰 조건을 의미합니다.</p>
 <p>행렬의 맨 왼쪽에 해당하는 Amat은 각 자산의 표준편차로 이루어진 벡터 행렬과, 1로 이루어진 대각행렬로 구성되어 있습니다. 먼저 <code>diag(covmat)</code>을 통해 분산-공분산 부분에서 대각 부분, 즉 분산 부분만을 추출할 수 있습니다. 개별 자산의 분산인 <span class="math inline">\(\sigma_{i,i}\)</span>는 <span class="math inline">\(\sigma_i\sigma_i\rho_{1,1}\)</span> 형태로 쓸 수 있으며, <span class="math inline">\(\rho_{1,1} = 1\)</span>을 적용하면 <span class="math inline">\(\sigma_i^2\)</span>와 같습니다. 따라서 대각부분 값에 제곱근을 계산하는 <code>sqrt()</code> 함수를 적용하면 각각의 표준편차만 남게 됩니다. 이를 <code>diag(10)</code>을 통해 만든 대각행렬과 행으로 묶어준 후 전치행렬을 입력해 줍니다.</p>
 <p>bvec는 행렬의 맨 오른쪽과 같이 등위 제약조건에 해당하는 1과 부등위 제약조건에 해당하는 0들로 구성되어 있습니다. 차후에 표준화 과정을 거쳐야 하므로 Duality 방법에서는 개별 자산의 투자비중이 1보다 작은 조건을 입력하지 않아도 됩니다.</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb387-1" data-line-number="1">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
-<a class="sourceLine" id="cb387-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb387-3" data-line-number="3">w =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb387-4" data-line-number="4"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb387-5" data-line-number="5"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb387-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb387-7" data-line-number="7"><span class="kw">print</span>(w)</a></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" data-line-number="1">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
+<a class="sourceLine" id="cb430-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb430-3" data-line-number="3">w =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb430-4" data-line-number="4"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb430-5" data-line-number="5"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb430-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb430-7" data-line-number="7"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##     SPY     IEV     EWJ     EEM     TLT     IEF     IYR 
 ## 18.6824  0.6756  3.9253  0.0000 25.7099 38.3377  2.4357 
 ##     RWX     GLD     DBC 
 ##  0.0000  7.9903 11.8847</code></pre>
 <p>입력된 목적함수와 제약조건들을 바탕으로 <code>solve.QP()</code> 함수를 통해 최적화를 수행한 후 최대분산효과를 만족하는 해를 구해보면, 비중의 합이 1을 초과하게 됩니다. <span class="math inline">\(w_i = \frac{w_i}{\sum_{i=1}^nw_i}\)</span>를 통해 비중의 합이 1이 되도록 표준화를 해줍니다.</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" data-line-number="1">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb389-2" data-line-number="2"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb389-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb389-4" data-line-number="4"><span class="kw">print</span>(w)</a></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb432-2" data-line-number="2"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb432-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb432-4" data-line-number="4"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.1704 0.0062 0.0358 0.0000 0.2345 0.3497 0.0222 0.0000 
 ##    GLD    DBC 
 ## 0.0729 0.1084</code></pre>
 <p>표준화 과정을 통해 비중의 합이 1이 되었습니다.</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" data-line-number="1"><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb391-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
-<a class="sourceLine" id="cb391-3" data-line-number="3">                        <span class="dt">y =</span> w)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb391-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb391-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb391-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" data-line-number="1"><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb434-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
+<a class="sourceLine" id="cb434-3" data-line-number="3">                        <span class="dt">y =</span> w)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb434-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb434-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb434-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-29-1.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="optimalportfolio-함수를-이용한-최적화-1" class="section level3">
 <h3><span class="header-section-number">11.2.2</span> <code>optimalPortfolio()</code> 함수를 이용한 최적화</h3>
 <p>최소분산 포트폴리오와 동일하게 <code>optimalPortfolio()</code> 함수를 이용해 매우 간단하게 최대분산효과 포트폴리오를 구현할 수 있습니다.</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb392-1" data-line-number="1">w =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,</a>
-<a class="sourceLine" id="cb392-2" data-line-number="2">                     <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;maxdiv&#39;</span>,</a>
-<a class="sourceLine" id="cb392-3" data-line-number="3">                                    <span class="dt">constraint =</span> <span class="st">&#39;lo&#39;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb392-4" data-line-number="4"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb392-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb392-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" data-line-number="1">w =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,</a>
+<a class="sourceLine" id="cb435-2" data-line-number="2">                     <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;maxdiv&#39;</span>,</a>
+<a class="sourceLine" id="cb435-3" data-line-number="3">                                    <span class="dt">constraint =</span> <span class="st">&#39;lo&#39;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb435-4" data-line-number="4"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb435-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb435-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##  [1] 0.1704 0.0062 0.0358 0.0000 0.2345 0.3497 0.0222
 ##  [8] 0.0000 0.0729 0.1084</code></pre>
 <p>control 항목의 type에 maximum diversification을 의미하는 ’maxdiv’를 입력해주며, 제약조건에는 투자비중이 0보다 큰 lo(Long Only) 조건을 입력합니다. 패키지를 활용해 매우 간단하게 최대분산효과 포트폴리오를 구현할 수 있으며, 그 결과 또한 앞에서 계산한 것과 동일합니다. 해당 함수의 코드를 확인해보면, 최대분산효과 포트폴리오 계산 시 Min -DR 방법을 사용합니다.</p>
@@ -1666,35 +1674,35 @@ wb(w_1 + w_2 + \dots + w_{10}) - w_1 \\ \vdots \\
 ub(w_1 + w_2 + \dots + w_{10}) - w_{10}
 \end{bmatrix} \ge \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \]</span></p>
 <p>첫 번째 행 <span class="math inline">\(\sigma_1w_1 + \sigma_2w_2 + \dots + \sigma_{10}w_{10}\)</span>은 등위 제약조건인 <span class="math inline">\(\sum_{i=1}^n w_i \sigma_i = 1\)</span>에 해당하며, 두 번째 행부터는 부등위 제약조건에 해당합니다. 두 번째 행을 정리하면 <span class="math inline">\(\frac{w_1}{w_1+w_2+\dots+w_{10}} \ge lb\)</span>, 즉 비중의 표준화가 고려된 최소비중 제약조건입니다. 마지막 행 역시 정리하면 <span class="math inline">\(\frac{w_1}{w_1+w_2+\dots+w_{10}} \le ub\)</span>가 되어 비중의 표준화가 고려된 최대비중 제약조건을 의미합니다. 위 행렬을 고려해 Amat과 bvec을 수정한 코드는 다음과 같습니다.</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
-<a class="sourceLine" id="cb394-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb394-3" data-line-number="3">Alb =<span class="st"> </span><span class="op">-</span><span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">10</span>) <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">+</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb394-4" data-line-number="4">Aub =<span class="st"> </span><span class="kw">rep</span>(<span class="fl">0.20</span>, <span class="dv">10</span>) <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">-</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb394-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb394-6" data-line-number="6">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(covmat)), Alb, Aub))</a>
-<a class="sourceLine" id="cb394-7" data-line-number="7">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb394-8" data-line-number="8">meq =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb394-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb394-10" data-line-number="10">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
-<a class="sourceLine" id="cb394-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb394-12" data-line-number="12">w =<span class="st"> </span>result<span class="op">$</span>solution </a>
-<a class="sourceLine" id="cb394-13" data-line-number="13">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb394-14" data-line-number="14"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb394-15" data-line-number="15"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb394-16" data-line-number="16">  </a>
-<a class="sourceLine" id="cb394-17" data-line-number="17"><span class="kw">print</span>(w)</a></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb437-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
+<a class="sourceLine" id="cb437-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb437-3" data-line-number="3">Alb =<span class="st"> </span><span class="op">-</span><span class="kw">rep</span>(<span class="fl">0.05</span>, <span class="dv">10</span>) <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">+</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb437-4" data-line-number="4">Aub =<span class="st"> </span><span class="kw">rep</span>(<span class="fl">0.20</span>, <span class="dv">10</span>) <span class="op">%*%</span><span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">-</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb437-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb437-6" data-line-number="6">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(covmat)), Alb, Aub))</a>
+<a class="sourceLine" id="cb437-7" data-line-number="7">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb437-8" data-line-number="8">meq =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb437-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb437-10" data-line-number="10">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
+<a class="sourceLine" id="cb437-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb437-12" data-line-number="12">w =<span class="st"> </span>result<span class="op">$</span>solution </a>
+<a class="sourceLine" id="cb437-13" data-line-number="13">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb437-14" data-line-number="14"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb437-15" data-line-number="15"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb437-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb437-17" data-line-number="17"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 
 ##    GLD    DBC 
 ## 0.1899 0.1101</code></pre>
 <p>Alb의 -rep(0.05, 10)는 <span class="math inline">\(-lb\)</span> 부분, matrix(1, 1, 10)은 <span class="math inline">\(e^T\)</span> 부분, diag(10)부분은 <span class="math inline">\(I\)</span> 부분을 의미하며, 이는 최소비중 제약조건의 좌변(<span class="math inline">\(-lb \times e^T + I\)</span>)과 같습니다. 동일하게 Aub는 최대비중 제약조건의 좌변(<span class="math inline">\(ub \times e^T - I\)</span>)과 같으며, 결과를 확인하면 최소 및 최대비중 제약조건인 [5%, 20%]가 제대로 반영되었습니다.</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb396-1" data-line-number="1"><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb396-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
-<a class="sourceLine" id="cb396-3" data-line-number="3">                        <span class="dt">y =</span> w)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb396-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb396-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb396-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.20</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb396-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb439-1" data-line-number="1"><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb439-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</a>
+<a class="sourceLine" id="cb439-3" data-line-number="3">                        <span class="dt">y =</span> w)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb439-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb439-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb439-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.20</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb439-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>)</a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="각-자산-별-제약조건의-추가" class="section level3">
@@ -1824,27 +1832,27 @@ wb_1(w_1 + w_2 + \dots + w_{10}) - w_1 \\ wb_2(w_1 + w_2 + \dots + w_{10}) - w_2
 ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 \end{bmatrix} \ge \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \]</span></p>
 <p>기존에 공통적으로 적용되던 최소 및 최대 투자비중이 자산별로 다르게 구성되었습니다. 따라서 <span class="math inline">\(-lb \times e^T + I\)</span>와 <span class="math inline">\(ub \times e^T - I\)</span>만 <span class="math inline">\(-lb_i \times e^T + I\)</span> <span class="math inline">\(ub_i \times e^T - I\)</span>로 수정하면 해당 제약조건 역시 손쉽게 구현이 가능합니다.</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
-<a class="sourceLine" id="cb397-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb397-3" data-line-number="3">Alb =<span class="st"> </span><span class="op">-</span><span class="kw">c</span>(<span class="fl">0.10</span>, <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.10</span>,</a>
-<a class="sourceLine" id="cb397-4" data-line-number="4">         <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.03</span>, <span class="fl">0.03</span>) <span class="op">%*%</span></a>
-<a class="sourceLine" id="cb397-5" data-line-number="5"><span class="st">  </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">+</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb397-6" data-line-number="6">Aub =<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>,</a>
-<a class="sourceLine" id="cb397-7" data-line-number="7">        <span class="fl">0.20</span>, <span class="fl">0.10</span>, <span class="fl">0.10</span>, <span class="fl">0.08</span>, <span class="fl">0.08</span>) <span class="op">%*%</span></a>
-<a class="sourceLine" id="cb397-8" data-line-number="8"><span class="st">  </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">-</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb397-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb397-10" data-line-number="10">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(covmat)), Alb, Aub))</a>
-<a class="sourceLine" id="cb397-11" data-line-number="11">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb397-12" data-line-number="12">meq =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb397-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb397-14" data-line-number="14">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
-<a class="sourceLine" id="cb397-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb397-16" data-line-number="16">w =<span class="st"> </span>result<span class="op">$</span>solution </a>
-<a class="sourceLine" id="cb397-17" data-line-number="17">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb397-18" data-line-number="18"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb397-19" data-line-number="19"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb397-20" data-line-number="20">  </a>
-<a class="sourceLine" id="cb397-21" data-line-number="21"><span class="kw">print</span>(w)</a></code></pre></div>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" data-line-number="1">Dmat =<span class="st"> </span>covmat</a>
+<a class="sourceLine" id="cb440-2" data-line-number="2">dvec =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb440-3" data-line-number="3">Alb =<span class="st"> </span><span class="op">-</span><span class="kw">c</span>(<span class="fl">0.10</span>, <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.10</span>,</a>
+<a class="sourceLine" id="cb440-4" data-line-number="4">         <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.03</span>, <span class="fl">0.03</span>) <span class="op">%*%</span></a>
+<a class="sourceLine" id="cb440-5" data-line-number="5"><span class="st">  </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">+</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb440-6" data-line-number="6">Aub =<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>,</a>
+<a class="sourceLine" id="cb440-7" data-line-number="7">        <span class="fl">0.20</span>, <span class="fl">0.10</span>, <span class="fl">0.10</span>, <span class="fl">0.08</span>, <span class="fl">0.08</span>) <span class="op">%*%</span></a>
+<a class="sourceLine" id="cb440-8" data-line-number="8"><span class="st">  </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>) <span class="op">-</span><span class="st"> </span><span class="kw">diag</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb440-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb440-10" data-line-number="10">Amat =<span class="st"> </span><span class="kw">t</span>(<span class="kw">rbind</span>(<span class="kw">sqrt</span>(<span class="kw">diag</span>(covmat)), Alb, Aub))</a>
+<a class="sourceLine" id="cb440-11" data-line-number="11">bvec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb440-12" data-line-number="12">meq =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb440-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb440-14" data-line-number="14">result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</a>
+<a class="sourceLine" id="cb440-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb440-16" data-line-number="16">w =<span class="st"> </span>result<span class="op">$</span>solution </a>
+<a class="sourceLine" id="cb440-17" data-line-number="17">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb440-18" data-line-number="18"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb440-19" data-line-number="19"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb440-20" data-line-number="20">  </a>
+<a class="sourceLine" id="cb440-21" data-line-number="21"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##  SPY  IEV  EWJ  EEM  TLT  IEF  IYR  RWX  GLD  DBC 
 ## 0.10 0.10 0.09 0.05 0.20 0.20 0.05 0.05 0.08 0.08</code></pre>
 <p>최소 및 최대투자비중 제약조건을 나타내는 Alb와 Aub 부분이 자산별 각각의 제약비중으로 변경되었으며, 나머지 부분은 모두 동일합니다. 결괏값들이 모두 제약조건 내에 위치함을 확인할 수 있습니다.</p>
@@ -1868,26 +1876,26 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <p>결과적으로 <span class="math inline">\(i\)</span>번째 자산의 위험기여도는, <span class="math inline">\(i\)</span>번째 자산의 한계 위험기여도와 포트폴리오 내 비중의 곱으로 이루어집니다.</p>
 <p><span class="math display">\[RC_i = \frac{\partial\sigma_p}{\partial w_i} \times w_i\]</span>
 위험기여도를 코드로 나타내면 다음과 같습니다. 먼저 포트폴리오 비중인 <span class="math inline">\(w\)</span>와 분산-공분산 행렬인 covmat을 이용해 한계 위험기여도를 계산합니다. 그 후 비중 <span class="math inline">\(w\)</span>를 곱해 위험기여도를 계산해 준 후 합계가 1이 되도록 표준화를 해줍니다.</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb399-1" data-line-number="1">get_RC =<span class="st"> </span><span class="cf">function</span>(w, covmat) {</a>
-<a class="sourceLine" id="cb399-2" data-line-number="2">  port_vol =<span class="st"> </span><span class="kw">t</span>(w) <span class="op">%*%</span><span class="st"> </span>covmat <span class="op">%*%</span><span class="st"> </span>w</a>
-<a class="sourceLine" id="cb399-3" data-line-number="3">  port_std =<span class="st"> </span><span class="kw">sqrt</span>(port_vol)</a>
-<a class="sourceLine" id="cb399-4" data-line-number="4">  </a>
-<a class="sourceLine" id="cb399-5" data-line-number="5">  MRC =<span class="st"> </span>(covmat <span class="op">%*%</span><span class="st"> </span>w) <span class="op">/</span><span class="st"> </span><span class="kw">as.numeric</span>(port_std)</a>
-<a class="sourceLine" id="cb399-6" data-line-number="6">  RC =<span class="st"> </span>MRC <span class="op">*</span><span class="st"> </span>w</a>
-<a class="sourceLine" id="cb399-7" data-line-number="7">  RC =<span class="st"> </span><span class="kw">c</span>(RC <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(RC))</a>
-<a class="sourceLine" id="cb399-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb399-9" data-line-number="9">  <span class="kw">return</span>(RC)</a>
-<a class="sourceLine" id="cb399-10" data-line-number="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" data-line-number="1">get_RC =<span class="st"> </span><span class="cf">function</span>(w, covmat) {</a>
+<a class="sourceLine" id="cb442-2" data-line-number="2">  port_vol =<span class="st"> </span><span class="kw">t</span>(w) <span class="op">%*%</span><span class="st"> </span>covmat <span class="op">%*%</span><span class="st"> </span>w</a>
+<a class="sourceLine" id="cb442-3" data-line-number="3">  port_std =<span class="st"> </span><span class="kw">sqrt</span>(port_vol)</a>
+<a class="sourceLine" id="cb442-4" data-line-number="4">  </a>
+<a class="sourceLine" id="cb442-5" data-line-number="5">  MRC =<span class="st"> </span>(covmat <span class="op">%*%</span><span class="st"> </span>w) <span class="op">/</span><span class="st"> </span><span class="kw">as.numeric</span>(port_std)</a>
+<a class="sourceLine" id="cb442-6" data-line-number="6">  RC =<span class="st"> </span>MRC <span class="op">*</span><span class="st"> </span>w</a>
+<a class="sourceLine" id="cb442-7" data-line-number="7">  RC =<span class="st"> </span><span class="kw">c</span>(RC <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(RC))</a>
+<a class="sourceLine" id="cb442-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb442-9" data-line-number="9">  <span class="kw">return</span>(RC)</a>
+<a class="sourceLine" id="cb442-10" data-line-number="10">}</a></code></pre></div>
 <div id="주식-60와-채권-40-포트폴리오의-위험기여도" class="section level3">
 <h3><span class="header-section-number">11.3.1</span> 주식 60%와 채권 40% 포트폴리오의 위험기여도</h3>
 <p>자산배분에서 가장 많이 사용되는 투자방법은 주식에 60%, 채권에 40% 가량의 비율로 투자하는 것입니다. 주식과 채권이 서로 상관관계가 낮아 분산효과가 있다는 점, 장기적으로 주식이 채권에 비해 장기적으로 수익률이 높다는 점을 감안하면 이는 꽤나 합리적인 방법으로 보입니다.</p>
 <p>그러나 눈에 보이는 비중이 60대 40이라도, 포트폴리오 내에서 각 자산이 가지고 있는 위험기여도 60대 40의 비중이 아닌 전혀 다른 비중을 가지고 있습니다.</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" data-line-number="1">ret_stock_bond =<span class="st"> </span>rets[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)]</a>
-<a class="sourceLine" id="cb400-2" data-line-number="2">cov_stock_bond =<span class="st"> </span><span class="kw">cov</span>(ret_stock_bond)</a>
-<a class="sourceLine" id="cb400-3" data-line-number="3">RC_stock_bond =<span class="st"> </span><span class="kw">get_RC</span>(<span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>), cov_stock_bond)</a>
-<a class="sourceLine" id="cb400-4" data-line-number="4">RC_stock_bond =<span class="st"> </span><span class="kw">round</span>(RC_stock_bond, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb400-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb400-6" data-line-number="6"><span class="kw">print</span>(RC_stock_bond)</a></code></pre></div>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb443-1" data-line-number="1">ret_stock_bond =<span class="st"> </span>rets[, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)]</a>
+<a class="sourceLine" id="cb443-2" data-line-number="2">cov_stock_bond =<span class="st"> </span><span class="kw">cov</span>(ret_stock_bond)</a>
+<a class="sourceLine" id="cb443-3" data-line-number="3">RC_stock_bond =<span class="st"> </span><span class="kw">get_RC</span>(<span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>), cov_stock_bond)</a>
+<a class="sourceLine" id="cb443-4" data-line-number="4">RC_stock_bond =<span class="st"> </span><span class="kw">round</span>(RC_stock_bond, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb443-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb443-6" data-line-number="6"><span class="kw">print</span>(RC_stock_bond)</a></code></pre></div>
 <pre><code>## [1] 0.9769 0.0231</code></pre>
 <p>rets 데이터에서 첫 번째 행은 미국 주식 수익률을, 다섯 번째 행은 미국 장기채를 의미하므로, 해당 부분을 ret_stock_bond 변수에 지정합니다. 그 후 <code>cov()</code> 함수를 이용해 두 자산의 분산-공분산 행렬을 만들어주며, 위에서 만든 get_RC 함수를 통해 자산별 위험기여도를 계산합니다.</p>
 <p>주식과 채권이 가지는 위험기여도는 각각 97.69%, 2.31%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.</p>
@@ -1899,17 +1907,17 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <span class="math display">\[\frac{\partial\sigma_p}{\partial w_1} \times w_1 = \frac{\partial\sigma_p}{\partial w_2} \times w_2
 = \dots = \frac{\partial\sigma_p}{\partial w_n} \times w_n = \frac{1}{n}\]</span></p>
 <p>위험균형 포트폴리오 역시 <code>slsqp()</code>나 <code>optimalPortfolio()</code> 함수를 이용해 구현할 수 있으나, 간혹 최적화된 값을 찾지 못할 때도 있습니다. 반면 cccp 패키지의 rp() 함수를 사용하면 매우 정확하게 위험균형 포트폴리오를 구성하는 비중을 계산할 수 있습니다.</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" data-line-number="1"><span class="kw">library</span>(cccp)</a>
-<a class="sourceLine" id="cb402-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb402-3" data-line-number="3">opt =<span class="st"> </span><span class="kw">rp</span>(<span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb402-4" data-line-number="4">         <span class="dt">P =</span> covmat,</a>
-<a class="sourceLine" id="cb402-5" data-line-number="5">         <span class="dt">mrc =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb403-1" data-line-number="1">w =<span class="st"> </span><span class="kw">getx</span>(opt) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop</span>()</a>
-<a class="sourceLine" id="cb403-2" data-line-number="2">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb403-3" data-line-number="3"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb403-4" data-line-number="4"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb403-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb403-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb445-1" data-line-number="1"><span class="kw">library</span>(cccp)</a>
+<a class="sourceLine" id="cb445-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb445-3" data-line-number="3">opt =<span class="st"> </span><span class="kw">rp</span>(<span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb445-4" data-line-number="4">         <span class="dt">P =</span> covmat,</a>
+<a class="sourceLine" id="cb445-5" data-line-number="5">         <span class="dt">mrc =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" data-line-number="1">w =<span class="st"> </span><span class="kw">getx</span>(opt) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop</span>()</a>
+<a class="sourceLine" id="cb446-2" data-line-number="2">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb446-3" data-line-number="3"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb446-4" data-line-number="4"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb446-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb446-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.0606 0.0466 0.0563 0.0369 0.1749 0.3704 0.0393 0.0507 
 ##    GLD    DBC 
@@ -1921,7 +1929,7 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 </ol>
 <p><code>rp()</code> 함수는 위 입력 변수를 바탕으로 최적해를 찾아줍니다. <code>getx()</code> 함수를 통해 해를 추출할 수 있으며, <code>drop()</code>을 통해 벡터 형태로 변환합니다. 마지막으로 비중의 합이 1이 되기 위해 비중들의 합으로 나눠줍니다.</p>
 <p>최종적으로 계산된 비중이 위험균형 포트폴리오를 만족하는 해가 됩니다.</p>
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb405-1" data-line-number="1"><span class="kw">get_RC</span>(w, covmat)</a></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" data-line-number="1"><span class="kw">get_RC</span>(w, covmat)</a></code></pre></div>
 <pre><code>##  [1] 0.10008 0.10010 0.09997 0.10003 0.09990 0.09992
 ##  [7] 0.09990 0.10000 0.10003 0.10008</code></pre>
 <p><code>get_RC()</code> 함수를 통해 위험기여도를 확인해보면, 모든 자산이 거의 동일한 위험기여도를 가지는 것을 알 수 있습니다.</p>
@@ -2009,24 +2017,24 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb407-1" data-line-number="1"><span class="kw">library</span>(cccp)</a>
-<a class="sourceLine" id="cb407-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb407-3" data-line-number="3">opt =<span class="st"> </span><span class="kw">rp</span>(<span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb407-4" data-line-number="4">         <span class="dt">P =</span> covmat,</a>
-<a class="sourceLine" id="cb407-5" data-line-number="5">         <span class="dt">mrc =</span> <span class="kw">c</span>(<span class="fl">0.15</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span>, <span class="fl">0.10</span>,</a>
-<a class="sourceLine" id="cb407-6" data-line-number="6">                 <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" data-line-number="1">w =<span class="st"> </span><span class="kw">getx</span>(opt) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop</span>()</a>
-<a class="sourceLine" id="cb408-2" data-line-number="2">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb408-3" data-line-number="3"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb408-4" data-line-number="4"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
-<a class="sourceLine" id="cb408-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb408-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" data-line-number="1"><span class="kw">library</span>(cccp)</a>
+<a class="sourceLine" id="cb450-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb450-3" data-line-number="3">opt =<span class="st"> </span><span class="kw">rp</span>(<span class="dt">x0 =</span> <span class="kw">rep</span>(<span class="fl">0.1</span>, <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb450-4" data-line-number="4">         <span class="dt">P =</span> covmat,</a>
+<a class="sourceLine" id="cb450-5" data-line-number="5">         <span class="dt">mrc =</span> <span class="kw">c</span>(<span class="fl">0.15</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span>, <span class="fl">0.15</span>, <span class="fl">0.10</span>,</a>
+<a class="sourceLine" id="cb450-6" data-line-number="6">                 <span class="fl">0.10</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb451-1" data-line-number="1">w =<span class="st"> </span><span class="kw">getx</span>(opt) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop</span>()</a>
+<a class="sourceLine" id="cb451-2" data-line-number="2">w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb451-3" data-line-number="3"><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb451-4" data-line-number="4"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a>
+<a class="sourceLine" id="cb451-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb451-6" data-line-number="6"><span class="kw">print</span>(w)</a></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.0849 0.0665 0.0779 0.0527 0.1826 0.3919 0.0196 0.0251 
 ##    GLD    DBC 
 ## 0.0548 0.0441</code></pre>
 <p>mrc에 목표로 하는 각 자산별 위험기여도를 입력하며, 나머지는 기존 위험균형 포트폴리오와 동일하게 입력합니다.</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb410-1" data-line-number="1"><span class="kw">get_RC</span>(w, covmat)</a></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb453-1" data-line-number="1"><span class="kw">get_RC</span>(w, covmat)</a></code></pre></div>
 <pre><code>##  [1] 0.14990 0.15006 0.15004 0.15012 0.09996 0.09993
 ##  [7] 0.04999 0.04996 0.04999 0.05006</code></pre>
 <p><code>get_RC()</code> 함수를 통해 위험기여도를 확인해보면 우리가 원하던 자산별 위험예산과 거의 동일한 것을 알 수 있습니다.</p>
@@ -2213,16 +2221,16 @@ C
 </div>
 <p>즉 일정 규칙에 따라 200 종목이 선정되고, 각 종목들의 시가총액비중 만큼을 지수 내 비중으로 가지고 갑니다. 물론 선정된 200 종목이 단순하게 시가총액의 순서대로 선택되는 것은 아니며, 유동비의 경우 지수제공업체인 한국거래소에서 유료로 제공하므로 이를 구매하지 않는 이상 정확하게 알 수 없습니다. 그러나 지수 내 종목 및 대략의 시가총액비중은 해당 지수를 추종하는 ETF(예: KODEX 200)의 PDF를 통해 확인할 수 있으며, 본 책에서는 편의를 위해 시가총액상위 200 종목을 선택하고 유동비는 모두 100%로 가정하겠습니다.</p>
 <p>앞서 구한 데이터를 이용해 상위 200 종목의 시가총액비중을 계산해보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb412-1" data-line-number="1"><span class="kw">library</span>(stringr)</a>
-<a class="sourceLine" id="cb412-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb412-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb412-4" data-line-number="4">KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>,</a>
-<a class="sourceLine" id="cb412-5" data-line-number="5">                      <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </a>
-<a class="sourceLine" id="cb412-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb412-7" data-line-number="7">KOSPI200 =<span class="st"> </span>KOR_ticker <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(시장구분 <span class="op">==</span><span class="st"> &#39;코스피&#39;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb412-8" data-line-number="8"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">200</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb412-9" data-line-number="9"><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">시가총액</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">시가총액.원.</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb412-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(시가총액비중 =<span class="st"> </span>시가총액 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(시가총액))</a></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb455-1" data-line-number="1"><span class="kw">library</span>(stringr)</a>
+<a class="sourceLine" id="cb455-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb455-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb455-4" data-line-number="4">KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>,</a>
+<a class="sourceLine" id="cb455-5" data-line-number="5">                      <span class="dt">row.names =</span> <span class="dv">1</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </a>
+<a class="sourceLine" id="cb455-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb455-7" data-line-number="7">KOSPI200 =<span class="st"> </span>KOR_ticker <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(시장구분 <span class="op">==</span><span class="st"> &#39;코스피&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb455-8" data-line-number="8"><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">200</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb455-9" data-line-number="9"><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">시가총액</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">시가총액.원.</span><span class="st">`</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb455-10" data-line-number="10"><span class="st">  </span><span class="kw">mutate</span>(시가총액비중 =<span class="st"> </span>시가총액 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(시가총액))</a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>저장해둔 티커 정보를 불러옵니다.</li>
 <li><code>filter()</code> 함수를 통해 코스피 시장에 해당하는 종목만을 선택합니다.</li>
@@ -2231,14 +2239,14 @@ C
 <li>각 주식의 시가총액을 전체 시가총액으로 나눈 후, 시가총액비중에 저장합니다.</li>
 </ol>
 <p>계산된 시가총액비중을 시각화하도록 하겠습니다.</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb413-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb413-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb413-3" data-line-number="3">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb413-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb413-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb413-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb413-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;시가총액비중(%)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb413-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb456-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb456-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb456-3" data-line-number="3">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb456-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb456-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb456-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb456-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;시가총액비중(%)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb456-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent)</a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-43-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><code>ggplot()</code> 함수를 이용해 시각화를 해주도록 하며, <code>reorder()</code>를 통해 시가총액비중으로 <span class="math inline">\(x\)</span>축을 정리합니다.</li>
@@ -2247,14 +2255,14 @@ C
 <li><code>scale_y_continuous()</code> 함수 내 scales::percent 인자를 입력하여 <span class="math inline">\(y\)</span> 축을 퍼센트 형식으로 변경합니다.</li>
 </ol>
 <p>위 과정을 통해 코스피 시가총액 상위 200 종목의 시가총액비중을 계산 및 시각화 하였습니다. 그러나 <span class="math inline">\(x\)</span>축에 해당하는 종목이 200개나 되어 종목명이 잘 보이지 않으며, 국내의 경우 삼성전자의 시가총액비중이 지나치게 커 다른 종목들의 비중이 잘 보이지 않습니다. 이를 고려하여 그림을 다시 수정해주도록 합니다.</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb414-1" data-line-number="1">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb414-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb414-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb414-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb414-5" data-line-number="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;시가총액비중(로그 스케일링)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb414-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb414-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb414-8" data-line-number="8"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb457-1" data-line-number="1">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb457-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb457-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb457-4" data-line-number="4"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb457-5" data-line-number="5"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;시가총액비중(로그 스케일링)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb457-6" data-line-number="6"><span class="st">  </span><span class="kw">scale_y_log10</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb457-7" data-line-number="7"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb457-8" data-line-number="8"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><code>scale_y_log10()</code> 함수를 통해 <span class="math inline">\(y\)</span>축을 로그값으로 스케일링 하였습니다.</li>
@@ -2262,11 +2270,11 @@ C
 <li><code>theme()</code> 내부에 <code>element_text()</code> 인자를 통해 <span class="math inline">\(x\)</span>축 글자를 회전시키고 위치를 조정하였습니다.</li>
 </ol>
 <p>다음으로 만일 여러분에게 1억이 있을 경우 KOSPI 200을 복제하는 방법을 알아보겠습니다.</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb415-1" data-line-number="1">KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb415-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(매수금액 =<span class="st"> </span><span class="dv">100000000</span> <span class="op">*</span><span class="st"> </span>시가총액비중,</a>
-<a class="sourceLine" id="cb415-3" data-line-number="3">             매수주수 =<span class="st"> </span>매수금액 <span class="op">/</span><span class="st"> `</span><span class="dt">현재가.종가.</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb415-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb415-5" data-line-number="5">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(매수금액, 매수주수) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb458-1" data-line-number="1">KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb458-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(매수금액 =<span class="st"> </span><span class="dv">100000000</span> <span class="op">*</span><span class="st"> </span>시가총액비중,</a>
+<a class="sourceLine" id="cb458-3" data-line-number="3">             매수주수 =<span class="st"> </span>매수금액 <span class="op">/</span><span class="st"> `</span><span class="dt">현재가.종가.</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb458-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb458-5" data-line-number="5">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(매수금액, 매수주수) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
 <pre><code>##   매수금액 매수주수
 ## 1 27435163  526.587
 ## 2  5490479   64.216
@@ -2276,8 +2284,8 @@ C
 ## 6  1981184   11.321</code></pre>
 <p>여러분이 가지고 있는 금액에 시가총액비중을 곱해 각 주식당 매수해야 하는 금액을 구합니다. 그 후 각 금액을 현재가로 나누어 매수해야 하는 주식의 수를 계산합니다.</p>
 <p>이론적으로는 계산된 주식수만큼 매수하여야 인덱스를 정확히 복제합니다. 그러나 주식은 1주 단위로 거래할 수 있으므로 소수점 단위로는 거래할 수는 없습니다. 만일 매수주수를 올림처리할 경우 총 매수금액이 보유금액보다 많이질 수 있으므로, 내림처리를 통해 매수주수를 수정해줍니다.</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb417-1" data-line-number="1">KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(매수주수 =<span class="st"> </span><span class="kw">floor</span>(매수주수))</a>
-<a class="sourceLine" id="cb417-2" data-line-number="2">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(매수금액, 매수주수) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb460-1" data-line-number="1">KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(매수주수 =<span class="st"> </span><span class="kw">floor</span>(매수주수))</a>
+<a class="sourceLine" id="cb460-2" data-line-number="2">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(매수금액, 매수주수) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</a></code></pre></div>
 <pre><code>##   매수금액 매수주수
 ## 1 27435163      526
 ## 2  5490479       64
@@ -2286,10 +2294,10 @@ C
 ## 5  2272803        6
 ## 6  1981184       11</code></pre>
 <p><code>floor()</code> 함수를 통해 내림처리를 하였으며, 각 주수만큼 매수할 경우 KOSPI 200 지수를 매우 유사하게 복제할 수 있습니다.</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb419-1" data-line-number="1">inv_money =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(실제매수금액 =<span class="st"> `</span><span class="dt">현재가.종가.</span><span class="st">`</span> <span class="op">*</span><span class="st"> </span>매수주수) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb419-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">sum</span>(실제매수금액))</a>
-<a class="sourceLine" id="cb419-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb419-4" data-line-number="4"><span class="kw">print</span>(inv_money)</a></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb462-1" data-line-number="1">inv_money =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(실제매수금액 =<span class="st"> `</span><span class="dt">현재가.종가.</span><span class="st">`</span> <span class="op">*</span><span class="st"> </span>매수주수) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb462-2" data-line-number="2"><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">sum</span>(실제매수금액))</a>
+<a class="sourceLine" id="cb462-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb462-4" data-line-number="4"><span class="kw">print</span>(inv_money)</a></code></pre></div>
 <pre><code>##   sum(실제매수금액)
 ## 1          92764855</code></pre>
 <p>주수를 내림 처리하였으므로 실제 매수에 사용되는 금액은 1억원 보다 약간 모자르게 되며, 1억과 해당금액의 차이는 현금으로 보유하거나 해당 지수를 추종하는 ETF 및 펀드 투자에 사용해도 됩니다.</p>
@@ -2297,21 +2305,21 @@ C
 <div id="팩터를-이용한-인핸스드-포트폴리오-구성하기" class="section level3">
 <h3><span class="header-section-number">11.4.3</span> 팩터를 이용한 인핸스드 포트폴리오 구성하기</h3>
 <p>위 방법을 통해 포트폴리오를 구성할 경우 이론적으로는 벤치마크와 수익률이 거의 동일합니다. 그러나 약간의 위험을 감수하여 벤치마크 대비 미세한 초과수익을 원하는 수요가 존재하며, 이러한 펀드가 <strong>인핸스드 인덱스 펀드</strong>입니다. 이를 위해 층화추출법, 비중조절법, 차익거래 등의 전략이 활용되며, 본 책에서는 가장 널리 사용되는 비중조절법에 대해 알아보겠습니다. 그 예제로써 PBR을 이용해 시가총액비중을 조절해보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb421-1" data-line-number="1">KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(종목명, PBR, 시가총액비중) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb421-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">PBR =</span> <span class="kw">as.numeric</span>(PBR)) </a></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb464-1" data-line-number="1">KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(종목명, PBR, 시가총액비중) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb464-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">PBR =</span> <span class="kw">as.numeric</span>(PBR)) </a></code></pre></div>
 <p>먼저 필요한 종목코드, 종목명, PBR, 시가총액비중 열만 선택합니다. 그 후 문자열 형태의 PBR을 숫자 형태로 변경해주며, PBR 데이터가 없어 [-]로 표시되었던 종목의 PBR은 NA로 변경됩니다.</p>
 <div id="단순-가감법" class="section level4">
 <h4><span class="header-section-number">11.4.3.1</span> 단순 가감법</h4>
 <p>먼저 가장 손쉬운 방법은 PBR의 랭킹을 구한 후, PBR이 낮은 상위 n개 종목에는 일정 비중씩을 더하며, 나머지 종목들에서 해당 비중만큼을 빼는 방법입니다. 몇개의 종목에서 얼마씩의 비중을 조절할지는 투자자의 재량에 달렸으며, 본 예제에서는 상위 100 종목에 각각 5bp를 더해주며, 나머지 100 종목에서 각각 5bp를 빼주도록 하겠습니다.</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb422-1" data-line-number="1">KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb422-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(랭킹 =<span class="st"> </span><span class="kw">rank</span>(PBR),</a>
-<a class="sourceLine" id="cb422-3" data-line-number="3">           조절비중 =<span class="st"> </span><span class="kw">ifelse</span>(랭킹 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>, 시가총액비중 <span class="op">+</span><span class="st"> </span><span class="fl">0.0005</span>, 시가총액비중 <span class="op">-</span><span class="st"> </span><span class="fl">0.0005</span>),</a>
-<a class="sourceLine" id="cb422-4" data-line-number="4">           조절비중 =<span class="st"> </span><span class="kw">ifelse</span>(조절비중 <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, 조절비중),</a>
-<a class="sourceLine" id="cb422-5" data-line-number="5">           조절비중 =<span class="st"> </span>조절비중 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(조절비중),</a>
-<a class="sourceLine" id="cb422-6" data-line-number="6">           차이 =<span class="st"> </span>조절비중 <span class="op">-</span><span class="st"> </span>시가총액비중) </a></code></pre></div>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb423-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb423-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb423-3" data-line-number="3"><span class="kw">head</span>(KOSPI200)</a></code></pre></div>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb465-1" data-line-number="1">KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb465-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(랭킹 =<span class="st"> </span><span class="kw">rank</span>(PBR),</a>
+<a class="sourceLine" id="cb465-3" data-line-number="3">           조절비중 =<span class="st"> </span><span class="kw">ifelse</span>(랭킹 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">100</span>, 시가총액비중 <span class="op">+</span><span class="st"> </span><span class="fl">0.0005</span>, 시가총액비중 <span class="op">-</span><span class="st"> </span><span class="fl">0.0005</span>),</a>
+<a class="sourceLine" id="cb465-4" data-line-number="4">           조절비중 =<span class="st"> </span><span class="kw">ifelse</span>(조절비중 <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, 조절비중),</a>
+<a class="sourceLine" id="cb465-5" data-line-number="5">           조절비중 =<span class="st"> </span>조절비중 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(조절비중),</a>
+<a class="sourceLine" id="cb465-6" data-line-number="6">           차이 =<span class="st"> </span>조절비중 <span class="op">-</span><span class="st"> </span>시가총액비중) </a></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb466-1" data-line-number="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb466-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb466-3" data-line-number="3"><span class="kw">head</span>(KOSPI200)</a></code></pre></div>
 <pre><code>##             종목명  PBR 시가총액비중 랭킹 조절비중
 ## 1         삼성전자 1.47      0.27435  137  0.27384
 ## 2       SK하이닉스 1.33      0.05490  129  0.05440
@@ -2326,7 +2334,7 @@ C
 ## 4 -0.0005007
 ## 5 -0.0005007
 ## 6 -0.0005006</code></pre>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb425-1" data-line-number="1"><span class="kw">tail</span>(KOSPI200)</a></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb468-1" data-line-number="1"><span class="kw">tail</span>(KOSPI200)</a></code></pre></div>
 <pre><code>##         종목명  PBR 시가총액비중  랭킹  조절비중
 ## 195 넥센타이어 0.42    0.0004980  33.0 0.0009979
 ## 196       대웅 0.99    0.0004970 109.5 0.0000000
@@ -2349,31 +2357,31 @@ C
 <li>시가총액비중과 조절비중의 차이를 계산합니다.</li>
 </ol>
 <p>PBR 랭킹이 100 미만인 종목, 즉 저PBR 종목은 시가총액비중 대비 투자비중이 많으며, 이와 반대로 고PBR 종목은 시가총액비중 대비 투자비중이 작습니다. 즉 장기적으로 저PBR 종목이 고PBR 종목 대비 우수한 성과를 보일 경우, 저PBR 종목에 더 높은 비중을 준 해당 포트폴리오 역시 벤치마크 대비 우수한 성과를 기록할 수 있을 것입니다.</p>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb427-1" data-line-number="1">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb427-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb427-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb427-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> KOSPI200, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 조절비중),</a>
-<a class="sourceLine" id="cb427-5" data-line-number="5">             <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">shape =</span> <span class="dv">4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb427-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb427-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중(%)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb427-8" data-line-number="8"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.03</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb427-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb427-10" data-line-number="10"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
-<a class="sourceLine" id="cb427-11" data-line-number="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb470-1" data-line-number="1">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb470-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb470-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb470-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> KOSPI200, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 조절비중),</a>
+<a class="sourceLine" id="cb470-5" data-line-number="5">             <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">shape =</span> <span class="dv">4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb470-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb470-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중(%)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb470-8" data-line-number="8"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.03</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb470-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb470-10" data-line-number="10"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
+<a class="sourceLine" id="cb470-11" data-line-number="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-51-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>검은색 점은 인덱스 내 시가총액비중이며, 붉은색 엑스표시는 5bp씩 더하거나 뺀 투자비중입니다. 약간씩의 베팅만 했으므로 기초지수와 크게 차이가 없습니다.</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" data-line-number="1">KOSPI200_mod =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(PBR)</a>
-<a class="sourceLine" id="cb428-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb428-3" data-line-number="3">KOSPI200_mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb428-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, PBR), <span class="dt">y =</span> 차이)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb428-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb428-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, PBR), <span class="dt">y =</span> PBR <span class="op">/</span><span class="dv">10000</span>), <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb428-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb428-8" data-line-number="8"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;차이(%)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb428-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent, </a>
-<a class="sourceLine" id="cb428-10" data-line-number="10">                     <span class="dt">sec.axis =</span> <span class="kw">sec_axis</span>(<span class="op">~</span>. <span class="op">*</span><span class="st"> </span><span class="dv">10000</span>, <span class="dt">name =</span> <span class="st">&quot;PBR&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb428-11" data-line-number="11"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200_mod[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb428-12" data-line-number="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb471-1" data-line-number="1">KOSPI200_mod =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(PBR)</a>
+<a class="sourceLine" id="cb471-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb471-3" data-line-number="3">KOSPI200_mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb471-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, PBR), <span class="dt">y =</span> 차이)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb471-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb471-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, PBR), <span class="dt">y =</span> PBR <span class="op">/</span><span class="dv">10000</span>), <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb471-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb471-8" data-line-number="8"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;차이(%)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb471-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent, </a>
+<a class="sourceLine" id="cb471-10" data-line-number="10">                     <span class="dt">sec.axis =</span> <span class="kw">sec_axis</span>(<span class="op">~</span>. <span class="op">*</span><span class="st"> </span><span class="dv">10000</span>, <span class="dt">name =</span> <span class="st">&quot;PBR&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb471-11" data-line-number="11"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200_mod[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb471-12" data-line-number="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-52-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>PBR 기준 오름차순을 한 후 그림을 그려보면, PBR이 낮은 종목에는 비중이 추가되며 PBR이 높은 종목에는 비중이 감소되는 것이 쉽게 확인됩니다.</p>
 </div>
@@ -2575,14 +2583,14 @@ E
 <li>각 종목의 차이를 보면, PBR이 낮을수록 증가되는 비중이 크며, PBR아 높을수록 감소되는 비중 역시 큽니다.</li>
 </ol>
 <p>이처럼 Z-Score와 누적확률을 이용할 경우 훨씬 팩터에 대한 노출을 크게 할 수 있습니다. 이번에는 KOSPI 200 전 종목을 대상으로 PBR 대상 팩터 틸트 포트폴리오를 구성하도록 하겠습니다.</p>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb429-1" data-line-number="1">KOSPI200_tilt =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb429-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(종목명, PBR, 시가총액비중, 랭킹) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb429-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">zscore =</span> <span class="op">-</span><span class="kw">scale</span>(랭킹),</a>
-<a class="sourceLine" id="cb429-4" data-line-number="4">         <span class="dt">cdf =</span> <span class="kw">pnorm</span>(zscore),</a>
-<a class="sourceLine" id="cb429-5" data-line-number="5">         투자비중 =<span class="st"> </span>시가총액비중 <span class="op">*</span><span class="st"> </span>cdf,</a>
-<a class="sourceLine" id="cb429-6" data-line-number="6">         투자비중 =<span class="st"> </span>투자비중 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(투자비중),</a>
-<a class="sourceLine" id="cb429-7" data-line-number="7">         차이 =<span class="st"> </span>투자비중 <span class="op">-</span><span class="st"> </span>시가총액비중)</a></code></pre></div>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" data-line-number="1"><span class="kw">head</span>(KOSPI200_tilt)</a></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb472-1" data-line-number="1">KOSPI200_tilt =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb472-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(종목명, PBR, 시가총액비중, 랭킹) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb472-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">zscore =</span> <span class="op">-</span><span class="kw">scale</span>(랭킹),</a>
+<a class="sourceLine" id="cb472-4" data-line-number="4">         <span class="dt">cdf =</span> <span class="kw">pnorm</span>(zscore),</a>
+<a class="sourceLine" id="cb472-5" data-line-number="5">         투자비중 =<span class="st"> </span>시가총액비중 <span class="op">*</span><span class="st"> </span>cdf,</a>
+<a class="sourceLine" id="cb472-6" data-line-number="6">         투자비중 =<span class="st"> </span>투자비중 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(투자비중),</a>
+<a class="sourceLine" id="cb472-7" data-line-number="7">         차이 =<span class="st"> </span>투자비중 <span class="op">-</span><span class="st"> </span>시가총액비중)</a></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb473-1" data-line-number="1"><span class="kw">head</span>(KOSPI200_tilt)</a></code></pre></div>
 <pre><code>##             종목명  PBR 시가총액비중 랭킹  zscore
 ## 1         삼성전자 1.47      0.27435  137 -0.6307
 ## 2       SK하이닉스 1.33      0.05490  129 -0.4924
@@ -2597,7 +2605,7 @@ E
 ## 4 0.06100 0.003768 -0.020947
 ## 5 0.23667 0.013443 -0.009285
 ## 6 0.05126 0.002538 -0.017274</code></pre>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" data-line-number="1"><span class="kw">tail</span>(KOSPI200_tilt)</a></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb475-1" data-line-number="1"><span class="kw">tail</span>(KOSPI200_tilt)</a></code></pre></div>
 <pre><code>##         종목명  PBR 시가총액비중  랭킹  zscore    cdf
 ## 195 넥센타이어 0.42    0.0004980  33.0  1.1663 0.8782
 ## 196       대웅 0.99    0.0004970 109.5 -0.1555 0.4382
@@ -2620,39 +2628,39 @@ E
 <li>틸트된 비중과 기존 비중간의 차이를 구합니다.</li>
 </ol>
 <p>위 방법은 시가총액비중이 클수록, 그리고 Z-Score의 절대값이 클수록 비중의 차이가 많이 발생하게 됩니다. 각 종목의 투자비중을 그림으로 나타내겠습니다.</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" data-line-number="1">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb434-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb434-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb434-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> KOSPI200_tilt, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 투자비중),</a>
-<a class="sourceLine" id="cb434-5" data-line-number="5">             <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">shape =</span> <span class="dv">4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb434-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb434-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중(%)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb434-8" data-line-number="8"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.03</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb434-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb434-10" data-line-number="10"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
-<a class="sourceLine" id="cb434-11" data-line-number="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb477-1" data-line-number="1">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb477-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb477-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb477-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> KOSPI200_tilt, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 투자비중),</a>
+<a class="sourceLine" id="cb477-5" data-line-number="5">             <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">shape =</span> <span class="dv">4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb477-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb477-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중(%)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb477-8" data-line-number="8"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.03</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb477-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb477-10" data-line-number="10"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
+<a class="sourceLine" id="cb477-11" data-line-number="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-56-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>검은색 점은 인덱스 내 시가총액비중이며, 붉은색 엑스표시는 새롭게 구한 투자비중입니다. 단순이 동일한 비중을 더하거나 빼는것 보다 비중 차이의 폭이 훨씬 크며, 이는 전체 포트폴리오가 팩터에 노출된 정도가 크다는 것을 의미합니다.</p>
 <p>그러나 실무에서는 이러한 차이가 지나치게 벌어지는 것을 방지하기 위한 제약이 있습니다. 그 예로써 종목당 시가총액비중과 투자비중의 차이가 50bp 이상이 되지 않는 제약이 있는 경우를 생각해봅시다. (제약을 더 크게 설정할 수록, 지수 대비 베팅의 크기가 커집니다.)</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb435-1" data-line-number="1">KOSPI200_tilt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb435-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 차이)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb435-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb435-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.005</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb435-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">-0.005</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb435-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb435-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중 차이(%)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb435-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb435-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
-<a class="sourceLine" id="cb435-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb478-1" data-line-number="1">KOSPI200_tilt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb478-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 차이)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb478-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb478-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.005</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb478-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">-0.005</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb478-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb478-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중 차이(%)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb478-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb478-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
+<a class="sourceLine" id="cb478-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-57-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>시가총액이 큰 종목의 경우 허용치인 50bp를 넘어가는 경우가 다수 존재합니다. 이를 방지하기 위해 비중에 제약조건을 두어야 합니다. 예를 들어 삼성전자의 경우 둘 간의 비중의 차이가 -0.0933 로 지나치게 크므로 [시가총액비중 - 50bp] 가 투자되도록 변경해 줍니다. 타 종목 역시 이와 동일하게 제약조건을 추가해 줍니다.</p>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" data-line-number="1">KOSPI200_tilt =<span class="st"> </span>KOSPI200_tilt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb436-2" data-line-number="2"><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&lt;</span><span class="st"> </span><span class="fl">-0.005</span>, 시가총액비중 <span class="op">-</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb436-3" data-line-number="3"><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.005</span>, 시가총액비중 <span class="op">+</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb436-4" data-line-number="4"><span class="st">    </span><span class="kw">mutate</span>(투자비중 =<span class="st"> </span>투자비중 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(투자비중), </a>
-<a class="sourceLine" id="cb436-5" data-line-number="5">               차이 =<span class="st"> </span>투자비중 <span class="op">-</span><span class="st"> </span>시가총액비중)</a>
-<a class="sourceLine" id="cb436-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb436-7" data-line-number="7"><span class="kw">head</span>(KOSPI200_tilt)</a></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb479-1" data-line-number="1">KOSPI200_tilt =<span class="st"> </span>KOSPI200_tilt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb479-2" data-line-number="2"><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&lt;</span><span class="st"> </span><span class="fl">-0.005</span>, 시가총액비중 <span class="op">-</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb479-3" data-line-number="3"><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.005</span>, 시가총액비중 <span class="op">+</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb479-4" data-line-number="4"><span class="st">    </span><span class="kw">mutate</span>(투자비중 =<span class="st"> </span>투자비중 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(투자비중), </a>
+<a class="sourceLine" id="cb479-5" data-line-number="5">               차이 =<span class="st"> </span>투자비중 <span class="op">-</span><span class="st"> </span>시가총액비중)</a>
+<a class="sourceLine" id="cb479-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb479-7" data-line-number="7"><span class="kw">head</span>(KOSPI200_tilt)</a></code></pre></div>
 <pre><code>##             종목명  PBR 시가총액비중 랭킹  zscore
 ## 1         삼성전자 1.47      0.27435  137 -0.6307
 ## 2       SK하이닉스 1.33      0.05490  129 -0.4924
@@ -2672,15 +2680,15 @@ E
 <li>재표준화 작업을 거쳐준 후 차이를 다시 계산합니다.</li>
 </ol>
 <p>위 방법을 통해 차이가 50bp가 되도록 강제로 설정하였으나, 재표준화를 거치는 과정에서 차이가 50bp를 넘는 종목이 다시 발생하게 됩니다. 모든 종목의 차이가 50bp 이내가 되도록 해당 작업을 반복해줍니다.</p>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" data-line-number="1"><span class="cf">while</span> (<span class="kw">max</span>(<span class="kw">abs</span>(KOSPI200_tilt<span class="op">$</span>차이)) <span class="op">&gt;</span><span class="st"> </span>(<span class="fl">0.005</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.00001</span>)) {</a>
-<a class="sourceLine" id="cb438-2" data-line-number="2">  KOSPI200_tilt =<span class="st"> </span>KOSPI200_tilt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb438-3" data-line-number="3"><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&lt;</span><span class="st"> </span><span class="fl">-0.005</span>, 시가총액비중 <span class="op">-</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb438-4" data-line-number="4"><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.005</span>, 시가총액비중 <span class="op">+</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb438-5" data-line-number="5"><span class="st">    </span><span class="kw">mutate</span>(투자비중 =<span class="st"> </span>투자비중 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(투자비중), </a>
-<a class="sourceLine" id="cb438-6" data-line-number="6">               차이 =<span class="st"> </span>투자비중 <span class="op">-</span><span class="st"> </span>시가총액비중)</a>
-<a class="sourceLine" id="cb438-7" data-line-number="7">}</a>
-<a class="sourceLine" id="cb438-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb438-9" data-line-number="9"><span class="kw">head</span>(KOSPI200_tilt)</a></code></pre></div>
+<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb481-1" data-line-number="1"><span class="cf">while</span> (<span class="kw">max</span>(<span class="kw">abs</span>(KOSPI200_tilt<span class="op">$</span>차이)) <span class="op">&gt;</span><span class="st"> </span>(<span class="fl">0.005</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.00001</span>)) {</a>
+<a class="sourceLine" id="cb481-2" data-line-number="2">  KOSPI200_tilt =<span class="st"> </span>KOSPI200_tilt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb481-3" data-line-number="3"><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&lt;</span><span class="st"> </span><span class="fl">-0.005</span>, 시가총액비중 <span class="op">-</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb481-4" data-line-number="4"><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.005</span>, 시가총액비중 <span class="op">+</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb481-5" data-line-number="5"><span class="st">    </span><span class="kw">mutate</span>(투자비중 =<span class="st"> </span>투자비중 <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(투자비중), </a>
+<a class="sourceLine" id="cb481-6" data-line-number="6">               차이 =<span class="st"> </span>투자비중 <span class="op">-</span><span class="st"> </span>시가총액비중)</a>
+<a class="sourceLine" id="cb481-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb481-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb481-9" data-line-number="9"><span class="kw">head</span>(KOSPI200_tilt)</a></code></pre></div>
 <pre><code>##             종목명  PBR 시가총액비중 랭킹  zscore
 ## 1         삼성전자 1.47      0.27435  137 -0.6307
 ## 2       SK하이닉스 1.33      0.05490  129 -0.4924
@@ -2696,43 +2704,43 @@ E
 ## 5 0.23667  0.01773 -0.005000
 ## 6 0.05126  0.01481 -0.005000</code></pre>
 <p>위와 동일한 코드에 <code>while()</code> 구문을 활용하여 둘 간의 차이가 50bp 보다 클 경우 해당 작업을 계속해서 반복하며, 결과적으로 차이가 거의 50bp에 수렴합니다.</p>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" data-line-number="1">KOSPI200_tilt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb440-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 차이)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb440-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb440-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.005</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb440-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">-0.005</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb440-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb440-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중 차이(%)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb440-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb440-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
-<a class="sourceLine" id="cb440-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb483-1" data-line-number="1">KOSPI200_tilt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb483-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 차이)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb483-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb483-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">0.005</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb483-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="kw">aes</span>(<span class="dt">yintercept =</span> <span class="fl">-0.005</span>), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb483-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb483-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중 차이(%)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb483-8" data-line-number="8"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb483-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
+<a class="sourceLine" id="cb483-10" data-line-number="10"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-60-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>모든 종목이 제약조건 내에 들어오게 되었습니다.</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb441-1" data-line-number="1">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb441-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb441-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb441-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> KOSPI200_tilt, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 투자비중),</a>
-<a class="sourceLine" id="cb441-5" data-line-number="5">             <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">shape =</span> <span class="dv">4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb441-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb441-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중(%)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb441-8" data-line-number="8"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.03</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb441-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb441-10" data-line-number="10"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
-<a class="sourceLine" id="cb441-11" data-line-number="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb484-1" data-line-number="1">KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb484-2" data-line-number="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 시가총액비중)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb484-3" data-line-number="3"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb484-4" data-line-number="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> KOSPI200_tilt, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 투자비중),</a>
+<a class="sourceLine" id="cb484-5" data-line-number="5">             <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">shape =</span> <span class="dv">4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb484-6" data-line-number="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb484-7" data-line-number="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;비중(%)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb484-8" data-line-number="8"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.03</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb484-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb484-10" data-line-number="10"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></a>
+<a class="sourceLine" id="cb484-11" data-line-number="11"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-61-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>제약조건으로 인해 기초지수와의 차이가 줄어들었지만, 기존 단순가감법 보다는 적극적으로 베팅이 되었습니다.</p>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" data-line-number="1">KOSPI200_tilt_mod =<span class="st"> </span>KOSPI200_tilt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(PBR)</a>
-<a class="sourceLine" id="cb442-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb442-3" data-line-number="3">KOSPI200_tilt_mod <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb442-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, PBR), <span class="dt">y =</span> 차이)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb442-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb442-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, PBR), <span class="dt">y =</span> PBR <span class="op">/</span><span class="dv">2000</span>), <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb442-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb442-8" data-line-number="8"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;차이(%)&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb442-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent, </a>
-<a class="sourceLine" id="cb442-10" data-line-number="10">                     <span class="dt">sec.axis =</span> <span class="kw">sec_axis</span>(<span class="op">~</span>. <span class="op">*</span><span class="st"> </span><span class="dv">2000</span>, <span class="dt">name =</span> <span class="st">&quot;PBR&quot;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb442-11" data-line-number="11"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200_mod[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
-<a class="sourceLine" id="cb442-12" data-line-number="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" data-line-number="1">KOSPI200_tilt_mod =<span class="st"> </span>KOSPI200_tilt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(PBR)</a>
+<a class="sourceLine" id="cb485-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb485-3" data-line-number="3">KOSPI200_tilt_mod <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb485-4" data-line-number="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, PBR), <span class="dt">y =</span> 차이)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb485-5" data-line-number="5"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb485-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, PBR), <span class="dt">y =</span> PBR <span class="op">/</span><span class="dv">2000</span>), <span class="dt">fill =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb485-7" data-line-number="7"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb485-8" data-line-number="8"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;차이(%)&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb485-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent, </a>
+<a class="sourceLine" id="cb485-10" data-line-number="10">                     <span class="dt">sec.axis =</span> <span class="kw">sec_axis</span>(<span class="op">~</span>. <span class="op">*</span><span class="st"> </span><span class="dv">2000</span>, <span class="dt">name =</span> <span class="st">&quot;PBR&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb485-11" data-line-number="11"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">breaks =</span> KOSPI200_mod[<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="op">+</span></a>
+<a class="sourceLine" id="cb485-12" data-line-number="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-62-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>PBR에 따른 비중의 차이 역시 단순 가감법보다 훨씬 증가했습니다. 실무에서는 단순히 PBR처럼 하나의 지표만 살펴보기 보다는 앞서 살펴본 멀티팩터를 이용해 비중을 틸트하기도 하며, 좀 더 다양한 제약조건을 추가하기도 합니다.</p>
 

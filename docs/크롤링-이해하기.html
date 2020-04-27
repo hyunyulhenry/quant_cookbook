@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-26" />
+<meta name="date" content="2020-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -262,6 +262,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-다운로드"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
 <li class="chapter" data-level="6.2.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#가치지표-계산하기"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
 <li class="chapter" data-level="6.2.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-재무제표-및-가치지표-다운로드"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#dart의-open-api를-이용한-데이터-수집하기"><i class="fa fa-check"></i><b>6.3</b> DART의 Open API를 이용한 데이터 수집하기</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#api-key발급-및-추가하기"><i class="fa fa-check"></i><b>6.3.1</b> API Key발급 및 추가하기</a></li>
+<li class="chapter" data-level="6.3.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#고유번호-다운로드"><i class="fa fa-check"></i><b>6.3.2</b> 고유번호 다운로드</a></li>
+<li class="chapter" data-level="6.3.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#공시검색"><i class="fa fa-check"></i><b>6.3.3</b> 공시검색</a></li>
+<li class="chapter" data-level="6.3.4" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#사업보고서-주요-정보"><i class="fa fa-check"></i><b>6.3.4</b> 사업보고서 주요 정보</a></li>
+<li class="chapter" data-level="6.3.5" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#상장기업-재무정보"><i class="fa fa-check"></i><b>6.3.5</b> 상장기업 재무정보</a></li>
+<li class="chapter" data-level="6.3.6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#단일회사-전체-재무제표"><i class="fa fa-check"></i><b>6.3.6</b> 단일회사 전체 재무제표</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
@@ -510,26 +518,26 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>위 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장됩니다. 이처럼 개발자 도구 화면을 통해 내가 추출하고자 하는 데이터가 HTML 중 어디에 위치하고 있는지 먼저 확인하면 어렵지 않게 해당 데이터를 읽어올 수 있습니다.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">print</span>(data_title)</a></code></pre></div>
-<pre><code>##  [1] &quot;[이번주 증시] 글로벌 정책여력 주목&quot; 
-##  [2] &quot;[표]일본 주요기업 주가(4/24)&quot;       
-##  [3] &quot;&quot;                                   
-##  [4] &quot;[주간추천주]코로나19 여파에 실적주&quot; 
-##  [5] &quot;[김은정의 기업워치]&#39;코로나 불황&#39;에&quot; 
-##  [6] &quot;[마켓인사이트]“코로나19 이후 온라&quot;  
-##  [7] &quot;이번주(4월 27~5월 1일) 재테크&quot;      
-##  [8] &quot;[마켓포인트]개인 코스닥 주간 순매도&quot;
-##  [9] &quot;[마켓포인트]개인 코스닥 주간 순매수&quot;
-## [10] &quot;[마켓포인트]기관 코스닥 주간 순매도&quot;
-## [11] &quot;[마켓포인트]기관 코스닥 주간 순매수&quot;
-## [12] &quot;[마켓포인트]외국인 코스닥 주간 순매&quot;
-## [13] &quot;[마켓포인트]외국인 코스닥 주간 순매&quot;
-## [14] &quot;[마켓포인트]개인 코스피 주간 순매도&quot;
-## [15] &quot;[마켓포인트]개인 코스피 주간 순매수&quot;
-## [16] &quot;[마켓포인트]기관 코스피 주간 순매도&quot;
-## [17] &quot;[마켓포인트]기관 코스피 주간 순매수&quot;
-## [18] &quot;[마켓포인트]외국인 코스피 주간 순매&quot;
-## [19] &quot;[마켓포인트]외국인 코스피 주간 순매&quot;
-## [20] &quot;[주간증시전망]주요국 잇단 통화정책 &quot;</code></pre>
+<pre><code>##  [1] &quot;연이정보통신, 정현욱 단독 대표 체제&quot;  
+##  [2] &quot;원유선물 ETN, 하루 시가총액 1천&quot;      
+##  [3] &quot;[현장에서]공매도냐, 펀드수익률이냐&quot;   
+##  [4] &quot;상장협 &quot;                              
+##  [5] &quot;라임운용이 투자했던 한류타임즈 매물로&quot;
+##  [6] &quot;LG화학, 배터리 사업 상승 가도… &quot;      
+##  [7] &quot;27일, 코스닥 기관 순매도상위에 제&quot;    
+##  [8] &quot;27일, 외국인 코스닥에서 메디톡스(&quot;    
+##  [9] &quot;27일, 기관 코스닥에서 셀트리온헬스&quot;   
+## [10] &quot;27일, 코스닥 외국인 순매수상위에 &quot;    
+## [11] &quot;27일, 기관 거래소에서 KODEX &quot;         
+## [12] &quot;27일, 거래소 외국인 순매도상위에 &quot;    
+## [13] &quot;27일, 거래소 기관 순매수상위에 금&quot;    
+## [14] &quot;27일, 외국인 거래소에서 KB금융(&quot;      
+## [15] &quot;연이정보통신, 정현욱 단독대표 체제로&quot; 
+## [16] &quot;KG이니시스, 백제약품 외 1개사 채&quot;     
+## [17] &quot;아리온, 사내이사 횡령 및 배임 혐의&quot;   
+## [18] &quot;[표]투자주체별 매매동향(4월 27일&quot;     
+## [19] &quot;[표]코스닥 기관·외국인·개인 순매수&quot;   
+## [20] &quot;[표]유가증권 기관·외국인·개인 순매&quot;</code></pre>
 </div>
 <div id="기업공시채널에서-오늘의-공시-불러오기" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -750,18 +758,18 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
 <pre><code>##    N           종목명  현재가 전일비 등락률 액면가
 ## 1 NA                                              
-## 2  1         삼성전자  49,350    500 -1.00%    100
-## 3  2       SK하이닉스  81,400  1,200 -1.45%  5,000
-## 4  3 삼성바이오로직스 591,000 10,000 -1.66%  2,500
-## 5  4       삼성전자우  42,500    500 -1.16%    100
-## 6  5            NAVER 192,500  2,500 +1.32%    100
+## 2  1         삼성전자  49,850    500 +1.01%    100
+## 3  2       SK하이닉스  82,600  1,200 +1.47%  5,000
+## 4  3 삼성바이오로직스 588,000  3,000 -0.51%  2,500
+## 5  4       삼성전자우  42,750    250 +0.59%    100
+## 6  5            NAVER 197,500  5,000 +2.60%    100
 ##    시가총액 상장주식수 외국인비율     거래량    PER
 ## 1                              NA              &lt;NA&gt;
-## 2 2,946,088  5,969,783      55.22 15,555,003  15.59
-## 3   592,594    728,002      48.41  3,182,862  29.44
-## 4   391,035     66,165      10.42    397,916 192.70
-## 5   349,727    822,887      88.69  1,565,122  13.42
-## 6   316,207    164,263      57.83    927,247  54.41
+## 2 2,975,937  5,969,783      55.19 13,742,821  15.75
+## 3   601,330    728,002      48.48  3,221,840  29.87
+## 4   389,050     66,165      10.43    174,581 191.72
+## 5   351,784    822,887      88.69  1,158,191  13.50
+## 6   324,420    164,263      57.91    896,825  55.82
 ##     ROE 토론실
 ## 1  &lt;NA&gt;     NA
 ## 2  8.69     NA
@@ -774,19 +782,19 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <a class="sourceLine" id="cb79-2" data-line-number="2">table =<span class="st"> </span><span class="kw">na.omit</span>(table)</a>
 <a class="sourceLine" id="cb79-3" data-line-number="3"><span class="kw">print</span>(<span class="kw">head</span>(table))</a></code></pre></div>
 <pre><code>##    N           종목명  현재가 전일비 등락률 액면가
-## 2  1         삼성전자  49,350    500 -1.00%    100
-## 3  2       SK하이닉스  81,400  1,200 -1.45%  5,000
-## 4  3 삼성바이오로직스 591,000 10,000 -1.66%  2,500
-## 5  4       삼성전자우  42,500    500 -1.16%    100
-## 6  5            NAVER 192,500  2,500 +1.32%    100
-## 10 6         셀트리온 211,500  2,500 -1.17%  1,000
+## 2  1         삼성전자  49,850    500 +1.01%    100
+## 3  2       SK하이닉스  82,600  1,200 +1.47%  5,000
+## 4  3 삼성바이오로직스 588,000  3,000 -0.51%  2,500
+## 5  4       삼성전자우  42,750    250 +0.59%    100
+## 6  5            NAVER 197,500  5,000 +2.60%    100
+## 10 6         셀트리온 212,500  1,000 +0.47%  1,000
 ##     시가총액 상장주식수 외국인비율     거래량    PER
-## 2  2,946,088  5,969,783      55.22 15,555,003  15.59
-## 3    592,594    728,002      48.41  3,182,862  29.44
-## 4    391,035     66,165      10.42    397,916 192.70
-## 5    349,727    822,887      88.69  1,565,122  13.42
-## 6    316,207    164,263      57.83    927,247  54.41
-## 10   284,905    134,707      20.16  1,069,375  95.66
+## 2  2,975,937  5,969,783      55.19 13,742,821  15.75
+## 3    601,330    728,002      48.48  3,221,840  29.87
+## 4    389,050     66,165      10.43    174,581 191.72
+## 5    351,784    822,887      88.69  1,158,191  13.50
+## 6    324,420    164,263      57.91    896,825  55.82
+## 10   286,252    134,707      20.14    476,952  96.11
 ##      ROE
 ## 2   8.69
 ## 3   4.25

@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-26" />
+<meta name="date" content="2020-04-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -263,6 +263,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#가치지표-계산하기"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
 <li class="chapter" data-level="6.2.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-재무제표-및-가치지표-다운로드"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
 </ul></li>
+<li class="chapter" data-level="6.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#dart의-open-api를-이용한-데이터-수집하기"><i class="fa fa-check"></i><b>6.3</b> DART의 Open API를 이용한 데이터 수집하기</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#api-key발급-및-추가하기"><i class="fa fa-check"></i><b>6.3.1</b> API Key발급 및 추가하기</a></li>
+<li class="chapter" data-level="6.3.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#고유번호-다운로드"><i class="fa fa-check"></i><b>6.3.2</b> 고유번호 다운로드</a></li>
+<li class="chapter" data-level="6.3.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#공시검색"><i class="fa fa-check"></i><b>6.3.3</b> 공시검색</a></li>
+<li class="chapter" data-level="6.3.4" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#사업보고서-주요-정보"><i class="fa fa-check"></i><b>6.3.4</b> 사업보고서 주요 정보</a></li>
+<li class="chapter" data-level="6.3.5" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#상장기업-재무정보"><i class="fa fa-check"></i><b>6.3.5</b> 상장기업 재무정보</a></li>
+<li class="chapter" data-level="6.3.6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#단일회사-전체-재무제표"><i class="fa fa-check"></i><b>6.3.6</b> 단일회사 전체 재무제표</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
 <li class="chapter" data-level="7.1" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#주가-정리하기"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
@@ -486,14 +494,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;
 ##  1 코스피   030720   동원수산… 어업               8940
 ##  2 코스피   007160   사조산업… 어업              54400
-##  3 코스피   006040   동원산업… 어업             246500
-##  4 코스피   004970   신라교역… 어업              14350
-##  5 코스피   012320   경동인베스… 광업              40300
-##  6 코스피   003580   넥스트사이… 광업               5200
-##  7 코스피   017810   풀무원 음식료품          11300
-##  8 코스피   280360   롯데제과… 음식료품         159500
-##  9 코스피   271560   오리온 음식료품          83300
-## 10 코스피   006090   사조오양… 음식료품           8220
+##  3 코스피   006090   사조오양… 음식료품           8220
+##  4 코스피   005300   롯데칠성… 음식료품         166500
+##  5 코스피   003230   삼양식품… 음식료품          71100
+##  6 코스피   001685   대상우 음식료품          13300
+##  7 코스피   005820   원림   섬유의복          18400
+##  8 코스피   001465   BYC우  섬유의복         140500
+##  9 코스피   001460   BYC    섬유의복         235500
+## 10 코스피   009580   무림P&amp;P… 종이목재           5260
 ## # … with 2,233 more rows, and 2 more variables:
 ## #   전일대비 &lt;dbl&gt;, `시가총액(원)` &lt;dbl&gt;</code></pre>
 <p>위 과정을 통해 down_sector 변수에는 산업별 현황 데이터가 저장되었습니다. 이를 csv 파일로 저장하겠습니다.</p>
@@ -595,7 +603,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb99-13" data-line-number="13"><span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)</a>
 <a class="sourceLine" id="cb99-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb99-15" data-line-number="15"><span class="kw">print</span>(biz_day)</a></code></pre></div>
-<pre><code>## [1] &quot;20200422&quot;</code></pre>
+<pre><code>## [1] &quot;20200423&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li>페이지의 url을 저장합니다.</li>
 <li><code>GET()</code> 함수를 통해 해당 페이지 내용을 받습니다.</li>

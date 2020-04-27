@@ -71,7 +71,7 @@ print(price)
 
 ```
 ##            [,1]
-## 2020-04-26   NA
+## 2020-04-27   NA
 ```
 
 1. data 폴더 내에 KOR_price 폴더를 생성합니다.
@@ -96,12 +96,12 @@ print(head(data_html))
 ```
 
 ```
-## [1] "20180412|49440|49440|48880|49000|249325"
-## [2] "20180413|49600|50180|49400|49800|205566"
-## [3] "20180416|50320|50600|49860|50340|157549"
-## [4] "20180417|50240|50540|49820|49980|155440"
-## [5] "20180418|51000|51360|50580|51360|269252"
-## [6] "20180419|52000|52980|51540|52780|343811"
+## [1] "20180413|49600|50180|49400|49800|205566"
+## [2] "20180416|50320|50600|49860|50340|157549"
+## [3] "20180417|50240|50540|49820|49980|155440"
+## [4] "20180418|51000|51360|50580|51360|269252"
+## [5] "20180419|52000|52980|51540|52780|343811"
+## [6] "20180420|51800|52260|51420|51620|235220"
 ```
 
 1. `paste0()` 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.
@@ -121,14 +121,14 @@ print(head(price))
 
 ```
 ## # A tibble: 6 x 6
-##   `20180412` `49440` `49440_1` `48880` `49000` `249325`
-##        <dbl>   <dbl>     <dbl>   <dbl>   <dbl>    <dbl>
-## 1   20180413   49600     50180   49400   49800   205566
-## 2   20180416   50320     50600   49860   50340   157549
-## 3   20180417   50240     50540   49820   49980   155440
-## 4   20180418   51000     51360   50580   51360   269252
-## 5   20180419   52000     52980   51540   52780   343811
-## 6   20180420   51800     52260   51420   51620   235220
+##   `20180413` `49600` `50180` `49400` `49800` `205566`
+##        <dbl>   <dbl>   <dbl>   <dbl>   <dbl>    <dbl>
+## 1   20180416   50320   50600   49860   50340   157549
+## 2   20180417   50240   50540   49820   49980   155440
+## 3   20180418   51000   51360   50580   51360   269252
+## 4   20180419   52000   52980   51540   52780   343811
+## 5   20180420   51800   52260   51420   51620   235220
+## 6   20180423   51000   52080   51000   51900   232380
 ```
 
 readr 패키지의 `read_delim()` 함수를 쓰면 구분자로 이루어진 데이터를 테이블로 쉽게 변경할 수 있습니다. 데이터를 확인해보면 테이블 형태로 변경되었으며 각 열은 날짜, 시가, 고가, 저가, 종가, 거래량을 의미합니다. 이 중 우리가 필요한 날짜와 종가를 선택한 후 데이터 클렌징을 해줍니다.
@@ -149,12 +149,12 @@ print(tail(price))
 
 ```
 ##            Price
-## 2020-04-17 51400
 ## 2020-04-20 50100
 ## 2020-04-21 49250
 ## 2020-04-22 49850
 ## 2020-04-23 49850
 ## 2020-04-24 49350
+## 2020-04-27 49850
 ```
 
 1. 날짜에 해당하는 첫 번째 열과, 종가에 해당하는 다섯 번째 열만 선택해 저장합니다.
@@ -826,3 +826,873 @@ for(i in 1 : nrow(KOR_ticker) ) {
 ```
 
 전 종목 주가 데이터를 받는 과정과 동일하게 KOR_ticker.csv 파일을 불러온 후 for loop를 통해 i 값이 변함에 따라 티커를 변경해가며 모든 종목의 재무제표 및 가치지표를 다운로드합니다. `tryCatch()` 함수를 이용해 오류가 발생하면 NA로 이루어진 빈 데이터를 저장한 후 다음 루프로 넘어가게 됩니다. data/KOR_fs 폴더에는 전 종목의 재무제표 데이터가 저장되고, data/KOR_value 폴더에는 전 종목의 가치지표 데이터가 csv 형태로 저장됩니다.
+
+## DART의 Open API를 이용한 데이터 수집하기
+
+DART(Data Analysis, Retrieval and Transfer System)는 금융감독원 전자공시시스템으로써, 상장법인 등이 공시서류를 인터넷으로 제출하고, 투자자 등 이용자는 제출 즉시 인터넷을 통해 조회할 수 있도록 하는 종합적 기업공시 시스템입니다. 홈페이지에서도 각종 공시내역을 확인할 수 있지만, 해당 사이트에서 제공하는 API를 이용할 경우 더욱 쉽게 공시 내용을 수집할 수 있습니다.
+
+### API Key발급 및 추가하기
+
+먼저 https://opendart.fss.or.kr/에 접속한 후 [인증키 신청/관리] → [인증키 신청]을 통해 API Key를 발급 받습니다.
+
+<div class="figure" style="text-align: center">
+<img src="images/dart_api_key.png" alt="OpenAPI 인증키 신청" width="70%" />
+<p class="caption">(\#fig:unnamed-chunk-28)OpenAPI 인증키 신청</p>
+</div>
+
+계정을 생성하고 이메일을 통해 이용자 등록을 한 후 로그인을 합니다. 그 후 [오픈API 이용현황]을 살펴보면 **API Key** 부분에 발급받은 Key가 있으며, 금일 몇번의 API를 요청했는지가 일일이용현황에 나옵니다. 하루 총 10,000번까지 데이터를 요청할 수 있습니다.
+
+<div class="figure" style="text-align: center">
+<img src="images/dart_api_status.png" alt="OpenAPI 이용현황" width="70%" />
+<p class="caption">(\#fig:unnamed-chunk-29)OpenAPI 이용현황</p>
+</div>
+
+다음으로 발급받은 API Key를 **.Renviron** 파일에 추가하도록 합니다. 해당 파일에는 여러 패스워드를 추가해 안전하게 관리할 수 있습니다.
+
+
+```r
+file.edit("~/.Renviron")
+```
+
+**.Renviron** 파일이 열리면 다음과 같이 입력을 해줍니다.
+
+```
+dart_api_key = '발급받은 API'
+```
+
+파일을 저장한 후 해당 파일을 적용하기 위해 **R을 Session을 재시작합니다.** 그 후 아래 명령어를 실행하여 API Key를 불러오도록 합니다. (재시작하지 않으면 Key를 불러올 수 없습니다.)
+
+
+```r
+dart_api = Sys.getenv("dart_api_key")
+```
+
+### 고유번호 다운로드
+
+Open API에서 각 기업의 데이터를 받기 위해서는 종목에 해당하는 고유번호를 알아야 합니다. 이에 대한 개발가이드는 아래 페이지에 나와 있습니다.
+
+https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&apiId=2019018
+
+위 페이지의 내용을 코드로 나타내보도록 합니다.
+
+
+```r
+library(httr)
+library(rvest)
+
+codezip_url = paste0(
+  'https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=',dart_api)
+
+codezip_data = GET(codezip_url)
+print(codezip_data)
+```
+
+```
+## Response [https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=b1a630e527b0e5ff5bd58ed81b49825017fa80b8]
+##   Date: 2020-04-27 10:04
+##   Status: 200
+##   Content-Type: application/x-msdownload;charset=UTF-8
+##   Size: 1.34 MB
+## <BINARY BODY>
+```
+
+```
+## NULL
+```
+
+1. **https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=** 뒤에 본인의 API 키를 입력합니다.
+2. `GET()` 함수를 통해 해당 페이지 내용을 받습니다.
+
+다운로드 받은 내용을 확인해보면 <BINARY BODY>, 즉 바이너리 형태의 데이터가 첨부되어 있습니다. 이에 대해 좀더 자세히 알아보도록 하겠습니다.
+
+
+```r
+codezip_data$headers[["content-disposition"]]
+```
+
+```
+## [1] ": attachment; filename=CORPCODE.zip"
+```
+
+headers의 "content-disposition" 부분을 확인해보면 **CORPCODE.zip** 파일이 첨부되어 있습니다. 해당 파일의 압축을 풀어 첨부된 내용을 확인합니다.
+
+
+```r
+tf = tempfile(fileext = '.zip')
+
+writeBin(
+  content(codezip_data, as = "raw"),
+  file.path(tf)
+)
+
+nm = unzip(tf, list = TRUE)
+print(nm)
+```
+
+```
+##           Name   Length                Date
+## 1 CORPCODE.xml 15548473 2020-04-20 12:04:00
+```
+
+1. `tempfile()` 함수 통해 빈 .zip 파일을 만듭니다.
+2. `writeBin()` 함수는 바이너리 형태의 파일을 저장하는 함수이며,  `content()`를 통해 첨부 파일 내용을 raw 형태로 저장합니다. 파일명은 위에서 만든 tf로 합니다.
+3. `unzip()` 함수를 통해 zip 내 파일 리스트를 확인합니다.
+
+zip 파일 내에는 CORPCODE.xml 파일이 있으며, `read_xml()` 함수를 통해 이를 불러오도록 합니다. 
+
+
+```r
+code_data = read_xml(unzip(tf, nm$Name))
+print(code_data)
+```
+
+```
+## {xml_document}
+## <result>
+##  [1] <list>\n  <corp_code>00434003</corp_code>\n  <co ...
+##  [2] <list>\n  <corp_code>00434456</corp_code>\n  <co ...
+##  [3] <list>\n  <corp_code>00430964</corp_code>\n  <co ...
+##  [4] <list>\n  <corp_code>00432403</corp_code>\n  <co ...
+##  [5] <list>\n  <corp_code>00388953</corp_code>\n  <co ...
+##  [6] <list>\n  <corp_code>00179984</corp_code>\n  <co ...
+##  [7] <list>\n  <corp_code>00420143</corp_code>\n  <co ...
+##  [8] <list>\n  <corp_code>00401111</corp_code>\n  <co ...
+##  [9] <list>\n  <corp_code>00435534</corp_code>\n  <co ...
+## [10] <list>\n  <corp_code>00430186</corp_code>\n  <co ...
+## [11] <list>\n  <corp_code>00430201</corp_code>\n  <co ...
+## [12] <list>\n  <corp_code>00430210</corp_code>\n  <co ...
+## [13] <list>\n  <corp_code>00430229</corp_code>\n  <co ...
+## [14] <list>\n  <corp_code>00140432</corp_code>\n  <co ...
+## [15] <list>\n  <corp_code>00426208</corp_code>\n  <co ...
+## [16] <list>\n  <corp_code>00433262</corp_code>\n  <co ...
+## [17] <list>\n  <corp_code>00433749</corp_code>\n  <co ...
+## [18] <list>\n  <corp_code>00433785</corp_code>\n  <co ...
+## [19] <list>\n  <corp_code>00196079</corp_code>\n  <co ...
+## [20] <list>\n  <corp_code>00435048</corp_code>\n  <co ...
+## ...
+```
+
+해당 파일은 HTML 형식으로 되어 있으며 중요부분은 다음과 같습니다.
+
+- corp_code: 고유번호
+- corp_name: 종목명
+- corp_stock: 거래소 상장 티커
+
+HTML의 태그를 이용해 각 부분을 추출한 후 하나의 데이터로 합치도록 하겠습니다.
+
+
+```r
+corp_code = code_data %>% html_nodes('corp_code') %>% html_text()
+corp_name = code_data %>% html_nodes('corp_name') %>% html_text()
+corp_stock = code_data %>% html_nodes('stock_code') %>% html_text()
+
+corp_list = data.frame(
+  'code' = corp_code,
+  'name' = corp_name,
+  'stock' = corp_stock,
+  stringsAsFactors = FALSE
+)
+```
+
+1. `html_nodes()` 함수를 이용해 고유번호, 종목명, 상장티커를 선택한 후, `html_text()` 함수를 이용해 문자열만 추출하도록 합니다.
+2. `data.frame()` 함수를 통해 데이터프레임 형식으로 묶어주도록 합니다.
+
+
+```r
+nrow(corp_list)
+```
+
+```
+## [1] 78252
+```
+
+```r
+head(corp_list)
+```
+
+```
+##       code                               name stock
+## 1 00434003                               다코      
+## 2 00434456                           일산약품      
+## 3 00430964                         굿앤엘에스      
+## 4 00432403                           한라판지      
+## 5 00388953 크레디피아제이십오차유동화전문회사      
+## 6 00179984                       연방건설산업
+```
+
+종목수를 확인해보면 78252 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.
+
+
+```r
+corp_list = corp_list[corp_list$stock != " ", ]
+
+write.csv(corp_list, 'data/corp_list.csv')
+```
+
+### 공시검색
+
+#### 전체 공시 검색
+
+먼저 공시검색 API에 대한 이해를 위해 전체 종목의 공시를 수집하도록 하며, 해당 개발가이드는 아래 페이지에 나와 있습니다.
+
+https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&apiId=2019001
+
+각종 요청인자를 통해 url을 생성 후 전송하여, 요청에 맞는 데이터를 받을 수 있습니다. 공시 검색에 해당하는 인자는 다음과 같습니다.
+
+<div class="figure" style="text-align: center">
+<img src="images/dart_api_input.png" alt="OpenAPI 요청 인자 예시" width="70%" />
+<p class="caption">(\#fig:unnamed-chunk-39)OpenAPI 요청 인자 예시</p>
+</div>
+
+페이지 하단에서 인자를 입력 후 [검색]을 누르면 각 인자에 맞게 생성된 url과 그 결과를 볼 수 있습니다.
+
+<div class="figure" style="text-align: center">
+<img src="images/dart_api_exam.png" alt="OpenAPI 테스트 예시" width="70%" />
+<p class="caption">(\#fig:unnamed-chunk-40)OpenAPI 테스트 예시</p>
+</div>
+
+먼저 시작일과 종료일을 토대로 최근 공시 100건에 해당하는 url을 생성하도록 하겠습니다. 
+
+
+```r
+library(lubridate)
+library(stringr)
+library(jsonlite)
+
+bgn_date = (Sys.Date() - days(7)) %>% str_remove_all('-')
+end_date = (Sys.Date() ) %>% str_remove_all('-')
+notice_url = paste0('https://opendart.fss.or.kr/api/list.json?crtfc_key=',dart_api,'&bgn_de=',
+                    bgn_date,'&end_de=',end_date,'&page_no=1&page_count=100')
+```
+
+bgn_date에는 현재로부터 일주일 전을, end_date는 오늘 날짜를, 페이지별 건수에 해당하는 page_count에는 100을 입력하도록 합니다. 그 후 홈페이지에 나와있는 예시에 맞게 url을 작성해주도록 합니다. XML 보다는 JSON 형식으로 url을 생성 후 요청하는 것이 데이터 처리 측면에서 훨씬 효율적입니다.
+
+
+```r
+notice_data = fromJSON(notice_url) 
+notice_data = notice_data[['list']]
+
+head(notice_data)
+```
+
+```
+##   corp_code    corp_name stock_code corp_cls
+## 1  00989327  LPK로보틱스     183350        N
+## 2  00144720   유양디앤유     011690        Y
+## 3  01086812     케미메디     205290        N
+## 4  01183407 이십일스토어     270020        N
+## 5  00111218           KD     044180        K
+## 6  01183407 이십일스토어     270020        N
+##                                            report_nm
+## 1                               주권매매거래정지해제
+## 2      기타시장안내(상장폐지사유 해소 개선기간 부여)
+## 3                               주권매매거래정지해제
+## 4                           주권매매거래정지기간변경
+## 5 기타시장안내(개선계획 이행내역서 제출에 따른 안내)
+## 6                        기타시장안내(개선기간 부여)
+##         rcept_no           flr_nm rcept_dt rm
+## 1 20200427600735       코넥스시장 20200427 넥
+## 2 20200427800730 유가증권시장본부 20200427 유
+## 3 20200427600726       코넥스시장 20200427 넥
+## 4 20200427600720       코넥스시장 20200427 넥
+## 5 20200427900719   코스닥시장본부 20200427 코
+## 6 20200427600718       코넥스시장 20200427 넥
+```
+
+`fromJSON()` 함수를 통해 JSON 데이터를 받은 후 list를 확인해보면 우리가 원하는 공시정보, 즉 일주일 전부터 100건의 공시 정보가 다운로드 되어 있습니다.
+
+#### 특정 기업의 공시 검색
+
+이번에는 고유번호를 추가하여 원하는 기업의 공시만 확인해보록 하겠습니다. 고유번호는 위에서 다운받은 **corp_list.csv** 파일을 통해 확인해볼 수 있으며, 예시로 살펴볼 삼성전자의 고유번호는 00126380 입니다.
+
+
+```r
+bgn_date = (Sys.Date() - days(30)) %>% str_remove_all('-')
+end_date = (Sys.Date() ) %>% str_remove_all('-')
+corp_code = '00126380'
+
+notice_url_ss = paste0(
+  'https://opendart.fss.or.kr/api/list.json?crtfc_key=',dart_api,
+  '&corp_code=', corp_code, 
+  '&bgn_de=', bgn_date,'&end_de=',
+  end_date,'&page_no=1&page_count=100')
+```
+
+시작일을 과거 30일로 수정하였으며, 기존 url에 **&corp_code=** 부분을 추가하였습니다.
+
+
+```r
+notice_data_ss = fromJSON(notice_url_ss) 
+notice_data_ss = notice_data_ss[['list']]
+
+head(notice_data_ss)
+```
+
+```
+##   corp_code corp_name stock_code corp_cls
+## 1  00126380  삼성전자     005930        Y
+## 2  00126380  삼성전자     005930        Y
+## 3  00126380  삼성전자     005930        Y
+## 4  00126380  삼성전자     005930        Y
+## 5  00126380  삼성전자     005930        Y
+## 6  00126380  삼성전자     005930        Y
+##                                report_nm       rcept_no
+## 1 임원ㆍ주요주주특정증권등소유상황보고서 20200417000340
+## 2 임원ㆍ주요주주특정증권등소유상황보고서 20200416000397
+## 3 임원ㆍ주요주주특정증권등소유상황보고서 20200410003280
+## 4           최대주주등소유주식변동신고서 20200410801083
+## 5 임원ㆍ주요주주특정증권등소유상황보고서 20200409002508
+## 6 임원ㆍ주요주주특정증권등소유상황보고서 20200408002060
+##     flr_nm rcept_dt rm
+## 1   김태영 20200417   
+## 2   한재수 20200416   
+## 3   이인용 20200410   
+## 4 삼성전자 20200410 유
+## 5   문형준 20200409   
+## 6   김태영 20200408
+```
+
+역시나 JSON 형태로 손쉽게 공시정보를 다운로드 받을 수 있습니다. 이 중 rcept_no는 공시번호에 해당하며, 해당 데이터를 이용해 공시에 해당하는 url에 접속을 할 수도 있습니다.
+ 
+
+
+```r
+notice_url_exam = notice_data_ss[1, 'rcept_no']
+notice_dart_url = paste0(
+  'http://dart.fss.or.kr/dsaf001/main.do?rcpNo=',notice_url_exam)
+
+print(notice_dart_url)
+```
+
+```
+## [1] "http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20200417000340"
+```
+
+dart 홈페이지의 공시에 해당하는 url과 첫번째 공시에 해당하는 공시번호를 합쳐주도록 합니다.
+
+
+
+위 url에 접속하여 해당 공시를 좀 더 자세하게 확인할 수 있습니다.
+
+<div class="figure" style="text-align: center">
+<img src="images/dart_api_web.png" alt="공시 정보의 확인" width="70%" />
+<p class="caption">(\#fig:unnamed-chunk-47)공시 정보의 확인</p>
+</div>
+
+### 사업보고서 주요 정보
+
+API를 이용하여 사업보고서의 주요 정보 역시 다운로드 받을 수 있으며, 제공하는 목록은 다음과 같습니다.
+
+https://opendart.fss.or.kr/guide/main.do?apiGrpCd=DS002
+
+이 중 예시로써 [배당에 관한 사항]을 다운로드 받도록 하며, 개발가이드 페이지는 다음과 같습니다. 
+
+https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS002&apiId=2019005 
+
+url 생성에 필요한 요청 인자는 다음과 같습니다.
+
+
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>(\#tab:unnamed-chunk-48)배당에 관한 사항 주요 인자</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> 키 </th>
+   <th style="text-align:left;"> 명칭 </th>
+   <th style="text-align:left;"> 설명 </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> crtfc_key </td>
+   <td style="text-align:left;"> API 인증키 </td>
+   <td style="text-align:left;"> 발급받은 인증키 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> corp_code </td>
+   <td style="text-align:left;"> 고유번호 </td>
+   <td style="text-align:left;"> 공시대상회사의 고유번호(8자리) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> bsns_year </td>
+   <td style="text-align:left;"> 사업년도 </td>
+   <td style="text-align:left;"> 사업연도(4자리) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reprt_code </td>
+   <td style="text-align:left;"> 보고서 코드 </td>
+   <td style="text-align:left;"> <li>1분기보고서 : 11013</li>
+<li>반기보고서 : 11012</li>
+<li>3분기보고서 : 11014</li>
+<li>사업보고서 : 11011</li> </td>
+  </tr>
+</tbody>
+</table>
+
+이를 바탕으로 삼성전자의 2019년 사업보고서를 통해 배당에 관한 사항을 살펴보도록 하겠습니다.
+
+
+```r
+corp_code = '00126380'
+bsns_year = '2019'
+reprt_code = '11011'
+
+url_div = paste0('https://opendart.fss.or.kr/api/alotMatter.json?crtfc_key=',
+       dart_api, 
+       '&corp_code=', corp_code,
+       '&bsns_year=', bsns_year,
+       '&reprt_code=', reprt_code
+       )
+```
+
+API 인증키, 고유번호, 사업년도, 보고서 코드에 각각 해당하는 데이터를 입력하여 url 생성하도록 합니다.
+
+
+```r
+div_data_ss = fromJSON(url_div) 
+div_data_ss = div_data_ss[['list']]
+
+head(div_data_ss)
+```
+
+```
+##         rcept_no corp_cls corp_code corp_name
+## 1 20200330003851        Y  00126380  삼성전자
+## 2 20200330003851        Y  00126380  삼성전자
+## 3 20200330003851        Y  00126380  삼성전자
+## 4 20200330003851        Y  00126380  삼성전자
+## 5 20200330003851        Y  00126380  삼성전자
+## 6 20200330003851        Y  00126380  삼성전자
+##                         se     thstrm     frmtrm
+## 1         주당액면가액(원)        100        100
+## 2 (연결)당기순이익(백만원) 21,505,054 43,890,877
+## 3 (별도)당기순이익(백만원) 15,353,323 32,815,127
+## 4     (연결)주당순이익(원)      3,166      6,461
+## 5   현금배당금총액(백만원)  9,619,243  9,619,243
+## 6   주식배당금총액(백만원)          -          -
+##         lwfr stock_knd
+## 1        100      <NA>
+## 2 41,344,569      <NA>
+## 3 28,800,837      <NA>
+## 4      5,997      <NA>
+## 5  5,826,302      <NA>
+## 6          -      <NA>
+```
+
+JSON 파일을 다운로드 받은 후 데이터를 확인해보면, 사업보고서 중 배당에 관한 사항만이 나타나 있습니다. 위 url의 **alotMatter** 부분을 각 사업보고서에 해당하는 값으로 변경해주면 다른 정보 역시 동일한 방법으로 수집이 가능합니다.
+
+### 상장기업 재무정보
+
+Open API에서는 상장기업의 재무정보 중 주요계정, 전체 재무제표, 원본파일을 제공하고 있습니다. 이 중 주요계정 및 전체 재무제표를 다운로드 받는법에 대해 알아보도록 하겠습니다.
+
+#### 단일회사 및 다중회사 주요계정
+
+API를 통해 단일회사의 주요계정을, 혹은 한번에 여러 회사의 주요계정을 받을수 있습니다. 각각의 개발가이드는 다음과 같습니다.
+
+- 단일회사 주요계정: https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&apiId=2019016
+- 다중회사 주요계정: https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&apiId=2019017
+
+먼저 단일회사(삼성전자)의 주요계정을 다운로드 받도록 하겠습니다.
+
+
+```r
+corp_code = '00126380'
+bsns_year = '2019'
+reprt_code = '11011'
+
+url_single = paste0(
+  'https://opendart.fss.or.kr/api/fnlttSinglAcnt.json?crtfc_key=',
+  dart_api, 
+  '&corp_code=', corp_code,
+  '&bsns_year=', bsns_year,
+  '&reprt_code=', reprt_code
+  )
+```
+
+url을 생성하는 방법이 기존 [사업보고서 주요 정보] 에서 살펴본 바와 매우 비슷하며, **/api** 뒷부분을 [fnlttSinglAcnt.json] 으로 변경하기만 하면 됩니다.
+
+
+```r
+fs_data_single = fromJSON(url_single) 
+fs_data_single = fs_data_single[['list']]
+
+head(fs_data_single)
+```
+
+```
+##         rcept_no reprt_code bsns_year corp_code
+## 1 20200330003851      11011      2019  00126380
+## 2 20200330003851      11011      2019  00126380
+## 3 20200330003851      11011      2019  00126380
+## 4 20200330003851      11011      2019  00126380
+## 5 20200330003851      11011      2019  00126380
+## 6 20200330003851      11011      2019  00126380
+##   stock_code fs_div        fs_nm sj_div      sj_nm
+## 1     005930    CFS 연결재무제표     BS 재무상태표
+## 2     005930    CFS 연결재무제표     BS 재무상태표
+## 3     005930    CFS 연결재무제표     BS 재무상태표
+## 4     005930    CFS 연결재무제표     BS 재무상태표
+## 5     005930    CFS 연결재무제표     BS 재무상태표
+## 6     005930    CFS 연결재무제표     BS 재무상태표
+##   account_nm thstrm_nm       thstrm_dt
+## 1   유동자산  제 51 기 2019.12.31 현재
+## 2 비유동자산  제 51 기 2019.12.31 현재
+## 3   자산총계  제 51 기 2019.12.31 현재
+## 4   유동부채  제 51 기 2019.12.31 현재
+## 5 비유동부채  제 51 기 2019.12.31 현재
+## 6   부채총계  제 51 기 2019.12.31 현재
+##         thstrm_amount frmtrm_nm       frmtrm_dt
+## 1 181,385,260,000,000  제 50 기 2018.12.31 현재
+## 2 171,179,237,000,000  제 50 기 2018.12.31 현재
+## 3 352,564,497,000,000  제 50 기 2018.12.31 현재
+## 4  63,782,764,000,000  제 50 기 2018.12.31 현재
+## 5  25,901,312,000,000  제 50 기 2018.12.31 현재
+## 6  89,684,076,000,000  제 50 기 2018.12.31 현재
+##         frmtrm_amount bfefrmtrm_nm    bfefrmtrm_dt
+## 1 174,697,424,000,000     제 49 기 2017.12.31 현재
+## 2 164,659,820,000,000     제 49 기 2017.12.31 현재
+## 3 339,357,244,000,000     제 49 기 2017.12.31 현재
+## 4  69,081,510,000,000     제 49 기 2017.12.31 현재
+## 5  22,522,557,000,000     제 49 기 2017.12.31 현재
+## 6  91,604,067,000,000     제 49 기 2017.12.31 현재
+##      bfefrmtrm_amount ord
+## 1 146,982,464,000,000   1
+## 2 154,769,626,000,000   3
+## 3 301,752,090,000,000   5
+## 4  67,175,114,000,000   7
+## 5  20,085,548,000,000   9
+## 6  87,260,662,000,000  11
+```
+
+연결재무제표와 재무상태표에 해당하는 주요 내용이 수집되었으며, 각 열에 해당하는 내용은 페이지의 개발가이드의 [응답 결과]에서 확인할 수 있습니다.
+
+<div class="figure" style="text-align: center">
+<img src="images/dart_single_result.png" alt="단일회사 주요계정 응답 결과" width="70%" />
+<p class="caption">(\#fig:unnamed-chunk-53)단일회사 주요계정 응답 결과</p>
+</div>
+
+이번에는 url을 수정하여 여러 회사의 주요계정을 한번에 받도록 하겠으며, 그 예로써 삼성전자, 셀트리온, KT의 데이터를 다운로드 받도록 합니다.
+
+
+```r
+corp_code = c('00126380,00413046,00190321')
+bsns_year = '2019'
+reprt_code = '11011'
+
+url_multiple = paste0(
+  'https://opendart.fss.or.kr/api/fnlttMultiAcnt.json?crtfc_key=',
+  dart_api, 
+  '&corp_code=', corp_code,
+  '&bsns_year=', bsns_year,
+  '&reprt_code=', reprt_code
+  )
+```
+
+먼저 corp에 원하는 기업들의 고유번호를 나열해주며, url 중 [fnlttSinglAcnt]을 [fnlttMultiAcnt]로 수정합니다.
+
+
+```r
+fs_data_multiple = fromJSON(url_multiple) 
+fs_data_multiple = fs_data_multiple[['list']]
+```
+
+3개 기업의 주요계정이 하나의 데이터 프레임으로 다운로드 됩니다. 마지막으로 각 회사별로 데이터를 나눠주도록 하겠습니다.
+
+
+```r
+fs_data_list = fs_data_multiple %>% split(f = .$corp_code)
+
+lapply(fs_data_list, head, 2)
+```
+
+```
+## $`00126380`
+##         rcept_no reprt_code bsns_year corp_code
+## 1 20200330003851      11011      2019  00126380
+## 2 20200330003851      11011      2019  00126380
+##   stock_code fs_div        fs_nm sj_div      sj_nm
+## 1     005930    CFS 연결재무제표     BS 재무상태표
+## 2     005930    CFS 연결재무제표     BS 재무상태표
+##   account_nm thstrm_nm       thstrm_dt
+## 1   유동자산  제 51 기 2019.12.31 현재
+## 2 비유동자산  제 51 기 2019.12.31 현재
+##         thstrm_amount frmtrm_nm       frmtrm_dt
+## 1 181,385,260,000,000  제 50 기 2018.12.31 현재
+## 2 171,179,237,000,000  제 50 기 2018.12.31 현재
+##         frmtrm_amount bfefrmtrm_nm    bfefrmtrm_dt
+## 1 174,697,424,000,000     제 49 기 2017.12.31 현재
+## 2 164,659,820,000,000     제 49 기 2017.12.31 현재
+##      bfefrmtrm_amount ord
+## 1 146,982,464,000,000   1
+## 2 154,769,626,000,000   3
+## 
+## $`00190321`
+##          rcept_no reprt_code bsns_year corp_code
+## 27 20200330004658      11011      2019  00190321
+## 28 20200330004658      11011      2019  00190321
+##    stock_code fs_div        fs_nm sj_div      sj_nm
+## 27     030200    CFS 연결재무제표     BS 재무상태표
+## 28     030200    CFS 연결재무제표     BS 재무상태표
+##    account_nm thstrm_nm       thstrm_dt
+## 27   유동자산  제 38 기 2019.12.31 현재
+## 28 비유동자산  제 38 기 2019.12.31 현재
+##         thstrm_amount frmtrm_nm       frmtrm_dt
+## 27 11,898,255,000,000  제 37 기 2018.12.31 현재
+## 28 22,163,037,000,000  제 37 기 2018.12.31 현재
+##         frmtrm_amount bfefrmtrm_nm    bfefrmtrm_dt
+## 27 11,894,252,000,000     제 36 기 2017.12.31 현재
+## 28 20,294,578,000,000     제 36 기 2017.12.31 현재
+##      bfefrmtrm_amount ord
+## 27  9,672,412,000,000   1
+## 28 20,058,498,000,000   3
+## 
+## $`00413046`
+##          rcept_no reprt_code bsns_year corp_code
+## 53 20200410002837      11011      2019  00413046
+## 54 20200410002837      11011      2019  00413046
+##    stock_code fs_div        fs_nm sj_div      sj_nm
+## 53     068270    CFS 연결재무제표     BS 재무상태표
+## 54     068270    CFS 연결재무제표     BS 재무상태표
+##    account_nm thstrm_nm       thstrm_dt
+## 53   유동자산  제 29 기 2019.12.31 현재
+## 54 비유동자산  제 29 기 2019.12.31 현재
+##        thstrm_amount frmtrm_nm       frmtrm_dt
+## 53 1,787,340,254,600  제 28 기 2018.12.31 현재
+## 54 2,106,351,351,846  제 28 기 2018.12.31 현재
+##        frmtrm_amount bfefrmtrm_nm    bfefrmtrm_dt
+## 53 1,664,478,918,682     제 27 기 2017.12.31 현재
+## 54 1,876,147,755,272     제 27 기 2017.12.31 현재
+##     bfefrmtrm_amount ord
+## 53 1,614,033,788,024   1
+## 54 1,701,493,916,629   3
+```
+
+`split()` 함수 내 f 인자를 통해 corp_code, 즉 고유번호 단위로 각각의 리스트에 데이터가 저장됩니다. 
+
+### 단일회사 전체 재무제표
+
+단일회사의 전체 재무제표 데이터 역시 다운로드 받을 수 있으며 개발가이드는 다음과 같습니다.
+
+https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&apiId=2019020
+
+예제로써 삼성전자의 2019년 사업보고서에 나와있는 전체 재무제표를 다운로드 받도록 하겠습니다.
+
+
+```r
+corp_code = '00126380'
+bsns_year = 2019
+reprt_code = '11011'
+
+url_fs_all = paste0(
+  'https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=',
+   dart_api, 
+   '&corp_code=', corp_code,
+   '&bsns_year=', bsns_year,
+   '&reprt_code=', reprt_code,'&fs_div=CFS'
+  )
+```
+
+역시나 앞선 예제들과 거의 동일화며, url의 **api/** 뒷 부분을 [fnlttSinglAcntAll.json] 으로 변경해주도록 합니다. 연결재무제표와 일반재무제표를 구분하는 fs_div 인자는 연결재무제표를 의미하는 CFS로 선택해줍니다.
+
+
+```r
+fs_data_all = fromJSON(url_fs_all) 
+fs_data_all = fs_data_all[['list']]
+
+head(fs_data_all)
+```
+
+```
+##         rcept_no reprt_code bsns_year corp_code sj_div
+## 1 20200330003851      11011      2019  00126380     BS
+## 2 20200330003851      11011      2019  00126380     BS
+## 3 20200330003851      11011      2019  00126380     BS
+## 4 20200330003851      11011      2019  00126380     BS
+## 5 20200330003851      11011      2019  00126380     BS
+## 6 20200330003851      11011      2019  00126380     BS
+##        sj_nm
+## 1 재무상태표
+## 2 재무상태표
+## 3 재무상태표
+## 4 재무상태표
+## 5 재무상태표
+## 6 재무상태표
+##                                                                                     account_id
+## 1                                                                      ifrs-full_CurrentAssets
+## 2                                                             ifrs-full_CashAndCashEquivalents
+## 3                                         dart_ShortTermDepositsNotClassifiedAsCashEquivalents
+## 4                                                                        -표준계정코드 미사용-
+## 5                                                                        -표준계정코드 미사용-
+## 6 ifrs-full_CurrentFinancialAssetsAtFairValueThroughProfitOrLossMandatorilyMeasuredAtFairValue
+##                      account_nm account_detail
+## 1                      유동자산              -
+## 2              현금및현금성자산              -
+## 3                  단기금융상품              -
+## 4          단기매도가능금융자산              -
+## 5        단기상각후원가금융자산              -
+## 6 단기당기손익-공정가치금융자산              -
+##   thstrm_nm   thstrm_amount frmtrm_nm   frmtrm_amount
+## 1  제 51 기 181385260000000  제 50 기 174697424000000
+## 2  제 51 기  26885999000000  제 50 기  30340505000000
+## 3  제 51 기  76252052000000  제 50 기  65893797000000
+## 4  제 51 기                  제 50 기                
+## 5  제 51 기   3914216000000  제 50 기   2703693000000
+## 6  제 51 기   1727436000000  제 50 기   2001948000000
+##   bfefrmtrm_nm bfefrmtrm_amount ord thstrm_add_amount
+## 1     제 49 기  146982464000000   1              <NA>
+## 2     제 49 기   30545130000000   2              <NA>
+## 3     제 49 기   49447696000000   3              <NA>
+## 4     제 49 기    3191375000000   4              <NA>
+## 5     제 49 기                    5              <NA>
+## 6     제 49 기                    6              <NA>
+```
+
+총 210개의 재무제표 항목이 다운로드 됩니다. 이 중 thstrm_nm와 thstrm_amount는 당기(금년), frmtrm_nm과 frmtrm_amount는 전기, bfefrmtrm_nm과 bfefrmtrm_amount는 전전기를 의미합니다. 따라서 해당 열을 통해 최근 3년 재무제표 만을 선택할 수도 있습니다.
+
+
+```r
+yr_count = str_detect(colnames(fs_data_all), 'trm_amount') %>% sum()
+yr_name = seq(bsns_year, (bsns_year - yr_count + 1))
+
+fs_data_all = fs_data_all[, c('corp_code', 'sj_nm', 'account_nm', 'account_detail')] %>%
+  cbind(fs_data_all[, str_which(colnames(fs_data_all), 'trm_amount')])
+
+colnames(fs_data_all)[str_which(colnames(fs_data_all), 'amount')] = yr_name
+
+head(fs_data_all)
+```
+
+```
+##   corp_code      sj_nm                    account_nm
+## 1  00126380 재무상태표                      유동자산
+## 2  00126380 재무상태표              현금및현금성자산
+## 3  00126380 재무상태표                  단기금융상품
+## 4  00126380 재무상태표          단기매도가능금융자산
+## 5  00126380 재무상태표        단기상각후원가금융자산
+## 6  00126380 재무상태표 단기당기손익-공정가치금융자산
+##   account_detail            2019            2018
+## 1              - 181385260000000 174697424000000
+## 2              -  26885999000000  30340505000000
+## 3              -  76252052000000  65893797000000
+## 4              -                                
+## 5              -   3914216000000   2703693000000
+## 6              -   1727436000000   2001948000000
+##              2017
+## 1 146982464000000
+## 2  30545130000000
+## 3  49447696000000
+## 4   3191375000000
+## 5                
+## 6
+```
+
+1. `str_detect()` 함수를 이용해 열 이름에 trm_amount 들어간 갯수를 확인합니다. 이는 최근 3개년 데이터가 없는 경우도 고려하기 위함입니다. (일반적으로 3이 반환될 것이며, 재무데이터가 2년치 밖에 없는 경우 2가 반환될 것입니다.)
+2. 위에서 계산된 갯수를 이용해 열이름에 들어갈 년도를 생성합니다. 
+3. corp_code(고유번호), sj_nm(재무제표명), account_nm(계정명), account_detail(계정상세) 및 연도별 금액에 해당하는 trm_amount가 포함된 열을 선택합니다.
+4. 연도별 데이터에 해당하는 열의 이름을 yr_name, 즉 각 연도로 변경합니다.
+
+#### 전 종목 전체 재무제표 데이터 수집하기
+
+for loop 구문을  이용해 고유번호에 해당하는 corp_code 부분만 변경해주면 전 종목의 API를 통해 재무제표 데이터를 손쉽게 수집할 수도 있습니다. 단, 일부 종목(대부분 금융주)의 경우 API로 파일이 제공되지 않습니다.
+
+
+```r
+library(stringr)
+
+KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
+corp_list =  read.csv('data/corp_list.csv', row.names = 1)
+
+KOR_ticker$'종목코드' =
+  str_pad(KOR_ticker$'종목코드', 6, side = c('left'), pad = '0')
+
+corp_list$'code' =
+  str_pad(corp_list$'code', 8, side = c('left'), pad = '0')
+
+corp_list$'stock' =
+  str_pad(corp_list$'stock', 6, side = c('left'), pad = '0')
+
+ticker_list = KOR_ticker %>% left_join(corp_list, by = c('종목코드' = 'stock')) %>%
+  select('종목코드', '종목명', 'code')
+
+ifelse(dir.exists('data/dart_fs'), FALSE, dir.create('data/dart_fs'))
+```
+
+먼저 거래소에서 받은 티커 파일과 API를 통해 받은 고유번호 파일을 불러온 후, `str_pad()` 함수를 통해 0을 채워주며, 고유번호의 경우 8자리로 구성되어 있습니다. 그 후 dart_fs 폴더를 생성해 줍니다.
+
+
+```r
+bsns_year = 2019
+reprt_code = '11011'
+
+for(i in 1 : nrow(ticker_list) ) {
+  
+  data_fs = c()
+  name = ticker_list$code[i]
+  
+  # 오류 발생 시 이를 무시하고 다음 루프로 진행
+  
+  tryCatch({
+    
+    # url 생성
+    url = paste0('https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=',
+       dart_api, 
+       '&corp_code=', name,
+       '&bsns_year=', bsns_year,
+       '&reprt_code=', reprt_code,'&fs_div=CFS'
+       )
+    
+    # JSON 다운로드
+    fs_data_all = fromJSON(url) 
+    fs_data_all = fs_data_all[['list']]
+    
+    # 만일 연결재무제표 없어서 NULL 반환시
+    # reprt_code를 OFS 즉 재무제표 다운로드
+    if (is.null(fs_data_all)) {
+      
+      url = paste0('https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=',
+       dart_api, 
+       '&corp_code=', name,
+       '&bsns_year=', bsns_year,
+       '&reprt_code=', reprt_code,'&fs_div=OFS'
+       )
+      
+      fs_data_all = fromJSON(url) 
+      fs_data_all = fs_data_all[['list']]
+      
+    }
+    
+
+    # 데이터 선택 후 열이름을 연도로 변경
+    yr_count = str_detect(colnames(fs_data_all), 'trm_amount') %>% sum()
+    yr_name = seq(bsns_year, (bsns_year - yr_count + 1))
+    
+    fs_data_all = fs_data_all[, c('corp_code', 'sj_nm', 'account_nm', 'account_detail')] %>%
+      cbind(fs_data_all[, str_which(colnames(fs_data_all), 'trm_amount')])
+    
+    colnames(fs_data_all)[str_which(colnames(fs_data_all), 'amount')] = yr_name
+    
+  }, error = function(e) {
+    
+    # 오류 발생시 해당 종목명을 출력하고 다음 루프로 이동
+    data_fs <<- NA
+    warning(paste0("Error in Ticker: ", name))
+  })
+  
+  # 다운로드 받은 파일을 생성한 각각의 폴더 내 csv 파일로 저장
+  
+  # 재무제표 저장
+  write.csv(fs_data_all, paste0('data/dart_fs/', ticker_list$종목코드[i], '_fs_dart.csv'))
+  
+  # 2초간 타임슬립 적용
+  Sys.sleep(2)
+}
+```
+
+1. for loop 구문을 이용해 고유번호에 해당하는 값을 변경합니다.
+2. 일부 종목의 경우 연결재무제표가 아닌 재무제표를 업로드 하는 경우가 있으며, `if (is.null(fs_data_all))` 부분을 통해 연결재무제표가 없을 경우 fs_div를 OFS로 변경하여 재무제표를 다운로드 받습니다.
+3. 이를 제외하고는 앞서 살펴본 예제와 동일합니다.
+4. 데이터 수집 및 정리를 해준 후, data 폴더의 dart_fs 폴더 내에 티커_fs_dart.csv 이름으로 저장해 줍니다.
+
+Open API 내에서는 2015년 이후 재무제표 데이터를 API 형태로 제공하고 있으므로 bsns_year 부분에도 for loop 구문을 이용하면 해당 데이터를 모두 수집할 수 있습니다. 그러나 간단한 퀀트 투자를 하기에는 최근 3년의 재무제표 데이터만 있어도 충분하며, 시간이 너무 오래 걸린다는 점, API 요청한도를 초과한다는 단점이 있으므로 본 책에서는 다루지 않도록 하겠습니다.
+
+
+
