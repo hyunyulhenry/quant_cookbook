@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-27" />
+<meta name="date" content="2020-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -459,7 +459,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb125-4" data-line-number="4">price =<span class="st"> </span><span class="kw">xts</span>(<span class="ot">NA</span>, <span class="dt">order.by =</span> <span class="kw">Sys.Date</span>())</a>
 <a class="sourceLine" id="cb125-5" data-line-number="5"><span class="kw">print</span>(price)</a></code></pre></div>
 <pre><code>##            [,1]
-## 2020-04-27   NA</code></pre>
+## 2020-05-31   NA</code></pre>
 <ol style="list-style-type: decimal">
 <li>data 폴더 내에 KOR_price 폴더를 생성합니다.</li>
 <li>i = 1을 입력합니다. 향후 for loop 구문을 통해 i 값만 변경하면 모든 종목의 주가를 다운로드할 수 있습니다.</li>
@@ -478,12 +478,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb127-10" data-line-number="10"><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&#39;data&#39;</span>) </a>
 <a class="sourceLine" id="cb127-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb127-12" data-line-number="12"><span class="kw">print</span>(<span class="kw">head</span>(data_html))</a></code></pre></div>
-<pre><code>## [1] &quot;20180413|49600|50180|49400|49800|205566&quot;
-## [2] &quot;20180416|50320|50600|49860|50340|157549&quot;
-## [3] &quot;20180417|50240|50540|49820|49980|155440&quot;
-## [4] &quot;20180418|51000|51360|50580|51360|269252&quot;
-## [5] &quot;20180419|52000|52980|51540|52780|343811&quot;
-## [6] &quot;20180420|51800|52260|51420|51620|235220&quot;</code></pre>
+<pre><code>## [1] &quot;20180516|49200|50200|49150|49850|15918683&quot;
+## [2] &quot;20180517|50300|50500|49400|49400|10365440&quot;
+## [3] &quot;20180518|49900|49900|49350|49500|6706570&quot; 
+## [4] &quot;20180521|49650|50200|49100|50000|9020998&quot; 
+## [5] &quot;20180523|50600|52000|50400|51800|17095490&quot;
+## [6] &quot;20180524|52000|52000|51100|51400|8289275&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>paste0()</code> 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.</li>
 <li><code>GET()</code> 함수를 통해 페이지의 데이터를 불러옵니다.</li>
@@ -496,14 +496,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb129-3" data-line-number="3">price =<span class="st"> </span><span class="kw">read_delim</span>(data_html, <span class="dt">delim =</span> <span class="st">&#39;|&#39;</span>)</a>
 <a class="sourceLine" id="cb129-4" data-line-number="4"><span class="kw">print</span>(<span class="kw">head</span>(price))</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 6
-##   `20180413` `49600` `50180` `49400` `49800` `205566`
-##        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
-## 1   20180416   50320   50600   49860   50340   157549
-## 2   20180417   50240   50540   49820   49980   155440
-## 3   20180418   51000   51360   50580   51360   269252
-## 4   20180419   52000   52980   51540   52780   343811
-## 5   20180420   51800   52260   51420   51620   235220
-## 6   20180423   51000   52080   51000   51900   232380</code></pre>
+##   `20180516` `49200` `50200` `49150` `49850` `15918683`
+##        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+## 1   20180517   50300   50500   49400   49400   10365440
+## 2   20180518   49900   49900   49350   49500    6706570
+## 3   20180521   49650   50200   49100   50000    9020998
+## 4   20180523   50600   52000   50400   51800   17095490
+## 5   20180524   52000   52000   51100   51400    8289275
+## 6   20180525   51000   52800   50800   52700   15207266</code></pre>
 <p>readr 패키지의 <code>read_delim()</code> 함수를 쓰면 구분자로 이루어진 데이터를 테이블로 쉽게 변경할 수 있습니다. 데이터를 확인해보면 테이블 형태로 변경되었으며 각 열은 날짜, 시가, 고가, 저가, 종가, 거래량을 의미합니다. 이 중 우리가 필요한 날짜와 종가를 선택한 후 데이터 클렌징을 해줍니다.</p>
 <div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb131-1" data-line-number="1"><span class="kw">library</span>(lubridate)</a>
 <a class="sourceLine" id="cb131-2" data-line-number="2"><span class="kw">library</span>(timetk)</a>
@@ -516,12 +516,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb131-9" data-line-number="9"> </a>
 <a class="sourceLine" id="cb131-10" data-line-number="10"><span class="kw">print</span>(<span class="kw">tail</span>(price))</a></code></pre></div>
 <pre><code>##            Price
-## 2020-04-20 50100
-## 2020-04-21 49250
-## 2020-04-22 49850
-## 2020-04-23 49850
-## 2020-04-24 49350
-## 2020-04-27 49850</code></pre>
+## 2020-05-22 48750
+## 2020-05-25 48850
+## 2020-05-26 49250
+## 2020-05-27 49900
+## 2020-05-28 50400
+## 2020-05-29 50700</code></pre>
 <ol style="list-style-type: decimal">
 <li>날짜에 해당하는 첫 번째 열과, 종가에 해당하는 다섯 번째 열만 선택해 저장합니다.</li>
 <li>티블 형태의 데이터를 데이터 프레임 형태로 변경합니다.</li>
@@ -630,63 +630,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" data-line-number="1"><span class="kw">lapply</span>(data, <span class="cf">function</span>(x) {</a>
 <a class="sourceLine" id="cb136-2" data-line-number="2">  <span class="kw">head</span>(x, <span class="dv">3</span>)})</a></code></pre></div>
 <pre><code>## [[1]]
-##   IFRS(연결)   2016/12   2017/12   2018/12   2019/12
-## 1     매출액 2,018,667 2,395,754 2,437,714 2,304,009
-## 2   매출원가 1,202,777 1,292,907 1,323,944 1,472,395
-## 3 매출총이익   815,890 1,102,847 1,113,770   831,613
-##    전년동기 전년동기(%)
-## 1 2,437,714        -5.5
-## 2 1,323,944        11.2
-## 3 1,113,770       -25.3
+##   IFRS(연결)   2017/12   2018/12   2019/12 2020/03
+## 1     매출액 2,395,754 2,437,714 2,304,009 553,252
+## 2   매출원가 1,292,907 1,323,944 1,472,395 348,067
+## 3 매출총이익 1,102,847 1,113,770   831,613 205,185
+##   전년동기 전년동기(%)
+## 1  523,855         5.6
+## 2  327,465         6.3
+## 3  196,391         4.5
 ## 
 ## [[2]]
-##   IFRS(연결) 2019/03 2019/06 2019/09 2019/12 전년동기
-## 1     매출액 523,855 561,271 620,035 598,848  592,651
-## 2   매출원가 327,465 359,447 399,939 385,545  340,160
-## 3 매출총이익 196,391 201,824 220,096 213,302  252,491
+##   IFRS(연결) 2019/06 2019/09 2019/12 2020/03 전년동기
+## 1     매출액 561,271 620,035 598,848 553,252  523,855
+## 2   매출원가 359,447 399,939 385,545 348,067  327,465
+## 3 매출총이익 201,824 220,096 213,302 205,185  196,391
 ##   전년동기(%)
-## 1         1.0
-## 2        13.3
-## 3       -15.5
+## 1         5.6
+## 2         6.3
+## 3         4.5
 ## 
 ## [[3]]
-##                          IFRS(연결)   2016/12   2017/12
-## 1                              자산 2,621,743 3,017,521
-## 2 유동자산계산에 참여한 계정 펼치기 1,414,297 1,469,825
-## 3                          재고자산   183,535   249,834
-##     2018/12   2019/12
-## 1 3,393,572 3,525,645
-## 2 1,746,974 1,813,853
-## 3   289,847   267,665
+##                          IFRS(연결)   2017/12   2018/12
+## 1                              자산 3,017,521 3,393,572
+## 2 유동자산계산에 참여한 계정 펼치기 1,469,825 1,746,974
+## 3                          재고자산   249,834   289,847
+##     2019/12   2020/03
+## 1 3,525,645 3,574,575
+## 2 1,813,853 1,867,397
+## 3   267,665   284,549
 ## 
 ## [[4]]
-##                          IFRS(연결)   2019/03   2019/06
-## 1                              자산 3,450,679 3,429,401
-## 2 유동자산계산에 참여한 계정 펼치기 1,773,885 1,734,335
-## 3                          재고자산   314,560   312,470
-##     2019/09   2019/12
-## 1 3,533,860 3,525,645
-## 2 1,860,421 1,813,853
-## 3   309,088   267,665
+##                          IFRS(연결)   2019/06   2019/09
+## 1                              자산 3,429,401 3,533,860
+## 2 유동자산계산에 참여한 계정 펼치기 1,734,335 1,860,421
+## 3                          재고자산   312,470   309,088
+##     2019/12   2020/03
+## 1 3,525,645 3,574,575
+## 2 1,813,853 1,867,397
+## 3   267,665   284,549
 ## 
 ## [[5]]
-##                     IFRS(연결) 2016/12 2017/12 2018/12
-## 1     영업활동으로인한현금흐름 473,856 621,620 670,319
-## 2                   당기순손익 227,261 421,867 443,449
+##                     IFRS(연결) 2017/12 2018/12 2019/12
+## 1     영업활동으로인한현금흐름 621,620 670,319 453,829
+## 2                   당기순손익 421,867 443,449 217,389
 ## 3 법인세비용차감전계속사업이익                        
-##   2019/12
-## 1 453,829
-## 2 217,389
+##   2020/03
+## 1 118,299
+## 2  48,849
 ## 3        
 ## 
 ## [[6]]
-##                     IFRS(연결) 2019/03 2019/06 2019/09
-## 1     영업활동으로인한현금흐름  52,443  65,949 138,266
-## 2                   당기순손익  50,436  51,806  62,877
+##                     IFRS(연결) 2019/06 2019/09 2019/12
+## 1     영업활동으로인한현금흐름  65,949 138,266 197,171
+## 2                   당기순손익  51,806  62,877  52,270
 ## 3 법인세비용차감전계속사업이익                        
-##   2019/12
-## 1 197,171
-## 2  52,270
+##   2020/03
+## 1 118,299
+## 2  48,849
 ## 3</code></pre>
 <ol style="list-style-type: decimal">
 <li>data 폴더 내에 KOR_fs 폴더를 생성합니다.</li>
@@ -740,8 +740,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb139-3" data-line-number="3">data_CF =<span class="st"> </span>data[[<span class="dv">5</span>]]</a>
 <a class="sourceLine" id="cb139-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb139-5" data-line-number="5"><span class="kw">print</span>(<span class="kw">names</span>(data_IS))</a></code></pre></div>
-<pre><code>## [1] &quot;IFRS(연결)&quot;  &quot;2016/12&quot;     &quot;2017/12&quot;    
-## [4] &quot;2018/12&quot;     &quot;2019/12&quot;     &quot;전년동기&quot;   
+<pre><code>## [1] &quot;IFRS(연결)&quot;  &quot;2017/12&quot;     &quot;2018/12&quot;    
+## [4] &quot;2019/12&quot;     &quot;2020/03&quot;     &quot;전년동기&quot;   
 ## [7] &quot;전년동기(%)&quot;</code></pre>
 <div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" data-line-number="1">data_IS =<span class="st"> </span>data_IS[, <span class="dv">1</span><span class="op">:</span>(<span class="kw">ncol</span>(data_IS)<span class="op">-</span><span class="dv">2</span>)]</a></code></pre></div>
 <p>포괄손익계산서 테이블(data_IS)에는 전년동기, 전년동기(%) 열이 있는데 통일성을 위해 해당 열을 삭제합니다. 이제 테이블을 묶은 후 클렌징하겠습니다.</p>
@@ -763,23 +763,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>간혹 12월 결산법인이 아닌 종목이거나 연간 재무제표임에도 불구하고 분기 재무제표가 들어간 경우가 있습니다. 비교의 통일성을 위해 <code>substr()</code> 함수를 이용해 끝 글자가 12인 열, 즉 12월 결산 데이터만 선택합니다.</li>
 </ol>
 <div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" data-line-number="1"><span class="kw">print</span>(<span class="kw">head</span>(data_fs))</a></code></pre></div>
-<pre><code>##                    2016/12   2017/12   2018/12
-## 매출액           2,018,667 2,395,754 2,437,714
-## 매출원가         1,202,777 1,292,907 1,323,944
-## 매출총이익         815,890 1,102,847 1,113,770
-## 판매비와관리비     523,484   566,397   524,903
-## 인건비              59,763    67,972    64,514
-## 유무형자산상각비    10,018    13,366    14,477
-##                    2019/12
-## 매출액           2,304,009
-## 매출원가         1,472,395
-## 매출총이익         831,613
-## 판매비와관리비     553,928
-## 인건비              64,226
-## 유무형자산상각비    20,408</code></pre>
+<pre><code>##                    2017/12   2018/12   2019/12
+## 매출액           2,395,754 2,437,714 2,304,009
+## 매출원가         1,292,907 1,323,944 1,472,395
+## 매출총이익       1,102,847 1,113,770   831,613
+## 판매비와관리비     566,397   524,903   553,928
+## 인건비              67,972    64,514    64,226
+## 유무형자산상각비    13,366    14,477    20,408</code></pre>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" data-line-number="1"><span class="kw">sapply</span>(data_fs, typeof)</a></code></pre></div>
-<pre><code>##     2016/12     2017/12     2018/12     2019/12 
-## &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;character&quot;</code></pre>
+<pre><code>##     2017/12     2018/12     2019/12 
+## &quot;character&quot; &quot;character&quot; &quot;character&quot;</code></pre>
 <p>데이터를 확인해보면 연간 기준 재무제표가 정리되었습니다. 문자형 데이터이므로 숫자형으로 변경합니다.</p>
 <div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" data-line-number="1"><span class="kw">library</span>(stringr)</a>
 <a class="sourceLine" id="cb147-2" data-line-number="2"></a>
@@ -790,16 +783,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb147-7" data-line-number="7"><span class="st">  </span><span class="kw">data.frame</span>(., <span class="dt">row.names =</span> <span class="kw">rownames</span>(data_fs))</a>
 <a class="sourceLine" id="cb147-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb147-9" data-line-number="9"><span class="kw">print</span>(<span class="kw">head</span>(data_fs))</a></code></pre></div>
-<pre><code>##                  X2016.12 X2017.12 X2018.12 X2019.12
-## 매출액            2018667  2395754  2437714  2304009
-## 매출원가          1202777  1292907  1323944  1472395
-## 매출총이익         815890  1102847  1113770   831613
-## 판매비와관리비     523484   566397   524903   553928
-## 인건비              59763    67972    64514    64226
-## 유무형자산상각비    10018    13366    14477    20408</code></pre>
+<pre><code>##                  X2017.12 X2018.12 X2019.12
+## 매출액            2395754  2437714  2304009
+## 매출원가          1292907  1323944  1472395
+## 매출총이익        1102847  1113770   831613
+## 판매비와관리비     566397   524903   553928
+## 인건비              67972    64514    64226
+## 유무형자산상각비    13366    14477    20408</code></pre>
 <div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" data-line-number="1"><span class="kw">sapply</span>(data_fs, typeof)</a></code></pre></div>
-<pre><code>## X2016.12 X2017.12 X2018.12 X2019.12 
-## &quot;double&quot; &quot;double&quot; &quot;double&quot; &quot;double&quot;</code></pre>
+<pre><code>## X2017.12 X2018.12 X2019.12 
+## &quot;double&quot; &quot;double&quot; &quot;double&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>sapply()</code> 함수를 이용해 각 열에 stringr 패키지의 <code>str_replace_allr()</code> 함수를 적용해 콤마(,)를 제거한 후 <code>as.numeric()</code> 함수를 통해 숫자형 데이터로 변경합니다.</li>
 <li><code>data.frame()</code> 함수를 이용해 데이터 프레임 형태로 만들어주며, 행 이름은 기존 내용을 그대로 유지합니다.</li>
@@ -905,7 +898,7 @@ Sales (매출액)
 <a class="sourceLine" id="cb157-11" data-line-number="11"><span class="st">  </span><span class="kw">parse_number</span>()</a>
 <a class="sourceLine" id="cb157-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb157-13" data-line-number="13"><span class="kw">print</span>(price)</a></code></pre></div>
-<pre><code>## [1] 49350</code></pre>
+<pre><code>## [1] 50700</code></pre>
 <ol style="list-style-type: decimal">
 <li>url을 입력한 후, <code>GET()</code> 함수를 이용해 데이터를 불러오며, 역시나 user_agent를 추가해 줍니다.</li>
 <li><code>read_html()</code> 함수를 이용해 HTML 데이터를 불러온 후 <code>html_node()</code> 함수에 앞서 구한 Xpath를 입력해 해당 지점의 데이터를 추출합니다.</li>
@@ -949,7 +942,7 @@ Sales (매출액)
 <a class="sourceLine" id="cb164-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb164-5" data-line-number="5"><span class="kw">print</span>(data_value)</a></code></pre></div>
 <pre><code>##    PER    PBR    PCR    PSR 
-## 13.699  1.121  6.492  1.279</code></pre>
+## 14.074  1.151  6.669  1.314</code></pre>
 <p>분자에는 현재 주가를 입력하며, 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 단, 주가는 원 단위, 재무 데이터는 억 원 단위이므로, 둘 사이에 단위를 동일하게 맞춰주기 위해 분모에 억을 곱합니다. 또한 가치지표가 음수인 경우는 NA로 변경해줍니다.</p>
 <p>결과를 확인해보면 4가지 가치지표가 잘 계산되었습니다.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" data-line-number="1"><span class="kw">write.csv</span>(data_value, <span class="st">&#39;data/KOR_value/005930_value.csv&#39;</span>)</a></code></pre></div>
@@ -1133,10 +1126,10 @@ Sales (매출액)
 <a class="sourceLine" id="cb171-7" data-line-number="7">codezip_data =<span class="st"> </span><span class="kw">GET</span>(codezip_url)</a>
 <a class="sourceLine" id="cb171-8" data-line-number="8"><span class="kw">print</span>(codezip_data)</a></code></pre></div>
 <pre><code>## Response [https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=b1a630e527b0e5ff5bd58ed81b49825017fa80b8]
-##   Date: 2020-04-27 10:00
+##   Date: 2020-05-31 03:47
 ##   Status: 200
 ##   Content-Type: application/x-msdownload
-##   Size: 1.34 MB
+##   Size: 1.38 MB
 ## &lt;BINARY BODY&gt;</code></pre>
 <pre><code>## NULL</code></pre>
 <ol style="list-style-type: decimal">
@@ -1157,7 +1150,7 @@ Sales (매출액)
 <a class="sourceLine" id="cb176-8" data-line-number="8">nm =<span class="st"> </span><span class="kw">unzip</span>(tf, <span class="dt">list =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb176-9" data-line-number="9"><span class="kw">print</span>(nm)</a></code></pre></div>
 <pre><code>##           Name   Length                Date
-## 1 CORPCODE.xml 15548473 2020-04-20 12:04:00</code></pre>
+## 1 CORPCODE.xml 16026472 2020-05-27 11:24:00</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>tempfile()</code> 함수 통해 빈 .zip 파일을 만듭니다.</li>
 <li><code>writeBin()</code> 함수는 바이너리 형태의 파일을 저장하는 함수이며, <code>content()</code>를 통해 첨부 파일 내용을 raw 형태로 저장합니다. 파일명은 위에서 만든 tf로 합니다.</li>
@@ -1211,7 +1204,7 @@ Sales (매출액)
 <li><code>data.frame()</code> 함수를 통해 데이터프레임 형식으로 묶어주도록 합니다.</li>
 </ol>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" data-line-number="1"><span class="kw">nrow</span>(corp_list)</a></code></pre></div>
-<pre><code>## [1] 78252</code></pre>
+<pre><code>## [1] 80662</code></pre>
 <div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" data-line-number="1"><span class="kw">head</span>(corp_list)</a></code></pre></div>
 <pre><code>##       code                               name stock
 ## 1 00434003                               다코      
@@ -1220,7 +1213,7 @@ Sales (매출액)
 ## 4 00432403                           한라판지      
 ## 5 00388953 크레디피아제이십오차유동화전문회사      
 ## 6 00179984                       연방건설산업</code></pre>
-<p>종목수를 확인해보면 78252 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.</p>
+<p>종목수를 확인해보면 80662 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.</p>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" data-line-number="1">corp_list =<span class="st"> </span>corp_list[corp_list<span class="op">$</span>stock <span class="op">!=</span><span class="st"> &quot; &quot;</span>, ]</a>
 <a class="sourceLine" id="cb185-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb185-3" data-line-number="3"><span class="kw">write.csv</span>(corp_list, <span class="st">&#39;data/corp_list.csv&#39;</span>)</a></code></pre></div>
@@ -1259,27 +1252,27 @@ Sales (매출액)
 <a class="sourceLine" id="cb187-2" data-line-number="2">notice_data =<span class="st"> </span>notice_data[[<span class="st">&#39;list&#39;</span>]]</a>
 <a class="sourceLine" id="cb187-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb187-4" data-line-number="4"><span class="kw">head</span>(notice_data)</a></code></pre></div>
-<pre><code>##   corp_code    corp_name stock_code corp_cls
-## 1  00989327  LPK로보틱스     183350        N
-## 2  00144720   유양디앤유     011690        Y
-## 3  01086812     케미메디     205290        N
-## 4  01183407 이십일스토어     270020        N
-## 5  00111218           KD     044180        K
-## 6  01183407 이십일스토어     270020        N
-##                                            report_nm
-## 1                               주권매매거래정지해제
-## 2      기타시장안내(상장폐지사유 해소 개선기간 부여)
-## 3                               주권매매거래정지해제
-## 4                           주권매매거래정지기간변경
-## 5 기타시장안내(개선계획 이행내역서 제출에 따른 안내)
-## 6                        기타시장안내(개선기간 부여)
-##         rcept_no           flr_nm rcept_dt rm
-## 1 20200427600735       코넥스시장 20200427 넥
-## 2 20200427800730 유가증권시장본부 20200427 유
-## 3 20200427600726       코넥스시장 20200427 넥
-## 4 20200427600720       코넥스시장 20200427 넥
-## 5 20200427900719   코스닥시장본부 20200427 코
-## 6 20200427600718       코넥스시장 20200427 넥</code></pre>
+<pre><code>##   corp_code     corp_name stock_code corp_cls
+## 1  01243550 IBKS제7호스팩     276920        K
+## 2  00201432    비츠로시스     054220        K
+## 3  00199252    에이치엘비     028300        K
+## 4  00609634        아이엠     101390        K
+## 5  01070149      올리패스     244460        K
+## 6  01267550    나라소프트     288490        N
+##                                                                          report_nm
+## 1                                                 기타시장안내(상장폐지 우려 예고)
+## 2                                             기타시장안내(최대주주의의무보유관련)
+## 3                                   유상증자또는주식관련사채등의청약결과(자율공시)
+## 4                                                 [기재정정]타인에대한채무보증결정
+## 5 투자판단관련주요경영사항(비마약성진통제(OLP-1002) 호주 임상 1b상 시험 계획 신청)
+## 6                                                   주식명의개서정지(주주명부폐쇄)
+##         rcept_no         flr_nm rcept_dt rm
+## 1 20200529900833 코스닥시장본부 20200529 코
+## 2 20200529900829 코스닥시장본부 20200529 코
+## 3 20200529900828     에이치엘비 20200529 코
+## 4 20200529900826         아이엠 20200529 코
+## 5 20200529900825       올리패스 20200529 코
+## 6 20200529600823     나라소프트 20200529 넥</code></pre>
 <p><code>fromJSON()</code> 함수를 통해 JSON 데이터를 받은 후 list를 확인해보면 우리가 원하는 공시정보, 즉 일주일 전부터 100건의 공시 정보가 다운로드 되어 있습니다.</p>
 </div>
 <div id="특정-기업의-공시-검색" class="section level4">
@@ -1307,26 +1300,26 @@ Sales (매출액)
 ## 5  00126380  삼성전자     005930        Y
 ## 6  00126380  삼성전자     005930        Y
 ##                                report_nm       rcept_no
-## 1 임원ㆍ주요주주특정증권등소유상황보고서 20200417000340
-## 2 임원ㆍ주요주주특정증권등소유상황보고서 20200416000397
-## 3 임원ㆍ주요주주특정증권등소유상황보고서 20200410003280
-## 4           최대주주등소유주식변동신고서 20200410801083
-## 5 임원ㆍ주요주주특정증권등소유상황보고서 20200409002508
-## 6 임원ㆍ주요주주특정증권등소유상황보고서 20200408002060
+## 1                 기업지배구조보고서공시 20200529800642
+## 2                 특수관계인과의보험거래 20200527000418
+## 3                 기타경영사항(자율공시) 20200527800457
+## 4 임원ㆍ주요주주특정증권등소유상황보고서 20200521000265
+## 5 임원ㆍ주요주주특정증권등소유상황보고서 20200520000263
+## 6                   분기보고서 (2020.03) 20200515001451
 ##     flr_nm rcept_dt rm
-## 1   김태영 20200417   
-## 2   한재수 20200416   
-## 3   이인용 20200410   
-## 4 삼성전자 20200410 유
-## 5   문형준 20200409   
-## 6   김태영 20200408</code></pre>
+## 1 삼성전자 20200529 유
+## 2 삼성전자 20200527 공
+## 3 삼성전자 20200527 유
+## 4   이규호 20200521   
+## 5   김태영 20200520   
+## 6 삼성전자 20200515</code></pre>
 <p>역시나 JSON 형태로 손쉽게 공시정보를 다운로드 받을 수 있습니다. 이 중 rcept_no는 공시번호에 해당하며, 해당 데이터를 이용해 공시에 해당하는 url에 접속을 할 수도 있습니다.</p>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" data-line-number="1">notice_url_exam =<span class="st"> </span>notice_data_ss[<span class="dv">1</span>, <span class="st">&#39;rcept_no&#39;</span>]</a>
 <a class="sourceLine" id="cb192-2" data-line-number="2">notice_dart_url =<span class="st"> </span><span class="kw">paste0</span>(</a>
 <a class="sourceLine" id="cb192-3" data-line-number="3">  <span class="st">&#39;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=&#39;</span>,notice_url_exam)</a>
 <a class="sourceLine" id="cb192-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb192-5" data-line-number="5"><span class="kw">print</span>(notice_dart_url)</a></code></pre></div>
-<pre><code>## [1] &quot;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20200417000340&quot;</code></pre>
+<pre><code>## [1] &quot;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20200529800642&quot;</code></pre>
 <p>dart 홈페이지의 공시에 해당하는 url과 첫번째 공시에 해당하는 공시번호를 합쳐주도록 합니다.</p>
 <p>위 url에 접속하여 해당 공시를 좀 더 자세하게 확인할 수 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-47"></span>

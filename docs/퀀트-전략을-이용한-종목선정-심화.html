@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-27" />
+<meta name="date" content="2020-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -533,8 +533,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb366-22" data-line-number="22"><span class="kw">cbind</span>(data_pbr, <span class="op">-</span>data_gpa) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb366-23" data-line-number="23"><span class="st">  </span><span class="kw">cor</span>(<span class="dt">method =</span> <span class="st">&#39;spearman&#39;</span>, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">4</span>)</a></code></pre></div>
 <pre><code>##         PBR     GPA
-## PBR  1.0000 -0.2307
-## GPA -0.2307  1.0000</code></pre>
+## PBR  1.0000 -0.2359
+## GPA -0.2359  1.0000</code></pre>
 <p>데이터를 불러온 후 PBR과 GPA(매출총이익/자산)를 구합니다. 그 후 랭킹의 상관관계인 스피어만 상관관계를 구해보면, 서로 간에 반대 관계가 있음이 확인됩니다. PBR은 오름차순, GPA는 내림차순이므로 GPA 앞에 마이너스(-)를 붙여주었습니다.</p>
 <div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" data-line-number="1"><span class="kw">cbind</span>(data_pbr, data_gpa) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb368-2" data-line-number="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">quantile_pbr =</span> <span class="kw">ntile</span>(data_pbr, <span class="dv">5</span>)) <span class="op">%&gt;%</span></a>
@@ -672,35 +672,36 @@ PER \times Earnings &amp; = \frac{Price}{Earnings/Shares} \times Earnings \\
 <a class="sourceLine" id="cb371-5" data-line-number="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">이익수익률</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(magic_ey[invest_magic, ], <span class="dv">4</span>),</a>
 <a class="sourceLine" id="cb371-6" data-line-number="6">         <span class="st">`</span><span class="dt">투하자본수익률</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(magic_roc[invest_magic, ], <span class="dv">4</span>))</a></code></pre></div>
 <pre><code>##    종목코드         종목명 이익수익률 투하자본수익률
-## 1    004800           효성     0.5853         1.8508
-## 2    010780   아이에스동서     0.2429         0.2914
-## 3    008060       대덕전자     0.3909         0.2936
-## 4    001820     삼화콘덴서     0.1499         0.6383
-## 5    012630            HDC     0.6515         0.3623
-## 6    086390     유니테스트     0.3213         0.4580
-## 7    192440   슈피겐코리아     0.2755         0.2092
-## 8    003300     한일홀딩스     0.4297         0.2164
-## 9    110790 크리스에프앤씨     0.2378         0.2266
-## 10   121800         비덴트     0.4601         0.3265
-## 11   045100     한양이엔지     0.3438         0.3235
-## 12   029460         케이씨     1.0966         0.5832
-## 13   255440           야스     0.1953         0.3193
-## 14   091810     티웨이항공     0.2631         0.2043
-## 15   036200         유니셈     0.1723         0.2694
-## 16   004960       한신공영     0.1931         0.3066
-## 17   036190   금화피에스시     0.3342         0.2316
-## 18   003030   세아제강지주     0.3363         0.2303
-## 19   290740         액트로     0.2128         0.3194
-## 20   251630       브이원텍     0.2415         0.2510
-## 21   225190     삼양옵틱스     0.1683         0.4102
-## 22   241790     오션브릿지     0.1747         0.3109
-## 23   089230        THE E&amp;M     0.1463         0.7804
-## 24   006580       대양제지     0.2569         0.2779
-## 25   042040   케이피엠테크     0.4041         0.2939
-## 26   093520         매커스     0.2211         0.2333
-## 27   094970       제이엠티     0.3256         0.2700
-## 28   127710     아시아경제     0.4760         0.2409
-## 29   194510     파티게임즈     0.2171         0.5069</code></pre>
+## 1    018260 삼성에스디에스     0.0804         0.1489
+## 2    086280   현대글로비스     0.0971         0.1298
+## 3    028050 삼성엔지니어링     0.0754         0.2646
+## 4    011780       금호석유     0.1190         0.1382
+## 5    114090            GKL     0.0909         0.1505
+## 6    028150       GS홈쇼핑     0.1932         0.1410
+## 7    298020     효성티앤씨     0.0745         0.2938
+## 8    004490       세방전지     0.1589         0.1123
+## 9    268280     미원에스씨     0.1346         0.1935
+## 10   053210   스카이라이프     0.1989         0.1171
+## 11   014830         유니드     0.1631         0.1274
+## 12   143240 사람인에이치알     0.1169         0.2879
+## 13   025770   한국정보통신     0.0999         0.1730
+## 14   092130     이크레더블     0.0866         0.3308
+## 15   067280     멀티캠퍼스     0.1006         0.1843
+## 16   002170       삼양통상     0.3110         0.1780
+## 17   282690     동아타이어     0.2121         0.0928
+## 18   102120   어보브반도체     0.1047         0.1436
+## 19   248170       샘표식품     0.1951         0.2046
+## 20   010960       삼호개발     0.1595         0.1373
+## 21   083930         아바코     0.1929         0.1860
+## 22   056700     신화인터텍     0.0792         0.1487
+## 23   038070     서린바이오     0.1510         0.1672
+## 24   115310       인포바인     0.2790         0.1312
+## 25   046110   한일네트웍스     0.1072         0.1397
+## 26   122310       제노레이     0.1250         0.2471
+## 27   046310        백금T&amp;A     0.1866         0.1599
+## 28   003780       진양산업     0.2185         0.2238
+## 29   010640       진양폴리     0.2180         0.2803
+## 30   045300     성우테크론     0.1324         0.1141</code></pre>
 <p>이익수익률과 투하자본 수익률의 랭킹을 각각 구해주며, 내림차순으로 값을 구하기 위해 마이너스(-)를 붙여줍니다. 그 후 두 값의 합의 랭킹 기준 상위 30종목을 선택한 후 종목코드, 종목명과 각 지표를 확인합니다.</p>
 </div>
 </div>
@@ -928,43 +929,43 @@ Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Ra
 <a class="sourceLine" id="cb389-5" data-line-number="5"><span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(ret_12m[invest_qvm], <span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb389-6" data-line-number="6"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;종목코드&#39;</span>, <span class="st">&#39;종목명&#39;</span>, <span class="st">&#39;ROE&#39;</span>, <span class="st">&#39;PBR&#39;</span>, <span class="st">&#39;12M&#39;</span>))</a></code></pre></div>
 <pre><code>##      종목코드         종목명  ROE  PBR   12M
-## 38     030200             KT 0.05 0.36 -0.24
-## 39     032640     LG유플러스 0.07 0.70 -0.20
-## 201    034310           NICE 0.06 0.70  0.01
-## 244    090460       비에이치 0.43 2.83 -0.14
-## 275    215200 메가스터디교육 0.19 2.26  0.18
-## 434    086390     유니테스트 0.37 1.80 -0.21
-## 530    002310     아세아제지 0.15 0.41 -0.30
-## 606    232140   와이아이케이 0.25 1.45 -0.18
-## 660    067990   도이치모터스 0.17 0.77 -0.17
-## 661    045100     한양이엔지 0.25 0.53 -0.35
-## 665    029460         케이씨 0.47 0.37 -0.15
-## 689    005960       동부건설 0.20 0.46 -0.02
-## 730    065130   탑엔지니어링 0.06 0.46 -0.02
-## 755    036810     에프에스티 0.18 1.39  0.14
-## 795    083310     엘오티베큠 0.13 0.97  0.11
-## 825    016710     대성홀딩스 0.04 0.25  0.20
-## 841    001340       백광산업 0.14 0.70 -0.11
-## 870    096630       에스코넥 0.14 0.99 -0.30
-## 911    248170       샘표식품 0.14 0.70 -0.20
-## 914    023600       삼보판지 0.16 0.28 -0.28
-## 921    001570           금양 0.25 1.30  0.03
-## 1124   241790     오션브릿지 0.24 1.49 -0.12
-## 1137   091340      S&amp;K폴리텍 0.11 1.00  0.50
-## 1229   290120     대유에이피 0.19 1.92  0.38
-## 1346   002200       수출포장 0.07 0.27 -0.26
-## 1352   004140           동방 0.12 0.43  0.03
-## 1388   006740       영풍제지 0.13 0.52 -0.26
-## 1434   002410       범양건영 0.11 1.10  0.23
-## 1511   024120     KB오토시스 0.14 0.62 -0.11
-## 1725   046310        백금T&amp;A 0.10 0.71 -0.19</code></pre>
+## 1      005930       삼성전자 0.08 1.13  0.14
+## 28     009150       삼성전기 0.09 1.53  0.11
+## 38     030200             KT 0.04 0.36 -0.24
+## 39     032640     LG유플러스 0.06 0.70 -0.20
+## 60     008770       호텔신라 0.18 3.21 -0.11
+## 69     011070       LG이노텍 0.05 1.13 -0.01
+## 72     282330      BGF리테일 0.24 3.78 -0.33
+## 248    298020     효성티앤씨 0.16 0.85 -0.31
+## 363    268280     미원에스씨 0.16 1.44  0.01
+## 392    053210   스카이라이프 0.08 0.43 -0.47
+## 452    143240 사람인에이치알 0.23 2.31  0.25
+## 550    007690       국도화학 0.07 0.41 -0.28
+## 562    036530      S&amp;T홀딩스 0.04 0.12 -0.10
+## 574    092130     이크레더블 0.26 3.75 -0.02
+## 717    002170       삼양통상 0.13 0.48  0.18
+## 761    052330           코텍 0.10 0.41 -0.41
+## 787    102120   어보브반도체 0.15 1.35  0.28
+## 911    248170       샘표식품 0.17 0.70 -0.20
+## 948    013520   화승알앤에이 0.09 0.38 -0.29
+## 1073   010960       삼호개발 0.11 0.47 -0.28
+## 1105   007540           샘표 0.05 0.32 -0.20
+## 1122   083930         아바코 0.15 0.61 -0.19
+## 1249   056700     신화인터텍 0.10 0.73  0.39
+## 1255   058850           KTcs 0.05 0.41 -0.33
+## 1355   038070     서린바이오 0.15 0.91 -0.24
+## 1679   046110   한일네트웍스 0.10 0.59 -0.37
+## 1716   122310       제노레이 0.22 1.95  0.02
+## 1725   046310        백금T&amp;A 0.03 0.71 -0.19
+## 1772   003780       진양산업 0.17 0.89 -0.22
+## 1934   010640       진양폴리 0.29 1.05  0.24</code></pre>
 <p>포트폴리오 내 종목들을 대상으로 팩터별 대표적인 지표인 ROE, PBR, 12개월 수익률을 나타냈습니다. 전반적으로 ROE는 높고 PBR은 낮으며, 12개월 수익률이 높은 모습을 보입니다. 물론 특정 팩터의 강도가 약하더라도 나머지 팩터의 강도가 충분히 강하다면, 포트폴리오에 편입되는 모습을 보이기도 합니다.</p>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" data-line-number="1"><span class="kw">cbind</span>(quality_profit, KOR_value, ret_bind)[invest_qvm, ] <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb391-2" data-line-number="2"><span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>()</a></code></pre></div>
-<pre><code>##       ROE   GPA   CFO   PER   PBR   PCR   PSR ret_3m
-## [1,] 0.17 0.308 0.161 6.644 0.925 3.064 0.437 -0.107
+<pre><code>##        ROE  GPA   CFO   PER   PBR   PCR   PSR ret_3m
+## [1,] 0.126 0.45 0.155 8.987 1.104 4.335 0.745 -0.176
 ##      ret_6m ret_12m
-## [1,] -0.089  -0.067</code></pre>
+## [1,]  -0.15  -0.113</code></pre>
 <p>마지막으로 포트폴리오 내 종목들의 지표별 평균을 계산한 값입니다.</p>
 
 </div>

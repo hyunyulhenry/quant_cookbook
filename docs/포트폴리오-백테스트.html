@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-27" />
+<meta name="date" content="2020-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1049,7 +1049,7 @@ EOP.Value
 ## [131] 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
 ## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123
 ## [151] 3143 3165 3187 3207 3230 3250 3271 3292 3311 3333
-## [161] 3350</code></pre>
+## [161] 3354 3374</code></pre>
 <div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" data-line-number="1">wts =<span class="st"> </span><span class="kw">list</span>()</a>
 <a class="sourceLine" id="cb500-2" data-line-number="2">lookback =<span class="st"> </span><span class="dv">10</span></a></code></pre></div>
 <p>먼저 xts 패키지의 <code>endpoints()</code> 함수를 이용해 매월 말일의 위치를 구합니다. 해당 함수는 <code>endpoints(x, on= 'months', k=1)</code>의 형태로 이루어지며 x는 시계열 데이터, on은 원하는 기간, k는 구간 길이를 의미합니다. 즉, 시계열 데이터에서 월말에 해당하는 부분의 위치를 반환하며, 매월이 아닌 weeks, quarters, years도 입력이 가능합니다. 결과적으로 ep에는 rets의 인덱스 중 매월 말일에 해당하는 부분의 위치가 구해집니다.</p>
@@ -1171,7 +1171,7 @@ wt[2] = 1
 <p>동적 자산배분을 이용한 포트폴리오는 다음과 같이 구성됩니다.</p>
 <ol style="list-style-type: decimal">
 <li>글로벌 10개 자산 중 과거 12개월 수익률이 높은 5개 자산을 선택합니다.</li>
-<li>포트폴리오를 구성하며, 개별 투자비중은 최소 10%, 최대 30% 제약조건을 설정합니다.</li>
+<li>최소분산 포트폴리오를 구성하며, 개별 투자비중은 최소 10%, 최대 30% 제약조건을 설정합니다.</li>
 <li>매월 리밸런싱을 실시합니다.</li>
 </ol>
 <div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" data-line-number="1"><span class="kw">library</span>(quantmod)</a>

@@ -1,7 +1,7 @@
 --- 
 title: "R을 이용한 퀀트 투자 포트폴리오 만들기"
 author: "이현열"
-date: "2020-04-27"
+date: "2020-05-31"
 output:
   bookdown::gitbook:
     includes:

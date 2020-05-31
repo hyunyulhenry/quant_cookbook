@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-04-27" />
+<meta name="date" content="2020-05-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -483,12 +483,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2007-01-09     12.35     13.28    12.16      13.22
 ## 2007-01-10     13.54     13.97    13.35      13.86
 ##            AAPL.Volume AAPL.Adjusted
-## 2007-01-03   309579900         10.39
-## 2007-01-04   211815100         10.62
-## 2007-01-05   208685400         10.55
-## 2007-01-08   199276700         10.60
-## 2007-01-09   837324600         11.48
-## 2007-01-10   738220000         12.03</code></pre>
+## 2007-01-03   309579900         10.36
+## 2007-01-04   211815100         10.59
+## 2007-01-05   208685400         10.52
+## 2007-01-08   199276700         10.57
+## 2007-01-09   837324600         11.45
+## 2007-01-10   738220000         12.00</code></pre>
 <p>먼저 <code>getSymbols()</code> 함수 내에 애플의 티커인 AAPL을 입력합니다. 티커와 동일한 변수인 AAPL이 생성되며, 주가 데이터가 다운로드된 후 xts 형태로 입력됩니다.</p>
 <p>다운로드 결과로 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한 Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">chart_Series</span>(<span class="kw">Ad</span>(AAPL))</a></code></pre></div>
@@ -506,12 +506,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2000-01-07     3.446     3.607    3.411      3.554
 ## 2000-01-10     3.643     3.652    3.384      3.491
 ##            AAPL.Volume AAPL.Adjusted
-## 2000-01-03   133949200         3.470
-## 2000-01-04   128094400         3.178
-## 2000-01-05   194580400         3.224
-## 2000-01-06   191993200         2.945
-## 2000-01-07   115183600         3.085
-## 2000-01-10   126266000         3.030</code></pre>
+## 2000-01-03   133949200         3.461
+## 2000-01-04   128094400         3.169
+## 2000-01-05   194580400         3.215
+## 2000-01-06   191993200         2.937
+## 2000-01-07   115183600         3.076
+## 2000-01-10   126266000         3.022</code></pre>
 <p>from에는 시작시점을 입력하고 to에는 종료시점을 입력하면 해당 기간의 데이터가 다운로드됩니다.</p>
 <p><code>getSymbols()</code> 함수를 통해 다운로드한 데이터는 자동으로 티커와 동일한 변수명에 저장됩니다. 만일 티커명이 아닌 원하는 변수명에 데이터를 저장하려면 auto.assign 인자를 FALSE로 설정해주면 다운로드한 데이터가 원하는 변수에 저장됩니다.</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;FB&#39;</span>, <span class="st">&#39;NVDA&#39;</span>) </a>
@@ -608,12 +608,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;DEXKOUS&quot;</code></pre>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">tail</span>(DEXKOUS)</a></code></pre></div>
 <pre><code>##            DEXKOUS
-## 2020-04-10    1212
-## 2020-04-13    1218
-## 2020-04-14    1217
-## 2020-04-15    1225
-## 2020-04-16    1228
-## 2020-04-17    1218</code></pre>
+## 2020-05-15    1231
+## 2020-05-18    1232
+## 2020-05-19    1225
+## 2020-05-20    1230
+## 2020-05-21    1231
+## 2020-05-22    1237</code></pre>
 <p>해당 티커를 입력하면, FRED 웹사이트와 동일한 데이터가 다운로드됩니다. 이 외에도 509,000여 개의 방대한 FRED 데이터를 해당 함수를 통해 손쉽게 R에서 다운로드할 수 있습니다.</p>
 
 </div>
