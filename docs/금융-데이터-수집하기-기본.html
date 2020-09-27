@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 금융 데이터 수집하기 (기본) | R을 이용한 퀀트 투자 포트폴리오 만들기</title>
   <meta name="description" content="Chapter 5 금융 데이터 수집하기 (기본) | R을 이용한 퀀트 투자 포트폴리오 만들기" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 금융 데이터 수집하기 (기본) | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-05-31" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="크롤링-이해하기.html"/>
 <link rel="next" href="금융-데이터-수집하기-심화.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.0/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +50,9 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
@@ -60,58 +62,60 @@
 <script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
 <script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
 <script src="libs/proj4js-2.3.15/proj4.js"></script>
-<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
-<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
-<script src="libs/highcharts-7.0.1/highcharts.js"></script>
-<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
-<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
-<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
-<script src="libs/highcharts-7.0.1/modules/map.js"></script>
-<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
-<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
-<script src="libs/highcharts-7.0.1/modules/data.js"></script>
-<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
-<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
-<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
-<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
-<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
-<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
-<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
-<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
-<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
-<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
-<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
-<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
-<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
-<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
-<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
-<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
-<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
-<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
-<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
-<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
-<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
-<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
-<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
-<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<link href="libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
+<script src="libs/highcharts-8.1.2/highcharts.js"></script>
+<script src="libs/highcharts-8.1.2/highcharts-3d.js"></script>
+<script src="libs/highcharts-8.1.2/highcharts-more.js"></script>
+<script src="libs/highcharts-8.1.2/modules/stock.js"></script>
+<script src="libs/highcharts-8.1.2/modules/map.js"></script>
+<script src="libs/highcharts-8.1.2/modules/annotations.js"></script>
+<script src="libs/highcharts-8.1.2/modules/data.js"></script>
+<script src="libs/highcharts-8.1.2/modules/drilldown.js"></script>
+<script src="libs/highcharts-8.1.2/modules/item-series.js"></script>
+<script src="libs/highcharts-8.1.2/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-8.1.2/modules/exporting.js"></script>
+<script src="libs/highcharts-8.1.2/modules/export-data.js"></script>
+<script src="libs/highcharts-8.1.2/modules/funnel.js"></script>
+<script src="libs/highcharts-8.1.2/modules/heatmap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/treemap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/sankey.js"></script>
+<script src="libs/highcharts-8.1.2/modules/dependency-wheel.js"></script>
+<script src="libs/highcharts-8.1.2/modules/organization.js"></script>
+<script src="libs/highcharts-8.1.2/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-8.1.2/modules/streamgraph.js"></script>
+<script src="libs/highcharts-8.1.2/modules/sunburst.js"></script>
+<script src="libs/highcharts-8.1.2/modules/vector.js"></script>
+<script src="libs/highcharts-8.1.2/modules/wordcloud.js"></script>
+<script src="libs/highcharts-8.1.2/modules/xrange.js"></script>
+<script src="libs/highcharts-8.1.2/modules/tilemap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/venn.js"></script>
+<script src="libs/highcharts-8.1.2/modules/gantt.js"></script>
+<script src="libs/highcharts-8.1.2/modules/timeline.js"></script>
+<script src="libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-8.1.2/modules/bullet.js"></script>
+<script src="libs/highcharts-8.1.2/modules/coloraxis.js"></script>
+<script src="libs/highcharts-8.1.2/modules/dumbbell.js"></script>
+<script src="libs/highcharts-8.1.2/modules/lollipop.js"></script>
+<script src="libs/highcharts-8.1.2/modules/series-label.js"></script>
+<script src="libs/highcharts-8.1.2/plugins/motion.js"></script>
+<script src="libs/highcharts-8.1.2/custom/reset.js"></script>
+<script src="libs/highcharts-8.1.2/modules/boost.js"></script>
+<script src="libs/highchart-binding-0.8.2/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -120,14 +124,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -136,9 +142,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -195,6 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#도움이-될-만한-자료들"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-지원-페이지"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#종목과-관련된-유의사항"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#세션정보"><i class="fa fa-check"></i>세션정보</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
 <li class="chapter" data-level="1.1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#데이터-구하기"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
@@ -449,23 +456,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>General 항목의 Request URL은 OTP를 제출할 주소입니다. Form Data의 OTP는 1번 단계에서 부여받은 OTP에 해당합니다. 이 역시 POST 방식으로 데이터를 요청합니다.</p>
 <p>위 과정을 코드로 나타내면 다음과 같습니다.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1"><span class="kw">library</span>(httr)</a>
-<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="kw">library</span>(rvest)</a>
-<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb89-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb89-5" data-line-number="5">gen_otp_url =</a>
-<a class="sourceLine" id="cb89-6" data-line-number="6"><span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span></a>
-<a class="sourceLine" id="cb89-7" data-line-number="7">gen_otp_data =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb89-8" data-line-number="8">  <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,</a>
-<a class="sourceLine" id="cb89-9" data-line-number="9">  <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,</a>
-<a class="sourceLine" id="cb89-10" data-line-number="10">  <span class="dt">url =</span> <span class="st">&#39;MKD/03/0303/03030103/mkd03030103&#39;</span>,</a>
-<a class="sourceLine" id="cb89-11" data-line-number="11">  <span class="dt">tp_cd =</span> <span class="st">&#39;ALL&#39;</span>,</a>
-<a class="sourceLine" id="cb89-12" data-line-number="12">  <span class="dt">date =</span> <span class="st">&#39;20190607&#39;</span>,</a>
-<a class="sourceLine" id="cb89-13" data-line-number="13">  <span class="dt">lang =</span> <span class="st">&#39;ko&#39;</span>,</a>
-<a class="sourceLine" id="cb89-14" data-line-number="14">  <span class="dt">pagePath =</span> <span class="st">&#39;/contents/MKD/03/0303/03030103/MKD03030103.jsp&#39;</span>)</a>
-<a class="sourceLine" id="cb89-15" data-line-number="15">otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span class="dt">query =</span> gen_otp_data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb89-16" data-line-number="16"><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb89-17" data-line-number="17"><span class="st">  </span><span class="kw">html_text</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="금융-데이터-수집하기-기본.html#cb90-1"></a><span class="kw">library</span>(httr)</span>
+<span id="cb90-2"><a href="금융-데이터-수집하기-기본.html#cb90-2"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb90-3"><a href="금융-데이터-수집하기-기본.html#cb90-3"></a><span class="kw">library</span>(readr)</span>
+<span id="cb90-4"><a href="금융-데이터-수집하기-기본.html#cb90-4"></a></span>
+<span id="cb90-5"><a href="금융-데이터-수집하기-기본.html#cb90-5"></a>gen_otp_url =</span>
+<span id="cb90-6"><a href="금융-데이터-수집하기-기본.html#cb90-6"></a><span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span></span>
+<span id="cb90-7"><a href="금융-데이터-수집하기-기본.html#cb90-7"></a>gen_otp_data =<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb90-8"><a href="금융-데이터-수집하기-기본.html#cb90-8"></a>  <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,</span>
+<span id="cb90-9"><a href="금융-데이터-수집하기-기본.html#cb90-9"></a>  <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,</span>
+<span id="cb90-10"><a href="금융-데이터-수집하기-기본.html#cb90-10"></a>  <span class="dt">url =</span> <span class="st">&#39;MKD/03/0303/03030103/mkd03030103&#39;</span>,</span>
+<span id="cb90-11"><a href="금융-데이터-수집하기-기본.html#cb90-11"></a>  <span class="dt">tp_cd =</span> <span class="st">&#39;ALL&#39;</span>,</span>
+<span id="cb90-12"><a href="금융-데이터-수집하기-기본.html#cb90-12"></a>  <span class="dt">date =</span> <span class="st">&#39;20190607&#39;</span>,</span>
+<span id="cb90-13"><a href="금융-데이터-수집하기-기본.html#cb90-13"></a>  <span class="dt">lang =</span> <span class="st">&#39;ko&#39;</span>,</span>
+<span id="cb90-14"><a href="금융-데이터-수집하기-기본.html#cb90-14"></a>  <span class="dt">pagePath =</span> <span class="st">&#39;/contents/MKD/03/0303/03030103/MKD03030103.jsp&#39;</span>)</span>
+<span id="cb90-15"><a href="금융-데이터-수집하기-기본.html#cb90-15"></a>otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span class="dt">query =</span> gen_otp_data) <span class="op">%&gt;%</span></span>
+<span id="cb90-16"><a href="금융-데이터-수집하기-기본.html#cb90-16"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb90-17"><a href="금융-데이터-수집하기-기본.html#cb90-17"></a><span class="st">  </span><span class="kw">html_text</span>()</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>gen_otp_url에 원하는 항목을 제출할 URL을 입력합니다.</li>
 <li>개발자 도구 화면에 나타는 쿼리 내용들을 리스트 형태로 입력합니다. <strong>단, filetype은 xls이 아닌 csv로 변경하는데</strong>, csv 형태로 다운로드하면 데이터를 처리하기 훨씬 쉽기 때문입니다.</li>
@@ -474,12 +481,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>html_text()</code> 함수는 HTML 내에서 텍스트에 해당하는 부분만을 추출합니다. 이를 통해 OTP 값만 추출하게 됩니다.</li>
 </ol>
 <p>위의 과정을 거쳐 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드할 수 있습니다.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span></a>
-<a class="sourceLine" id="cb90-2" data-line-number="2">down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),</a>
-<a class="sourceLine" id="cb90-3" data-line-number="3">                   <span class="kw">add_headers</span>(<span class="dt">referer =</span> gen_otp_url)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb90-4" data-line-number="4"><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb90-5" data-line-number="5"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb90-6" data-line-number="6"><span class="st">  </span><span class="kw">read_csv</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="금융-데이터-수집하기-기본.html#cb91-1"></a>down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span></span>
+<span id="cb91-2"><a href="금융-데이터-수집하기-기본.html#cb91-2"></a>down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),</span>
+<span id="cb91-3"><a href="금융-데이터-수집하기-기본.html#cb91-3"></a>                   <span class="kw">add_headers</span>(<span class="dt">referer =</span> gen_otp_url)) <span class="op">%&gt;%</span></span>
+<span id="cb91-4"><a href="금융-데이터-수집하기-기본.html#cb91-4"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb91-5"><a href="금융-데이터-수집하기-기본.html#cb91-5"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb91-6"><a href="금융-데이터-수집하기-기본.html#cb91-6"></a><span class="st">  </span><span class="kw">read_csv</span>()</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>OTP를 제출할 URL을 down_url에 입력합니다.</li>
 <li><code>POST()</code> 함수를 통해 위에서 부여받은 OTP 코드를 해당 URL에 제출합니다.</li>
@@ -488,25 +495,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>read_html()</code>과 <code>html_text()</code> 함수를 통해 텍스트 데이터만 추출합니다.</li>
 <li><code>read_csv()</code> 함수는 csv 형태의 데이터를 불러옵니다. 위의 요청 쿼리에서 filetype을 csv로 지정했으므로 손쉽게 데이터를 읽어올 수 있습니다.</li>
 </ol>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1"><span class="kw">print</span>(down_sector)</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="금융-데이터-수집하기-기본.html#cb92-1"></a><span class="kw">print</span>(down_sector)</span></code></pre></div>
 <pre><code>## # A tibble: 2,243 x 7
 ##    시장구분 종목코드 종목명 산업분류 `현재가(종가)`
 ##    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;
 ##  1 코스피   030720   동원수산… 어업               8940
 ##  2 코스피   007160   사조산업… 어업              54400
 ##  3 코스피   006040   동원산업… 어업             246500
-##  4 코스피   280360   롯데제과… 음식료품         159500
-##  5 코스피   271560   오리온 음식료품          83300
-##  6 코스피   26490K   크라운제과… 음식료품           7930
-##  7 코스피   264900   크라운제과… 음식료품           9750
-##  8 코스피   248170   샘표식품… 음식료품          30100
-##  9 코스피   101530   해태제과식… 음식료품           9500
-## 10 코스피   145995   삼양사우… 음식료품          37300
+##  4 코스피   004970   신라교역… 어업              14350
+##  5 코스피   003580   넥스트사이… 광업               5200
+##  6 코스피   012320   경동인베스… 광업              40300
+##  7 코스피   017810   풀무원 음식료품          11300
+##  8 코스피   280360   롯데제과… 음식료품         159500
+##  9 코스피   271560   오리온 음식료품          83300
+## 10 코스피   006090   사조오양… 음식료품           8220
 ## # … with 2,233 more rows, and 2 more variables:
 ## #   전일대비 &lt;dbl&gt;, `시가총액(원)` &lt;dbl&gt;</code></pre>
 <p>위 과정을 통해 down_sector 변수에는 산업별 현황 데이터가 저장되었습니다. 이를 csv 파일로 저장하겠습니다.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1"><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data&#39;</span>), <span class="ot">FALSE</span>, <span class="kw">dir.create</span>(<span class="st">&#39;data&#39;</span>))</a>
-<a class="sourceLine" id="cb93-2" data-line-number="2"><span class="kw">write.csv</span>(down_sector, <span class="st">&#39;data/krx_sector.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="금융-데이터-수집하기-기본.html#cb94-1"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data&#39;</span>), <span class="ot">FALSE</span>, <span class="kw">dir.create</span>(<span class="st">&#39;data&#39;</span>))</span>
+<span id="cb94-2"><a href="금융-데이터-수집하기-기본.html#cb94-2"></a><span class="kw">write.csv</span>(down_sector, <span class="st">&#39;data/krx_sector.csv&#39;</span>)</span></code></pre></div>
 <p>먼저 <code>ifelse()</code> 함수를 통해 data라는 이름의 폴더가 있으면 FALSE를 반환하고, 없으면 해당 이름으로 폴더를 생성해줍니다. 그 후 앞서 다운로드한 데이터를 data 폴더 안에 krx_sector.csv 이름으로 저장합니다. 해당 폴더를 확인해보면 데이터가 csv 형태로 저장되어 있습니다.</p>
 </div>
 <div id="개별종목-지표-크롤링" class="section level3">
@@ -519,32 +526,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 </div>
 <p>이 중 isu_cdnm, isu_cd, isu_nm, isu_srt_cd, fromdate 항목은 종목 구분의 개별 탭에 해당하는 부분이므로 우리가 원하는 전체 데이터를 받을 때는 필요하지 않은 요청값입니다. 이를 제외한 요청값을 산업별 현황 예제에 적용하면 해당 데이터 역시 손쉽게 다운로드할 수 있습니다.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">library</span>(httr)</a>
-<a class="sourceLine" id="cb94-2" data-line-number="2"><span class="kw">library</span>(rvest)</a>
-<a class="sourceLine" id="cb94-3" data-line-number="3"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb94-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb94-5" data-line-number="5">gen_otp_url =</a>
-<a class="sourceLine" id="cb94-6" data-line-number="6"><span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span></a>
-<a class="sourceLine" id="cb94-7" data-line-number="7">gen_otp_data =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb94-8" data-line-number="8">  <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,</a>
-<a class="sourceLine" id="cb94-9" data-line-number="9">  <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,</a>
-<a class="sourceLine" id="cb94-10" data-line-number="10">  <span class="dt">url =</span> <span class="st">&quot;MKD/13/1302/13020401/mkd13020401&quot;</span>,</a>
-<a class="sourceLine" id="cb94-11" data-line-number="11">  <span class="dt">market_gubun =</span> <span class="st">&#39;ALL&#39;</span>,</a>
-<a class="sourceLine" id="cb94-12" data-line-number="12">  <span class="dt">gubun =</span> <span class="st">&#39;1&#39;</span>,</a>
-<a class="sourceLine" id="cb94-13" data-line-number="13">  <span class="dt">schdate =</span> <span class="st">&#39;20190607&#39;</span>,</a>
-<a class="sourceLine" id="cb94-14" data-line-number="14">  <span class="dt">pagePath =</span> <span class="st">&quot;/contents/MKD/13/1302/13020401/MKD13020401.jsp&quot;</span>)</a>
-<a class="sourceLine" id="cb94-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb94-16" data-line-number="16">otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span class="dt">query =</span> gen_otp_data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-17" data-line-number="17"><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-18" data-line-number="18"><span class="st">  </span><span class="kw">html_text</span>()</a>
-<a class="sourceLine" id="cb94-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb94-20" data-line-number="20">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span></a>
-<a class="sourceLine" id="cb94-21" data-line-number="21">down_ind =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),</a>
-<a class="sourceLine" id="cb94-22" data-line-number="22">                <span class="kw">add_headers</span>(<span class="dt">referer =</span> gen_otp_url)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-23" data-line-number="23"><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-24" data-line-number="24"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb94-25" data-line-number="25"><span class="st">  </span><span class="kw">read_csv</span>()</a></code></pre></div>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="kw">print</span>(down_ind)</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="금융-데이터-수집하기-기본.html#cb95-1"></a><span class="kw">library</span>(httr)</span>
+<span id="cb95-2"><a href="금융-데이터-수집하기-기본.html#cb95-2"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb95-3"><a href="금융-데이터-수집하기-기본.html#cb95-3"></a><span class="kw">library</span>(readr)</span>
+<span id="cb95-4"><a href="금융-데이터-수집하기-기본.html#cb95-4"></a></span>
+<span id="cb95-5"><a href="금융-데이터-수집하기-기본.html#cb95-5"></a>gen_otp_url =</span>
+<span id="cb95-6"><a href="금융-데이터-수집하기-기본.html#cb95-6"></a><span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span></span>
+<span id="cb95-7"><a href="금융-데이터-수집하기-기본.html#cb95-7"></a>gen_otp_data =<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb95-8"><a href="금융-데이터-수집하기-기본.html#cb95-8"></a>  <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,</span>
+<span id="cb95-9"><a href="금융-데이터-수집하기-기본.html#cb95-9"></a>  <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,</span>
+<span id="cb95-10"><a href="금융-데이터-수집하기-기본.html#cb95-10"></a>  <span class="dt">url =</span> <span class="st">&quot;MKD/13/1302/13020401/mkd13020401&quot;</span>,</span>
+<span id="cb95-11"><a href="금융-데이터-수집하기-기본.html#cb95-11"></a>  <span class="dt">market_gubun =</span> <span class="st">&#39;ALL&#39;</span>,</span>
+<span id="cb95-12"><a href="금융-데이터-수집하기-기본.html#cb95-12"></a>  <span class="dt">gubun =</span> <span class="st">&#39;1&#39;</span>,</span>
+<span id="cb95-13"><a href="금융-데이터-수집하기-기본.html#cb95-13"></a>  <span class="dt">schdate =</span> <span class="st">&#39;20190607&#39;</span>,</span>
+<span id="cb95-14"><a href="금융-데이터-수집하기-기본.html#cb95-14"></a>  <span class="dt">pagePath =</span> <span class="st">&quot;/contents/MKD/13/1302/13020401/MKD13020401.jsp&quot;</span>)</span>
+<span id="cb95-15"><a href="금융-데이터-수집하기-기본.html#cb95-15"></a></span>
+<span id="cb95-16"><a href="금융-데이터-수집하기-기본.html#cb95-16"></a>otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span class="dt">query =</span> gen_otp_data) <span class="op">%&gt;%</span></span>
+<span id="cb95-17"><a href="금융-데이터-수집하기-기본.html#cb95-17"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb95-18"><a href="금융-데이터-수집하기-기본.html#cb95-18"></a><span class="st">  </span><span class="kw">html_text</span>()</span>
+<span id="cb95-19"><a href="금융-데이터-수집하기-기본.html#cb95-19"></a></span>
+<span id="cb95-20"><a href="금융-데이터-수집하기-기본.html#cb95-20"></a>down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span></span>
+<span id="cb95-21"><a href="금융-데이터-수집하기-기본.html#cb95-21"></a>down_ind =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),</span>
+<span id="cb95-22"><a href="금융-데이터-수집하기-기본.html#cb95-22"></a>                <span class="kw">add_headers</span>(<span class="dt">referer =</span> gen_otp_url)) <span class="op">%&gt;%</span></span>
+<span id="cb95-23"><a href="금융-데이터-수집하기-기본.html#cb95-23"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb95-24"><a href="금융-데이터-수집하기-기본.html#cb95-24"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb95-25"><a href="금융-데이터-수집하기-기본.html#cb95-25"></a><span class="st">  </span><span class="kw">read_csv</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="금융-데이터-수집하기-기본.html#cb96-1"></a><span class="kw">print</span>(down_ind)</span></code></pre></div>
 <pre><code>## # A tibble: 2,204 x 13
 ##    일자       종목코드 종목명 관리여부  종가 EPS   PER  
 ##    &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;
@@ -563,7 +570,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   배당수익률 &lt;dbl&gt;, `게시물 일련번호` &lt;dbl&gt;,
 ## #   총카운트 &lt;dbl&gt;</code></pre>
 <p>위 과정을 통해 down_ind 변수에는 개별종목 지표 데이터가 저장되었습니다. 해당 데이터 역시 csv 파일로 저장하겠습니다.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="kw">write.csv</span>(down_ind, <span class="st">&#39;data/krx_ind.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="금융-데이터-수집하기-기본.html#cb98-1"></a><span class="kw">write.csv</span>(down_ind, <span class="st">&#39;data/krx_ind.csv&#39;</span>)</span></code></pre></div>
 </div>
 <div id="최근-영업일-기준-데이터-받기" class="section level3">
 <h3><span class="header-section-number">5.1.3</span> 최근 영업일 기준 데이터 받기</h3>
@@ -583,27 +590,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 </div>
 <p>먼저 크롤링하고자 하는 내용에 마우스 커서를 올린 채 마우스 오른쪽 버튼을 클릭한 후 [검사]를 선택합니다. 그러면 개발자 도구 화면이 열리며 해당 지점의 HTML 부분이 선택됩니다. 그 후 HTML 화면에서 마우스 오른쪽 버튼을 클릭하고 [Copy → Copy Xpath]를 선택하면 해당 지점의 Xpath가 복사됩니다.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb98-1" data-line-number="1">/<span class="co">/*[@id=&quot;type_0&quot;]/div/ul[2]/li/span</span></a></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb99-1"><a href="금융-데이터-수집하기-기본.html#cb99-1"></a><span class="er">//*[@id=&quot;type_0&quot;]/div/ul[2]/li/span</span></span></code></pre></div>
 <style type="text/css">
 //*[@id="type_0"]/div/ul[2]/li/span
 </style>
 <p>위에서 구한 날짜의 Xpath를 이용해 해당 데이터를 크롤링하겠습니다.</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1"><span class="kw">library</span>(httr)</a>
-<a class="sourceLine" id="cb99-2" data-line-number="2"><span class="kw">library</span>(rvest)</a>
-<a class="sourceLine" id="cb99-3" data-line-number="3"><span class="kw">library</span>(stringr)</a>
-<a class="sourceLine" id="cb99-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb99-5" data-line-number="5">url =<span class="st"> &#39;https://finance.naver.com/sise/sise_deposit.nhn&#39;</span></a>
-<a class="sourceLine" id="cb99-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb99-7" data-line-number="7">biz_day =<span class="st"> </span><span class="kw">GET</span>(url) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb99-8" data-line-number="8"><span class="st">  </span><span class="kw">read_html</span>(<span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb99-9" data-line-number="9"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span></a>
-<a class="sourceLine" id="cb99-10" data-line-number="10">               <span class="st">&#39;//*[@id=&quot;type_1&quot;]/div/ul[2]/li/span&#39;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb99-11" data-line-number="11"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb99-12" data-line-number="12"><span class="st">  </span><span class="kw">str_match</span>((<span class="st">&#39;[0-9]+.[0-9]+.[0-9]+&#39;</span>) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb99-13" data-line-number="13"><span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)</a>
-<a class="sourceLine" id="cb99-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb99-15" data-line-number="15"><span class="kw">print</span>(biz_day)</a></code></pre></div>
-<pre><code>## [1] &quot;20200527&quot;</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="금융-데이터-수집하기-기본.html#cb100-1"></a><span class="kw">library</span>(httr)</span>
+<span id="cb100-2"><a href="금융-데이터-수집하기-기본.html#cb100-2"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb100-3"><a href="금융-데이터-수집하기-기본.html#cb100-3"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb100-4"><a href="금융-데이터-수집하기-기본.html#cb100-4"></a></span>
+<span id="cb100-5"><a href="금융-데이터-수집하기-기본.html#cb100-5"></a>url =<span class="st"> &#39;https://finance.naver.com/sise/sise_deposit.nhn&#39;</span></span>
+<span id="cb100-6"><a href="금융-데이터-수집하기-기본.html#cb100-6"></a></span>
+<span id="cb100-7"><a href="금융-데이터-수집하기-기본.html#cb100-7"></a>biz_day =<span class="st"> </span><span class="kw">GET</span>(url) <span class="op">%&gt;%</span></span>
+<span id="cb100-8"><a href="금융-데이터-수집하기-기본.html#cb100-8"></a><span class="st">  </span><span class="kw">read_html</span>(<span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb100-9"><a href="금융-데이터-수집하기-기본.html#cb100-9"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span></span>
+<span id="cb100-10"><a href="금융-데이터-수집하기-기본.html#cb100-10"></a>               <span class="st">&#39;//*[@id=&quot;type_1&quot;]/div/ul[2]/li/span&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb100-11"><a href="금융-데이터-수집하기-기본.html#cb100-11"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb100-12"><a href="금융-데이터-수집하기-기본.html#cb100-12"></a><span class="st">  </span><span class="kw">str_match</span>((<span class="st">&#39;[0-9]+.[0-9]+.[0-9]+&#39;</span>) ) <span class="op">%&gt;%</span></span>
+<span id="cb100-13"><a href="금융-데이터-수집하기-기본.html#cb100-13"></a><span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
+<span id="cb100-14"><a href="금융-데이터-수집하기-기본.html#cb100-14"></a></span>
+<span id="cb100-15"><a href="금융-데이터-수집하기-기본.html#cb100-15"></a><span class="kw">print</span>(biz_day)</span></code></pre></div>
+<pre><code>## [1] &quot;20200923&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li>페이지의 url을 저장합니다.</li>
 <li><code>GET()</code> 함수를 통해 해당 페이지 내용을 받습니다.</li>
@@ -614,240 +621,246 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>str_replace_all()</code> 함수를 이용해 마침표(.)를 모두 없애줍니다.</li>
 </ol>
 <p>이처럼 Xpath를 이용하면 태그나 속성을 분해하지 않고도 원하는 지점의 데이터를 크롤링할 수 있습니다. 위 과정을 통해 yyyymmdd 형태의 날짜만 남게 되었습니다. 이를 위의 date와 schdate에 입력하면 산업별 현황과 개별종목 지표를 최근일자 기준으로 다운로드하게 됩니다. 전체 코드는 다음과 같습니다.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="kw">library</span>(httr)</a>
-<a class="sourceLine" id="cb101-2" data-line-number="2"><span class="kw">library</span>(rvest)</a>
-<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="kw">library</span>(stringr)</a>
-<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb101-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb101-6" data-line-number="6"><span class="co"># 최근 영업일 구하기</span></a>
-<a class="sourceLine" id="cb101-7" data-line-number="7">url =<span class="st"> &#39;https://finance.naver.com/sise/sise_deposit.nhn&#39;</span></a>
-<a class="sourceLine" id="cb101-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb101-9" data-line-number="9">biz_day =<span class="st"> </span><span class="kw">GET</span>(url) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-10" data-line-number="10"><span class="st">  </span><span class="kw">read_html</span>(<span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-11" data-line-number="11"><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span></a>
-<a class="sourceLine" id="cb101-12" data-line-number="12">               <span class="st">&#39;//*[@id=&quot;type_1&quot;]/div/ul[2]/li/span&#39;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-13" data-line-number="13"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-14" data-line-number="14"><span class="st">  </span><span class="kw">str_match</span>((<span class="st">&#39;[0-9]+.[0-9]+.[0-9]+&#39;</span>) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-15" data-line-number="15"><span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)</a>
-<a class="sourceLine" id="cb101-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb101-17" data-line-number="17"><span class="co"># 산업별 현황 OTP 발급</span></a>
-<a class="sourceLine" id="cb101-18" data-line-number="18">gen_otp_url =</a>
-<a class="sourceLine" id="cb101-19" data-line-number="19"><span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span></a>
-<a class="sourceLine" id="cb101-20" data-line-number="20">gen_otp_data =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb101-21" data-line-number="21">  <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,</a>
-<a class="sourceLine" id="cb101-22" data-line-number="22">  <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,</a>
-<a class="sourceLine" id="cb101-23" data-line-number="23">  <span class="dt">url =</span> <span class="st">&#39;MKD/03/0303/03030103/mkd03030103&#39;</span>,</a>
-<a class="sourceLine" id="cb101-24" data-line-number="24">  <span class="dt">tp_cd =</span> <span class="st">&#39;ALL&#39;</span>,</a>
-<a class="sourceLine" id="cb101-25" data-line-number="25">  <span class="dt">date =</span> biz_day, <span class="co"># 최근영업일로 변경</span></a>
-<a class="sourceLine" id="cb101-26" data-line-number="26">  <span class="dt">lang =</span> <span class="st">&#39;ko&#39;</span>,</a>
-<a class="sourceLine" id="cb101-27" data-line-number="27">  <span class="dt">pagePath =</span> <span class="st">&#39;/contents/MKD/03/0303/03030103/MKD03030103.jsp&#39;</span>)</a>
-<a class="sourceLine" id="cb101-28" data-line-number="28">otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span class="dt">query =</span> gen_otp_data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-29" data-line-number="29"><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-30" data-line-number="30"><span class="st">  </span><span class="kw">html_text</span>()</a>
-<a class="sourceLine" id="cb101-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb101-32" data-line-number="32"><span class="co"># 산업별 현황 데이터 다운로드</span></a>
-<a class="sourceLine" id="cb101-33" data-line-number="33">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span></a>
-<a class="sourceLine" id="cb101-34" data-line-number="34">down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),</a>
-<a class="sourceLine" id="cb101-35" data-line-number="35">                   <span class="kw">add_headers</span>(<span class="dt">referer =</span> gen_otp_url)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-36" data-line-number="36"><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-37" data-line-number="37"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-38" data-line-number="38"><span class="st">  </span><span class="kw">read_csv</span>()</a>
-<a class="sourceLine" id="cb101-39" data-line-number="39"></a>
-<a class="sourceLine" id="cb101-40" data-line-number="40"><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data&#39;</span>), <span class="ot">FALSE</span>, <span class="kw">dir.create</span>(<span class="st">&#39;data&#39;</span>))</a>
-<a class="sourceLine" id="cb101-41" data-line-number="41"><span class="kw">write.csv</span>(down_sector, <span class="st">&#39;data/krx_sector.csv&#39;</span>)</a>
-<a class="sourceLine" id="cb101-42" data-line-number="42"></a>
-<a class="sourceLine" id="cb101-43" data-line-number="43"><span class="co"># 개별종목 지표 OTP 발급</span></a>
-<a class="sourceLine" id="cb101-44" data-line-number="44">gen_otp_url =</a>
-<a class="sourceLine" id="cb101-45" data-line-number="45"><span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span></a>
-<a class="sourceLine" id="cb101-46" data-line-number="46">gen_otp_data =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb101-47" data-line-number="47">  <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,</a>
-<a class="sourceLine" id="cb101-48" data-line-number="48">  <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,</a>
-<a class="sourceLine" id="cb101-49" data-line-number="49">  <span class="dt">url =</span> <span class="st">&quot;MKD/13/1302/13020401/mkd13020401&quot;</span>,</a>
-<a class="sourceLine" id="cb101-50" data-line-number="50">  <span class="dt">market_gubun =</span> <span class="st">&#39;ALL&#39;</span>,</a>
-<a class="sourceLine" id="cb101-51" data-line-number="51">  <span class="dt">gubun =</span> <span class="st">&#39;1&#39;</span>,</a>
-<a class="sourceLine" id="cb101-52" data-line-number="52">  <span class="dt">schdate =</span> biz_day, <span class="co"># 최근영업일로 변경</span></a>
-<a class="sourceLine" id="cb101-53" data-line-number="53">  <span class="dt">pagePath =</span> <span class="st">&quot;/contents/MKD/13/1302/13020401/MKD13020401.jsp&quot;</span>)</a>
-<a class="sourceLine" id="cb101-54" data-line-number="54"></a>
-<a class="sourceLine" id="cb101-55" data-line-number="55">otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span class="dt">query =</span> gen_otp_data) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-56" data-line-number="56"><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-57" data-line-number="57"><span class="st">  </span><span class="kw">html_text</span>()</a>
-<a class="sourceLine" id="cb101-58" data-line-number="58"></a>
-<a class="sourceLine" id="cb101-59" data-line-number="59"><span class="co"># 개별종목 지표 데이터 다운로드</span></a>
-<a class="sourceLine" id="cb101-60" data-line-number="60">down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span></a>
-<a class="sourceLine" id="cb101-61" data-line-number="61">down_ind =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),</a>
-<a class="sourceLine" id="cb101-62" data-line-number="62">                <span class="kw">add_headers</span>(<span class="dt">referer =</span> gen_otp_url)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-63" data-line-number="63"><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-64" data-line-number="64"><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb101-65" data-line-number="65"><span class="st">  </span><span class="kw">read_csv</span>()</a>
-<a class="sourceLine" id="cb101-66" data-line-number="66"></a>
-<a class="sourceLine" id="cb101-67" data-line-number="67"><span class="kw">write.csv</span>(down_ind, <span class="st">&#39;data/krx_ind.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="금융-데이터-수집하기-기본.html#cb102-1"></a><span class="kw">library</span>(httr)</span>
+<span id="cb102-2"><a href="금융-데이터-수집하기-기본.html#cb102-2"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb102-3"><a href="금융-데이터-수집하기-기본.html#cb102-3"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb102-4"><a href="금융-데이터-수집하기-기본.html#cb102-4"></a><span class="kw">library</span>(readr)</span>
+<span id="cb102-5"><a href="금융-데이터-수집하기-기본.html#cb102-5"></a></span>
+<span id="cb102-6"><a href="금융-데이터-수집하기-기본.html#cb102-6"></a><span class="co"># 최근 영업일 구하기</span></span>
+<span id="cb102-7"><a href="금융-데이터-수집하기-기본.html#cb102-7"></a>url =<span class="st"> &#39;https://finance.naver.com/sise/sise_deposit.nhn&#39;</span></span>
+<span id="cb102-8"><a href="금융-데이터-수집하기-기본.html#cb102-8"></a></span>
+<span id="cb102-9"><a href="금융-데이터-수집하기-기본.html#cb102-9"></a>biz_day =<span class="st"> </span><span class="kw">GET</span>(url) <span class="op">%&gt;%</span></span>
+<span id="cb102-10"><a href="금융-데이터-수집하기-기본.html#cb102-10"></a><span class="st">  </span><span class="kw">read_html</span>(<span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb102-11"><a href="금융-데이터-수집하기-기본.html#cb102-11"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span></span>
+<span id="cb102-12"><a href="금융-데이터-수집하기-기본.html#cb102-12"></a>               <span class="st">&#39;//*[@id=&quot;type_1&quot;]/div/ul[2]/li/span&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb102-13"><a href="금융-데이터-수집하기-기본.html#cb102-13"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb102-14"><a href="금융-데이터-수집하기-기본.html#cb102-14"></a><span class="st">  </span><span class="kw">str_match</span>((<span class="st">&#39;[0-9]+.[0-9]+.[0-9]+&#39;</span>) ) <span class="op">%&gt;%</span></span>
+<span id="cb102-15"><a href="금융-데이터-수집하기-기본.html#cb102-15"></a><span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
+<span id="cb102-16"><a href="금융-데이터-수집하기-기본.html#cb102-16"></a></span>
+<span id="cb102-17"><a href="금융-데이터-수집하기-기본.html#cb102-17"></a><span class="co"># 산업별 현황 OTP 발급</span></span>
+<span id="cb102-18"><a href="금융-데이터-수집하기-기본.html#cb102-18"></a>gen_otp_url =</span>
+<span id="cb102-19"><a href="금융-데이터-수집하기-기본.html#cb102-19"></a><span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span></span>
+<span id="cb102-20"><a href="금융-데이터-수집하기-기본.html#cb102-20"></a>gen_otp_data =<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb102-21"><a href="금융-데이터-수집하기-기본.html#cb102-21"></a>  <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,</span>
+<span id="cb102-22"><a href="금융-데이터-수집하기-기본.html#cb102-22"></a>  <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,</span>
+<span id="cb102-23"><a href="금융-데이터-수집하기-기본.html#cb102-23"></a>  <span class="dt">url =</span> <span class="st">&#39;MKD/03/0303/03030103/mkd03030103&#39;</span>,</span>
+<span id="cb102-24"><a href="금융-데이터-수집하기-기본.html#cb102-24"></a>  <span class="dt">tp_cd =</span> <span class="st">&#39;ALL&#39;</span>,</span>
+<span id="cb102-25"><a href="금융-데이터-수집하기-기본.html#cb102-25"></a>  <span class="dt">date =</span> biz_day, <span class="co"># 최근영업일로 변경</span></span>
+<span id="cb102-26"><a href="금융-데이터-수집하기-기본.html#cb102-26"></a>  <span class="dt">lang =</span> <span class="st">&#39;ko&#39;</span>,</span>
+<span id="cb102-27"><a href="금융-데이터-수집하기-기본.html#cb102-27"></a>  <span class="dt">pagePath =</span> <span class="st">&#39;/contents/MKD/03/0303/03030103/MKD03030103.jsp&#39;</span>)</span>
+<span id="cb102-28"><a href="금융-데이터-수집하기-기본.html#cb102-28"></a>otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span class="dt">query =</span> gen_otp_data) <span class="op">%&gt;%</span></span>
+<span id="cb102-29"><a href="금융-데이터-수집하기-기본.html#cb102-29"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb102-30"><a href="금융-데이터-수집하기-기본.html#cb102-30"></a><span class="st">  </span><span class="kw">html_text</span>()</span>
+<span id="cb102-31"><a href="금융-데이터-수집하기-기본.html#cb102-31"></a></span>
+<span id="cb102-32"><a href="금융-데이터-수집하기-기본.html#cb102-32"></a><span class="co"># 산업별 현황 데이터 다운로드</span></span>
+<span id="cb102-33"><a href="금융-데이터-수집하기-기본.html#cb102-33"></a>down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span></span>
+<span id="cb102-34"><a href="금융-데이터-수집하기-기본.html#cb102-34"></a>down_sector =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),</span>
+<span id="cb102-35"><a href="금융-데이터-수집하기-기본.html#cb102-35"></a>                   <span class="kw">add_headers</span>(<span class="dt">referer =</span> gen_otp_url)) <span class="op">%&gt;%</span></span>
+<span id="cb102-36"><a href="금융-데이터-수집하기-기본.html#cb102-36"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb102-37"><a href="금융-데이터-수집하기-기본.html#cb102-37"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb102-38"><a href="금융-데이터-수집하기-기본.html#cb102-38"></a><span class="st">  </span><span class="kw">read_csv</span>()</span>
+<span id="cb102-39"><a href="금융-데이터-수집하기-기본.html#cb102-39"></a></span>
+<span id="cb102-40"><a href="금융-데이터-수집하기-기본.html#cb102-40"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data&#39;</span>), <span class="ot">FALSE</span>, <span class="kw">dir.create</span>(<span class="st">&#39;data&#39;</span>))</span>
+<span id="cb102-41"><a href="금융-데이터-수집하기-기본.html#cb102-41"></a><span class="kw">write.csv</span>(down_sector, <span class="st">&#39;data/krx_sector.csv&#39;</span>)</span>
+<span id="cb102-42"><a href="금융-데이터-수집하기-기본.html#cb102-42"></a></span>
+<span id="cb102-43"><a href="금융-데이터-수집하기-기본.html#cb102-43"></a><span class="co"># 개별종목 지표 OTP 발급</span></span>
+<span id="cb102-44"><a href="금융-데이터-수집하기-기본.html#cb102-44"></a>gen_otp_url =</span>
+<span id="cb102-45"><a href="금융-데이터-수집하기-기본.html#cb102-45"></a><span class="st">  &#39;http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx&#39;</span></span>
+<span id="cb102-46"><a href="금융-데이터-수집하기-기본.html#cb102-46"></a>gen_otp_data =<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb102-47"><a href="금융-데이터-수집하기-기본.html#cb102-47"></a>  <span class="dt">name =</span> <span class="st">&#39;fileDown&#39;</span>,</span>
+<span id="cb102-48"><a href="금융-데이터-수집하기-기본.html#cb102-48"></a>  <span class="dt">filetype =</span> <span class="st">&#39;csv&#39;</span>,</span>
+<span id="cb102-49"><a href="금융-데이터-수집하기-기본.html#cb102-49"></a>  <span class="dt">url =</span> <span class="st">&quot;MKD/13/1302/13020401/mkd13020401&quot;</span>,</span>
+<span id="cb102-50"><a href="금융-데이터-수집하기-기본.html#cb102-50"></a>  <span class="dt">market_gubun =</span> <span class="st">&#39;ALL&#39;</span>,</span>
+<span id="cb102-51"><a href="금융-데이터-수집하기-기본.html#cb102-51"></a>  <span class="dt">gubun =</span> <span class="st">&#39;1&#39;</span>,</span>
+<span id="cb102-52"><a href="금융-데이터-수집하기-기본.html#cb102-52"></a>  <span class="dt">schdate =</span> biz_day, <span class="co"># 최근영업일로 변경</span></span>
+<span id="cb102-53"><a href="금융-데이터-수집하기-기본.html#cb102-53"></a>  <span class="dt">pagePath =</span> <span class="st">&quot;/contents/MKD/13/1302/13020401/MKD13020401.jsp&quot;</span>)</span>
+<span id="cb102-54"><a href="금융-데이터-수집하기-기본.html#cb102-54"></a></span>
+<span id="cb102-55"><a href="금융-데이터-수집하기-기본.html#cb102-55"></a>otp =<span class="st"> </span><span class="kw">POST</span>(gen_otp_url, <span class="dt">query =</span> gen_otp_data) <span class="op">%&gt;%</span></span>
+<span id="cb102-56"><a href="금융-데이터-수집하기-기본.html#cb102-56"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb102-57"><a href="금융-데이터-수집하기-기본.html#cb102-57"></a><span class="st">  </span><span class="kw">html_text</span>()</span>
+<span id="cb102-58"><a href="금융-데이터-수집하기-기본.html#cb102-58"></a></span>
+<span id="cb102-59"><a href="금융-데이터-수집하기-기본.html#cb102-59"></a><span class="co"># 개별종목 지표 데이터 다운로드</span></span>
+<span id="cb102-60"><a href="금융-데이터-수집하기-기본.html#cb102-60"></a>down_url =<span class="st"> &#39;http://file.krx.co.kr/download.jspx&#39;</span></span>
+<span id="cb102-61"><a href="금융-데이터-수집하기-기본.html#cb102-61"></a>down_ind =<span class="st"> </span><span class="kw">POST</span>(down_url, <span class="dt">query =</span> <span class="kw">list</span>(<span class="dt">code =</span> otp),</span>
+<span id="cb102-62"><a href="금융-데이터-수집하기-기본.html#cb102-62"></a>                <span class="kw">add_headers</span>(<span class="dt">referer =</span> gen_otp_url)) <span class="op">%&gt;%</span></span>
+<span id="cb102-63"><a href="금융-데이터-수집하기-기본.html#cb102-63"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb102-64"><a href="금융-데이터-수집하기-기본.html#cb102-64"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb102-65"><a href="금융-데이터-수집하기-기본.html#cb102-65"></a><span class="st">  </span><span class="kw">read_csv</span>()</span>
+<span id="cb102-66"><a href="금융-데이터-수집하기-기본.html#cb102-66"></a></span>
+<span id="cb102-67"><a href="금융-데이터-수집하기-기본.html#cb102-67"></a><span class="kw">write.csv</span>(down_ind, <span class="st">&#39;data/krx_ind.csv&#39;</span>)</span></code></pre></div>
 </div>
 <div id="거래소-데이터-정리하기" class="section level3">
 <h3><span class="header-section-number">5.1.4</span> 거래소 데이터 정리하기</h3>
 <p>위에서 다운로드한 데이터는 중복된 열이 있으며, 불필요한 데이터 역시 있습니다. 따라서 하나의 테이블로 합친 후 정리할 필요가 있습니다. 먼저 다운로드한 csv 파일을 읽어옵니다.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">down_sector =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/krx_sector.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb102-2" data-line-number="2">                       <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb102-3" data-line-number="3">down_ind =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/krx_ind.csv&#39;</span>,  <span class="dt">row.names =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb102-4" data-line-number="4">                    <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="금융-데이터-수집하기-기본.html#cb103-1"></a>down_sector =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/krx_sector.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb103-2"><a href="금융-데이터-수집하기-기본.html#cb103-2"></a>                       <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb103-3"><a href="금융-데이터-수집하기-기본.html#cb103-3"></a>down_ind =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/krx_ind.csv&#39;</span>,  <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb103-4"><a href="금융-데이터-수집하기-기본.html#cb103-4"></a>                    <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p><code>read.csv()</code> 함수를 이용해 csv 파일을 불러옵니다. <code>row.names = 1</code>을 통해 첫 번째 열을 행 이름으로 지정하고, <code>stringsAsFactors = FALSE</code>를 통해 문자열 데이터가 팩터 형태로 변형되지 않게 합니다.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb103-1" data-line-number="1"><span class="kw">intersect</span>(<span class="kw">names</span>(down_sector), <span class="kw">names</span>(down_ind))</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="금융-데이터-수집하기-기본.html#cb104-1"></a><span class="kw">intersect</span>(<span class="kw">names</span>(down_sector), <span class="kw">names</span>(down_ind))</span></code></pre></div>
 <pre><code>## [1] &quot;종목코드&quot; &quot;종목명&quot;</code></pre>
 <p>먼저 <code>intersect()</code> 함수를 통해 두 데이터 간 중복되는 열 이름을 살펴보면 종목코드와 종목명이 동일한 위치에 있습니다.</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" data-line-number="1"><span class="kw">setdiff</span>(down_sector[, <span class="st">&#39;종목명&#39;</span>], down_ind[ ,<span class="st">&#39;종목명&#39;</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="금융-데이터-수집하기-기본.html#cb106-1"></a><span class="kw">setdiff</span>(down_sector[, <span class="st">&#39;종목명&#39;</span>], down_ind[ ,<span class="st">&#39;종목명&#39;</span>])</span></code></pre></div>
 <pre><code>##  [1] &quot;엘브이엠씨홀딩스&quot;   &quot;한국패러랠&quot;        
 ##  [3] &quot;한국ANKOR유전&quot;      &quot;맵스리얼티1&quot;       
-##  [5] &quot;맥쿼리인프라&quot;       &quot;하나니켈2호&quot;       
-##  [7] &quot;하나니켈1호&quot;        &quot;베트남개발1&quot;       
-##  [9] &quot;NH프라임리츠&quot;       &quot;롯데리츠&quot;          
-## [11] &quot;신한알파리츠&quot;       &quot;이리츠코크렙&quot;      
-## [13] &quot;모두투어리츠&quot;       &quot;하이골드12호&quot;      
-## [15] &quot;하이골드8호&quot;        &quot;바다로19호&quot;        
-## [17] &quot;하이골드3호&quot;        &quot;케이탑리츠&quot;        
-## [19] &quot;에이리츠&quot;           &quot;동북아13호&quot;        
-## [21] &quot;동북아12호&quot;         &quot;컬러레이&quot;          
+##  [5] &quot;맥쿼리인프라&quot;       &quot;베트남개발1&quot;       
+##  [7] &quot;코람코에너지리츠&quot;   &quot;제이알글로벌리츠&quot;  
+##  [9] &quot;미래에셋맵스리츠&quot;   &quot;이지스레지던스리츠&quot;
+## [11] &quot;이지스밸류리츠&quot;     &quot;NH프라임리츠&quot;      
+## [13] &quot;롯데리츠&quot;           &quot;신한알파리츠&quot;      
+## [15] &quot;이리츠코크렙&quot;       &quot;모두투어리츠&quot;      
+## [17] &quot;하이골드12호&quot;       &quot;바다로19호&quot;        
+## [19] &quot;하이골드3호&quot;        &quot;케이탑리츠&quot;        
+## [21] &quot;에이리츠&quot;           &quot;소마젠(Reg.S)&quot;     
 ## [23] &quot;JTC&quot;                &quot;뉴프라이드&quot;        
-## [25] &quot;윙입푸드&quot;           &quot;글로벌에스엠&quot;      
-## [27] &quot;크리스탈신소재&quot;     &quot;씨케이에이치&quot;      
-## [29] &quot;차이나그레이트&quot;     &quot;골든센츄리&quot;        
+## [25] &quot;컬러레이&quot;           &quot;윙입푸드&quot;          
+## [27] &quot;글로벌에스엠&quot;       &quot;크리스탈신소재&quot;    
+## [29] &quot;씨케이에이치&quot;       &quot;골든센츄리&quot;        
 ## [31] &quot;오가닉티코스메틱&quot;   &quot;GRT&quot;               
 ## [33] &quot;로스웰&quot;             &quot;헝셩그룹&quot;          
 ## [35] &quot;이스트아시아홀딩스&quot; &quot;에스앤씨엔진그룹&quot;  
-## [37] &quot;SNK&quot;                &quot;SBI핀테크솔루션즈&quot; 
-## [39] &quot;잉글우드랩&quot;         &quot;코오롱티슈진&quot;      
-## [41] &quot;엑세스바이오&quot;</code></pre>
+## [37] &quot;미투젠&quot;             &quot;SNK&quot;               
+## [39] &quot;SBI핀테크솔루션즈&quot;  &quot;잉글우드랩&quot;        
+## [41] &quot;코오롱티슈진&quot;       &quot;엑세스바이오&quot;</code></pre>
 <p><code>setdiff()</code> 함수를 통해 두 데이터에 공통적으로 없는 종목명, 즉 하나의 데이터에만 있는 종목을 살펴보면 위와 같습니다. 해당 종목들은 선박펀드, 광물펀드, 해외종목 등 일반적이지 않은 종목들이므로 제외하는 것이 좋습니다. 따라서 둘 사이에 공통적으로 존재하는 종목을 기준으로 데이터를 합쳐주겠습니다.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb107-1" data-line-number="1">KOR_ticker =<span class="st"> </span><span class="kw">merge</span>(down_sector, down_ind,</a>
-<a class="sourceLine" id="cb107-2" data-line-number="2">                   <span class="dt">by =</span> <span class="kw">intersect</span>(<span class="kw">names</span>(down_sector),</a>
-<a class="sourceLine" id="cb107-3" data-line-number="3">                                  <span class="kw">names</span>(down_ind)),</a>
-<a class="sourceLine" id="cb107-4" data-line-number="4">                   <span class="dt">all =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb107-5" data-line-number="5">                   )</a></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="금융-데이터-수집하기-기본.html#cb108-1"></a>KOR_ticker =<span class="st"> </span><span class="kw">merge</span>(down_sector, down_ind,</span>
+<span id="cb108-2"><a href="금융-데이터-수집하기-기본.html#cb108-2"></a>                   <span class="dt">by =</span> <span class="kw">intersect</span>(<span class="kw">names</span>(down_sector),</span>
+<span id="cb108-3"><a href="금융-데이터-수집하기-기본.html#cb108-3"></a>                                  <span class="kw">names</span>(down_ind)),</span>
+<span id="cb108-4"><a href="금융-데이터-수집하기-기본.html#cb108-4"></a>                   <span class="dt">all =</span> <span class="ot">FALSE</span></span>
+<span id="cb108-5"><a href="금융-데이터-수집하기-기본.html#cb108-5"></a>                   )</span></code></pre></div>
 <p><code>merge()</code> 함수는 by를 기준으로 두 데이터를 하나로 합치며, 공통으로 존재하는 종목코드, 종목명을 기준으로 입력해줍니다. 또한 all 값을 TRUE로 설정하면 합집합을 반환하고, FALSE로 설정하면 교집합을 반환합니다. 공통으로 존재하는 항목을 원하므로 여기서는 FALSE를 입력합니다.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" data-line-number="1">KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">order</span>(<span class="op">-</span>KOR_ticker[<span class="st">&#39;시가총액.원.&#39;</span>]), ]</a>
-<a class="sourceLine" id="cb108-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">head</span>(KOR_ticker))</a></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="금융-데이터-수집하기-기본.html#cb109-1"></a>KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">order</span>(<span class="op">-</span>KOR_ticker[<span class="st">&#39;시가총액.원.&#39;</span>]), ]</span>
+<span id="cb109-2"><a href="금융-데이터-수집하기-기본.html#cb109-2"></a><span class="kw">print</span>(<span class="kw">head</span>(KOR_ticker))</span></code></pre></div>
 <pre><code>##      종목코드           종목명 시장구분 산업분류
-## 332    005930         삼성전자   코스피 전기전자
+## 328    005930         삼성전자   코스피 전기전자
 ## 45     000660       SK하이닉스   코스피 전기전자
-## 333    005935       삼성전자우   코스피 전기전자
-## 1938   207940 삼성바이오로직스   코스피   의약품
-## 852    035420            NAVER   코스피 서비스업
-## 1082   051910           LG화학   코스피     화학
+## 846    035420            NAVER   코스피 서비스업
+## 1926   207940 삼성바이오로직스   코스피   의약품
+## 1076   051910           LG화학   코스피     화학
+## 329    005935       삼성전자우   코스피 전기전자
 ##      현재가.종가. 전일대비 시가총액.원.       일자
-## 332         52100    -2500    3.110e+14 2020-03-11
-## 45          85500    -3600    6.224e+13 2020-03-11
-## 333         44350    -1150    3.650e+13 2020-03-11
-## 1938       484000   -12000    3.202e+13 2020-03-11
-## 852        170000    -2000    2.802e+13 2020-03-11
-## 1082       365000    -8500    2.577e+13 2020-03-11
-##      관리여부   종가    EPS   PER     BPS  PBR
-## 332         -  52100  6,461  8.06  35,342 1.47
-## 45          -  85500 22,255  3.84  64,348 1.33
-## 333         -  44350      -     -       -    -
-## 1938        - 484000  3,387 142.9  62,805 7.71
-## 852         - 170000  4,437 38.31  31,795 5.35
-## 1082        - 365000 19,217 18.99 218,227 1.67
+## 328         58600      400    3.498e+14 2020-09-23
+## 45          83600     2300    6.086e+13 2020-09-23
+## 846        296500    12000    4.870e+13 2020-09-23
+## 1926       705000   -26000    4.665e+13 2020-09-23
+## 1076       630000    -9000    4.447e+13 2020-09-23
+## 329         50900     -100    4.188e+13 2020-09-23
+##      관리여부   종가   EPS    PER     BPS   PBR
+## 328         -  58600 3,166  18.51  37,528  1.56
+## 45          -  83600 2,943  28.41  65,836  1.27
+## 846         - 296500 4,006  74.01  35,223  8.42
+## 1926        - 705000 3,067 229.87  65,812 10.71
+## 1076        - 630000 4,085 154.22 217,230   2.9
+## 329         -  50900     -      -       -     -
 ##      주당배당금 배당수익률 게시물..일련번호 총카운트
-## 332        1416       2.72             1518       NA
-## 45         1500       1.75             1471       NA
-## 333        1417       3.20             1851       NA
-## 1938          0       0.00             1650       NA
-## 852         314       0.18             1591       NA
-## 1082       6000       1.64             1603       NA</code></pre>
+## 328        1416       2.42             1726       NA
+## 45         1000       1.20             1459       NA
+## 846         376       0.13             2045       NA
+## 1926          0       0.00             2250       NA
+## 1076       2000       0.32             2076       NA
+## 329        1417       2.78             1727       NA</code></pre>
 <p>데이터를 시가총액 기준으로 내림차순 정렬할 필요도 있습니다. <code>order()</code> 함수를 통해 상대적인 순서를 구할 수 있습니다. R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꿉니다. 결과적으로 시가총액 기준 내림차
 순으로 해당 데이터가 정렬됩니다.</p>
 <p>마지막으로 스팩, 우선주 종목 역시 제외해야 합니다.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb110-1" data-line-number="1"><span class="kw">library</span>(stringr)</a>
-<a class="sourceLine" id="cb110-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb110-3" data-line-number="3">KOR_ticker[<span class="kw">grepl</span>(<span class="st">&#39;스팩&#39;</span>, KOR_ticker[, <span class="st">&#39;종목명&#39;</span>]), <span class="st">&#39;종목명&#39;</span>]  </a></code></pre></div>
-<pre><code>##  [1] &quot;엔에이치스팩14호&quot;    &quot;하나금융11호스팩&quot;   
-##  [3] &quot;케이비제18호스팩&quot;    &quot;엔에이치스팩12호&quot;   
-##  [5] &quot;삼성스팩2호&quot;         &quot;한화에스비아이스팩&quot; 
-##  [7] &quot;미래에셋대우스팩3호&quot; &quot;신한제4호스팩&quot;      
-##  [9] &quot;유안타제5호스팩&quot;     &quot;SK6호스팩&quot;          
-## [11] &quot;케이비17호스팩&quot;      &quot;대신밸런스제7호스팩&quot;
-## [13] &quot;SK4호스팩&quot;           &quot;한국제7호스팩&quot;      
-## [15] &quot;대신밸런스제6호스팩&quot; &quot;신한제6호스팩&quot;      
-## [17] &quot;IBKS제11호스팩&quot;      &quot;동부스팩5호&quot;        
-## [19] &quot;상상인이안1호스팩&quot;   &quot;하나머스트제6호스팩&quot;
-## [21] &quot;유안타제4호스팩&quot;     &quot;삼성머스트스팩3호&quot;  
-## [23] &quot;DB금융스팩7호&quot;       &quot;한국제6호스팩&quot;      
-## [25] &quot;하이제4호스팩&quot;       &quot;하나금융9호스팩&quot;    
-## [27] &quot;하나금융14호스팩&quot;    &quot;유안타제3호스팩&quot;    
-## [29] &quot;IBKS제10호스팩&quot;      &quot;미래에셋대우스팩4호&quot;
-## [31] &quot;SK5호스팩&quot;           &quot;케이비제19호스팩&quot;   
-## [33] &quot;신한제5호스팩&quot;       &quot;신영스팩6호&quot;        
-## [35] &quot;교보7호스팩&quot;         &quot;유진스팩5호&quot;        
-## [37] &quot;상상인이안제2호스팩&quot; &quot;교보8호스팩&quot;        
-## [39] &quot;IBKS제7호스팩&quot;       &quot;키움제5호스팩&quot;      
-## [41] &quot;한화에이스스팩4호&quot;   &quot;신영스팩5호&quot;        
-## [43] &quot;유진스팩4호&quot;         &quot;한국제8호스팩&quot;      
-## [45] &quot;엔에이치스팩13호&quot;    &quot;IBKS제12호스팩&quot;</code></pre>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb112-1" data-line-number="1">KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;종목명&#39;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="금융-데이터-수집하기-기본.html#cb111-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb111-2"><a href="금융-데이터-수집하기-기본.html#cb111-2"></a></span>
+<span id="cb111-3"><a href="금융-데이터-수집하기-기본.html#cb111-3"></a>KOR_ticker[<span class="kw">grepl</span>(<span class="st">&#39;스팩&#39;</span>, KOR_ticker[, <span class="st">&#39;종목명&#39;</span>]), <span class="st">&#39;종목명&#39;</span>]  </span></code></pre></div>
+<pre><code>##  [1] &quot;대신밸런스제6호스팩&quot;  &quot;엔에이치스팩14호&quot;    
+##  [3] &quot;케이비제18호스팩&quot;     &quot;삼성스팩2호&quot;         
+##  [5] &quot;엔에이치스팩17호&quot;     &quot;유안타제6호스팩&quot;     
+##  [7] &quot;미래에셋대우스팩3호&quot;  &quot;케이비제20호스팩&quot;    
+##  [9] &quot;엔에이치스팩15호&quot;     &quot;유안타제5호스팩&quot;     
+## [11] &quot;한화에스비아이스팩&quot;   &quot;SK6호스팩&quot;           
+## [13] &quot;대신밸런스제8호스팩&quot;  &quot;미래에셋대우스팩 5호&quot;
+## [15] &quot;케이비17호스팩&quot;       &quot;교보10호스팩&quot;        
+## [17] &quot;IBKS제11호스팩&quot;       &quot;대신밸런스제7호스팩&quot; 
+## [19] &quot;IBKS제13호스팩&quot;       &quot;SK4호스팩&quot;           
+## [21] &quot;한국제7호스팩&quot;        &quot;하이제5호스팩&quot;       
+## [23] &quot;신한제6호스팩&quot;        &quot;삼성머스트스팩3호&quot;   
+## [25] &quot;하나머스트제6호스팩&quot;  &quot;하나금융15호스팩&quot;    
+## [27] &quot;상상인이안1호스팩&quot;    &quot;한화플러스제1호스팩&quot; 
+## [29] &quot;하이제4호스팩&quot;        &quot;유안타제4호스팩&quot;     
+## [31] &quot;DB금융스팩7호&quot;        &quot;미래에셋대우스팩4호&quot; 
+## [33] &quot;하나금융14호스팩&quot;     &quot;IBKS제14호스팩&quot;      
+## [35] &quot;유안타제3호스팩&quot;      &quot;엔에이치스팩16호&quot;    
+## [37] &quot;IBKS제10호스팩&quot;       &quot;케이비제19호스팩&quot;    
+## [39] &quot;SK5호스팩&quot;            &quot;신영스팩6호&quot;         
+## [41] &quot;에이치엠씨제4호스팩&quot;  &quot;신한제5호스팩&quot;       
+## [43] &quot;하나금융16호스팩&quot;     &quot;교보8호스팩&quot;         
+## [45] &quot;유진스팩5호&quot;          &quot;교보9호스팩&quot;         
+## [47] &quot;상상인이안제2호스팩&quot;  &quot;키움제5호스팩&quot;       
+## [49] &quot;이베스트스팩5호&quot;      &quot;신영스팩5호&quot;         
+## [51] &quot;유진스팩4호&quot;          &quot;엔에이치스팩13호&quot;    
+## [53] &quot;한국제8호스팩&quot;        &quot;IBKS제12호스팩&quot;      
+## [55] &quot;이베스트이안스팩1호&quot;</code></pre>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="금융-데이터-수집하기-기본.html#cb113-1"></a>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;종목명&#39;</span>]</span></code></pre></div>
 <pre><code>##   [1] &quot;삼성전자우&quot;         &quot;현대차2우B&quot;        
-##   [3] &quot;LG생활건강우&quot;       &quot;현대차우&quot;          
-##   [5] &quot;LG화학우&quot;           &quot;아모레퍼시픽우&quot;    
-##   [7] &quot;미래에셋대우2우B&quot;   &quot;삼성화재우&quot;        
-##   [9] &quot;LG전자우&quot;           &quot;신영증권우&quot;        
-##  [11] &quot;아모레G3우(전환)&quot;   &quot;한화3우B&quot;          
-##  [13] &quot;삼성SDI우&quot;          &quot;CJ4우(전환)&quot;       
-##  [15] &quot;한국금융지주우&quot;     &quot;대신증권우&quot;        
-##  [17] &quot;두산우&quot;             &quot;삼성전기우&quot;        
-##  [19] &quot;LG우&quot;               &quot;NH투자증권우&quot;      
-##  [21] &quot;아모레G우&quot;          &quot;S-Oil우&quot;           
-##  [23] &quot;현대차3우B&quot;         &quot;CJ제일제당 우&quot;     
-##  [25] &quot;대림산업우&quot;         &quot;삼성물산우B&quot;       
-##  [27] &quot;SK우&quot;               &quot;CJ우&quot;              
-##  [29] &quot;SK이노베이션우&quot;     &quot;금호석유우&quot;        
-##  [31] &quot;대신증권2우B&quot;       &quot;두산솔루스1우&quot;     
-##  [33] &quot;GS우&quot;               &quot;대교우B&quot;           
-##  [35] &quot;미래에셋대우우&quot;     &quot;부국증권우&quot;        
-##  [37] &quot;롯데지주우&quot;         &quot;코오롱인더우&quot;      
-##  [39] &quot;유한양행우&quot;         &quot;두산퓨얼셀1우&quot;     
-##  [41] &quot;두산2우B&quot;           &quot;유화증권우&quot;        
-##  [43] &quot;롯데칠성우&quot;         &quot;SK케미칼우&quot;        
-##  [45] &quot;호텔신라우&quot;         &quot;두산솔루스2우B&quot;    
-##  [47] &quot;신풍제약우&quot;         &quot;유안타증권우&quot;      
-##  [49] &quot;BYC우&quot;              &quot;한진칼우&quot;          
-##  [51] &quot;두산퓨얼셀2우B&quot;     &quot;LG하우시스우&quot;      
-##  [53] &quot;대한항공우&quot;         &quot;세방우&quot;            
-##  [55] &quot;SK디스커버리우&quot;     &quot;남양유업우&quot;        
-##  [57] &quot;대덕전자1우&quot;        &quot;태영건설우&quot;        
-##  [59] &quot;하이트진로2우B&quot;     &quot;대상우&quot;            
-##  [61] &quot;넥센타이어1우B&quot;     &quot;쌍용양회우&quot;        
-##  [63] &quot;녹십자홀딩스2우&quot;    &quot;한화우&quot;            
-##  [65] &quot;NPC우&quot;              &quot;한화솔루션우&quot;      
-##  [67] &quot;삼양홀딩스우&quot;       &quot;넥센우&quot;            
-##  [69] &quot;태양금속우&quot;         &quot;SK증권우&quot;          
-##  [71] &quot;현대건설우&quot;         &quot;코리아써우&quot;        
-##  [73] &quot;삼양사우&quot;           &quot;남선알미우&quot;        
-##  [75] &quot;서울식품우&quot;         &quot;덕성우&quot;            
-##  [77] &quot;코오롱우&quot;           &quot;SK네트웍스우&quot;      
-##  [79] &quot;계양전기우&quot;         &quot;금호산업우&quot;        
-##  [81] &quot;일양약품우&quot;         &quot;한화투자증권우&quot;    
-##  [83] &quot;유유제약1우&quot;        &quot;대한제당우&quot;        
-##  [85] &quot;루트로닉3우C&quot;       &quot;동원시스템즈우&quot;    
-##  [87] &quot;성문전자우&quot;         &quot;깨끗한나라우&quot;      
-##  [89] &quot;크라운해태홀딩스우&quot; &quot;CJ씨푸드1우&quot;       
-##  [91] &quot;대원전선우&quot;         &quot;하이트진로홀딩스우&quot;
-##  [93] &quot;노루페인트우&quot;       &quot;삼성중공우&quot;        
-##  [95] &quot;현대비앤지스틸우&quot;   &quot;대호피앤씨우&quot;      
-##  [97] &quot;성신양회우&quot;         &quot;크라운제과우&quot;      
-##  [99] &quot;코오롱글로벌우&quot;     &quot;대상홀딩스우&quot;      
-## [101] &quot;소프트센우&quot;         &quot;금강공업우&quot;        
-## [103] &quot;JW중외제약우&quot;       &quot;DB하이텍1우&quot;       
-## [105] &quot;동부건설우&quot;         &quot;진흥기업우B&quot;       
-## [107] &quot;흥국화재우&quot;         &quot;진흥기업2우B&quot;      
-## [109] &quot;한양증권우&quot;         &quot;코리아써키트2우B&quot;  
-## [111] &quot;동양우&quot;             &quot;JW중외제약2우B&quot;    
-## [113] &quot;동부제철우&quot;         &quot;신원우&quot;            
-## [115] &quot;동양2우B&quot;           &quot;노루홀딩스우&quot;      
-## [117] &quot;유유제약2우B&quot;       &quot;흥국화재2우B&quot;      
-## [119] &quot;대한제당3우B&quot;       &quot;동양3우B&quot;</code></pre>
+##   [3] &quot;LG화학우&quot;           &quot;현대차우&quot;          
+##   [5] &quot;LG생활건강우&quot;       &quot;아모레퍼시픽우&quot;    
+##   [7] &quot;미래에셋대우2우B&quot;   &quot;LG전자우&quot;          
+##   [9] &quot;삼성화재우&quot;         &quot;삼성SDI우&quot;         
+##  [11] &quot;신풍제약우&quot;         &quot;한국금융지주우&quot;    
+##  [13] &quot;신영증권우&quot;         &quot;한화3우B&quot;          
+##  [15] &quot;대신증권우&quot;         &quot;두산퓨얼셀1우&quot;     
+##  [17] &quot;CJ4우(전환)&quot;        &quot;아모레G3우(전환)&quot;  
+##  [19] &quot;SK케미칼우&quot;         &quot;CJ제일제당 우&quot;     
+##  [21] &quot;현대차3우B&quot;         &quot;삼성전기우&quot;        
+##  [23] &quot;LG우&quot;               &quot;삼성물산우B&quot;       
+##  [25] &quot;대림산업우&quot;         &quot;두산우&quot;            
+##  [27] &quot;SK이노베이션우&quot;     &quot;NH투자증권우&quot;      
+##  [29] &quot;두산솔루스1우&quot;      &quot;녹십자홀딩스2우&quot;   
+##  [31] &quot;아모레G우&quot;          &quot;S-Oil우&quot;           
+##  [33] &quot;금호석유우&quot;         &quot;SK우&quot;              
+##  [35] &quot;CJ우&quot;               &quot;대신증권2우B&quot;      
+##  [37] &quot;두산퓨얼셀2우B&quot;     &quot;유한양행우&quot;        
+##  [39] &quot;두산2우B&quot;           &quot;미래에셋대우우&quot;    
+##  [41] &quot;SK디스커버리우&quot;     &quot;두산솔루스2우B&quot;    
+##  [43] &quot;롯데지주우&quot;         &quot;한화솔루션우&quot;      
+##  [45] &quot;코오롱인더우&quot;       &quot;부국증권우&quot;        
+##  [47] &quot;GS우&quot;               &quot;일양약품우&quot;        
+##  [49] &quot;대교우B&quot;            &quot;티와이홀딩스우&quot;    
+##  [51] &quot;호텔신라우&quot;         &quot;삼성중공우&quot;        
+##  [53] &quot;롯데칠성우&quot;         &quot;유화증권우&quot;        
+##  [55] &quot;쌍용양회우&quot;         &quot;유안타증권우&quot;      
+##  [57] &quot;한화우&quot;             &quot;한진칼우&quot;          
+##  [59] &quot;남양유업우&quot;         &quot;BYC우&quot;             
+##  [61] &quot;LG하우시스우&quot;       &quot;대한항공우&quot;        
+##  [63] &quot;대상우&quot;             &quot;하이트진로2우B&quot;    
+##  [65] &quot;세방우&quot;             &quot;SK증권우&quot;          
+##  [67] &quot;현대건설우&quot;         &quot;한화투자증권우&quot;    
+##  [69] &quot;남선알미우&quot;         &quot;태영건설우&quot;        
+##  [71] &quot;유유제약1우&quot;        &quot;DB하이텍1우&quot;       
+##  [73] &quot;SK네트웍스우&quot;       &quot;삼양사우&quot;          
+##  [75] &quot;코오롱우&quot;           &quot;넥센타이어1우B&quot;    
+##  [77] &quot;대덕전자1우&quot;        &quot;코리아써우&quot;        
+##  [79] &quot;삼양홀딩스우&quot;       &quot;JW중외제약우&quot;      
+##  [81] &quot;코오롱글로벌우&quot;     &quot;덕성우&quot;            
+##  [83] &quot;성신양회우&quot;         &quot;계양전기우&quot;        
+##  [85] &quot;태양금속우&quot;         &quot;서울식품우&quot;        
+##  [87] &quot;NPC우&quot;              &quot;넥센우&quot;            
+##  [89] &quot;금호산업우&quot;         &quot;깨끗한나라우&quot;      
+##  [91] &quot;CJ씨푸드1우&quot;        &quot;대원전선우&quot;        
+##  [93] &quot;JW중외제약2우B&quot;     &quot;금강공업우&quot;        
+##  [95] &quot;대한제당우&quot;         &quot;대덕1우&quot;           
+##  [97] &quot;한양증권우&quot;         &quot;크라운해태홀딩스우&quot;
+##  [99] &quot;현대비앤지스틸우&quot;   &quot;동원시스템즈우&quot;    
+## [101] &quot;하이트진로홀딩스우&quot; &quot;성문전자우&quot;        
+## [103] &quot;진흥기업우B&quot;        &quot;대상홀딩스우&quot;      
+## [105] &quot;크라운제과우&quot;       &quot;흥국화재우&quot;        
+## [107] &quot;KG동부제철우&quot;       &quot;대호피앤씨우&quot;      
+## [109] &quot;노루페인트우&quot;       &quot;동부건설우&quot;        
+## [111] &quot;소프트센우&quot;         &quot;유유제약2우B&quot;      
+## [113] &quot;루트로닉3우C&quot;       &quot;코리아써키트2우B&quot;  
+## [115] &quot;동양우&quot;             &quot;동양2우B&quot;          
+## [117] &quot;신원우&quot;             &quot;진흥기업2우B&quot;      
+## [119] &quot;흥국화재2우B&quot;       &quot;노루홀딩스우&quot;      
+## [121] &quot;동양3우B&quot;</code></pre>
 <p><code>grepl()</code> 함수를 통해 종목명에 ‘스팩’이 들어가는 종목을 찾고, <code>stringr</code> 패키지의 <code>str_sub()</code> 함수를 통해 종목코드 끝이 0이 아닌 우선주 종목을 찾을 수 있습니다.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb114-1" data-line-number="1">KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="op">!</span><span class="kw">grepl</span>(<span class="st">&#39;스팩&#39;</span>, KOR_ticker[, <span class="st">&#39;종목명&#39;</span>]), ]  </a>
-<a class="sourceLine" id="cb114-2" data-line-number="2">KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="금융-데이터-수집하기-기본.html#cb115-1"></a>KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="op">!</span><span class="kw">grepl</span>(<span class="st">&#39;스팩&#39;</span>, KOR_ticker[, <span class="st">&#39;종목명&#39;</span>]), ]  </span>
+<span id="cb115-2"><a href="금융-데이터-수집하기-기본.html#cb115-2"></a>KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, ]</span></code></pre></div>
 <p>마지막으로 행 이름을 초기화한 후 정리된 데이터를 csv 파일로 저장합니다.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" data-line-number="1"><span class="kw">rownames</span>(KOR_ticker) =<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb115-2" data-line-number="2"><span class="kw">write.csv</span>(KOR_ticker, <span class="st">&#39;data/KOR_ticker.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="금융-데이터-수집하기-기본.html#cb116-1"></a><span class="kw">rownames</span>(KOR_ticker) =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb116-2"><a href="금융-데이터-수집하기-기본.html#cb116-2"></a><span class="kw">write.csv</span>(KOR_ticker, <span class="st">&#39;data/KOR_ticker.csv&#39;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="wics-기준-섹터정보-크롤링" class="section level2">
@@ -882,12 +895,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </p>
 </div>
 <p>글자들은 페이지에 출력된 내용이지만 매우 특이한 형태로 구성되어 있는데 이것은 JSON 형식의 데이터입니다. 기존에 우리가 살펴보았던 대부분의 웹페이지는 XML 형식으로 표현되어 있습니다. XML 형식은 문법이 복잡하고 표현 규칙이 엄격해 데이터의 용량이 커지는 단점이 있습니다. 반면 JSON 형식은 문법이 단순하고 데이터의 용량이 작아 빠른 속도로 데이터를 교환할 수 있습니다. R에서는 jsonlite 패키지의 <code>fromJSON()</code> 함수를 사용해 매우 손쉽게 JSON 형식의 데이터를 크롤링할 수 있습니다.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" data-line-number="1"><span class="kw">library</span>(jsonlite)</a>
-<a class="sourceLine" id="cb116-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb116-3" data-line-number="3">url =<span class="st"> &#39;http://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&amp;dt=20190607&amp;sec_cd=G10&#39;</span></a>
-<a class="sourceLine" id="cb116-4" data-line-number="4">data =<span class="st"> </span><span class="kw">fromJSON</span>(url)</a>
-<a class="sourceLine" id="cb116-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb116-6" data-line-number="6"><span class="kw">lapply</span>(data, head)</a></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="금융-데이터-수집하기-기본.html#cb117-1"></a><span class="kw">library</span>(jsonlite)</span>
+<span id="cb117-2"><a href="금융-데이터-수집하기-기본.html#cb117-2"></a></span>
+<span id="cb117-3"><a href="금융-데이터-수집하기-기본.html#cb117-3"></a>url =<span class="st"> &#39;http://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&amp;dt=20190607&amp;sec_cd=G10&#39;</span></span>
+<span id="cb117-4"><a href="금융-데이터-수집하기-기본.html#cb117-4"></a>data =<span class="st"> </span><span class="kw">fromJSON</span>(url)</span>
+<span id="cb117-5"><a href="금융-데이터-수집하기-기본.html#cb117-5"></a></span>
+<span id="cb117-6"><a href="금융-데이터-수집하기-기본.html#cb117-6"></a><span class="kw">lapply</span>(data, head)</span></code></pre></div>
 <pre><code>## $info
 ## $info$TRD_DT
 ## [1] &quot;/Date(1559833200000)/&quot;
@@ -940,35 +953,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 WMI520 WMI500 중형주    13.56     4.44
 ## 3 WMI530 WMI500 소형주    17.04     5.78</code></pre>
 <p>$list 항목에는 해당 섹터의 구성종목 정보가 있으며, $sector 항목을 통해 다른 섹터의 코드도 확인할 수 있습니다. for loop 구문을 이용해 URL의 sec_cd=에 해당하는 부분만 변경하면 모든 섹터의 구성종목을 매우 쉽게 얻을 수 있습니다.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb118-1" data-line-number="1">sector_code =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;G25&#39;</span>, <span class="st">&#39;G35&#39;</span>, <span class="st">&#39;G50&#39;</span>, <span class="st">&#39;G40&#39;</span>, <span class="st">&#39;G10&#39;</span>,</a>
-<a class="sourceLine" id="cb118-2" data-line-number="2">                <span class="st">&#39;G20&#39;</span>, <span class="st">&#39;G55&#39;</span>, <span class="st">&#39;G30&#39;</span>, <span class="st">&#39;G15&#39;</span>, <span class="st">&#39;G45&#39;</span>)</a>
-<a class="sourceLine" id="cb118-3" data-line-number="3">data_sector =<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb118-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb118-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> sector_code) {</a>
-<a class="sourceLine" id="cb118-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb118-7" data-line-number="7">  url =<span class="st"> </span><span class="kw">paste0</span>(</a>
-<a class="sourceLine" id="cb118-8" data-line-number="8">    <span class="st">&#39;http://www.wiseindex.com/Index/GetIndexComponets&#39;</span>,</a>
-<a class="sourceLine" id="cb118-9" data-line-number="9">    <span class="st">&#39;?ceil_yn=0&amp;dt=&#39;</span>,biz_day,<span class="st">&#39;&amp;sec_cd=&#39;</span>,i)</a>
-<a class="sourceLine" id="cb118-10" data-line-number="10">  data =<span class="st"> </span><span class="kw">fromJSON</span>(url)</a>
-<a class="sourceLine" id="cb118-11" data-line-number="11">  data =<span class="st"> </span>data<span class="op">$</span>list</a>
-<a class="sourceLine" id="cb118-12" data-line-number="12">  </a>
-<a class="sourceLine" id="cb118-13" data-line-number="13">  data_sector[[i]] =<span class="st"> </span>data</a>
-<a class="sourceLine" id="cb118-14" data-line-number="14">  </a>
-<a class="sourceLine" id="cb118-15" data-line-number="15">  <span class="kw">Sys.sleep</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb118-16" data-line-number="16">}</a>
-<a class="sourceLine" id="cb118-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb118-18" data-line-number="18">data_sector =<span class="st"> </span><span class="kw">do.call</span>(rbind, data_sector)</a></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="금융-데이터-수집하기-기본.html#cb119-1"></a>sector_code =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;G25&#39;</span>, <span class="st">&#39;G35&#39;</span>, <span class="st">&#39;G50&#39;</span>, <span class="st">&#39;G40&#39;</span>, <span class="st">&#39;G10&#39;</span>,</span>
+<span id="cb119-2"><a href="금융-데이터-수집하기-기본.html#cb119-2"></a>                <span class="st">&#39;G20&#39;</span>, <span class="st">&#39;G55&#39;</span>, <span class="st">&#39;G30&#39;</span>, <span class="st">&#39;G15&#39;</span>, <span class="st">&#39;G45&#39;</span>)</span>
+<span id="cb119-3"><a href="금융-데이터-수집하기-기본.html#cb119-3"></a>data_sector =<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb119-4"><a href="금융-데이터-수집하기-기본.html#cb119-4"></a></span>
+<span id="cb119-5"><a href="금융-데이터-수집하기-기본.html#cb119-5"></a><span class="cf">for</span> (i <span class="cf">in</span> sector_code) {</span>
+<span id="cb119-6"><a href="금융-데이터-수집하기-기본.html#cb119-6"></a>  </span>
+<span id="cb119-7"><a href="금융-데이터-수집하기-기본.html#cb119-7"></a>  url =<span class="st"> </span><span class="kw">paste0</span>(</span>
+<span id="cb119-8"><a href="금융-데이터-수집하기-기본.html#cb119-8"></a>    <span class="st">&#39;http://www.wiseindex.com/Index/GetIndexComponets&#39;</span>,</span>
+<span id="cb119-9"><a href="금융-데이터-수집하기-기본.html#cb119-9"></a>    <span class="st">&#39;?ceil_yn=0&amp;dt=&#39;</span>,biz_day,<span class="st">&#39;&amp;sec_cd=&#39;</span>,i)</span>
+<span id="cb119-10"><a href="금융-데이터-수집하기-기본.html#cb119-10"></a>  data =<span class="st"> </span><span class="kw">fromJSON</span>(url)</span>
+<span id="cb119-11"><a href="금융-데이터-수집하기-기본.html#cb119-11"></a>  data =<span class="st"> </span>data<span class="op">$</span>list</span>
+<span id="cb119-12"><a href="금융-데이터-수집하기-기본.html#cb119-12"></a>  </span>
+<span id="cb119-13"><a href="금융-데이터-수집하기-기본.html#cb119-13"></a>  data_sector[[i]] =<span class="st"> </span>data</span>
+<span id="cb119-14"><a href="금융-데이터-수집하기-기본.html#cb119-14"></a>  </span>
+<span id="cb119-15"><a href="금융-데이터-수집하기-기본.html#cb119-15"></a>  <span class="kw">Sys.sleep</span>(<span class="dv">1</span>)</span>
+<span id="cb119-16"><a href="금융-데이터-수집하기-기본.html#cb119-16"></a>}</span>
+<span id="cb119-17"><a href="금융-데이터-수집하기-기본.html#cb119-17"></a></span>
+<span id="cb119-18"><a href="금융-데이터-수집하기-기본.html#cb119-18"></a>data_sector =<span class="st"> </span><span class="kw">do.call</span>(rbind, data_sector)</span></code></pre></div>
 <p>해당 데이터를 csv 파일로 저장해주도록 합니다.</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb119-1" data-line-number="1"><span class="kw">write.csv</span>(data_sector, <span class="st">&#39;data/KOR_sector.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="금융-데이터-수집하기-기본.html#cb120-1"></a><span class="kw">write.csv</span>(data_sector, <span class="st">&#39;data/KOR_sector.csv&#39;</span>)</span></code></pre></div>
 
 </div>
 </div>
 <div class="footnotes">
 <hr />
 <ol start="11">
-<li id="fn11"><p>특정한 규칙을 가진 문자열의 집합을 표현하는데 사용하는 형식 언어<a href="금융-데이터-수집하기-기본.html#fnref11" class="footnote-back">↩</a></p></li>
-<li id="fn12"><p><a href="https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard" class="uri">https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard</a><a href="금융-데이터-수집하기-기본.html#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p><a href="http://www.wiseindex.com/" class="uri">http://www.wiseindex.com/</a><a href="금융-데이터-수집하기-기본.html#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>특정한 규칙을 가진 문자열의 집합을 표현하는데 사용하는 형식 언어<a href="금융-데이터-수집하기-기본.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p><a href="https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard" class="uri">https://en.wikipedia.org/wiki/Global_Industry_Classification_Standard</a><a href="금융-데이터-수집하기-기본.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p><a href="http://www.wiseindex.com/" class="uri">http://www.wiseindex.com/</a><a href="금융-데이터-수집하기-기본.html#fnref13" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>

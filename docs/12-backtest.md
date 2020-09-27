@@ -28,16 +28,16 @@ Return.portfolio(R, weights = NULL, wealth.index = FALSE,
 
 Table: (\#tab:returnportarg)Return.portfolio() 함수 내 인자 설명
 
-     인자                                                                                                      내용                                                                                               
---------------  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      R                                                                                               각 자산 수익률 데이터                                                                                       
-   weights                                                         리밸런싱 시기의 자산별 목표 비중. 미 입력시 동일비중 포트폴리오를 가정해 백테스트가 이루어짐                                                   
- wealth.index                                                            포트폴리오 시작점이 1인 wealth index에 대한 생성 여부이며, 디폴트는 FALSE로 설정                                                         
- contribution                                                         포트폴리오 내에서 자산별 성과기여를 나타내는지에 대한 여부이며, 디폴트는 FALSE로 설정                                                       
-  geometric                                                        포트폴리오 수익률 계산시 복리(기하)수익률 적용 여부이며, 디폴트는 TRUE로서 복리수익률을 계산                                                   
- rebalance_on                                                             weight 값이 미입력 혹은 매번 같은 비중일 경우, 리밸런싱 주기를 선택할 수 있음                                                           
-    value                                                                                  초기 포트폴리오 가치를 의미하며, 디폴트는 1                                                                            
-   verbose       부가적인 결과를 표시할지에 대한 여부. 디폴트인 FALSE를 입력하면 포트폴리오 수익률만이 시계열 형태로 계산되며, TRUE를 입력하면 수익률 외에 자산 별 성과기여, 비중, 성과 등이 리스트 형태로 계산됨 
+|     인자     |                                                                                               내용                                                                                               |
+|:------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|      R       |                                                                                      각 자산 수익률 데이터                                                                                       |
+|   weights    |                                                   리밸런싱 시기의 자산별 목표 비중. 미 입력시 동일비중 포트폴리오를 가정해 백테스트가 이루어짐                                                   |
+| wealth.index |                                                         포트폴리오 시작점이 1인 wealth index에 대한 생성 여부이며, 디폴트는 FALSE로 설정                                                         |
+| contribution |                                                      포트폴리오 내에서 자산별 성과기여를 나타내는지에 대한 여부이며, 디폴트는 FALSE로 설정                                                       |
+|  geometric   |                                                   포트폴리오 수익률 계산시 복리(기하)수익률 적용 여부이며, 디폴트는 TRUE로서 복리수익률을 계산                                                   |
+| rebalance_on |                                                          weight 값이 미입력 혹은 매번 같은 비중일 경우, 리밸런싱 주기를 선택할 수 있음                                                           |
+|    value     |                                                                           초기 포트폴리오 가치를 의미하며, 디폴트는 1                                                                            |
+|   verbose    | 부가적인 결과를 표시할지에 대한 여부. 디폴트인 FALSE를 입력하면 포트폴리오 수익률만이 시계열 형태로 계산되며, TRUE를 입력하면 수익률 외에 자산 별 성과기여, 비중, 성과 등이 리스트 형태로 계산됨 |
 
 이 중 가장 중요한 인자는 개별 자산의 수익률인 R과 리밸런싱 시기의 자산별 목표 비중인 weights입니다. 매 리밸런싱 시점마다 적용되는 자산별 비중이 동일할 경우(예: 매월 말 60%대 40% 비중으로 리밸런싱) 상수 형태로 입력해도 되지만, 시점마다 자산별 목표비중이 다를 경우 weights는 시계열 형태로 입력되어야 합니다.
 
@@ -122,8 +122,8 @@ cor(rets)
 
 ```
 ##              SPY.Adjusted TLT.Adjusted
-## SPY.Adjusted       1.0000      -0.4431
-## TLT.Adjusted      -0.4431       1.0000
+## SPY.Adjusted       1.0000      -0.4428
+## TLT.Adjusted      -0.4428       1.0000
 ```
 
 `cor()` 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.44로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.
@@ -151,15 +151,15 @@ portfolio = Return.portfolio(R = rets,
 <caption style="font-size: initial !important;">(\#tab:portreturn)Return.portfolio() 계산 과정</caption>
  <thead>
 <tr>
-<th style="border-bottom:hidden" colspan="1"></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작금액</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작합계</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작비중</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">수익률</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료금액</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료합계</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료비중</div></th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">최종수익률</div></th>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1"></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작금액</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작합계</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">시작비중</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">수익률</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료금액</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료합계</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">종료비중</div></th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">최종수익률</div></th>
 </tr>
   <tr>
    <th style="text-align:left;">   </th>
@@ -395,7 +395,7 @@ print(ep)
 ## [131] 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
 ## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123
 ## [151] 3143 3165 3187 3207 3230 3250 3271 3292 3311 3333
-## [161] 3354 3374
+## [161] 3354 3374 3396 3418 3439 3457
 ```
 
 ```r
@@ -417,9 +417,9 @@ head(sub_price, 3)
 
 ```
 ##            SPY.Adjusted
-## 2007-01-03        107.8
-## 2007-01-04        108.1
-## 2007-01-05        107.2
+## 2007-01-03        106.9
+## 2007-01-04        107.2
+## 2007-01-05        106.3
 ```
 
 ```r
@@ -428,9 +428,9 @@ tail(sub_price, 3)
 
 ```
 ##            SPY.Adjusted
-## 2007-10-26        118.7
-## 2007-10-29        119.1
-## 2007-10-30        118.3
+## 2007-10-26        117.7
+## 2007-10-29        118.1
+## 2007-10-30        117.3
 ```
 
 ```r

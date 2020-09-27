@@ -46,3 +46,7 @@ assign("familyset_hook",
 setHook("plot.new", get("familyset_hook", pos="KoreaEnv"))
 setHook("persp", get("familyset_hook", pos="KoreaEnv"))
 
+library(showtext)
+font_add(family = 'NanumGothic', regular = 'NanumFont/NanumGothic.ttf')
+showtext_auto()
+

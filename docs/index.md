@@ -1,7 +1,7 @@
 --- 
 title: "R을 이용한 퀀트 투자 포트폴리오 만들기"
 author: "이현열"
-date: "2020-05-31"
+date: "2020-09-27"
 output:
   bookdown::gitbook:
     includes:
@@ -27,6 +27,10 @@ github-repo: hyunyulhenry/quant_cookbook
 **패스트캠퍼스에서 본 책의 내용을 바탕으로 강의가 진행중이니, 수강을 원하시는 분은 참조하시기 바랍니다. [강의 링크](https://bit.ly/2WMwLpF)**
 
 책 발간 이후 업데이트 내용은 다음과 같습니다.
+
+- 2020년 9월 26일: 5장 [한국거래소의 산업별 현황 및 개별지표 크롤링] 부분이 R 4.0 이상 버젼에서 잘 작동하지 않는 문제가 발생하고 있습니다. R 3.6 버젼에서 실행해주시길 바랍니다. (https://rstudio.cloud/ 에서는 원하는 R 버젼으로 프로그램 실행이 가능합니다.) 해당 버젼에서도 안될 경우 session을 재시작하면 제대로 실행이 됩니다.
+
+- 2020년 9월 26일: 4장 [기업공시채널에서 오늘의 공시 불러오기]에서 POST 부분의 url이 기존 **http**://kind.krx.co.kr/disclosure/todaydisclosure.do 에서 **https**://kind.krx.co.kr/disclosure/todaydisclosure.do 로 변경되었습니다. (http -> https)
 
 - 2020년 4월 27일: 9장 [금융 데이터 수집하기 (심화)]에 [DART의 Open API를 이용한 데이터 수집하기] 챕터를 추가하였습니다. 이를 통해 더욱 다양한 데이터를 수집할 수 있습니다.
 
@@ -133,6 +137,7 @@ API를 통한 데이터 수집과 `getSymbols()` 함수의 사용 방법에 대�
 - 웹페이지: https://hyunyulhenry.github.io/quant_cookbook
 - GitHub 저장소: https://github.com/hyunyulhenry/quant_cookbook
 
+
 크롤링 대상 웹페이지의 구조가 바뀌어 코드의 수정이 필요할 경우 즉각적으로 반영할 것이며, 인쇄본에서 다루지 않은 내용도 추가적으로 업데이트될 예정입니다. 또한 bookdown 패키지를 이용하여 책을 집필하고자 하는 분들에게도 많은 도움이 될 것입
 니다.
 
@@ -145,3 +150,41 @@ API를 통한 데이터 수집과 `getSymbols()` 함수의 사용 방법에 대�
 팩터 모델을 이용한 종목 선택과 관련된 CHAPTER에서는 해당 조건으로 선택된 종목들이 나열되어 있습니다. 그러나 이는 **해당 종목에 대한 매수 추천이 아님을 밝히며, 데이터를 받은 시점의 종목이기에 독자 여러분이 책을 읽는 시점에서 선택된 종목과는 상당한 차이가 있습니다.**
 
 또한 이 책에서 다루는 모델을 이용하여 투자를 할 경우, 이로 인한 이익과 손해는 본인에게 귀속됨을 알립니다.
+
+## 세션정보 {-}
+
+본 책에서 사용된 R 버젼 및 각종 정보는 다음과 같습니다.
+
+
+```
+## R version 3.6.3 (2020-02-29)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.6 LTS
+## 
+## Matrix products: default
+## BLAS:   /usr/lib/atlas-base/atlas/libblas.so.3.0
+## LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0
+## 
+## locale:
+##  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C          
+##  [3] LC_TIME=C.UTF-8        LC_COLLATE=C.UTF-8    
+##  [5] LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+##  [7] LC_PAPER=C.UTF-8       LC_NAME=C             
+##  [9] LC_ADDRESS=C           LC_TELEPHONE=C        
+## [11] LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets 
+## [6] methods   base     
+## 
+## other attached packages:
+## [1] showtext_0.9   showtextdb_3.0 sysfonts_0.8.1
+## 
+## loaded via a namespace (and not attached):
+##  [1] compiler_3.6.3  magrittr_1.5    bookdown_0.20  
+##  [4] htmltools_0.5.0 tools_3.6.3     yaml_2.2.1     
+##  [7] stringi_1.5.3   rmarkdown_2.3   knitr_1.30     
+## [10] stringr_1.4.0   digest_0.6.25   xfun_0.17      
+## [13] rlang_0.4.7     evaluate_0.14
+```
+

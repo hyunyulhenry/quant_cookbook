@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 12 포트폴리오 백테스트 | R을 이용한 퀀트 투자 포트폴리오 만들기</title>
   <meta name="description" content="Chapter 12 포트폴리오 백테스트 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 12 포트폴리오 백테스트 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-05-31" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="포트폴리오-구성.html"/>
 <link rel="next" href="성과-및-위험-평가.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.0/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +50,9 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
@@ -60,58 +62,60 @@
 <script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
 <script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
 <script src="libs/proj4js-2.3.15/proj4.js"></script>
-<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
-<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
-<script src="libs/highcharts-7.0.1/highcharts.js"></script>
-<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
-<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
-<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
-<script src="libs/highcharts-7.0.1/modules/map.js"></script>
-<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
-<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
-<script src="libs/highcharts-7.0.1/modules/data.js"></script>
-<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
-<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
-<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
-<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
-<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
-<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
-<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
-<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
-<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
-<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
-<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
-<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
-<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
-<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
-<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
-<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
-<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
-<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
-<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
-<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
-<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
-<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
-<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
-<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<link href="libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
+<script src="libs/highcharts-8.1.2/highcharts.js"></script>
+<script src="libs/highcharts-8.1.2/highcharts-3d.js"></script>
+<script src="libs/highcharts-8.1.2/highcharts-more.js"></script>
+<script src="libs/highcharts-8.1.2/modules/stock.js"></script>
+<script src="libs/highcharts-8.1.2/modules/map.js"></script>
+<script src="libs/highcharts-8.1.2/modules/annotations.js"></script>
+<script src="libs/highcharts-8.1.2/modules/data.js"></script>
+<script src="libs/highcharts-8.1.2/modules/drilldown.js"></script>
+<script src="libs/highcharts-8.1.2/modules/item-series.js"></script>
+<script src="libs/highcharts-8.1.2/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-8.1.2/modules/exporting.js"></script>
+<script src="libs/highcharts-8.1.2/modules/export-data.js"></script>
+<script src="libs/highcharts-8.1.2/modules/funnel.js"></script>
+<script src="libs/highcharts-8.1.2/modules/heatmap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/treemap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/sankey.js"></script>
+<script src="libs/highcharts-8.1.2/modules/dependency-wheel.js"></script>
+<script src="libs/highcharts-8.1.2/modules/organization.js"></script>
+<script src="libs/highcharts-8.1.2/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-8.1.2/modules/streamgraph.js"></script>
+<script src="libs/highcharts-8.1.2/modules/sunburst.js"></script>
+<script src="libs/highcharts-8.1.2/modules/vector.js"></script>
+<script src="libs/highcharts-8.1.2/modules/wordcloud.js"></script>
+<script src="libs/highcharts-8.1.2/modules/xrange.js"></script>
+<script src="libs/highcharts-8.1.2/modules/tilemap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/venn.js"></script>
+<script src="libs/highcharts-8.1.2/modules/gantt.js"></script>
+<script src="libs/highcharts-8.1.2/modules/timeline.js"></script>
+<script src="libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-8.1.2/modules/bullet.js"></script>
+<script src="libs/highcharts-8.1.2/modules/coloraxis.js"></script>
+<script src="libs/highcharts-8.1.2/modules/dumbbell.js"></script>
+<script src="libs/highcharts-8.1.2/modules/lollipop.js"></script>
+<script src="libs/highcharts-8.1.2/modules/series-label.js"></script>
+<script src="libs/highcharts-8.1.2/plugins/motion.js"></script>
+<script src="libs/highcharts-8.1.2/custom/reset.js"></script>
+<script src="libs/highcharts-8.1.2/modules/boost.js"></script>
+<script src="libs/highchart-binding-0.8.2/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -120,14 +124,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -136,9 +142,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -195,6 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#도움이-될-만한-자료들"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-지원-페이지"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#종목과-관련된-유의사항"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#세션정보"><i class="fa fa-check"></i>세션정보</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
 <li class="chapter" data-level="1.1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#데이터-구하기"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
@@ -426,13 +433,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="인자-목록-살펴보기" class="section level3">
 <h3><span class="header-section-number">12.1.1</span> 인자 목록 살펴보기</h3>
 <p>먼저 <code>Return.portfolio()</code> 함수는 다음과 같은 형태로 구성되어 있으며, 표 <a href="포트폴리오-백테스트.html#tab:returnportarg">12.1</a>는 인자의 내용을 정리한 것입니다.</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb486-1" data-line-number="1"><span class="kw">Return.portfolio</span>(R, <span class="dt">weights =</span> <span class="ot">NULL</span>, <span class="dt">wealth.index =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb486-2" data-line-number="2">  <span class="dt">contribution =</span> <span class="ot">FALSE</span>, <span class="dt">geometric =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb486-3" data-line-number="3">  <span class="dt">rebalance_on =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;years&quot;</span>, <span class="st">&quot;quarters&quot;</span>, </a>
-<a class="sourceLine" id="cb486-4" data-line-number="4">                   <span class="st">&quot;months&quot;</span>, <span class="st">&quot;weeks&quot;</span>, <span class="st">&quot;days&quot;</span>),</a>
-<a class="sourceLine" id="cb486-5" data-line-number="5">  <span class="dt">value =</span> <span class="dv">1</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>, ...)</a></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="포트폴리오-백테스트.html#cb487-1"></a><span class="kw">Return.portfolio</span>(R, <span class="dt">weights =</span> <span class="ot">NULL</span>, <span class="dt">wealth.index =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb487-2"><a href="포트폴리오-백테스트.html#cb487-2"></a>  <span class="dt">contribution =</span> <span class="ot">FALSE</span>, <span class="dt">geometric =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb487-3"><a href="포트폴리오-백테스트.html#cb487-3"></a>  <span class="dt">rebalance_on =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;years&quot;</span>, <span class="st">&quot;quarters&quot;</span>, </span>
+<span id="cb487-4"><a href="포트폴리오-백테스트.html#cb487-4"></a>                   <span class="st">&quot;months&quot;</span>, <span class="st">&quot;weeks&quot;</span>, <span class="st">&quot;days&quot;</span>),</span>
+<span id="cb487-5"><a href="포트폴리오-백테스트.html#cb487-5"></a>  <span class="dt">value =</span> <span class="dv">1</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>, ...)</span></code></pre></div>
 <table>
 <caption><span id="tab:returnportarg">표 12.1: </span>Return.portfolio() 함수 내 인자 설명</caption>
+<colgroup>
+<col width="6%" />
+<col width="93%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th align="center">인자</th>
@@ -556,26 +567,26 @@ EOP.Value
 <div id="전통적인-60대-40-포트폴리오-백테스트" class="section level2">
 <h2><span class="header-section-number">12.2</span> 전통적인 60대 40 포트폴리오 백테스트</h2>
 <p><code>Return.portfolio()</code> 함수의 가장 간단한 예제로서 전통적인 60대 40 포트폴리오를 백테스트합니다. 해당 포트폴리오는 주식과 채권에 각각 60%와 40%를 투자하며, 특정 시점마다 해당 비중을 맞춰주기 위해 리밸런싱을 수행합니다. 매해 말 리밸런싱을 가정하는 예제를 살펴보겠습니다.</p>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" data-line-number="1"><span class="kw">library</span>(quantmod)</a>
-<a class="sourceLine" id="cb487-2" data-line-number="2"><span class="kw">library</span>(PerformanceAnalytics)</a>
-<a class="sourceLine" id="cb487-3" data-line-number="3"><span class="kw">library</span>(magrittr)</a>
-<a class="sourceLine" id="cb487-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb487-5" data-line-number="5">ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;TLT&#39;</span>)</a>
-<a class="sourceLine" id="cb487-6" data-line-number="6"><span class="kw">getSymbols</span>(ticker)</a></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="포트폴리오-백테스트.html#cb488-1"></a><span class="kw">library</span>(quantmod)</span>
+<span id="cb488-2"><a href="포트폴리오-백테스트.html#cb488-2"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
+<span id="cb488-3"><a href="포트폴리오-백테스트.html#cb488-3"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb488-4"><a href="포트폴리오-백테스트.html#cb488-4"></a></span>
+<span id="cb488-5"><a href="포트폴리오-백테스트.html#cb488-5"></a>ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;TLT&#39;</span>)</span>
+<span id="cb488-6"><a href="포트폴리오-백테스트.html#cb488-6"></a><span class="kw">getSymbols</span>(ticker)</span></code></pre></div>
 <pre><code>## [1] &quot;SPY&quot; &quot;TLT&quot;</code></pre>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb489-1" data-line-number="1">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,</a>
-<a class="sourceLine" id="cb489-2" data-line-number="2">                 <span class="kw">lapply</span>(ticker, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))</a>
-<a class="sourceLine" id="cb489-3" data-line-number="3">rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="포트폴리오-백테스트.html#cb490-1"></a>prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,</span>
+<span id="cb490-2"><a href="포트폴리오-백테스트.html#cb490-2"></a>                 <span class="kw">lapply</span>(ticker, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))</span>
+<span id="cb490-3"><a href="포트폴리오-백테스트.html#cb490-3"></a>rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</span></code></pre></div>
 <p>글로벌 자산의 ETF 데이터 중 주식(S&amp;P 500)과 채권(미국 장기채)에 해당하는 데이터를 다운로드한 후 수익률을 계산합니다.</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb490-1" data-line-number="1"><span class="kw">cor</span>(rets)</a></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="포트폴리오-백테스트.html#cb491-1"></a><span class="kw">cor</span>(rets)</span></code></pre></div>
 <pre><code>##              SPY.Adjusted TLT.Adjusted
-## SPY.Adjusted       1.0000      -0.4431
-## TLT.Adjusted      -0.4431       1.0000</code></pre>
+## SPY.Adjusted       1.0000      -0.4428
+## TLT.Adjusted      -0.4428       1.0000</code></pre>
 <p><code>cor()</code> 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.44로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb492-1" data-line-number="1">portfolio =<span class="st"> </span><span class="kw">Return.portfolio</span>(<span class="dt">R =</span> rets,</a>
-<a class="sourceLine" id="cb492-2" data-line-number="2">                             <span class="dt">weights =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</a>
-<a class="sourceLine" id="cb492-3" data-line-number="3">                             <span class="dt">rebalance_on =</span> <span class="st">&#39;years&#39;</span>,</a>
-<a class="sourceLine" id="cb492-4" data-line-number="4">                             <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="포트폴리오-백테스트.html#cb493-1"></a>portfolio =<span class="st"> </span><span class="kw">Return.portfolio</span>(<span class="dt">R =</span> rets,</span>
+<span id="cb493-2"><a href="포트폴리오-백테스트.html#cb493-2"></a>                             <span class="dt">weights =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</span>
+<span id="cb493-3"><a href="포트폴리오-백테스트.html#cb493-3"></a>                             <span class="dt">rebalance_on =</span> <span class="st">&#39;years&#39;</span>,</span>
+<span id="cb493-4"><a href="포트폴리오-백테스트.html#cb493-4"></a>                             <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><code>Return.portfolio()</code> 함수를 이용하여 백테스트를 실행합니다.</p>
 <ol style="list-style-type: decimal">
 <li>자산의 수익률인 R에는 수익률 테이블인 rets를 입력합니다.</li>
@@ -590,44 +601,44 @@ EOP.Value
 </caption>
 <thead>
 <tr>
-<th style="border-bottom:hidden" colspan="1">
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 시작금액
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 시작합계
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 시작비중
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 수익률
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 종료금액
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 종료합계
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 종료비중
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="1">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 최종수익률
 </div>
@@ -994,21 +1005,21 @@ EOP.Value
 <p>그러나 매해 리밸런싱을 가정했으므로, 첫 영업일인 2018-01-02에는 포트폴리오 리밸런싱이 이루어집니다. 따라서 전일 2017-12-29의 종료금액의 합인 2.555를 사전에 정의한 0.6과 0.4에 맞게 각 자산을 시작시점에 매수 혹은 매도하게 됩니다. 이후에는 기존과 동일하게 해당일의 수익률을 곱해 종료시점의 금액과 비중을 구한 후 포트폴리오 수익률을 계산하게 됩니다.</p>
 <p>리밸런싱 전일 종료시점의 비중과 리밸런싱 당일 시작시점의 비중 차이의 절대값을 합하면, 포트폴리오의 회전율을 계산할 수도 있습니다. 해당 예제에서는 2017-12-29 종료시점의 비중인 0.626, 0.374와 2018-01-02 시작시점의 비중인 0.6, 0.4의 차이인 0.026, -0.026의 절대값의 합계인 0.052가 회전율이 됩니다.</p>
 <p>이처럼 리밸런싱을 원하는 시점과 비중을 정의하면, <code>Return.portfolio()</code> 함수 내에서는 이러한 단계를 거쳐 포트폴리오의 수익률, 시작과 종료시점의 금액 및 비중이 계산되며, 이를 응용하여 회전율을 계산할 수도 있습니다.</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" data-line-number="1">portfolios =<span class="st"> </span><span class="kw">cbind</span>(rets, portfolio<span class="op">$</span>returns) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb493-2" data-line-number="2"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;주식&#39;</span>, <span class="st">&#39;채권&#39;</span>, <span class="st">&#39;60대 40&#39;</span>))</a>
-<a class="sourceLine" id="cb493-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb493-4" data-line-number="4"><span class="kw">charts.PerformanceSummary</span>(portfolios,</a>
-<a class="sourceLine" id="cb493-5" data-line-number="5">                          <span class="dt">main =</span> <span class="st">&#39;60대 40 포트폴리오&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="포트폴리오-백테스트.html#cb494-1"></a>portfolios =<span class="st"> </span><span class="kw">cbind</span>(rets, portfolio<span class="op">$</span>returns) <span class="op">%&gt;%</span></span>
+<span id="cb494-2"><a href="포트폴리오-백테스트.html#cb494-2"></a><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;주식&#39;</span>, <span class="st">&#39;채권&#39;</span>, <span class="st">&#39;60대 40&#39;</span>))</span>
+<span id="cb494-3"><a href="포트폴리오-백테스트.html#cb494-3"></a></span>
+<span id="cb494-4"><a href="포트폴리오-백테스트.html#cb494-4"></a><span class="kw">charts.PerformanceSummary</span>(portfolios,</span>
+<span id="cb494-5"><a href="포트폴리오-백테스트.html#cb494-5"></a>                          <span class="dt">main =</span> <span class="st">&#39;60대 40 포트폴리오&#39;</span>)</span></code></pre></div>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>PerformanceAnalytics 패키지의 <code>charts.PerformanceSummary()</code> 함수는 기간별 수익률을 입력 시 누적수익률, 일별 수익률, 드로우다운(낙폭) 그래프를 자동으로 그려줍니다.</p>
 <p>그래프는 색으로 구분되어 각각 주식 수익률(SPY), 채권 수익률(TLT), 60대 40 포트폴리오 수익률을 나타냅니다. 주식과 채권은 상반되는 움직임을 보이며 상승하며, 분산 투자 포트폴리오는 각 개별 자산에 비해 훨씬 안정적인 수익률을 보입니다.</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb494-1" data-line-number="1">turnover =<span class="st"> </span><span class="kw">xts</span>(</a>
-<a class="sourceLine" id="cb494-2" data-line-number="2">  <span class="kw">rowSums</span>(<span class="kw">abs</span>(portfolio<span class="op">$</span>BOP.Weight <span class="op">-</span></a>
-<a class="sourceLine" id="cb494-3" data-line-number="3"><span class="st">                </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(portfolio<span class="op">$</span>EOP.Weight)),</a>
-<a class="sourceLine" id="cb494-4" data-line-number="4">          <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb494-5" data-line-number="5">  <span class="dt">order.by =</span> <span class="kw">index</span>(portfolio<span class="op">$</span>BOP.Weight))</a>
-<a class="sourceLine" id="cb494-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb494-7" data-line-number="7"><span class="kw">chart.TimeSeries</span>(turnover)</a></code></pre></div>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="포트폴리오-백테스트.html#cb495-1"></a>turnover =<span class="st"> </span><span class="kw">xts</span>(</span>
+<span id="cb495-2"><a href="포트폴리오-백테스트.html#cb495-2"></a>  <span class="kw">rowSums</span>(<span class="kw">abs</span>(portfolio<span class="op">$</span>BOP.Weight <span class="op">-</span></span>
+<span id="cb495-3"><a href="포트폴리오-백테스트.html#cb495-3"></a><span class="st">                </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(portfolio<span class="op">$</span>EOP.Weight)),</span>
+<span id="cb495-4"><a href="포트폴리오-백테스트.html#cb495-4"></a>          <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb495-5"><a href="포트폴리오-백테스트.html#cb495-5"></a>  <span class="dt">order.by =</span> <span class="kw">index</span>(portfolio<span class="op">$</span>BOP.Weight))</span>
+<span id="cb495-6"><a href="포트폴리오-백테스트.html#cb495-6"></a></span>
+<span id="cb495-7"><a href="포트폴리오-백테스트.html#cb495-7"></a><span class="kw">chart.TimeSeries</span>(turnover)</span></code></pre></div>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>전일 종료시점의 비중인 EOP.Weight를 <code>lag()</code> 함수를 이용해 한 단계씩 내린 후 시작시점의 비중인 BOP.Weight와의 차이의 절댓값을 더해주면 해당 시점에서의 회전율이 계산됩니다. <code>lag()</code> 함수의 경우 dplyr 패키지에도 동일한 이름의 함수가 있으므로, 충돌을 방지하기 위해 timeSeries 패키지의 함수임을 선언해줍니다. 이를 <code>xts()</code> 함수를 이용해 시계열 형태로 만든 후 <code>chart.TimeSeries()</code> 함수를 이용해 그래프로 나타내줍니다.</p>
 <p>리밸런싱 시점에 해당하는 매해 첫 영업일에 회전율이 발생하며, 그렇지 않은 날은 매수 혹은 매도가 없으므로 회전율 역시 0을 기록합니다. 2008년에는 주식과 채권의 등락폭이 심했으므로 이듬해엔 2009년 리밸런싱으로 인한 회전율이 심하지만, 이를 제외한 해는 회전율이 그리 심하지 않습니다.</p>
@@ -1016,23 +1027,23 @@ EOP.Value
 <div id="시점-선택-전략-백테스트" class="section level2">
 <h2><span class="header-section-number">12.3</span> 시점 선택 전략 백테스트</h2>
 <p>이전 테스트가 리밸런싱 시점별 비중이 60%와 40%로 고정되어 있었다면, 이번에는 시점별 비중이 다른 형태의 예제를 살펴보겠습니다.</p>
-<p>메브 파버(Meb Faber)는 본인의 논문<span class="citation">(Faber <a href="#ref-faber2007quantitative">2007</a>)</span>을 통해, 시점 선택(Market Timing) 전략을 사용할 경우 단순 매수 후 보유 대비 극심한 하락장에서 낙폭을 줄일 수 있으며, 이로 인해 위험 대비 수익률을 올릴 수 있다고 설명합니다. 논문에서 말하는 시점 선택의 투자 규칙은 다음과 같습니다.</p>
+<p>메브 파버(Meb Faber)는 본인의 논문<span class="citation">(Faber <a href="#ref-faber2007quantitative" role="doc-biblioref">2007</a>)</span>을 통해, 시점 선택(Market Timing) 전략을 사용할 경우 단순 매수 후 보유 대비 극심한 하락장에서 낙폭을 줄일 수 있으며, 이로 인해 위험 대비 수익률을 올릴 수 있다고 설명합니다. 논문에서 말하는 시점 선택의 투자 규칙은 다음과 같습니다.</p>
 <p><span class="math display">\[주가 &gt; 10개월\,이동평균 \to 매수\]</span>
 <span class="math display">\[주가 &lt; 10개월\,이동평균 \to 매도\,및\,현금\,보유\]</span></p>
 <p>해당 규칙을 미국 S&amp;P 500에 적용하는 예제를 살펴보겠습니다. 현재 주식 가격이 과거 10개월 주식 가격의 단순 평균 대비 이상이면 매수, 그렇지 않으면 전량 매도 후 현금을 보유하는 전략이며, 리밸런싱은 매월 실행합니다.</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" data-line-number="1"><span class="kw">library</span>(quantmod)</a>
-<a class="sourceLine" id="cb495-2" data-line-number="2"><span class="kw">library</span>(PerformanceAnalytics)</a>
-<a class="sourceLine" id="cb495-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb495-4" data-line-number="4">symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;SHY&#39;</span>)</a>
-<a class="sourceLine" id="cb495-5" data-line-number="5"><span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="포트폴리오-백테스트.html#cb496-1"></a><span class="kw">library</span>(quantmod)</span>
+<span id="cb496-2"><a href="포트폴리오-백테스트.html#cb496-2"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
+<span id="cb496-3"><a href="포트폴리오-백테스트.html#cb496-3"></a></span>
+<span id="cb496-4"><a href="포트폴리오-백테스트.html#cb496-4"></a>symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="st">&#39;SHY&#39;</span>)</span>
+<span id="cb496-5"><a href="포트폴리오-백테스트.html#cb496-5"></a><span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;SPY&quot; &quot;SHY&quot;</code></pre>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb497-1" data-line-number="1">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,</a>
-<a class="sourceLine" id="cb497-2" data-line-number="2">                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))</a>
-<a class="sourceLine" id="cb497-3" data-line-number="3">rets =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">Return.calculate</span>(prices))</a></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="포트폴리오-백테스트.html#cb498-1"></a>prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,</span>
+<span id="cb498-2"><a href="포트폴리오-백테스트.html#cb498-2"></a>                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x))))</span>
+<span id="cb498-3"><a href="포트폴리오-백테스트.html#cb498-3"></a>rets =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">Return.calculate</span>(prices))</span></code></pre></div>
 <p>먼저 주식과 현금에 해당하는 ETF 데이터를 다운로드합니다. 주식에 해당하는 ETF로 는 S&amp;P 500 수익률을 추종하는 SPY를 사용하며, 현금에 해당하는 ETF로는 미국 단기채 수익률을 추종하는 SHY를 사용합니다.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" data-line-number="1">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)</a>
-<a class="sourceLine" id="cb498-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb498-3" data-line-number="3"><span class="kw">print</span>(ep)</a></code></pre></div>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="포트폴리오-백테스트.html#cb499-1"></a>ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)</span>
+<span id="cb499-2"><a href="포트폴리오-백테스트.html#cb499-2"></a></span>
+<span id="cb499-3"><a href="포트폴리오-백테스트.html#cb499-3"></a><span class="kw">print</span>(ep)</span></code></pre></div>
 <pre><code>##   [1]    0   19   38   60   80  102  123  144  167  186
 ##  [11]  209  230  250  271  291  311  333  354  375  397
 ##  [21]  418  439  462  481  503  523  542  564  585  605
@@ -1049,31 +1060,31 @@ EOP.Value
 ## [131] 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
 ## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123
 ## [151] 3143 3165 3187 3207 3230 3250 3271 3292 3311 3333
-## [161] 3354 3374</code></pre>
-<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" data-line-number="1">wts =<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb500-2" data-line-number="2">lookback =<span class="st"> </span><span class="dv">10</span></a></code></pre></div>
+## [161] 3354 3374 3396 3418 3439 3457</code></pre>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="포트폴리오-백테스트.html#cb501-1"></a>wts =<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb501-2"><a href="포트폴리오-백테스트.html#cb501-2"></a>lookback =<span class="st"> </span><span class="dv">10</span></span></code></pre></div>
 <p>먼저 xts 패키지의 <code>endpoints()</code> 함수를 이용해 매월 말일의 위치를 구합니다. 해당 함수는 <code>endpoints(x, on= 'months', k=1)</code>의 형태로 이루어지며 x는 시계열 데이터, on은 원하는 기간, k는 구간 길이를 의미합니다. 즉, 시계열 데이터에서 월말에 해당하는 부분의 위치를 반환하며, 매월이 아닌 weeks, quarters, years도 입력이 가능합니다. 결과적으로 ep에는 rets의 인덱스 중 매월 말일에 해당하는 부분의 위치가 구해집니다.</p>
 <p>각 시점별 비중이 입력될 wts를 공백의 리스트 형식으로 저장해주며, n개월 이동평균값에 해당하는 lookback 변수는 10을 입력합니다.</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" data-line-number="1">i =<span class="st"> </span>lookback <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb501-2" data-line-number="2">sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb501-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb501-4" data-line-number="4"><span class="kw">head</span>(sub_price, <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="포트폴리오-백테스트.html#cb502-1"></a>i =<span class="st"> </span>lookback <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb502-2"><a href="포트폴리오-백테스트.html#cb502-2"></a>sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]</span>
+<span id="cb502-3"><a href="포트폴리오-백테스트.html#cb502-3"></a></span>
+<span id="cb502-4"><a href="포트폴리오-백테스트.html#cb502-4"></a><span class="kw">head</span>(sub_price, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            SPY.Adjusted
-## 2007-01-03        107.8
-## 2007-01-04        108.1
-## 2007-01-05        107.2</code></pre>
-<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb503-1" data-line-number="1"><span class="kw">tail</span>(sub_price, <span class="dv">3</span>)</a></code></pre></div>
+## 2007-01-03        106.9
+## 2007-01-04        107.2
+## 2007-01-05        106.3</code></pre>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="포트폴리오-백테스트.html#cb504-1"></a><span class="kw">tail</span>(sub_price, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            SPY.Adjusted
-## 2007-10-26        118.7
-## 2007-10-29        119.1
-## 2007-10-30        118.3</code></pre>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb505-1" data-line-number="1">sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)</a>
-<a class="sourceLine" id="cb505-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb505-3" data-line-number="3">wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb505-4" data-line-number="4">wt[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">last</span>(sub_price) <span class="op">&gt;</span><span class="st"> </span>sma, <span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb505-5" data-line-number="5">wt[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>wt[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb505-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb505-7" data-line-number="7">wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))</a></code></pre></div>
+## 2007-10-26        117.7
+## 2007-10-29        118.1
+## 2007-10-30        117.3</code></pre>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="포트폴리오-백테스트.html#cb506-1"></a>sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)</span>
+<span id="cb506-2"><a href="포트폴리오-백테스트.html#cb506-2"></a></span>
+<span id="cb506-3"><a href="포트폴리오-백테스트.html#cb506-3"></a>wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb506-4"><a href="포트폴리오-백테스트.html#cb506-4"></a>wt[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">last</span>(sub_price) <span class="op">&gt;</span><span class="st"> </span>sma, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb506-5"><a href="포트폴리오-백테스트.html#cb506-5"></a>wt[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>wt[<span class="dv">1</span>]</span>
+<span id="cb506-6"><a href="포트폴리오-백테스트.html#cb506-6"></a></span>
+<span id="cb506-7"><a href="포트폴리오-백테스트.html#cb506-7"></a>wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))</span></code></pre></div>
 <p>해당 전략은 for loop 구문을 통해, 매월 말 과거 10개월 이동평균을 구한 후 매수 혹은 매도를 선택한 후 비중을 계산합니다. 예시를 위해 첫 번째 시점의 테스트 과정을 살펴보며, 과거 10개월에 해당하는 가격의 이동평균이 필요하므로 처음 시작은 i+1 인 11부터 가능합니다.</p>
 <ol style="list-style-type: decimal">
 <li>주가는 일별 데이터이며, 현재부터 과거 10개월에 해당하는 주가를 선택해야 합니다. 앞서 <code>endpoints()</code> 함수를 통해 주가에서 월말 기준점의 위치를 찾았으며, ep[i]는 현재시점 주가의 위치를, ep[i-lookback]는 현재부터 10개월 전
@@ -1126,29 +1137,29 @@ wt[2] = 1
 </tbody>
 </table>
 <p>위 과정을 for loop 구문을 통해 전체 기간에 적용한 백테스트는 다음과 같습니다.</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" data-line-number="1">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)</a>
-<a class="sourceLine" id="cb506-2" data-line-number="2">wts =<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb506-3" data-line-number="3">lookback =<span class="st"> </span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb506-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb506-5" data-line-number="5"><span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {</a>
-<a class="sourceLine" id="cb506-6" data-line-number="6">  sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb506-7" data-line-number="7">  sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)</a>
-<a class="sourceLine" id="cb506-8" data-line-number="8">  wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb506-9" data-line-number="9">  wt[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">last</span>(sub_price) <span class="op">&gt;</span><span class="st"> </span>sma, <span class="dv">1</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb506-10" data-line-number="10">  wt[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>wt[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb506-11" data-line-number="11">  </a>
-<a class="sourceLine" id="cb506-12" data-line-number="12">  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))</a>
-<a class="sourceLine" id="cb506-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb506-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb506-15" data-line-number="15">wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</a></code></pre></div>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="포트폴리오-백테스트.html#cb507-1"></a>ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)</span>
+<span id="cb507-2"><a href="포트폴리오-백테스트.html#cb507-2"></a>wts =<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb507-3"><a href="포트폴리오-백테스트.html#cb507-3"></a>lookback =<span class="st"> </span><span class="dv">10</span></span>
+<span id="cb507-4"><a href="포트폴리오-백테스트.html#cb507-4"></a></span>
+<span id="cb507-5"><a href="포트폴리오-백테스트.html#cb507-5"></a><span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {</span>
+<span id="cb507-6"><a href="포트폴리오-백테스트.html#cb507-6"></a>  sub_price =<span class="st"> </span>prices[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , <span class="dv">1</span>]</span>
+<span id="cb507-7"><a href="포트폴리오-백테스트.html#cb507-7"></a>  sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)</span>
+<span id="cb507-8"><a href="포트폴리오-백테스트.html#cb507-8"></a>  wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb507-9"><a href="포트폴리오-백테스트.html#cb507-9"></a>  wt[<span class="dv">1</span>] =<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">last</span>(sub_price) <span class="op">&gt;</span><span class="st"> </span>sma, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb507-10"><a href="포트폴리오-백테스트.html#cb507-10"></a>  wt[<span class="dv">2</span>] =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>wt[<span class="dv">1</span>]</span>
+<span id="cb507-11"><a href="포트폴리오-백테스트.html#cb507-11"></a>  </span>
+<span id="cb507-12"><a href="포트폴리오-백테스트.html#cb507-12"></a>  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))</span>
+<span id="cb507-13"><a href="포트폴리오-백테스트.html#cb507-13"></a>}</span>
+<span id="cb507-14"><a href="포트폴리오-백테스트.html#cb507-14"></a></span>
+<span id="cb507-15"><a href="포트폴리오-백테스트.html#cb507-15"></a>wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</span></code></pre></div>
 <p>매월 말 과거 10개월 이동평균을 구한 후 현재 주가와 비교해 주식 혹은 현금 투자비중을 구한 후 wts 리스트에 저장합니다. 그 후 <code>do.call()</code> 함수를 통해 리스트를 테이블로 묶어줍니다.</p>
 <p>수익률 데이터와 비중 데이터가 구해졌으므로 <code>Return.portfolio()</code> 함수를 통해 포트폴리오의 수익률을 계산합니다.</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" data-line-number="1">Tactical =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb507-2" data-line-number="2">portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">cbind</span>(rets[,<span class="dv">1</span>], Tactical<span class="op">$</span>returns)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb507-3" data-line-number="3"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;매수 후 보유&#39;</span>, <span class="st">&#39;시점 선택 전략&#39;</span>))</a>
-<a class="sourceLine" id="cb507-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb507-5" data-line-number="5"><span class="kw">charts.PerformanceSummary</span>(portfolios,</a>
-<a class="sourceLine" id="cb507-6" data-line-number="6">                          <span class="dt">main =</span> <span class="st">&quot;Buy &amp; Hold vs Tactical&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="포트폴리오-백테스트.html#cb508-1"></a>Tactical =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb508-2"><a href="포트폴리오-백테스트.html#cb508-2"></a>portfolios =<span class="st"> </span><span class="kw">na.omit</span>(<span class="kw">cbind</span>(rets[,<span class="dv">1</span>], Tactical<span class="op">$</span>returns)) <span class="op">%&gt;%</span></span>
+<span id="cb508-3"><a href="포트폴리오-백테스트.html#cb508-3"></a><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;매수 후 보유&#39;</span>, <span class="st">&#39;시점 선택 전략&#39;</span>))</span>
+<span id="cb508-4"><a href="포트폴리오-백테스트.html#cb508-4"></a></span>
+<span id="cb508-5"><a href="포트폴리오-백테스트.html#cb508-5"></a><span class="kw">charts.PerformanceSummary</span>(portfolios,</span>
+<span id="cb508-6"><a href="포트폴리오-백테스트.html#cb508-6"></a>                          <span class="dt">main =</span> <span class="st">&quot;Buy &amp; Hold vs Tactical&quot;</span>)</span></code></pre></div>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li>수익률 데이터와 비중 데이터의 입력을 통해 백테스트를 실행합니다.</li>
@@ -1156,54 +1167,54 @@ wt[2] = 1
 <li><code>charts.PerformanceSummary()</code> 함수를 통해 수익률을 그래프로 나타냅니다.</li>
 </ol>
 <p>검은색 그래프는 S&amp;P 500 에 매수 후 보유 시 수익률이고, 주황색 그래프는 시점 선택 전략을 적용한 수익률입니다. 2008년과 같은 하락장에서 낙폭이 훨씬 낮음이 확인됩니다.</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" data-line-number="1">turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(Tactical<span class="op">$</span>BOP.Weight <span class="op">-</span></a>
-<a class="sourceLine" id="cb508-2" data-line-number="2"><span class="st">                             </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(Tactical<span class="op">$</span>EOP.Weight)),</a>
-<a class="sourceLine" id="cb508-3" data-line-number="3">                       <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb508-4" data-line-number="4">               <span class="dt">order.by =</span> <span class="kw">index</span>(Tactical<span class="op">$</span>BOP.Weight))</a>
-<a class="sourceLine" id="cb508-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb508-6" data-line-number="6"><span class="kw">chart.TimeSeries</span>(turnover)</a></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="포트폴리오-백테스트.html#cb509-1"></a>turnover =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">rowSums</span>(<span class="kw">abs</span>(Tactical<span class="op">$</span>BOP.Weight <span class="op">-</span></span>
+<span id="cb509-2"><a href="포트폴리오-백테스트.html#cb509-2"></a><span class="st">                             </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(Tactical<span class="op">$</span>EOP.Weight)),</span>
+<span id="cb509-3"><a href="포트폴리오-백테스트.html#cb509-3"></a>                       <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb509-4"><a href="포트폴리오-백테스트.html#cb509-4"></a>               <span class="dt">order.by =</span> <span class="kw">index</span>(Tactical<span class="op">$</span>BOP.Weight))</span>
+<span id="cb509-5"><a href="포트폴리오-백테스트.html#cb509-5"></a></span>
+<span id="cb509-6"><a href="포트폴리오-백테스트.html#cb509-6"></a><span class="kw">chart.TimeSeries</span>(turnover)</span></code></pre></div>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>해당 전략의 회전율을 확인해보면, 몇 년간 매매가 없는 경우도 있습니다. 그러나 매매가 발생할 시 매수와 매도 포지션 양쪽의 매매로 인해 200%의 회전율이 발생하게 됩니다.</p>
 </div>
 <div id="동적-자산배분-백테스트" class="section level2">
 <h2><span class="header-section-number">12.4</span> 동적 자산배분 백테스트</h2>
-<p>마지막으로 기존에 배웠던 것들을 응용해 동적 자산배분의 백테스트를 수행하겠습니다. 일반적인 자산배분이 주식과 채권, 대체자산에 투자비중을 사전에 정해놓고 약간의 비율만 수정하는 정적 자산배분인 반면, 동적 자산배분이란 투자비중에 대한 제한이 없이 동적으로 포트폴리오를 구성하는 방법입니다. <span class="citation">(Butler et al. <a href="#ref-butler2012adaptive">2012</a>)</span></p>
+<p>마지막으로 기존에 배웠던 것들을 응용해 동적 자산배분의 백테스트를 수행하겠습니다. 일반적인 자산배분이 주식과 채권, 대체자산에 투자비중을 사전에 정해놓고 약간의 비율만 수정하는 정적 자산배분인 반면, 동적 자산배분이란 투자비중에 대한 제한이 없이 동적으로 포트폴리오를 구성하는 방법입니다. <span class="citation">(Butler et al. <a href="#ref-butler2012adaptive" role="doc-biblioref">2012</a>)</span></p>
 <p>동적 자산배분을 이용한 포트폴리오는 다음과 같이 구성됩니다.</p>
 <ol style="list-style-type: decimal">
 <li>글로벌 10개 자산 중 과거 12개월 수익률이 높은 5개 자산을 선택합니다.</li>
 <li>최소분산 포트폴리오를 구성하며, 개별 투자비중은 최소 10%, 최대 30% 제약조건을 설정합니다.</li>
 <li>매월 리밸런싱을 실시합니다.</li>
 </ol>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" data-line-number="1"><span class="kw">library</span>(quantmod)</a>
-<a class="sourceLine" id="cb509-2" data-line-number="2"><span class="kw">library</span>(PerformanceAnalytics)</a>
-<a class="sourceLine" id="cb509-3" data-line-number="3"><span class="kw">library</span>(RiskPortfolios)</a>
-<a class="sourceLine" id="cb509-4" data-line-number="4"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb509-5" data-line-number="5"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb509-6" data-line-number="6"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb509-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb509-8" data-line-number="8">symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="co"># 미국 주식</span></a>
-<a class="sourceLine" id="cb509-9" data-line-number="9">            <span class="st">&#39;IEV&#39;</span>, <span class="co"># 유럽 주식 </span></a>
-<a class="sourceLine" id="cb509-10" data-line-number="10">            <span class="st">&#39;EWJ&#39;</span>, <span class="co"># 일본 주식</span></a>
-<a class="sourceLine" id="cb509-11" data-line-number="11">            <span class="st">&#39;EEM&#39;</span>, <span class="co"># 이머징 주식</span></a>
-<a class="sourceLine" id="cb509-12" data-line-number="12">            <span class="st">&#39;TLT&#39;</span>, <span class="co"># 미국 장기채</span></a>
-<a class="sourceLine" id="cb509-13" data-line-number="13">            <span class="st">&#39;IEF&#39;</span>, <span class="co"># 미국 중기채</span></a>
-<a class="sourceLine" id="cb509-14" data-line-number="14">            <span class="st">&#39;IYR&#39;</span>, <span class="co"># 미국 리츠</span></a>
-<a class="sourceLine" id="cb509-15" data-line-number="15">            <span class="st">&#39;RWX&#39;</span>, <span class="co"># 글로벌 리츠</span></a>
-<a class="sourceLine" id="cb509-16" data-line-number="16">            <span class="st">&#39;GLD&#39;</span>, <span class="co"># 금</span></a>
-<a class="sourceLine" id="cb509-17" data-line-number="17">            <span class="st">&#39;DBC&#39;</span>  <span class="co"># 상품</span></a>
-<a class="sourceLine" id="cb509-18" data-line-number="18">            )</a>
-<a class="sourceLine" id="cb509-19" data-line-number="19"><span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</a>
-<a class="sourceLine" id="cb509-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb509-21" data-line-number="21">prices =<span class="st"> </span><span class="kw">do.call</span>(cbind, <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x)))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb509-22" data-line-number="22"><span class="st">  </span><span class="kw">setNames</span>(symbols)</a>
-<a class="sourceLine" id="cb509-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb509-24" data-line-number="24">rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="포트폴리오-백테스트.html#cb510-1"></a><span class="kw">library</span>(quantmod)</span>
+<span id="cb510-2"><a href="포트폴리오-백테스트.html#cb510-2"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
+<span id="cb510-3"><a href="포트폴리오-백테스트.html#cb510-3"></a><span class="kw">library</span>(RiskPortfolios)</span>
+<span id="cb510-4"><a href="포트폴리오-백테스트.html#cb510-4"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb510-5"><a href="포트폴리오-백테스트.html#cb510-5"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb510-6"><a href="포트폴리오-백테스트.html#cb510-6"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb510-7"><a href="포트폴리오-백테스트.html#cb510-7"></a></span>
+<span id="cb510-8"><a href="포트폴리오-백테스트.html#cb510-8"></a>symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;SPY&#39;</span>, <span class="co"># 미국 주식</span></span>
+<span id="cb510-9"><a href="포트폴리오-백테스트.html#cb510-9"></a>            <span class="st">&#39;IEV&#39;</span>, <span class="co"># 유럽 주식 </span></span>
+<span id="cb510-10"><a href="포트폴리오-백테스트.html#cb510-10"></a>            <span class="st">&#39;EWJ&#39;</span>, <span class="co"># 일본 주식</span></span>
+<span id="cb510-11"><a href="포트폴리오-백테스트.html#cb510-11"></a>            <span class="st">&#39;EEM&#39;</span>, <span class="co"># 이머징 주식</span></span>
+<span id="cb510-12"><a href="포트폴리오-백테스트.html#cb510-12"></a>            <span class="st">&#39;TLT&#39;</span>, <span class="co"># 미국 장기채</span></span>
+<span id="cb510-13"><a href="포트폴리오-백테스트.html#cb510-13"></a>            <span class="st">&#39;IEF&#39;</span>, <span class="co"># 미국 중기채</span></span>
+<span id="cb510-14"><a href="포트폴리오-백테스트.html#cb510-14"></a>            <span class="st">&#39;IYR&#39;</span>, <span class="co"># 미국 리츠</span></span>
+<span id="cb510-15"><a href="포트폴리오-백테스트.html#cb510-15"></a>            <span class="st">&#39;RWX&#39;</span>, <span class="co"># 글로벌 리츠</span></span>
+<span id="cb510-16"><a href="포트폴리오-백테스트.html#cb510-16"></a>            <span class="st">&#39;GLD&#39;</span>, <span class="co"># 금</span></span>
+<span id="cb510-17"><a href="포트폴리오-백테스트.html#cb510-17"></a>            <span class="st">&#39;DBC&#39;</span>  <span class="co"># 상품</span></span>
+<span id="cb510-18"><a href="포트폴리오-백테스트.html#cb510-18"></a>            )</span>
+<span id="cb510-19"><a href="포트폴리오-백테스트.html#cb510-19"></a><span class="kw">getSymbols</span>(symbols, <span class="dt">src =</span> <span class="st">&#39;yahoo&#39;</span>)</span>
+<span id="cb510-20"><a href="포트폴리오-백테스트.html#cb510-20"></a></span>
+<span id="cb510-21"><a href="포트폴리오-백테스트.html#cb510-21"></a>prices =<span class="st"> </span><span class="kw">do.call</span>(cbind, <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x) <span class="kw">Ad</span>(<span class="kw">get</span>(x)))) <span class="op">%&gt;%</span></span>
+<span id="cb510-22"><a href="포트폴리오-백테스트.html#cb510-22"></a><span class="st">  </span><span class="kw">setNames</span>(symbols)</span>
+<span id="cb510-23"><a href="포트폴리오-백테스트.html#cb510-23"></a></span>
+<span id="cb510-24"><a href="포트폴리오-백테스트.html#cb510-24"></a>rets =<span class="st"> </span><span class="kw">Return.calculate</span>(prices) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</span></code></pre></div>
 <p>먼저 이전 CHAPTER와 동일하게 글로벌 자산을 대표하는 ETF 데이터를 다운로드한
 후 수정주가의 수익률을 계산합니다.</p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" data-line-number="1">ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)</a>
-<a class="sourceLine" id="cb510-2" data-line-number="2">wts =<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb510-3" data-line-number="3">lookback =<span class="st"> </span><span class="dv">12</span></a>
-<a class="sourceLine" id="cb510-4" data-line-number="4">wt_zero =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</a></code></pre></div>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="포트폴리오-백테스트.html#cb511-1"></a>ep =<span class="st"> </span><span class="kw">endpoints</span>(rets, <span class="dt">on =</span> <span class="st">&#39;months&#39;</span>)</span>
+<span id="cb511-2"><a href="포트폴리오-백테스트.html#cb511-2"></a>wts =<span class="st"> </span><span class="kw">list</span>()</span>
+<span id="cb511-3"><a href="포트폴리오-백테스트.html#cb511-3"></a>lookback =<span class="st"> </span><span class="dv">12</span></span>
+<span id="cb511-4"><a href="포트폴리오-백테스트.html#cb511-4"></a>wt_zero =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</span></code></pre></div>
 <p>백테스트에 사용되는 각종 값을 사전에 정의합니다.</p>
 <ol style="list-style-type: decimal">
 <li><code>endpoints()</code> 함수를 통해 매월 말일의 위치를 구합니다.</li>
@@ -1212,24 +1223,24 @@ wt[2] = 1
 <li><code>rep()</code> 함수를 통해 비중이 들어갈 0으로 이루어진 벡터를 만들며 이름을 설정합니다.</li>
 </ol>
 <p>다음은 매월 말 투자 규칙에 따라 포트폴리오의 비중을 구하는 백테스트 과정입니다.</p>
-<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb511-1" data-line-number="1"><span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {</a>
-<a class="sourceLine" id="cb511-2" data-line-number="2">  sub_ret =<span class="st"> </span>rets[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , ]</a>
-<a class="sourceLine" id="cb511-3" data-line-number="3">  cum =<span class="st"> </span><span class="kw">Return.cumulative</span>(sub_ret)</a>
-<a class="sourceLine" id="cb511-4" data-line-number="4">  </a>
-<a class="sourceLine" id="cb511-5" data-line-number="5">  K =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>cum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb511-6" data-line-number="6">  covmat =<span class="st"> </span><span class="kw">cov</span>(sub_ret[, K])</a>
-<a class="sourceLine" id="cb511-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb511-8" data-line-number="8">  wt =<span class="st"> </span>wt_zero</a>
-<a class="sourceLine" id="cb511-9" data-line-number="9">  wt[K] =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,</a>
-<a class="sourceLine" id="cb511-10" data-line-number="10">                           <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>,</a>
-<a class="sourceLine" id="cb511-11" data-line-number="11">                                          <span class="dt">constraint =</span> <span class="st">&#39;user&#39;</span>,</a>
-<a class="sourceLine" id="cb511-12" data-line-number="12">                                          <span class="dt">LB =</span> <span class="kw">rep</span>(<span class="fl">0.10</span>, <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb511-13" data-line-number="13">                                          <span class="dt">UB =</span> <span class="kw">rep</span>(<span class="fl">0.30</span>, <span class="dv">5</span>)))</a>
-<a class="sourceLine" id="cb511-14" data-line-number="14">  </a>
-<a class="sourceLine" id="cb511-15" data-line-number="15">  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))</a>
-<a class="sourceLine" id="cb511-16" data-line-number="16">}</a>
-<a class="sourceLine" id="cb511-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb511-18" data-line-number="18">wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</a></code></pre></div>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="포트폴리오-백테스트.html#cb512-1"></a><span class="cf">for</span> (i <span class="cf">in</span> (lookback<span class="op">+</span><span class="dv">1</span>) <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(ep)) {</span>
+<span id="cb512-2"><a href="포트폴리오-백테스트.html#cb512-2"></a>  sub_ret =<span class="st"> </span>rets[ep[i<span class="op">-</span>lookback] <span class="op">:</span><span class="st"> </span>ep[i] , ]</span>
+<span id="cb512-3"><a href="포트폴리오-백테스트.html#cb512-3"></a>  cum =<span class="st"> </span><span class="kw">Return.cumulative</span>(sub_ret)</span>
+<span id="cb512-4"><a href="포트폴리오-백테스트.html#cb512-4"></a>  </span>
+<span id="cb512-5"><a href="포트폴리오-백테스트.html#cb512-5"></a>  K =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>cum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span></span>
+<span id="cb512-6"><a href="포트폴리오-백테스트.html#cb512-6"></a>  covmat =<span class="st"> </span><span class="kw">cov</span>(sub_ret[, K])</span>
+<span id="cb512-7"><a href="포트폴리오-백테스트.html#cb512-7"></a>  </span>
+<span id="cb512-8"><a href="포트폴리오-백테스트.html#cb512-8"></a>  wt =<span class="st"> </span>wt_zero</span>
+<span id="cb512-9"><a href="포트폴리오-백테스트.html#cb512-9"></a>  wt[K] =<span class="st"> </span><span class="kw">optimalPortfolio</span>(covmat,</span>
+<span id="cb512-10"><a href="포트폴리오-백테스트.html#cb512-10"></a>                           <span class="dt">control =</span> <span class="kw">list</span>(<span class="dt">type =</span> <span class="st">&#39;minvol&#39;</span>,</span>
+<span id="cb512-11"><a href="포트폴리오-백테스트.html#cb512-11"></a>                                          <span class="dt">constraint =</span> <span class="st">&#39;user&#39;</span>,</span>
+<span id="cb512-12"><a href="포트폴리오-백테스트.html#cb512-12"></a>                                          <span class="dt">LB =</span> <span class="kw">rep</span>(<span class="fl">0.10</span>, <span class="dv">5</span>),</span>
+<span id="cb512-13"><a href="포트폴리오-백테스트.html#cb512-13"></a>                                          <span class="dt">UB =</span> <span class="kw">rep</span>(<span class="fl">0.30</span>, <span class="dv">5</span>)))</span>
+<span id="cb512-14"><a href="포트폴리오-백테스트.html#cb512-14"></a>  </span>
+<span id="cb512-15"><a href="포트폴리오-백테스트.html#cb512-15"></a>  wts[[i]] =<span class="st"> </span><span class="kw">xts</span>(<span class="kw">t</span>(wt), <span class="dt">order.by =</span> <span class="kw">index</span>(rets[ep[i]]))</span>
+<span id="cb512-16"><a href="포트폴리오-백테스트.html#cb512-16"></a>}</span>
+<span id="cb512-17"><a href="포트폴리오-백테스트.html#cb512-17"></a></span>
+<span id="cb512-18"><a href="포트폴리오-백테스트.html#cb512-18"></a>wts =<span class="st"> </span><span class="kw">do.call</span>(rbind, wts)</span></code></pre></div>
 <p>for loop 구문을 통해 매월 말 과거 12개월 수익률을 구한 후 비중을 계산하므로, 처음 시작은 i+1인 13부터 가능합니다.</p>
 <ol style="list-style-type: decimal">
 <li>ep[i]는 현재시점 수익률의 위치를, ep[i-lookback]는 현재부터 12개월 전 수익률의 위치를 의미합니다. 이를 통해 과거 12개월 간 수익률을 찾은 후 sub_ret에 저장합니다.</li>
@@ -1241,47 +1252,47 @@ wt[2] = 1
 <li>for loop 구문이 끝난 후 <code>do.call()</code> 함수를 통해 투자비중이 저장된 리스트를 테이블 형태로 바꿔줍니다.</li>
 </ol>
 <p>이를 통해 동적 자산배분의 투자 규칙에 맞는 매월 말 투자비중이 계산되었습니다.</p>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" data-line-number="1">GDAA =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb512-2" data-line-number="2"><span class="kw">charts.PerformanceSummary</span>(GDAA<span class="op">$</span>returns, <span class="dt">main =</span> <span class="st">&#39;동적자산배분&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="포트폴리오-백테스트.html#cb513-1"></a>GDAA =<span class="st"> </span><span class="kw">Return.portfolio</span>(rets, wts, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb513-2"><a href="포트폴리오-백테스트.html#cb513-2"></a><span class="kw">charts.PerformanceSummary</span>(GDAA<span class="op">$</span>returns, <span class="dt">main =</span> <span class="st">&#39;동적자산배분&#39;</span>)</span></code></pre></div>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>수익률과 비중 데이터가 있으므로 <code>Return.portfolio()</code> 함수를 통해 백테스트 수익률을 계산할 수 있습니다. <code>charts.PerformanceSummary()</code> 함수를 통해 누적수익률을 확인하면 해당 전략을 이용한 포트폴리오가 꾸준히 우상향하는 모습을 보이게됩니다.</p>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb513-1" data-line-number="1">wts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb513-2" data-line-number="2"><span class="st">  </span><span class="kw">gather</span>(key, value, <span class="op">-</span>Index) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb513-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Index =</span> <span class="kw">as.Date</span>(Index)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb513-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">key =</span> <span class="kw">factor</span>(key, <span class="dt">levels =</span> <span class="kw">unique</span>(key))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb513-5" data-line-number="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> value)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb513-6" data-line-number="6"><span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">color =</span> key, <span class="dt">fill =</span> key),</a>
-<a class="sourceLine" id="cb513-7" data-line-number="7">            <span class="dt">position =</span> <span class="st">&#39;stack&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb513-8" data-line-number="8"><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb513-9" data-line-number="9"><span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks=</span><span class="st">&quot;years&quot;</span>, <span class="dt">date_labels=</span><span class="st">&quot;%Y&quot;</span>,</a>
-<a class="sourceLine" id="cb513-10" data-line-number="10">               <span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb513-11" data-line-number="11"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb513-12" data-line-number="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb513-13" data-line-number="13">                                  <span class="dt">size =</span> <span class="dv">12</span>),</a>
-<a class="sourceLine" id="cb513-14" data-line-number="14">        <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>,</a>
-<a class="sourceLine" id="cb513-15" data-line-number="15">        <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb513-16" data-line-number="16">        <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>,</a>
-<a class="sourceLine" id="cb513-17" data-line-number="17">                                   <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">8</span>),</a>
-<a class="sourceLine" id="cb513-18" data-line-number="18">        <span class="dt">panel.grid.minor.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></a>
-<a class="sourceLine" id="cb513-19" data-line-number="19"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="포트폴리오-백테스트.html#cb514-1"></a>wts <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span></span>
+<span id="cb514-2"><a href="포트폴리오-백테스트.html#cb514-2"></a><span class="st">  </span><span class="kw">gather</span>(key, value, <span class="op">-</span>Index) <span class="op">%&gt;%</span></span>
+<span id="cb514-3"><a href="포트폴리오-백테스트.html#cb514-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Index =</span> <span class="kw">as.Date</span>(Index)) <span class="op">%&gt;%</span></span>
+<span id="cb514-4"><a href="포트폴리오-백테스트.html#cb514-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">key =</span> <span class="kw">factor</span>(key, <span class="dt">levels =</span> <span class="kw">unique</span>(key))) <span class="op">%&gt;%</span></span>
+<span id="cb514-5"><a href="포트폴리오-백테스트.html#cb514-5"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> value)) <span class="op">+</span></span>
+<span id="cb514-6"><a href="포트폴리오-백테스트.html#cb514-6"></a><span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">color =</span> key, <span class="dt">fill =</span> key),</span>
+<span id="cb514-7"><a href="포트폴리오-백테스트.html#cb514-7"></a>            <span class="dt">position =</span> <span class="st">&#39;stack&#39;</span>) <span class="op">+</span></span>
+<span id="cb514-8"><a href="포트폴리오-백테스트.html#cb514-8"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb514-9"><a href="포트폴리오-백테스트.html#cb514-9"></a><span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_breaks=</span><span class="st">&quot;years&quot;</span>, <span class="dt">date_labels=</span><span class="st">&quot;%Y&quot;</span>,</span>
+<span id="cb514-10"><a href="포트폴리오-백테스트.html#cb514-10"></a>               <span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span></span>
+<span id="cb514-11"><a href="포트폴리오-백테스트.html#cb514-11"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span></span>
+<span id="cb514-12"><a href="포트폴리오-백테스트.html#cb514-12"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb514-13"><a href="포트폴리오-백테스트.html#cb514-13"></a>                                  <span class="dt">size =</span> <span class="dv">12</span>),</span>
+<span id="cb514-14"><a href="포트폴리오-백테스트.html#cb514-14"></a>        <span class="dt">legend.position =</span> <span class="st">&#39;bottom&#39;</span>,</span>
+<span id="cb514-15"><a href="포트폴리오-백테스트.html#cb514-15"></a>        <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb514-16"><a href="포트폴리오-백테스트.html#cb514-16"></a>        <span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">45</span>,</span>
+<span id="cb514-17"><a href="포트폴리오-백테스트.html#cb514-17"></a>                                   <span class="dt">hjust =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">8</span>),</span>
+<span id="cb514-18"><a href="포트폴리오-백테스트.html#cb514-18"></a>        <span class="dt">panel.grid.minor.x =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb514-19"><a href="포트폴리오-백테스트.html#cb514-19"></a><span class="st">  </span><span class="kw">guides</span>(<span class="dt">color =</span> <span class="kw">guide_legend</span>(<span class="dt">byrow =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>반면 자산별 투자비중의 변화가 많은 것을 알 수 있습니다. 그 원인은 수익률 상위 5개에 해당하는 자산이 매월 말 바뀌며, 최소분산 포트폴리오를 구성하는 비중이 계속해서 바뀌기 때문입니다.</p>
 <p>회전율이 상대적으로 낮았던 기존 백테스트에서는 매매비용, 세금, 기타비용 등을 고려하지 않아도 수익률에 크게 영향이 없지만, 회전율이 상대적으로 높은 전략에서는 이러한 것들을 무시하지 않을 수 없습니다.</p>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" data-line-number="1">GDAA<span class="op">$</span>turnover =<span class="st"> </span><span class="kw">xts</span>(</a>
-<a class="sourceLine" id="cb514-2" data-line-number="2">  <span class="kw">rowSums</span>(<span class="kw">abs</span>(GDAA<span class="op">$</span>BOP.Weight <span class="op">-</span></a>
-<a class="sourceLine" id="cb514-3" data-line-number="3"><span class="st">                </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(GDAA<span class="op">$</span>EOP.Weight)),</a>
-<a class="sourceLine" id="cb514-4" data-line-number="4">          <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb514-5" data-line-number="5">  <span class="dt">order.by =</span> <span class="kw">index</span>(GDAA<span class="op">$</span>BOP.Weight))</a>
-<a class="sourceLine" id="cb514-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb514-7" data-line-number="7"><span class="kw">chart.TimeSeries</span>(GDAA<span class="op">$</span>turnover)</a></code></pre></div>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="포트폴리오-백테스트.html#cb515-1"></a>GDAA<span class="op">$</span>turnover =<span class="st"> </span><span class="kw">xts</span>(</span>
+<span id="cb515-2"><a href="포트폴리오-백테스트.html#cb515-2"></a>  <span class="kw">rowSums</span>(<span class="kw">abs</span>(GDAA<span class="op">$</span>BOP.Weight <span class="op">-</span></span>
+<span id="cb515-3"><a href="포트폴리오-백테스트.html#cb515-3"></a><span class="st">                </span>timeSeries<span class="op">::</span><span class="kw">lag</span>(GDAA<span class="op">$</span>EOP.Weight)),</span>
+<span id="cb515-4"><a href="포트폴리오-백테스트.html#cb515-4"></a>          <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</span>
+<span id="cb515-5"><a href="포트폴리오-백테스트.html#cb515-5"></a>  <span class="dt">order.by =</span> <span class="kw">index</span>(GDAA<span class="op">$</span>BOP.Weight))</span>
+<span id="cb515-6"><a href="포트폴리오-백테스트.html#cb515-6"></a></span>
+<span id="cb515-7"><a href="포트폴리오-백테스트.html#cb515-7"></a><span class="kw">chart.TimeSeries</span>(GDAA<span class="op">$</span>turnover)</span></code></pre></div>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>기존에 살펴본 방법으로 회전율을 계산한다면 매월 상당한 매매회전이 발생함이 확인됩니다.</p>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb515-1" data-line-number="1">fee =<span class="st"> </span><span class="fl">0.0030</span></a>
-<a class="sourceLine" id="cb515-2" data-line-number="2">GDAA<span class="op">$</span>net =<span class="st"> </span>GDAA<span class="op">$</span>returns <span class="op">-</span><span class="st"> </span>GDAA<span class="op">$</span>turnover<span class="op">*</span>fee</a></code></pre></div>
+<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb516-1"><a href="포트폴리오-백테스트.html#cb516-1"></a>fee =<span class="st"> </span><span class="fl">0.0030</span></span>
+<span id="cb516-2"><a href="포트폴리오-백테스트.html#cb516-2"></a>GDAA<span class="op">$</span>net =<span class="st"> </span>GDAA<span class="op">$</span>returns <span class="op">-</span><span class="st"> </span>GDAA<span class="op">$</span>turnover<span class="op">*</span>fee</span></code></pre></div>
 <p>매수 혹은 매도당 발생하는 세금, 수수료, 시장충격 등 총 비용을 0.3%로 가정합니다. 포트폴리오 수익률에서 회전율과 총 비용의 곱을 빼면, 비용 후 포트폴리오의 순수익률이 계산됩니다.</p>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" data-line-number="1"><span class="kw">cbind</span>(GDAA<span class="op">$</span>returns, GDAA<span class="op">$</span>net) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb516-2" data-line-number="2"><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;No Fee&#39;</span>, <span class="st">&#39;After Fee&#39;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb516-3" data-line-number="3"><span class="st">  </span><span class="kw">charts.PerformanceSummary</span>(<span class="dt">main =</span> <span class="st">&#39;GDAA&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="포트폴리오-백테스트.html#cb517-1"></a><span class="kw">cbind</span>(GDAA<span class="op">$</span>returns, GDAA<span class="op">$</span>net) <span class="op">%&gt;%</span></span>
+<span id="cb517-2"><a href="포트폴리오-백테스트.html#cb517-2"></a><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">c</span>(<span class="st">&#39;No Fee&#39;</span>, <span class="st">&#39;After Fee&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb517-3"><a href="포트폴리오-백테스트.html#cb517-3"></a><span class="st">  </span><span class="kw">charts.PerformanceSummary</span>(<span class="dt">main =</span> <span class="st">&#39;GDAA&#39;</span>)</span></code></pre></div>
 <p><img src="12-backtest_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>기존 비용을 고려하지 않은 포트폴리오(검은색)에 비해, 비용을 차감한 포트폴리오(붉은색)의 수익률이 시간이 지남에 따라 서서히 감소합니다. 이러한 차이는 비용이 크거나 매매회전율이 높을수록 더욱 벌어지게 됩니다.</p>
 
@@ -1293,7 +1304,7 @@ wt[2] = 1
 <p>Butler, Adam, Mike Philbrick, Rodrigo Gordillo, and David Varadi. 2012. “Adaptive Asset Allocation: A Primer.” <em>Available at SSRN 2328254</em>.</p>
 </div>
 <div id="ref-faber2007quantitative">
-<p>Faber, Mebane T. 2007. “A Quantitative Approach to Tactical Asset Allocation.” <em>The Journal of Wealth Management</em> 9 (4). Institutional Investor Journals Umbrella: 69–79.</p>
+<p>Faber, Mebane T. 2007. “A Quantitative Approach to Tactical Asset Allocation.” <em>The Journal of Wealth Management</em> 9 (4): 69–79.</p>
 </div>
 </div>
 <div id="disqus_thread"></div>

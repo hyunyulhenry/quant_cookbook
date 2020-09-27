@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | R을 이용한 퀀트 투자 포트폴리오 만들기</title>
   <meta name="description" content="Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 퀀트 투자의 심장: 데이터와 프로그래밍 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-05-31" />
+<meta name="date" content="2020-09-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="크롤링을-위한-기본-지식.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.0/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,7 +50,9 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
@@ -60,58 +62,60 @@
 <script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
 <script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
 <script src="libs/proj4js-2.3.15/proj4.js"></script>
-<link href="libs/highcharts-7.0.1/css/motion.css" rel="stylesheet" />
-<link href="libs/highcharts-7.0.1/css/htmlwdgtgrid.css" rel="stylesheet" />
-<script src="libs/highcharts-7.0.1/highcharts.js"></script>
-<script src="libs/highcharts-7.0.1/highcharts-3d.js"></script>
-<script src="libs/highcharts-7.0.1/highcharts-more.js"></script>
-<script src="libs/highcharts-7.0.1/modules/stock.js"></script>
-<script src="libs/highcharts-7.0.1/modules/map.js"></script>
-<script src="libs/highcharts-7.0.1/modules/annotations.js"></script>
-<script src="libs/highcharts-7.0.1/modules/boost.js"></script>
-<script src="libs/highcharts-7.0.1/modules/data.js"></script>
-<script src="libs/highcharts-7.0.1/modules/drag-panes.js"></script>
-<script src="libs/highcharts-7.0.1/modules/drilldown.js"></script>
-<script src="libs/highcharts-7.0.1/modules/item-series.js"></script>
-<script src="libs/highcharts-7.0.1/modules/offline-exporting.js"></script>
-<script src="libs/highcharts-7.0.1/modules/overlapping-datalabels.js"></script>
-<script src="libs/highcharts-7.0.1/modules/exporting.js"></script>
-<script src="libs/highcharts-7.0.1/modules/export-data.js"></script>
-<script src="libs/highcharts-7.0.1/modules/funnel.js"></script>
-<script src="libs/highcharts-7.0.1/modules/heatmap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/treemap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/sankey.js"></script>
-<script src="libs/highcharts-7.0.1/modules/solid-gauge.js"></script>
-<script src="libs/highcharts-7.0.1/modules/streamgraph.js"></script>
-<script src="libs/highcharts-7.0.1/modules/sunburst.js"></script>
-<script src="libs/highcharts-7.0.1/modules/vector.js"></script>
-<script src="libs/highcharts-7.0.1/modules/wordcloud.js"></script>
-<script src="libs/highcharts-7.0.1/modules/xrange.js"></script>
-<script src="libs/highcharts-7.0.1/modules/tilemap.js"></script>
-<script src="libs/highcharts-7.0.1/modules/venn.js"></script>
-<script src="libs/highcharts-7.0.1/modules/gantt.js"></script>
-<script src="libs/highcharts-7.0.1/modules/timeline.js"></script>
-<script src="libs/highcharts-7.0.1/modules/parallel-coordinates.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/grouped-categories.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/motion.js"></script>
-<script src="libs/highcharts-7.0.1/plugins/multicolor_series.js"></script>
-<script src="libs/highcharts-7.0.1/custom/reset.js"></script>
-<script src="libs/highcharts-7.0.1/custom/symbols-extra.js"></script>
-<script src="libs/highcharts-7.0.1/custom/text-symbols.js"></script>
-<script src="libs/highchart-binding-0.7.0/highchart.js"></script>
-<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<link href="libs/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
+<script src="libs/highcharts-8.1.2/highcharts.js"></script>
+<script src="libs/highcharts-8.1.2/highcharts-3d.js"></script>
+<script src="libs/highcharts-8.1.2/highcharts-more.js"></script>
+<script src="libs/highcharts-8.1.2/modules/stock.js"></script>
+<script src="libs/highcharts-8.1.2/modules/map.js"></script>
+<script src="libs/highcharts-8.1.2/modules/annotations.js"></script>
+<script src="libs/highcharts-8.1.2/modules/data.js"></script>
+<script src="libs/highcharts-8.1.2/modules/drilldown.js"></script>
+<script src="libs/highcharts-8.1.2/modules/item-series.js"></script>
+<script src="libs/highcharts-8.1.2/modules/offline-exporting.js"></script>
+<script src="libs/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
+<script src="libs/highcharts-8.1.2/modules/exporting.js"></script>
+<script src="libs/highcharts-8.1.2/modules/export-data.js"></script>
+<script src="libs/highcharts-8.1.2/modules/funnel.js"></script>
+<script src="libs/highcharts-8.1.2/modules/heatmap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/treemap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/sankey.js"></script>
+<script src="libs/highcharts-8.1.2/modules/dependency-wheel.js"></script>
+<script src="libs/highcharts-8.1.2/modules/organization.js"></script>
+<script src="libs/highcharts-8.1.2/modules/solid-gauge.js"></script>
+<script src="libs/highcharts-8.1.2/modules/streamgraph.js"></script>
+<script src="libs/highcharts-8.1.2/modules/sunburst.js"></script>
+<script src="libs/highcharts-8.1.2/modules/vector.js"></script>
+<script src="libs/highcharts-8.1.2/modules/wordcloud.js"></script>
+<script src="libs/highcharts-8.1.2/modules/xrange.js"></script>
+<script src="libs/highcharts-8.1.2/modules/tilemap.js"></script>
+<script src="libs/highcharts-8.1.2/modules/venn.js"></script>
+<script src="libs/highcharts-8.1.2/modules/gantt.js"></script>
+<script src="libs/highcharts-8.1.2/modules/timeline.js"></script>
+<script src="libs/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
+<script src="libs/highcharts-8.1.2/modules/bullet.js"></script>
+<script src="libs/highcharts-8.1.2/modules/coloraxis.js"></script>
+<script src="libs/highcharts-8.1.2/modules/dumbbell.js"></script>
+<script src="libs/highcharts-8.1.2/modules/lollipop.js"></script>
+<script src="libs/highcharts-8.1.2/modules/series-label.js"></script>
+<script src="libs/highcharts-8.1.2/plugins/motion.js"></script>
+<script src="libs/highcharts-8.1.2/custom/reset.js"></script>
+<script src="libs/highcharts-8.1.2/modules/boost.js"></script>
+<script src="libs/highchart-binding-0.8.2/highchart.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 <link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -120,14 +124,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -136,9 +142,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -195,6 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#도움이-될-만한-자료들"><i class="fa fa-check"></i>도움이 될 만한 자료들</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-지원-페이지"><i class="fa fa-check"></i>이 책의 지원 페이지</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#종목과-관련된-유의사항"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#세션정보"><i class="fa fa-check"></i>세션정보</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
 <li class="chapter" data-level="1.1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#데이터-구하기"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
@@ -418,7 +425,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 1</span> 퀀트 투자의 심장: 데이터와 프로그래밍</h1>
 <p>몇 년 전까지만 하더라도 <strong>퀀트 투자</strong>는 일반 투자자들에게 매우 낯선 영역이었지만, 최근에는 각종 커뮤니티와 매체를 통해 많은 사람들에게 익숙한 단어가 되었습니다. 퀀트 투자에서 ‘퀀트’란 모형을 기반으로 금융상품의 가격을 산정하거나, 이를 바탕으로투자를 하는 사람을 말합니다. 퀀트(Quant)라는 단어가 ‘계량적’을 의미하는 퀀티터티브(Quantitative)의 앞 글자를 따왔음을 생각하면 쉽게 이해가 될 것입니다.</p>
 <p>일반적으로 투자자들이 산업과 기업을 분석해 가치를 매기는 정성적인 투자법과는 달리, 퀀트 투자는 수학과 통계를 기반으로 전략을 만들고 이를 바탕으로 투자하는 정량적인 투자법을 의미합니다. 이처럼 데이터를 수집·가공한 후 이를 바탕으로 모델을 만들고 실행하는 단계는 데이터 과학의 업무 흐름도와 매우 유사합니다. 해들리 위컴
-(Hadley Wickham)<span class="citation">(Grolemund and Wickham <a href="#ref-grolemund2018r">2018</a>)</span>에 따르면 데이터 과학의 업무 과정은 그림 <a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fig:ds">1.1</a>과 같습니다.</p>
+(Hadley Wickham)<span class="citation">(Grolemund and Wickham <a href="#ref-grolemund2018r" role="doc-biblioref">2018</a>)</span>에 따르면 데이터 과학의 업무 과정은 그림 <a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fig:ds">1.1</a>과 같습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:ds"></span>
 <img src="images/ds_flow.png" alt="데이터 과학 업무 과정" width="70%" />
 <p class="caption">
@@ -492,16 +499,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><strong>ggplot2</strong>: 데이터를 시각화할 때 가장 많이 사용되는 패키지입니다. 물론 R에서 기본적으로 내장된 <code>plot()</code> 함수를 이용해도 시각화가 가능하지만, 해당 패키지를 이용하면 훨씬 다양하고 깔끔하게 데이터를 그림으로 표현할 수 있습니다.</p></li>
 </ul>
 <p>이 외에도 이 책에서는 다양한 패키지를 사용했으며, 아래의 코드를 실행하면 설치되지 않은 패키지를 설치할 수 있습니다.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">pkg =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;magrittr&#39;</span>, <span class="st">&#39;quantmod&#39;</span>, <span class="st">&#39;rvest&#39;</span>, <span class="st">&#39;httr&#39;</span>, <span class="st">&#39;jsonlite&#39;</span>,</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">        <span class="st">&#39;readr&#39;</span>, <span class="st">&#39;readxl&#39;</span>, <span class="st">&#39;stringr&#39;</span>, <span class="st">&#39;lubridate&#39;</span>, <span class="st">&#39;dplyr&#39;</span>,</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">        <span class="st">&#39;tidyr&#39;</span>, <span class="st">&#39;ggplot2&#39;</span>, <span class="st">&#39;corrplot&#39;</span>, <span class="st">&#39;dygraphs&#39;</span>,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">        <span class="st">&#39;highcharter&#39;</span>, <span class="st">&#39;plotly&#39;</span>, <span class="st">&#39;PerformanceAnalytics&#39;</span>,</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">        <span class="st">&#39;nloptr&#39;</span>, <span class="st">&#39;quadprog&#39;</span>, <span class="st">&#39;RiskPortfolios&#39;</span>, <span class="st">&#39;cccp&#39;</span>,</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">        <span class="st">&#39;timetk&#39;</span>, <span class="st">&#39;broom&#39;</span>, <span class="st">&#39;stargazer&#39;</span>, <span class="st">&#39;timeSeries&#39;</span>)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">new.pkg =<span class="st"> </span>pkg[<span class="op">!</span>(pkg <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="st">&quot;Package&quot;</span>])]</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="cf">if</span> (<span class="kw">length</span>(new.pkg)) {</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="kw">install.packages</span>(new.pkg, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)}</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-1"></a>pkg =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;magrittr&#39;</span>, <span class="st">&#39;quantmod&#39;</span>, <span class="st">&#39;rvest&#39;</span>, <span class="st">&#39;httr&#39;</span>, <span class="st">&#39;jsonlite&#39;</span>,</span>
+<span id="cb2-2"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-2"></a>        <span class="st">&#39;readr&#39;</span>, <span class="st">&#39;readxl&#39;</span>, <span class="st">&#39;stringr&#39;</span>, <span class="st">&#39;lubridate&#39;</span>, <span class="st">&#39;dplyr&#39;</span>,</span>
+<span id="cb2-3"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-3"></a>        <span class="st">&#39;tidyr&#39;</span>, <span class="st">&#39;ggplot2&#39;</span>, <span class="st">&#39;corrplot&#39;</span>, <span class="st">&#39;dygraphs&#39;</span>,</span>
+<span id="cb2-4"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-4"></a>        <span class="st">&#39;highcharter&#39;</span>, <span class="st">&#39;plotly&#39;</span>, <span class="st">&#39;PerformanceAnalytics&#39;</span>,</span>
+<span id="cb2-5"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-5"></a>        <span class="st">&#39;nloptr&#39;</span>, <span class="st">&#39;quadprog&#39;</span>, <span class="st">&#39;RiskPortfolios&#39;</span>, <span class="st">&#39;cccp&#39;</span>,</span>
+<span id="cb2-6"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-6"></a>        <span class="st">&#39;timetk&#39;</span>, <span class="st">&#39;broom&#39;</span>, <span class="st">&#39;stargazer&#39;</span>, <span class="st">&#39;timeSeries&#39;</span>)</span>
+<span id="cb2-7"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-7"></a></span>
+<span id="cb2-8"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-8"></a>new.pkg =<span class="st"> </span>pkg[<span class="op">!</span>(pkg <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="st">&quot;Package&quot;</span>])]</span>
+<span id="cb2-9"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-9"></a><span class="cf">if</span> (<span class="kw">length</span>(new.pkg)) {</span>
+<span id="cb2-10"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#cb2-10"></a>  <span class="kw">install.packages</span>(new.pkg, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)}</span></code></pre></div>
 
 </div>
 </div>
@@ -514,11 +521,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p><a href="https://www.quandl.com/" class="uri">https://www.quandl.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p><a href="https://www.tiingo.com/" class="uri">https://www.tiingo.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p><a href="https://finance.yahoo.com/" class="uri">https://finance.yahoo.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p><a href="https://en.wikipedia.org/wiki/List_of_programming_languages" class="uri">https://en.wikipedia.org/wiki/List_of_programming_languages</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p><a href="https://www.tiobe.com/tiobe-index/" class="uri">https://www.tiobe.com/tiobe-index/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p><a href="https://www.quandl.com/" class="uri">https://www.quandl.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://www.tiingo.com/" class="uri">https://www.tiingo.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://finance.yahoo.com/" class="uri">https://finance.yahoo.com/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p><a href="https://en.wikipedia.org/wiki/List_of_programming_languages" class="uri">https://en.wikipedia.org/wiki/List_of_programming_languages</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p><a href="https://www.tiobe.com/tiobe-index/" class="uri">https://www.tiobe.com/tiobe-index/</a><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>

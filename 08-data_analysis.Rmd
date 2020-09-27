@@ -241,15 +241,6 @@ data_market %>%
 
 위 예제는 시장과 섹터를 기준으로 데이터를 그룹화한 후 각 그룹별 PBR 중앙값을 구했습니다. 이처럼 그룹은 하나만이 아닌 원하는 만큼 나눌 수 있습니다.
 
----
-title: "ggplot_basic"
-output:
-  html_document:
-    toc: true
-    toc_float:
-      toc_collapsed: true
----
-
 ## `ggplot()` 기초
 
 R에서 기본적으로 제공하는 `plot()` 함수를 이용해도 시각화가 충분히 가능합니다. 그러나 데이터 과학자들에게 가장 많이 사랑받는 패키지 중 하나인 ggplot2 패키지의 `ggplot()` 함수를 사용하면 그림을 훨씬 아름답게 표현할 수 있으며 다양한 기능들을 매우 쉽게 사용할 수도 있습니다.

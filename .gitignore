@@ -9,3 +9,6 @@ data/KOR_fs/
 data/dart
 temp/
 render*.rds
+placeholder.Rcheck/
+placeholder*.tar.gz
+placeholder*.tgz

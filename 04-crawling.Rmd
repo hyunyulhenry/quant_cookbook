@@ -142,7 +142,7 @@ library(rvest)
 
 Sys.setlocale("LC_ALL", "English")
 
-url = 'http://kind.krx.co.kr/disclosure/todaydisclosure.do'
+url = 'https://kind.krx.co.kr/disclosure/todaydisclosure.do'
 data = POST(url, body = 
               list(
                 method = 'searchTodayDisclosureSub',
@@ -153,7 +153,7 @@ data = POST(url, body =
                 forward = 'todaydisclosure_sub',
                 chose = 'S',
                 todayFlag = 'Y',
-                selDate = '2018-12-28'
+                selDate = '2020-09-25'
                 ))
 
 data = read_html(data) %>%
@@ -177,12 +177,12 @@ Sys.setlocale("LC_ALL", "Korean")
 print(head(data))
 ```
 
-POST 형식의 경우 body에 들어가는 쿼리 내용을 바꾸어 원하는 데이터를 받을 수 있습니다. 만일 2019년 1월 8일 공시를 확인하고자 한다면 위의 코드에서 selDate만 2019-01-08로 변경해주면 됩니다. 아래 코드의 출력 결과물을 2019년 1월 8일 공시와 비교하면 동일한 결과임을 확인할 수 있습니다.
+POST 형식의 경우 body에 들어가는 쿼리 내용을 바꾸어 원하는 데이터를 받을 수 있습니다. 만일 2020년 9월 18일 공시를 확인하고자 한다면 위의 코드에서 selDate만 2020-09-18로 변경해주면 됩니다. 아래 코드의 출력 결과물을 2019년 9월 18일 공시와 비교하면 동일한 결과임을 확인할 수 있습니다.
 
 ```{r results="hide"}
 Sys.setlocale("LC_ALL", "English")
 
-url = 'http://kind.krx.co.kr/disclosure/todaydisclosure.do'
+url = 'https://kind.krx.co.kr/disclosure/todaydisclosure.do'
 data = POST(url, body =
               list(
                 method = 'searchTodayDisclosureSub',
@@ -193,7 +193,7 @@ data = POST(url, body =
                 forward = 'todaydisclosure_sub',
                 chose = 'S',
                 todayFlag = 'Y',
-                selDate = '2019-01-08'
+                selDate = '2020-09-18'
                 ))
 
 data = read_html(data) %>%
