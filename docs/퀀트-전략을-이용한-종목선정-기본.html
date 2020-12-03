@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-09-27" />
+<meta name="date" content="2020-12-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1309,7 +1309,7 @@ Operating Efficiency
 <span id="cb350-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-15"></a>F_<span class="dv">8</span> =<span class="st"> </span><span class="kw">as.integer</span>(MARGIN[, num_col] <span class="op">-</span></span>
 <span id="cb350-16"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-16"></a><span class="st">                   </span>MARGIN[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
 <span id="cb350-17"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-17"></a>F_<span class="dv">9</span> =<span class="st"> </span><span class="kw">as.integer</span>(TURN[,num_col] <span class="op">-</span><span class="st"> </span>TURN[,(num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
-<p><code>ncol()</code> 함수를 이용해 열 개수를 구해줍니다. 가장 최근년도의 재무제표가 가장 오른쪽에 위치하고 있으므로, 해당 변수를 통해 최근년도 데이터만을 선택할 수 있습니다. <strong>그러나 1월~4월의 경우 전년도 재무제표가 일부만 들어오는 경향이 있으므로, 을 통해 전전년도 데이터를 사용해야 합니다.</strong> 따라서 <code>Sys.Date()</code> 함수를 통해 현재 날짜를 추출한 후, lubridate 패키지의 <code>month()</code> 함수를 이용해 해당 월을 계산합니다. 만일 현재 날짜가 1~4월 일 경우 <code>ncol(KOR_fs[[1]]) - 1</code>을 이용해 전전년도 데이터를 선택하며, 그렇지 않을 경우(5~12월) 전년도 데이터를 선택합니다.</p>
+<p><code>ncol()</code> 함수를 이용해 열 개수를 구해줍니다. 가장 최근년도의 재무제표가 가장 오른쪽에 위치하고 있으므로, 해당 변수를 통해 최근년도 데이터만을 선택할 수 있습니다. <strong>그러나 1월~4월의 경우 전년도 재무제표가 일부만 들어오는 경향이 있으므로, 전전년도 데이터를 사용해야 합니다.</strong> 따라서 <code>Sys.Date()</code> 함수를 통해 현재 날짜를 추출한 후, lubridate 패키지의 <code>month()</code> 함수를 이용해 해당 월을 계산합니다. 만일 현재 날짜가 1~4월 일 경우 <code>ncol(KOR_fs[[1]]) - 1</code>을 이용해 전전년도 데이터를 선택하며, 그렇지 않을 경우(5~12월) 전년도 데이터를 선택합니다.</p>
 <p><code>as.integer()</code> 함수는 TRUE일 경우 1을 반환하고 FALSE일 경우 0을 반환하는 함수로서, F-Score 지표의 점수를 매기는 데 매우 유용합니다. 점수 기준은 다음과 같습니다.</p>
 <ol style="list-style-type: decimal">
 <li>ROA가 양수면 1점, 그렇지 않으면 0점</li>

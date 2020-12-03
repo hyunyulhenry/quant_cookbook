@@ -1,7 +1,7 @@
 --- 
 title: "R을 이용한 퀀트 투자 포트폴리오 만들기"
 author: "이현열"
-date: "2020-09-27"
+date: "2020-12-03"
 output:
   bookdown::gitbook:
     includes:
@@ -159,7 +159,7 @@ API를 통한 데이터 수집과 `getSymbols()` 함수의 사용 방법에 대�
 ```
 ## R version 3.6.3 (2020-02-29)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.04.6 LTS
+## Running under: Ubuntu 16.04.7 LTS
 ## 
 ## Matrix products: default
 ## BLAS:   /usr/lib/atlas-base/atlas/libblas.so.3.0
