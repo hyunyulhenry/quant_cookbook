@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2020-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -466,7 +466,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb126-4"><a href="금융-데이터-수집하기-심화.html#cb126-4"></a>price =<span class="st"> </span><span class="kw">xts</span>(<span class="ot">NA</span>, <span class="dt">order.by =</span> <span class="kw">Sys.Date</span>())</span>
 <span id="cb126-5"><a href="금융-데이터-수집하기-심화.html#cb126-5"></a><span class="kw">print</span>(price)</span></code></pre></div>
 <pre><code>##            [,1]
-## 2020-12-03   NA</code></pre>
+## 2020-12-20   NA</code></pre>
 <ol style="list-style-type: decimal">
 <li>data 폴더 내에 KOR_price 폴더를 생성합니다.</li>
 <li>i = 1을 입력합니다. 향후 for loop 구문을 통해 i 값만 변경하면 모든 종목의 주가를 다운로드할 수 있습니다.</li>
@@ -485,12 +485,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb128-10"><a href="금융-데이터-수집하기-심화.html#cb128-10"></a><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&#39;data&#39;</span>) </span>
 <span id="cb128-11"><a href="금융-데이터-수집하기-심화.html#cb128-11"></a></span>
 <span id="cb128-12"><a href="금융-데이터-수집하기-심화.html#cb128-12"></a><span class="kw">print</span>(<span class="kw">head</span>(data_html))</span></code></pre></div>
-<pre><code>## [1] &quot;20181126|42150|42800|42100|42600|6613009&quot; 
-## [2] &quot;20181127|42900|43100|42500|43050|8367091&quot; 
-## [3] &quot;20181128|42800|43200|42750|43150|6943099&quot; 
-## [4] &quot;20181129|43850|43850|42900|43150|8473511&quot; 
-## [5] &quot;20181130|43450|44000|41750|41850|19775519&quot;
-## [6] &quot;20181203|42750|43400|42400|43250|12110702&quot;</code></pre>
+<pre><code>## [1] &quot;20181211|40600|40700|40200|40250|10638766&quot;
+## [2] &quot;20181212|40250|40700|40150|40450|12024279&quot;
+## [3] &quot;20181213|40650|40750|40000|40000|26254646&quot;
+## [4] &quot;20181214|40200|40200|38700|38950|19671783&quot;
+## [5] &quot;20181217|38650|39600|38650|39150|11532968&quot;
+## [6] &quot;20181218|38300|39200|38300|38900|11042101&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>paste0()</code> 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.</li>
 <li><code>GET()</code> 함수를 통해 페이지의 데이터를 불러옵니다.</li>
@@ -503,14 +503,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb130-3"><a href="금융-데이터-수집하기-심화.html#cb130-3"></a>price =<span class="st"> </span><span class="kw">read_delim</span>(data_html, <span class="dt">delim =</span> <span class="st">&#39;|&#39;</span>)</span>
 <span id="cb130-4"><a href="금융-데이터-수집하기-심화.html#cb130-4"></a><span class="kw">print</span>(<span class="kw">head</span>(price))</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 6
-##   `20181126` `42150` `42800` `42100` `42600` `6613009`
-##        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
-## 1   20181127   42900   43100   42500   43050   8367091
-## 2   20181128   42800   43200   42750   43150   6943099
-## 3   20181129   43850   43850   42900   43150   8473511
-## 4   20181130   43450   44000   41750   41850  19775519
-## 5   20181203   42750   43400   42400   43250  12110702
-## 6   20181204   42650   42900   41900   42150  14347746</code></pre>
+##   `20181211` `40600` `40700` `40200` `40250` `10638766`
+##        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+## 1   20181212   40250   40700   40150   40450   12024279
+## 2   20181213   40650   40750   40000   40000   26254646
+## 3   20181214   40200   40200   38700   38950   19671783
+## 4   20181217   38650   39600   38650   39150   11532968
+## 5   20181218   38300   39200   38300   38900   11042101
+## 6   20181219   38900   39350   38850   39100    9942037</code></pre>
 <p>readr 패키지의 <code>read_delim()</code> 함수를 쓰면 구분자로 이루어진 데이터를 테이블로 쉽게 변경할 수 있습니다. 데이터를 확인해보면 테이블 형태로 변경되었으며 각 열은 날짜, 시가, 고가, 저가, 종가, 거래량을 의미합니다. 이 중 우리가 필요한 날짜와 종가를 선택한 후 데이터 클렌징을 해줍니다.</p>
 <div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="금융-데이터-수집하기-심화.html#cb132-1"></a><span class="kw">library</span>(lubridate)</span>
 <span id="cb132-2"><a href="금융-데이터-수집하기-심화.html#cb132-2"></a><span class="kw">library</span>(timetk)</span>
@@ -523,12 +523,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb132-9"><a href="금융-데이터-수집하기-심화.html#cb132-9"></a> </span>
 <span id="cb132-10"><a href="금융-데이터-수집하기-심화.html#cb132-10"></a><span class="kw">print</span>(<span class="kw">tail</span>(price))</span></code></pre></div>
 <pre><code>##            Price
-## 2020-11-26 68000
-## 2020-11-27 68200
-## 2020-11-30 66700
-## 2020-12-01 67800
-## 2020-12-02 69500
-## 2020-12-03 69700</code></pre>
+## 2020-12-11 73400
+## 2020-12-14 73800
+## 2020-12-15 73800
+## 2020-12-16 73800
+## 2020-12-17 73300
+## 2020-12-18 73000</code></pre>
 <ol style="list-style-type: decimal">
 <li>날짜에 해당하는 첫 번째 열과, 종가에 해당하는 다섯 번째 열만 선택해 저장합니다.</li>
 <li>티블 형태의 데이터를 데이터 프레임 형태로 변경합니다.</li>
@@ -698,7 +698,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li>data 폴더 내에 KOR_fs 폴더를 생성합니다.</li>
 <li><code>Sys.setlocale()</code> 함수를 통해 로케일 언어를 English로 설정합니다.</li>
-<li>url을 입력한 후 <code>GET()</code> 함수를 통해 페이지 내용을 받아오며, <code>user_agent()</code> 항목에 웹브라우저 구별을 입력해줍니다. 해당 사이트는 크롤러와 같이 정체가 불분명한 웹브라우저를 통한 접속이 막혀 있어, 마치 모질라 혹은 크롬을 통해 접속한 것 처럼 데이터를 요청합니다. 다양한 웹브라저 리스트는 아래 링크에 나와있습니다.</li>
+<li>url을 입력한 후 <code>GET()</code> 함수를 통해 페이지 내용을 받아오며, <code>user_agent()</code> 항목에 웹브라우저 구별을 입력해줍니다. 해당 사이트는 크롤러와 같이 정체가 불분명한 웹브라우저를 통한 접속이 막혀 있어, 마치 모질라 혹은 크롬을 통해 접속한 것 처럼 데이터를 요청합니다. 다양한 웹브라우저 리스트는 아래 링크에 나와있습니다.</li>
 </ol>
 <pre><code>http://www.useragentstring.com/pages/useragentstring.php</code></pre>
 <ol start="4" style="list-style-type: decimal">
@@ -905,7 +905,7 @@ Sales (매출액)
 <span id="cb158-11"><a href="금융-데이터-수집하기-심화.html#cb158-11"></a><span class="st">  </span><span class="kw">parse_number</span>()</span>
 <span id="cb158-12"><a href="금융-데이터-수집하기-심화.html#cb158-12"></a></span>
 <span id="cb158-13"><a href="금융-데이터-수집하기-심화.html#cb158-13"></a><span class="kw">print</span>(price)</span></code></pre></div>
-<pre><code>## [1] 69500</code></pre>
+<pre><code>## [1] 73000</code></pre>
 <ol style="list-style-type: decimal">
 <li>url을 입력한 후, <code>GET()</code> 함수를 이용해 데이터를 불러오며, 역시나 user_agent를 추가해 줍니다.</li>
 <li><code>read_html()</code> 함수를 이용해 HTML 데이터를 불러온 후 <code>html_node()</code> 함수에 앞서 구한 Xpath를 입력해 해당 지점의 데이터를 추출합니다.</li>
@@ -949,7 +949,7 @@ Sales (매출액)
 <span id="cb165-4"><a href="금융-데이터-수집하기-심화.html#cb165-4"></a></span>
 <span id="cb165-5"><a href="금융-데이터-수집하기-심화.html#cb165-5"></a><span class="kw">print</span>(data_value)</span></code></pre></div>
 <pre><code>##    PER    PBR    PCR    PSR 
-## 19.293  1.578  9.142  1.801</code></pre>
+## 20.265  1.658  9.603  1.891</code></pre>
 <p>분자에는 현재 주가를 입력하며, 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 단, 주가는 원 단위, 재무 데이터는 억 원 단위이므로, 둘 사이에 단위를 동일하게 맞춰주기 위해 분모에 억을 곱합니다. 또한 가치지표가 음수인 경우는 NA로 변경해줍니다.</p>
 <p>결과를 확인해보면 4가지 가치지표가 잘 계산되었습니다.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="금융-데이터-수집하기-심화.html#cb167-1"></a><span class="kw">write.csv</span>(data_value, <span class="st">&#39;data/KOR_value/005930_value.csv&#39;</span>)</span></code></pre></div>
@@ -1133,7 +1133,7 @@ Sales (매출액)
 <span id="cb172-7"><a href="금융-데이터-수집하기-심화.html#cb172-7"></a>codezip_data =<span class="st"> </span><span class="kw">GET</span>(codezip_url)</span>
 <span id="cb172-8"><a href="금융-데이터-수집하기-심화.html#cb172-8"></a><span class="kw">print</span>(codezip_data)</span></code></pre></div>
 <pre><code>## Response [https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=b1a630e527b0e5ff5bd58ed81b49825017fa80b8]
-##   Date: 2020-12-03 11:07
+##   Date: 2020-12-20 12:08
 ##   Status: 200
 ##   Content-Type: application/x-msdownload
 ##   Size: 1.4 MB
@@ -1157,7 +1157,7 @@ Sales (매출액)
 <span id="cb177-8"><a href="금융-데이터-수집하기-심화.html#cb177-8"></a>nm =<span class="st"> </span><span class="kw">unzip</span>(tf, <span class="dt">list =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb177-9"><a href="금융-데이터-수집하기-심화.html#cb177-9"></a><span class="kw">print</span>(nm)</span></code></pre></div>
 <pre><code>##           Name   Length Date
-## 1 CORPCODE.xml 16012575 &lt;NA&gt;</code></pre>
+## 1 CORPCODE.xml 16039857 &lt;NA&gt;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>tempfile()</code> 함수 통해 빈 .zip 파일을 만듭니다.</li>
 <li><code>writeBin()</code> 함수는 바이너리 형태의 파일을 저장하는 함수이며, <code>content()</code>를 통해 첨부 파일 내용을 raw 형태로 저장합니다. 파일명은 위에서 만든 tf로 합니다.</li>
@@ -1211,7 +1211,7 @@ Sales (매출액)
 <li><code>data.frame()</code> 함수를 통해 데이터프레임 형식으로 묶어주도록 합니다.</li>
 </ol>
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="금융-데이터-수집하기-심화.html#cb182-1"></a><span class="kw">nrow</span>(corp_list)</span></code></pre></div>
-<pre><code>## [1] 83064</code></pre>
+<pre><code>## [1] 83201</code></pre>
 <div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="금융-데이터-수집하기-심화.html#cb184-1"></a><span class="kw">head</span>(corp_list)</span></code></pre></div>
 <pre><code>##       code                               name stock
 ## 1 00434003                               다코      
@@ -1220,7 +1220,7 @@ Sales (매출액)
 ## 4 00432403                           한라판지      
 ## 5 00388953 크레디피아제이십오차유동화전문회사      
 ## 6 00179984                       연방건설산업</code></pre>
-<p>종목수를 확인해보면 83064 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.</p>
+<p>종목수를 확인해보면 83201 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="금융-데이터-수집하기-심화.html#cb186-1"></a>corp_list =<span class="st"> </span>corp_list[corp_list<span class="op">$</span>stock <span class="op">!=</span><span class="st"> &quot; &quot;</span>, ]</span>
 <span id="cb186-2"><a href="금융-데이터-수집하기-심화.html#cb186-2"></a></span>
 <span id="cb186-3"><a href="금융-데이터-수집하기-심화.html#cb186-3"></a><span class="kw">write.csv</span>(corp_list, <span class="st">&#39;data/corp_list.csv&#39;</span>)</span></code></pre></div>
@@ -1259,27 +1259,27 @@ Sales (매출액)
 <span id="cb188-2"><a href="금융-데이터-수집하기-심화.html#cb188-2"></a>notice_data =<span class="st"> </span>notice_data[[<span class="st">&#39;list&#39;</span>]]</span>
 <span id="cb188-3"><a href="금융-데이터-수집하기-심화.html#cb188-3"></a></span>
 <span id="cb188-4"><a href="금융-데이터-수집하기-심화.html#cb188-4"></a><span class="kw">head</span>(notice_data)</span></code></pre></div>
-<pre><code>##   corp_code      corp_name stock_code corp_cls
-## 1  00390860         MP그룹     065150        K
-## 2  00235147         에스모     073070        K
-## 3  00235147         에스모     073070        K
-## 4  00151863 센트럴인사이트     012600        Y
-## 5  00976615           틸론     217880        N
-## 6  00976615           틸론     217880        N
-##                                                        report_nm
-## 1 기타시장안내(코스닥시장위원회 개최 결과 및 심의속개 결정 안내)
-## 2                    주권매매거래정지기간변경(상장폐지사유 발생)
-## 3                기타시장안내(코스닥시장위원회 심의결과 등 안내)
-## 4                                     [기재정정]주주총회소집결의
-## 5                         소송등의판결ㆍ결정(일정금액이상의청구)
-## 6               [기재정정]소송등의제기ㆍ신청(일정금액이상의청구)
+<pre><code>##   corp_code corp_name stock_code corp_cls
+## 1  00249441  씨씨에스     066790        K
+## 2  00545929    제넥신     095700        K
+## 3  00167208  흥아해운     003280        Y
+## 4  00167208  흥아해운     003280        Y
+## 5  01363818  롯데리츠     330590        Y
+## 6  00181712        SK     034730        Y
+##                                                                                                   report_nm
+## 1                                                                    기타시장안내(개선계획 이행내역서 제출)
+## 2 투자판단관련주요경영사항(코로나바이러스감염증-19 (COVID-19) 예방백신 (GX-19) 임상 제1/2a상 임상시험 종료)
+## 3                                                                                [기재정정]임시주주총회결과
+## 4                                                                                    기타경영사항(자율공시)
+## 5                                                                [첨부정정]주요사항보고서(유형자산양수결정)
+## 6                                                             타인에대한채무보증결정(자회사의 주요경영사항)
 ##         rcept_no         flr_nm rcept_dt rm
-## 1 20201203900523 코스닥시장본부 20201203 코
-## 2 20201203900521 코스닥시장본부 20201203 코
-## 3 20201203900522 코스닥시장본부 20201203 코
-## 4 20201203800518 센트럴인사이트 20201203 유
-## 5 20201203600505           틸론 20201203 넥
-## 6 20201203600510           틸론 20201203 넥</code></pre>
+## 1 20201218900715 코스닥시장본부 20201218 코
+## 2 20201218900783         제넥신 20201218 코
+## 3 20201218800815       흥아해운 20201218 유
+## 4 20201218800814       흥아해운 20201218 유
+## 5 20201218000648       롯데리츠 20201218   
+## 6 20201218800792             SK 20201218 유</code></pre>
 <p><code>fromJSON()</code> 함수를 통해 JSON 데이터를 받은 후 list를 확인해보면 우리가 원하는 공시정보, 즉 일주일 전부터 100건의 공시 정보가 다운로드 되어 있습니다.</p>
 </div>
 <div id="특정-기업의-공시-검색" class="section level4">
@@ -1307,26 +1307,26 @@ Sales (매출액)
 ## 5  00126380  삼성전자     005930        Y
 ## 6  00126380  삼성전자     005930        Y
 ##                                report_nm       rcept_no
-## 1 임원ㆍ주요주주특정증권등소유상황보고서 20201203000103
-## 2                 기타경영사항(자율공시) 20201201800263
-## 3                 기타경영사항(자율공시) 20201201800261
-## 4 동일인등출자계열회사와의상품ㆍ용역거래 20201130001711
-## 5                 특수관계인과의보험거래 20201130001667
-## 6                 특수관계인과의보험거래 20201130001661
-##     flr_nm rcept_dt rm
-## 1     최철 20201203   
-## 2 삼성전자 20201201 유
-## 3 삼성전자 20201201 유
-## 4 삼성전자 20201130 공
-## 5 삼성전자 20201130 공
-## 6 삼성전자 20201130 공</code></pre>
+## 1 임원ㆍ주요주주특정증권등소유상황보고서 20201218000643
+## 2 임원ㆍ주요주주특정증권등소유상황보고서 20201217000257
+## 3 임원ㆍ주요주주특정증권등소유상황보고서 20201217000239
+## 4 임원ㆍ주요주주특정증권등소유상황보고서 20201215000506
+## 5 임원ㆍ주요주주특정증권등소유상황보고서 20201215000074
+## 6 임원ㆍ주요주주특정증권등소유상황보고서 20201215000061
+##   flr_nm rcept_dt rm
+## 1 지송하 20201218   
+## 2 이상훈 20201217   
+## 3 양장규 20201217   
+## 4 최재혁 20201215   
+## 5 전승준 20201215   
+## 6 김윤재 20201215</code></pre>
 <p>역시나 JSON 형태로 손쉽게 공시정보를 다운로드 받을 수 있습니다. 이 중 rcept_no는 공시번호에 해당하며, 해당 데이터를 이용해 공시에 해당하는 url에 접속을 할 수도 있습니다.</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="금융-데이터-수집하기-심화.html#cb193-1"></a>notice_url_exam =<span class="st"> </span>notice_data_ss[<span class="dv">1</span>, <span class="st">&#39;rcept_no&#39;</span>]</span>
 <span id="cb193-2"><a href="금융-데이터-수집하기-심화.html#cb193-2"></a>notice_dart_url =<span class="st"> </span><span class="kw">paste0</span>(</span>
 <span id="cb193-3"><a href="금융-데이터-수집하기-심화.html#cb193-3"></a>  <span class="st">&#39;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=&#39;</span>,notice_url_exam)</span>
 <span id="cb193-4"><a href="금융-데이터-수집하기-심화.html#cb193-4"></a></span>
 <span id="cb193-5"><a href="금융-데이터-수집하기-심화.html#cb193-5"></a><span class="kw">print</span>(notice_dart_url)</span></code></pre></div>
-<pre><code>## [1] &quot;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20201203000103&quot;</code></pre>
+<pre><code>## [1] &quot;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20201218000643&quot;</code></pre>
 <p>dart 홈페이지의 공시에 해당하는 url과 첫번째 공시에 해당하는 공시번호를 합쳐주도록 합니다.</p>
 <p>위 url에 접속하여 해당 공시를 좀 더 자세하게 확인할 수 있습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-47"></span>

@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2020-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -490,12 +490,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2007-01-09     3.087     3.321    3.041      3.306
 ## 2007-01-10     3.384     3.493    3.337      3.464
 ##            AAPL.Volume AAPL.Adjusted
-## 2007-01-03  1238319600         2.561
-## 2007-01-04   847260400         2.618
-## 2007-01-05   834741600         2.599
-## 2007-01-08   797106800         2.612
-## 2007-01-09  3349298400         2.829
-## 2007-01-10  2952880000         2.964</code></pre>
+## 2007-01-03  1238319600         2.582
+## 2007-01-04   847260400         2.639
+## 2007-01-05   834741600         2.620
+## 2007-01-08   797106800         2.633
+## 2007-01-09  3349298400         2.852
+## 2007-01-10  2952880000         2.988</code></pre>
 <p>먼저 <code>getSymbols()</code> 함수 내에 애플의 티커인 AAPL을 입력합니다. 티커와 동일한 변수인 AAPL이 생성되며, 주가 데이터가 다운로드된 후 xts 형태로 입력됩니다.</p>
 <p>다운로드 결과로 총 6개의 열이 생성됩니다. Open은 시가, High는 고가, Low는 저가, Close는 종가를 의미합니다. 또한 Volume은 거래량을 의미하며, Adjusted는 배당이 반영된 수정주가를 의미합니다. 이 중 가장 많이 사용되는 데이터는 Adjusted, 즉 배당이 반영된 수정주가입니다.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="api를-이용한-데이터-수집.html#cb33-1"></a><span class="kw">chart_Series</span>(<span class="kw">Ad</span>(AAPL))</span></code></pre></div>
@@ -513,12 +513,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2000-01-07    0.8616    0.9018   0.8527     0.8884
 ## 2000-01-10    0.9107    0.9129   0.8460     0.8728
 ##            AAPL.Volume AAPL.Adjusted
-## 2000-01-03   535796800        0.8552
-## 2000-01-04   512377600        0.7831
-## 2000-01-05   778321600        0.7945
-## 2000-01-06   767972800        0.7258
-## 2000-01-07   460734400        0.7601
-## 2000-01-10   505064000        0.7468</code></pre>
+## 2000-01-03   535796800        0.8622
+## 2000-01-04   512377600        0.7895
+## 2000-01-05   778321600        0.8010
+## 2000-01-06   767972800        0.7317
+## 2000-01-07   460734400        0.7664
+## 2000-01-10   505064000        0.7529</code></pre>
 <p>from에는 시작시점을 입력하고 to에는 종료시점을 입력하면 해당 기간의 데이터가 다운로드됩니다.</p>
 <p><code>getSymbols()</code> 함수를 통해 다운로드한 데이터는 자동으로 티커와 동일한 변수명에 저장됩니다. 만일 티커명이 아닌 원하는 변수명에 데이터를 저장하려면 auto.assign 인자를 FALSE로 설정해주면 다운로드한 데이터가 원하는 변수에 저장됩니다.</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="api를-이용한-데이터-수집.html#cb36-1"></a>ticker =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;FB&#39;</span>, <span class="st">&#39;NVDA&#39;</span>) </span>
@@ -548,11 +548,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2007-01-09     22.64     22.79    22.14      22.17
 ## 2007-01-10     21.93     23.47    21.60      23.26
 ##            NVDA.Volume NVDA.Adjusted
-## 2007-01-03    28870500         22.12
-## 2007-01-04    19932400         22.02
-## 2007-01-05    31083600         20.64
-## 2007-01-08    16431700         20.79
-## 2007-01-09    19104100         20.39
+## 2007-01-03    28870500         22.11
+## 2007-01-04    19932400         22.01
+## 2007-01-05    31083600         20.63
+## 2007-01-08    16431700         20.78
+## 2007-01-09    19104100         20.38
 ## 2007-01-10    27718600         21.39</code></pre>
 <p>한 번에 여러 종목의 주가를 다운로드할 수도 있습니다. 위 예제와 같이 페이스북과 엔비디아의 티커인 FB와 NVDA를 ticker 변수에 입력하고 <code>getSymbols()</code> 함수에 티커를 입력한 변수를 넣으면 두 종목의 주가가 순차적으로 다운로드됩니다.</p>
 </div>
@@ -615,12 +615,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;DEXKOUS&quot;</code></pre>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="api를-이용한-데이터-수집.html#cb57-1"></a><span class="kw">tail</span>(DEXKOUS)</span></code></pre></div>
 <pre><code>##            DEXKOUS
-## 2020-11-18    1106
-## 2020-11-19    1115
-## 2020-11-20    1114
-## 2020-11-23    1115
-## 2020-11-24    1111
-## 2020-11-25    1107</code></pre>
+## 2020-12-04    1082
+## 2020-12-07    1082
+## 2020-12-08    1085
+## 2020-12-09    1084
+## 2020-12-10    1087
+## 2020-12-11    1091</code></pre>
 <p>해당 티커를 입력하면, FRED 웹사이트와 동일한 데이터가 다운로드됩니다. 이 외에도 509,000여 개의 방대한 FRED 데이터를 해당 함수를 통해 손쉽게 R에서 다운로드할 수 있습니다.</p>
 
 </div>

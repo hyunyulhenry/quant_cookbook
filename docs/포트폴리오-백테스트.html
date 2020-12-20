@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2020-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -580,8 +580,8 @@ EOP.Value
 <p>글로벌 자산의 ETF 데이터 중 주식(S&amp;P 500)과 채권(미국 장기채)에 해당하는 데이터를 다운로드한 후 수익률을 계산합니다.</p>
 <div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="포트폴리오-백테스트.html#cb491-1"></a><span class="kw">cor</span>(rets)</span></code></pre></div>
 <pre><code>##              SPY.Adjusted TLT.Adjusted
-## SPY.Adjusted       1.0000      -0.4408
-## TLT.Adjusted      -0.4408       1.0000</code></pre>
+## SPY.Adjusted       1.0000      -0.4406
+## TLT.Adjusted      -0.4406       1.0000</code></pre>
 <p><code>cor()</code> 함수를 통해 두 자산간의 상관관계를 확인해보면 -0.44로써 매우 낮은 상관관계를 보이며, 강한 분산효과를 기대해볼 수 있습니다.</p>
 <div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="포트폴리오-백테스트.html#cb493-1"></a>portfolio =<span class="st"> </span><span class="kw">Return.portfolio</span>(<span class="dt">R =</span> rets,</span>
 <span id="cb493-2"><a href="포트폴리오-백테스트.html#cb493-2"></a>                             <span class="dt">weights =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="fl">0.4</span>),</span>
@@ -1060,7 +1060,7 @@ EOP.Value
 ## [131] 2727 2748 2768 2789 2808 2829 2850 2872 2893 2914
 ## [141] 2937 2956 2979 3000 3019 3040 3059 3080 3101 3123
 ## [151] 3143 3165 3187 3207 3230 3250 3271 3292 3311 3333
-## [161] 3354 3374 3396 3418 3439 3460 3482 3502 3504</code></pre>
+## [161] 3354 3374 3396 3418 3439 3460 3482 3502 3516</code></pre>
 <div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="포트폴리오-백테스트.html#cb501-1"></a>wts =<span class="st"> </span><span class="kw">list</span>()</span>
 <span id="cb501-2"><a href="포트폴리오-백테스트.html#cb501-2"></a>lookback =<span class="st"> </span><span class="dv">10</span></span></code></pre></div>
 <p>먼저 xts 패키지의 <code>endpoints()</code> 함수를 이용해 매월 말일의 위치를 구합니다. 해당 함수는 <code>endpoints(x, on= 'months', k=1)</code>의 형태로 이루어지며 x는 시계열 데이터, on은 원하는 기간, k는 구간 길이를 의미합니다. 즉, 시계열 데이터에서 월말에 해당하는 부분의 위치를 반환하며, 매월이 아닌 weeks, quarters, years도 입력이 가능합니다. 결과적으로 ep에는 rets의 인덱스 중 매월 말일에 해당하는 부분의 위치가 구해집니다.</p>
@@ -1070,14 +1070,14 @@ EOP.Value
 <span id="cb502-3"><a href="포트폴리오-백테스트.html#cb502-3"></a></span>
 <span id="cb502-4"><a href="포트폴리오-백테스트.html#cb502-4"></a><span class="kw">head</span>(sub_price, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            SPY.Adjusted
-## 2007-01-03        106.9
-## 2007-01-04        107.2
-## 2007-01-05        106.3</code></pre>
+## 2007-01-03        106.5
+## 2007-01-04        106.7
+## 2007-01-05        105.9</code></pre>
 <div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="포트폴리오-백테스트.html#cb504-1"></a><span class="kw">tail</span>(sub_price, <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##            SPY.Adjusted
-## 2007-10-26        117.7
-## 2007-10-29        118.1
-## 2007-10-30        117.3</code></pre>
+## 2007-10-26        117.2
+## 2007-10-29        117.6
+## 2007-10-30        116.8</code></pre>
 <div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="포트폴리오-백테스트.html#cb506-1"></a>sma =<span class="st"> </span><span class="kw">mean</span>(sub_price)</span>
 <span id="cb506-2"><a href="포트폴리오-백테스트.html#cb506-2"></a></span>
 <span id="cb506-3"><a href="포트폴리오-백테스트.html#cb506-3"></a>wt =<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>)</span>

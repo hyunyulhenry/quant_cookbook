@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2020-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -360,7 +360,7 @@
 <div id="header">
 <h1 class="title">R을 이용한 퀀트 투자 포트폴리오 만들기</h1>
 <p class="author"><em>이현열</em></p>
-<p class="date"><em>2020-12-03</em></p>
+<p class="date"><em>2020-12-20</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered">
 <h1>Welcome</h1>
@@ -372,7 +372,7 @@
 <p>책 발간 이후 업데이트 내용은 다음과 같습니다.</p>
 <ul>
 <li><p>2020년 9월 26일: 5장 [한국거래소의 산업별 현황 및 개별지표 크롤링] 부분이 R 4.0 이상 버젼에서 잘 작동하지 않는 문제가 발생하고 있습니다. R 3.6 버젼에서 실행해주시길 바랍니다. (<a href="https://rstudio.cloud/" class="uri">https://rstudio.cloud/</a> 에서는 원하는 R 버젼으로 프로그램 실행이 가능합니다.) 해당 버젼에서도 안될 경우 session을 재시작하면 제대로 실행이 됩니다.</p></li>
-<li><p>2020년 9월 26일: 4장 [기업공시채널에서 오늘의 공시 불러오기]에서 POST 부분의 url이 기존 <strong>http</strong>://kind.krx.co.kr/disclosure/todaydisclosure.do 에서 <strong>https</strong>://kind.krx.co.kr/disclosure/todaydisclosure.do 로 변경되었습니다. (http -&gt; https)</p></li>
+<li><p>2020년 9월 26일: 4장 [기업공시채널에서 오늘의 공시 불러오기]에서 POST 부분의 url이 기존 <em>htt</em>://kind.krx.co.kr/disclosure/todaydisclosure.do* 에서 <em><a href="https://dev-kind.krx.co.kr/disclosure/todaydisclosure.do" class="uri">https://dev-kind.krx.co.kr/disclosure/todaydisclosure.do</a></em> 로 변경되었습니다.</p></li>
 <li><p>2020년 4월 27일: 9장 [금융 데이터 수집하기 (심화)]에 [DART의 Open API를 이용한 데이터 수집하기] 챕터를 추가하였습니다. 이를 통해 더욱 다양한 데이터를 수집할 수 있습니다.</p></li>
 <li><p>2020년 4월 7일: 각 페이지 하단에 질문/답변 기능을 추가하였습니다. 이제 블로그나 이메일, SNS 보다는 웹북에 질문을 남겨주시기 바랍니다.</p></li>
 <li><p>2020년 3월 22일: 11장 [포트폴리오 구성]에 실무에서 많이 사용되는 인덱스 포트폴리오 및 인헨스드 인덱스 포트폴리오 구성 방법을 추가하였습니다.</p></li>
@@ -420,7 +420,7 @@ API를 통한 데이터 수집과 <code>getSymbols()</code> 함수의 사용 방
 <p><strong>CHAPTER 10 퀀트 전략을 이용한 종목 선정 심화</strong>
 단순 종목 선정을 넘어 실무에서 사용되는 섹터 중립 포트폴리오 및 이상치 제거와 팩터 결합 방법, 마법공식 및 멀티팩터에 대해 살펴봅니다.</p>
 <p><strong>CHAPTER 11 포트폴리오 구성</strong>
-최적화 패키지를 이용한 포트폴리오 구성에서 가장 대중적으로 사용되는 최소분산 포트폴리오, 최대분산효과 포트폴리오, 위험균형 포트폴리오를 구현합니다.</p>
+최적화 패키지를 이용한 포트폴리오 구성에서 가장 대중적으로 사용되는 최소분산 포트폴리오, 최대분산효과 포트폴리오, 위험균형 포트폴리오를 구현합니다. 또한 실무에서 많이 사용되는 인덱스 포트폴리오 및 인헨스드 인덱스 포트폴리오 구성 방법을 살펴봅니다.</p>
 <p><strong>CHAPTER 12 포트폴리오 백테스트</strong>
 <code>Return.portfolio()</code> 함수를 이용한 백테스트 방법에 대해 살펴보겠습니다.</p>
 <p><strong>CHAPTER 13 성과 및 위험 평가</strong>
@@ -429,9 +429,7 @@ API를 통한 데이터 수집과 <code>getSymbols()</code> 함수의 사용 방
 <div id="이-책에서-다루지-않은-주제" class="section level2 unnumbered">
 <h2>이 책에서 다루지 않은 주제</h2>
 <p>이 책은 R을 기본적으로 사용할 줄 아는 독자를 대상으로 작성되었습니다. 따라서 내용의 효율적 전달을 위해 R과 R Studio 설치, 기초적인 프로그래밍 등의 내용은 생략했습니다. 따라서 프로그래밍을 처음 접하는 독자라면 프로그래밍 기초를 먼저 익히신후 본 책을 읽으시길 추천드립니다.</p>
-<p>또한 텔레그램 메신저 자동전송, 이메일 자동전송, 전자공시시스템(DART) 크롤링, R마크다운과 샤이니를 이용한 포트폴리오 수익률 관리 등에 대한 주제는 다루지 않았습니다. 해당 내용은 저자의 블로그에 이미 업로드되어 있으므로 궁금한 분은 해당 글들을 참조하길 바라며, 기회가 된다면 추후 개정판에서 다루도록 하겠습니다.</p>
-<p>마지막으로 이 책에서는 프로그램 언어로 R을 이용했기 때문에 Python 혹은 다른 언어를 사용하는 분들에게는 직접적으로 도움이 되지 않을 수 있다고 생각할 수 있습니다. 그러나 투자에 필요한 금융 데이터 수집을 어디서 어떻게 하는지, 종목 선택을 어떻게 하고 포트폴리오를 어떻게 구성하는지에 대한 이론적 내용을 이해한 후 본인들
-이 사용하는 언어로 구현해보는 것도 좋은 도전이 될 것입니다.</p>
+<p>또한 이 책에서는 프로그램 언어로 R을 이용했기 때문에 Python 혹은 다른 언어를 사용하는 분들에게는 직접적으로 도움이 되지 않을 수 있다고 생각할 수 있습니다. 그러나 투자에 필요한 금융 데이터 수집을 어디서 어떻게 하는지, 종목 선택을 어떻게 하고 포트폴리오를 어떻게 구성하는지에 대한 이론적 내용을 이해한 후 본인들이 사용하는 언어로 구현해보는 것도 좋은 도전이 될 것입니다.</p>
 </div>
 <div id="도움이-될-만한-자료들" class="section level2 unnumbered">
 <h2>도움이 될 만한 자료들</h2>

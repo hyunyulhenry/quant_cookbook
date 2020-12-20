@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2020-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -592,11 +592,11 @@ heq
 <span id="cb403-6"><a href="포트폴리오-구성.html#cb403-6"></a>                <span class="dt">heq =</span> heq.objective)</span>
 <span id="cb403-7"><a href="포트폴리오-구성.html#cb403-7"></a></span>
 <span id="cb403-8"><a href="포트폴리오-구성.html#cb403-8"></a><span class="kw">print</span>(result<span class="op">$</span>par)</span></code></pre></div>
-<pre><code>##  [1]  1.427e-01 -3.243e-17  7.411e-18  3.567e-18
-##  [5]  7.902e-18  7.924e-01  7.661e-18 -1.794e-18
-##  [9] -1.279e-18  6.492e-02</code></pre>
+<pre><code>##  [1]  1.427e-01 -8.243e-19 -1.215e-17  3.376e-18
+##  [5]  8.500e-17  7.924e-01  5.714e-19  6.046e-19
+##  [9]  1.081e-17  6.491e-02</code></pre>
 <div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="포트폴리오-구성.html#cb405-1"></a><span class="kw">print</span>(result<span class="op">$</span>value)</span></code></pre></div>
-<pre><code>## [1] 0.000009877</code></pre>
+<pre><code>## [1] 0.000009852</code></pre>
 <p>위에서 만들어진 함수들을 바탕으로 최적화 작업을 실행합니다. 초기값인 x0에는 먼저 동일한 비중들을 입력합니다. 예제에서는 종목이 10개 이므로, x0값에는 <code>rep(0.1, 10)</code> 인 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1을 입력합니다. 최소화하고자 하는 목적함수 fn에는 위에서 구성한 objective 함수를 입력합니다. 부등위 제약조건과 등위 제약조건에도 각각 위에서 구성한 hin.objective와 heq.objective 함수를 입력합니다.</p>
 <p>즉, 해당 함수는 초기값을 시작점으로 해 주어진 제약조건을 만족하는 해를 찾기 위해 <span class="math inline">\(w\)</span>값들을 조정하는 작업을 반복한 후 목적함수가 최소가 되는 지점의 <span class="math inline">\(w\)</span>를 반환합니다.</p>
 <p>result 값 중 $par는 최적화된 지점의 해를 의미하며, 최소분산 포트폴리오를 구성하는 자산들의 투자 비중을 의미합니다. $value는 $par에서 산출된 값을 목적함수 fn에 입력하였을 때 나오는 결괏값으로써, 포트폴리오의 분산을 의미합니다.</p>
@@ -767,11 +767,11 @@ meq
 <span id="cb411-2"><a href="포트폴리오-구성.html#cb411-2"></a>result =<span class="st"> </span><span class="kw">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</span>
 <span id="cb411-3"><a href="포트폴리오-구성.html#cb411-3"></a></span>
 <span id="cb411-4"><a href="포트폴리오-구성.html#cb411-4"></a><span class="kw">print</span>(result<span class="op">$</span>solution)</span></code></pre></div>
-<pre><code>##  [1]  1.427e-01 -1.571e-18  0.000e+00  5.056e-18
-##  [5] -1.642e-17  7.924e-01 -8.053e-21 -3.089e-20
-##  [9] -8.831e-22  6.492e-02</code></pre>
+<pre><code>##  [1]  1.427e-01 -3.407e-19  0.000e+00  1.137e-17
+##  [5] -2.769e-17  7.924e-01 -1.881e-18 -2.249e-18
+##  [9] -1.908e-19  6.491e-02</code></pre>
 <div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="포트폴리오-구성.html#cb413-1"></a><span class="kw">print</span>(result<span class="op">$</span>value)</span></code></pre></div>
-<pre><code>## [1] 0.000004938</code></pre>
+<pre><code>## [1] 0.000004926</code></pre>
 <p>위에 입력된 내역들을 <code>solve.QP()</code> 함수에 넣어 최적화 값을 찾아줍니다. 결과 중 $solution은 최적화된 지점의 해, 즉 최소분산 포트폴리오를 구성하는 자산들의 투자비중을 의미합니다. $value는 $solution에서 산출된 값을 목적함수에 입력했을때 나오는 결괏값으로서, 포트폴리오의 분산을 의미합니다.</p>
 <div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="포트폴리오-구성.html#cb415-1"></a>w_<span class="dv">2</span> =<span class="st"> </span>result<span class="op">$</span>solution <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></span>
 <span id="cb415-2"><a href="포트폴리오-구성.html#cb415-2"></a><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</span>
@@ -1403,7 +1403,7 @@ w_7\\ w_8\\ w_9\\ w_{10} \\ -w_1 \\ -w_2 \\ -w_3 \\ -w_4 \\ -w_5 \\ -w_6 \\ -w_7
 <span id="cb428-13"><a href="포트폴리오-구성.html#cb428-13"></a><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>) <span class="op">%&gt;%</span></span>
 <span id="cb428-14"><a href="포트폴리오-구성.html#cb428-14"></a><span class="st">  </span><span class="kw">setNames</span>(<span class="kw">colnames</span>(rets))</span></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1038 0.1000 0.0862 0.0500 0.2000 0.2000 0.0500 0.0500 
+## 0.1034 0.1000 0.0866 0.0500 0.2000 0.2000 0.0500 0.0500 
 ##    GLD    DBC 
 ## 0.0800 0.0800</code></pre>
 <p>결괏값을 확인해보면 각 자산별 제약조건 내에 위치함을 확인할 수 있습니다.</p>
@@ -1568,18 +1568,18 @@ c(1, rep(0, 10))
 <span id="cb431-6"><a href="포트폴리오-구성.html#cb431-6"></a>  </span>
 <span id="cb431-7"><a href="포트폴리오-구성.html#cb431-7"></a><span class="kw">print</span>(w)</span></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 17.057  1.178  4.564  0.000 26.190 37.791  2.847  0.000 
+## 17.001  1.199  4.617  0.000 26.176 37.925  2.864  0.000 
 ##    GLD    DBC 
-##  7.878 11.935</code></pre>
+##  7.859 11.959</code></pre>
 <p>입력된 목적함수와 제약조건들을 바탕으로 <code>solve.QP()</code> 함수를 통해 최적화를 수행한 후 최대분산효과를 만족하는 해를 구해보면, 비중의 합이 1을 초과하게 됩니다. <span class="math inline">\(w_i = \frac{w_i}{\sum_{i=1}^nw_i}\)</span>를 통해 비중의 합이 1이 되도록 표준화를 해줍니다.</p>
 <div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="포트폴리오-구성.html#cb433-1"></a>w =<span class="st"> </span>(w <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(w)) <span class="op">%&gt;%</span></span>
 <span id="cb433-2"><a href="포트폴리오-구성.html#cb433-2"></a><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)</span>
 <span id="cb433-3"><a href="포트폴리오-구성.html#cb433-3"></a></span>
 <span id="cb433-4"><a href="포트폴리오-구성.html#cb433-4"></a><span class="kw">print</span>(w)</span></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.1559 0.0108 0.0417 0.0000 0.2393 0.3453 0.0260 0.0000 
+## 0.1551 0.0109 0.0421 0.0000 0.2388 0.3460 0.0261 0.0000 
 ##    GLD    DBC 
-## 0.0720 0.1091</code></pre>
+## 0.0717 0.1091</code></pre>
 <p>표준화 과정을 통해 비중의 합이 1이 되었습니다.</p>
 <div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="포트폴리오-구성.html#cb435-1"></a><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span></span>
 <span id="cb435-2"><a href="포트폴리오-구성.html#cb435-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</span>
@@ -1598,8 +1598,8 @@ c(1, rep(0, 10))
 <span id="cb436-4"><a href="포트폴리오-구성.html#cb436-4"></a><span class="st">  </span><span class="kw">round</span>(., <span class="dv">4</span>)</span>
 <span id="cb436-5"><a href="포트폴리오-구성.html#cb436-5"></a></span>
 <span id="cb436-6"><a href="포트폴리오-구성.html#cb436-6"></a><span class="kw">print</span>(w)</span></code></pre></div>
-<pre><code>##  [1] 0.1559 0.0108 0.0417 0.0000 0.2393 0.3453 0.0260
-##  [8] 0.0000 0.0720 0.1091</code></pre>
+<pre><code>##  [1] 0.1551 0.0109 0.0421 0.0000 0.2388 0.3460 0.0261
+##  [8] 0.0000 0.0717 0.1091</code></pre>
 <p>control 항목의 type에 maximum diversification을 의미하는 ’maxdiv’를 입력해주며, 제약조건에는 투자비중이 0보다 큰 lo(Long Only) 조건을 입력합니다. 패키지를 활용해 매우 간단하게 최대분산효과 포트폴리오를 구현할 수 있으며, 그 결과 또한 앞에서 계산한 것과 동일합니다. 해당 함수의 코드를 확인해보면, 최대분산효과 포트폴리오 계산 시 Min -DR 방법을 사용합니다.</p>
 </div>
 <div id="최소-및-최대-투자비중-제약조건-1" class="section level3">
@@ -1701,7 +1701,7 @@ ub(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
 ## 0.0500 0.0500 0.0500 0.0500 0.2000 0.2000 0.0500 0.0500 
 ##    GLD    DBC 
-## 0.1897 0.1103</code></pre>
+## 0.1895 0.1105</code></pre>
 <p>Alb의 -rep(0.05, 10)는 <span class="math inline">\(-lb\)</span> 부분, matrix(1, 1, 10)은 <span class="math inline">\(e^T\)</span> 부분, diag(10)부분은 <span class="math inline">\(I\)</span> 부분을 의미하며, 이는 최소비중 제약조건의 좌변(<span class="math inline">\(-lb \times e^T + I\)</span>)과 같습니다. 동일하게 Aub는 최대비중 제약조건의 좌변(<span class="math inline">\(ub \times e^T - I\)</span>)과 같으며, 결과를 확인하면 최소 및 최대비중 제약조건인 [5%, 20%]가 제대로 반영되었습니다.</p>
 <div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="포트폴리오-구성.html#cb440-1"></a><span class="kw">data.frame</span>(w) <span class="op">%&gt;%</span></span>
 <span id="cb440-2"><a href="포트폴리오-구성.html#cb440-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(<span class="kw">rownames</span>(.), <span class="dt">levels =</span> <span class="kw">rownames</span>(.)),</span>
@@ -1903,9 +1903,9 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <span id="cb444-4"><a href="포트폴리오-구성.html#cb444-4"></a>RC_stock_bond =<span class="st"> </span><span class="kw">round</span>(RC_stock_bond, <span class="dv">4</span>)</span>
 <span id="cb444-5"><a href="포트폴리오-구성.html#cb444-5"></a></span>
 <span id="cb444-6"><a href="포트폴리오-구성.html#cb444-6"></a><span class="kw">print</span>(RC_stock_bond)</span></code></pre></div>
-<pre><code>## [1] 0.9766 0.0234</code></pre>
+<pre><code>## [1] 0.9764 0.0236</code></pre>
 <p>rets 데이터에서 첫 번째 행은 미국 주식 수익률을, 다섯 번째 행은 미국 장기채를 의미하므로, 해당 부분을 ret_stock_bond 변수에 지정합니다. 그 후 <code>cov()</code> 함수를 이용해 두 자산의 분산-공분산 행렬을 만들어주며, 위에서 만든 get_RC 함수를 통해 자산별 위험기여도를 계산합니다.</p>
-<p>주식과 채권이 가지는 위험기여도는 각각 97.66%, 2.34%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.</p>
+<p>주식과 채권이 가지는 위험기여도는 각각 97.64%, 2.36%로서 투자 비중인 60%, 40%와는 전혀 다른 위험 비중을 보입니다. 즉, 주식이 포트폴리오 위험의 대부분을 차지하고 있습니다.</p>
 </div>
 <div id="rp-함수를-이용한-최적화" class="section level3">
 <h3><span class="header-section-number">11.3.2</span> <code>rp()</code> 함수를 이용한 최적화</h3>
@@ -1926,9 +1926,9 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <span id="cb447-5"><a href="포트폴리오-구성.html#cb447-5"></a></span>
 <span id="cb447-6"><a href="포트폴리오-구성.html#cb447-6"></a><span class="kw">print</span>(w)</span></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.0600 0.0464 0.0564 0.0371 0.1749 0.3720 0.0394 0.0505 
+## 0.0600 0.0464 0.0565 0.0371 0.1748 0.3721 0.0394 0.0505 
 ##    GLD    DBC 
-## 0.0869 0.0763</code></pre>
+## 0.0868 0.0763</code></pre>
 <ol style="list-style-type: decimal">
 <li>x0은 최적화를 위한 초기 입력값이며 동일 비중인 10%씩을 입력합니다.</li>
 <li>P는 분산-공분산 행렬을 입력해줍니다.</li>
@@ -1937,8 +1937,8 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <p><code>rp()</code> 함수는 위 입력 변수를 바탕으로 최적해를 찾아줍니다. <code>getx()</code> 함수를 통해 해를 추출할 수 있으며, <code>drop()</code>을 통해 벡터 형태로 변환합니다. 마지막으로 비중의 합이 1이 되기 위해 비중들의 합으로 나눠줍니다.</p>
 <p>최종적으로 계산된 비중이 위험균형 포트폴리오를 만족하는 해가 됩니다.</p>
 <div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="포트폴리오-구성.html#cb449-1"></a><span class="kw">get_RC</span>(w, covmat)</span></code></pre></div>
-<pre><code>##  [1] 0.10004 0.09995 0.09993 0.10009 0.10004 0.10007
-##  [7] 0.09992 0.10000 0.10001 0.09995</code></pre>
+<pre><code>##  [1] 0.10004 0.09991 0.10003 0.10008 0.10004 0.10007
+##  [7] 0.09991 0.10001 0.09998 0.09994</code></pre>
 <p><code>get_RC()</code> 함수를 통해 위험기여도를 확인해보면, 모든 자산이 거의 동일한 위험기여도를 가지는 것을 알 수 있습니다.</p>
 </div>
 <div id="위험예산-포트폴리오" class="section level3">
@@ -2037,13 +2037,13 @@ ub_{10}(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <span id="cb452-5"><a href="포트폴리오-구성.html#cb452-5"></a></span>
 <span id="cb452-6"><a href="포트폴리오-구성.html#cb452-6"></a><span class="kw">print</span>(w)</span></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX 
-## 0.0843 0.0663 0.0780 0.0529 0.1825 0.3933 0.0197 0.0250 
+## 0.0843 0.0663 0.0781 0.0529 0.1823 0.3934 0.0197 0.0250 
 ##    GLD    DBC 
 ## 0.0543 0.0437</code></pre>
 <p>mrc에 목표로 하는 각 자산별 위험기여도를 입력하며, 나머지는 기존 위험균형 포트폴리오와 동일하게 입력합니다.</p>
 <div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="포트폴리오-구성.html#cb454-1"></a><span class="kw">get_RC</span>(w, covmat)</span></code></pre></div>
-<pre><code>##  [1] 0.15006 0.15005 0.14996 0.15002 0.10000 0.09996
-##  [7] 0.05010 0.04995 0.04996 0.04995</code></pre>
+<pre><code>##  [1] 0.15006 0.15000 0.15007 0.15003 0.09989 0.09991
+##  [7] 0.05009 0.04995 0.05003 0.04997</code></pre>
 <p><code>get_RC()</code> 함수를 통해 위험기여도를 확인해보면 우리가 원하던 자산별 위험예산과 거의 동일한 것을 알 수 있습니다.</p>
 </div>
 </div>
@@ -2283,30 +2283,30 @@ C
 <span id="cb459-4"><a href="포트폴리오-구성.html#cb459-4"></a></span>
 <span id="cb459-5"><a href="포트폴리오-구성.html#cb459-5"></a>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(매수금액, 매수주수) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</span></code></pre></div>
 <pre><code>##   매수금액 매수주수
-## 1 24943984  425.665
-## 2  4339591   51.909
-## 3  3472763   11.713
-## 4  3326037    4.718
-## 5  3171085    5.033
-## 6  2734727   15.235</code></pre>
+## 1 26142166  354.230
+## 2  5075716   43.198
+## 3  3430585    4.189
+## 4  3168316    3.926
+## 5  2831671    8.010
+## 6  2782746    9.747</code></pre>
 <p>여러분이 가지고 있는 금액에 시가총액비중을 곱해 각 주식당 매수해야 하는 금액을 구합니다. 그 후 각 금액을 현재가로 나누어 매수해야 하는 주식의 수를 계산합니다.</p>
 <p>이론적으로는 계산된 주식수만큼 매수하여야 인덱스를 정확히 복제합니다. 그러나 주식은 1주 단위로 거래할 수 있으므로 소수점 단위로는 거래할 수는 없습니다. 만일 매수주수를 올림처리할 경우 총 매수금액이 보유금액보다 많이질 수 있으므로, 내림처리를 통해 매수주수를 수정해줍니다.</p>
 <div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="포트폴리오-구성.html#cb461-1"></a>KOSPI200 =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(매수주수 =<span class="st"> </span><span class="kw">floor</span>(매수주수))</span>
 <span id="cb461-2"><a href="포트폴리오-구성.html#cb461-2"></a>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(매수금액, 매수주수) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</span></code></pre></div>
 <pre><code>##   매수금액 매수주수
-## 1 24943984      425
-## 2  4339591       51
-## 3  3472763       11
-## 4  3326037        4
-## 5  3171085        5
-## 6  2734727       15</code></pre>
+## 1 26142166      354
+## 2  5075716       43
+## 3  3430585        4
+## 4  3168316        3
+## 5  2831671        8
+## 6  2782746        9</code></pre>
 <p><code>floor()</code> 함수를 통해 내림처리를 하였으며, 각 주수만큼 매수할 경우 KOSPI 200 지수를 매우 유사하게 복제할 수 있습니다.</p>
 <div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="포트폴리오-구성.html#cb463-1"></a>inv_money =<span class="st"> </span>KOSPI200 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(실제매수금액 =<span class="st"> `</span><span class="dt">현재가.종가.</span><span class="st">`</span> <span class="op">*</span><span class="st"> </span>매수주수) <span class="op">%&gt;%</span></span>
 <span id="cb463-2"><a href="포트폴리오-구성.html#cb463-2"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="kw">sum</span>(실제매수금액))</span>
 <span id="cb463-3"><a href="포트폴리오-구성.html#cb463-3"></a></span>
 <span id="cb463-4"><a href="포트폴리오-구성.html#cb463-4"></a><span class="kw">print</span>(inv_money)</span></code></pre></div>
 <pre><code>##   sum(실제매수금액)
-## 1          91395910</code></pre>
+## 1          89387460</code></pre>
 <p>주수를 내림 처리하였으므로 실제 매수에 사용되는 금액은 1억원 보다 약간 모자르게 되며, 1억과 해당금액의 차이는 현금으로 보유하거나 해당 지수를 추종하는 ETF 및 펀드 투자에 사용해도 됩니다.</p>
 </div>
 <div id="팩터를-이용한-인핸스드-포트폴리오-구성하기" class="section level3">
@@ -2328,34 +2328,34 @@ C
 <span id="cb467-2"><a href="포트폴리오-구성.html#cb467-2"></a></span>
 <span id="cb467-3"><a href="포트폴리오-구성.html#cb467-3"></a><span class="kw">head</span>(KOSPI200)</span></code></pre></div>
 <pre><code>##             종목명   PBR 시가총액비중  랭킹 조절비중
-## 1         삼성전자  1.56      0.24944 122.0  0.24894
-## 2       SK하이닉스  1.27      0.04340 112.5  0.04290
-## 3            NAVER  8.42      0.03473 188.0  0.03423
-## 4 삼성바이오로직스 10.71      0.03326 190.0  0.03276
-## 5           LG화학  2.90      0.03171 156.0  0.03121
-## 6           현대차  0.71      0.02735  74.0  0.02785
-##      차이
-## 1 -0.0005
-## 2 -0.0005
-## 3 -0.0005
-## 4 -0.0005
-## 5 -0.0005
-## 6  0.0005</code></pre>
+## 1         삼성전자  1.97      0.26142 126.5  0.26090
+## 2       SK하이닉스  1.78      0.05076 120.0  0.05025
+## 3           LG화학  3.77      0.03431 159.0  0.03380
+## 4 삼성바이오로직스 12.26      0.03168 189.0  0.03118
+## 5         셀트리온 17.00      0.02832 193.0  0.02781
+## 6            NAVER  8.11      0.02783 185.0  0.02733
+##         차이
+## 1 -0.0005188
+## 2 -0.0005036
+## 3 -0.0005024
+## 4 -0.0005022
+## 5 -0.0005020
+## 6 -0.0005020</code></pre>
 <div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="포트폴리오-구성.html#cb469-1"></a><span class="kw">tail</span>(KOSPI200)</span></code></pre></div>
-<pre><code>##           종목명  PBR 시가총액비중 랭킹   조절비중
-## 195     롯데칠성 0.66    0.0005215   68 0.00102151
-## 196    S&amp;T모티브 0.98    0.0005166   91 0.00101665
-## 197     태광산업 0.23    0.0005160    7 0.00101603
-## 198    LIG넥스원 1.14    0.0005145  102 0.00001452
-## 199 미래에셋생명 0.35    0.0005143   18 0.00101434
-## 200 현대그린푸드 0.42    0.0005127   25 0.00101275
-##        차이
-## 195  0.0005
-## 196  0.0005
-## 197  0.0005
-## 198 -0.0005
-## 199  0.0005
-## 200  0.0005</code></pre>
+<pre><code>##               종목명  PBR 시가총액비중  랭킹  조절비중
+## 195       한미반도체 4.14    0.0004859 164.0 0.0000000
+## 196 동아쏘시오홀딩스 1.08    0.0004784  92.0 0.0009784
+## 197         동원산업 0.77    0.0004768  68.5 0.0009767
+## 198             풍산 0.58    0.0004739  36.5 0.0009739
+## 199           에스엘 0.58    0.0004719  36.5 0.0009719
+## 200       신성이엔지 5.58    0.0004682 174.0 0.0000000
+##           차이
+## 195 -0.0004859
+## 196  0.0004999
+## 197  0.0004999
+## 198  0.0004999
+## 199  0.0004999
+## 200 -0.0004682</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>rank()</code> 함수를 통해 PBR의 랭킹을 구합니다.</li>
 <li>랭킹이 100 이하일 시, 즉 저PBR 100개 종목에는 시가총액비중에서 5bp씩을 더해주며, 반대로 고PBR 100개 종목에는 5bp 씩을 빼줍니다.</li>
@@ -2599,34 +2599,34 @@ E
 <span id="cb473-7"><a href="포트폴리오-구성.html#cb473-7"></a>         차이 =<span class="st"> </span>투자비중 <span class="op">-</span><span class="st"> </span>시가총액비중)</span></code></pre></div>
 <div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="포트폴리오-구성.html#cb474-1"></a><span class="kw">head</span>(KOSPI200_tilt)</span></code></pre></div>
 <pre><code>##             종목명   PBR 시가총액비중  랭킹  zscore
-## 1         삼성전자  1.56      0.24944 122.0 -0.3715
-## 2       SK하이닉스  1.27      0.04340 112.5 -0.2073
-## 3            NAVER  8.42      0.03473 188.0 -1.5118
-## 4 삼성바이오로직스 10.71      0.03326 190.0 -1.5464
-## 5           LG화학  2.90      0.03171 156.0 -0.9589
-## 6           현대차  0.71      0.02735  74.0  0.4579
-##       cdf 투자비중       차이
-## 1 0.35514 0.215086 -0.0343534
-## 2 0.41787 0.044029  0.0006332
-## 3 0.06529 0.005505 -0.0292226
-## 4 0.06101 0.004927 -0.0283338
-## 5 0.16880 0.012996 -0.0187146
-## 6 0.67648 0.044917  0.0175699</code></pre>
+## 1         삼성전자  1.97      0.26142 126.5 -0.4492
+## 2       SK하이닉스  1.78      0.05076 120.0 -0.3369
+## 3           LG화학  3.77      0.03431 159.0 -1.0108
+## 4 삼성바이오로직스 12.26      0.03168 189.0 -1.5291
+## 5         셀트리온 17.00      0.02832 193.0 -1.5982
+## 6            NAVER  8.11      0.02783 185.0 -1.4600
+##       cdf 투자비중      차이
+## 1 0.32663 0.210228 -0.051194
+## 2 0.36809 0.045998 -0.004759
+## 3 0.15606 0.013181 -0.021125
+## 4 0.06312 0.004923 -0.026760
+## 5 0.05500 0.003834 -0.024483
+## 6 0.07214 0.004943 -0.022885</code></pre>
 <div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="포트폴리오-구성.html#cb476-1"></a><span class="kw">tail</span>(KOSPI200_tilt)</span></code></pre></div>
-<pre><code>##           종목명  PBR 시가총액비중 랭킹   zscore    cdf
-## 195     롯데칠성 0.66    0.0005215   68  0.56154 0.7128
-## 196    S&amp;T모티브 0.98    0.0005166   91  0.16414 0.5652
-## 197     태광산업 0.23    0.0005160    7  1.61549 0.9469
-## 198    LIG넥스원 1.14    0.0005145  102 -0.02592 0.4897
-## 199 미래에셋생명 0.35    0.0005143   18  1.42544 0.9230
-## 200 현대그린푸드 0.42    0.0005127   25  1.30449 0.9040
-##      투자비중       차이
-## 195 0.0009025 0.00038103
-## 196 0.0007090 0.00019233
-## 197 0.0011864 0.00067035
-## 198 0.0006117 0.00009719
-## 199 0.0011526 0.00063829
-## 200 0.0011254 0.00061264</code></pre>
+<pre><code>##               종목명  PBR 시가총액비중  랭킹  zscore
+## 195       한미반도체 4.14    0.0004859 164.0 -1.0972
+## 196 동아쏘시오홀딩스 1.08    0.0004784  92.0  0.1469
+## 197         동원산업 0.77    0.0004768  68.5  0.5529
+## 198             풍산 0.58    0.0004739  36.5  1.1058
+## 199           에스엘 0.58    0.0004719  36.5  1.1058
+## 200       신성이엔지 5.58    0.0004682 174.0 -1.2699
+##        cdf  투자비중       차이
+## 195 0.1363 0.0001630 -0.0003229
+## 196 0.5584 0.0006577  0.0001793
+## 197 0.7098 0.0008333  0.0003565
+## 198 0.8656 0.0010100  0.0005360
+## 199 0.8656 0.0010057  0.0005338
+## 200 0.1021 0.0001176 -0.0003506</code></pre>
 <ol style="list-style-type: decimal">
 <li>먼저 필요한 열만 선택합니다.</li>
 <li><code>scale()</code> 함수를 통해 Z-Score를 구하며, (-1)을 곱해줍니다.</li>
@@ -2660,7 +2660,7 @@ E
 <span id="cb479-9"><a href="포트폴리오-구성.html#cb479-9"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></span>
 <span id="cb479-10"><a href="포트폴리오-구성.html#cb479-10"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">60</span>, <span class="dt">hjust =</span> <span class="dv">1</span>)) </span></code></pre></div>
 <p><img src="11-portfolio_files/figure-html/unnamed-chunk-57-1.png" width="70%" style="display: block; margin: auto;" /></p>
-<p>시가총액이 큰 종목의 경우 허용치인 50bp를 넘어가는 경우가 다수 존재합니다. 이를 방지하기 위해 비중에 제약조건을 두어야 합니다. 예를 들어 삼성전자의 경우 둘 간의 비중의 차이가 -0.0344 로 지나치게 크므로 [시가총액비중 - 50bp] 가 투자되도록 변경해 줍니다. 타 종목 역시 이와 동일하게 제약조건을 추가해 줍니다.</p>
+<p>시가총액이 큰 종목의 경우 허용치인 50bp를 넘어가는 경우가 다수 존재합니다. 이를 방지하기 위해 비중에 제약조건을 두어야 합니다. 예를 들어 삼성전자의 경우 둘 간의 비중의 차이가 -0.0512 로 지나치게 크므로 [시가총액비중 - 50bp] 가 투자되도록 변경해 줍니다. 타 종목 역시 이와 동일하게 제약조건을 추가해 줍니다.</p>
 <div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="포트폴리오-구성.html#cb480-1"></a>KOSPI200_tilt =<span class="st"> </span>KOSPI200_tilt <span class="op">%&gt;%</span></span>
 <span id="cb480-2"><a href="포트폴리오-구성.html#cb480-2"></a><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&lt;</span><span class="st"> </span><span class="fl">-0.005</span>, 시가총액비중 <span class="op">-</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></span>
 <span id="cb480-3"><a href="포트폴리오-구성.html#cb480-3"></a><span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(투자비중), <span class="kw">list</span>(<span class="op">~</span><span class="kw">ifelse</span>(차이 <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.005</span>, 시가총액비중 <span class="op">+</span><span class="st"> </span><span class="fl">0.005</span>, 투자비중))) <span class="op">%&gt;%</span></span>
@@ -2669,19 +2669,19 @@ E
 <span id="cb480-6"><a href="포트폴리오-구성.html#cb480-6"></a></span>
 <span id="cb480-7"><a href="포트폴리오-구성.html#cb480-7"></a><span class="kw">head</span>(KOSPI200_tilt)</span></code></pre></div>
 <pre><code>##             종목명   PBR 시가총액비중  랭킹  zscore
-## 1         삼성전자  1.56      0.24944 122.0 -0.3715
-## 2       SK하이닉스  1.27      0.04340 112.5 -0.2073
-## 3            NAVER  8.42      0.03473 188.0 -1.5118
-## 4 삼성바이오로직스 10.71      0.03326 190.0 -1.5464
-## 5           LG화학  2.90      0.03171 156.0 -0.9589
-## 6           현대차  0.71      0.02735  74.0  0.4579
+## 1         삼성전자  1.97      0.26142 126.5 -0.4492
+## 2       SK하이닉스  1.78      0.05076 120.0 -0.3369
+## 3           LG화학  3.77      0.03431 159.0 -1.0108
+## 4 삼성바이오로직스 12.26      0.03168 189.0 -1.5291
+## 5         셀트리온 17.00      0.02832 193.0 -1.5982
+## 6            NAVER  8.11      0.02783 185.0 -1.4600
 ##       cdf 투자비중      차이
-## 1 0.35514  0.22721 -0.022235
-## 2 0.41787  0.04092 -0.002471
-## 3 0.06529  0.02763 -0.007096
-## 4 0.06101  0.02627 -0.006993
-## 5 0.16880  0.02483 -0.006883
-## 6 0.67648  0.03007  0.002719</code></pre>
+## 1 0.32663  0.23829 -0.023132
+## 2 0.36809  0.04275 -0.008012
+## 3 0.15606  0.02723 -0.007072
+## 4 0.06312  0.02480 -0.006887
+## 5 0.05500  0.02167 -0.006649
+## 6 0.07214  0.02121 -0.006614</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>mutate_at()</code> 함수를 이용해 시가총액비중과 투자비중의 차이가 50bp 미만일 경우 투자비중을 [시가총액 - 50bp]로 변경해주며, 50bp 초과일 경우 [시가총액 + 50bp]로 변경해줍니다.</li>
 <li>재표준화 작업을 거쳐준 후 차이를 다시 계산합니다.</li>
@@ -2697,19 +2697,19 @@ E
 <span id="cb482-8"><a href="포트폴리오-구성.html#cb482-8"></a></span>
 <span id="cb482-9"><a href="포트폴리오-구성.html#cb482-9"></a><span class="kw">head</span>(KOSPI200_tilt)</span></code></pre></div>
 <pre><code>##             종목명   PBR 시가총액비중  랭킹  zscore
-## 1         삼성전자  1.56      0.24944 122.0 -0.3715
-## 2       SK하이닉스  1.27      0.04340 112.5 -0.2073
-## 3            NAVER  8.42      0.03473 188.0 -1.5118
-## 4 삼성바이오로직스 10.71      0.03326 190.0 -1.5464
-## 5           LG화학  2.90      0.03171 156.0 -0.9589
-## 6           현대차  0.71      0.02735  74.0  0.4579
+## 1         삼성전자  1.97      0.26142 126.5 -0.4492
+## 2       SK하이닉스  1.78      0.05076 120.0 -0.3369
+## 3           LG화학  3.77      0.03431 159.0 -1.0108
+## 4 삼성바이오로직스 12.26      0.03168 189.0 -1.5291
+## 5         셀트리온 17.00      0.02832 193.0 -1.5982
+## 6            NAVER  8.11      0.02783 185.0 -1.4600
 ##       cdf 투자비중      차이
-## 1 0.35514  0.24443 -0.005006
-## 2 0.41787  0.03898 -0.004411
-## 3 0.06529  0.02973 -0.005001
-## 4 0.06101  0.02826 -0.005001
-## 5 0.16880  0.02671 -0.005001
-## 6 0.67648  0.02864  0.001294</code></pre>
+## 1 0.32663  0.25641 -0.005007
+## 2 0.36809  0.04576 -0.005001
+## 3 0.15606  0.02931 -0.005001
+## 4 0.06312  0.02668 -0.005001
+## 5 0.05500  0.02332 -0.005001
+## 6 0.07214  0.02283 -0.005001</code></pre>
 <p>위와 동일한 코드에 <code>while()</code> 구문을 활용하여 둘 간의 차이가 50bp 보다 클 경우 해당 작업을 계속해서 반복하며, 결과적으로 차이가 거의 50bp에 수렴합니다.</p>
 <div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="포트폴리오-구성.html#cb484-1"></a>KOSPI200_tilt <span class="op">%&gt;%</span></span>
 <span id="cb484-2"><a href="포트폴리오-구성.html#cb484-2"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(종목명, <span class="op">-</span>시가총액비중), <span class="dt">y =</span> 차이)) <span class="op">+</span></span>

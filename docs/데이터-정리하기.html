@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2020-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -450,21 +450,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb212-21"><a href="데이터-정리하기.html#cb212-21"></a>price_list =<span class="st"> </span><span class="kw">do.call</span>(cbind, price_list) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.locf</span>()</span>
 <span id="cb212-22"><a href="데이터-정리하기.html#cb212-22"></a><span class="kw">colnames</span>(price_list) =<span class="st"> </span>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span></span></code></pre></div>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="데이터-정리하기.html#cb213-1"></a><span class="kw">head</span>(price_list[, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span></code></pre></div>
-<pre><code>##            X X005930 X000660 X035420 X207940
-## 1 2018-09-18   45500   78000  145206  507000
-## 2 2018-09-19   46150   78800  146408  507000
-## 3 2018-09-20   47250   79100  146408  528000
-## 4 2018-09-21   47400   76700  145206  530000
-## 5 2018-09-27   47500   75000  142803  546000
-## 6 2018-09-28   46450   73100  143403  534000</code></pre>
+<pre><code>##            X X005930 X000660 X051910 X207940
+## 1 2018-12-11      NA      NA      NA      NA
+## 2 2018-12-12   40450   66200  350000  394500
+## 3 2018-12-13   40000   65500  355000  410000
+## 4 2018-12-14   38950   61800  351500  391500
+## 5 2018-12-17   39150   62200  351500  372500
+## 6 2018-12-18   38900   61100  340000  366500</code></pre>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="데이터-정리하기.html#cb215-1"></a><span class="kw">tail</span>(price_list[, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])</span></code></pre></div>
-<pre><code>##              X X005930 X000660 X035420 X207940
-## 494 2020-09-18   59300   83700  298000  758000
-## 495 2020-09-21   59200   84500  292000  740000
-## 496 2020-09-22   58200   81300  284500  731000
-## 497 2020-09-23   58600   83600  296500  705000
-## 498 2020-09-24   57800   84300  294000  673000
-## 499 2020-09-25   57900   82900  295000  675000</code></pre>
+<pre><code>##              X X005930 X000660 X051910 X207940
+## 495 2020-12-11   73400  115500  808000  820000
+## 496 2020-12-14   73800  117000  793000  812000
+## 497 2020-12-15   73800  117500  801000  800000
+## 498 2020-12-16   73800  117500  819000  807000
+## 499 2020-12-17   73300  119500  830000  804000
+## 500 2020-12-18   73000  118500  814000  802000</code></pre>
 <ol style="list-style-type: decimal">
 <li>티커가 저장된 csv 파일을 불러온 후 티커를 6자리로 맞춰줍니다.</li>
 <li>빈 리스트인 price_list를 생성합니다.</li>
@@ -523,10 +523,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>##            X2017.12 X2018.12 X2019.12 NA.
 ## 매출액...1  2395754  2437714  2304009  NA
 ## 매출액...2   301094   404451   269907  NA
-## 매출액...3    46785    55869    65934  NA
+## 매출액...3   256980   281830   286250  NA
 ## 매출액...4     4646     5358     7016  NA
-## 매출액...5   256980   281830   286250  NA
-## 매출액...6   963761   968126  1057464  NA</code></pre>
+## 매출액...5     9491     9821    11285  NA
+## 매출액...6    46785    55869    65934  NA</code></pre>
 <p>먼저 <code>lapply()</code> 함수를 이용해 모든 재무 데이터가 들어 있는 data_fs 데이터를 대상으로 함수를 적용합니다. <code>%in%</code> 함수를 통해 만일 매출액이라는 항목이 행 이름에 있으면 해당 부분의 데이터를 select_fs 리스트에 저장하고, 해당 항목이 없는 경우 NA로 이루어진 데이터 프레임을 저장합니다.</p>
 <p>그 후, dplyr 패키지의 <code>bind_rows()</code> 함수를 이용해 리스트 내 데이터들을 행으로 묶어줍니다. <code>rbind()</code>에서는 리스트 형태를 테이블로 묶으려면 모든 데이터의 열 개수가 동일해야 하는 반면, <code>bind_rows()</code>에서는 열 개수가 다를 경우 나머지 부분을 NA로 처리해 합쳐주는 장점이 있습니다.</p>
 <p>합쳐진 데이터를 살펴보면, 먼저 열 이름이 . 혹은 NA.인 부분이 있습니다. 이는 매출액 항목이 없는 종목의 경우 NA 데이터 프레임을 저장해 생긴 결과입니다. 또한 연도가 순서대로 저장되지 않은 경우가 있습니다. 이 두 가지를 고려해 데이터를 클렌징합니다.</p>
@@ -539,10 +539,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>##        X2017.12 X2018.12 X2019.12
 ## 5930    2395754  2437714  2304009
 ## 660      301094   404451   269907
-## 35420     46785    55869    65934
-## 207940     4646     5358     7016
 ## 51910    256980   281830   286250
-## 5380     963761   968126  1057464</code></pre>
+## 207940     4646     5358     7016
+## 68270      9491     9821    11285
+## 35420     46785    55869    65934</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>!</code>와 <code>%in%</code> 함수를 이용해, 열 이름에 . 혹은 NA.가 들어가지 않은 열만 선택합니다.</li>
 <li><code>order()</code> 함수를 이용해 열 이름의 연도별 순서를 구한 후 이를 바탕으로 열을 다시 정리합니다.</li>
@@ -640,13 +640,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="데이터-정리하기.html#cb230-1"></a>data_value =<span class="st"> </span><span class="kw">bind_rows</span>(data_value)</span>
 <span id="cb230-2"><a href="데이터-정리하기.html#cb230-2"></a><span class="kw">print</span>(<span class="kw">head</span>(data_value))</span></code></pre></div>
-<pre><code>##          PER     PBR      PCR     PSR X1
-## x...1  16.07  1.3149    7.616  1.5002 NA
-## x...2  29.98  1.2588    9.309  2.2360 NA
-## x...3  83.10  7.4506   35.715  7.3494 NA
-## x...4 220.12 10.2564 4378.566 63.6565 NA
-## x...5 141.23  2.5461   14.181  1.5462 NA
-## x...6  12.19  0.4757   86.526  0.3435 NA</code></pre>
+<pre><code>##          PER    PBR      PCR    PSR X1
+## x...1  20.35  1.665    9.642  1.899 NA
+## x...2  43.21  1.815   13.419  3.223 NA
+## x...3 186.95  3.370   18.773  2.047 NA
+## x...4 262.18 12.216 5215.359 75.822 NA
+## x...5 159.45 16.323  100.109 42.048 NA
+## x...6  80.29  7.198   34.504  7.100 NA</code></pre>
 <p><code>bind_rows()</code> 함수를 이용하여 리스트 내 데이터들을 행으로 묶어준 후 데이터를 확인해보면 PER, PBR, PCR, PSR 열 외에 불필요한 NA로 이루어진 열이 존재합니다. 해당 열을 삭제한 후 정리 작업을 하겠습니다.</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="데이터-정리하기.html#cb232-1"></a>data_value =<span class="st"> </span>data_value[<span class="kw">colnames</span>(data_value) <span class="op">%in%</span></span>
 <span id="cb232-2"><a href="데이터-정리하기.html#cb232-2"></a><span class="st">                          </span><span class="kw">c</span>(<span class="st">&#39;PER&#39;</span>, <span class="st">&#39;PBR&#39;</span>, <span class="st">&#39;PCR&#39;</span>, <span class="st">&#39;PSR&#39;</span>)]</span>
@@ -656,13 +656,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb232-6"><a href="데이터-정리하기.html#cb232-6"></a></span>
 <span id="cb232-7"><a href="데이터-정리하기.html#cb232-7"></a><span class="kw">rownames</span>(data_value) =<span class="st"> </span>KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>]</span>
 <span id="cb232-8"><a href="데이터-정리하기.html#cb232-8"></a><span class="kw">print</span>(<span class="kw">head</span>(data_value))</span></code></pre></div>
-<pre><code>##           PER     PBR      PCR     PSR
-## 005930  16.07  1.3149    7.616  1.5002
-## 000660  29.98  1.2588    9.309  2.2360
-## 035420  83.10  7.4506   35.715  7.3494
-## 207940 220.12 10.2564 4378.566 63.6565
-## 051910 141.23  2.5461   14.181  1.5462
-## 005380  12.19  0.4757   86.526  0.3435</code></pre>
+<pre><code>##           PER    PBR      PCR    PSR
+## 005930  20.35  1.665    9.642  1.899
+## 000660  43.21  1.815   13.419  3.223
+## 051910 186.95  3.370   18.773  2.047
+## 207940 262.18 12.216 5215.359 75.822
+## 068270 159.45 16.323  100.109 42.048
+## 035420  80.29  7.198   34.504  7.100</code></pre>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="데이터-정리하기.html#cb234-1"></a><span class="kw">write.csv</span>(data_value, <span class="st">&#39;data/KOR_value.csv&#39;</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>열 이름이 가치지표에 해당하는 부분만 선택합니다.</li>

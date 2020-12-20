@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-12-03" />
+<meta name="date" content="2020-12-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -499,16 +499,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 2,243 x 7
 ##    시장구분 종목코드 종목명 산업분류 `현재가(종가)`
 ##    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;             &lt;dbl&gt;
-##  1 코스피   030720   동원수산… 어업               8940
-##  2 코스피   007160   사조산업… 어업              54400
-##  3 코스피   006040   동원산업… 어업             246500
-##  4 코스피   006090   사조오양… 음식료품           8220
-##  5 코스피   004970   신라교역… 어업              14350
-##  6 코스피   003580   넥스트사이… 광업               5200
-##  7 코스피   012320   경동인베스… 광업              40300
-##  8 코스피   017810   풀무원 음식료품          11300
+##  1 코스피   030720   동원수산… 농업, 임업 …           8940
+##  2 코스피   007160   사조산업… 농업, 임업 …          54400
+##  3 코스피   006040   동원산업… 농업, 임업 …         246500
+##  4 코스피   004970   신라교역… 농업, 임업 …          14350
+##  5 코스피   003580   넥스트사이… 광업               5200
+##  6 코스피   012320   경동인베스… 광업              40300
+##  7 코스피   017810   풀무원 음식료품          11300
+##  8 코스피   280360   롯데제과… 음식료품         159500
 ##  9 코스피   271560   오리온 음식료품          83300
-## 10 코스피   007310   오뚜기 음식료품         694000
+## 10 코스피   006090   사조오양… 음식료품           8220
 ## # … with 2,233 more rows, and 2 more variables:
 ## #   전일대비 &lt;dbl&gt;, `시가총액(원)` &lt;dbl&gt;</code></pre>
 <p>위 과정을 통해 down_sector 변수에는 산업별 현황 데이터가 저장되었습니다. 이를 csv 파일로 저장하겠습니다.</p>
@@ -610,7 +610,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb100-13"><a href="금융-데이터-수집하기-기본.html#cb100-13"></a><span class="st">  </span><span class="kw">str_replace_all</span>(<span class="st">&#39;</span><span class="ch">\\</span><span class="st">.&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
 <span id="cb100-14"><a href="금융-데이터-수집하기-기본.html#cb100-14"></a></span>
 <span id="cb100-15"><a href="금융-데이터-수집하기-기본.html#cb100-15"></a><span class="kw">print</span>(biz_day)</span></code></pre></div>
-<pre><code>## [1] &quot;20201201&quot;</code></pre>
+<pre><code>## [1] &quot;20201216&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li>페이지의 url을 저장합니다.</li>
 <li><code>GET()</code> 함수를 통해 해당 페이지 내용을 받습니다.</li>
@@ -732,33 +732,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="금융-데이터-수집하기-기본.html#cb109-1"></a>KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">order</span>(<span class="op">-</span>KOR_ticker[<span class="st">&#39;시가총액.원.&#39;</span>]), ]</span>
 <span id="cb109-2"><a href="금융-데이터-수집하기-기본.html#cb109-2"></a><span class="kw">print</span>(<span class="kw">head</span>(KOR_ticker))</span></code></pre></div>
 <pre><code>##      종목코드           종목명 시장구분 산업분류
-## 328    005930         삼성전자   코스피 전기전자
+## 327    005930         삼성전자   코스피 전기전자
 ## 45     000660       SK하이닉스   코스피 전기전자
-## 846    035420            NAVER   코스피 서비스업
-## 1926   207940 삼성바이오로직스   코스피   의약품
 ## 1076   051910           LG화학   코스피     화학
-## 329    005935       삼성전자우   코스피 전기전자
+## 328    005935       삼성전자우   코스피 전기전자
+## 1929   207940 삼성바이오로직스   코스피   의약품
+## 1274   068270         셀트리온   코스피   의약품
 ##      현재가.종가. 전일대비 시가총액.원.       일자
-## 328         58600      400    3.498e+14 2020-09-23
-## 45          83600     2300    6.086e+13 2020-09-23
-## 846        296500    12000    4.870e+13 2020-09-23
-## 1926       705000   -26000    4.665e+13 2020-09-23
-## 1076       630000    -9000    4.447e+13 2020-09-23
-## 329         50900     -100    4.188e+13 2020-09-23
+## 327         73800        0    4.406e+14 2020-12-16
+## 45         117500        0    8.554e+13 2020-12-16
+## 1076       819000    18000    5.782e+13 2020-12-16
+## 328         69500        0    5.719e+13 2020-12-16
+## 1929       807000     7000    5.340e+13 2020-12-16
+## 1274       353500    -6500    4.772e+13 2020-12-16
 ##      관리여부   종가   EPS    PER     BPS   PBR
-## 328         -  58600 3,166  18.51  37,528  1.56
-## 45          -  83600 2,943  28.41  65,836  1.27
-## 846         - 296500 4,006  74.01  35,223  8.42
-## 1926        - 705000 3,067 229.87  65,812 10.71
-## 1076        - 630000 4,085 154.22 217,230   2.9
-## 329         -  50900     -      -       -     -
+## 327         -  73800 3,166  23.31  37,528  1.97
+## 45          - 117500 2,943  39.93  65,836  1.78
+## 1076        - 819000 4,085 200.49 217,230  3.77
+## 328         -  69500     -      -       -     -
+## 1929        - 807000 3,067 263.12  65,812 12.26
+## 1274        - 353500 2,236 158.09  20,795    17
 ##      주당배당금 배당수익률 게시물..일련번호 총카운트
-## 328        1416       2.42             1726       NA
-## 45         1000       1.20             1459       NA
-## 846         376       0.13             2045       NA
-## 1926          0       0.00             2250       NA
-## 1076       2000       0.32             2076       NA
-## 329        1417       2.78             1727       NA</code></pre>
+## 327        1416       1.92             1748       NA
+## 45         1000       0.85             1486       NA
+## 1076       2000       0.24             2099       NA
+## 328        1417       2.04             1749       NA
+## 1929          0       0.00             2273       NA
+## 1274          0       0.00             2119       NA</code></pre>
 <p>데이터를 시가총액 기준으로 내림차순 정렬할 필요도 있습니다. <code>order()</code> 함수를 통해 상대적인 순서를 구할 수 있습니다. R은 기본적으로 오름차순으로 순서를 구하므로 앞에 마이너스(-)를 붙여 내림차순 형태로 바꿉니다. 결과적으로 시가총액 기준 내림차
 순으로 해당 데이터가 정렬됩니다.</p>
 <p>마지막으로 스팩, 우선주 종목 역시 제외해야 합니다.</p>
@@ -768,93 +768,91 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>##  [1] &quot;대신밸런스제6호스팩&quot;  &quot;엔에이치스팩14호&quot;    
 ##  [3] &quot;케이비제18호스팩&quot;     &quot;삼성스팩2호&quot;         
 ##  [5] &quot;엔에이치스팩17호&quot;     &quot;유안타제6호스팩&quot;     
-##  [7] &quot;미래에셋대우스팩3호&quot;  &quot;케이비제20호스팩&quot;    
-##  [9] &quot;엔에이치스팩15호&quot;     &quot;유안타제5호스팩&quot;     
-## [11] &quot;한화에스비아이스팩&quot;   &quot;SK6호스팩&quot;           
-## [13] &quot;대신밸런스제8호스팩&quot;  &quot;미래에셋대우스팩 5호&quot;
-## [15] &quot;케이비17호스팩&quot;       &quot;교보10호스팩&quot;        
-## [17] &quot;IBKS제11호스팩&quot;       &quot;대신밸런스제7호스팩&quot; 
-## [19] &quot;IBKS제13호스팩&quot;       &quot;SK4호스팩&quot;           
-## [21] &quot;한국제7호스팩&quot;        &quot;하이제5호스팩&quot;       
-## [23] &quot;신한제6호스팩&quot;        &quot;삼성머스트스팩3호&quot;   
-## [25] &quot;하나머스트제6호스팩&quot;  &quot;하나금융15호스팩&quot;    
-## [27] &quot;상상인이안1호스팩&quot;    &quot;한화플러스제1호스팩&quot; 
-## [29] &quot;하이제4호스팩&quot;        &quot;유안타제4호스팩&quot;     
-## [31] &quot;DB금융스팩7호&quot;        &quot;미래에셋대우스팩4호&quot; 
-## [33] &quot;하나금융14호스팩&quot;     &quot;IBKS제14호스팩&quot;      
-## [35] &quot;유안타제3호스팩&quot;      &quot;엔에이치스팩16호&quot;    
-## [37] &quot;IBKS제10호스팩&quot;       &quot;케이비제19호스팩&quot;    
-## [39] &quot;SK5호스팩&quot;            &quot;신영스팩6호&quot;         
-## [41] &quot;에이치엠씨제4호스팩&quot;  &quot;신한제5호스팩&quot;       
-## [43] &quot;하나금융16호스팩&quot;     &quot;교보8호스팩&quot;         
-## [45] &quot;유진스팩5호&quot;          &quot;교보9호스팩&quot;         
-## [47] &quot;상상인이안제2호스팩&quot;  &quot;키움제5호스팩&quot;       
-## [49] &quot;이베스트스팩5호&quot;      &quot;신영스팩5호&quot;         
-## [51] &quot;유진스팩4호&quot;          &quot;엔에이치스팩13호&quot;    
-## [53] &quot;한국제8호스팩&quot;        &quot;IBKS제12호스팩&quot;      
-## [55] &quot;이베스트이안스팩1호&quot;</code></pre>
+##  [7] &quot;삼성머스트스팩3호&quot;    &quot;미래에셋대우스팩3호&quot; 
+##  [9] &quot;케이비제20호스팩&quot;     &quot;DB금융스팩7호&quot;       
+## [11] &quot;하이제4호스팩&quot;        &quot;DB금융스팩8호&quot;       
+## [13] &quot;유안타제5호스팩&quot;      &quot;신한제5호스팩&quot;       
+## [15] &quot;대신밸런스제8호스팩&quot;  &quot;SK6호스팩&quot;           
+## [17] &quot;한화에스비아이스팩&quot;   &quot;케이비17호스팩&quot;      
+## [19] &quot;교보10호스팩&quot;         &quot;교보8호스팩&quot;         
+## [21] &quot;IBKS제13호스팩&quot;       &quot;미래에셋대우스팩 5호&quot;
+## [23] &quot;대신밸런스제7호스팩&quot;  &quot;신한제6호스팩&quot;       
+## [25] &quot;SK4호스팩&quot;            &quot;한국제7호스팩&quot;       
+## [27] &quot;하이제5호스팩&quot;        &quot;에이치엠씨제5호스팩&quot; 
+## [29] &quot;하나금융15호스팩&quot;     &quot;하나머스트제6호스팩&quot; 
+## [31] &quot;상상인이안1호스팩&quot;    &quot;한화플러스제1호스팩&quot; 
+## [33] &quot;유안타제4호스팩&quot;      &quot;하나금융14호스팩&quot;    
+## [35] &quot;IBKS제14호스팩&quot;       &quot;미래에셋대우스팩4호&quot; 
+## [37] &quot;엔에이치스팩16호&quot;     &quot;케이비제19호스팩&quot;    
+## [39] &quot;유안타제3호스팩&quot;      &quot;신영스팩6호&quot;         
+## [41] &quot;SK5호스팩&quot;            &quot;에이치엠씨제4호스팩&quot; 
+## [43] &quot;하나금융16호스팩&quot;     &quot;유진스팩5호&quot;         
+## [45] &quot;교보9호스팩&quot;          &quot;상상인이안제2호스팩&quot; 
+## [47] &quot;키움제5호스팩&quot;        &quot;이베스트스팩5호&quot;     
+## [49] &quot;신영스팩5호&quot;          &quot;엔에이치스팩13호&quot;    
+## [51] &quot;한국제8호스팩&quot;        &quot;유진스팩4호&quot;         
+## [53] &quot;IBKS제12호스팩&quot;       &quot;이베스트이안스팩1호&quot;</code></pre>
 <div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="금융-데이터-수집하기-기본.html#cb113-1"></a>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&#39;종목명&#39;</span>]</span></code></pre></div>
 <pre><code>##   [1] &quot;삼성전자우&quot;         &quot;현대차2우B&quot;        
 ##   [3] &quot;LG화학우&quot;           &quot;현대차우&quot;          
-##   [5] &quot;LG생활건강우&quot;       &quot;아모레퍼시픽우&quot;    
-##   [7] &quot;미래에셋대우2우B&quot;   &quot;LG전자우&quot;          
+##   [5] &quot;LG생활건강우&quot;       &quot;미래에셋대우2우B&quot;  
+##   [7] &quot;LG전자우&quot;           &quot;아모레퍼시픽우&quot;    
 ##   [9] &quot;삼성화재우&quot;         &quot;삼성SDI우&quot;         
-##  [11] &quot;신풍제약우&quot;         &quot;한국금융지주우&quot;    
-##  [13] &quot;신영증권우&quot;         &quot;한화3우B&quot;          
-##  [15] &quot;대신증권우&quot;         &quot;두산퓨얼셀1우&quot;     
-##  [17] &quot;CJ4우(전환)&quot;        &quot;아모레G3우(전환)&quot;  
-##  [19] &quot;SK케미칼우&quot;         &quot;CJ제일제당 우&quot;     
-##  [21] &quot;현대차3우B&quot;         &quot;삼성전기우&quot;        
-##  [23] &quot;LG우&quot;               &quot;삼성물산우B&quot;       
-##  [25] &quot;대림산업우&quot;         &quot;두산우&quot;            
-##  [27] &quot;SK이노베이션우&quot;     &quot;NH투자증권우&quot;      
-##  [29] &quot;두산솔루스1우&quot;      &quot;녹십자홀딩스2우&quot;   
-##  [31] &quot;아모레G우&quot;          &quot;S-Oil우&quot;           
-##  [33] &quot;금호석유우&quot;         &quot;SK우&quot;              
-##  [35] &quot;CJ우&quot;               &quot;대신증권2우B&quot;      
-##  [37] &quot;두산퓨얼셀2우B&quot;     &quot;유한양행우&quot;        
-##  [39] &quot;두산2우B&quot;           &quot;미래에셋대우우&quot;    
-##  [41] &quot;SK디스커버리우&quot;     &quot;두산솔루스2우B&quot;    
-##  [43] &quot;롯데지주우&quot;         &quot;한화솔루션우&quot;      
-##  [45] &quot;코오롱인더우&quot;       &quot;부국증권우&quot;        
-##  [47] &quot;GS우&quot;               &quot;일양약품우&quot;        
-##  [49] &quot;대교우B&quot;            &quot;티와이홀딩스우&quot;    
-##  [51] &quot;호텔신라우&quot;         &quot;삼성중공우&quot;        
-##  [53] &quot;롯데칠성우&quot;         &quot;유화증권우&quot;        
-##  [55] &quot;쌍용양회우&quot;         &quot;유안타증권우&quot;      
-##  [57] &quot;한화우&quot;             &quot;한진칼우&quot;          
-##  [59] &quot;남양유업우&quot;         &quot;BYC우&quot;             
-##  [61] &quot;LG하우시스우&quot;       &quot;대한항공우&quot;        
-##  [63] &quot;대상우&quot;             &quot;하이트진로2우B&quot;    
-##  [65] &quot;세방우&quot;             &quot;SK증권우&quot;          
-##  [67] &quot;현대건설우&quot;         &quot;한화투자증권우&quot;    
-##  [69] &quot;남선알미우&quot;         &quot;태영건설우&quot;        
-##  [71] &quot;유유제약1우&quot;        &quot;DB하이텍1우&quot;       
-##  [73] &quot;SK네트웍스우&quot;       &quot;삼양사우&quot;          
-##  [75] &quot;코오롱우&quot;           &quot;넥센타이어1우B&quot;    
-##  [77] &quot;대덕전자1우&quot;        &quot;코리아써우&quot;        
-##  [79] &quot;삼양홀딩스우&quot;       &quot;JW중외제약우&quot;      
-##  [81] &quot;코오롱글로벌우&quot;     &quot;덕성우&quot;            
-##  [83] &quot;성신양회우&quot;         &quot;계양전기우&quot;        
-##  [85] &quot;태양금속우&quot;         &quot;서울식품우&quot;        
-##  [87] &quot;NPC우&quot;              &quot;넥센우&quot;            
-##  [89] &quot;금호산업우&quot;         &quot;깨끗한나라우&quot;      
-##  [91] &quot;CJ씨푸드1우&quot;        &quot;대원전선우&quot;        
-##  [93] &quot;JW중외제약2우B&quot;     &quot;금강공업우&quot;        
-##  [95] &quot;대한제당우&quot;         &quot;대덕1우&quot;           
-##  [97] &quot;한양증권우&quot;         &quot;크라운해태홀딩스우&quot;
-##  [99] &quot;현대비앤지스틸우&quot;   &quot;동원시스템즈우&quot;    
-## [101] &quot;하이트진로홀딩스우&quot; &quot;성문전자우&quot;        
-## [103] &quot;진흥기업우B&quot;        &quot;대상홀딩스우&quot;      
-## [105] &quot;크라운제과우&quot;       &quot;흥국화재우&quot;        
-## [107] &quot;KG동부제철우&quot;       &quot;대호피앤씨우&quot;      
-## [109] &quot;노루페인트우&quot;       &quot;동부건설우&quot;        
-## [111] &quot;소프트센우&quot;         &quot;유유제약2우B&quot;      
-## [113] &quot;루트로닉3우C&quot;       &quot;코리아써키트2우B&quot;  
-## [115] &quot;동양우&quot;             &quot;동양2우B&quot;          
-## [117] &quot;신원우&quot;             &quot;진흥기업2우B&quot;      
-## [119] &quot;흥국화재2우B&quot;       &quot;노루홀딩스우&quot;      
-## [121] &quot;동양3우B&quot;</code></pre>
+##  [11] &quot;한국금융지주우&quot;     &quot;신영증권우&quot;        
+##  [13] &quot;한화3우B&quot;           &quot;신풍제약우&quot;        
+##  [15] &quot;대신증권우&quot;         &quot;CJ4우(전환)&quot;       
+##  [17] &quot;아모레G3우(전환)&quot;   &quot;SK케미칼우&quot;        
+##  [19] &quot;삼성전기우&quot;         &quot;CJ제일제당 우&quot;     
+##  [21] &quot;현대차3우B&quot;         &quot;LG우&quot;              
+##  [23] &quot;삼성물산우B&quot;        &quot;대림산업우&quot;        
+##  [25] &quot;두산퓨얼셀1우&quot;      &quot;NH투자증권우&quot;      
+##  [27] &quot;두산우&quot;             &quot;SK이노베이션우&quot;    
+##  [29] &quot;금호석유우&quot;         &quot;S-Oil우&quot;           
+##  [31] &quot;SK우&quot;               &quot;두산솔루스1우&quot;     
+##  [33] &quot;아모레G우&quot;          &quot;CJ우&quot;              
+##  [35] &quot;녹십자홀딩스2우&quot;    &quot;대신증권2우B&quot;      
+##  [37] &quot;유한양행우&quot;         &quot;한화솔루션우&quot;      
+##  [39] &quot;미래에셋대우우&quot;     &quot;SK디스커버리우&quot;    
+##  [41] &quot;두산2우B&quot;           &quot;롯데지주우&quot;        
+##  [43] &quot;부국증권우&quot;         &quot;코오롱인더우&quot;      
+##  [45] &quot;호텔신라우&quot;         &quot;두산퓨얼셀2우B&quot;    
+##  [47] &quot;두산솔루스2우B&quot;     &quot;GS우&quot;              
+##  [49] &quot;대교우B&quot;            &quot;대한항공우&quot;        
+##  [51] &quot;롯데칠성우&quot;         &quot;유화증권우&quot;        
+##  [53] &quot;삼성중공우&quot;         &quot;일양약품우&quot;        
+##  [55] &quot;LG하우시스우&quot;       &quot;티와이홀딩스우&quot;    
+##  [57] &quot;유안타증권우&quot;       &quot;BYC우&quot;             
+##  [59] &quot;한진칼우&quot;           &quot;대상우&quot;            
+##  [61] &quot;하이트진로2우B&quot;     &quot;세방우&quot;            
+##  [63] &quot;SK증권우&quot;           &quot;남양유업우&quot;        
+##  [65] &quot;한화우&quot;             &quot;덕성우&quot;            
+##  [67] &quot;대덕전자1우&quot;        &quot;현대건설우&quot;        
+##  [69] &quot;코리아써우&quot;         &quot;넥센타이어1우B&quot;    
+##  [71] &quot;한화투자증권우&quot;     &quot;태영건설우&quot;        
+##  [73] &quot;코오롱우&quot;           &quot;삼양사우&quot;          
+##  [75] &quot;유유제약1우&quot;        &quot;서울식품우&quot;        
+##  [77] &quot;남선알미우&quot;         &quot;삼양홀딩스우&quot;      
+##  [79] &quot;SK네트웍스우&quot;       &quot;DB하이텍1우&quot;       
+##  [81] &quot;NPC우&quot;              &quot;코오롱글로벌우&quot;    
+##  [83] &quot;넥센우&quot;             &quot;대덕1우&quot;           
+##  [85] &quot;계양전기우&quot;         &quot;금호산업우&quot;        
+##  [87] &quot;한양증권우&quot;         &quot;루트로닉3우C&quot;      
+##  [89] &quot;대한제당우&quot;         &quot;성신양회우&quot;        
+##  [91] &quot;태양금속우&quot;         &quot;CJ씨푸드1우&quot;       
+##  [93] &quot;깨끗한나라우&quot;       &quot;크라운제과우&quot;      
+##  [95] &quot;동원시스템즈우&quot;     &quot;크라운해태홀딩스우&quot;
+##  [97] &quot;현대비앤지스틸우&quot;   &quot;대상홀딩스우&quot;      
+##  [99] &quot;하이트진로홀딩스우&quot; &quot;금강공업우&quot;        
+## [101] &quot;KG동부제철우&quot;       &quot;JW중외제약우&quot;      
+## [103] &quot;대원전선우&quot;         &quot;흥국화재우&quot;        
+## [105] &quot;노루페인트우&quot;       &quot;대호피앤씨우&quot;      
+## [107] &quot;진흥기업우B&quot;        &quot;성문전자우&quot;        
+## [109] &quot;코리아써키트2우B&quot;   &quot;동부건설우&quot;        
+## [111] &quot;유유제약2우B&quot;       &quot;JW중외제약2우B&quot;    
+## [113] &quot;소프트센우&quot;         &quot;동양우&quot;            
+## [115] &quot;동양2우B&quot;           &quot;신원우&quot;            
+## [117] &quot;진흥기업2우B&quot;       &quot;노루홀딩스우&quot;      
+## [119] &quot;흥국화재2우B&quot;       &quot;동양3우B&quot;</code></pre>
 <p><code>grepl()</code> 함수를 통해 종목명에 ‘스팩’이 들어가는 종목을 찾고, <code>stringr</code> 패키지의 <code>str_sub()</code> 함수를 통해 종목코드 끝이 0이 아닌 우선주 종목을 찾을 수 있습니다.</p>
 <div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="금융-데이터-수집하기-기본.html#cb115-1"></a>KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="op">!</span><span class="kw">grepl</span>(<span class="st">&#39;스팩&#39;</span>, KOR_ticker[, <span class="st">&#39;종목명&#39;</span>]), ]  </span>
 <span id="cb115-2"><a href="금융-데이터-수집하기-기본.html#cb115-2"></a>KOR_ticker =<span class="st"> </span>KOR_ticker[<span class="kw">str_sub</span>(KOR_ticker[, <span class="st">&#39;종목코드&#39;</span>], <span class="dv">-1</span>, <span class="dv">-1</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, ]</span></code></pre></div>
