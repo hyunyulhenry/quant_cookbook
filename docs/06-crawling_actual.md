@@ -882,7 +882,7 @@ print(codezip_data)
 
 ```
 ## Response [https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=b1a630e527b0e5ff5bd58ed81b49825017fa80b8]
-##   Date: 2020-12-20 12:32
+##   Date: 2020-12-20 13:01
 ##   Status: 200
 ##   Content-Type: application/x-msdownload
 ##   Size: 1.4 MB
