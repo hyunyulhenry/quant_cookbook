@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2020-12-20" />
+<meta name="date" content="2021-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -253,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
 <li class="chapter" data-level="5.1" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#한국거래소의-산업별-현황-및-개별지표-크롤링"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#산업별-현황-크롤링"><i class="fa fa-check"></i><b>5.1.1</b> 산업별 현황 크롤링</a></li>
+<li class="chapter" data-level="5.1.1" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#업종분류-현황-크롤링"><i class="fa fa-check"></i><b>5.1.1</b> 업종분류 현황 크롤링</a></li>
 <li class="chapter" data-level="5.1.2" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#개별종목-지표-크롤링"><i class="fa fa-check"></i><b>5.1.2</b> 개별종목 지표 크롤링</a></li>
 <li class="chapter" data-level="5.1.3" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#최근-영업일-기준-데이터-받기"><i class="fa fa-check"></i><b>5.1.3</b> 최근 영업일 기준 데이터 받기</a></li>
 <li class="chapter" data-level="5.1.4" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#거래소-데이터-정리하기"><i class="fa fa-check"></i><b>5.1.4</b> 거래소 데이터 정리하기</a></li>
@@ -525,26 +525,26 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>위 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장됩니다. 이처럼 개발자 도구 화면을 통해 내가 추출하고자 하는 데이터가 HTML 중 어디에 위치하고 있는지 먼저 확인하면 어렵지 않게 해당 데이터를 읽어올 수 있습니다.</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="크롤링-이해하기.html#cb61-1"></a><span class="kw">print</span>(data_title)</span></code></pre></div>
-<pre><code>##  [1] &quot;임차료 직접 지원 검토…3차 지원금 &quot;    
-##  [2] &quot;산은, 600억 연체 중인 쌍용차 대&quot;      
-##  [3] &quot;ISA 통해 투자한 주식·채권 2년 &quot;       
-##  [4] &quot;\&quot;어게인 2018\&quot;…내년 반도체 3차&quot;      
-##  [5] &quot;&quot;                                     
-##  [6] &quot;[표] 주요국 증시 주간 동향&quot;           
-##  [7] &quot;한달새 30% 급등한 한전…주가 전망&quot;     
-##  [8] &quot;증권사 공매도 42% 줄듯…금융위, &quot;      
-##  [9] &quot;[표] 주간 주요 증시 지표&quot;             
-## [10] &quot;야놀자·빅히트·마켓컬리 성공 뒤에는·&quot;  
-## [11] &quot;&#39;공포&#39;에 사서 기다렸다…&#39;주식 필패&quot;    
-## [12] &quot;증시 &#39;3대 편견&#39; 깨고…수익률 승자&quot;     
-## [13] &quot;주식세제·공모주…금융정책도 좌지우지하&quot;
-## [14] &quot;증권사들 공매도 규모 42% 줄어든다&quot;    
-## [15] &quot;내년 ETF 투자 황금비율…&#39;주식 5&quot;       
-## [16] &quot;개인 계좌 1년새 589만개 급증&quot;         
-## [17] &quot;&#39;액티브 ETF&#39;가 뜬다…美 혁신기업&quot;      
-## [18] &quot;美 지수서 퇴출되는 中 기업들…\&quot;친환&quot;  
-## [19] &quot;김병욱 “시장조성자 제도 개선 환영”&quot;   
-## [20] &quot;금융당국 \&quot;불확실성 대비해야\&quot;...은&quot;</code></pre>
+<pre><code>##  [1] &quot;거래소, 시장정보포털 &#39;KRX 정보데&quot;    
+##  [2] &quot;거래소, 상장사 ESG 정보공개 가이&quot;    
+##  [3] &quot;美 바이든 정부 공식 출범…韓 조정 &quot;   
+##  [4] &quot;금감원, 삼성증권 종합검사 이르면 1&quot;  
+##  [5] &quot;포모증후군?, 증시 변동성 높아져도.&quot;  
+##  [6] &quot;3년간 공매도 수익 9170억…개미 &quot;      
+##  [7] &quot;엠씨넥스에 대한 기대감이 솔솔 높아지&quot;
+##  [8] &quot;바이든 정부 공식 출범…지수 상승 부&quot;  
+##  [9] &quot;대작 줄줄이 개봉...CGV 웃을 수&quot;      
+## [10] &quot;[fn마켓워치] 변동성 커진 두산인프&quot;   
+## [11] &quot;거래소, `KRX 정보데이터시스템` &quot;     
+## [12] &quot;거래소, `ESG 정보공개 가이던스`&quot;     
+## [13] &quot;한국거래소, 시장정보포털 &#39;KRX정보&quot;   
+## [14] &quot;컴투스, 신작 줄줄이 출시…‘백년전쟁&quot;  
+## [15] &quot;&#39;ESG 정보공개 가이던스&#39; 제정…온&quot;     
+## [16] &quot;한국거래소, ESG 투자 활성화 속도&quot;    
+## [17] &quot;증권·파생상품시장 정보 한 눈에...&quot;   
+## [18] &quot;뜨거운 증시만큼 달궈진 IPO 시장 &quot;    
+## [19] &quot;한국거래소 &#39;ESG 정보공개 가이던스&quot;   
+## [20] &quot;주식 정보 여기서 다 본다…거래소, &quot;</code></pre>
 </div>
 <div id="기업공시채널에서-오늘의-공시-불러오기" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -750,18 +750,18 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="크롤링-이해하기.html#cb78-1"></a><span class="kw">print</span>(<span class="kw">head</span>(table))</span></code></pre></div>
 <pre><code>##    N           종목명  현재가 전일비 등락률 액면가
 ## 1 NA                                              
-## 2  1         삼성전자  73,000    300 -0.41%    100
-## 3  2       SK하이닉스 118,500  1,000 -0.84%  5,000
-## 4  3           LG화학 814,000 16,000 -1.93%  5,000
-## 5  4       삼성전자우  68,600    300 -0.44%    100
-## 6  5 삼성바이오로직스 802,000  2,000 -0.25%  2,500
+## 2  1         삼성전자  88,000  1,700 -1.90%    100
+## 3  2       SK하이닉스 127,500  3,000 -2.30%  5,000
+## 4  3           LG화학 979,000 31,000 -3.07%  5,000
+## 5  4       삼성전자우  77,600  1,200 -1.52%    100
+## 6  5 삼성바이오로직스 804,000 12,000 -1.47%  2,500
 ##    시가총액 상장주식수 외국인비율     거래량    PER
 ## 1                              NA              &lt;NA&gt;
-## 2 4,357,941  5,969,783      55.98 17,380,940  19.93
-## 3   862,683    728,002      49.84  2,981,088  30.06
-## 4   574,622     70,592      42.55    350,546  76.05
-## 5   564,500    822,887      82.60  3,244,480  18.73
-## 6   530,643     66,165      10.21     66,273 149.32
+## 2 5,253,409  5,969,783      55.57 33,117,980  24.03
+## 3   928,203    728,002      50.20  4,763,450  32.34
+## 4   691,099     70,592      43.59    442,295  91.47
+## 5   638,560    822,887      80.52  3,116,433  21.19
+## 6   531,967     66,165      10.40    136,954 149.69
 ##    ROE 토론실
 ## 1 &lt;NA&gt;     NA
 ## 2 8.69     NA
@@ -774,26 +774,26 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <span id="cb80-2"><a href="크롤링-이해하기.html#cb80-2"></a>table =<span class="st"> </span><span class="kw">na.omit</span>(table)</span>
 <span id="cb80-3"><a href="크롤링-이해하기.html#cb80-3"></a><span class="kw">print</span>(<span class="kw">head</span>(table))</span></code></pre></div>
 <pre><code>##    N           종목명  현재가 전일비 등락률 액면가
-## 2  1         삼성전자  73,000    300 -0.41%    100
-## 3  2       SK하이닉스 118,500  1,000 -0.84%  5,000
-## 4  3           LG화학 814,000 16,000 -1.93%  5,000
-## 5  4       삼성전자우  68,600    300 -0.44%    100
-## 6  5 삼성바이오로직스 802,000  2,000 -0.25%  2,500
-## 10 6         셀트리온 356,000  4,500 +1.28%  1,000
+## 2  1         삼성전자  88,000  1,700 -1.90%    100
+## 3  2       SK하이닉스 127,500  3,000 -2.30%  5,000
+## 4  3           LG화학 979,000 31,000 -3.07%  5,000
+## 5  4       삼성전자우  77,600  1,200 -1.52%    100
+## 6  5 삼성바이오로직스 804,000 12,000 -1.47%  2,500
+## 10 6           현대차 240,000 10,500 -4.19%  5,000
 ##     시가총액 상장주식수 외국인비율     거래량    PER
-## 2  4,357,941  5,969,783      55.98 17,380,940  19.93
-## 3    862,683    728,002      49.84  2,981,088  30.06
-## 4    574,622     70,592      42.55    350,546  76.05
-## 5    564,500    822,887      82.60  3,244,480  18.73
-## 6    530,643     66,165      10.21     66,273 149.32
-## 10   480,592    134,998      20.79    905,386  94.35
-##      ROE
-## 2   8.69
-## 3   4.25
-## 4   1.84
-## 5    N/A
-## 6   4.77
-## 10 11.19</code></pre>
+## 2  5,253,409  5,969,783      55.57 33,117,980  24.03
+## 3    928,203    728,002      50.20  4,763,450  32.34
+## 4    691,099     70,592      43.59    442,295  91.47
+## 5    638,560    822,887      80.52  3,116,433  21.19
+## 6    531,967     66,165      10.40    136,954 149.69
+## 10   512,804    213,668      30.95  3,863,728  57.35
+##     ROE
+## 2  8.69
+## 3  4.25
+## 4  1.84
+## 5   N/A
+## 6  4.77
+## 10 4.32</code></pre>
 <p>이제 필요한 정보는 6자리 티커입니다. 티커 역시 개발자 도구 화면을 통해 tbody → td → a 태그의 href 속성에 위치하고 있음을 알고 있습니다. 티커를 추출하는 코드는 다음과 같습니다.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="크롤링-이해하기.html#cb82-1"></a>symbol =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></span>
 <span id="cb82-2"><a href="크롤링-이해하기.html#cb82-2"></a><span class="st">  </span><span class="kw">html_nodes</span>(., <span class="st">&#39;tbody&#39;</span>) <span class="op">%&gt;%</span></span>
@@ -841,7 +841,7 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="크롤링-이해하기.html#cb86-1"></a>symbol =<span class="st"> </span><span class="kw">unique</span>(symbol)</span>
 <span id="cb86-2"><a href="크롤링-이해하기.html#cb86-2"></a><span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</span></code></pre></div>
 <pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;051910&quot; &quot;005935&quot; &quot;207940&quot;
-##  [6] &quot;068270&quot; &quot;035420&quot; &quot;005380&quot; &quot;006400&quot; &quot;035720&quot;</code></pre>
+##  [6] &quot;005380&quot; &quot;006400&quot; &quot;035420&quot; &quot;068270&quot; &quot;035720&quot;</code></pre>
 <p><code>unique()</code> 함수를 이용해 중복되는 티커를 제거하면 우리가 원하는 티커 부분만 깔끔하게 정리됩니다. 해당 내용을 위에서 구한 테이블에 입력한 후 데이터를 다듬는 과정은 다음과 같습니다.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="크롤링-이해하기.html#cb88-1"></a>table<span class="op">$</span>N =<span class="st"> </span>symbol</span>
 <span id="cb88-2"><a href="크롤링-이해하기.html#cb88-2"></a><span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &#39;종목코드&#39;</span></span>

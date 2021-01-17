@@ -76,15 +76,15 @@ glimpse(data_market, width = 50)
 ### `rename()`: 열 이름 바꾸기
 
 ```{r}
-head(names(data_market), 10)
+head(names(data_market), 15)
 
 data_market = data_market %>%
-  rename(`시가총액` = `시가총액.원.`)
+  rename(`배당수익률(%)` = `배당수익률`)
 
-head(names(data_market), 10)
+head(names(data_market), 15)
 ```
 
-`rename()` 함수는 열 이름을 바꾸는 함수로서, `rename(tbl, new_name, old_name)` 형태로 입력합니다. 위의 경우 시가총액.원. 열 이름이 시가총액으로 변경되었습니다.
+`rename()` 함수는 열 이름을 바꾸는 함수로서, `rename(tbl, new_name, old_name)` 형태로 입력합니다. 위의 경우 **배당수익률** 열 이름이 **배당수익률(%)**로 변경되었습니다.
 
 ### distinct(): 고유한 값 확인
 

@@ -4,20 +4,21 @@ API와 크롤링을 이용한다면 비용을 지불하지 않고 얼마든지 �
 
 ## 한국거래소의 산업별 현황 및 개별지표 크롤링
 
-앞 CHAPTER의 예제를 통해 네이버 금융에서 주식티커를 크롤링하는 방법을 살펴보았습니다. 그러나 이 방법은 지나치게 복잡하고 시간이 오래 걸립니다. 반면 한국거래소에서 제공하는 산업별 현황과 개별종목 지표 데이터를 이용하면 훨씬 간단하게 주식티커 데이터를 수집할 수 있습니다.
+앞 CHAPTER의 예제를 통해 네이버 금융에서 주식티커를 크롤링하는 방법을 살펴보았습니다. 그러나 이 방법은 지나치게 복잡하고 시간이 오래 걸립니다. 반면 한국거래소에서 제공하는 업종분류 현황과 개별종목 지표 데이터를 이용하면 훨씬 간단하게 주식티커 데이터를 수집할 수 있습니다.
 
-- 산업별 현황: http://marketdata.krx.co.kr/mdi#document=03030103
-- 개별지표: http://marketdata.krx.co.kr/mdi#document=13020401
+- KRX 정보데이터시스템 http://data.krx.co.kr/ 에서 [기본통계 → 주식 → 세부안내] 부분
+- [12025] 업종분류 현황 
+- [12021] 개별종목
 
 해당 데이터들을 크롤링이 아닌 [Excel] 버튼을 클릭해 엑셀 파일로 받을 수도 있습니다. 그러나 매번 엑셀 파일을 다운로드하고 이를 R로 불러오는 작업은 상당히 비효율적이며, 크롤링을 이용한다면 해당 데이터를 R로 직접 불러올 수 있습니다.
 
-### 산업별 현황 크롤링
+### 업종분류 현황 크롤링
 
-먼저 산업별 현황에 해당하는 페이지에 접속한 후 개발자 도구 화면을 열고 [Excel] 버튼을 클릭합니다. [Network] 탭에는 GenerateOTP.jspx와 download.jspx 두 가지 항목이 있습니다. 거래소에서 엑셀 데이터를 받는 과정은 다음과 같습니다.
+먼저 업종분류 현황에 해당하는 페이지에 접속한 후 개발자 도구 화면을 열고 [다운로드] 버튼을 클릭한 후 [CSV]를 누릅니다. [Network] 탭에는 generate.cmd와 download.cmd 두 가지 항목이 있습니다. 거래소에서 엑셀 데이터를 받는 과정은 다음과 같습니다.
 
-1. http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx 에 원하는 항목을쿼리로 발송하면 해당 쿼리에 해당하는 OTP(GenerateOTP.jspx)를 받게 됩니다.
+1. http://data.krx.co.kr/comm/fileDn/download_excel/download.cmd 에 원하는 항목을 쿼리로 발송하면 해당 쿼리에 해당하는 OTP(generate.cmd)를 받게 됩니다.
 
-2. 부여받은 OTP를 **http://file.krx.co.kr/download.jspx**에 제출하면 이에 해당하는 데이터(download.jspx)를 다운로드하게 됩니다.
+2. 부여받은 OTP를 **http://data.krx.co.kr/**에 제출하면 이에 해당하는 데이터(download.cmd)를 다운로드하게 됩니다.
 
 먼저 1번 단계를 살펴보겠습니다.
 
@@ -25,7 +26,7 @@ API와 크롤링을 이용한다면 비용을 지불하지 않고 얼마든지 �
 knitr::include_graphics('images/crawl_practice_krx_sector.png')
 ```
 
-General 항목의 Request URL의 앞부분이 원하는 항목을 제출할 주소입니다. Query String Parameters에는 우리가 원하는 항목들이 적혀 있습니다. 이를 통해 POST 방식으로 데이터를 요청함을 알 수 있습니다.
+General 항목의 Request URL의 앞부분이 원하는 항목을 제출할 주소입니다. Form Data에는 우리가 원하는 항목들이 적혀 있습니다. 이를 통해 POST 방식으로 데이터를 요청함을 알 수 있습니다.
 
 다음으로 2번 단계를 살펴보겠습니다.
 
@@ -43,22 +44,22 @@ library(rvest)
 library(readr)
 
 gen_otp_url =
-  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+  'http://data.krx.co.kr/comm/fileDn/GenerateOTP/generate.cmd'
 gen_otp_data = list(
+  mktId = 'STK',
+  trdDd = '20210108',
+  money = '1',
+  csvxls_isNo = 'false',
   name = 'fileDown',
-  filetype = 'csv',
-  url = 'MKD/03/0303/03030103/mkd03030103',
-  tp_cd = 'ALL',
-  date = '20190607',
-  lang = 'ko',
-  pagePath = '/contents/MKD/03/0303/03030103/MKD03030103.jsp')
+  url = 'dbms/MDC/STAT/standard/MDCSTAT03901'
+)
 otp = POST(gen_otp_url, query = gen_otp_data) %>%
   read_html() %>%
   html_text()
 ```
 
 1. gen_otp_url에 원하는 항목을 제출할 URL을 입력합니다.
-2. 개발자 도구 화면에 나타는 쿼리 내용들을 리스트 형태로 입력합니다. **단, filetype은 xls이 아닌 csv로 변경하는데**, csv 형태로 다운로드하면 데이터를 처리하기 훨씬 쉽기 때문입니다.
+2. 개발자 도구 화면에 나타는 쿼리 내용들을 리스트 형태로 입력합니다. 이 중 mktId의 STK는 코스피에 해당하는 내용이며, 코스닥 데이터를 받고자 할 경우 KSQ를 입력해야 합니다.
 3. `POST()` 함수를 통해 해당 URL에 쿼리를 전송하면 이에 해당하는 데이터를 받게 됩니다.
 4. `read_html()`함수를 통해 HTML 내용을 읽어옵니다.
 5. `html_text()` 함수는 HTML 내에서 텍스트에 해당하는 부분만을 추출합니다. 이를 통해 OTP 값만 추출하게 됩니다.
@@ -66,10 +67,10 @@ otp = POST(gen_otp_url, query = gen_otp_data) %>%
 위의 과정을 거쳐 생성된 OTP를 제출하면, 우리가 원하는 데이터를 다운로드할 수 있습니다.
 
 ```{r}
-down_url = 'http://file.krx.co.kr/download.jspx'
-down_sector = POST(down_url, query = list(code = otp),
+down_url = 'http://data.krx.co.kr/comm/fileDn/download_csv/download.cmd'
+down_sector_KS = POST(down_url, query = list(code = otp),
                    add_headers(referer = gen_otp_url)) %>%
-  read_html() %>%
+  read_html(encoding = 'EUC-KR') %>%
   html_text() %>%
   read_csv()
 ```
@@ -78,14 +79,43 @@ down_sector = POST(down_url, query = list(code = otp),
 2. `POST()` 함수를 통해 위에서 부여받은 OTP 코드를 해당 URL에 제출합니다.
 3. `add_headers()` 구문을 통해 리퍼러(referer)를 추가해야 합니다. 리퍼러란 링크를 통해서 각각의 웹사이트로 방문할 때 남는 흔적입니다. 거래소 데이터를 다운로드하는 과정을 살펴보면 첫 번째 URL에서 OTP를 부여받고, 이를 다시 두번째 URL에 제출했습니다. 그런데 이러한 과정의 흔적이 없이 OTP를 바로 두번째 URL에 제출하면 서버는 이를 로봇으로 인식해 데이터를 반환하지 않습니다. 따라서 `add_headers()` 함수를 통해 우리가 거쳐온 과정을 흔적으로 남겨
 야 데이터를 반환하게 되며 첫 번째 URL을 리퍼러로 지정해줍니다.
-4. `read_html()`과 `html_text()` 함수를 통해 텍스트 데이터만 추출합니다.
-5. `read_csv()` 함수는 csv 형태의 데이터를 불러옵니다. 위의 요청 쿼리에서 filetype을 csv로 지정했으므로 손쉽게 데이터를 읽어올 수 있습니다.
+4. `read_html()`과 `html_text()` 함수를 통해 텍스트 데이터만 추출합니다. EUC-KR로 인코딩이 되어 있으므로 `read_html()` 내에 이를 입력해줍니다.
+5. `read_csv()` 함수는 csv 형태의 데이터를 불러옵니다. 
 
 ```{r}
-print(down_sector)
+print(down_sector_KS)
 ```
 
-위 과정을 통해 down_sector 변수에는 산업별 현황 데이터가 저장되었습니다. 이를 csv 파일로 저장하겠습니다.
+위 과정을 통해 down_sector 변수에는 산업별 현황 데이터가 저장되었습니다. 코스닥 시장의 데이터도 다운로드 받도록 하겠습니다.
+
+```{r}
+gen_otp_data = list(
+  mktId = 'KSQ', # 코스닥으로 변경
+  trdDd = '20210108',
+  money = '1',
+  csvxls_isNo = 'false',
+  name = 'fileDown',
+  url = 'dbms/MDC/STAT/standard/MDCSTAT03901'
+)
+otp = POST(gen_otp_url, query = gen_otp_data) %>%
+  read_html() %>%
+  html_text()
+
+down_sector_KQ = POST(down_url, query = list(code = otp),
+                   add_headers(referer = gen_otp_url)) %>%
+  read_html(encoding = 'EUC-KR') %>%
+  html_text() %>%
+  read_csv()
+```
+
+코스피 데이터와 코스닥 데이터를 하나로 합치도록 합니다.
+
+```{r}
+down_sector = rbind(down_sector_KS, down_sector_KQ)
+```
+
+
+이를 csv 파일로 저장하겠습니다.
 
 ```{r eval = FALSE}
 ifelse(dir.exists('data'), FALSE, dir.create('data'))
@@ -102,7 +132,7 @@ write.csv(down_sector, 'data/krx_sector.csv')
 knitr::include_graphics('images/crawl_practice_krx_ind.png')
 ```
 
-이 중 isu_cdnm, isu_cd, isu_nm, isu_srt_cd, fromdate 항목은 종목 구분의 개별 탭에 해당하는 부분이므로 우리가 원하는 전체 데이터를 받을 때는 필요하지 않은 요청값입니다. 이를 제외한 요청값을 산업별 현황 예제에 적용하면 해당 데이터 역시 손쉽게 다운로드할 수 있습니다.
+이 중 tboxisuCd_finder_stkisu0_6, isu_Cd, isu_Cd2 등의 항목은 조회 구분의 개별추이 탭에 해당하는 부분이므로 우리가 원하는 전체 데이터를 받을 때는 필요하지 않은 요청값입니다. 이를 제외한 요청값을 산업별 현황 예제에 적용하면 해당 데이터 역시 손쉽게 다운로드할 수 있습니다.
 
 ```{r message = FALSE}
 library(httr)
@@ -110,24 +140,23 @@ library(rvest)
 library(readr)
 
 gen_otp_url =
-  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+  'http://data.krx.co.kr/comm/fileDn/GenerateOTP/generate.cmd'
 gen_otp_data = list(
+  searchType = '1',
+  mktId = 'ALL',
+  trdDd = '20210108',
+  csvxls_isNo = 'false',
   name = 'fileDown',
-  filetype = 'csv',
-  url = "MKD/13/1302/13020401/mkd13020401",
-  market_gubun = 'ALL',
-  gubun = '1',
-  schdate = '20190607',
-  pagePath = "/contents/MKD/13/1302/13020401/MKD13020401.jsp")
-
+  url = 'dbms/MDC/STAT/standard/MDCSTAT03501'
+)
 otp = POST(gen_otp_url, query = gen_otp_data) %>%
   read_html() %>%
   html_text()
 
-down_url = 'http://file.krx.co.kr/download.jspx'
+down_url = 'http://data.krx.co.kr/comm/fileDn/download_csv/download.cmd'
 down_ind = POST(down_url, query = list(code = otp),
                 add_headers(referer = gen_otp_url)) %>%
-  read_html() %>%
+  read_html(encoding = 'EUC-KR') %>%
   html_text() %>%
   read_csv()
 ```
@@ -211,53 +240,74 @@ biz_day = GET(url) %>%
   str_match(('[0-9]+.[0-9]+.[0-9]+') ) %>%
   str_replace_all('\\.', '')
 
-# 산업별 현황 OTP 발급
+# 코스피 업종분류 OTP 발급
 gen_otp_url =
-  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+    'http://data.krx.co.kr/comm/fileDn/GenerateOTP/generate.cmd'
 gen_otp_data = list(
+  mktId = 'STK',
+  trdDd = biz_day, # 최근영업일로 변경
+  money = '1',
+  csvxls_isNo = 'false',
   name = 'fileDown',
-  filetype = 'csv',
-  url = 'MKD/03/0303/03030103/mkd03030103',
-  tp_cd = 'ALL',
-  date = biz_day, # 최근영업일로 변경
-  lang = 'ko',
-  pagePath = '/contents/MKD/03/0303/03030103/MKD03030103.jsp')
+  url = 'dbms/MDC/STAT/standard/MDCSTAT03901'
+)
 otp = POST(gen_otp_url, query = gen_otp_data) %>%
   read_html() %>%
   html_text()
 
-# 산업별 현황 데이터 다운로드
-down_url = 'http://file.krx.co.kr/download.jspx'
-down_sector = POST(down_url, query = list(code = otp),
+# 코스피 업종분류 데이터 다운로드
+down_url = 'http://data.krx.co.kr/comm/fileDn/download_csv/download.cmd'
+down_sector_KS = POST(down_url, query = list(code = otp),
                    add_headers(referer = gen_otp_url)) %>%
-  read_html() %>%
+  read_html(encoding = 'EUC-KR') %>%
   html_text() %>%
   read_csv()
+
+# 코스닥 업종분류 OTP 발급
+gen_otp_data = list(
+  mktId = 'KSQ',
+  trdDd = biz_day, # 최근영업일로 변경
+  money = '1',
+  csvxls_isNo = 'false',
+  name = 'fileDown',
+  url = 'dbms/MDC/STAT/standard/MDCSTAT03901'
+)
+otp = POST(gen_otp_url, query = gen_otp_data) %>%
+  read_html() %>%
+  html_text()
+
+# 코스닥 업종분류 데이터 다운로드
+down_sector_KQ = POST(down_url, query = list(code = otp),
+                   add_headers(referer = gen_otp_url)) %>%
+  read_html(encoding = 'EUC-KR') %>%
+  html_text() %>%
+  read_csv()
+
+down_sector = rbind(down_sector_KS, down_sector_KQ)
 
 ifelse(dir.exists('data'), FALSE, dir.create('data'))
 write.csv(down_sector, 'data/krx_sector.csv')
 
 # 개별종목 지표 OTP 발급
 gen_otp_url =
-  'http://marketdata.krx.co.kr/contents/COM/GenerateOTP.jspx'
+  'http://data.krx.co.kr/comm/fileDn/GenerateOTP/generate.cmd'
 gen_otp_data = list(
+  searchType = '1',
+  mktId = 'ALL',
+  trdDd = biz_day, # 최근영업일로 변경
+  csvxls_isNo = 'false',
   name = 'fileDown',
-  filetype = 'csv',
-  url = "MKD/13/1302/13020401/mkd13020401",
-  market_gubun = 'ALL',
-  gubun = '1',
-  schdate = biz_day, # 최근영업일로 변경
-  pagePath = "/contents/MKD/13/1302/13020401/MKD13020401.jsp")
-
+  url = 'dbms/MDC/STAT/standard/MDCSTAT03501'
+)
 otp = POST(gen_otp_url, query = gen_otp_data) %>%
   read_html() %>%
   html_text()
 
 # 개별종목 지표 데이터 다운로드
-down_url = 'http://file.krx.co.kr/download.jspx'
+down_url = 'http://data.krx.co.kr/comm/fileDn/download_csv/download.cmd'
 down_ind = POST(down_url, query = list(code = otp),
                 add_headers(referer = gen_otp_url)) %>%
-  read_html() %>%
+  read_html(encoding = 'EUC-KR') %>%
   html_text() %>%
   read_csv()
 
@@ -281,7 +331,7 @@ down_ind = read.csv('data/krx_ind.csv',  row.names = 1,
 intersect(names(down_sector), names(down_ind))
 ```
 
-먼저 `intersect()` 함수를 통해 두 데이터 간 중복되는 열 이름을 살펴보면 종목코드와 종목명이 동일한 위치에 있습니다.
+먼저 `intersect()` 함수를 통해 두 데이터 간 중복되는 열 이름을 살펴보면 종목코드와 종목명 등이 동일한 위치에 있습니다.
 
 ```{r}
 setdiff(down_sector[, '종목명'], down_ind[ ,'종목명'])
@@ -300,7 +350,7 @@ KOR_ticker = merge(down_sector, down_ind,
 `merge()` 함수는 by를 기준으로 두 데이터를 하나로 합치며, 공통으로 존재하는 `r intersect(names(down_sector), names(down_ind))`을 기준으로 입력해줍니다. 또한 all 값을 TRUE로 설정하면 합집합을 반환하고, FALSE로 설정하면 교집합을 반환합니다. 공통으로 존재하는 항목을 원하므로 여기서는 FALSE를 입력합니다.
 
 ```{r}
-KOR_ticker = KOR_ticker[order(-KOR_ticker['시가총액.원.']), ]
+KOR_ticker = KOR_ticker[order(-KOR_ticker['시가총액']), ]
 print(head(KOR_ticker))
 ```
 

@@ -132,9 +132,9 @@ KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1,
 data_pbr = KOR_value['PBR']
 
 if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
-  num_col = ncol(KOR_fs[[1]]) - 1
+  num_col = str_which(colnames(KOR_fs[[1]]), as.character(lubridate::year(Sys.Date()) - 2))
 } else {
-  num_col = ncol(KOR_fs[[1]]) 
+  num_col = str_which(colnames(KOR_fs[[1]]), as.character(lubridate::year(Sys.Date()) - 1))
 }
 
 data_gpa =
@@ -231,9 +231,9 @@ KOR_ticker$'종목코드' =
   str_pad(KOR_ticker$'종목코드', 6, 'left', 0)
 
 if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
-  num_col = ncol(KOR_fs[[1]]) - 1
+  num_col = str_which(colnames(KOR_fs[[1]]), as.character(lubridate::year(Sys.Date()) - 2))
 } else {
-  num_col = ncol(KOR_fs[[1]]) 
+  num_col = str_which(colnames(KOR_fs[[1]]), as.character(lubridate::year(Sys.Date()) - 1))
 }
 
 # 분자
@@ -435,9 +435,9 @@ KOR_ticker$'종목코드' =
 
 ```{r warning = FALSE, message = FALSE, out.width='50%'}
 if ( lubridate::month(Sys.Date()) %in% c(1,2,3,4) ) {
-  num_col = ncol(KOR_fs[[1]]) - 1
+  num_col = str_which(colnames(KOR_fs[[1]]), as.character(lubridate::year(Sys.Date()) - 2))
 } else {
-  num_col = ncol(KOR_fs[[1]]) 
+  num_col = str_which(colnames(KOR_fs[[1]]), as.character(lubridate::year(Sys.Date()) - 1))
 }
 
 quality_roe = (KOR_fs$'지배주주순이익' / KOR_fs$'자본')[num_col]

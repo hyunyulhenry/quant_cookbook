@@ -1075,17 +1075,15 @@ library(dplyr)
 KOR_ticker = read.csv('data/KOR_ticker.csv',
                       row.names = 1, stringsAsFactors = FALSE) 
 
-KOSPI200 = KOR_ticker %>% filter(시장구분 == '코스피') %>%
+KOSPI200 = KOR_ticker %>% filter(시장구분 == 'KOSPI') %>%
   slice(1:200) %>%
-  rename(`시가총액` = `시가총액.원.`) %>%
   mutate(시가총액비중 = 시가총액 / sum(시가총액))
 ```
 
 1. 저장해둔 티커 정보를 불러옵니다.
 2. `filter()` 함수를 통해 코스피 시장에 해당하는 종목만을 선택합니다.
 3. `slice()` 함수를 통해 1번부터 200번 행 까지 데이터를 선택합니다.
-4. `rename()` 함수를 통해 열 이름을 바꿔 줍니다.
-5. 각 주식의 시가총액을 전체 시가총액으로 나눈 후, 시가총액비중에 저장합니다.
+4. 각 주식의 시가총액을 전체 시가총액으로 나눈 후, 시가총액비중에 저장합니다.
 
 계산된 시가총액비중을 시각화하도록 하겠습니다.
 
@@ -1127,7 +1125,7 @@ KOSPI200 %>%
 ```{r}
 KOSPI200 = KOSPI200 %>%
   mutate(매수금액 = 100000000 * 시가총액비중,
-             매수주수 = 매수금액 / `현재가.종가.`)
+             매수주수 = 매수금액 / 종가)
 
 KOSPI200 %>% select(매수금액, 매수주수) %>% head()
 ```
@@ -1144,7 +1142,7 @@ KOSPI200 %>% select(매수금액, 매수주수) %>% head()
 `floor()` 함수를 통해 내림처리를 하였으며, 각 주수만큼 매수할 경우 KOSPI 200 지수를 매우 유사하게 복제할 수 있습니다.
 
 ```{r}
-inv_money = KOSPI200 %>% mutate(실제매수금액 = `현재가.종가.` * 매수주수) %>%
+inv_money = KOSPI200 %>% mutate(실제매수금액 = 종가 * 매수주수) %>%
   summarize(sum(실제매수금액))
 
 print(inv_money)

@@ -622,7 +622,7 @@ file.edit("~/.Renviron")
 dart_api_key = '발급받은 API'
 ```
 
-파일을 저장한 후 해당 파일을 적용하기 위해 **R을 Session을 재시작합니다.** 그 후 아래 명령어를 실행하여 API Key를 불러오도록 합니다. (재시작하지 않으면 Key를 불러올 수 없습니다.)
+파일을 저장한 후 해당 파일을 적용하기 위해 **R의 Session을 재시작합니다.** 그 후 아래 명령어를 실행하여 API Key를 불러오도록 합니다. (재시작하지 않으면 Key를 불러올 수 없습니다.)
 
 ```{r}
 dart_api = Sys.getenv("dart_api_key")
