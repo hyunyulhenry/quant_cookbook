@@ -596,18 +596,18 @@ b
 <div id="베타-계산하기" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> 베타 계산하기</h3>
 <p>베타를 구하는 방법을 알아보기 위해 주식시장에 대한 대용치로 KOSPI 200 ETF, 개별주식으로는 전통적 고베타주인 증권주를 이용하겠습니다.</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb308-1"></a><span class="kw">library</span>(quantmod)</span>
-<span id="cb308-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb308-2"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
-<span id="cb308-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb308-3"></a><span class="kw">library</span>(magrittr)</span>
-<span id="cb308-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb308-4"></a></span>
-<span id="cb308-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb308-5"></a>symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;102110.KS&#39;</span>, <span class="st">&#39;039490.KS&#39;</span>)</span>
-<span id="cb308-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb308-6"></a><span class="kw">getSymbols</span>(symbols)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb309-1"></a><span class="kw">library</span>(quantmod)</span>
+<span id="cb309-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb309-2"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
+<span id="cb309-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb309-3"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb309-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb309-4"></a></span>
+<span id="cb309-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb309-5"></a>symbols =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;102110.KS&#39;</span>, <span class="st">&#39;039490.KS&#39;</span>)</span>
+<span id="cb309-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb309-6"></a><span class="kw">getSymbols</span>(symbols)</span></code></pre></div>
 <pre><code>## [1] &quot;102110.KS&quot; &quot;039490.KS&quot;</code></pre>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb310-1"></a>prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,</span>
-<span id="cb310-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb310-2"></a>                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x)<span class="kw">Cl</span>(<span class="kw">get</span>(x))))</span>
-<span id="cb310-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb310-3"></a></span>
-<span id="cb310-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb310-4"></a>ret =<span class="st"> </span><span class="kw">Return.calculate</span>(prices)</span>
-<span id="cb310-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb310-5"></a>ret =<span class="st"> </span>ret[<span class="st">&#39;2016-01::2018-12&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-1"></a>prices =<span class="st"> </span><span class="kw">do.call</span>(cbind,</span>
+<span id="cb311-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-2"></a>                 <span class="kw">lapply</span>(symbols, <span class="cf">function</span>(x)<span class="kw">Cl</span>(<span class="kw">get</span>(x))))</span>
+<span id="cb311-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-3"></a></span>
+<span id="cb311-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-4"></a>ret =<span class="st"> </span><span class="kw">Return.calculate</span>(prices)</span>
+<span id="cb311-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-5"></a>ret =<span class="st"> </span>ret[<span class="st">&#39;2016-01::2018-12&#39;</span>]</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>KOSPI 200 ETF인 TIGER 200(102110.KS), 증권주인 키움증권(039490.KS)의 티커를 입력합니다.</li>
 <li><code>getSymbols()</code> 함수를 이용하여 해당 티커들의 데이터를 다운로드 받습니다.</li>
@@ -615,11 +615,11 @@ b
 <li><code>Return.calculate()</code> 함수를 통해 수익률을 계산해 줍니다.</li>
 <li>xts 형식의 데이터는 대괄호 속에 [‘시작일자::종료일자’]와 같은 형태로, 원하는 날짜를 편리하게 선택할 수 있으며, 위에서는 2016년 1월부터 2018년 12월 까지 데이터를 선택합니다.</li>
 </ol>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-1"></a>rm =<span class="st"> </span>ret[, <span class="dv">1</span>]</span>
-<span id="cb311-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-2"></a>ri =<span class="st"> </span>ret[, <span class="dv">2</span>]</span>
-<span id="cb311-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-3"></a></span>
-<span id="cb311-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-4"></a>reg =<span class="st"> </span><span class="kw">lm</span>(ri <span class="op">~</span><span class="st"> </span>rm)</span>
-<span id="cb311-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb311-5"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb312-1"></a>rm =<span class="st"> </span>ret[, <span class="dv">1</span>]</span>
+<span id="cb312-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb312-2"></a>ri =<span class="st"> </span>ret[, <span class="dv">2</span>]</span>
+<span id="cb312-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb312-3"></a></span>
+<span id="cb312-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb312-4"></a>reg =<span class="st"> </span><span class="kw">lm</span>(ri <span class="op">~</span><span class="st"> </span>rm)</span>
+<span id="cb312-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb312-5"></a><span class="kw">summary</span>(reg)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = ri ~ rm)
@@ -652,11 +652,11 @@ b
 <div id="베타-시각화" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> 베타 시각화</h3>
 <p>이제 구해진 베타를 그림으로 표현해보겠습니다.</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb313-1"></a><span class="kw">plot</span>(<span class="kw">as.numeric</span>(rm), <span class="kw">as.numeric</span>(ri), <span class="dt">pch =</span> <span class="dv">4</span>, <span class="dt">cex =</span> <span class="fl">0.3</span>, </span>
-<span id="cb313-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb313-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;KOSPI 200&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Individual Stock&quot;</span>,</span>
-<span id="cb313-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb313-3"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.02</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.02</span>))</span>
-<span id="cb313-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb313-4"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb313-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb313-5"></a><span class="kw">abline</span>(reg, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb314-1"></a><span class="kw">plot</span>(<span class="kw">as.numeric</span>(rm), <span class="kw">as.numeric</span>(ri), <span class="dt">pch =</span> <span class="dv">4</span>, <span class="dt">cex =</span> <span class="fl">0.3</span>, </span>
+<span id="cb314-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb314-2"></a>     <span class="dt">xlab =</span> <span class="st">&quot;KOSPI 200&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Individual Stock&quot;</span>,</span>
+<span id="cb314-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb314-3"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.02</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.02</span>))</span>
+<span id="cb314-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb314-4"></a><span class="kw">abline</span>(<span class="dt">a =</span> <span class="dv">0</span>, <span class="dt">b =</span> <span class="dv">1</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb314-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb314-5"></a><span class="kw">abline</span>(reg, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><code>plot()</code> 함수를 통해 그림을 그려주며, x축과 y축에 주식시장 수익률과 개별 주식 수익률을 입력합니다. pch는 점들의 모양을, cex는 점들의 크기를 나타내며, xlab과 ylab은 각각 x축과 y축에 들어갈 문구를 나타냅니다. xlim과 ylim은 x
@@ -672,8 +672,8 @@ b
 <p>금융 시장에서 변동성은 수익률이 움직이는 정도로서, 일반적으로 표준편차가 사용됩니다. 표준편차는 자료가 평균을 중심으로 얼마나 퍼져 있는지를 나타내는 수치로서, 수식은 다음과 같습니다.</p>
 <p><span class="math display">\[\sigma = \sqrt{\frac{\sum_{i=1}^{n}{(x_i - \bar{x})^2}}{n-1}}\]</span></p>
 <p>관측값의 개수가 적을 경우에는 수식에 대입해 계산하는 것이 가능하지만, 관측값이 수백 혹은 수천 개로 늘어날 경우 컴퓨터를 이용하지 않고 계산하기는 사실상 불가능합니다. R에서는 복잡한 계산 과정 없이 <code>sd()</code> 함수를 이용해 간단하게 표준편차를 계산할 수 있습니다.</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb314-1"></a>example =<span class="st"> </span><span class="kw">c</span>(<span class="dv">85</span>, <span class="dv">76</span>, <span class="dv">73</span>, <span class="dv">80</span>, <span class="dv">72</span>)</span>
-<span id="cb314-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb314-2"></a><span class="kw">sd</span>(example)</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb315-1"></a>example =<span class="st"> </span><span class="kw">c</span>(<span class="dv">85</span>, <span class="dv">76</span>, <span class="dv">73</span>, <span class="dv">80</span>, <span class="dv">72</span>)</span>
+<span id="cb315-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb315-2"></a><span class="kw">sd</span>(example)</span></code></pre></div>
 <pre><code>## [1] 5.357</code></pre>
 <p>개별 주식의 표준편차를 측정할 때는 주식의 가격이 아닌 수익률로 계산해야 합니다. 수익률의 표준편차가 크면 수익률이 위아래로 많이 움직여 위험한 종목으로 여겨집니다. 반면 표준편차가 작으면 수익률의 움직임이 적어 상대적으로 안전한 종목으로 여겨집니다.</p>
 <p>전통적 금융 이론에서는 수익률의 변동성이 클수록 위험이 크고, 이런 위험에 대한 보상으로 기대수익률이 높아야 한다고 보았습니다. 따라서 고변동성 종목의 기대수익률이 크고, 저변동성 종목의 기대수익률이 낮은 고위험 고수익이 당연한 믿음이었습니다. 그러나 현실에서는 오히려 변동성이 낮은 종목들의 수익률이 변동성이 높은 종목들의 수익률보다 높은, 저변동성 효과가 발견되고 있습니다. 이러한 저변동성 효과가 발생하는 원인으로는 여러 가설이 있습니다.</p>
@@ -686,43 +686,43 @@ b
 <div id="저변동성-포트폴리오-구하기-일간-기준" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> 저변동성 포트폴리오 구하기: 일간 기준</h3>
 <p>먼저 최근 1년 일간 수익률 기준 변동성이 낮은 30종목을 선택하겠습니다.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb316-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-2"></a><span class="kw">library</span>(xts)</span>
-<span id="cb316-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-3"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
-<span id="cb316-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-4"></a><span class="kw">library</span>(magrittr)</span>
-<span id="cb316-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-5"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb316-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-6"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb316-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-7"></a></span>
-<span id="cb316-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-8"></a>KOR_price =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_price.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb316-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-9"></a>                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.xts</span>()</span>
-<span id="cb316-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-10"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb316-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-11"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
-<span id="cb316-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-12"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =<span class="st"> </span></span>
-<span id="cb316-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-13"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span>
-<span id="cb316-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-14"></a></span>
-<span id="cb316-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-15"></a>ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price)</span>
-<span id="cb316-16"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-16"></a>std_12m_daily =<span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(ret, <span class="dv">252</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span></span>
-<span id="cb316-17"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb316-17"></a><span class="st">  </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">252</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb317-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-2"></a><span class="kw">library</span>(xts)</span>
+<span id="cb317-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-3"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
+<span id="cb317-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-4"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb317-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-5"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb317-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-6"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb317-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-7"></a></span>
+<span id="cb317-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-8"></a>KOR_price =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_price.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb317-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-9"></a>                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.xts</span>()</span>
+<span id="cb317-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-10"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb317-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-11"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb317-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-12"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =<span class="st"> </span></span>
+<span id="cb317-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-13"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span>
+<span id="cb317-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-14"></a></span>
+<span id="cb317-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-15"></a>ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price)</span>
+<span id="cb317-16"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-16"></a>std_12m_daily =<span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(ret, <span class="dv">252</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span></span>
+<span id="cb317-17"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-17"></a><span class="st">  </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">252</span>))</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>저장해둔 가격 정보와 티커 정보를 불러옵니다. 가격 정보는 <code>as.xts()</code> 함수를 통해 xts 형태로 변경합니다.</li>
 <li><code>Return.calculate()</code> 함수를 통해 수익률을 구합니다.</li>
 <li><code>last()</code> 함수는 마지막 n개 데이터를 선택해주는 함수이며, 1년 영업일 기준인 252개 데이터를 선택합니다. dplyr 패키지의 <code>last()</code> 함수와 이름이 같으므로, <code>xts::last()</code> 형식을 통해 xts 패키지의 함수임을 정의해줍니다.</li>
 <li><code>apply()</code> 함수를 통해 sd 즉 변동성을 계산해주며, 연율화를 해주기 위해 <code>multiply_by()</code> 함수를 통해 <span class="math inline">\(\sqrt{252}\)</span>를 곱해줍니다.</li>
 </ol>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-1"></a>std_12m_daily <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb317-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-2"></a><span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
-<span id="cb317-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> (<span class="st">`</span><span class="dt">.</span><span class="st">`</span>))) <span class="op">+</span></span>
-<span id="cb317-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-4"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>) <span class="op">+</span></span>
-<span id="cb317-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-5"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;rect&quot;</span>, <span class="dt">xmin =</span> <span class="fl">-0.02</span>, <span class="dt">xmax =</span> <span class="fl">0.02</span>,</span>
-<span id="cb317-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-6"></a>           <span class="dt">ymin =</span> <span class="dv">0</span>,</span>
-<span id="cb317-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-7"></a>           <span class="dt">ymax =</span> <span class="kw">sum</span>(std_12m_daily <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">*</span><span class="st"> </span><span class="fl">1.1</span>,</span>
-<span id="cb317-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-8"></a>           <span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">fill=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
-<span id="cb317-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</span>
-<span id="cb317-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-10"></a></span>
-<span id="cb317-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb317-11"></a>std_12m_daily[std_12m_daily <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-1"></a>std_12m_daily <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb318-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-2"></a><span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb318-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> (<span class="st">`</span><span class="dt">.</span><span class="st">`</span>))) <span class="op">+</span></span>
+<span id="cb318-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-4"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>) <span class="op">+</span></span>
+<span id="cb318-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-5"></a><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;rect&quot;</span>, <span class="dt">xmin =</span> <span class="fl">-0.02</span>, <span class="dt">xmax =</span> <span class="fl">0.02</span>,</span>
+<span id="cb318-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-6"></a>           <span class="dt">ymin =</span> <span class="dv">0</span>,</span>
+<span id="cb318-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-7"></a>           <span class="dt">ymax =</span> <span class="kw">sum</span>(std_12m_daily <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">*</span><span class="st"> </span><span class="fl">1.1</span>,</span>
+<span id="cb318-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-8"></a>           <span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">fill=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb318-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</span>
+<span id="cb318-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-10"></a></span>
+<span id="cb318-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-11"></a>std_12m_daily[std_12m_daily <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>변동성을 히스토그램으로 나타내보면, 0에 위치하는 종목들이 다수 있습니다. 해당 종목들은 최근 1년간 거래정지로 인해 가격이 변하지 않았고, 이로 인해 변동성이 없는 종목들입니다. 해당 종목들은 NA로 처리해줍니다.</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb318-1"></a>std_12m_daily[<span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb319-1"></a>std_12m_daily[<span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</span></code></pre></div>
 <pre><code>## X268280 X001720 X072710 X016800 X000480 X015360 X004890 
 ##  0.1968  0.2437  0.2352  0.1510  0.2121  0.2504  0.2216 
 ## X100250 X117580 X134380 X024090 X003460 X007330 X003650 
@@ -733,18 +733,18 @@ b
 ##  0.1812  0.2477  0.2466  0.1485  0.1447  0.1270  0.1852 
 ## X069330 X033600 
 ##  0.2087  0.2123</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb320-1"></a>std_12m_daily[<span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>] <span class="op">%&gt;%</span></span>
-<span id="cb320-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb320-2"></a><span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
-<span id="cb320-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb320-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>), <span class="dt">y =</span> <span class="st">`</span><span class="dt">.</span><span class="st">`</span>)) <span class="op">+</span></span>
-<span id="cb320-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb320-4"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
-<span id="cb320-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb320-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-1"></a>std_12m_daily[<span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>] <span class="op">%&gt;%</span></span>
+<span id="cb321-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-2"></a><span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb321-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">30</span>), <span class="dt">y =</span> <span class="st">`</span><span class="dt">.</span><span class="st">`</span>)) <span class="op">+</span></span>
+<span id="cb321-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-4"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb321-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>)</span></code></pre></div>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><code>rank()</code> 함수를 통해 순위를 구할 수 있으며, R은 기본적으로 오름차순 즉 가장 낮은값의 순위가 1이 됩니다. 따라서 변동성이 낮을수록 높은 순위가 되며, 30위 이하의 순위를 선택하면 변동성이 낮은 30종목이 선택됩니다. 또한 <code>ggplot()</code> 함수를 이용해 해당 종목들의 변동성을 확인해볼 수도 있습니다.</p>
 <p>이번에는 해당 종목들의 티커 및 종목명을 확인하겠습니다.</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-1"></a>invest_lowvol =<span class="st"> </span><span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
-<span id="cb321-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-2"></a>KOR_ticker[invest_lowvol, ] <span class="op">%&gt;%</span></span>
-<span id="cb321-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb321-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb321-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(std_12m_daily[invest_lowvol], <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb322-1"></a>invest_lowvol =<span class="st"> </span><span class="kw">rank</span>(std_12m_daily) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb322-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb322-2"></a>KOR_ticker[invest_lowvol, ] <span class="op">%&gt;%</span></span>
+<span id="cb322-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb322-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb322-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb322-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(std_12m_daily[invest_lowvol], <span class="dv">4</span>))</span></code></pre></div>
 <pre><code>##    종목코드               종목명 변동성
 ## 1    268280           미원에스씨 0.1968
 ## 2    001720             신영증권 0.2437
@@ -781,13 +781,13 @@ b
 <div id="저변동성-포트폴리오-구하기-주간-기준" class="section level3">
 <h3><span class="header-section-number">9.2.2</span> 저변동성 포트폴리오 구하기: 주간 기준</h3>
 <p>이번에는 일간 변동성이 아닌 주간 변동성을 기준으로 저변동성 종목을 선택하겠습니다.</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb323-1"></a>std_12m_weekly =<span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(ret, <span class="dv">252</span>) <span class="op">%&gt;%</span></span>
-<span id="cb323-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb323-2"></a><span class="st">  </span><span class="kw">apply.weekly</span>(Return.cumulative) <span class="op">%&gt;%</span></span>
-<span id="cb323-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb323-3"></a><span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">52</span>))</span>
-<span id="cb323-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb323-4"></a></span>
-<span id="cb323-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb323-5"></a>std_12m_weekly[std_12m_weekly <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb324-1"></a>std_12m_weekly =<span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(ret, <span class="dv">252</span>) <span class="op">%&gt;%</span></span>
+<span id="cb324-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb324-2"></a><span class="st">  </span><span class="kw">apply.weekly</span>(Return.cumulative) <span class="op">%&gt;%</span></span>
+<span id="cb324-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb324-3"></a><span class="st">  </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">52</span>))</span>
+<span id="cb324-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb324-4"></a></span>
+<span id="cb324-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb324-5"></a>std_12m_weekly[std_12m_weekly <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
 <p>먼저 최근 252일 수익률울 선택한 후, <code>apply.weekly()</code> 함수 내 Return.cumulative를 입력해 주간 수익률을 계산하며, 연율화를 위해 연간 주수에 해당하는 <span class="math inline">\(\sqrt{52}\)</span>를 곱해줍니다. 이 외에도 <code>apply.monthly()</code>, <code>apply.yearly()</code> 함수 등으로 일간 수익률을 월간, 연간 수익률 등으로 변환할 수 있습니다. 그 후 과정은 위와 동일합니다.</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb324-1"></a>std_12m_weekly[<span class="kw">rank</span>(std_12m_weekly) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb325-1"></a>std_12m_weekly[<span class="kw">rank</span>(std_12m_weekly) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</span></code></pre></div>
 <pre><code>## X268280 X339770 X072710 X016800 X000480 X129890 X356860 
 ## 0.18460 0.20056 0.23445 0.11909 0.21891 0.16514 0.21100 
 ## X053080 X340570 X100250 X117580 X134380 X003460 X244920 
@@ -798,11 +798,11 @@ b
 ## 0.16788 0.22936 0.18982 0.21502 0.18373 0.15247 0.19531 
 ## X028040 X347140 
 ## 0.23791 0.03747</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb326-1"></a>invest_lowvol_weekly =<span class="st"> </span><span class="kw">rank</span>(std_12m_weekly) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
-<span id="cb326-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb326-2"></a>KOR_ticker[invest_lowvol_weekly, ] <span class="op">%&gt;%</span></span>
-<span id="cb326-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb326-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb326-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb326-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =</span>
-<span id="cb326-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb326-5"></a><span class="st">           </span><span class="kw">round</span>(std_12m_weekly[invest_lowvol_weekly], <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb327-1"></a>invest_lowvol_weekly =<span class="st"> </span><span class="kw">rank</span>(std_12m_weekly) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb327-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb327-2"></a>KOR_ticker[invest_lowvol_weekly, ] <span class="op">%&gt;%</span></span>
+<span id="cb327-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb327-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb327-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb327-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =</span>
+<span id="cb327-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb327-5"></a><span class="st">           </span><span class="kw">round</span>(std_12m_weekly[invest_lowvol_weekly], <span class="dv">4</span>))</span></code></pre></div>
 <pre><code>##    종목코드               종목명 변동성
 ## 1    268280           미원에스씨 0.1846
 ## 2    339770         교촌에프앤비 0.2006
@@ -835,8 +835,8 @@ b
 ## 29   028040              미래SCI 0.2379
 ## 30   347140    케이프이에스제4호 0.0375</code></pre>
 <p>주간 수익률의 변동성이 낮은 30종목을 선택해 종목코드, 종목명, 연율화 변동성을 확인합니다.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb328-1"></a><span class="kw">intersect</span>(KOR_ticker[invest_lowvol, <span class="st">&#39;종목명&#39;</span>],</span>
-<span id="cb328-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb328-2"></a>          KOR_ticker[invest_lowvol_weekly, <span class="st">&#39;종목명&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb329-1"></a><span class="kw">intersect</span>(KOR_ticker[invest_lowvol, <span class="st">&#39;종목명&#39;</span>],</span>
+<span id="cb329-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb329-2"></a>          KOR_ticker[invest_lowvol_weekly, <span class="st">&#39;종목명&#39;</span>])</span></code></pre></div>
 <pre><code>##  [1] &quot;미원에스씨&quot;           &quot;농심홀딩스&quot;          
 ##  [3] &quot;퍼시스&quot;               &quot;조선내화&quot;            
 ##  [5] &quot;진양홀딩스&quot;           &quot;대성에너지&quot;          
@@ -857,28 +857,28 @@ b
 <div id="모멘텀-포트폴리오-구하기-12개월-모멘텀" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</h3>
 <p>먼저 최근 1년 동안의 수익률이 높은 30종목을 선택하겠습니다.</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb330-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-2"></a><span class="kw">library</span>(xts)</span>
-<span id="cb330-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-3"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
-<span id="cb330-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-4"></a><span class="kw">library</span>(magrittr)</span>
-<span id="cb330-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-5"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb330-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-6"></a></span>
-<span id="cb330-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-7"></a>KOR_price =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_price.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb330-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-8"></a>                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.xts</span>()</span>
-<span id="cb330-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-9"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb330-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-10"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
-<span id="cb330-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-11"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
-<span id="cb330-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-12"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span>
-<span id="cb330-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-13"></a></span>
-<span id="cb330-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-14"></a>ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">252</span>) </span>
-<span id="cb330-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-15"></a>ret_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {</span>
-<span id="cb330-16"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-16"></a>  <span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb330-17"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb330-17"></a>  })</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb331-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-2"></a><span class="kw">library</span>(xts)</span>
+<span id="cb331-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-3"></a><span class="kw">library</span>(PerformanceAnalytics)</span>
+<span id="cb331-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-4"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb331-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-5"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb331-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-6"></a></span>
+<span id="cb331-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-7"></a>KOR_price =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_price.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb331-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-8"></a>                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.xts</span>()</span>
+<span id="cb331-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-9"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb331-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-10"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb331-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-11"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
+<span id="cb331-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-12"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span>
+<span id="cb331-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-13"></a></span>
+<span id="cb331-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-14"></a>ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">252</span>) </span>
+<span id="cb331-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-15"></a>ret_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {</span>
+<span id="cb331-16"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-16"></a>  <span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb331-17"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-17"></a>  })</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>가격 정보와 티커 정보를 불러온 후 <code>Return.calculate()</code> 함수를 통해 수익률을 계산합니다. 그 후 최근 252일 수익률을 선택합니다.</li>
 <li><code>sapply()</code> 함수 내부에 <code>prod()</code> 함수를 이용해 각 종목의 누적수익률을 계산해줍니다.</li>
 </ol>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb331-1"></a>ret_12m[<span class="kw">rank</span>(<span class="op">-</span>ret_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb332-1"></a>ret_12m[<span class="kw">rank</span>(<span class="op">-</span>ret_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>]</span></code></pre></div>
 <pre><code>## X019170 X096530 X196170 X285130 X336260 X112610 X011000 
 ##  13.436   4.307   3.607   5.210   6.656   3.615   7.837 
 ## X100090 X222080 X156100 X131290 X018000 X001470 X101360 
@@ -890,10 +890,10 @@ b
 ## X045340 X051980 
 ##   6.077   3.861</code></pre>
 <p><code>rank()</code> 함수를 통해 순위를 구합니다. 모멘텀의 경우 높을수록 좋은 내림차순으로 순위를 계산해야 하므로 수익률 앞에 마이너스(-)를 붙여줍니다. 12개월 누적수익률이 높은 종목들이 선택됨이 확인됩니다.</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb333-1"></a>invest_mom =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>ret_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
-<span id="cb333-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb333-2"></a>KOR_ticker[invest_mom, ] <span class="op">%&gt;%</span></span>
-<span id="cb333-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb333-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb333-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb333-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">수익률</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(ret_12m[invest_mom], <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb334-1"></a>invest_mom =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>ret_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb334-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb334-2"></a>KOR_ticker[invest_mom, ] <span class="op">%&gt;%</span></span>
+<span id="cb334-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb334-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb334-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb334-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">수익률</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(ret_12m[invest_mom], <span class="dv">4</span>))</span></code></pre></div>
 <pre><code>##    종목코드           종목명 수익률
 ## 1    019170         신풍제약 13.436
 ## 2    096530             씨젠  4.306
@@ -930,12 +930,12 @@ b
 <div id="모멘텀-포트폴리오-구하기-위험조정-수익률" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> 모멘텀 포트폴리오 구하기: 위험조정 수익률</h3>
 <p>단순히 과거 수익률로만 모멘텀 종목을 선택하면 각종 테마나 이벤트에 따른 급등으로 인해 변동성이 지나치게 높은 종목이 있을 수도 있습니다. 누적수익률을 변동성으로 나누어 위험을 고려해줄 경우, 이러한 종목은 제외되며 상대적으로 안정적인 모멘텀 종목을 선택할 수 있습니다.</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb335-1"></a>ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">252</span>) </span>
-<span id="cb335-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb335-2"></a>ret_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {</span>
-<span id="cb335-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb335-3"></a>  <span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb335-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb335-4"></a>  })</span>
-<span id="cb335-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb335-5"></a>std_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">252</span>))</span>
-<span id="cb335-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb335-6"></a>sharpe_12m =<span class="st"> </span>ret_12m <span class="op">/</span><span class="st"> </span>std_12m</span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-1"></a>ret =<span class="st"> </span><span class="kw">Return.calculate</span>(KOR_price) <span class="op">%&gt;%</span><span class="st"> </span>xts<span class="op">::</span><span class="kw">last</span>(<span class="dv">252</span>) </span>
+<span id="cb336-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-2"></a>ret_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sapply</span>(., <span class="cf">function</span>(x) {</span>
+<span id="cb336-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-3"></a>  <span class="kw">prod</span>(<span class="dv">1</span><span class="op">+</span>x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb336-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-4"></a>  })</span>
+<span id="cb336-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-5"></a>std_12m =<span class="st"> </span>ret <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(., <span class="dv">2</span>, sd) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">multiply_by</span>(<span class="kw">sqrt</span>(<span class="dv">252</span>))</span>
+<span id="cb336-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-6"></a>sharpe_12m =<span class="st"> </span>ret_12m <span class="op">/</span><span class="st"> </span>std_12m</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>최근 1년에 해당하는 수익률을 선택합니다.</li>
 <li><code>sapply()</code>와 <code>prod()</code> 함수를 이용해 분자에 해당하는 누적수익률을 계산합니다.</li>
@@ -943,15 +943,15 @@ b
 <li>수익률을 변동성으로 나누어 위험조정 수익률을 계산해줍니다.</li>
 </ol>
 <p>이를 통해 수익률이 높으면서 변동성이 낮은 종목을 선정할 수 있습니다.</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-1"></a>invest_mom_sharpe =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>sharpe_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
-<span id="cb336-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-2"></a>KOR_ticker[invest_mom_sharpe, ] <span class="op">%&gt;%</span></span>
-<span id="cb336-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb336-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">수익률</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(ret_12m[invest_mom_sharpe], <span class="dv">2</span>),</span>
-<span id="cb336-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-5"></a>         <span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(std_12m[invest_mom_sharpe], <span class="dv">2</span>),</span>
-<span id="cb336-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-6"></a>         <span class="st">`</span><span class="dt">위험조정 수익률</span><span class="st">`</span> =</span>
-<span id="cb336-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-7"></a><span class="st">           </span><span class="kw">round</span>(sharpe_12m[invest_mom_sharpe], <span class="dv">2</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb336-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-8"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
-<span id="cb336-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb336-9"></a><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="ot">Inf</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-1"></a>invest_mom_sharpe =<span class="st"> </span><span class="kw">rank</span>(<span class="op">-</span>sharpe_12m) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb337-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-2"></a>KOR_ticker[invest_mom_sharpe, ] <span class="op">%&gt;%</span></span>
+<span id="cb337-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb337-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">수익률</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(ret_12m[invest_mom_sharpe], <span class="dv">2</span>),</span>
+<span id="cb337-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-5"></a>         <span class="st">`</span><span class="dt">변동성</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(std_12m[invest_mom_sharpe], <span class="dv">2</span>),</span>
+<span id="cb337-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-6"></a>         <span class="st">`</span><span class="dt">위험조정 수익률</span><span class="st">`</span> =</span>
+<span id="cb337-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-7"></a><span class="st">           </span><span class="kw">round</span>(sharpe_12m[invest_mom_sharpe], <span class="dv">2</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb337-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-8"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
+<span id="cb337-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb337-9"></a><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="ot">Inf</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 30 x 5
 ##    종목코드 종목명        수익률 변동성 `위험조정 수익률`…
 ##    &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;            &lt;dbl&gt;
@@ -986,8 +986,8 @@ b
 ## 29 045340   토탈소프트      6.08   0.9              6.78
 ## 30 013720   청보산업        3.16   0.69             4.55</code></pre>
 <p>티커와 종목명, 누적수익률, 변동성, 위험조정 수익률을 확인할 수 있습니다.</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb338-1"></a><span class="kw">intersect</span>(KOR_ticker[invest_mom, <span class="st">&#39;종목명&#39;</span>],</span>
-<span id="cb338-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb338-2"></a>          KOR_ticker[invest_mom_sharpe, <span class="st">&#39;종목명&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb339-1"></a><span class="kw">intersect</span>(KOR_ticker[invest_mom, <span class="st">&#39;종목명&#39;</span>],</span>
+<span id="cb339-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb339-2"></a>          KOR_ticker[invest_mom_sharpe, <span class="st">&#39;종목명&#39;</span>])</span></code></pre></div>
 <pre><code>##  [1] &quot;신풍제약&quot;         &quot;SK케미칼&quot;        
 ##  [3] &quot;두산퓨얼셀&quot;       &quot;씨에스윈드&quot;      
 ##  [5] &quot;진원생명과학&quot;     &quot;삼강엠앤티&quot;      
@@ -1001,20 +1001,20 @@ b
 ## [21] &quot;멕아이씨에스&quot;     &quot;오킨스전자&quot;      
 ## [23] &quot;에쓰씨엔지니어링&quot; &quot;토탈소프트&quot;</code></pre>
 <p><code>intersect()</code> 함수를 통해 단순 수익률 및 위험조정 수익률 기준 모두에 포함되는 종목을 찾을 수 있습니다. 다음은 위험조정 수익률 상위 30종목의 가격 그래프입니다.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-1"></a><span class="kw">library</span>(xts)</span>
-<span id="cb340-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-2"></a><span class="kw">library</span>(tidyr)</span>
-<span id="cb340-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-3"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb340-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-4"></a></span>
-<span id="cb340-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-5"></a>KOR_price[, invest_mom_sharpe] <span class="op">%&gt;%</span></span>
-<span id="cb340-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-6"></a><span class="st">  </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span></span>
-<span id="cb340-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-7"></a><span class="st">  </span><span class="kw">gather</span>(ticker, price, <span class="op">-</span>Index) <span class="op">%&gt;%</span></span>
-<span id="cb340-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-8"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> price)) <span class="op">+</span></span>
-<span id="cb340-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-9"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
-<span id="cb340-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-10"></a><span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>ticker, <span class="dt">scales =</span> <span class="st">&#39;free&#39;</span>) <span class="op">+</span></span>
-<span id="cb340-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-11"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb340-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-12"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb340-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-13"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),</span>
-<span id="cb340-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb340-14"></a>        <span class="dt">axis.text.y=</span><span class="kw">element_blank</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-1"></a><span class="kw">library</span>(xts)</span>
+<span id="cb341-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-2"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb341-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb341-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-4"></a></span>
+<span id="cb341-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-5"></a>KOR_price[, invest_mom_sharpe] <span class="op">%&gt;%</span></span>
+<span id="cb341-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-6"></a><span class="st">  </span><span class="kw">fortify.zoo</span>() <span class="op">%&gt;%</span></span>
+<span id="cb341-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-7"></a><span class="st">  </span><span class="kw">gather</span>(ticker, price, <span class="op">-</span>Index) <span class="op">%&gt;%</span></span>
+<span id="cb341-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-8"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Index, <span class="dt">y =</span> price)) <span class="op">+</span></span>
+<span id="cb341-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-9"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb341-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-10"></a><span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>ticker, <span class="dt">scales =</span> <span class="st">&#39;free&#39;</span>) <span class="op">+</span></span>
+<span id="cb341-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-11"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb341-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-12"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb341-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-13"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x=</span><span class="kw">element_blank</span>(),</span>
+<span id="cb341-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-14"></a>        <span class="dt">axis.text.y=</span><span class="kw">element_blank</span>())</span></code></pre></div>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -1029,21 +1029,21 @@ b
 <div id="밸류-포트폴리오-구하기-저pbr" class="section level3">
 <h3><span class="header-section-number">9.4.1</span> 밸류 포트폴리오 구하기: 저PBR</h3>
 <p>먼저 기업의 가치 여부를 판단할 때 가장 많이 사용되는 지표인 PBR을 이용한 포트폴리오를 구성하겠습니다.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb341-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-2"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb341-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-3"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb341-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-4"></a></span>
-<span id="cb341-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-5"></a>KOR_value =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_value.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb341-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-6"></a>                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb341-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-7"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb341-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-8"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
-<span id="cb341-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-9"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
-<span id="cb341-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-10"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span>
-<span id="cb341-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-11"></a></span>
-<span id="cb341-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-12"></a>invest_pbr =<span class="st"> </span><span class="kw">rank</span>(KOR_value<span class="op">$</span>PBR) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
-<span id="cb341-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-13"></a>KOR_ticker[invest_pbr, ] <span class="op">%&gt;%</span></span>
-<span id="cb341-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-14"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb341-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb341-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">PBR</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(KOR_value[invest_pbr, <span class="st">&#39;PBR&#39;</span>], <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb342-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb342-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-3"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb342-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-4"></a></span>
+<span id="cb342-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-5"></a>KOR_value =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_value.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb342-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-6"></a>                     <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb342-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-7"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb342-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-8"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb342-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-9"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
+<span id="cb342-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-10"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span>
+<span id="cb342-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-11"></a></span>
+<span id="cb342-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-12"></a>invest_pbr =<span class="st"> </span><span class="kw">rank</span>(KOR_value<span class="op">$</span>PBR) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb342-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-13"></a>KOR_ticker[invest_pbr, ] <span class="op">%&gt;%</span></span>
+<span id="cb342-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-14"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb342-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb342-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">PBR</span><span class="st">`</span> =<span class="st"> </span><span class="kw">round</span>(KOR_value[invest_pbr, <span class="st">&#39;PBR&#39;</span>], <span class="dv">4</span>))</span></code></pre></div>
 <pre><code>##    종목코드         종목명    PBR
 ## 1    000210       대림산업 0.1902
 ## 2    088350       한화생명 0.1905
@@ -1080,31 +1080,31 @@ b
 <div id="각-지표-결합하기" class="section level3">
 <h3><span class="header-section-number">9.4.2</span> 각 지표 결합하기</h3>
 <p>저PBR 하나의 지표만으로도 우수한 성과를 거둘 수 있음은 오랜 기간 증명되고 있습니다. 그러나 저평가 주식이 계속해서 저평가에 머무르는 가치 함정에 빠지지 않으려면 여러 지표를 동시에 볼 필요도 있습니다.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-1"></a><span class="kw">library</span>(corrplot)</span>
-<span id="cb343-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-2"></a></span>
-<span id="cb343-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-3"></a>rank_value =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb343-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-4"></a><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(.)))</span>
-<span id="cb343-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-5"></a></span>
-<span id="cb343-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-6"></a><span class="kw">cor</span>(rank_value, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb343-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-7"></a><span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span></span>
-<span id="cb343-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-8"></a><span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,</span>
-<span id="cb343-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-9"></a>           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="dv">1</span>,</span>
-<span id="cb343-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-10"></a>           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt=</span><span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,</span>
-<span id="cb343-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-11"></a>           <span class="dt">col =</span> <span class="kw">colorRampPalette</span>(</span>
-<span id="cb343-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-12"></a>             <span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),</span>
-<span id="cb343-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb343-13"></a>           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-1"></a><span class="kw">library</span>(corrplot)</span>
+<span id="cb344-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-2"></a></span>
+<span id="cb344-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-3"></a>rank_value =<span class="st"> </span>KOR_value <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb344-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-4"></a><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(.)))</span>
+<span id="cb344-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-5"></a></span>
+<span id="cb344-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-6"></a><span class="kw">cor</span>(rank_value, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb344-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-7"></a><span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span></span>
+<span id="cb344-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-8"></a><span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,</span>
+<span id="cb344-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-9"></a>           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="dv">1</span>,</span>
+<span id="cb344-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-10"></a>           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt=</span><span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,</span>
+<span id="cb344-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-11"></a>           <span class="dt">col =</span> <span class="kw">colorRampPalette</span>(</span>
+<span id="cb344-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-12"></a>             <span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),</span>
+<span id="cb344-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-13"></a>           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</span></code></pre></div>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>먼저 <code>mutate_all()</code> 함수를 이용해 모든 열에 함수를 적용해주며, <code>min_rank()</code>를 통해 순위를 구합니다.</p>
 <p>각 열에 해당하는 가치지표별 랭킹을 구한 후 상관관계를 확인하며, NA 종목은 삭제해주기 위해 <code>use = 'complete.obs'</code>를 입력합니다.</p>
 <p><code>corrplot</code> 패키지의 <code>corrplot()</code> 함수를 이용해 상관관계를 그려보면, 같은 가치지표임에도 불구하고 서로 간의 상관관계가 꽤 낮은 지표도 있습니다. 따라서 지표를 통합적으로 고려하면 분산효과를 기대할 수도 있습니다.</p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-1"></a>rank_sum =<span class="st"> </span>rank_value <span class="op">%&gt;%</span></span>
-<span id="cb344-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-2"></a><span class="st">  </span><span class="kw">rowSums</span>()</span>
-<span id="cb344-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-3"></a></span>
-<span id="cb344-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-4"></a>invest_value =<span class="st"> </span><span class="kw">rank</span>(rank_sum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
-<span id="cb344-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-5"></a></span>
-<span id="cb344-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-6"></a>KOR_ticker[invest_value, ] <span class="op">%&gt;%</span></span>
-<span id="cb344-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb344-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb344-8"></a><span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(KOR_value[invest_value, ], <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb345-1"></a>rank_sum =<span class="st"> </span>rank_value <span class="op">%&gt;%</span></span>
+<span id="cb345-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb345-2"></a><span class="st">  </span><span class="kw">rowSums</span>()</span>
+<span id="cb345-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb345-3"></a></span>
+<span id="cb345-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb345-4"></a>invest_value =<span class="st"> </span><span class="kw">rank</span>(rank_sum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb345-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb345-5"></a></span>
+<span id="cb345-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb345-6"></a>KOR_ticker[invest_value, ] <span class="op">%&gt;%</span></span>
+<span id="cb345-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb345-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb345-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb345-8"></a><span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(KOR_value[invest_value, ], <span class="dv">2</span>))</span></code></pre></div>
 <pre><code>##      종목코드           종목명   PER  PBR  PCR  PSR
 ## 83     078930               GS  6.79 0.34 2.33 0.21
 ## 105    001040               CJ 12.73 0.23 0.88 0.10
@@ -1137,8 +1137,8 @@ b
 ## 1643   002920         유성기업  4.55 0.26 2.56 0.30
 ## 1734   012320     경동인베스트  7.78 0.17 2.19 0.26</code></pre>
 <p><code>rowSums()</code> 함수를 이용해 종목별 랭킹들의 합을 구해줍니다. 그 후 네 개 지표 랭킹의 합 기준 랭킹이 낮은 30종목을 선택합니다. 즉 하나의 지표보다 네 개 지표가 골고루 낮은 종목을 선택합니다. 해당 종목들의 티커, 종목명과 가치지표를 확인할 수 있습니다.</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb346-1"></a><span class="kw">intersect</span>(KOR_ticker[invest_pbr, <span class="st">&#39;종목명&#39;</span>],</span>
-<span id="cb346-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb346-2"></a>          KOR_ticker[invest_value, <span class="st">&#39;종목명&#39;</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb347-1"></a><span class="kw">intersect</span>(KOR_ticker[invest_pbr, <span class="st">&#39;종목명&#39;</span>],</span>
+<span id="cb347-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb347-2"></a>          KOR_ticker[invest_value, <span class="st">&#39;종목명&#39;</span>])</span></code></pre></div>
 <pre><code>##  [1] &quot;대림산업&quot;       &quot;두산&quot;           &quot;영원무역홀딩스&quot;
 ##  [4] &quot;세아홀딩스&quot;     &quot;KISCO홀딩스&quot;    &quot;넥센&quot;          
 ##  [7] &quot;KPX홀딩스&quot;      &quot;S&amp;T홀딩스&quot;      &quot;아세아&quot;        
@@ -1266,29 +1266,29 @@ Operating Efficiency
 </table>
 <p>각 지표가 우수할 경우 1점, 그렇지 않을 경우 0점을 매겨, 총 0점부터 9점까지의 포트폴리오를 구성합니다.</p>
 
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb348-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-2"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb348-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-3"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb348-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-4"></a></span>
-<span id="cb348-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-5"></a>KOR_fs =<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/KOR_fs.Rds&#39;</span>)</span>
-<span id="cb348-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-6"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb348-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-7"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
-<span id="cb348-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-8"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
-<span id="cb348-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb348-9"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb349-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb349-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-3"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb349-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-4"></a></span>
+<span id="cb349-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-5"></a>KOR_fs =<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/KOR_fs.Rds&#39;</span>)</span>
+<span id="cb349-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-6"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb349-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-7"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb349-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-8"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
+<span id="cb349-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-9"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span></code></pre></div>
 <p>먼저 재무제표와 티커 파일을 불러옵니다. 재무제표 데이터는 Rds 형태로 저장되어 있으며, <code>readRDS()</code> 함수를 이용해 리스트 형태 그대로 불러올 수 있습니다.</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-1"></a><span class="co"># 수익성</span></span>
-<span id="cb349-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-2"></a>ROA =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;지배주주순이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></span>
-<span id="cb349-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-3"></a>CFO =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;영업활동으로인한현금흐름&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></span>
-<span id="cb349-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-4"></a>ACCURUAL =<span class="st"> </span>CFO <span class="op">-</span><span class="st"> </span>ROA</span>
-<span id="cb349-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-5"></a></span>
-<span id="cb349-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-6"></a><span class="co"># 재무성과</span></span>
-<span id="cb349-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-7"></a>LEV =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;장기차입금&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></span>
-<span id="cb349-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-8"></a>LIQ =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유동자산&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유동부채&#39;</span></span>
-<span id="cb349-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-9"></a>OFFER =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유상증자&#39;</span></span>
-<span id="cb349-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-10"></a></span>
-<span id="cb349-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-11"></a><span class="co"># 운영 효율성</span></span>
-<span id="cb349-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-12"></a>MARGIN =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출총이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출액&#39;</span></span>
-<span id="cb349-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb349-13"></a>TURN =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출액&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-1"></a><span class="co"># 수익성</span></span>
+<span id="cb350-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-2"></a>ROA =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;지배주주순이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></span>
+<span id="cb350-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-3"></a>CFO =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;영업활동으로인한현금흐름&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></span>
+<span id="cb350-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-4"></a>ACCURUAL =<span class="st"> </span>CFO <span class="op">-</span><span class="st"> </span>ROA</span>
+<span id="cb350-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-5"></a></span>
+<span id="cb350-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-6"></a><span class="co"># 재무성과</span></span>
+<span id="cb350-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-7"></a>LEV =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;장기차입금&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></span>
+<span id="cb350-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-8"></a>LIQ =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유동자산&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유동부채&#39;</span></span>
+<span id="cb350-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-9"></a>OFFER =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;유상증자&#39;</span></span>
+<span id="cb350-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-10"></a></span>
+<span id="cb350-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-11"></a><span class="co"># 운영 효율성</span></span>
+<span id="cb350-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-12"></a>MARGIN =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출총이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출액&#39;</span></span>
+<span id="cb350-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-13"></a>TURN =<span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;매출액&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span></span></code></pre></div>
 <p>지표에 해당하는 내용을 계산해줍니다.</p>
 <ol style="list-style-type: decimal">
 <li>ROA는 지배주주순이익을 자산으로 나누어 계산합니다.</li>
@@ -1301,23 +1301,23 @@ Operating Efficiency
 <li>TURN(Turnover)은 매출액을 자산으로 나누어 계산합니다.</li>
 </ol>
 <p>다음으로 각 지표들이 조건을 충족하는지 여부를 판단해, 지표별로 1점 혹은 0점을 부여합니다.</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-1"></a><span class="cf">if</span> ( lubridate<span class="op">::</span><span class="kw">month</span>(<span class="kw">Sys.Date</span>()) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>) ) {</span>
-<span id="cb350-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-2"></a>  num_col =<span class="st"> </span><span class="kw">str_which</span>(<span class="kw">colnames</span>(KOR_fs[[<span class="dv">1</span>]]), <span class="kw">as.character</span>(lubridate<span class="op">::</span><span class="kw">year</span>(<span class="kw">Sys.Date</span>()) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>))</span>
-<span id="cb350-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-3"></a>} <span class="cf">else</span> {</span>
-<span id="cb350-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-4"></a>  num_col =<span class="st"> </span><span class="kw">str_which</span>(<span class="kw">colnames</span>(KOR_fs[[<span class="dv">1</span>]]), <span class="kw">as.character</span>(lubridate<span class="op">::</span><span class="kw">year</span>(<span class="kw">Sys.Date</span>()) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb350-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-5"></a>}</span>
-<span id="cb350-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-6"></a></span>
-<span id="cb350-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-7"></a>F_<span class="dv">1</span> =<span class="st"> </span><span class="kw">as.integer</span>(ROA[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb350-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-8"></a>F_<span class="dv">2</span> =<span class="st"> </span><span class="kw">as.integer</span>(CFO[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb350-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-9"></a>F_<span class="dv">3</span> =<span class="st"> </span><span class="kw">as.integer</span>(ROA[, num_col] <span class="op">-</span><span class="st"> </span>ROA[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb350-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-10"></a>F_<span class="dv">4</span> =<span class="st"> </span><span class="kw">as.integer</span>(ACCURUAL[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) </span>
-<span id="cb350-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-11"></a>F_<span class="dv">5</span> =<span class="st"> </span><span class="kw">as.integer</span>(LEV[, num_col] <span class="op">-</span><span class="st"> </span>LEV[, (num_col<span class="dv">-1</span>)] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>) </span>
-<span id="cb350-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-12"></a>F_<span class="dv">6</span> =<span class="st"> </span><span class="kw">as.integer</span>(LIQ[, num_col] <span class="op">-</span><span class="st"> </span>LIQ[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb350-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-13"></a>F_<span class="dv">7</span> =<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">is.na</span>(OFFER[,num_col]) <span class="op">|</span></span>
-<span id="cb350-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-14"></a><span class="st">                   </span>OFFER[,num_col] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb350-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-15"></a>F_<span class="dv">8</span> =<span class="st"> </span><span class="kw">as.integer</span>(MARGIN[, num_col] <span class="op">-</span></span>
-<span id="cb350-16"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-16"></a><span class="st">                   </span>MARGIN[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
-<span id="cb350-17"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb350-17"></a>F_<span class="dv">9</span> =<span class="st"> </span><span class="kw">as.integer</span>(TURN[,num_col] <span class="op">-</span><span class="st"> </span>TURN[,(num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-1"></a><span class="cf">if</span> ( lubridate<span class="op">::</span><span class="kw">month</span>(<span class="kw">Sys.Date</span>()) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>) ) {</span>
+<span id="cb351-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-2"></a>  num_col =<span class="st"> </span><span class="kw">str_which</span>(<span class="kw">colnames</span>(KOR_fs[[<span class="dv">1</span>]]), <span class="kw">as.character</span>(lubridate<span class="op">::</span><span class="kw">year</span>(<span class="kw">Sys.Date</span>()) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>))</span>
+<span id="cb351-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-3"></a>} <span class="cf">else</span> {</span>
+<span id="cb351-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-4"></a>  num_col =<span class="st"> </span><span class="kw">str_which</span>(<span class="kw">colnames</span>(KOR_fs[[<span class="dv">1</span>]]), <span class="kw">as.character</span>(lubridate<span class="op">::</span><span class="kw">year</span>(<span class="kw">Sys.Date</span>()) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb351-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-5"></a>}</span>
+<span id="cb351-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-6"></a></span>
+<span id="cb351-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-7"></a>F_<span class="dv">1</span> =<span class="st"> </span><span class="kw">as.integer</span>(ROA[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb351-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-8"></a>F_<span class="dv">2</span> =<span class="st"> </span><span class="kw">as.integer</span>(CFO[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb351-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-9"></a>F_<span class="dv">3</span> =<span class="st"> </span><span class="kw">as.integer</span>(ROA[, num_col] <span class="op">-</span><span class="st"> </span>ROA[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb351-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-10"></a>F_<span class="dv">4</span> =<span class="st"> </span><span class="kw">as.integer</span>(ACCURUAL[, num_col] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) </span>
+<span id="cb351-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-11"></a>F_<span class="dv">5</span> =<span class="st"> </span><span class="kw">as.integer</span>(LEV[, num_col] <span class="op">-</span><span class="st"> </span>LEV[, (num_col<span class="dv">-1</span>)] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>) </span>
+<span id="cb351-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-12"></a>F_<span class="dv">6</span> =<span class="st"> </span><span class="kw">as.integer</span>(LIQ[, num_col] <span class="op">-</span><span class="st"> </span>LIQ[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb351-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-13"></a>F_<span class="dv">7</span> =<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw">is.na</span>(OFFER[,num_col]) <span class="op">|</span></span>
+<span id="cb351-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-14"></a><span class="st">                   </span>OFFER[,num_col] <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb351-15"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-15"></a>F_<span class="dv">8</span> =<span class="st"> </span><span class="kw">as.integer</span>(MARGIN[, num_col] <span class="op">-</span></span>
+<span id="cb351-16"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-16"></a><span class="st">                   </span>MARGIN[, (num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span>
+<span id="cb351-17"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-17"></a>F_<span class="dv">9</span> =<span class="st"> </span><span class="kw">as.integer</span>(TURN[,num_col] <span class="op">-</span><span class="st"> </span>TURN[,(num_col<span class="dv">-1</span>)] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 <p><code>num_col</code> 변수에 원하는 열의 위치를 구해줍니다. <strong>1월~4월에 데이터를 받을 경우 전년도 재무제표가 일부만 들어오는 경향이 있으므로, 전전년도 데이터를 사용해야 합니다.</strong> 따라서 <code>Sys.Date()</code> 함수를 통해 현재 날짜를 추출한 후, lubridate 패키지의 <code>month()</code> 함수를 이용해 해당 월을 계산합니다. <code>str_which()</code> 함수를 이용해, 만일 현재 날짜가 1~4월인 경우 열 이름이 2년전 년도를 포함하는 부분을(예: 만일 오늘이 2021년 1월 이라면 열 이름중 2019가 포함된 곳), 그렇지 않을 경우(5~12월) 열 이름이 1년전 년도를 포함하는 부분을(예: 만일 오늘이 2021년 5월 이라면 열 이름중 2020가 포함된 곳) 선택합니다.</p>
 <p><code>as.integer()</code> 함수는 TRUE일 경우 1을 반환하고 FALSE일 경우 0을 반환하는 함수로서, F-Score 지표의 점수를 매기는 데 매우 유용합니다. 점수 기준은 다음과 같습니다.</p>
 <ol style="list-style-type: decimal">
@@ -1331,37 +1331,37 @@ Operating Efficiency
 <li>매출총이익률이 전년 대비 증가했으면 1점, 그렇지 않으면 0점</li>
 <li>회전율이 전년 대비 증가했으면 1점, 그렇지 않으면 0점</li>
 </ol>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-1"></a>F_Table =<span class="st"> </span><span class="kw">cbind</span>(F_<span class="dv">1</span>, F_<span class="dv">2</span>, F_<span class="dv">3</span>, F_<span class="dv">4</span>, F_<span class="dv">5</span>, F_<span class="dv">6</span>, F_<span class="dv">7</span>, F_<span class="dv">8</span>, F_<span class="dv">9</span>) </span>
-<span id="cb351-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-2"></a>F_Score =<span class="st"> </span>F_Table <span class="op">%&gt;%</span></span>
-<span id="cb351-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-3"></a><span class="st">  </span><span class="kw">apply</span>(., <span class="dv">1</span>, sum, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
-<span id="cb351-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb351-4"></a><span class="st">  </span><span class="kw">setNames</span>(KOR_ticker<span class="op">$</span><span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb352-1"></a>F_Table =<span class="st"> </span><span class="kw">cbind</span>(F_<span class="dv">1</span>, F_<span class="dv">2</span>, F_<span class="dv">3</span>, F_<span class="dv">4</span>, F_<span class="dv">5</span>, F_<span class="dv">6</span>, F_<span class="dv">7</span>, F_<span class="dv">8</span>, F_<span class="dv">9</span>) </span>
+<span id="cb352-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb352-2"></a>F_Score =<span class="st"> </span>F_Table <span class="op">%&gt;%</span></span>
+<span id="cb352-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb352-3"></a><span class="st">  </span><span class="kw">apply</span>(., <span class="dv">1</span>, sum, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb352-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb352-4"></a><span class="st">  </span><span class="kw">setNames</span>(KOR_ticker<span class="op">$</span><span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><code>cbind()</code> 함수를 통해 열의 형태로 묶어줍니다.</li>
 <li><code>apply()</code> 함수를 통해 종목별 지표의 합을 더해 F-Score를 계산해줍니다.</li>
 <li><code>setNanmes()</code> 함수를 통해 종목명을 입력합니다.</li>
 </ol>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb352-1"></a>(<span class="dt">F_dist =</span> <span class="kw">prop.table</span>(<span class="kw">table</span>(F_Score)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb353-1"></a>(<span class="dt">F_dist =</span> <span class="kw">prop.table</span>(<span class="kw">table</span>(F_Score)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## F_Score
 ##     0     1     2     3     4     5     6     7     8 
 ## 0.003 0.051 0.078 0.157 0.193 0.179 0.158 0.110 0.058 
 ##     9 
 ## 0.012</code></pre>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-1"></a>F_dist <span class="op">%&gt;%</span></span>
-<span id="cb354-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-2"></a><span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
-<span id="cb354-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> F_Score, <span class="dt">y =</span> Freq,</span>
-<span id="cb354-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-4"></a>             <span class="dt">label =</span> <span class="kw">paste0</span>(Freq <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="st">&#39;%&#39;</span>))) <span class="op">+</span></span>
-<span id="cb354-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-5"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span></span>
-<span id="cb354-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-6"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">vjust =</span> <span class="fl">-0.4</span>) <span class="op">+</span></span>
-<span id="cb354-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-7"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.05</span>),</span>
-<span id="cb354-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-8"></a>                     <span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></span>
-<span id="cb354-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span></span>
-<span id="cb354-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb354-10"></a><span class="st">  </span><span class="kw">theme_classic</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-1"></a>F_dist <span class="op">%&gt;%</span></span>
+<span id="cb355-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-2"></a><span class="st">  </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb355-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-3"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> F_Score, <span class="dt">y =</span> Freq,</span>
+<span id="cb355-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-4"></a>             <span class="dt">label =</span> <span class="kw">paste0</span>(Freq <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="st">&#39;%&#39;</span>))) <span class="op">+</span></span>
+<span id="cb355-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-5"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>) <span class="op">+</span></span>
+<span id="cb355-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-6"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">vjust =</span> <span class="fl">-0.4</span>) <span class="op">+</span></span>
+<span id="cb355-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-7"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.05</span>),</span>
+<span id="cb355-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-8"></a>                     <span class="dt">labels =</span> scales<span class="op">::</span>percent) <span class="op">+</span></span>
+<span id="cb355-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-9"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="ot">NULL</span>) <span class="op">+</span></span>
+<span id="cb355-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-10"></a><span class="st">  </span><span class="kw">theme_classic</span>() </span></code></pre></div>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-31-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><code>table()</code> 함수를 통해 각 스코어별 개수를 구한 후 <code>prop.table()</code>을 통해 비중으로 변환합니다. 이를 통해 점수별 비중을 살펴보면 3~6점에 상당히 많은 종목이 분포하고 있음이 확인됩니다.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-1"></a>invest_F_Score =<span class="st"> </span>F_Score <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">9</span>)</span>
-<span id="cb355-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-2"></a>KOR_ticker[invest_F_Score, ] <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb355-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb355-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb355-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">F-Score</span><span class="st">`</span> =<span class="st"> </span>F_Score[invest_F_Score])</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb356-1"></a>invest_F_Score =<span class="st"> </span>F_Score <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">9</span>)</span>
+<span id="cb356-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb356-2"></a>KOR_ticker[invest_F_Score, ] <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb356-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb356-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb356-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb356-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">F-Score</span><span class="st">`</span> =<span class="st"> </span>F_Score[invest_F_Score])</span></code></pre></div>
 <pre><code>##    종목코드         종목명 F-Score
 ## 1    009900       명신산업       9
 ## 2    034230     파라다이스       9
@@ -1394,54 +1394,54 @@ Operating Efficiency
 <div id="각-지표를-결합하기" class="section level3">
 <h3><span class="header-section-number">9.5.2</span> 각 지표를 결합하기</h3>
 <p>이번에는 퀄리티를 측정하는 요소 중 가장 널리 사용되는 수익성 지표를 결합한 포트폴리오를 만들어보겠습니다. 여기서 사용되는 지표는 <strong>자기자본이익률(ROE), 매출총이익(Gross Profit), 영업활동현금흐름(Cash Flow From Operating)</strong>입니다.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb357-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-2"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb357-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-3"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb357-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-4"></a><span class="kw">library</span>(tidyr)</span>
-<span id="cb357-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-5"></a></span>
-<span id="cb357-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-6"></a>KOR_fs =<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/KOR_fs.Rds&#39;</span>)</span>
-<span id="cb357-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-7"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb357-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-8"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
-<span id="cb357-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-9"></a></span>
-<span id="cb357-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-10"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
-<span id="cb357-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb357-11"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-1"></a><span class="cf">if</span> ( lubridate<span class="op">::</span><span class="kw">month</span>(<span class="kw">Sys.Date</span>()) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>) ) {</span>
-<span id="cb358-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-2"></a>  num_col =<span class="st"> </span><span class="kw">str_which</span>(<span class="kw">colnames</span>(KOR_fs[[<span class="dv">1</span>]]), <span class="kw">as.character</span>(lubridate<span class="op">::</span><span class="kw">year</span>(<span class="kw">Sys.Date</span>()) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>))</span>
-<span id="cb358-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-3"></a>} <span class="cf">else</span> {</span>
-<span id="cb358-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-4"></a>  num_col =<span class="st"> </span><span class="kw">str_which</span>(<span class="kw">colnames</span>(KOR_fs[[<span class="dv">1</span>]]), <span class="kw">as.character</span>(lubridate<span class="op">::</span><span class="kw">year</span>(<span class="kw">Sys.Date</span>()) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb358-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-5"></a>}</span>
-<span id="cb358-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-6"></a></span>
-<span id="cb358-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-7"></a>quality_roe =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;지배주주순이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자본&#39;</span>)[num_col]</span>
-<span id="cb358-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-8"></a>quality_gpa =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;매출총이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>)[num_col]</span>
-<span id="cb358-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-9"></a>quality_cfo =</span>
-<span id="cb358-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-10"></a><span class="st">  </span>(KOR_fs<span class="op">$</span><span class="st">&#39;영업활동으로인한현금흐름&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>)[num_col]</span>
-<span id="cb358-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-11"></a></span>
-<span id="cb358-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-12"></a>quality_profit =</span>
-<span id="cb358-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-13"></a><span class="st">  </span><span class="kw">cbind</span>(quality_roe, quality_gpa, quality_cfo) <span class="op">%&gt;%</span></span>
-<span id="cb358-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-14"></a><span class="st">  </span><span class="kw">setNames</span>(., <span class="kw">c</span>(<span class="st">&#39;ROE&#39;</span>, <span class="st">&#39;GPA&#39;</span>, <span class="st">&#39;CFO&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb358-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb358-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-3"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb358-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-4"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb358-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-5"></a></span>
+<span id="cb358-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-6"></a>KOR_fs =<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&#39;data/KOR_fs.Rds&#39;</span>)</span>
+<span id="cb358-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-7"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb358-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-8"></a>                      <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>) </span>
+<span id="cb358-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-9"></a></span>
+<span id="cb358-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-10"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
+<span id="cb358-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb358-11"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="st">&#39;left&#39;</span>, <span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-1"></a><span class="cf">if</span> ( lubridate<span class="op">::</span><span class="kw">month</span>(<span class="kw">Sys.Date</span>()) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>) ) {</span>
+<span id="cb359-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-2"></a>  num_col =<span class="st"> </span><span class="kw">str_which</span>(<span class="kw">colnames</span>(KOR_fs[[<span class="dv">1</span>]]), <span class="kw">as.character</span>(lubridate<span class="op">::</span><span class="kw">year</span>(<span class="kw">Sys.Date</span>()) <span class="op">-</span><span class="st"> </span><span class="dv">2</span>))</span>
+<span id="cb359-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-3"></a>} <span class="cf">else</span> {</span>
+<span id="cb359-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-4"></a>  num_col =<span class="st"> </span><span class="kw">str_which</span>(<span class="kw">colnames</span>(KOR_fs[[<span class="dv">1</span>]]), <span class="kw">as.character</span>(lubridate<span class="op">::</span><span class="kw">year</span>(<span class="kw">Sys.Date</span>()) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb359-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-5"></a>}</span>
+<span id="cb359-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-6"></a></span>
+<span id="cb359-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-7"></a>quality_roe =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;지배주주순이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자본&#39;</span>)[num_col]</span>
+<span id="cb359-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-8"></a>quality_gpa =<span class="st"> </span>(KOR_fs<span class="op">$</span><span class="st">&#39;매출총이익&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>)[num_col]</span>
+<span id="cb359-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-9"></a>quality_cfo =</span>
+<span id="cb359-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-10"></a><span class="st">  </span>(KOR_fs<span class="op">$</span><span class="st">&#39;영업활동으로인한현금흐름&#39;</span> <span class="op">/</span><span class="st"> </span>KOR_fs<span class="op">$</span><span class="st">&#39;자산&#39;</span>)[num_col]</span>
+<span id="cb359-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-11"></a></span>
+<span id="cb359-12"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-12"></a>quality_profit =</span>
+<span id="cb359-13"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-13"></a><span class="st">  </span><span class="kw">cbind</span>(quality_roe, quality_gpa, quality_cfo) <span class="op">%&gt;%</span></span>
+<span id="cb359-14"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-14"></a><span class="st">  </span><span class="kw">setNames</span>(., <span class="kw">c</span>(<span class="st">&#39;ROE&#39;</span>, <span class="st">&#39;GPA&#39;</span>, <span class="st">&#39;CFO&#39;</span>))</span></code></pre></div>
 <p>먼저 재무제표와 티커 파일을 불러온 후 세 가지 지표에 해당하는 값을 구한 뒤 최근년도 데이터만 선택합니다. 그런 다음 <code>cbind()</code> 함수를 이용해 지표들을 하나로 묶어줍니다. <strong>역시나 1~4월의 경우 전년도가 아닌 전전년도 회계 데이터를 사용합니다.</strong></p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-1"></a>rank_quality =<span class="st"> </span>quality_profit <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb359-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-2"></a><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(<span class="kw">desc</span>(.))))</span>
-<span id="cb359-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-3"></a></span>
-<span id="cb359-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-4"></a><span class="kw">cor</span>(rank_quality, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb359-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-5"></a><span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span></span>
-<span id="cb359-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-6"></a><span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,</span>
-<span id="cb359-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-7"></a>           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="dv">1</span>,</span>
-<span id="cb359-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-8"></a>           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt =</span> <span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,</span>
-<span id="cb359-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-9"></a>           <span class="dt">col =</span></span>
-<span id="cb359-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-10"></a>             <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),</span>
-<span id="cb359-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb359-11"></a>           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-1"></a>rank_quality =<span class="st"> </span>quality_profit <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb360-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-2"></a><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">list</span>(<span class="op">~</span><span class="kw">min_rank</span>(<span class="kw">desc</span>(.))))</span>
+<span id="cb360-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-3"></a></span>
+<span id="cb360-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-4"></a><span class="kw">cor</span>(rank_quality, <span class="dt">use =</span> <span class="st">&#39;complete.obs&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb360-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-5"></a><span class="st">  </span><span class="kw">round</span>(., <span class="dv">2</span>) <span class="op">%&gt;%</span></span>
+<span id="cb360-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-6"></a><span class="st">  </span><span class="kw">corrplot</span>(<span class="dt">method =</span> <span class="st">&#39;color&#39;</span>, <span class="dt">type =</span> <span class="st">&#39;upper&#39;</span>,</span>
+<span id="cb360-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-7"></a>           <span class="dt">addCoef.col =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">number.cex =</span> <span class="dv">1</span>,</span>
+<span id="cb360-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-8"></a>           <span class="dt">tl.cex =</span> <span class="fl">0.6</span>, <span class="dt">tl.srt =</span> <span class="dv">45</span>, <span class="dt">tl.col =</span> <span class="st">&#39;black&#39;</span>,</span>
+<span id="cb360-9"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-9"></a>           <span class="dt">col =</span></span>
+<span id="cb360-10"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-10"></a>             <span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),</span>
+<span id="cb360-11"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-11"></a>           <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</span></code></pre></div>
 <p><img src="09-factor_basic_files/figure-html/unnamed-chunk-35-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p><code>mutate_all()</code> 함수와 <code>min_rank()</code> 함수를 통해 지표별 랭킹을 구하며, 퀄리티 지표는 높을수록 좋은 내림차순으로 계산해야 하므로 <code>desc()</code>를 추가합니다.</p>
 <p>수익성 지표 역시 서로 간의 상관관계가 낮아, 지표를 통합적으로 고려 시 분산효과를 기대할 수 있습니다.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-1"></a>rank_sum =<span class="st"> </span>rank_quality <span class="op">%&gt;%</span></span>
-<span id="cb360-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-2"></a><span class="st">  </span><span class="kw">rowSums</span>()</span>
-<span id="cb360-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-3"></a></span>
-<span id="cb360-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-4"></a>invest_quality =<span class="st"> </span><span class="kw">rank</span>(rank_sum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
-<span id="cb360-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-5"></a></span>
-<span id="cb360-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-6"></a>KOR_ticker[invest_quality, ] <span class="op">%&gt;%</span></span>
-<span id="cb360-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
-<span id="cb360-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb360-8"></a><span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(quality_profit[invest_quality, ], <span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb361-1"></a>rank_sum =<span class="st"> </span>rank_quality <span class="op">%&gt;%</span></span>
+<span id="cb361-2"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb361-2"></a><span class="st">  </span><span class="kw">rowSums</span>()</span>
+<span id="cb361-3"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb361-3"></a></span>
+<span id="cb361-4"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb361-4"></a>invest_quality =<span class="st"> </span><span class="kw">rank</span>(rank_sum) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span></span>
+<span id="cb361-5"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb361-5"></a></span>
+<span id="cb361-6"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb361-6"></a>KOR_ticker[invest_quality, ] <span class="op">%&gt;%</span></span>
+<span id="cb361-7"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb361-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">종목코드</span><span class="st">`</span>, <span class="st">`</span><span class="dt">종목명</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb361-8"><a href="퀀트-전략을-이용한-종목선정-기본.html#cb361-8"></a><span class="st">  </span><span class="kw">cbind</span>(<span class="kw">round</span>(quality_profit[invest_quality, ], <span class="dv">4</span>))</span></code></pre></div>
 <pre><code>##      종목코드               종목명    ROE    GPA    CFO
 ## 15     051900           LG생활건강 0.1836 0.7343 0.1755
 ## 50     352820               빅히트 0.4254 0.5551 0.2526

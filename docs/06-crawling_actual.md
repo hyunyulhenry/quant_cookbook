@@ -12,12 +12,17 @@
 
 먼저 네이버 금융에서 특정종목(예: 삼성전자)의 [차트] 탭^[https://finance.naver.com/item/fchart.nhn?code=005930]을 선택합니다. 해당 차트는 주가 데이터를 받아 그래프를 그려주는 형태입니다. 따라서 해당 데이터가 어디에서 오는지 알기 위해 개발자 도구 화면을 이용합니다.
 
+
 <div class="figure" style="text-align: center">
 <img src="images/crawl_practice_price2.png" alt="네이버금융 차트의 통신기록" width="70%" />
 <p class="caption">(\#fig:unnamed-chunk-1)네이버금융 차트의 통신기록</p>
 </div>
 
-화면을 연 상태에서 [일] 탭을 선택하면 나오는 항목 중 가장 상단의 항목의 Request URL이 주가 데이터를 요청하는 주소입니다. 해당 URL에 접속해보겠습니다.
+화면을 연 상태에서 [일] 탭을 선택하면 나오는 항목 중 가장 상단 항목의 Request URL이 주가 데이터를 요청하는 주소입니다. 해당 URL에 접속해보겠습니다.
+
+```
+URL: https://fchart.stock.naver.com/siseJson.nhn?symbol=005930&requestType=1&startTime=20191117&endTime=20210124&timeframe=day
+```
 
 <div class="figure" style="text-align: center">
 <img src="images/crawl_practice_price3.png" alt="주가 데이터 페이지" width="70%" />
@@ -45,7 +50,7 @@ KOR_ticker$'종목코드' =
   str_pad(KOR_ticker$'종목코드', 6, side = c('left'), pad = '0')
 ```
 
-먼저 저장해두었던 csv 파일을 불러옵니다. 종목코드를 살펴보면 005930이어야 할 삼성전자의 티커가 5930으로 입력되어 있습니다. 이는 파일을 불러오는 과정에서 0으로 시작하는 숫자들이 지워졌기 때문입니다. stringr 패키지의 `str_pad()` 함수를 사용해 6자리가 되지 않는 문자는 왼쪽에 0을 추가해 강제로 6자리로 만들어주도록 합니다.
+먼저 저장해두었던 티커 항목의 csv 파일을 불러옵니다. 종목코드를 살펴보면 005930이어야 할 삼성전자의 티커가 5930으로 입력되어 있습니다. 이는 파일을 불러오는 과정에서 0으로 시작하는 숫자들이 지워졌기 때문입니다. stringr 패키지의 `str_pad()` 함수를 사용해 6자리가 되지 않는 문자는 왼쪽에 0을 추가해 강제로 6자리로 만들어주도록 합니다.
 
 다음은 첫 번째 종목인 삼성전자의 주가를 크롤링한 후 가공하는 방법입니다.
 
@@ -119,8 +124,8 @@ print(data_html)
 ## #   `'거래량'` <dbl>, `'외국인소진율']` <chr>, X8 <lgl>
 ```
 
-1. 먼저 시작일과 종료일에 해당하는 날짜를 입력합니다. `Sys.Date()`를 통해 오늘 날짜를 불러온 후, 시작일은 `years()` 함수를 이용해 3년을 빼줍니다. (원하는 기간 만큼을 빼주면 됩니다) 그 후 `str_remove_all()` 함수를 이용해 **-** 부분을 제거해 yyyymmdd 형식을 만들어 줍니다.
-1. `paste0()` 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.
+1. 먼저 시작일(from)과 종료일(to)에 해당하는 날짜를 입력합니다. `Sys.Date()`를 통해 오늘 날짜를 불러온 후, 시작일은 `years()` 함수를 이용해 3년을 빼줍니다. (본인이 원하는 기간 만큼을 빼주면 됩니다.) 그 후 `str_remove_all()` 함수를 이용해 **-** 부분을 제거해 yyyymmdd 형식을 만들어 줍니다.
+1. `paste0()` 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분에 위에서 입력한 name을 설정합니다.
 2. `GET()` 함수를 통해 페이지의 데이터를 불러옵니다.
 3. `read_html()` 함수를 통해 HTML 정보를 읽어옵니다.
 4. `html_text()` 함수를 통해 텍스트 데이터만을 추출합니다.
@@ -877,7 +882,7 @@ print(codezip_data)
 
 ```
 ## Response [https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=b1a630e527b0e5ff5bd58ed81b49825017fa80b8]
-##   Date: 2021-01-24 14:25
+##   Date: 2021-01-24 14:55
 ##   Status: 200
 ##   Content-Type: application/x-msdownload
 ##   Size: 1.4 MB
