@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2021-01-17" />
+<meta name="date" content="2021-01-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -430,22 +430,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>또한 단순 주가를 구할 수 있는 방법은 많지만, 투자에 필요한 수정주가를 구할 수 있는 방법은 찾기 힘듭니다. 다행히 네이버 금융에서 제공하는 정보를 통해 모든 종목의 수정주가를 매우 손쉽게 구할 수 있습니다.</p>
 <div id="개별종목-주가-크롤링" class="section level3">
 <h3><span class="header-section-number">6.1.1</span> 개별종목 주가 크롤링</h3>
-<p>먼저 네이버 금융에서 특정종목(예: 삼성전자)의 [차트] 탭<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>을 선택합니다.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> 해당 차트는 주가 데이터를 받아 그래프를 그려주는 형태입니다. 따라서 해당 데이터가 어디에서 오는지 알기 위해 개발자 도구 화면을 이용합니다.</p>
+<p>먼저 네이버 금융에서 특정종목(예: 삼성전자)의 [차트] 탭<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>을 선택합니다. 해당 차트는 주가 데이터를 받아 그래프를 그려주는 형태입니다. 따라서 해당 데이터가 어디에서 오는지 알기 위해 개발자 도구 화면을 이용합니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
 <img src="images/crawl_practice_price2.png" alt="네이버금융 차트의 통신기록" width="70%" />
 <p class="caption">
 그림 1.3: 네이버금융 차트의 통신기록
 </p>
 </div>
-<p>화면을 연 상태에서 [일봉] 탭을 선택하면 sise.nhn, schedule.nhn, notice.nhn 총 세 가지 항목이 생성됩니다. 이 중 sise.nhn 항목의 Request URL이 주가 데이터를 요청하는 주소입니다. 해당 URL에 접속해보겠습니다.</p>
+<p>화면을 연 상태에서 [일] 탭을 선택하면 나오는 항목 중 가장 상단의 항목의 Request URL이 주가 데이터를 요청하는 주소입니다. 해당 URL에 접속해보겠습니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="images/crawl_practice_price3.png" alt="주가 데이터 페이지" width="70%" />
 <p class="caption">
 그림 2.1: 주가 데이터 페이지
 </p>
 </div>
-<p>각 날짜별로 시가, 고가, 저가, 종가, 거래량이 있으며, 주가는 모두 수정주가 기준입니다. 또한 해당 데이터가 item 태그 내 data 속성에 위치하고 있습니다.</p>
-<p>URL에서 symbol= 뒤에 6자리 티커만 변경하면 해당 종목의 주가 데이터가 있는 페이지로 이동할 수 있으며, 우리가 원하는 모든 종목의 주가 데이터를 크롤링할 수 있습니다.</p>
+<p>각 날짜별로 시가, 고가, 저가, 종가, 거래량, 외국인소지율이 있으며, 주가는 모두 수정주가 기준입니다.</p>
+<p>URL에서 symbol= 뒤에 6자리 티커만 변경하면 해당 종목의 주가 데이터가 있는 페이지로 이동할 수 있으며, 이를 통해 우리가 원하는 모든 종목의 주가 데이터를 크롤링할 수 있습니다. 또한 startTime= 에는 시작일자를, endTime= 에는 종료일자를 입력하여 원하는 기간 만큼의 데이터를 받을 수도 있습니다.</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="금융-데이터-수집하기-심화.html#cb123-1"></a><span class="kw">library</span>(stringr)</span>
 <span id="cb123-2"><a href="금융-데이터-수집하기-심화.html#cb123-2"></a></span>
 <span id="cb123-3"><a href="금융-데이터-수집하기-심화.html#cb123-3"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
@@ -466,7 +466,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb128-4"><a href="금융-데이터-수집하기-심화.html#cb128-4"></a>price =<span class="st"> </span><span class="kw">xts</span>(<span class="ot">NA</span>, <span class="dt">order.by =</span> <span class="kw">Sys.Date</span>())</span>
 <span id="cb128-5"><a href="금융-데이터-수집하기-심화.html#cb128-5"></a><span class="kw">print</span>(price)</span></code></pre></div>
 <pre><code>##            [,1]
-## 2021-01-17   NA</code></pre>
+## 2021-01-24   NA</code></pre>
 <ol style="list-style-type: decimal">
 <li>data 폴더 내에 KOR_price 폴더를 생성합니다.</li>
 <li>i = 1을 입력합니다. 향후 for loop 구문을 통해 i 값만 변경하면 모든 종목의 주가를 다운로드할 수 있습니다.</li>
@@ -475,134 +475,137 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="금융-데이터-수집하기-심화.html#cb130-1"></a><span class="kw">library</span>(httr)</span>
 <span id="cb130-2"><a href="금융-데이터-수집하기-심화.html#cb130-2"></a><span class="kw">library</span>(rvest)</span>
-<span id="cb130-3"><a href="금융-데이터-수집하기-심화.html#cb130-3"></a></span>
-<span id="cb130-4"><a href="금융-데이터-수집하기-심화.html#cb130-4"></a>url =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb130-5"><a href="금융-데이터-수집하기-심화.html#cb130-5"></a>  <span class="st">&#39;https://fchart.stock.naver.com/sise.nhn?symbol=&#39;</span>,</span>
-<span id="cb130-6"><a href="금융-데이터-수집하기-심화.html#cb130-6"></a>  name,<span class="st">&#39;&amp;timeframe=day&amp;count=500&amp;requestType=0&#39;</span>)</span>
-<span id="cb130-7"><a href="금융-데이터-수집하기-심화.html#cb130-7"></a>data =<span class="st"> </span><span class="kw">GET</span>(url)</span>
-<span id="cb130-8"><a href="금융-데이터-수집하기-심화.html#cb130-8"></a>data_html =<span class="st"> </span><span class="kw">read_html</span>(data, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb130-9"><a href="금융-데이터-수집하기-심화.html#cb130-9"></a><span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&#39;item&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb130-10"><a href="금융-데이터-수집하기-심화.html#cb130-10"></a><span class="st">  </span><span class="kw">html_attr</span>(<span class="st">&#39;data&#39;</span>) </span>
-<span id="cb130-11"><a href="금융-데이터-수집하기-심화.html#cb130-11"></a></span>
-<span id="cb130-12"><a href="금융-데이터-수집하기-심화.html#cb130-12"></a><span class="kw">print</span>(<span class="kw">head</span>(data_html))</span></code></pre></div>
-<pre><code>## [1] &quot;20190108|38000|39200|37950|38100|12756554&quot;
-## [2] &quot;20190109|38650|39600|38300|39600|17452708&quot;
-## [3] &quot;20190110|40000|40150|39600|39800|14731699&quot;
-## [4] &quot;20190111|40350|40550|39950|40500|11661063&quot;
-## [5] &quot;20190114|40450|40700|39850|40050|11984996&quot;
-## [6] &quot;20190115|40050|41100|39850|41100|11492756&quot;</code></pre>
+<span id="cb130-3"><a href="금융-데이터-수집하기-심화.html#cb130-3"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb130-4"><a href="금융-데이터-수집하기-심화.html#cb130-4"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb130-5"><a href="금융-데이터-수집하기-심화.html#cb130-5"></a><span class="kw">library</span>(readr)</span>
+<span id="cb130-6"><a href="금융-데이터-수집하기-심화.html#cb130-6"></a></span>
+<span id="cb130-7"><a href="금융-데이터-수집하기-심화.html#cb130-7"></a>from =<span class="st"> </span>(<span class="kw">Sys.Date</span>() <span class="op">-</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
+<span id="cb130-8"><a href="금융-데이터-수집하기-심화.html#cb130-8"></a>to =<span class="st"> </span><span class="kw">Sys.Date</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
+<span id="cb130-9"><a href="금융-데이터-수집하기-심화.html#cb130-9"></a></span>
+<span id="cb130-10"><a href="금융-데이터-수집하기-심화.html#cb130-10"></a>url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://fchart.stock.naver.com/siseJson.nhn?symbol=&#39;</span>, name,</span>
+<span id="cb130-11"><a href="금융-데이터-수집하기-심화.html#cb130-11"></a>             <span class="st">&#39;&amp;requestType=1&amp;startTime=&#39;</span>, from, <span class="st">&#39;&amp;endTime=&#39;</span>, to, <span class="st">&#39;&amp;timeframe=day&#39;</span>)</span>
+<span id="cb130-12"><a href="금융-데이터-수집하기-심화.html#cb130-12"></a></span>
+<span id="cb130-13"><a href="금융-데이터-수집하기-심화.html#cb130-13"></a>data =<span class="st"> </span><span class="kw">GET</span>(url)</span>
+<span id="cb130-14"><a href="금융-데이터-수집하기-심화.html#cb130-14"></a>data_html =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>read_html <span class="op">%&gt;%</span></span>
+<span id="cb130-15"><a href="금융-데이터-수집하기-심화.html#cb130-15"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb130-16"><a href="금융-데이터-수집하기-심화.html#cb130-16"></a><span class="st">  </span><span class="kw">read_csv</span>()</span>
+<span id="cb130-17"><a href="금융-데이터-수집하기-심화.html#cb130-17"></a></span>
+<span id="cb130-18"><a href="금융-데이터-수집하기-심화.html#cb130-18"></a><span class="kw">print</span>(data_html)</span></code></pre></div>
+<pre><code>## # A tibble: 1,479 x 8
+##    `[[&#39;날짜&#39;` `&#39;시가&#39;` `&#39;고가&#39;` `&#39;저가&#39;` `&#39;종가&#39;`
+##    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1  &lt;NA&gt;            NA       NA       NA       NA
+##  2  &lt;NA&gt;            NA       NA       NA       NA
+##  3  &lt;NA&gt;            NA       NA       NA       NA
+##  4 &quot;[\&quot;20180…    48860    49700    48560    49340
+##  5  &lt;NA&gt;            NA       NA       NA       NA
+##  6 &quot;[\&quot;20180…    49220    50360    49160    50260
+##  7  &lt;NA&gt;            NA       NA       NA       NA
+##  8 &quot;[\&quot;20180…    50500    50780    49840    50780
+##  9  &lt;NA&gt;            NA       NA       NA       NA
+## 10 &quot;[\&quot;20180…    51200    51480    50900    51220
+## # … with 1,469 more rows, and 3 more variables:
+## #   `&#39;거래량&#39;` &lt;dbl&gt;, `&#39;외국인소진율&#39;]` &lt;chr&gt;, X8 &lt;lgl&gt;</code></pre>
 <ol style="list-style-type: decimal">
+<li>먼저 시작일과 종료일에 해당하는 날짜를 입력합니다. <code>Sys.Date()</code>를 통해 오늘 날짜를 불러온 후, 시작일은 <code>years()</code> 함수를 이용해 3년을 빼줍니다. (원하는 기간 만큼을 빼주면 됩니다) 그 후 <code>str_remove_all()</code> 함수를 이용해 <strong>-</strong> 부분을 제거해 yyyymmdd 형식을 만들어 줍니다.</li>
 <li><code>paste0()</code> 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.</li>
 <li><code>GET()</code> 함수를 통해 페이지의 데이터를 불러옵니다.</li>
 <li><code>read_html()</code> 함수를 통해 HTML 정보를 읽어옵니다.</li>
-<li><code>html_nodes()</code>와 <code>html_attr()</code> 함수를 통해 item 태그 및 data 속성의 데이터를 추출합니다.</li>
+<li><code>html_text()</code> 함수를 통해 텍스트 데이터만을 추출합니다.</li>
+<li><code>read_csv()</code> 함수로 csv 형태의 데이터를 불러옵니다.</li>
 </ol>
-<p>결과적으로 날짜 및 주가, 거래량 데이터가 추출됩니다. 해당 데이터는 |으로 구분되어 있으며, 이를 테이블 형태로 바꿀 필요가 있습니다.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="금융-데이터-수집하기-심화.html#cb132-1"></a><span class="kw">library</span>(readr)</span>
+<p>결과적으로 날짜 및 주가, 거래량, 외국인소진율 데이터가 추출됩니다. 우리에게 필요한 날짜와 종가에 해당하는 열만 선택하고, 클렌징 작업을 해주도록 하겠습니다.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="금융-데이터-수집하기-심화.html#cb132-1"></a><span class="kw">library</span>(timetk)</span>
 <span id="cb132-2"><a href="금융-데이터-수집하기-심화.html#cb132-2"></a></span>
-<span id="cb132-3"><a href="금융-데이터-수집하기-심화.html#cb132-3"></a>price =<span class="st"> </span><span class="kw">read_delim</span>(data_html, <span class="dt">delim =</span> <span class="st">&#39;|&#39;</span>)</span>
-<span id="cb132-4"><a href="금융-데이터-수집하기-심화.html#cb132-4"></a><span class="kw">print</span>(<span class="kw">head</span>(price))</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 6
-##   `20190108` `38000` `39200` `37950` `38100` `12756554`
-##        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
-## 1   20190109   38650   39600   38300   39600   17452708
-## 2   20190110   40000   40150   39600   39800   14731699
-## 3   20190111   40350   40550   39950   40500   11661063
-## 4   20190114   40450   40700   39850   40050   11984996
-## 5   20190115   40050   41100   39850   41100   11492756
-## 6   20190116   41150   41450   40700   41450    8491595</code></pre>
-<p>readr 패키지의 <code>read_delim()</code> 함수를 쓰면 구분자로 이루어진 데이터를 테이블로 쉽게 변경할 수 있습니다. 데이터를 확인해보면 테이블 형태로 변경되었으며 각 열은 날짜, 시가, 고가, 저가, 종가, 거래량을 의미합니다. 이 중 우리가 필요한 날짜와 종가를 선택한 후 데이터 클렌징을 해줍니다.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="금융-데이터-수집하기-심화.html#cb134-1"></a><span class="kw">library</span>(lubridate)</span>
-<span id="cb134-2"><a href="금융-데이터-수집하기-심화.html#cb134-2"></a><span class="kw">library</span>(timetk)</span>
-<span id="cb134-3"><a href="금융-데이터-수집하기-심화.html#cb134-3"></a></span>
-<span id="cb134-4"><a href="금융-데이터-수집하기-심화.html#cb134-4"></a>price =<span class="st"> </span>price[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)] </span>
-<span id="cb134-5"><a href="금융-데이터-수집하기-심화.html#cb134-5"></a>price =<span class="st"> </span><span class="kw">data.frame</span>(price)</span>
-<span id="cb134-6"><a href="금융-데이터-수집하기-심화.html#cb134-6"></a><span class="kw">colnames</span>(price) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Date&#39;</span>, <span class="st">&#39;Price&#39;</span>)</span>
-<span id="cb134-7"><a href="금융-데이터-수집하기-심화.html#cb134-7"></a>price[, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">ymd</span>(price[, <span class="dv">1</span>])</span>
-<span id="cb134-8"><a href="금융-데이터-수집하기-심화.html#cb134-8"></a>price =<span class="st"> </span><span class="kw">tk_xts</span>(price, <span class="dt">date_var =</span> Date)</span>
-<span id="cb134-9"><a href="금융-데이터-수집하기-심화.html#cb134-9"></a> </span>
-<span id="cb134-10"><a href="금융-데이터-수집하기-심화.html#cb134-10"></a><span class="kw">print</span>(<span class="kw">tail</span>(price))</span></code></pre></div>
+<span id="cb132-3"><a href="금융-데이터-수집하기-심화.html#cb132-3"></a>price =<span class="st"> </span>data_html[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)]</span>
+<span id="cb132-4"><a href="금융-데이터-수집하기-심화.html#cb132-4"></a><span class="kw">colnames</span>(price) =<span class="st"> </span>(<span class="kw">c</span>(<span class="st">&#39;Date&#39;</span>, <span class="st">&#39;Price&#39;</span>))</span>
+<span id="cb132-5"><a href="금융-데이터-수집하기-심화.html#cb132-5"></a>price =<span class="st"> </span><span class="kw">na.omit</span>(price)</span>
+<span id="cb132-6"><a href="금융-데이터-수집하기-심화.html#cb132-6"></a>price<span class="op">$</span>Date =<span class="st"> </span><span class="kw">parse_number</span>(price<span class="op">$</span>Date)</span>
+<span id="cb132-7"><a href="금융-데이터-수집하기-심화.html#cb132-7"></a>price<span class="op">$</span>Date =<span class="st"> </span><span class="kw">ymd</span>(price<span class="op">$</span>Date)</span>
+<span id="cb132-8"><a href="금융-데이터-수집하기-심화.html#cb132-8"></a>price =<span class="st"> </span><span class="kw">tk_xts</span>(price, <span class="dt">date_var =</span> Date)</span>
+<span id="cb132-9"><a href="금융-데이터-수집하기-심화.html#cb132-9"></a></span>
+<span id="cb132-10"><a href="금융-데이터-수집하기-심화.html#cb132-10"></a><span class="kw">print</span>(<span class="kw">tail</span>(price))</span></code></pre></div>
 <pre><code>##            Price
-## 2021-01-08 88800
-## 2021-01-11 91000
-## 2021-01-12 90600
-## 2021-01-13 89700
-## 2021-01-14 89700
-## 2021-01-15 88000</code></pre>
+## 2021-01-15 88000
+## 2021-01-18 85000
+## 2021-01-19 87000
+## 2021-01-20 87200
+## 2021-01-21 88100
+## 2021-01-22 86800</code></pre>
 <ol style="list-style-type: decimal">
 <li>날짜에 해당하는 첫 번째 열과, 종가에 해당하는 다섯 번째 열만 선택해 저장합니다.</li>
-<li>티블 형태의 데이터를 데이터 프레임 형태로 변경합니다.</li>
 <li>열 이름을 Date와 Price로 변경합니다.</li>
+<li><code>na.omit()</code> 함수를 통해 NA 데이터를 삭제해줍니다.</li>
+<li>Date 열에서 숫자만을 추출하기 위해 readr 패키지의 <code>parse_number()</code> 함수를 적용합니다. 해당 함수는 문자형 데이터에서 콤마와 같은 불필요한 문자를 제거한 후 숫자형 데이터로 변경해줍니다.</li>
 <li>lubridate 패키지의 <code>ymd()</code> 함수를 이용하면 yyyymmdd 형태가 yyyy-mm-dd로 변경되며 데이터 형태 또한 Date 타입으로 변경됩니다.</li>
 <li><code>timetk</code> 패키지의 <code>tk_xts()</code> 함수를 이용해 시계열 형태로 변경하며, 인덱스는 Date 열을 설정합니다. 형태를 변경한 후 해당 열은 자동으로 삭제됩니다.</li>
 </ol>
 <p>데이터를 확인해보면 우리에게 필요한 형태로 정리되었습니다.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="금융-데이터-수집하기-심화.html#cb136-1"></a><span class="kw">write.csv</span>(price, <span class="kw">paste0</span>(<span class="st">&#39;data/KOR_price/&#39;</span>, name,</span>
-<span id="cb136-2"><a href="금융-데이터-수집하기-심화.html#cb136-2"></a>                        <span class="st">&#39;_price.csv&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="금융-데이터-수집하기-심화.html#cb134-1"></a><span class="kw">write.csv</span>(<span class="kw">data.frame</span>(price),</span>
+<span id="cb134-2"><a href="금융-데이터-수집하기-심화.html#cb134-2"></a>          <span class="kw">paste0</span>(<span class="st">&#39;data/KOR_price/&#39;</span>, name, <span class="st">&#39;_price.csv&#39;</span>))</span></code></pre></div>
 <p>마지막으로 해당 데이터를 data 폴더의 KOR_price 폴더 내에 티커_price.csv 이름으로 저장합니다.</p>
 </div>
 <div id="전-종목-주가-크롤링" class="section level3">
 <h3><span class="header-section-number">6.1.2</span> 전 종목 주가 크롤링</h3>
 <p>위의 코드에서 for loop 구문을 이용해 i 값만 변경해주면 모든 종목의 주가를 다운로드할 수 있습니다. 전 종목 주가를 다운로드하는 전체 코드는 다음과 같습니다.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="금융-데이터-수집하기-심화.html#cb137-1"></a><span class="kw">library</span>(httr)</span>
-<span id="cb137-2"><a href="금융-데이터-수집하기-심화.html#cb137-2"></a><span class="kw">library</span>(rvest)</span>
-<span id="cb137-3"><a href="금융-데이터-수집하기-심화.html#cb137-3"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb137-4"><a href="금융-데이터-수집하기-심화.html#cb137-4"></a><span class="kw">library</span>(xts)</span>
-<span id="cb137-5"><a href="금융-데이터-수집하기-심화.html#cb137-5"></a><span class="kw">library</span>(lubridate)</span>
-<span id="cb137-6"><a href="금융-데이터-수집하기-심화.html#cb137-6"></a><span class="kw">library</span>(readr)</span>
-<span id="cb137-7"><a href="금융-데이터-수집하기-심화.html#cb137-7"></a></span>
-<span id="cb137-8"><a href="금융-데이터-수집하기-심화.html#cb137-8"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb137-9"><a href="금융-데이터-수집하기-심화.html#cb137-9"></a><span class="kw">print</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>[<span class="dv">1</span>])</span>
-<span id="cb137-10"><a href="금융-데이터-수집하기-심화.html#cb137-10"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
-<span id="cb137-11"><a href="금융-데이터-수집하기-심화.html#cb137-11"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
-<span id="cb137-12"><a href="금융-데이터-수집하기-심화.html#cb137-12"></a></span>
-<span id="cb137-13"><a href="금융-데이터-수집하기-심화.html#cb137-13"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_price&#39;</span>), <span class="ot">FALSE</span>,</span>
-<span id="cb137-14"><a href="금융-데이터-수집하기-심화.html#cb137-14"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_price&#39;</span>))</span>
-<span id="cb137-15"><a href="금융-데이터-수집하기-심화.html#cb137-15"></a></span>
-<span id="cb137-16"><a href="금융-데이터-수집하기-심화.html#cb137-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="kw">nrow</span>(KOR_ticker) ) {</span>
-<span id="cb137-17"><a href="금융-데이터-수집하기-심화.html#cb137-17"></a>  </span>
-<span id="cb137-18"><a href="금융-데이터-수집하기-심화.html#cb137-18"></a>  price =<span class="st"> </span><span class="kw">xts</span>(<span class="ot">NA</span>, <span class="dt">order.by =</span> <span class="kw">Sys.Date</span>()) <span class="co"># 빈 시계열 데이터 생성</span></span>
-<span id="cb137-19"><a href="금융-데이터-수집하기-심화.html#cb137-19"></a>  name =<span class="st"> </span>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>[i] <span class="co"># 티커 부분 선택</span></span>
-<span id="cb137-20"><a href="금융-데이터-수집하기-심화.html#cb137-20"></a>  </span>
-<span id="cb137-21"><a href="금융-데이터-수집하기-심화.html#cb137-21"></a>  <span class="co"># 오류 발생 시 이를 무시하고 다음 루프로 진행</span></span>
-<span id="cb137-22"><a href="금융-데이터-수집하기-심화.html#cb137-22"></a>  <span class="kw">tryCatch</span>({</span>
-<span id="cb137-23"><a href="금융-데이터-수집하기-심화.html#cb137-23"></a>    <span class="co"># url 생성</span></span>
-<span id="cb137-24"><a href="금융-데이터-수집하기-심화.html#cb137-24"></a>    url =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb137-25"><a href="금융-데이터-수집하기-심화.html#cb137-25"></a>      <span class="st">&#39;https://fchart.stock.naver.com/sise.nhn?symbol=&#39;</span></span>
-<span id="cb137-26"><a href="금융-데이터-수집하기-심화.html#cb137-26"></a>      ,name,<span class="st">&#39;&amp;timeframe=day&amp;count=500&amp;requestType=0&#39;</span>)</span>
-<span id="cb137-27"><a href="금융-데이터-수집하기-심화.html#cb137-27"></a>    </span>
-<span id="cb137-28"><a href="금융-데이터-수집하기-심화.html#cb137-28"></a>    <span class="co"># 이 후 과정은 위와 동일함</span></span>
-<span id="cb137-29"><a href="금융-데이터-수집하기-심화.html#cb137-29"></a>    <span class="co"># 데이터 다운로드</span></span>
-<span id="cb137-30"><a href="금융-데이터-수집하기-심화.html#cb137-30"></a>    data =<span class="st"> </span><span class="kw">GET</span>(url)</span>
-<span id="cb137-31"><a href="금융-데이터-수집하기-심화.html#cb137-31"></a>    data_html =<span class="st"> </span><span class="kw">read_html</span>(data, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb137-32"><a href="금융-데이터-수집하기-심화.html#cb137-32"></a><span class="st">      </span><span class="kw">html_nodes</span>(<span class="st">&quot;item&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb137-33"><a href="금융-데이터-수집하기-심화.html#cb137-33"></a><span class="st">      </span><span class="kw">html_attr</span>(<span class="st">&quot;data&quot;</span>) </span>
-<span id="cb137-34"><a href="금융-데이터-수집하기-심화.html#cb137-34"></a>    </span>
-<span id="cb137-35"><a href="금융-데이터-수집하기-심화.html#cb137-35"></a>    <span class="co"># 데이터 나누기</span></span>
-<span id="cb137-36"><a href="금융-데이터-수집하기-심화.html#cb137-36"></a>    price =<span class="st"> </span><span class="kw">read_delim</span>(data_html, <span class="dt">delim =</span> <span class="st">&#39;|&#39;</span>)</span>
-<span id="cb137-37"><a href="금융-데이터-수집하기-심화.html#cb137-37"></a>    </span>
-<span id="cb137-38"><a href="금융-데이터-수집하기-심화.html#cb137-38"></a>    <span class="co"># 필요한 열만 선택 후 클렌징</span></span>
-<span id="cb137-39"><a href="금융-데이터-수집하기-심화.html#cb137-39"></a>    price =<span class="st"> </span>price[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)] </span>
-<span id="cb137-40"><a href="금융-데이터-수집하기-심화.html#cb137-40"></a>    price =<span class="st"> </span><span class="kw">data.frame</span>(price)</span>
-<span id="cb137-41"><a href="금융-데이터-수집하기-심화.html#cb137-41"></a>    <span class="kw">colnames</span>(price) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Date&#39;</span>, <span class="st">&#39;Price&#39;</span>)</span>
-<span id="cb137-42"><a href="금융-데이터-수집하기-심화.html#cb137-42"></a>    price[, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">ymd</span>(price[, <span class="dv">1</span>])</span>
-<span id="cb137-43"><a href="금융-데이터-수집하기-심화.html#cb137-43"></a>    </span>
-<span id="cb137-44"><a href="금융-데이터-수집하기-심화.html#cb137-44"></a>    <span class="kw">rownames</span>(price) =<span class="st"> </span>price[, <span class="dv">1</span>]</span>
-<span id="cb137-45"><a href="금융-데이터-수집하기-심화.html#cb137-45"></a>    price[, <span class="dv">1</span>] =<span class="st"> </span><span class="ot">NULL</span></span>
-<span id="cb137-46"><a href="금융-데이터-수집하기-심화.html#cb137-46"></a>    </span>
-<span id="cb137-47"><a href="금융-데이터-수집하기-심화.html#cb137-47"></a>  }, <span class="dt">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb137-48"><a href="금융-데이터-수집하기-심화.html#cb137-48"></a>    </span>
-<span id="cb137-49"><a href="금융-데이터-수집하기-심화.html#cb137-49"></a>    <span class="co"># 오류 발생시 해당 종목명을 출력하고 다음 루프로 이동</span></span>
-<span id="cb137-50"><a href="금융-데이터-수집하기-심화.html#cb137-50"></a>    <span class="kw">warning</span>(<span class="kw">paste0</span>(<span class="st">&quot;Error in Ticker: &quot;</span>, name))</span>
-<span id="cb137-51"><a href="금융-데이터-수집하기-심화.html#cb137-51"></a>  })</span>
-<span id="cb137-52"><a href="금융-데이터-수집하기-심화.html#cb137-52"></a>  </span>
-<span id="cb137-53"><a href="금융-데이터-수집하기-심화.html#cb137-53"></a>  <span class="co"># 다운로드 받은 파일을 생성한 폴더 내 csv 파일로 저장</span></span>
-<span id="cb137-54"><a href="금융-데이터-수집하기-심화.html#cb137-54"></a>  <span class="kw">write.csv</span>(price, <span class="kw">paste0</span>(<span class="st">&#39;data/KOR_price/&#39;</span>, name,</span>
-<span id="cb137-55"><a href="금융-데이터-수집하기-심화.html#cb137-55"></a>                          <span class="st">&#39;_price.csv&#39;</span>))</span>
-<span id="cb137-56"><a href="금융-데이터-수집하기-심화.html#cb137-56"></a>  </span>
-<span id="cb137-57"><a href="금융-데이터-수집하기-심화.html#cb137-57"></a>  <span class="co"># 타임슬립 적용</span></span>
-<span id="cb137-58"><a href="금융-데이터-수집하기-심화.html#cb137-58"></a>  <span class="kw">Sys.sleep</span>(<span class="dv">2</span>)</span>
-<span id="cb137-59"><a href="금융-데이터-수집하기-심화.html#cb137-59"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="금융-데이터-수집하기-심화.html#cb135-1"></a><span class="kw">library</span>(httr)</span>
+<span id="cb135-2"><a href="금융-데이터-수집하기-심화.html#cb135-2"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb135-3"><a href="금융-데이터-수집하기-심화.html#cb135-3"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb135-4"><a href="금융-데이터-수집하기-심화.html#cb135-4"></a><span class="kw">library</span>(xts)</span>
+<span id="cb135-5"><a href="금융-데이터-수집하기-심화.html#cb135-5"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb135-6"><a href="금융-데이터-수집하기-심화.html#cb135-6"></a><span class="kw">library</span>(readr)</span>
+<span id="cb135-7"><a href="금융-데이터-수집하기-심화.html#cb135-7"></a><span class="kw">library</span>(timetk)</span>
+<span id="cb135-8"><a href="금융-데이터-수집하기-심화.html#cb135-8"></a></span>
+<span id="cb135-9"><a href="금융-데이터-수집하기-심화.html#cb135-9"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb135-10"><a href="금융-데이터-수집하기-심화.html#cb135-10"></a><span class="kw">print</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>[<span class="dv">1</span>])</span>
+<span id="cb135-11"><a href="금융-데이터-수집하기-심화.html#cb135-11"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
+<span id="cb135-12"><a href="금융-데이터-수집하기-심화.html#cb135-12"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
+<span id="cb135-13"><a href="금융-데이터-수집하기-심화.html#cb135-13"></a></span>
+<span id="cb135-14"><a href="금융-데이터-수집하기-심화.html#cb135-14"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_price&#39;</span>), <span class="ot">FALSE</span>,</span>
+<span id="cb135-15"><a href="금융-데이터-수집하기-심화.html#cb135-15"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_price&#39;</span>))</span>
+<span id="cb135-16"><a href="금융-데이터-수집하기-심화.html#cb135-16"></a></span>
+<span id="cb135-17"><a href="금융-데이터-수집하기-심화.html#cb135-17"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="kw">nrow</span>(KOR_ticker) ) {</span>
+<span id="cb135-18"><a href="금융-데이터-수집하기-심화.html#cb135-18"></a>  </span>
+<span id="cb135-19"><a href="금융-데이터-수집하기-심화.html#cb135-19"></a>  price =<span class="st"> </span><span class="kw">xts</span>(<span class="ot">NA</span>, <span class="dt">order.by =</span> <span class="kw">Sys.Date</span>()) <span class="co"># 빈 시계열 데이터 생성</span></span>
+<span id="cb135-20"><a href="금융-데이터-수집하기-심화.html#cb135-20"></a>  name =<span class="st"> </span>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>[i] <span class="co"># 티커 부분 선택</span></span>
+<span id="cb135-21"><a href="금융-데이터-수집하기-심화.html#cb135-21"></a>  </span>
+<span id="cb135-22"><a href="금융-데이터-수집하기-심화.html#cb135-22"></a>  from =<span class="st"> </span>(<span class="kw">Sys.Date</span>() <span class="op">-</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>) <span class="co"># 시작일</span></span>
+<span id="cb135-23"><a href="금융-데이터-수집하기-심화.html#cb135-23"></a>  to =<span class="st"> </span><span class="kw">Sys.Date</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>) <span class="co"># 종료일</span></span>
+<span id="cb135-24"><a href="금융-데이터-수집하기-심화.html#cb135-24"></a>  </span>
+<span id="cb135-25"><a href="금융-데이터-수집하기-심화.html#cb135-25"></a>  <span class="co"># 오류 발생 시 이를 무시하고 다음 루프로 진행</span></span>
+<span id="cb135-26"><a href="금융-데이터-수집하기-심화.html#cb135-26"></a>  <span class="kw">tryCatch</span>({</span>
+<span id="cb135-27"><a href="금융-데이터-수집하기-심화.html#cb135-27"></a>    <span class="co"># url 생성</span></span>
+<span id="cb135-28"><a href="금융-데이터-수집하기-심화.html#cb135-28"></a>    url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://fchart.stock.naver.com/siseJson.nhn?symbol=&#39;</span>, name,</span>
+<span id="cb135-29"><a href="금융-데이터-수집하기-심화.html#cb135-29"></a>                 <span class="st">&#39;&amp;requestType=1&amp;startTime=&#39;</span>, from, <span class="st">&#39;&amp;endTime=&#39;</span>, to, <span class="st">&#39;&amp;timeframe=day&#39;</span>)</span>
+<span id="cb135-30"><a href="금융-데이터-수집하기-심화.html#cb135-30"></a>    </span>
+<span id="cb135-31"><a href="금융-데이터-수집하기-심화.html#cb135-31"></a>    <span class="co"># 이 후 과정은 위와 동일함</span></span>
+<span id="cb135-32"><a href="금융-데이터-수집하기-심화.html#cb135-32"></a>    <span class="co"># 데이터 다운로드</span></span>
+<span id="cb135-33"><a href="금융-데이터-수집하기-심화.html#cb135-33"></a>    data =<span class="st"> </span><span class="kw">GET</span>(url)</span>
+<span id="cb135-34"><a href="금융-데이터-수집하기-심화.html#cb135-34"></a>    data_html =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span>read_html <span class="op">%&gt;%</span></span>
+<span id="cb135-35"><a href="금융-데이터-수집하기-심화.html#cb135-35"></a><span class="st">      </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb135-36"><a href="금융-데이터-수집하기-심화.html#cb135-36"></a><span class="st">      </span><span class="kw">read_csv</span>()</span>
+<span id="cb135-37"><a href="금융-데이터-수집하기-심화.html#cb135-37"></a>    </span>
+<span id="cb135-38"><a href="금융-데이터-수집하기-심화.html#cb135-38"></a>    <span class="co"># 필요한 열만 선택 후 클렌징</span></span>
+<span id="cb135-39"><a href="금융-데이터-수집하기-심화.html#cb135-39"></a>    price =<span class="st"> </span>data_html[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">5</span>)]</span>
+<span id="cb135-40"><a href="금융-데이터-수집하기-심화.html#cb135-40"></a>    <span class="kw">colnames</span>(price) =<span class="st"> </span>(<span class="kw">c</span>(<span class="st">&#39;Date&#39;</span>, <span class="st">&#39;Price&#39;</span>))</span>
+<span id="cb135-41"><a href="금융-데이터-수집하기-심화.html#cb135-41"></a>    price =<span class="st"> </span><span class="kw">na.omit</span>(price)</span>
+<span id="cb135-42"><a href="금융-데이터-수집하기-심화.html#cb135-42"></a>    price<span class="op">$</span>Date =<span class="st"> </span><span class="kw">parse_number</span>(price<span class="op">$</span>Date)</span>
+<span id="cb135-43"><a href="금융-데이터-수집하기-심화.html#cb135-43"></a>    price<span class="op">$</span>Date =<span class="st"> </span><span class="kw">ymd</span>(price<span class="op">$</span>Date)</span>
+<span id="cb135-44"><a href="금융-데이터-수집하기-심화.html#cb135-44"></a>    price =<span class="st"> </span><span class="kw">tk_xts</span>(price, <span class="dt">date_var =</span> Date)</span>
+<span id="cb135-45"><a href="금융-데이터-수집하기-심화.html#cb135-45"></a>    </span>
+<span id="cb135-46"><a href="금융-데이터-수집하기-심화.html#cb135-46"></a>  }, <span class="dt">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb135-47"><a href="금융-데이터-수집하기-심화.html#cb135-47"></a>    </span>
+<span id="cb135-48"><a href="금융-데이터-수집하기-심화.html#cb135-48"></a>    <span class="co"># 오류 발생시 해당 종목명을 출력하고 다음 루프로 이동</span></span>
+<span id="cb135-49"><a href="금융-데이터-수집하기-심화.html#cb135-49"></a>    <span class="kw">warning</span>(<span class="kw">paste0</span>(<span class="st">&quot;Error in Ticker: &quot;</span>, name))</span>
+<span id="cb135-50"><a href="금융-데이터-수집하기-심화.html#cb135-50"></a>  })</span>
+<span id="cb135-51"><a href="금융-데이터-수집하기-심화.html#cb135-51"></a>  </span>
+<span id="cb135-52"><a href="금융-데이터-수집하기-심화.html#cb135-52"></a>  <span class="co"># 다운로드 받은 파일을 생성한 폴더 내 csv 파일로 저장</span></span>
+<span id="cb135-53"><a href="금융-데이터-수집하기-심화.html#cb135-53"></a>  <span class="kw">write.csv</span>(<span class="kw">data.frame</span>(price),</span>
+<span id="cb135-54"><a href="금융-데이터-수집하기-심화.html#cb135-54"></a>            <span class="kw">paste0</span>(<span class="st">&#39;data/KOR_price/&#39;</span>, name, <span class="st">&#39;_price.csv&#39;</span>))</span>
+<span id="cb135-55"><a href="금융-데이터-수집하기-심화.html#cb135-55"></a>  </span>
+<span id="cb135-56"><a href="금융-데이터-수집하기-심화.html#cb135-56"></a>  <span class="co"># 타임슬립 적용</span></span>
+<span id="cb135-57"><a href="금융-데이터-수집하기-심화.html#cb135-57"></a>  <span class="kw">Sys.sleep</span>(<span class="dv">2</span>)</span>
+<span id="cb135-58"><a href="금융-데이터-수집하기-심화.html#cb135-58"></a>}</span></code></pre></div>
 <p>위 코드에서 추가된 점은 다음과 같습니다. 페이지 오류, 통신 오류 등 오류가 발생할 경우 for loop 구문은 멈춰버리는데 전체 데이터를 처음부터 다시 받는 일은 매우 귀찮은 작업입니다. 따라서 <code>tryCatch()</code> 함수를 이용해 오류가 발생할 때 해당 티커를 출력한 후 다음 루프로 넘어가게 합니다.</p>
 <p>또한 오류가 발생하면 <code>xts()</code> 함수를 통해 만들어둔 빈 데이터를 저장하게 됩니다. 마지막으로 무한 크롤링을 방지하기 위해 한 번의 루프가 끝날 때마다 2초의 타임슬립을 적용했습니다.</p>
 <p>위 코드가 모두 돌아가는 데는 수 시간이 걸립니다. 작업이 끝난 후 data/KOR_price 폴더를 확인해보면 전 종목 주가가 csv 형태로 저장되어 있습니다.</p>
@@ -610,32 +613,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="재무제표-및-가치지표-크롤링" class="section level2">
 <h2><span class="header-section-number">6.2</span> 재무제표 및 가치지표 크롤링</h2>
-<p>주가와 더불어 재무제표와 가치지표 역시 투자에 있어 핵심이 되는 데이터입니다. 해당 데이터 역시 여러 웹사이트에서 구할 수 있지만, 국내 데이터 제공업체인 FnGuide에서 운영하는 Company Guide 웹사이트<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>에서 손쉽게 구할 수 있습니다.</p>
+<p>주가와 더불어 재무제표와 가치지표 역시 투자에 있어 핵심이 되는 데이터입니다. 해당 데이터 역시 여러 웹사이트에서 구할 수 있지만, 국내 데이터 제공업체인 FnGuide에서 운영하는 Company Guide 웹사이트<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>에서 손쉽게 구할 수 있습니다.</p>
 <div id="재무제표-다운로드" class="section level3">
 <h3><span class="header-section-number">6.2.1</span> 재무제표 다운로드</h3>
 <p>먼저 개별종목의 재무제표를 탭을 선택하면 포괄손익계산서, 재무상태표, 현금흐름표 항목이 보이게 되며, 티커에 해당하는 A005930 뒤의 주소는 불필요한 내용이므로, 이를 제거한 주소로 접속합니다. A 뒤의 6자리 티커만 변경한다면 해당 종목의 재무제표 페이지로 이동하게 됩니다.</p>
 <p><strong><a href="http://comp.fnguide.com/SVO2/ASP/SVD_Finance.asp?pGB=1&amp;gicode=A005930" class="uri">http://comp.fnguide.com/SVO2/ASP/SVD_Finance.asp?pGB=1&amp;gicode=A005930</a></strong></p>
 <p>우리가 원하는 재무제표 항목들은 모두 테이블 형태로 제공되고 있으므로 html_table() 함수를 이용해 추출할 수 있습니다.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="금융-데이터-수집하기-심화.html#cb138-1"></a><span class="kw">library</span>(httr)</span>
-<span id="cb138-2"><a href="금융-데이터-수집하기-심화.html#cb138-2"></a><span class="kw">library</span>(rvest)</span>
-<span id="cb138-3"><a href="금융-데이터-수집하기-심화.html#cb138-3"></a></span>
-<span id="cb138-4"><a href="금융-데이터-수집하기-심화.html#cb138-4"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_fs&#39;</span>), <span class="ot">FALSE</span>,</span>
-<span id="cb138-5"><a href="금융-데이터-수집하기-심화.html#cb138-5"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_fs&#39;</span>))</span>
-<span id="cb138-6"><a href="금융-데이터-수집하기-심화.html#cb138-6"></a></span>
-<span id="cb138-7"><a href="금융-데이터-수집하기-심화.html#cb138-7"></a><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;English&quot;</span>)</span>
-<span id="cb138-8"><a href="금융-데이터-수집하기-심화.html#cb138-8"></a></span>
-<span id="cb138-9"><a href="금융-데이터-수집하기-심화.html#cb138-9"></a>url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;http://comp.fnguide.com/SVO2/ASP/SVD_Finance.asp?pGB=1&amp;gicode=A005930&#39;</span>)</span>
-<span id="cb138-10"><a href="금융-데이터-수집하기-심화.html#cb138-10"></a></span>
-<span id="cb138-11"><a href="금융-데이터-수집하기-심화.html#cb138-11"></a>data =<span class="st"> </span><span class="kw">GET</span>(url,</span>
-<span id="cb138-12"><a href="금융-데이터-수집하기-심화.html#cb138-12"></a>           <span class="kw">user_agent</span>(<span class="st">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64)</span></span>
-<span id="cb138-13"><a href="금융-데이터-수집하기-심화.html#cb138-13"></a><span class="st">                      AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#39;</span>))</span>
-<span id="cb138-14"><a href="금융-데이터-수집하기-심화.html#cb138-14"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
-<span id="cb138-15"><a href="금융-데이터-수집하기-심화.html#cb138-15"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
-<span id="cb138-16"><a href="금융-데이터-수집하기-심화.html#cb138-16"></a><span class="st">  </span><span class="kw">html_table</span>()</span>
-<span id="cb138-17"><a href="금융-데이터-수집하기-심화.html#cb138-17"></a></span>
-<span id="cb138-18"><a href="금융-데이터-수집하기-심화.html#cb138-18"></a><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;Korean&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="금융-데이터-수집하기-심화.html#cb139-1"></a><span class="kw">lapply</span>(data, <span class="cf">function</span>(x) {</span>
-<span id="cb139-2"><a href="금융-데이터-수집하기-심화.html#cb139-2"></a>  <span class="kw">head</span>(x, <span class="dv">3</span>)})</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="금융-데이터-수집하기-심화.html#cb136-1"></a><span class="kw">library</span>(httr)</span>
+<span id="cb136-2"><a href="금융-데이터-수집하기-심화.html#cb136-2"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb136-3"><a href="금융-데이터-수집하기-심화.html#cb136-3"></a></span>
+<span id="cb136-4"><a href="금융-데이터-수집하기-심화.html#cb136-4"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_fs&#39;</span>), <span class="ot">FALSE</span>,</span>
+<span id="cb136-5"><a href="금융-데이터-수집하기-심화.html#cb136-5"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_fs&#39;</span>))</span>
+<span id="cb136-6"><a href="금융-데이터-수집하기-심화.html#cb136-6"></a></span>
+<span id="cb136-7"><a href="금융-데이터-수집하기-심화.html#cb136-7"></a><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;English&quot;</span>)</span>
+<span id="cb136-8"><a href="금융-데이터-수집하기-심화.html#cb136-8"></a></span>
+<span id="cb136-9"><a href="금융-데이터-수집하기-심화.html#cb136-9"></a>url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;http://comp.fnguide.com/SVO2/ASP/SVD_Finance.asp?pGB=1&amp;gicode=A005930&#39;</span>)</span>
+<span id="cb136-10"><a href="금융-데이터-수집하기-심화.html#cb136-10"></a></span>
+<span id="cb136-11"><a href="금융-데이터-수집하기-심화.html#cb136-11"></a>data =<span class="st"> </span><span class="kw">GET</span>(url,</span>
+<span id="cb136-12"><a href="금융-데이터-수집하기-심화.html#cb136-12"></a>           <span class="kw">user_agent</span>(<span class="st">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64)</span></span>
+<span id="cb136-13"><a href="금융-데이터-수집하기-심화.html#cb136-13"></a><span class="st">                      AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#39;</span>))</span>
+<span id="cb136-14"><a href="금융-데이터-수집하기-심화.html#cb136-14"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb136-15"><a href="금융-데이터-수집하기-심화.html#cb136-15"></a><span class="st">  </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb136-16"><a href="금융-데이터-수집하기-심화.html#cb136-16"></a><span class="st">  </span><span class="kw">html_table</span>()</span>
+<span id="cb136-17"><a href="금융-데이터-수집하기-심화.html#cb136-17"></a></span>
+<span id="cb136-18"><a href="금융-데이터-수집하기-심화.html#cb136-18"></a><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;Korean&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="금융-데이터-수집하기-심화.html#cb137-1"></a><span class="kw">lapply</span>(data, <span class="cf">function</span>(x) {</span>
+<span id="cb137-2"><a href="금융-데이터-수집하기-심화.html#cb137-2"></a>  <span class="kw">head</span>(x, <span class="dv">3</span>)})</span></code></pre></div>
 <pre><code>## [[1]]
 ##   IFRS(연결)   2017/12   2018/12   2019/12   2020/09
 ## 1     매출액 2,395,754 2,437,714 2,304,009 1,752,555
@@ -742,26 +745,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>이 중 연간 기준 재무제표에 해당하는 첫 번째, 세 번째, 다섯 번째 테이블을 선택합니다.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="금융-데이터-수집하기-심화.html#cb142-1"></a>data_IS =<span class="st"> </span>data[[<span class="dv">1</span>]]</span>
-<span id="cb142-2"><a href="금융-데이터-수집하기-심화.html#cb142-2"></a>data_BS =<span class="st"> </span>data[[<span class="dv">3</span>]]</span>
-<span id="cb142-3"><a href="금융-데이터-수집하기-심화.html#cb142-3"></a>data_CF =<span class="st"> </span>data[[<span class="dv">5</span>]]</span>
-<span id="cb142-4"><a href="금융-데이터-수집하기-심화.html#cb142-4"></a></span>
-<span id="cb142-5"><a href="금융-데이터-수집하기-심화.html#cb142-5"></a><span class="kw">print</span>(<span class="kw">names</span>(data_IS))</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="금융-데이터-수집하기-심화.html#cb140-1"></a>data_IS =<span class="st"> </span>data[[<span class="dv">1</span>]]</span>
+<span id="cb140-2"><a href="금융-데이터-수집하기-심화.html#cb140-2"></a>data_BS =<span class="st"> </span>data[[<span class="dv">3</span>]]</span>
+<span id="cb140-3"><a href="금융-데이터-수집하기-심화.html#cb140-3"></a>data_CF =<span class="st"> </span>data[[<span class="dv">5</span>]]</span>
+<span id="cb140-4"><a href="금융-데이터-수집하기-심화.html#cb140-4"></a></span>
+<span id="cb140-5"><a href="금융-데이터-수집하기-심화.html#cb140-5"></a><span class="kw">print</span>(<span class="kw">names</span>(data_IS))</span></code></pre></div>
 <pre><code>## [1] &quot;IFRS(연결)&quot;  &quot;2017/12&quot;     &quot;2018/12&quot;    
 ## [4] &quot;2019/12&quot;     &quot;2020/09&quot;     &quot;전년동기&quot;   
 ## [7] &quot;전년동기(%)&quot;</code></pre>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="금융-데이터-수집하기-심화.html#cb144-1"></a>data_IS =<span class="st"> </span>data_IS[, <span class="dv">1</span><span class="op">:</span>(<span class="kw">ncol</span>(data_IS)<span class="op">-</span><span class="dv">2</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="금융-데이터-수집하기-심화.html#cb142-1"></a>data_IS =<span class="st"> </span>data_IS[, <span class="dv">1</span><span class="op">:</span>(<span class="kw">ncol</span>(data_IS)<span class="op">-</span><span class="dv">2</span>)]</span></code></pre></div>
 <p>포괄손익계산서 테이블(data_IS)에는 전년동기, 전년동기(%) 열이 있는데 통일성을 위해 해당 열을 삭제합니다. 이제 테이블을 묶은 후 클렌징하겠습니다.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="금융-데이터-수집하기-심화.html#cb145-1"></a>data_fs =<span class="st"> </span><span class="kw">rbind</span>(data_IS, data_BS, data_CF)</span>
-<span id="cb145-2"><a href="금융-데이터-수집하기-심화.html#cb145-2"></a>data_fs[, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;계산에 참여한 계정 펼치기&#39;</span>,</span>
-<span id="cb145-3"><a href="금융-데이터-수집하기-심화.html#cb145-3"></a>                    <span class="st">&#39;&#39;</span>, data_fs[, <span class="dv">1</span>])</span>
-<span id="cb145-4"><a href="금융-데이터-수집하기-심화.html#cb145-4"></a>data_fs =<span class="st"> </span>data_fs[<span class="op">!</span><span class="kw">duplicated</span>(data_fs[, <span class="dv">1</span>]), ]</span>
-<span id="cb145-5"><a href="금융-데이터-수집하기-심화.html#cb145-5"></a></span>
-<span id="cb145-6"><a href="금융-데이터-수집하기-심화.html#cb145-6"></a><span class="kw">rownames</span>(data_fs) =<span class="st"> </span><span class="ot">NULL</span></span>
-<span id="cb145-7"><a href="금융-데이터-수집하기-심화.html#cb145-7"></a><span class="kw">rownames</span>(data_fs) =<span class="st"> </span>data_fs[, <span class="dv">1</span>]</span>
-<span id="cb145-8"><a href="금융-데이터-수집하기-심화.html#cb145-8"></a>data_fs[, <span class="dv">1</span>] =<span class="st"> </span><span class="ot">NULL</span></span>
-<span id="cb145-9"><a href="금융-데이터-수집하기-심화.html#cb145-9"></a></span>
-<span id="cb145-10"><a href="금융-데이터-수집하기-심화.html#cb145-10"></a>data_fs =<span class="st"> </span>data_fs[, <span class="kw">substr</span>(<span class="kw">colnames</span>(data_fs), <span class="dv">6</span>,<span class="dv">7</span>) <span class="op">==</span><span class="st"> &#39;12&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="금융-데이터-수집하기-심화.html#cb143-1"></a>data_fs =<span class="st"> </span><span class="kw">rbind</span>(data_IS, data_BS, data_CF)</span>
+<span id="cb143-2"><a href="금융-데이터-수집하기-심화.html#cb143-2"></a>data_fs[, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;계산에 참여한 계정 펼치기&#39;</span>,</span>
+<span id="cb143-3"><a href="금융-데이터-수집하기-심화.html#cb143-3"></a>                    <span class="st">&#39;&#39;</span>, data_fs[, <span class="dv">1</span>])</span>
+<span id="cb143-4"><a href="금융-데이터-수집하기-심화.html#cb143-4"></a>data_fs =<span class="st"> </span>data_fs[<span class="op">!</span><span class="kw">duplicated</span>(data_fs[, <span class="dv">1</span>]), ]</span>
+<span id="cb143-5"><a href="금융-데이터-수집하기-심화.html#cb143-5"></a></span>
+<span id="cb143-6"><a href="금융-데이터-수집하기-심화.html#cb143-6"></a><span class="kw">rownames</span>(data_fs) =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb143-7"><a href="금융-데이터-수집하기-심화.html#cb143-7"></a><span class="kw">rownames</span>(data_fs) =<span class="st"> </span>data_fs[, <span class="dv">1</span>]</span>
+<span id="cb143-8"><a href="금융-데이터-수집하기-심화.html#cb143-8"></a>data_fs[, <span class="dv">1</span>] =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb143-9"><a href="금융-데이터-수집하기-심화.html#cb143-9"></a></span>
+<span id="cb143-10"><a href="금융-데이터-수집하기-심화.html#cb143-10"></a>data_fs =<span class="st"> </span>data_fs[, <span class="kw">substr</span>(<span class="kw">colnames</span>(data_fs), <span class="dv">6</span>,<span class="dv">7</span>) <span class="op">==</span><span class="st"> &#39;12&#39;</span>]</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><code>rbind()</code> 함수를 이용해 세 테이블을 행으로 묶은 후 data_fs에 저장합니다.</li>
 <li>첫 번째 열인 계정명에는 ‘계산에 참여한 계정 펼치기’라는 글자가 들어간 항목이 있습니다. 이는 페이지 내에서 펼치기 역할을 하는 (+) 항목에 해당하며 <code>gsub()</code> 함수를 이용해 해당 글자를 삭제합니다.</li>
@@ -769,7 +772,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>행 이름을 초기화한 후 첫 번째 열의 계정명을 행 이름으로 변경합니다. 그 후 첫 번째 열은 삭제합니다.</li>
 <li>간혹 12월 결산법인이 아닌 종목이거나 연간 재무제표임에도 불구하고 분기 재무제표가 들어간 경우가 있습니다. 비교의 통일성을 위해 <code>substr()</code> 함수를 이용해 끝 글자가 12인 열, 즉 12월 결산 데이터만 선택합니다.</li>
 </ol>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="금융-데이터-수집하기-심화.html#cb146-1"></a><span class="kw">print</span>(<span class="kw">head</span>(data_fs))</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="금융-데이터-수집하기-심화.html#cb144-1"></a><span class="kw">print</span>(<span class="kw">head</span>(data_fs))</span></code></pre></div>
 <pre><code>##                    2017/12   2018/12   2019/12
 ## 매출액           2,395,754 2,437,714 2,304,009
 ## 매출원가         1,292,907 1,323,944 1,472,395
@@ -777,19 +780,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 판매비와관리비     566,397   524,903   553,928
 ## 인건비              67,972    64,514    64,226
 ## 유무형자산상각비    13,366    14,477    20,408</code></pre>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="금융-데이터-수집하기-심화.html#cb148-1"></a><span class="kw">sapply</span>(data_fs, typeof)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="금융-데이터-수집하기-심화.html#cb146-1"></a><span class="kw">sapply</span>(data_fs, typeof)</span></code></pre></div>
 <pre><code>##     2017/12     2018/12     2019/12 
 ## &quot;character&quot; &quot;character&quot; &quot;character&quot;</code></pre>
 <p>데이터를 확인해보면 연간 기준 재무제표가 정리되었습니다. 문자형 데이터이므로 숫자형으로 변경합니다.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="금융-데이터-수집하기-심화.html#cb150-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb150-2"><a href="금융-데이터-수집하기-심화.html#cb150-2"></a></span>
-<span id="cb150-3"><a href="금융-데이터-수집하기-심화.html#cb150-3"></a>data_fs =<span class="st"> </span><span class="kw">sapply</span>(data_fs, <span class="cf">function</span>(x) {</span>
-<span id="cb150-4"><a href="금융-데이터-수집하기-심화.html#cb150-4"></a>  <span class="kw">str_replace_all</span>(x, <span class="st">&#39;,&#39;</span>, <span class="st">&#39;&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb150-5"><a href="금융-데이터-수집하기-심화.html#cb150-5"></a><span class="st">    </span><span class="kw">as.numeric</span>()</span>
-<span id="cb150-6"><a href="금융-데이터-수집하기-심화.html#cb150-6"></a>}) <span class="op">%&gt;%</span></span>
-<span id="cb150-7"><a href="금융-데이터-수집하기-심화.html#cb150-7"></a><span class="st">  </span><span class="kw">data.frame</span>(., <span class="dt">row.names =</span> <span class="kw">rownames</span>(data_fs))</span>
-<span id="cb150-8"><a href="금융-데이터-수집하기-심화.html#cb150-8"></a></span>
-<span id="cb150-9"><a href="금융-데이터-수집하기-심화.html#cb150-9"></a><span class="kw">print</span>(<span class="kw">head</span>(data_fs))</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="금융-데이터-수집하기-심화.html#cb148-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb148-2"><a href="금융-데이터-수집하기-심화.html#cb148-2"></a></span>
+<span id="cb148-3"><a href="금융-데이터-수집하기-심화.html#cb148-3"></a>data_fs =<span class="st"> </span><span class="kw">sapply</span>(data_fs, <span class="cf">function</span>(x) {</span>
+<span id="cb148-4"><a href="금융-데이터-수집하기-심화.html#cb148-4"></a>  <span class="kw">str_replace_all</span>(x, <span class="st">&#39;,&#39;</span>, <span class="st">&#39;&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb148-5"><a href="금융-데이터-수집하기-심화.html#cb148-5"></a><span class="st">    </span><span class="kw">as.numeric</span>()</span>
+<span id="cb148-6"><a href="금융-데이터-수집하기-심화.html#cb148-6"></a>}) <span class="op">%&gt;%</span></span>
+<span id="cb148-7"><a href="금융-데이터-수집하기-심화.html#cb148-7"></a><span class="st">  </span><span class="kw">data.frame</span>(., <span class="dt">row.names =</span> <span class="kw">rownames</span>(data_fs))</span>
+<span id="cb148-8"><a href="금융-데이터-수집하기-심화.html#cb148-8"></a></span>
+<span id="cb148-9"><a href="금융-데이터-수집하기-심화.html#cb148-9"></a><span class="kw">print</span>(<span class="kw">head</span>(data_fs))</span></code></pre></div>
 <pre><code>##                  X2017.12 X2018.12 X2019.12
 ## 매출액            2395754  2437714  2304009
 ## 매출원가          1292907  1323944  1472395
@@ -797,7 +800,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 판매비와관리비     566397   524903   553928
 ## 인건비              67972    64514    64226
 ## 유무형자산상각비    13366    14477    20408</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="금융-데이터-수집하기-심화.html#cb152-1"></a><span class="kw">sapply</span>(data_fs, typeof)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="금융-데이터-수집하기-심화.html#cb150-1"></a><span class="kw">sapply</span>(data_fs, typeof)</span></code></pre></div>
 <pre><code>## X2017.12 X2018.12 X2019.12 
 ## &quot;double&quot; &quot;double&quot; &quot;double&quot;</code></pre>
 <ol style="list-style-type: decimal">
@@ -805,7 +808,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>data.frame()</code> 함수를 이용해 데이터 프레임 형태로 만들어주며, 행 이름은 기존 내용을 그대로 유지합니다.</li>
 </ol>
 <p>정리된 데이터를 출력해보면 문자형이던 데이터가 숫자형으로 변경되었습니다.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="금융-데이터-수집하기-심화.html#cb154-1"></a><span class="kw">write.csv</span>(data_fs, <span class="st">&#39;data/KOR_fs/005930_fs.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="금융-데이터-수집하기-심화.html#cb152-1"></a><span class="kw">write.csv</span>(data_fs, <span class="st">&#39;data/KOR_fs/005930_fs.csv&#39;</span>)</span></code></pre></div>
 <p>data 폴더의 KOR_fs 폴더 내에 티커_fs.csv 이름으로 저장합니다.</p>
 </div>
 <div id="가치지표-계산하기" class="section level3">
@@ -813,7 +816,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>위에서 구한 재무제표 데이터를 이용해 가치지표를 계산할 수 있습니다. 흔히 사용되는 가치지표는 <strong>PER, PBR, PCR, PSR</strong>이며 분자는 주가, 분모는 재무제표 데이터가 사용됩니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-17">표 6.2: </span>가치지표의 종류
+<span id="tab:unnamed-chunk-16">표 6.2: </span>가치지표의 종류
 </caption>
 <thead>
 <tr>
@@ -861,17 +864,17 @@ Sales (매출액)
 </tbody>
 </table>
 <p>위에서 구한 재무제표 항목에서 분모 부분에 해당하는 데이터만 선택해보겠습니다.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="금융-데이터-수집하기-심화.html#cb155-1"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_value&#39;</span>), <span class="ot">FALSE</span>,</span>
-<span id="cb155-2"><a href="금융-데이터-수집하기-심화.html#cb155-2"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_value&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="금융-데이터-수집하기-심화.html#cb153-1"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_value&#39;</span>), <span class="ot">FALSE</span>,</span>
+<span id="cb153-2"><a href="금융-데이터-수집하기-심화.html#cb153-2"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_value&#39;</span>))</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="금융-데이터-수집하기-심화.html#cb157-1"></a>value_type =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;지배주주순이익&#39;</span>,</span>
-<span id="cb157-2"><a href="금융-데이터-수집하기-심화.html#cb157-2"></a>               <span class="st">&#39;자본&#39;</span>,</span>
-<span id="cb157-3"><a href="금융-데이터-수집하기-심화.html#cb157-3"></a>               <span class="st">&#39;영업활동으로인한현금흐름&#39;</span>,</span>
-<span id="cb157-4"><a href="금융-데이터-수집하기-심화.html#cb157-4"></a>               <span class="st">&#39;매출액&#39;</span>)</span>
-<span id="cb157-5"><a href="금융-데이터-수집하기-심화.html#cb157-5"></a></span>
-<span id="cb157-6"><a href="금융-데이터-수집하기-심화.html#cb157-6"></a>value_index =<span class="st"> </span>data_fs[<span class="kw">match</span>(value_type, <span class="kw">rownames</span>(data_fs)),</span>
-<span id="cb157-7"><a href="금융-데이터-수집하기-심화.html#cb157-7"></a>                      <span class="kw">ncol</span>(data_fs)]</span>
-<span id="cb157-8"><a href="금융-데이터-수집하기-심화.html#cb157-8"></a><span class="kw">print</span>(value_index)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="금융-데이터-수집하기-심화.html#cb155-1"></a>value_type =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;지배주주순이익&#39;</span>,</span>
+<span id="cb155-2"><a href="금융-데이터-수집하기-심화.html#cb155-2"></a>               <span class="st">&#39;자본&#39;</span>,</span>
+<span id="cb155-3"><a href="금융-데이터-수집하기-심화.html#cb155-3"></a>               <span class="st">&#39;영업활동으로인한현금흐름&#39;</span>,</span>
+<span id="cb155-4"><a href="금융-데이터-수집하기-심화.html#cb155-4"></a>               <span class="st">&#39;매출액&#39;</span>)</span>
+<span id="cb155-5"><a href="금융-데이터-수집하기-심화.html#cb155-5"></a></span>
+<span id="cb155-6"><a href="금융-데이터-수집하기-심화.html#cb155-6"></a>value_index =<span class="st"> </span>data_fs[<span class="kw">match</span>(value_type, <span class="kw">rownames</span>(data_fs)),</span>
+<span id="cb155-7"><a href="금융-데이터-수집하기-심화.html#cb155-7"></a>                      <span class="kw">ncol</span>(data_fs)]</span>
+<span id="cb155-8"><a href="금융-데이터-수집하기-심화.html#cb155-8"></a><span class="kw">print</span>(value_index)</span></code></pre></div>
 <pre><code>## [1]  215051 2628804  453829 2304009</code></pre>
 <ol style="list-style-type: decimal">
 <li>data 폴더 내에 KOR_value 폴더를 생성합니다.</li>
@@ -880,61 +883,61 @@ Sales (매출액)
 <p>다음으로 분자 부분에 해당하는 현재 주가를 수집해야 합니다. 이 역시 Company Guide 접속 화면에서 구할 수 있습니다. 불필요한 부분을 제거한 URL은 다음과 같습니다.</p>
 <p><strong><a href="http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&amp;gicode=A005930" class="uri">http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&amp;gicode=A005930</a></strong></p>
 <p>위의 주소 역시 A 뒤의 6자리 티커만 변경하면 해당 종목의 스냅샷 페이지로 이동하게 됩니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
 <img src="images/crawl_practice_comp_price.png" alt="Company Guide 스냅샷 화면" width="70%" />
 <p class="caption">
-그림 2.12: Company Guide 스냅샷 화면
+그림 4.4: Company Guide 스냅샷 화면
 </p>
 </div>
 <p>주가추이 부분에 우리가 원하는 현재 주가가 있습니다. 해당 데이터의 Xpath는 다음과 같습니다.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb159-1"><a href="금융-데이터-수집하기-심화.html#cb159-1"></a><span class="er">//*[@id=&quot;svdMainChartTxt11&quot;]</span></span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb157-1"><a href="금융-데이터-수집하기-심화.html#cb157-1"></a><span class="er">//*[@id=&quot;svdMainChartTxt11&quot;]</span></span></code></pre></div>
 <style type="text/css">
 //*[@id="svdMainChartTxt11"]
 </style>
 <p>위에서 구한 주가의 Xpath를 이용해 해당 데이터를 크롤링하겠습니다.</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="금융-데이터-수집하기-심화.html#cb160-1"></a><span class="kw">library</span>(readr)</span>
-<span id="cb160-2"><a href="금융-데이터-수집하기-심화.html#cb160-2"></a></span>
-<span id="cb160-3"><a href="금융-데이터-수집하기-심화.html#cb160-3"></a>url =<span class="st"> &#39;http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&amp;gicode=A005930&#39;</span></span>
-<span id="cb160-4"><a href="금융-데이터-수집하기-심화.html#cb160-4"></a>data =<span class="st"> </span><span class="kw">GET</span>(url,</span>
-<span id="cb160-5"><a href="금융-데이터-수집하기-심화.html#cb160-5"></a>           <span class="kw">user_agent</span>(<span class="st">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64)</span></span>
-<span id="cb160-6"><a href="금융-데이터-수집하기-심화.html#cb160-6"></a><span class="st">                      AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#39;</span>))</span>
-<span id="cb160-7"><a href="금융-데이터-수집하기-심화.html#cb160-7"></a></span>
-<span id="cb160-8"><a href="금융-데이터-수집하기-심화.html#cb160-8"></a>price =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></span>
-<span id="cb160-9"><a href="금융-데이터-수집하기-심화.html#cb160-9"></a><span class="st">  </span><span class="kw">html_node</span>(<span class="dt">xpath =</span> <span class="st">&#39;//*[@id=&quot;svdMainChartTxt11&quot;]&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb160-10"><a href="금융-데이터-수집하기-심화.html#cb160-10"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
-<span id="cb160-11"><a href="금융-데이터-수집하기-심화.html#cb160-11"></a><span class="st">  </span><span class="kw">parse_number</span>()</span>
-<span id="cb160-12"><a href="금융-데이터-수집하기-심화.html#cb160-12"></a></span>
-<span id="cb160-13"><a href="금융-데이터-수집하기-심화.html#cb160-13"></a><span class="kw">print</span>(price)</span></code></pre></div>
-<pre><code>## [1] 88000</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="금융-데이터-수집하기-심화.html#cb158-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb158-2"><a href="금융-데이터-수집하기-심화.html#cb158-2"></a></span>
+<span id="cb158-3"><a href="금융-데이터-수집하기-심화.html#cb158-3"></a>url =<span class="st"> &#39;http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&amp;gicode=A005930&#39;</span></span>
+<span id="cb158-4"><a href="금융-데이터-수집하기-심화.html#cb158-4"></a>data =<span class="st"> </span><span class="kw">GET</span>(url,</span>
+<span id="cb158-5"><a href="금융-데이터-수집하기-심화.html#cb158-5"></a>           <span class="kw">user_agent</span>(<span class="st">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64)</span></span>
+<span id="cb158-6"><a href="금융-데이터-수집하기-심화.html#cb158-6"></a><span class="st">                      AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#39;</span>))</span>
+<span id="cb158-7"><a href="금융-데이터-수집하기-심화.html#cb158-7"></a></span>
+<span id="cb158-8"><a href="금융-데이터-수집하기-심화.html#cb158-8"></a>price =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></span>
+<span id="cb158-9"><a href="금융-데이터-수집하기-심화.html#cb158-9"></a><span class="st">  </span><span class="kw">html_node</span>(<span class="dt">xpath =</span> <span class="st">&#39;//*[@id=&quot;svdMainChartTxt11&quot;]&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb158-10"><a href="금융-데이터-수집하기-심화.html#cb158-10"></a><span class="st">  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb158-11"><a href="금융-데이터-수집하기-심화.html#cb158-11"></a><span class="st">  </span><span class="kw">parse_number</span>()</span>
+<span id="cb158-12"><a href="금융-데이터-수집하기-심화.html#cb158-12"></a></span>
+<span id="cb158-13"><a href="금융-데이터-수집하기-심화.html#cb158-13"></a><span class="kw">print</span>(price)</span></code></pre></div>
+<pre><code>## [1] 86800</code></pre>
 <ol style="list-style-type: decimal">
 <li>url을 입력한 후, <code>GET()</code> 함수를 이용해 데이터를 불러오며, 역시나 user_agent를 추가해 줍니다.</li>
 <li><code>read_html()</code> 함수를 이용해 HTML 데이터를 불러온 후 <code>html_node()</code> 함수에 앞서 구한 Xpath를 입력해 해당 지점의 데이터를 추출합니다.</li>
-<li><code>html_text()</code> 함수를 통해 텍스트 데이터만을 추출하며, readr 패키지의 <code>parse_number()</code> 함수를 적용합니다. 해당 함수는 문자형 데이터에서 콤마와 같은 불필요한 문자를 제거한 후 숫자형 데이터로 변경해줍니다.</li>
+<li><code>html_text()</code> 함수를 통해 텍스트 데이터만을 추출하며, readr 패키지의 <code>parse_number()</code> 함수를 적용합니다.</li>
 </ol>
 <p>가치지표를 계산하려면 발행주식수 역시 필요합니다. 예를 들어 PER를 계산하는 방법은 다음과 같습니다.</p>
 <p><span class="math display">\[ PER = Price / EPS  = 주가 / 주당순이익\]</span></p>
 <p>주당순이익은 순이익을 전체 주식수로 나눈 값이므로, 해당 값의 계산하려면 전체 주식수를 구해야 합니다. 전체 주식수 데이터 역시 웹페이지에 있으므로 앞서 주가를 크롤링한 방법과 동일한 방법으로 구할 수 있습니다. 전체 주식수 데이터의 Xpath는 다음과 같습니다.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb162-1"><a href="금융-데이터-수집하기-심화.html#cb162-1"></a><span class="er">//*[@id=&quot;svdMainGrid1&quot;]/table/tbody/tr[7]/td[1]</span></span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb160-1"><a href="금융-데이터-수집하기-심화.html#cb160-1"></a><span class="er">//*[@id=&quot;svdMainGrid1&quot;]/table/tbody/tr[7]/td[1]</span></span></code></pre></div>
 <style type="text/css">
 //*[@id="svdMainGrid1"]/table/tbody/tr[7]/td[1]
 </style>
 <p>이를 이용해 발행주식수 중 보통주를 선택하는 방법은 다음과 같습니다.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="금융-데이터-수집하기-심화.html#cb163-1"></a>share =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></span>
-<span id="cb163-2"><a href="금융-데이터-수집하기-심화.html#cb163-2"></a><span class="st">  </span><span class="kw">html_node</span>(</span>
-<span id="cb163-3"><a href="금융-데이터-수집하기-심화.html#cb163-3"></a>    <span class="dt">xpath =</span></span>
-<span id="cb163-4"><a href="금융-데이터-수집하기-심화.html#cb163-4"></a>      <span class="st">&#39;//*[@id=&quot;svdMainGrid1&quot;]/table/tbody/tr[7]/td[1]&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb163-5"><a href="금융-데이터-수집하기-심화.html#cb163-5"></a><span class="st">  </span><span class="kw">html_text</span>()</span>
-<span id="cb163-6"><a href="금융-데이터-수집하기-심화.html#cb163-6"></a></span>
-<span id="cb163-7"><a href="금융-데이터-수집하기-심화.html#cb163-7"></a><span class="kw">print</span>(share)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="금융-데이터-수집하기-심화.html#cb161-1"></a>share =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></span>
+<span id="cb161-2"><a href="금융-데이터-수집하기-심화.html#cb161-2"></a><span class="st">  </span><span class="kw">html_node</span>(</span>
+<span id="cb161-3"><a href="금융-데이터-수집하기-심화.html#cb161-3"></a>    <span class="dt">xpath =</span></span>
+<span id="cb161-4"><a href="금융-데이터-수집하기-심화.html#cb161-4"></a>      <span class="st">&#39;//*[@id=&quot;svdMainGrid1&quot;]/table/tbody/tr[7]/td[1]&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb161-5"><a href="금융-데이터-수집하기-심화.html#cb161-5"></a><span class="st">  </span><span class="kw">html_text</span>()</span>
+<span id="cb161-6"><a href="금융-데이터-수집하기-심화.html#cb161-6"></a></span>
+<span id="cb161-7"><a href="금융-데이터-수집하기-심화.html#cb161-7"></a><span class="kw">print</span>(share)</span></code></pre></div>
 <pre><code>## [1] &quot;5,969,782,550/ 822,886,700&quot;</code></pre>
 <p><code>read_html()</code> 함수와 <code>html_node()</code> 함수를 이용해, HTML 내에서 Xpath에 해당하는 데이터를 추출합니다. 그 후 <code>html_text()</code> 함수를 통해 텍스트 부분만 추출합니다. 해당 과정을 거치면 보통주/우선주의 형태로 발행주식주가 저장됩니다. 이 중 우리가 원하는 데이터는 / 앞에 있는 보통주 발행주식수입니다.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="금융-데이터-수집하기-심화.html#cb165-1"></a>share =<span class="st"> </span>share <span class="op">%&gt;%</span></span>
-<span id="cb165-2"><a href="금융-데이터-수집하기-심화.html#cb165-2"></a><span class="st">  </span><span class="kw">strsplit</span>(<span class="st">&#39;/&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb165-3"><a href="금융-데이터-수집하기-심화.html#cb165-3"></a><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></span>
-<span id="cb165-4"><a href="금융-데이터-수집하기-심화.html#cb165-4"></a><span class="st">  </span>.[<span class="dv">1</span>] <span class="op">%&gt;%</span></span>
-<span id="cb165-5"><a href="금융-데이터-수집하기-심화.html#cb165-5"></a><span class="st">  </span><span class="kw">parse_number</span>()</span>
-<span id="cb165-6"><a href="금융-데이터-수집하기-심화.html#cb165-6"></a></span>
-<span id="cb165-7"><a href="금융-데이터-수집하기-심화.html#cb165-7"></a><span class="kw">print</span>(share)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="금융-데이터-수집하기-심화.html#cb163-1"></a>share =<span class="st"> </span>share <span class="op">%&gt;%</span></span>
+<span id="cb163-2"><a href="금융-데이터-수집하기-심화.html#cb163-2"></a><span class="st">  </span><span class="kw">strsplit</span>(<span class="st">&#39;/&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb163-3"><a href="금융-데이터-수집하기-심화.html#cb163-3"></a><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></span>
+<span id="cb163-4"><a href="금융-데이터-수집하기-심화.html#cb163-4"></a><span class="st">  </span>.[<span class="dv">1</span>] <span class="op">%&gt;%</span></span>
+<span id="cb163-5"><a href="금융-데이터-수집하기-심화.html#cb163-5"></a><span class="st">  </span><span class="kw">parse_number</span>()</span>
+<span id="cb163-6"><a href="금융-데이터-수집하기-심화.html#cb163-6"></a></span>
+<span id="cb163-7"><a href="금융-데이터-수집하기-심화.html#cb163-7"></a><span class="kw">print</span>(share)</span></code></pre></div>
 <pre><code>## [1] 5969782550</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>strsplit()</code> 함수를 통해 /를 기준으로 데이터를 나눕니다. 해당 결과는 리스트 형태로 저장됩니다.</li>
@@ -943,153 +946,153 @@ Sales (매출액)
 <li><code>parse_number()</code> 함수를 통해 문자형 데이터를 숫자형으로 변환합니다.</li>
 </ol>
 <p>재무 데이터, 현재 주가, 발행주식수를 이용해 가치지표를 계산해보겠습니다.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="금융-데이터-수집하기-심화.html#cb167-1"></a>data_value =<span class="st"> </span>price <span class="op">/</span><span class="st"> </span>(value_index <span class="op">*</span><span class="st"> </span><span class="dv">100000000</span> <span class="op">/</span><span class="st"> </span>share)</span>
-<span id="cb167-2"><a href="금융-데이터-수집하기-심화.html#cb167-2"></a><span class="kw">names</span>(data_value) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;PER&#39;</span>, <span class="st">&#39;PBR&#39;</span>, <span class="st">&#39;PCR&#39;</span>, <span class="st">&#39;PSR&#39;</span>)</span>
-<span id="cb167-3"><a href="금융-데이터-수집하기-심화.html#cb167-3"></a>data_value[data_value <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></span>
-<span id="cb167-4"><a href="금융-데이터-수집하기-심화.html#cb167-4"></a></span>
-<span id="cb167-5"><a href="금융-데이터-수집하기-심화.html#cb167-5"></a><span class="kw">print</span>(data_value)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="금융-데이터-수집하기-심화.html#cb165-1"></a>data_value =<span class="st"> </span>price <span class="op">/</span><span class="st"> </span>(value_index <span class="op">*</span><span class="st"> </span><span class="dv">100000000</span> <span class="op">/</span><span class="st"> </span>share)</span>
+<span id="cb165-2"><a href="금융-데이터-수집하기-심화.html#cb165-2"></a><span class="kw">names</span>(data_value) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;PER&#39;</span>, <span class="st">&#39;PBR&#39;</span>, <span class="st">&#39;PCR&#39;</span>, <span class="st">&#39;PSR&#39;</span>)</span>
+<span id="cb165-3"><a href="금융-데이터-수집하기-심화.html#cb165-3"></a>data_value[data_value <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb165-4"><a href="금융-데이터-수집하기-심화.html#cb165-4"></a></span>
+<span id="cb165-5"><a href="금융-데이터-수집하기-심화.html#cb165-5"></a><span class="kw">print</span>(data_value)</span></code></pre></div>
 <pre><code>##    PER    PBR    PCR    PSR 
-## 24.429  1.998 11.576  2.280</code></pre>
+## 24.096  1.971 11.418  2.249</code></pre>
 <p>분자에는 현재 주가를 입력하며, 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 단, 주가는 원 단위, 재무 데이터는 억 원 단위이므로, 둘 사이에 단위를 동일하게 맞춰주기 위해 분모에 억을 곱합니다. 또한 가치지표가 음수인 경우는 NA로 변경해줍니다.</p>
-<p>결과를 확인해보면 4가지 가치지표가 잘 계산되었습니다.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a></p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="금융-데이터-수집하기-심화.html#cb169-1"></a><span class="kw">write.csv</span>(data_value, <span class="st">&#39;data/KOR_value/005930_value.csv&#39;</span>)</span></code></pre></div>
+<p>결과를 확인해보면 4가지 가치지표가 잘 계산되었습니다.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a></p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="금융-데이터-수집하기-심화.html#cb167-1"></a><span class="kw">write.csv</span>(data_value, <span class="st">&#39;data/KOR_value/005930_value.csv&#39;</span>)</span></code></pre></div>
 <p>data 폴더의 KOR_value 폴더 내에 티커_value.csv 이름으로 저장합니다.</p>
 </div>
 <div id="전-종목-재무제표-및-가치지표-다운로드" class="section level3">
 <h3><span class="header-section-number">6.2.3</span> 전 종목 재무제표 및 가치지표 다운로드</h3>
 <p>위 코드에서 for loop 구문을 이용해 URL 중 6자리 티커에 해당하는 값만 변경해주면 모든 종목의 재무제표를 다운로드하고 이를 바탕으로 가치지표를 계산할 수 있습니다. 해당 코드는 다음과 같습니다.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="금융-데이터-수집하기-심화.html#cb170-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb170-2"><a href="금융-데이터-수집하기-심화.html#cb170-2"></a><span class="kw">library</span>(httr)</span>
-<span id="cb170-3"><a href="금융-데이터-수집하기-심화.html#cb170-3"></a><span class="kw">library</span>(rvest)</span>
-<span id="cb170-4"><a href="금융-데이터-수집하기-심화.html#cb170-4"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb170-5"><a href="금융-데이터-수집하기-심화.html#cb170-5"></a><span class="kw">library</span>(readr)</span>
-<span id="cb170-6"><a href="금융-데이터-수집하기-심화.html#cb170-6"></a></span>
-<span id="cb170-7"><a href="금융-데이터-수집하기-심화.html#cb170-7"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb170-8"><a href="금융-데이터-수집하기-심화.html#cb170-8"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
-<span id="cb170-9"><a href="금융-데이터-수집하기-심화.html#cb170-9"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>,<span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
-<span id="cb170-10"><a href="금융-데이터-수집하기-심화.html#cb170-10"></a></span>
-<span id="cb170-11"><a href="금융-데이터-수집하기-심화.html#cb170-11"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_fs&#39;</span>), <span class="ot">FALSE</span>,</span>
-<span id="cb170-12"><a href="금융-데이터-수집하기-심화.html#cb170-12"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_fs&#39;</span>))</span>
-<span id="cb170-13"><a href="금융-데이터-수집하기-심화.html#cb170-13"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_value&#39;</span>), <span class="ot">FALSE</span>,</span>
-<span id="cb170-14"><a href="금융-데이터-수집하기-심화.html#cb170-14"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_value&#39;</span>))</span>
-<span id="cb170-15"><a href="금융-데이터-수집하기-심화.html#cb170-15"></a></span>
-<span id="cb170-16"><a href="금융-데이터-수집하기-심화.html#cb170-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="kw">nrow</span>(KOR_ticker) ) {</span>
-<span id="cb170-17"><a href="금융-데이터-수집하기-심화.html#cb170-17"></a>  </span>
-<span id="cb170-18"><a href="금융-데이터-수집하기-심화.html#cb170-18"></a>  data_fs =<span class="st"> </span><span class="kw">c</span>()</span>
-<span id="cb170-19"><a href="금융-데이터-수집하기-심화.html#cb170-19"></a>  data_value =<span class="st"> </span><span class="kw">c</span>()</span>
-<span id="cb170-20"><a href="금융-데이터-수집하기-심화.html#cb170-20"></a>  name =<span class="st"> </span>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>[i]</span>
-<span id="cb170-21"><a href="금융-데이터-수집하기-심화.html#cb170-21"></a>  </span>
-<span id="cb170-22"><a href="금융-데이터-수집하기-심화.html#cb170-22"></a>  <span class="co"># 오류 발생 시 이를 무시하고 다음 루프로 진행</span></span>
-<span id="cb170-23"><a href="금융-데이터-수집하기-심화.html#cb170-23"></a>  <span class="kw">tryCatch</span>({</span>
-<span id="cb170-24"><a href="금융-데이터-수집하기-심화.html#cb170-24"></a>    </span>
-<span id="cb170-25"><a href="금융-데이터-수집하기-심화.html#cb170-25"></a>    <span class="kw">Sys.setlocale</span>(<span class="st">&#39;LC_ALL&#39;</span>, <span class="st">&#39;English&#39;</span>)</span>
-<span id="cb170-26"><a href="금융-데이터-수집하기-심화.html#cb170-26"></a>    </span>
-<span id="cb170-27"><a href="금융-데이터-수집하기-심화.html#cb170-27"></a>    <span class="co"># url 생성</span></span>
-<span id="cb170-28"><a href="금융-데이터-수집하기-심화.html#cb170-28"></a>    url =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb170-29"><a href="금융-데이터-수집하기-심화.html#cb170-29"></a>      <span class="st">&#39;http://comp.fnguide.com/SVO2/ASP/&#39;</span></span>
-<span id="cb170-30"><a href="금융-데이터-수집하기-심화.html#cb170-30"></a>      ,<span class="st">&#39;SVD_Finance.asp?pGB=1&amp;gicode=A&#39;</span>,</span>
-<span id="cb170-31"><a href="금융-데이터-수집하기-심화.html#cb170-31"></a>      name)</span>
-<span id="cb170-32"><a href="금융-데이터-수집하기-심화.html#cb170-32"></a>    </span>
-<span id="cb170-33"><a href="금융-데이터-수집하기-심화.html#cb170-33"></a>    <span class="co"># 이 후 과정은 위와 동일함</span></span>
-<span id="cb170-34"><a href="금융-데이터-수집하기-심화.html#cb170-34"></a>    </span>
-<span id="cb170-35"><a href="금융-데이터-수집하기-심화.html#cb170-35"></a>    <span class="co"># 데이터 다운로드 후 테이블 추출</span></span>
-<span id="cb170-36"><a href="금융-데이터-수집하기-심화.html#cb170-36"></a>    data =<span class="st"> </span><span class="kw">GET</span>(url,</span>
-<span id="cb170-37"><a href="금융-데이터-수집하기-심화.html#cb170-37"></a>               <span class="kw">user_agent</span>(<span class="st">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64)</span></span>
-<span id="cb170-38"><a href="금융-데이터-수집하기-심화.html#cb170-38"></a><span class="st">                          AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#39;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb170-39"><a href="금융-데이터-수집하기-심화.html#cb170-39"></a><span class="st">      </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
-<span id="cb170-40"><a href="금융-데이터-수집하기-심화.html#cb170-40"></a><span class="st">      </span><span class="kw">html_table</span>()</span>
-<span id="cb170-41"><a href="금융-데이터-수집하기-심화.html#cb170-41"></a>    </span>
-<span id="cb170-42"><a href="금융-데이터-수집하기-심화.html#cb170-42"></a>    <span class="kw">Sys.setlocale</span>(<span class="st">&#39;LC_ALL&#39;</span>, <span class="st">&#39;Korean&#39;</span>)</span>
-<span id="cb170-43"><a href="금융-데이터-수집하기-심화.html#cb170-43"></a>    </span>
-<span id="cb170-44"><a href="금융-데이터-수집하기-심화.html#cb170-44"></a>    <span class="co"># 3개 재무제표를 하나로 합치기</span></span>
-<span id="cb170-45"><a href="금융-데이터-수집하기-심화.html#cb170-45"></a>    data_IS =<span class="st"> </span>data[[<span class="dv">1</span>]]</span>
-<span id="cb170-46"><a href="금융-데이터-수집하기-심화.html#cb170-46"></a>    data_BS =<span class="st"> </span>data[[<span class="dv">3</span>]]</span>
-<span id="cb170-47"><a href="금융-데이터-수집하기-심화.html#cb170-47"></a>    data_CF =<span class="st"> </span>data[[<span class="dv">5</span>]]</span>
-<span id="cb170-48"><a href="금융-데이터-수집하기-심화.html#cb170-48"></a>    </span>
-<span id="cb170-49"><a href="금융-데이터-수집하기-심화.html#cb170-49"></a>    data_IS =<span class="st"> </span>data_IS[, <span class="dv">1</span><span class="op">:</span>(<span class="kw">ncol</span>(data_IS)<span class="op">-</span><span class="dv">2</span>)]</span>
-<span id="cb170-50"><a href="금융-데이터-수집하기-심화.html#cb170-50"></a>    data_fs =<span class="st"> </span><span class="kw">rbind</span>(data_IS, data_BS, data_CF)</span>
-<span id="cb170-51"><a href="금융-데이터-수집하기-심화.html#cb170-51"></a>    </span>
-<span id="cb170-52"><a href="금융-데이터-수집하기-심화.html#cb170-52"></a>    <span class="co"># 데이터 클랜징</span></span>
-<span id="cb170-53"><a href="금융-데이터-수집하기-심화.html#cb170-53"></a>    data_fs[, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;계산에 참여한 계정 펼치기&#39;</span>,</span>
-<span id="cb170-54"><a href="금융-데이터-수집하기-심화.html#cb170-54"></a>                        <span class="st">&#39;&#39;</span>, data_fs[, <span class="dv">1</span>])</span>
-<span id="cb170-55"><a href="금융-데이터-수집하기-심화.html#cb170-55"></a>    data_fs =<span class="st"> </span>data_fs[<span class="op">!</span><span class="kw">duplicated</span>(data_fs[, <span class="dv">1</span>]), ]</span>
-<span id="cb170-56"><a href="금융-데이터-수집하기-심화.html#cb170-56"></a>    </span>
-<span id="cb170-57"><a href="금융-데이터-수집하기-심화.html#cb170-57"></a>    <span class="kw">rownames</span>(data_fs) =<span class="st"> </span><span class="ot">NULL</span></span>
-<span id="cb170-58"><a href="금융-데이터-수집하기-심화.html#cb170-58"></a>    <span class="kw">rownames</span>(data_fs) =<span class="st"> </span>data_fs[, <span class="dv">1</span>]</span>
-<span id="cb170-59"><a href="금융-데이터-수집하기-심화.html#cb170-59"></a>    data_fs[, <span class="dv">1</span>] =<span class="st"> </span><span class="ot">NULL</span></span>
-<span id="cb170-60"><a href="금융-데이터-수집하기-심화.html#cb170-60"></a>    </span>
-<span id="cb170-61"><a href="금융-데이터-수집하기-심화.html#cb170-61"></a>    <span class="co"># 12월 재무제표만 선택</span></span>
-<span id="cb170-62"><a href="금융-데이터-수집하기-심화.html#cb170-62"></a>    data_fs =</span>
-<span id="cb170-63"><a href="금융-데이터-수집하기-심화.html#cb170-63"></a><span class="st">      </span>data_fs[, <span class="kw">substr</span>(<span class="kw">colnames</span>(data_fs), <span class="dv">6</span>,<span class="dv">7</span>) <span class="op">==</span><span class="st"> &quot;12&quot;</span>]</span>
-<span id="cb170-64"><a href="금융-데이터-수집하기-심화.html#cb170-64"></a>    </span>
-<span id="cb170-65"><a href="금융-데이터-수집하기-심화.html#cb170-65"></a>    data_fs =<span class="st"> </span><span class="kw">sapply</span>(data_fs, <span class="cf">function</span>(x) {</span>
-<span id="cb170-66"><a href="금융-데이터-수집하기-심화.html#cb170-66"></a>      <span class="kw">str_replace_all</span>(x, <span class="st">&#39;,&#39;</span>, <span class="st">&#39;&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb170-67"><a href="금융-데이터-수집하기-심화.html#cb170-67"></a><span class="st">        </span><span class="kw">as.numeric</span>()</span>
-<span id="cb170-68"><a href="금융-데이터-수집하기-심화.html#cb170-68"></a>    }) <span class="op">%&gt;%</span></span>
-<span id="cb170-69"><a href="금융-데이터-수집하기-심화.html#cb170-69"></a><span class="st">      </span><span class="kw">data.frame</span>(., <span class="dt">row.names =</span> <span class="kw">rownames</span>(data_fs))</span>
-<span id="cb170-70"><a href="금융-데이터-수집하기-심화.html#cb170-70"></a>    </span>
-<span id="cb170-71"><a href="금융-데이터-수집하기-심화.html#cb170-71"></a>    </span>
-<span id="cb170-72"><a href="금융-데이터-수집하기-심화.html#cb170-72"></a>    <span class="co"># 가치지표 분모부분</span></span>
-<span id="cb170-73"><a href="금융-데이터-수집하기-심화.html#cb170-73"></a>    value_type =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;지배주주순이익&#39;</span>, </span>
-<span id="cb170-74"><a href="금융-데이터-수집하기-심화.html#cb170-74"></a>                   <span class="st">&#39;자본&#39;</span>, </span>
-<span id="cb170-75"><a href="금융-데이터-수집하기-심화.html#cb170-75"></a>                   <span class="st">&#39;영업활동으로인한현금흐름&#39;</span>, </span>
-<span id="cb170-76"><a href="금융-데이터-수집하기-심화.html#cb170-76"></a>                   <span class="st">&#39;매출액&#39;</span>) </span>
-<span id="cb170-77"><a href="금융-데이터-수집하기-심화.html#cb170-77"></a>    </span>
-<span id="cb170-78"><a href="금융-데이터-수집하기-심화.html#cb170-78"></a>    <span class="co"># 해당 재무데이터만 선택</span></span>
-<span id="cb170-79"><a href="금융-데이터-수집하기-심화.html#cb170-79"></a>    value_index =<span class="st"> </span>data_fs[<span class="kw">match</span>(value_type, <span class="kw">rownames</span>(data_fs)),</span>
-<span id="cb170-80"><a href="금융-데이터-수집하기-심화.html#cb170-80"></a>                          <span class="kw">ncol</span>(data_fs)]</span>
-<span id="cb170-81"><a href="금융-데이터-수집하기-심화.html#cb170-81"></a>    </span>
-<span id="cb170-82"><a href="금융-데이터-수집하기-심화.html#cb170-82"></a>    <span class="co"># Snapshot 페이지 불러오기</span></span>
-<span id="cb170-83"><a href="금융-데이터-수집하기-심화.html#cb170-83"></a>    url =</span>
-<span id="cb170-84"><a href="금융-데이터-수집하기-심화.html#cb170-84"></a><span class="st">      </span><span class="kw">paste0</span>(</span>
-<span id="cb170-85"><a href="금융-데이터-수집하기-심화.html#cb170-85"></a>        <span class="st">&#39;http://comp.fnguide.com/SVO2/ASP/SVD_Main.asp&#39;</span>,</span>
-<span id="cb170-86"><a href="금융-데이터-수집하기-심화.html#cb170-86"></a>        <span class="st">&#39;?pGB=1&amp;gicode=A&#39;</span>,name)</span>
-<span id="cb170-87"><a href="금융-데이터-수집하기-심화.html#cb170-87"></a>    data =<span class="st"> </span><span class="kw">GET</span>(url,</span>
-<span id="cb170-88"><a href="금융-데이터-수집하기-심화.html#cb170-88"></a>               <span class="kw">user_agent</span>(<span class="st">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64)</span></span>
-<span id="cb170-89"><a href="금융-데이터-수집하기-심화.html#cb170-89"></a><span class="st">                      AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#39;</span>))</span>
-<span id="cb170-90"><a href="금융-데이터-수집하기-심화.html#cb170-90"></a>    </span>
-<span id="cb170-91"><a href="금융-데이터-수집하기-심화.html#cb170-91"></a>    <span class="co"># 현재 주가 크롤링</span></span>
-<span id="cb170-92"><a href="금융-데이터-수집하기-심화.html#cb170-92"></a>    price =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></span>
-<span id="cb170-93"><a href="금융-데이터-수집하기-심화.html#cb170-93"></a><span class="st">      </span><span class="kw">html_node</span>(<span class="dt">xpath =</span> <span class="st">&#39;//*[@id=&quot;svdMainChartTxt11&quot;]&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb170-94"><a href="금융-데이터-수집하기-심화.html#cb170-94"></a><span class="st">      </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
-<span id="cb170-95"><a href="금융-데이터-수집하기-심화.html#cb170-95"></a><span class="st">      </span><span class="kw">parse_number</span>()</span>
-<span id="cb170-96"><a href="금융-데이터-수집하기-심화.html#cb170-96"></a>    </span>
-<span id="cb170-97"><a href="금융-데이터-수집하기-심화.html#cb170-97"></a>    <span class="co"># 보통주 발행주식수 크롤링</span></span>
-<span id="cb170-98"><a href="금융-데이터-수집하기-심화.html#cb170-98"></a>    share =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></span>
-<span id="cb170-99"><a href="금융-데이터-수집하기-심화.html#cb170-99"></a><span class="st">      </span><span class="kw">html_node</span>(</span>
-<span id="cb170-100"><a href="금융-데이터-수집하기-심화.html#cb170-100"></a>        <span class="dt">xpath =</span></span>
-<span id="cb170-101"><a href="금융-데이터-수집하기-심화.html#cb170-101"></a>        <span class="st">&#39;//*[@id=&quot;svdMainGrid1&quot;]/table/tbody/tr[7]/td[1]&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb170-102"><a href="금융-데이터-수집하기-심화.html#cb170-102"></a><span class="st">      </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
-<span id="cb170-103"><a href="금융-데이터-수집하기-심화.html#cb170-103"></a><span class="st">      </span><span class="kw">strsplit</span>(<span class="st">&#39;/&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb170-104"><a href="금융-데이터-수집하기-심화.html#cb170-104"></a><span class="st">      </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></span>
-<span id="cb170-105"><a href="금융-데이터-수집하기-심화.html#cb170-105"></a><span class="st">      </span>.[<span class="dv">1</span>] <span class="op">%&gt;%</span></span>
-<span id="cb170-106"><a href="금융-데이터-수집하기-심화.html#cb170-106"></a><span class="st">      </span><span class="kw">parse_number</span>()</span>
-<span id="cb170-107"><a href="금융-데이터-수집하기-심화.html#cb170-107"></a>    </span>
-<span id="cb170-108"><a href="금융-데이터-수집하기-심화.html#cb170-108"></a>    <span class="co"># 가치지표 계산</span></span>
-<span id="cb170-109"><a href="금융-데이터-수집하기-심화.html#cb170-109"></a>    data_value =<span class="st"> </span>price <span class="op">/</span><span class="st"> </span>(value_index <span class="op">*</span><span class="st"> </span><span class="dv">100000000</span><span class="op">/</span><span class="st"> </span>share)</span>
-<span id="cb170-110"><a href="금융-데이터-수집하기-심화.html#cb170-110"></a>    <span class="kw">names</span>(data_value) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;PER&#39;</span>, <span class="st">&#39;PBR&#39;</span>, <span class="st">&#39;PCR&#39;</span>, <span class="st">&#39;PSR&#39;</span>)</span>
-<span id="cb170-111"><a href="금융-데이터-수집하기-심화.html#cb170-111"></a>    data_value[data_value <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></span>
-<span id="cb170-112"><a href="금융-데이터-수집하기-심화.html#cb170-112"></a>    </span>
-<span id="cb170-113"><a href="금융-데이터-수집하기-심화.html#cb170-113"></a>  }, <span class="dt">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb170-114"><a href="금융-데이터-수집하기-심화.html#cb170-114"></a>    </span>
-<span id="cb170-115"><a href="금융-데이터-수집하기-심화.html#cb170-115"></a>    <span class="co"># 오류 발생시 해당 종목명을 출력하고 다음 루프로 이동</span></span>
-<span id="cb170-116"><a href="금융-데이터-수집하기-심화.html#cb170-116"></a>    data_fs &lt;&lt;-<span class="st"> </span><span class="ot">NA</span></span>
-<span id="cb170-117"><a href="금융-데이터-수집하기-심화.html#cb170-117"></a>    data_value &lt;&lt;-<span class="st"> </span><span class="ot">NA</span></span>
-<span id="cb170-118"><a href="금융-데이터-수집하기-심화.html#cb170-118"></a>    <span class="kw">warning</span>(<span class="kw">paste0</span>(<span class="st">&quot;Error in Ticker: &quot;</span>, name))</span>
-<span id="cb170-119"><a href="금융-데이터-수집하기-심화.html#cb170-119"></a>  })</span>
-<span id="cb170-120"><a href="금융-데이터-수집하기-심화.html#cb170-120"></a>  </span>
-<span id="cb170-121"><a href="금융-데이터-수집하기-심화.html#cb170-121"></a>  <span class="co"># 다운로드 받은 파일을 생성한 각각의 폴더 내 csv 파일로 저장</span></span>
-<span id="cb170-122"><a href="금융-데이터-수집하기-심화.html#cb170-122"></a>  </span>
-<span id="cb170-123"><a href="금융-데이터-수집하기-심화.html#cb170-123"></a>  <span class="co"># 재무제표 저장</span></span>
-<span id="cb170-124"><a href="금융-데이터-수집하기-심화.html#cb170-124"></a>  <span class="kw">write.csv</span>(data_fs, <span class="kw">paste0</span>(<span class="st">&#39;data/KOR_fs/&#39;</span>, name, <span class="st">&#39;_fs.csv&#39;</span>))</span>
-<span id="cb170-125"><a href="금융-데이터-수집하기-심화.html#cb170-125"></a>  </span>
-<span id="cb170-126"><a href="금융-데이터-수집하기-심화.html#cb170-126"></a>  <span class="co"># 가치지표 저장</span></span>
-<span id="cb170-127"><a href="금융-데이터-수집하기-심화.html#cb170-127"></a>  <span class="kw">write.csv</span>(data_value, <span class="kw">paste0</span>(<span class="st">&#39;data/KOR_value/&#39;</span>, name,</span>
-<span id="cb170-128"><a href="금융-데이터-수집하기-심화.html#cb170-128"></a>                               <span class="st">&#39;_value.csv&#39;</span>))</span>
-<span id="cb170-129"><a href="금융-데이터-수집하기-심화.html#cb170-129"></a>  </span>
-<span id="cb170-130"><a href="금융-데이터-수집하기-심화.html#cb170-130"></a>  <span class="co"># 2초간 타임슬립 적용</span></span>
-<span id="cb170-131"><a href="금융-데이터-수집하기-심화.html#cb170-131"></a>  <span class="kw">Sys.sleep</span>(<span class="dv">2</span>)</span>
-<span id="cb170-132"><a href="금융-데이터-수집하기-심화.html#cb170-132"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="금융-데이터-수집하기-심화.html#cb168-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb168-2"><a href="금융-데이터-수집하기-심화.html#cb168-2"></a><span class="kw">library</span>(httr)</span>
+<span id="cb168-3"><a href="금융-데이터-수집하기-심화.html#cb168-3"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb168-4"><a href="금융-데이터-수집하기-심화.html#cb168-4"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb168-5"><a href="금융-데이터-수집하기-심화.html#cb168-5"></a><span class="kw">library</span>(readr)</span>
+<span id="cb168-6"><a href="금융-데이터-수집하기-심화.html#cb168-6"></a></span>
+<span id="cb168-7"><a href="금융-데이터-수집하기-심화.html#cb168-7"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb168-8"><a href="금융-데이터-수집하기-심화.html#cb168-8"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
+<span id="cb168-9"><a href="금융-데이터-수집하기-심화.html#cb168-9"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>,<span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
+<span id="cb168-10"><a href="금융-데이터-수집하기-심화.html#cb168-10"></a></span>
+<span id="cb168-11"><a href="금융-데이터-수집하기-심화.html#cb168-11"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_fs&#39;</span>), <span class="ot">FALSE</span>,</span>
+<span id="cb168-12"><a href="금융-데이터-수집하기-심화.html#cb168-12"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_fs&#39;</span>))</span>
+<span id="cb168-13"><a href="금융-데이터-수집하기-심화.html#cb168-13"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/KOR_value&#39;</span>), <span class="ot">FALSE</span>,</span>
+<span id="cb168-14"><a href="금융-데이터-수집하기-심화.html#cb168-14"></a>       <span class="kw">dir.create</span>(<span class="st">&#39;data/KOR_value&#39;</span>))</span>
+<span id="cb168-15"><a href="금융-데이터-수집하기-심화.html#cb168-15"></a></span>
+<span id="cb168-16"><a href="금융-데이터-수집하기-심화.html#cb168-16"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="kw">nrow</span>(KOR_ticker) ) {</span>
+<span id="cb168-17"><a href="금융-데이터-수집하기-심화.html#cb168-17"></a>  </span>
+<span id="cb168-18"><a href="금융-데이터-수집하기-심화.html#cb168-18"></a>  data_fs =<span class="st"> </span><span class="kw">c</span>()</span>
+<span id="cb168-19"><a href="금융-데이터-수집하기-심화.html#cb168-19"></a>  data_value =<span class="st"> </span><span class="kw">c</span>()</span>
+<span id="cb168-20"><a href="금융-데이터-수집하기-심화.html#cb168-20"></a>  name =<span class="st"> </span>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>[i]</span>
+<span id="cb168-21"><a href="금융-데이터-수집하기-심화.html#cb168-21"></a>  </span>
+<span id="cb168-22"><a href="금융-데이터-수집하기-심화.html#cb168-22"></a>  <span class="co"># 오류 발생 시 이를 무시하고 다음 루프로 진행</span></span>
+<span id="cb168-23"><a href="금융-데이터-수집하기-심화.html#cb168-23"></a>  <span class="kw">tryCatch</span>({</span>
+<span id="cb168-24"><a href="금융-데이터-수집하기-심화.html#cb168-24"></a>    </span>
+<span id="cb168-25"><a href="금융-데이터-수집하기-심화.html#cb168-25"></a>    <span class="kw">Sys.setlocale</span>(<span class="st">&#39;LC_ALL&#39;</span>, <span class="st">&#39;English&#39;</span>)</span>
+<span id="cb168-26"><a href="금융-데이터-수집하기-심화.html#cb168-26"></a>    </span>
+<span id="cb168-27"><a href="금융-데이터-수집하기-심화.html#cb168-27"></a>    <span class="co"># url 생성</span></span>
+<span id="cb168-28"><a href="금융-데이터-수집하기-심화.html#cb168-28"></a>    url =<span class="st"> </span><span class="kw">paste0</span>(</span>
+<span id="cb168-29"><a href="금융-데이터-수집하기-심화.html#cb168-29"></a>      <span class="st">&#39;http://comp.fnguide.com/SVO2/ASP/&#39;</span></span>
+<span id="cb168-30"><a href="금융-데이터-수집하기-심화.html#cb168-30"></a>      ,<span class="st">&#39;SVD_Finance.asp?pGB=1&amp;gicode=A&#39;</span>,</span>
+<span id="cb168-31"><a href="금융-데이터-수집하기-심화.html#cb168-31"></a>      name)</span>
+<span id="cb168-32"><a href="금융-데이터-수집하기-심화.html#cb168-32"></a>    </span>
+<span id="cb168-33"><a href="금융-데이터-수집하기-심화.html#cb168-33"></a>    <span class="co"># 이 후 과정은 위와 동일함</span></span>
+<span id="cb168-34"><a href="금융-데이터-수집하기-심화.html#cb168-34"></a>    </span>
+<span id="cb168-35"><a href="금융-데이터-수집하기-심화.html#cb168-35"></a>    <span class="co"># 데이터 다운로드 후 테이블 추출</span></span>
+<span id="cb168-36"><a href="금융-데이터-수집하기-심화.html#cb168-36"></a>    data =<span class="st"> </span><span class="kw">GET</span>(url,</span>
+<span id="cb168-37"><a href="금융-데이터-수집하기-심화.html#cb168-37"></a>               <span class="kw">user_agent</span>(<span class="st">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64)</span></span>
+<span id="cb168-38"><a href="금융-데이터-수집하기-심화.html#cb168-38"></a><span class="st">                          AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb168-39"><a href="금융-데이터-수집하기-심화.html#cb168-39"></a><span class="st">      </span><span class="kw">read_html</span>() <span class="op">%&gt;%</span></span>
+<span id="cb168-40"><a href="금융-데이터-수집하기-심화.html#cb168-40"></a><span class="st">      </span><span class="kw">html_table</span>()</span>
+<span id="cb168-41"><a href="금융-데이터-수집하기-심화.html#cb168-41"></a>    </span>
+<span id="cb168-42"><a href="금융-데이터-수집하기-심화.html#cb168-42"></a>    <span class="kw">Sys.setlocale</span>(<span class="st">&#39;LC_ALL&#39;</span>, <span class="st">&#39;Korean&#39;</span>)</span>
+<span id="cb168-43"><a href="금융-데이터-수집하기-심화.html#cb168-43"></a>    </span>
+<span id="cb168-44"><a href="금융-데이터-수집하기-심화.html#cb168-44"></a>    <span class="co"># 3개 재무제표를 하나로 합치기</span></span>
+<span id="cb168-45"><a href="금융-데이터-수집하기-심화.html#cb168-45"></a>    data_IS =<span class="st"> </span>data[[<span class="dv">1</span>]]</span>
+<span id="cb168-46"><a href="금융-데이터-수집하기-심화.html#cb168-46"></a>    data_BS =<span class="st"> </span>data[[<span class="dv">3</span>]]</span>
+<span id="cb168-47"><a href="금융-데이터-수집하기-심화.html#cb168-47"></a>    data_CF =<span class="st"> </span>data[[<span class="dv">5</span>]]</span>
+<span id="cb168-48"><a href="금융-데이터-수집하기-심화.html#cb168-48"></a>    </span>
+<span id="cb168-49"><a href="금융-데이터-수집하기-심화.html#cb168-49"></a>    data_IS =<span class="st"> </span>data_IS[, <span class="dv">1</span><span class="op">:</span>(<span class="kw">ncol</span>(data_IS)<span class="op">-</span><span class="dv">2</span>)]</span>
+<span id="cb168-50"><a href="금융-데이터-수집하기-심화.html#cb168-50"></a>    data_fs =<span class="st"> </span><span class="kw">rbind</span>(data_IS, data_BS, data_CF)</span>
+<span id="cb168-51"><a href="금융-데이터-수집하기-심화.html#cb168-51"></a>    </span>
+<span id="cb168-52"><a href="금융-데이터-수집하기-심화.html#cb168-52"></a>    <span class="co"># 데이터 클랜징</span></span>
+<span id="cb168-53"><a href="금융-데이터-수집하기-심화.html#cb168-53"></a>    data_fs[, <span class="dv">1</span>] =<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;계산에 참여한 계정 펼치기&#39;</span>,</span>
+<span id="cb168-54"><a href="금융-데이터-수집하기-심화.html#cb168-54"></a>                        <span class="st">&#39;&#39;</span>, data_fs[, <span class="dv">1</span>])</span>
+<span id="cb168-55"><a href="금융-데이터-수집하기-심화.html#cb168-55"></a>    data_fs =<span class="st"> </span>data_fs[<span class="op">!</span><span class="kw">duplicated</span>(data_fs[, <span class="dv">1</span>]), ]</span>
+<span id="cb168-56"><a href="금융-데이터-수집하기-심화.html#cb168-56"></a>    </span>
+<span id="cb168-57"><a href="금융-데이터-수집하기-심화.html#cb168-57"></a>    <span class="kw">rownames</span>(data_fs) =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb168-58"><a href="금융-데이터-수집하기-심화.html#cb168-58"></a>    <span class="kw">rownames</span>(data_fs) =<span class="st"> </span>data_fs[, <span class="dv">1</span>]</span>
+<span id="cb168-59"><a href="금융-데이터-수집하기-심화.html#cb168-59"></a>    data_fs[, <span class="dv">1</span>] =<span class="st"> </span><span class="ot">NULL</span></span>
+<span id="cb168-60"><a href="금융-데이터-수집하기-심화.html#cb168-60"></a>    </span>
+<span id="cb168-61"><a href="금융-데이터-수집하기-심화.html#cb168-61"></a>    <span class="co"># 12월 재무제표만 선택</span></span>
+<span id="cb168-62"><a href="금융-데이터-수집하기-심화.html#cb168-62"></a>    data_fs =</span>
+<span id="cb168-63"><a href="금융-데이터-수집하기-심화.html#cb168-63"></a><span class="st">      </span>data_fs[, <span class="kw">substr</span>(<span class="kw">colnames</span>(data_fs), <span class="dv">6</span>,<span class="dv">7</span>) <span class="op">==</span><span class="st"> &quot;12&quot;</span>]</span>
+<span id="cb168-64"><a href="금융-데이터-수집하기-심화.html#cb168-64"></a>    </span>
+<span id="cb168-65"><a href="금융-데이터-수집하기-심화.html#cb168-65"></a>    data_fs =<span class="st"> </span><span class="kw">sapply</span>(data_fs, <span class="cf">function</span>(x) {</span>
+<span id="cb168-66"><a href="금융-데이터-수집하기-심화.html#cb168-66"></a>      <span class="kw">str_replace_all</span>(x, <span class="st">&#39;,&#39;</span>, <span class="st">&#39;&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb168-67"><a href="금융-데이터-수집하기-심화.html#cb168-67"></a><span class="st">        </span><span class="kw">as.numeric</span>()</span>
+<span id="cb168-68"><a href="금융-데이터-수집하기-심화.html#cb168-68"></a>    }) <span class="op">%&gt;%</span></span>
+<span id="cb168-69"><a href="금융-데이터-수집하기-심화.html#cb168-69"></a><span class="st">      </span><span class="kw">data.frame</span>(., <span class="dt">row.names =</span> <span class="kw">rownames</span>(data_fs))</span>
+<span id="cb168-70"><a href="금융-데이터-수집하기-심화.html#cb168-70"></a>    </span>
+<span id="cb168-71"><a href="금융-데이터-수집하기-심화.html#cb168-71"></a>    </span>
+<span id="cb168-72"><a href="금융-데이터-수집하기-심화.html#cb168-72"></a>    <span class="co"># 가치지표 분모부분</span></span>
+<span id="cb168-73"><a href="금융-데이터-수집하기-심화.html#cb168-73"></a>    value_type =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;지배주주순이익&#39;</span>, </span>
+<span id="cb168-74"><a href="금융-데이터-수집하기-심화.html#cb168-74"></a>                   <span class="st">&#39;자본&#39;</span>, </span>
+<span id="cb168-75"><a href="금융-데이터-수집하기-심화.html#cb168-75"></a>                   <span class="st">&#39;영업활동으로인한현금흐름&#39;</span>, </span>
+<span id="cb168-76"><a href="금융-데이터-수집하기-심화.html#cb168-76"></a>                   <span class="st">&#39;매출액&#39;</span>) </span>
+<span id="cb168-77"><a href="금융-데이터-수집하기-심화.html#cb168-77"></a>    </span>
+<span id="cb168-78"><a href="금융-데이터-수집하기-심화.html#cb168-78"></a>    <span class="co"># 해당 재무데이터만 선택</span></span>
+<span id="cb168-79"><a href="금융-데이터-수집하기-심화.html#cb168-79"></a>    value_index =<span class="st"> </span>data_fs[<span class="kw">match</span>(value_type, <span class="kw">rownames</span>(data_fs)),</span>
+<span id="cb168-80"><a href="금융-데이터-수집하기-심화.html#cb168-80"></a>                          <span class="kw">ncol</span>(data_fs)]</span>
+<span id="cb168-81"><a href="금융-데이터-수집하기-심화.html#cb168-81"></a>    </span>
+<span id="cb168-82"><a href="금융-데이터-수집하기-심화.html#cb168-82"></a>    <span class="co"># Snapshot 페이지 불러오기</span></span>
+<span id="cb168-83"><a href="금융-데이터-수집하기-심화.html#cb168-83"></a>    url =</span>
+<span id="cb168-84"><a href="금융-데이터-수집하기-심화.html#cb168-84"></a><span class="st">      </span><span class="kw">paste0</span>(</span>
+<span id="cb168-85"><a href="금융-데이터-수집하기-심화.html#cb168-85"></a>        <span class="st">&#39;http://comp.fnguide.com/SVO2/ASP/SVD_Main.asp&#39;</span>,</span>
+<span id="cb168-86"><a href="금융-데이터-수집하기-심화.html#cb168-86"></a>        <span class="st">&#39;?pGB=1&amp;gicode=A&#39;</span>,name)</span>
+<span id="cb168-87"><a href="금융-데이터-수집하기-심화.html#cb168-87"></a>    data =<span class="st"> </span><span class="kw">GET</span>(url,</span>
+<span id="cb168-88"><a href="금융-데이터-수집하기-심화.html#cb168-88"></a>               <span class="kw">user_agent</span>(<span class="st">&#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64)</span></span>
+<span id="cb168-89"><a href="금융-데이터-수집하기-심화.html#cb168-89"></a><span class="st">                      AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36&#39;</span>))</span>
+<span id="cb168-90"><a href="금융-데이터-수집하기-심화.html#cb168-90"></a>    </span>
+<span id="cb168-91"><a href="금융-데이터-수집하기-심화.html#cb168-91"></a>    <span class="co"># 현재 주가 크롤링</span></span>
+<span id="cb168-92"><a href="금융-데이터-수집하기-심화.html#cb168-92"></a>    price =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></span>
+<span id="cb168-93"><a href="금융-데이터-수집하기-심화.html#cb168-93"></a><span class="st">      </span><span class="kw">html_node</span>(<span class="dt">xpath =</span> <span class="st">&#39;//*[@id=&quot;svdMainChartTxt11&quot;]&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb168-94"><a href="금융-데이터-수집하기-심화.html#cb168-94"></a><span class="st">      </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb168-95"><a href="금융-데이터-수집하기-심화.html#cb168-95"></a><span class="st">      </span><span class="kw">parse_number</span>()</span>
+<span id="cb168-96"><a href="금융-데이터-수집하기-심화.html#cb168-96"></a>    </span>
+<span id="cb168-97"><a href="금융-데이터-수집하기-심화.html#cb168-97"></a>    <span class="co"># 보통주 발행주식수 크롤링</span></span>
+<span id="cb168-98"><a href="금융-데이터-수집하기-심화.html#cb168-98"></a>    share =<span class="st"> </span><span class="kw">read_html</span>(data) <span class="op">%&gt;%</span></span>
+<span id="cb168-99"><a href="금융-데이터-수집하기-심화.html#cb168-99"></a><span class="st">      </span><span class="kw">html_node</span>(</span>
+<span id="cb168-100"><a href="금융-데이터-수집하기-심화.html#cb168-100"></a>        <span class="dt">xpath =</span></span>
+<span id="cb168-101"><a href="금융-데이터-수집하기-심화.html#cb168-101"></a>        <span class="st">&#39;//*[@id=&quot;svdMainGrid1&quot;]/table/tbody/tr[7]/td[1]&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb168-102"><a href="금융-데이터-수집하기-심화.html#cb168-102"></a><span class="st">      </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span></span>
+<span id="cb168-103"><a href="금융-데이터-수집하기-심화.html#cb168-103"></a><span class="st">      </span><span class="kw">strsplit</span>(<span class="st">&#39;/&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb168-104"><a href="금융-데이터-수집하기-심화.html#cb168-104"></a><span class="st">      </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span></span>
+<span id="cb168-105"><a href="금융-데이터-수집하기-심화.html#cb168-105"></a><span class="st">      </span>.[<span class="dv">1</span>] <span class="op">%&gt;%</span></span>
+<span id="cb168-106"><a href="금융-데이터-수집하기-심화.html#cb168-106"></a><span class="st">      </span><span class="kw">parse_number</span>()</span>
+<span id="cb168-107"><a href="금융-데이터-수집하기-심화.html#cb168-107"></a>    </span>
+<span id="cb168-108"><a href="금융-데이터-수집하기-심화.html#cb168-108"></a>    <span class="co"># 가치지표 계산</span></span>
+<span id="cb168-109"><a href="금융-데이터-수집하기-심화.html#cb168-109"></a>    data_value =<span class="st"> </span>price <span class="op">/</span><span class="st"> </span>(value_index <span class="op">*</span><span class="st"> </span><span class="dv">100000000</span><span class="op">/</span><span class="st"> </span>share)</span>
+<span id="cb168-110"><a href="금융-데이터-수집하기-심화.html#cb168-110"></a>    <span class="kw">names</span>(data_value) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;PER&#39;</span>, <span class="st">&#39;PBR&#39;</span>, <span class="st">&#39;PCR&#39;</span>, <span class="st">&#39;PSR&#39;</span>)</span>
+<span id="cb168-111"><a href="금융-데이터-수집하기-심화.html#cb168-111"></a>    data_value[data_value <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb168-112"><a href="금융-데이터-수집하기-심화.html#cb168-112"></a>    </span>
+<span id="cb168-113"><a href="금융-데이터-수집하기-심화.html#cb168-113"></a>  }, <span class="dt">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb168-114"><a href="금융-데이터-수집하기-심화.html#cb168-114"></a>    </span>
+<span id="cb168-115"><a href="금융-데이터-수집하기-심화.html#cb168-115"></a>    <span class="co"># 오류 발생시 해당 종목명을 출력하고 다음 루프로 이동</span></span>
+<span id="cb168-116"><a href="금융-데이터-수집하기-심화.html#cb168-116"></a>    data_fs &lt;&lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb168-117"><a href="금융-데이터-수집하기-심화.html#cb168-117"></a>    data_value &lt;&lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb168-118"><a href="금융-데이터-수집하기-심화.html#cb168-118"></a>    <span class="kw">warning</span>(<span class="kw">paste0</span>(<span class="st">&quot;Error in Ticker: &quot;</span>, name))</span>
+<span id="cb168-119"><a href="금융-데이터-수집하기-심화.html#cb168-119"></a>  })</span>
+<span id="cb168-120"><a href="금융-데이터-수집하기-심화.html#cb168-120"></a>  </span>
+<span id="cb168-121"><a href="금융-데이터-수집하기-심화.html#cb168-121"></a>  <span class="co"># 다운로드 받은 파일을 생성한 각각의 폴더 내 csv 파일로 저장</span></span>
+<span id="cb168-122"><a href="금융-데이터-수집하기-심화.html#cb168-122"></a>  </span>
+<span id="cb168-123"><a href="금융-데이터-수집하기-심화.html#cb168-123"></a>  <span class="co"># 재무제표 저장</span></span>
+<span id="cb168-124"><a href="금융-데이터-수집하기-심화.html#cb168-124"></a>  <span class="kw">write.csv</span>(data_fs, <span class="kw">paste0</span>(<span class="st">&#39;data/KOR_fs/&#39;</span>, name, <span class="st">&#39;_fs.csv&#39;</span>))</span>
+<span id="cb168-125"><a href="금융-데이터-수집하기-심화.html#cb168-125"></a>  </span>
+<span id="cb168-126"><a href="금융-데이터-수집하기-심화.html#cb168-126"></a>  <span class="co"># 가치지표 저장</span></span>
+<span id="cb168-127"><a href="금융-데이터-수집하기-심화.html#cb168-127"></a>  <span class="kw">write.csv</span>(data_value, <span class="kw">paste0</span>(<span class="st">&#39;data/KOR_value/&#39;</span>, name,</span>
+<span id="cb168-128"><a href="금융-데이터-수집하기-심화.html#cb168-128"></a>                               <span class="st">&#39;_value.csv&#39;</span>))</span>
+<span id="cb168-129"><a href="금융-데이터-수집하기-심화.html#cb168-129"></a>  </span>
+<span id="cb168-130"><a href="금융-데이터-수집하기-심화.html#cb168-130"></a>  <span class="co"># 2초간 타임슬립 적용</span></span>
+<span id="cb168-131"><a href="금융-데이터-수집하기-심화.html#cb168-131"></a>  <span class="kw">Sys.sleep</span>(<span class="dv">2</span>)</span>
+<span id="cb168-132"><a href="금융-데이터-수집하기-심화.html#cb168-132"></a>}</span></code></pre></div>
 <p>전 종목 주가 데이터를 받는 과정과 동일하게 KOR_ticker.csv 파일을 불러온 후 for loop를 통해 i 값이 변함에 따라 티커를 변경해가며 모든 종목의 재무제표 및 가치지표를 다운로드합니다. <code>tryCatch()</code> 함수를 이용해 오류가 발생하면 NA로 이루어진 빈 데이터를 저장한 후 다음 루프로 넘어가게 됩니다. data/KOR_fs 폴더에는 전 종목의 재무제표 데이터가 저장되고, data/KOR_value 폴더에는 전 종목의 가치지표 데이터가 csv 형태로 저장됩니다.</p>
 </div>
 </div>
@@ -1099,41 +1102,41 @@ Sales (매출액)
 <div id="api-key발급-및-추가하기" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> API Key발급 및 추가하기</h3>
 <p>먼저 <a href="https://opendart.fss.or.kr/에" class="uri">https://opendart.fss.or.kr/에</a> 접속한 후 [인증키 신청/관리] → [인증키 신청]을 통해 API Key를 발급 받습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-27"></span>
 <img src="images/dart_api_key.png" alt="OpenAPI 인증키 신청" width="70%" />
 <p class="caption">
-그림 6.1: OpenAPI 인증키 신청
+그림 5.4: OpenAPI 인증키 신청
 </p>
 </div>
 <p>계정을 생성하고 이메일을 통해 이용자 등록을 한 후 로그인을 합니다. 그 후 [오픈API 이용현황]을 살펴보면 <strong>API Key</strong> 부분에 발급받은 Key가 있으며, 금일 몇번의 API를 요청했는지가 일일이용현황에 나옵니다. 하루 총 10,000번까지 데이터를 요청할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-29"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
 <img src="images/dart_api_status.png" alt="OpenAPI 이용현황" width="70%" />
 <p class="caption">
-그림 6.2: OpenAPI 이용현황
+그림 6.1: OpenAPI 이용현황
 </p>
 </div>
 <p>다음으로 발급받은 API Key를 <strong>.Renviron</strong> 파일에 추가하도록 합니다. 해당 파일에는 여러 패스워드를 추가해 안전하게 관리할 수 있습니다.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="금융-데이터-수집하기-심화.html#cb171-1"></a><span class="kw">file.edit</span>(<span class="st">&quot;~/.Renviron&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="금융-데이터-수집하기-심화.html#cb169-1"></a><span class="kw">file.edit</span>(<span class="st">&quot;~/.Renviron&quot;</span>)</span></code></pre></div>
 <p><strong>.Renviron</strong> 파일이 열리면 다음과 같이 입력을 해줍니다.</p>
 <pre><code>dart_api_key = &#39;발급받은 API&#39;</code></pre>
 <p>파일을 저장한 후 해당 파일을 적용하기 위해 <strong>R의 Session을 재시작합니다.</strong> 그 후 아래 명령어를 실행하여 API Key를 불러오도록 합니다. (재시작하지 않으면 Key를 불러올 수 없습니다.)</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="금융-데이터-수집하기-심화.html#cb173-1"></a>dart_api =<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">&quot;dart_api_key&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="금융-데이터-수집하기-심화.html#cb171-1"></a>dart_api =<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">&quot;dart_api_key&quot;</span>)</span></code></pre></div>
 </div>
 <div id="고유번호-다운로드" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> 고유번호 다운로드</h3>
 <p>Open API에서 각 기업의 데이터를 받기 위해서는 종목에 해당하는 고유번호를 알아야 합니다. 이에 대한 개발가이드는 아래 페이지에 나와 있습니다.</p>
 <p><a href="https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&amp;apiId=2019018" class="uri">https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&amp;apiId=2019018</a></p>
 <p>위 페이지의 내용을 코드로 나타내보도록 합니다.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="금융-데이터-수집하기-심화.html#cb174-1"></a><span class="kw">library</span>(httr)</span>
-<span id="cb174-2"><a href="금융-데이터-수집하기-심화.html#cb174-2"></a><span class="kw">library</span>(rvest)</span>
-<span id="cb174-3"><a href="금융-데이터-수집하기-심화.html#cb174-3"></a></span>
-<span id="cb174-4"><a href="금융-데이터-수집하기-심화.html#cb174-4"></a>codezip_url =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb174-5"><a href="금융-데이터-수집하기-심화.html#cb174-5"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=&#39;</span>,dart_api)</span>
-<span id="cb174-6"><a href="금융-데이터-수집하기-심화.html#cb174-6"></a></span>
-<span id="cb174-7"><a href="금융-데이터-수집하기-심화.html#cb174-7"></a>codezip_data =<span class="st"> </span><span class="kw">GET</span>(codezip_url)</span>
-<span id="cb174-8"><a href="금융-데이터-수집하기-심화.html#cb174-8"></a><span class="kw">print</span>(codezip_data)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="금융-데이터-수집하기-심화.html#cb172-1"></a><span class="kw">library</span>(httr)</span>
+<span id="cb172-2"><a href="금융-데이터-수집하기-심화.html#cb172-2"></a><span class="kw">library</span>(rvest)</span>
+<span id="cb172-3"><a href="금융-데이터-수집하기-심화.html#cb172-3"></a></span>
+<span id="cb172-4"><a href="금융-데이터-수집하기-심화.html#cb172-4"></a>codezip_url =<span class="st"> </span><span class="kw">paste0</span>(</span>
+<span id="cb172-5"><a href="금융-데이터-수집하기-심화.html#cb172-5"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=&#39;</span>,dart_api)</span>
+<span id="cb172-6"><a href="금융-데이터-수집하기-심화.html#cb172-6"></a></span>
+<span id="cb172-7"><a href="금융-데이터-수집하기-심화.html#cb172-7"></a>codezip_data =<span class="st"> </span><span class="kw">GET</span>(codezip_url)</span>
+<span id="cb172-8"><a href="금융-데이터-수집하기-심화.html#cb172-8"></a><span class="kw">print</span>(codezip_data)</span></code></pre></div>
 <pre><code>## Response [https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=b1a630e527b0e5ff5bd58ed81b49825017fa80b8]
-##   Date: 2021-01-17 05:38
+##   Date: 2021-01-24 14:22
 ##   Status: 200
 ##   Content-Type: application/x-msdownload
 ##   Size: 1.4 MB
@@ -1144,28 +1147,28 @@ Sales (매출액)
 <li><code>GET()</code> 함수를 통해 해당 페이지 내용을 받습니다.</li>
 </ol>
 <p>다운로드 받은 내용을 확인해보면 <BINARY BODY>, 즉 바이너리 형태의 데이터가 첨부되어 있습니다. 이에 대해 좀더 자세히 알아보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="금융-데이터-수집하기-심화.html#cb177-1"></a>codezip_data<span class="op">$</span>headers[[<span class="st">&quot;content-disposition&quot;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="금융-데이터-수집하기-심화.html#cb175-1"></a>codezip_data<span class="op">$</span>headers[[<span class="st">&quot;content-disposition&quot;</span>]]</span></code></pre></div>
 <pre><code>## [1] &quot;: attachment; filename=CORPCODE.zip&quot;</code></pre>
 <p>headers의 “content-disposition” 부분을 확인해보면 <strong>CORPCODE.zip</strong> 파일이 첨부되어 있습니다. 해당 파일의 압축을 풀어 첨부된 내용을 확인합니다.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="금융-데이터-수집하기-심화.html#cb179-1"></a>tf =<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&#39;.zip&#39;</span>)</span>
-<span id="cb179-2"><a href="금융-데이터-수집하기-심화.html#cb179-2"></a></span>
-<span id="cb179-3"><a href="금융-데이터-수집하기-심화.html#cb179-3"></a><span class="kw">writeBin</span>(</span>
-<span id="cb179-4"><a href="금융-데이터-수집하기-심화.html#cb179-4"></a>  <span class="kw">content</span>(codezip_data, <span class="dt">as =</span> <span class="st">&quot;raw&quot;</span>),</span>
-<span id="cb179-5"><a href="금융-데이터-수집하기-심화.html#cb179-5"></a>  <span class="kw">file.path</span>(tf)</span>
-<span id="cb179-6"><a href="금융-데이터-수집하기-심화.html#cb179-6"></a>)</span>
-<span id="cb179-7"><a href="금융-데이터-수집하기-심화.html#cb179-7"></a></span>
-<span id="cb179-8"><a href="금융-데이터-수집하기-심화.html#cb179-8"></a>nm =<span class="st"> </span><span class="kw">unzip</span>(tf, <span class="dt">list =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb179-9"><a href="금융-데이터-수집하기-심화.html#cb179-9"></a><span class="kw">print</span>(nm)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="금융-데이터-수집하기-심화.html#cb177-1"></a>tf =<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&#39;.zip&#39;</span>)</span>
+<span id="cb177-2"><a href="금융-데이터-수집하기-심화.html#cb177-2"></a></span>
+<span id="cb177-3"><a href="금융-데이터-수집하기-심화.html#cb177-3"></a><span class="kw">writeBin</span>(</span>
+<span id="cb177-4"><a href="금융-데이터-수집하기-심화.html#cb177-4"></a>  <span class="kw">content</span>(codezip_data, <span class="dt">as =</span> <span class="st">&quot;raw&quot;</span>),</span>
+<span id="cb177-5"><a href="금융-데이터-수집하기-심화.html#cb177-5"></a>  <span class="kw">file.path</span>(tf)</span>
+<span id="cb177-6"><a href="금융-데이터-수집하기-심화.html#cb177-6"></a>)</span>
+<span id="cb177-7"><a href="금융-데이터-수집하기-심화.html#cb177-7"></a></span>
+<span id="cb177-8"><a href="금융-데이터-수집하기-심화.html#cb177-8"></a>nm =<span class="st"> </span><span class="kw">unzip</span>(tf, <span class="dt">list =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb177-9"><a href="금융-데이터-수집하기-심화.html#cb177-9"></a><span class="kw">print</span>(nm)</span></code></pre></div>
 <pre><code>##           Name   Length Date
-## 1 CORPCODE.xml 16073037 &lt;NA&gt;</code></pre>
+## 1 CORPCODE.xml 16083121 &lt;NA&gt;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>tempfile()</code> 함수 통해 빈 .zip 파일을 만듭니다.</li>
 <li><code>writeBin()</code> 함수는 바이너리 형태의 파일을 저장하는 함수이며, <code>content()</code>를 통해 첨부 파일 내용을 raw 형태로 저장합니다. 파일명은 위에서 만든 tf로 합니다.</li>
 <li><code>unzip()</code> 함수를 통해 zip 내 파일 리스트를 확인합니다.</li>
 </ol>
 <p>zip 파일 내에는 CORPCODE.xml 파일이 있으며, <code>read_xml()</code> 함수를 통해 이를 불러오도록 합니다.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="금융-데이터-수집하기-심화.html#cb181-1"></a>code_data =<span class="st"> </span><span class="kw">read_xml</span>(<span class="kw">unzip</span>(tf, nm<span class="op">$</span>Name))</span>
-<span id="cb181-2"><a href="금융-데이터-수집하기-심화.html#cb181-2"></a><span class="kw">print</span>(code_data)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="금융-데이터-수집하기-심화.html#cb179-1"></a>code_data =<span class="st"> </span><span class="kw">read_xml</span>(<span class="kw">unzip</span>(tf, nm<span class="op">$</span>Name))</span>
+<span id="cb179-2"><a href="금융-데이터-수집하기-심화.html#cb179-2"></a><span class="kw">print</span>(code_data)</span></code></pre></div>
 <pre><code>## {xml_document}
 ## &lt;result&gt;
 ##  [1] &lt;list&gt;\n  &lt;corp_code&gt;00434003&lt;/corp_code&gt;\n  &lt;co ...
@@ -1196,23 +1199,23 @@ Sales (매출액)
 <li>corp_stock: 거래소 상장 티커</li>
 </ul>
 <p>HTML의 태그를 이용해 각 부분을 추출한 후 하나의 데이터로 합치도록 하겠습니다.</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="금융-데이터-수집하기-심화.html#cb183-1"></a>corp_code =<span class="st"> </span>code_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&#39;corp_code&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
-<span id="cb183-2"><a href="금융-데이터-수집하기-심화.html#cb183-2"></a>corp_name =<span class="st"> </span>code_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&#39;corp_name&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
-<span id="cb183-3"><a href="금융-데이터-수집하기-심화.html#cb183-3"></a>corp_stock =<span class="st"> </span>code_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&#39;stock_code&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
-<span id="cb183-4"><a href="금융-데이터-수집하기-심화.html#cb183-4"></a></span>
-<span id="cb183-5"><a href="금융-데이터-수집하기-심화.html#cb183-5"></a>corp_list =<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb183-6"><a href="금융-데이터-수집하기-심화.html#cb183-6"></a>  <span class="st">&#39;code&#39;</span> =<span class="st"> </span>corp_code,</span>
-<span id="cb183-7"><a href="금융-데이터-수집하기-심화.html#cb183-7"></a>  <span class="st">&#39;name&#39;</span> =<span class="st"> </span>corp_name,</span>
-<span id="cb183-8"><a href="금융-데이터-수집하기-심화.html#cb183-8"></a>  <span class="st">&#39;stock&#39;</span> =<span class="st"> </span>corp_stock,</span>
-<span id="cb183-9"><a href="금융-데이터-수집하기-심화.html#cb183-9"></a>  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></span>
-<span id="cb183-10"><a href="금융-데이터-수집하기-심화.html#cb183-10"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="금융-데이터-수집하기-심화.html#cb181-1"></a>corp_code =<span class="st"> </span>code_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&#39;corp_code&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb181-2"><a href="금융-데이터-수집하기-심화.html#cb181-2"></a>corp_name =<span class="st"> </span>code_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&#39;corp_name&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb181-3"><a href="금융-데이터-수집하기-심화.html#cb181-3"></a>corp_stock =<span class="st"> </span>code_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&#39;stock_code&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()</span>
+<span id="cb181-4"><a href="금융-데이터-수집하기-심화.html#cb181-4"></a></span>
+<span id="cb181-5"><a href="금융-데이터-수집하기-심화.html#cb181-5"></a>corp_list =<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb181-6"><a href="금융-데이터-수집하기-심화.html#cb181-6"></a>  <span class="st">&#39;code&#39;</span> =<span class="st"> </span>corp_code,</span>
+<span id="cb181-7"><a href="금융-데이터-수집하기-심화.html#cb181-7"></a>  <span class="st">&#39;name&#39;</span> =<span class="st"> </span>corp_name,</span>
+<span id="cb181-8"><a href="금융-데이터-수집하기-심화.html#cb181-8"></a>  <span class="st">&#39;stock&#39;</span> =<span class="st"> </span>corp_stock,</span>
+<span id="cb181-9"><a href="금융-데이터-수집하기-심화.html#cb181-9"></a>  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span></span>
+<span id="cb181-10"><a href="금융-데이터-수집하기-심화.html#cb181-10"></a>)</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li><code>html_nodes()</code> 함수를 이용해 고유번호, 종목명, 상장티커를 선택한 후, <code>html_text()</code> 함수를 이용해 문자열만 추출하도록 합니다.</li>
 <li><code>data.frame()</code> 함수를 통해 데이터프레임 형식으로 묶어주도록 합니다.</li>
 </ol>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="금융-데이터-수집하기-심화.html#cb184-1"></a><span class="kw">nrow</span>(corp_list)</span></code></pre></div>
-<pre><code>## [1] 83370</code></pre>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="금융-데이터-수집하기-심화.html#cb186-1"></a><span class="kw">head</span>(corp_list)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="금융-데이터-수집하기-심화.html#cb182-1"></a><span class="kw">nrow</span>(corp_list)</span></code></pre></div>
+<pre><code>## [1] 83421</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="금융-데이터-수집하기-심화.html#cb184-1"></a><span class="kw">head</span>(corp_list)</span></code></pre></div>
 <pre><code>##       code                               name stock
 ## 1 00434003                               다코      
 ## 2 00434456                           일산약품      
@@ -1220,10 +1223,10 @@ Sales (매출액)
 ## 4 00432403                           한라판지      
 ## 5 00388953 크레디피아제이십오차유동화전문회사      
 ## 6 00179984                       연방건설산업</code></pre>
-<p>종목수를 확인해보면 83370 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="금융-데이터-수집하기-심화.html#cb188-1"></a>corp_list =<span class="st"> </span>corp_list[corp_list<span class="op">$</span>stock <span class="op">!=</span><span class="st"> &quot; &quot;</span>, ]</span>
-<span id="cb188-2"><a href="금융-데이터-수집하기-심화.html#cb188-2"></a></span>
-<span id="cb188-3"><a href="금융-데이터-수집하기-심화.html#cb188-3"></a><span class="kw">write.csv</span>(corp_list, <span class="st">&#39;data/corp_list.csv&#39;</span>)</span></code></pre></div>
+<p>종목수를 확인해보면 83421 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="금융-데이터-수집하기-심화.html#cb186-1"></a>corp_list =<span class="st"> </span>corp_list[corp_list<span class="op">$</span>stock <span class="op">!=</span><span class="st"> &quot; &quot;</span>, ]</span>
+<span id="cb186-2"><a href="금융-데이터-수집하기-심화.html#cb186-2"></a></span>
+<span id="cb186-3"><a href="금융-데이터-수집하기-심화.html#cb186-3"></a><span class="kw">write.csv</span>(corp_list, <span class="st">&#39;data/corp_list.csv&#39;</span>)</span></code></pre></div>
 </div>
 <div id="공시검색" class="section level3">
 <h3><span class="header-section-number">6.3.3</span> 공시검색</h3>
@@ -1232,73 +1235,73 @@ Sales (매출액)
 <p>먼저 공시검색 API에 대한 이해를 위해 전체 종목의 공시를 수집하도록 하며, 해당 개발가이드는 아래 페이지에 나와 있습니다.</p>
 <p><a href="https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&amp;apiId=2019001" class="uri">https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&amp;apiId=2019001</a></p>
 <p>각종 요청인자를 통해 url을 생성 후 전송하여, 요청에 맞는 데이터를 받을 수 있습니다. 공시 검색에 해당하는 인자는 다음과 같습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-39"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-38"></span>
 <img src="images/dart_api_input.png" alt="OpenAPI 요청 인자 예시" width="70%" />
 <p class="caption">
-그림 6.3: OpenAPI 요청 인자 예시
+그림 6.2: OpenAPI 요청 인자 예시
 </p>
 </div>
 <p>페이지 하단에서 인자를 입력 후 [검색]을 누르면 각 인자에 맞게 생성된 url과 그 결과를 볼 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-40"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-39"></span>
 <img src="images/dart_api_exam.png" alt="OpenAPI 테스트 예시" width="70%" />
 <p class="caption">
-그림 6.4: OpenAPI 테스트 예시
+그림 6.3: OpenAPI 테스트 예시
 </p>
 </div>
 <p>먼저 시작일과 종료일을 토대로 최근 공시 100건에 해당하는 url을 생성하도록 하겠습니다.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="금융-데이터-수집하기-심화.html#cb189-1"></a><span class="kw">library</span>(lubridate)</span>
-<span id="cb189-2"><a href="금융-데이터-수집하기-심화.html#cb189-2"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb189-3"><a href="금융-데이터-수집하기-심화.html#cb189-3"></a><span class="kw">library</span>(jsonlite)</span>
-<span id="cb189-4"><a href="금융-데이터-수집하기-심화.html#cb189-4"></a></span>
-<span id="cb189-5"><a href="금융-데이터-수집하기-심화.html#cb189-5"></a>bgn_date =<span class="st"> </span>(<span class="kw">Sys.Date</span>() <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">7</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
-<span id="cb189-6"><a href="금융-데이터-수집하기-심화.html#cb189-6"></a>end_date =<span class="st"> </span>(<span class="kw">Sys.Date</span>() ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
-<span id="cb189-7"><a href="금융-데이터-수집하기-심화.html#cb189-7"></a>notice_url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://opendart.fss.or.kr/api/list.json?crtfc_key=&#39;</span>,dart_api,<span class="st">&#39;&amp;bgn_de=&#39;</span>,</span>
-<span id="cb189-8"><a href="금융-데이터-수집하기-심화.html#cb189-8"></a>                    bgn_date,<span class="st">&#39;&amp;end_de=&#39;</span>,end_date,<span class="st">&#39;&amp;page_no=1&amp;page_count=100&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="금융-데이터-수집하기-심화.html#cb187-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb187-2"><a href="금융-데이터-수집하기-심화.html#cb187-2"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb187-3"><a href="금융-데이터-수집하기-심화.html#cb187-3"></a><span class="kw">library</span>(jsonlite)</span>
+<span id="cb187-4"><a href="금융-데이터-수집하기-심화.html#cb187-4"></a></span>
+<span id="cb187-5"><a href="금융-데이터-수집하기-심화.html#cb187-5"></a>bgn_date =<span class="st"> </span>(<span class="kw">Sys.Date</span>() <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">7</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
+<span id="cb187-6"><a href="금융-데이터-수집하기-심화.html#cb187-6"></a>end_date =<span class="st"> </span>(<span class="kw">Sys.Date</span>() ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
+<span id="cb187-7"><a href="금융-데이터-수집하기-심화.html#cb187-7"></a>notice_url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://opendart.fss.or.kr/api/list.json?crtfc_key=&#39;</span>,dart_api,<span class="st">&#39;&amp;bgn_de=&#39;</span>,</span>
+<span id="cb187-8"><a href="금융-데이터-수집하기-심화.html#cb187-8"></a>                    bgn_date,<span class="st">&#39;&amp;end_de=&#39;</span>,end_date,<span class="st">&#39;&amp;page_no=1&amp;page_count=100&#39;</span>)</span></code></pre></div>
 <p>bgn_date에는 현재로부터 일주일 전을, end_date는 오늘 날짜를, 페이지별 건수에 해당하는 page_count에는 100을 입력하도록 합니다. 그 후 홈페이지에 나와있는 예시에 맞게 url을 작성해주도록 합니다. XML 보다는 JSON 형식으로 url을 생성 후 요청하는 것이 데이터 처리 측면에서 훨씬 효율적입니다.</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="금융-데이터-수집하기-심화.html#cb190-1"></a>notice_data =<span class="st"> </span><span class="kw">fromJSON</span>(notice_url) </span>
-<span id="cb190-2"><a href="금융-데이터-수집하기-심화.html#cb190-2"></a>notice_data =<span class="st"> </span>notice_data[[<span class="st">&#39;list&#39;</span>]]</span>
-<span id="cb190-3"><a href="금융-데이터-수집하기-심화.html#cb190-3"></a></span>
-<span id="cb190-4"><a href="금융-데이터-수집하기-심화.html#cb190-4"></a><span class="kw">head</span>(notice_data)</span></code></pre></div>
-<pre><code>##   corp_code         corp_name stock_code corp_cls
-## 1  00186452        릭스솔루션     029480        K
-## 2  00231372      롯데관광개발     032350        Y
-## 3  00105138            파라텍     033540        K
-## 4  01437186 ESR켄달스퀘어리츠     365550        Y
-## 5  00249502      더블유에프엠     035290        K
-## 6  00188380      유진자산운용                   E
-##                                                                                         report_nm
-## 1                                                      최대주주변경을수반하는주식담보제공계약체결
-## 2                                                  유상증자또는주식관련사채등의발행결과(자율공시)
-## 3                                              최대주주변경을수반하는주식담보제공계약해제ㆍ취소등
-## 4                                                     자본잠식50%이상또는매출액50억원미만사실발생
-## 5                                                            기타시장안내(최대주주의의무보유관련)
-## 6 [기재정정]증권신고서(집합투자증권-신탁형)(유진지수연계증권투자신탁76호(온라인전용)[ELS-파생형])
-##         rcept_no            flr_nm rcept_dt rm
-## 1 20210115900736        릭스솔루션 20210115 코
-## 2 20210115800737      롯데관광개발 20210115 유
-## 3 20210115900735            파라텍 20210115 코
-## 4 20210115800731 ESR켄달스퀘어리츠 20210115 유
-## 5 20210115900726    코스닥시장본부 20210115 코
-## 6 20210113000532      유진자산운용 20210113</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="금융-데이터-수집하기-심화.html#cb188-1"></a>notice_data =<span class="st"> </span><span class="kw">fromJSON</span>(notice_url) </span>
+<span id="cb188-2"><a href="금융-데이터-수집하기-심화.html#cb188-2"></a>notice_data =<span class="st"> </span>notice_data[[<span class="st">&#39;list&#39;</span>]]</span>
+<span id="cb188-3"><a href="금융-데이터-수집하기-심화.html#cb188-3"></a></span>
+<span id="cb188-4"><a href="금융-데이터-수집하기-심화.html#cb188-4"></a><span class="kw">head</span>(notice_data)</span></code></pre></div>
+<pre><code>##   corp_code    corp_name stock_code corp_cls
+## 1  00128971     대림건설     001880        Y
+## 2  00689418 지와이커머스     111820        K
+## 3  00138057     써니전자     004770        Y
+## 4  00128971     대림건설     001880        Y
+## 5  00809517     아이엠텍     226350        K
+## 6  00128971     대림건설     001880        Y
+##                                      report_nm
+## 1 최대주주등소유주식변동신고서(최대주주변경시)
+## 2                 타법인주식및출자증권취득결정
+## 3                     주권관련사채권의취득결정
+## 4                                 최대주주변경
+## 5           [기재정정]주요사항보고서(감자결정)
+## 6             [기재정정]단일판매ㆍ공급계약체결
+##         rcept_no       flr_nm rcept_dt rm
+## 1 20210122800734     대림건설 20210122 유
+## 2 20210122900732 지와이커머스 20210122 코
+## 3 20210122800730     써니전자 20210122 유
+## 4 20210122800709     대림건설 20210122 유
+## 5 20210122000535     아이엠텍 20210122   
+## 6 20210122800708     대림건설 20210122 유</code></pre>
 <p><code>fromJSON()</code> 함수를 통해 JSON 데이터를 받은 후 list를 확인해보면 우리가 원하는 공시정보, 즉 일주일 전부터 100건의 공시 정보가 다운로드 되어 있습니다.</p>
 </div>
 <div id="특정-기업의-공시-검색" class="section level4">
 <h4><span class="header-section-number">6.3.3.2</span> 특정 기업의 공시 검색</h4>
 <p>이번에는 고유번호를 추가하여 원하는 기업의 공시만 확인해보록 하겠습니다. 고유번호는 위에서 다운받은 <strong>corp_list.csv</strong> 파일을 통해 확인해볼 수 있으며, 예시로 살펴볼 삼성전자의 고유번호는 00126380 입니다.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="금융-데이터-수집하기-심화.html#cb192-1"></a>bgn_date =<span class="st"> </span>(<span class="kw">Sys.Date</span>() <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">30</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
-<span id="cb192-2"><a href="금융-데이터-수집하기-심화.html#cb192-2"></a>end_date =<span class="st"> </span>(<span class="kw">Sys.Date</span>() ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
-<span id="cb192-3"><a href="금융-데이터-수집하기-심화.html#cb192-3"></a>corp_code =<span class="st"> &#39;00126380&#39;</span></span>
-<span id="cb192-4"><a href="금융-데이터-수집하기-심화.html#cb192-4"></a></span>
-<span id="cb192-5"><a href="금융-데이터-수집하기-심화.html#cb192-5"></a>notice_url_ss =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb192-6"><a href="금융-데이터-수집하기-심화.html#cb192-6"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/list.json?crtfc_key=&#39;</span>,dart_api,</span>
-<span id="cb192-7"><a href="금융-데이터-수집하기-심화.html#cb192-7"></a>  <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code, </span>
-<span id="cb192-8"><a href="금융-데이터-수집하기-심화.html#cb192-8"></a>  <span class="st">&#39;&amp;bgn_de=&#39;</span>, bgn_date,<span class="st">&#39;&amp;end_de=&#39;</span>,</span>
-<span id="cb192-9"><a href="금융-데이터-수집하기-심화.html#cb192-9"></a>  end_date,<span class="st">&#39;&amp;page_no=1&amp;page_count=100&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="금융-데이터-수집하기-심화.html#cb190-1"></a>bgn_date =<span class="st"> </span>(<span class="kw">Sys.Date</span>() <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">30</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
+<span id="cb190-2"><a href="금융-데이터-수집하기-심화.html#cb190-2"></a>end_date =<span class="st"> </span>(<span class="kw">Sys.Date</span>() ) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_remove_all</span>(<span class="st">&#39;-&#39;</span>)</span>
+<span id="cb190-3"><a href="금융-데이터-수집하기-심화.html#cb190-3"></a>corp_code =<span class="st"> &#39;00126380&#39;</span></span>
+<span id="cb190-4"><a href="금융-데이터-수집하기-심화.html#cb190-4"></a></span>
+<span id="cb190-5"><a href="금융-데이터-수집하기-심화.html#cb190-5"></a>notice_url_ss =<span class="st"> </span><span class="kw">paste0</span>(</span>
+<span id="cb190-6"><a href="금융-데이터-수집하기-심화.html#cb190-6"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/list.json?crtfc_key=&#39;</span>,dart_api,</span>
+<span id="cb190-7"><a href="금융-데이터-수집하기-심화.html#cb190-7"></a>  <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code, </span>
+<span id="cb190-8"><a href="금융-데이터-수집하기-심화.html#cb190-8"></a>  <span class="st">&#39;&amp;bgn_de=&#39;</span>, bgn_date,<span class="st">&#39;&amp;end_de=&#39;</span>,</span>
+<span id="cb190-9"><a href="금융-데이터-수집하기-심화.html#cb190-9"></a>  end_date,<span class="st">&#39;&amp;page_no=1&amp;page_count=100&#39;</span>)</span></code></pre></div>
 <p>시작일을 과거 30일로 수정하였으며, 기존 url에 <strong>&amp;corp_code=</strong> 부분을 추가하였습니다.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="금융-데이터-수집하기-심화.html#cb193-1"></a>notice_data_ss =<span class="st"> </span><span class="kw">fromJSON</span>(notice_url_ss) </span>
-<span id="cb193-2"><a href="금융-데이터-수집하기-심화.html#cb193-2"></a>notice_data_ss =<span class="st"> </span>notice_data_ss[[<span class="st">&#39;list&#39;</span>]]</span>
-<span id="cb193-3"><a href="금융-데이터-수집하기-심화.html#cb193-3"></a></span>
-<span id="cb193-4"><a href="금융-데이터-수집하기-심화.html#cb193-4"></a><span class="kw">head</span>(notice_data_ss)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="금융-데이터-수집하기-심화.html#cb191-1"></a>notice_data_ss =<span class="st"> </span><span class="kw">fromJSON</span>(notice_url_ss) </span>
+<span id="cb191-2"><a href="금융-데이터-수집하기-심화.html#cb191-2"></a>notice_data_ss =<span class="st"> </span>notice_data_ss[[<span class="st">&#39;list&#39;</span>]]</span>
+<span id="cb191-3"><a href="금융-데이터-수집하기-심화.html#cb191-3"></a></span>
+<span id="cb191-4"><a href="금융-데이터-수집하기-심화.html#cb191-4"></a><span class="kw">head</span>(notice_data_ss)</span></code></pre></div>
 <pre><code>##   corp_code corp_name stock_code corp_cls
 ## 1  00126380  삼성전자     005930        Y
 ## 2  00126380  삼성전자     005930        Y
@@ -1307,32 +1310,32 @@ Sales (매출액)
 ## 5  00126380  삼성전자     005930        Y
 ## 6  00126380  삼성전자     005930        Y
 ##                                  report_nm
-## 1   임원ㆍ주요주주특정증권등소유상황보고서
-## 2             최대주주등소유주식변동신고서
-## 3             기업설명회(IR)개최(안내공시)
-## 4 연결재무제표기준영업(잠정)실적(공정공시)
-## 5   임원ㆍ주요주주특정증권등소유상황보고서
+## 1                       횡령ㆍ배임사실확인
+## 2   임원ㆍ주요주주특정증권등소유상황보고서
+## 3             최대주주등소유주식변동신고서
+## 4             기업설명회(IR)개최(안내공시)
+## 5 연결재무제표기준영업(잠정)실적(공정공시)
 ## 6   임원ㆍ주요주주특정증권등소유상황보고서
 ##         rcept_no       flr_nm rcept_dt rm
-## 1 20210111000382       안규리 20210111   
-## 2 20210108800652     삼성전자 20210108 유
-## 3 20210108800573     삼성전자 20210108 유
-## 4 20210108800029     삼성전자 20210108 유
-## 5 20210107000257 국민연금공단 20210107   
-## 6 20210105000430       이상훈 20210105</code></pre>
+## 1 20210120800650     삼성전자 20210120 유
+## 2 20210111000382       안규리 20210111   
+## 3 20210108800652     삼성전자 20210108 유
+## 4 20210108800573     삼성전자 20210108 유
+## 5 20210108800029     삼성전자 20210108 유
+## 6 20210107000257 국민연금공단 20210107</code></pre>
 <p>역시나 JSON 형태로 손쉽게 공시정보를 다운로드 받을 수 있습니다. 이 중 rcept_no는 공시번호에 해당하며, 해당 데이터를 이용해 공시에 해당하는 url에 접속을 할 수도 있습니다.</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="금융-데이터-수집하기-심화.html#cb195-1"></a>notice_url_exam =<span class="st"> </span>notice_data_ss[<span class="dv">1</span>, <span class="st">&#39;rcept_no&#39;</span>]</span>
-<span id="cb195-2"><a href="금융-데이터-수집하기-심화.html#cb195-2"></a>notice_dart_url =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb195-3"><a href="금융-데이터-수집하기-심화.html#cb195-3"></a>  <span class="st">&#39;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=&#39;</span>,notice_url_exam)</span>
-<span id="cb195-4"><a href="금융-데이터-수집하기-심화.html#cb195-4"></a></span>
-<span id="cb195-5"><a href="금융-데이터-수집하기-심화.html#cb195-5"></a><span class="kw">print</span>(notice_dart_url)</span></code></pre></div>
-<pre><code>## [1] &quot;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20210111000382&quot;</code></pre>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="금융-데이터-수집하기-심화.html#cb193-1"></a>notice_url_exam =<span class="st"> </span>notice_data_ss[<span class="dv">1</span>, <span class="st">&#39;rcept_no&#39;</span>]</span>
+<span id="cb193-2"><a href="금융-데이터-수집하기-심화.html#cb193-2"></a>notice_dart_url =<span class="st"> </span><span class="kw">paste0</span>(</span>
+<span id="cb193-3"><a href="금융-데이터-수집하기-심화.html#cb193-3"></a>  <span class="st">&#39;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=&#39;</span>,notice_url_exam)</span>
+<span id="cb193-4"><a href="금융-데이터-수집하기-심화.html#cb193-4"></a></span>
+<span id="cb193-5"><a href="금융-데이터-수집하기-심화.html#cb193-5"></a><span class="kw">print</span>(notice_dart_url)</span></code></pre></div>
+<pre><code>## [1] &quot;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20210120800650&quot;</code></pre>
 <p>dart 홈페이지의 공시에 해당하는 url과 첫번째 공시에 해당하는 공시번호를 합쳐주도록 합니다.</p>
 <p>위 url에 접속하여 해당 공시를 좀 더 자세하게 확인할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-47"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-46"></span>
 <img src="images/dart_api_web.png" alt="공시 정보의 확인" width="70%" />
 <p class="caption">
-그림 6.5: 공시 정보의 확인
+그림 6.4: 공시 정보의 확인
 </p>
 </div>
 </div>
@@ -1346,7 +1349,7 @@ Sales (매출액)
 <p>url 생성에 필요한 요청 인자는 다음과 같습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-48">표 6.3: </span>배당에 관한 사항 주요 인자
+<span id="tab:unnamed-chunk-47">표 6.3: </span>배당에 관한 사항 주요 인자
 </caption>
 <thead>
 <tr>
@@ -1420,21 +1423,21 @@ reprt_code
 </tbody>
 </table>
 <p>이를 바탕으로 삼성전자의 2019년 사업보고서를 통해 배당에 관한 사항을 살펴보도록 하겠습니다.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="금융-데이터-수집하기-심화.html#cb197-1"></a>corp_code =<span class="st"> &#39;00126380&#39;</span></span>
-<span id="cb197-2"><a href="금융-데이터-수집하기-심화.html#cb197-2"></a>bsns_year =<span class="st"> &#39;2019&#39;</span></span>
-<span id="cb197-3"><a href="금융-데이터-수집하기-심화.html#cb197-3"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
-<span id="cb197-4"><a href="금융-데이터-수집하기-심화.html#cb197-4"></a></span>
-<span id="cb197-5"><a href="금융-데이터-수집하기-심화.html#cb197-5"></a>url_div =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://opendart.fss.or.kr/api/alotMatter.json?crtfc_key=&#39;</span>,</span>
-<span id="cb197-6"><a href="금융-데이터-수집하기-심화.html#cb197-6"></a>       dart_api, </span>
-<span id="cb197-7"><a href="금융-데이터-수집하기-심화.html#cb197-7"></a>       <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code,</span>
-<span id="cb197-8"><a href="금융-데이터-수집하기-심화.html#cb197-8"></a>       <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
-<span id="cb197-9"><a href="금융-데이터-수집하기-심화.html#cb197-9"></a>       <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code</span>
-<span id="cb197-10"><a href="금융-데이터-수집하기-심화.html#cb197-10"></a>       )</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="금융-데이터-수집하기-심화.html#cb195-1"></a>corp_code =<span class="st"> &#39;00126380&#39;</span></span>
+<span id="cb195-2"><a href="금융-데이터-수집하기-심화.html#cb195-2"></a>bsns_year =<span class="st"> &#39;2019&#39;</span></span>
+<span id="cb195-3"><a href="금융-데이터-수집하기-심화.html#cb195-3"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
+<span id="cb195-4"><a href="금융-데이터-수집하기-심화.html#cb195-4"></a></span>
+<span id="cb195-5"><a href="금융-데이터-수집하기-심화.html#cb195-5"></a>url_div =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://opendart.fss.or.kr/api/alotMatter.json?crtfc_key=&#39;</span>,</span>
+<span id="cb195-6"><a href="금융-데이터-수집하기-심화.html#cb195-6"></a>       dart_api, </span>
+<span id="cb195-7"><a href="금융-데이터-수집하기-심화.html#cb195-7"></a>       <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code,</span>
+<span id="cb195-8"><a href="금융-데이터-수집하기-심화.html#cb195-8"></a>       <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
+<span id="cb195-9"><a href="금융-데이터-수집하기-심화.html#cb195-9"></a>       <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code</span>
+<span id="cb195-10"><a href="금융-데이터-수집하기-심화.html#cb195-10"></a>       )</span></code></pre></div>
 <p>API 인증키, 고유번호, 사업년도, 보고서 코드에 각각 해당하는 데이터를 입력하여 url 생성하도록 합니다.</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="금융-데이터-수집하기-심화.html#cb198-1"></a>div_data_ss =<span class="st"> </span><span class="kw">fromJSON</span>(url_div) </span>
-<span id="cb198-2"><a href="금융-데이터-수집하기-심화.html#cb198-2"></a>div_data_ss =<span class="st"> </span>div_data_ss[[<span class="st">&#39;list&#39;</span>]]</span>
-<span id="cb198-3"><a href="금융-데이터-수집하기-심화.html#cb198-3"></a></span>
-<span id="cb198-4"><a href="금융-데이터-수집하기-심화.html#cb198-4"></a><span class="kw">head</span>(div_data_ss)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="금융-데이터-수집하기-심화.html#cb196-1"></a>div_data_ss =<span class="st"> </span><span class="kw">fromJSON</span>(url_div) </span>
+<span id="cb196-2"><a href="금융-데이터-수집하기-심화.html#cb196-2"></a>div_data_ss =<span class="st"> </span>div_data_ss[[<span class="st">&#39;list&#39;</span>]]</span>
+<span id="cb196-3"><a href="금융-데이터-수집하기-심화.html#cb196-3"></a></span>
+<span id="cb196-4"><a href="금융-데이터-수집하기-심화.html#cb196-4"></a><span class="kw">head</span>(div_data_ss)</span></code></pre></div>
 <pre><code>##         rcept_no corp_cls corp_code corp_name
 ## 1 20200330003851        Y  00126380  삼성전자
 ## 2 20200330003851        Y  00126380  삼성전자
@@ -1469,22 +1472,22 @@ reprt_code
 <li>다중회사 주요계정: <a href="https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&amp;apiId=2019017" class="uri">https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&amp;apiId=2019017</a></li>
 </ul>
 <p>먼저 단일회사(삼성전자)의 주요계정을 다운로드 받도록 하겠습니다.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="금융-데이터-수집하기-심화.html#cb200-1"></a>corp_code =<span class="st"> &#39;00126380&#39;</span></span>
-<span id="cb200-2"><a href="금융-데이터-수집하기-심화.html#cb200-2"></a>bsns_year =<span class="st"> &#39;2019&#39;</span></span>
-<span id="cb200-3"><a href="금융-데이터-수집하기-심화.html#cb200-3"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
-<span id="cb200-4"><a href="금융-데이터-수집하기-심화.html#cb200-4"></a></span>
-<span id="cb200-5"><a href="금융-데이터-수집하기-심화.html#cb200-5"></a>url_single =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb200-6"><a href="금융-데이터-수집하기-심화.html#cb200-6"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/fnlttSinglAcnt.json?crtfc_key=&#39;</span>,</span>
-<span id="cb200-7"><a href="금융-데이터-수집하기-심화.html#cb200-7"></a>  dart_api, </span>
-<span id="cb200-8"><a href="금융-데이터-수집하기-심화.html#cb200-8"></a>  <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code,</span>
-<span id="cb200-9"><a href="금융-데이터-수집하기-심화.html#cb200-9"></a>  <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
-<span id="cb200-10"><a href="금융-데이터-수집하기-심화.html#cb200-10"></a>  <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code</span>
-<span id="cb200-11"><a href="금융-데이터-수집하기-심화.html#cb200-11"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="금융-데이터-수집하기-심화.html#cb198-1"></a>corp_code =<span class="st"> &#39;00126380&#39;</span></span>
+<span id="cb198-2"><a href="금융-데이터-수집하기-심화.html#cb198-2"></a>bsns_year =<span class="st"> &#39;2019&#39;</span></span>
+<span id="cb198-3"><a href="금융-데이터-수집하기-심화.html#cb198-3"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
+<span id="cb198-4"><a href="금융-데이터-수집하기-심화.html#cb198-4"></a></span>
+<span id="cb198-5"><a href="금융-데이터-수집하기-심화.html#cb198-5"></a>url_single =<span class="st"> </span><span class="kw">paste0</span>(</span>
+<span id="cb198-6"><a href="금융-데이터-수집하기-심화.html#cb198-6"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/fnlttSinglAcnt.json?crtfc_key=&#39;</span>,</span>
+<span id="cb198-7"><a href="금융-데이터-수집하기-심화.html#cb198-7"></a>  dart_api, </span>
+<span id="cb198-8"><a href="금융-데이터-수집하기-심화.html#cb198-8"></a>  <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code,</span>
+<span id="cb198-9"><a href="금융-데이터-수집하기-심화.html#cb198-9"></a>  <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
+<span id="cb198-10"><a href="금융-데이터-수집하기-심화.html#cb198-10"></a>  <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code</span>
+<span id="cb198-11"><a href="금융-데이터-수집하기-심화.html#cb198-11"></a>  )</span></code></pre></div>
 <p>url을 생성하는 방법이 기존 <a href="금융-데이터-수집하기-심화.html#사업보고서-주요-정보">사업보고서 주요 정보</a> 에서 살펴본 바와 매우 비슷하며, <strong>/api</strong> 뒷부분을 [fnlttSinglAcnt.json] 으로 변경하기만 하면 됩니다.</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="금융-데이터-수집하기-심화.html#cb201-1"></a>fs_data_single =<span class="st"> </span><span class="kw">fromJSON</span>(url_single) </span>
-<span id="cb201-2"><a href="금융-데이터-수집하기-심화.html#cb201-2"></a>fs_data_single =<span class="st"> </span>fs_data_single[[<span class="st">&#39;list&#39;</span>]]</span>
-<span id="cb201-3"><a href="금융-데이터-수집하기-심화.html#cb201-3"></a></span>
-<span id="cb201-4"><a href="금융-데이터-수집하기-심화.html#cb201-4"></a><span class="kw">head</span>(fs_data_single)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="금융-데이터-수집하기-심화.html#cb199-1"></a>fs_data_single =<span class="st"> </span><span class="kw">fromJSON</span>(url_single) </span>
+<span id="cb199-2"><a href="금융-데이터-수집하기-심화.html#cb199-2"></a>fs_data_single =<span class="st"> </span>fs_data_single[[<span class="st">&#39;list&#39;</span>]]</span>
+<span id="cb199-3"><a href="금융-데이터-수집하기-심화.html#cb199-3"></a></span>
+<span id="cb199-4"><a href="금융-데이터-수집하기-심화.html#cb199-4"></a><span class="kw">head</span>(fs_data_single)</span></code></pre></div>
 <pre><code>##         rcept_no reprt_code bsns_year corp_code
 ## 1 20200330003851      11011      2019  00126380
 ## 2 20200330003851      11011      2019  00126380
@@ -1528,31 +1531,31 @@ reprt_code
 ## 5  20,085,548,000,000   9
 ## 6  87,260,662,000,000  11</code></pre>
 <p>연결재무제표와 재무상태표에 해당하는 주요 내용이 수집되었으며, 각 열에 해당하는 내용은 페이지의 개발가이드의 [응답 결과]에서 확인할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-53"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-52"></span>
 <img src="images/dart_single_result.png" alt="단일회사 주요계정 응답 결과" width="70%" />
 <p class="caption">
-그림 6.6: 단일회사 주요계정 응답 결과
+그림 6.5: 단일회사 주요계정 응답 결과
 </p>
 </div>
 <p>이번에는 url을 수정하여 여러 회사의 주요계정을 한번에 받도록 하겠으며, 그 예로써 삼성전자, 셀트리온, KT의 데이터를 다운로드 받도록 합니다.</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="금융-데이터-수집하기-심화.html#cb203-1"></a>corp_code =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;00126380,00413046,00190321&#39;</span>)</span>
-<span id="cb203-2"><a href="금융-데이터-수집하기-심화.html#cb203-2"></a>bsns_year =<span class="st"> &#39;2019&#39;</span></span>
-<span id="cb203-3"><a href="금융-데이터-수집하기-심화.html#cb203-3"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
-<span id="cb203-4"><a href="금융-데이터-수집하기-심화.html#cb203-4"></a></span>
-<span id="cb203-5"><a href="금융-데이터-수집하기-심화.html#cb203-5"></a>url_multiple =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb203-6"><a href="금융-데이터-수집하기-심화.html#cb203-6"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/fnlttMultiAcnt.json?crtfc_key=&#39;</span>,</span>
-<span id="cb203-7"><a href="금융-데이터-수집하기-심화.html#cb203-7"></a>  dart_api, </span>
-<span id="cb203-8"><a href="금융-데이터-수집하기-심화.html#cb203-8"></a>  <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code,</span>
-<span id="cb203-9"><a href="금융-데이터-수집하기-심화.html#cb203-9"></a>  <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
-<span id="cb203-10"><a href="금융-데이터-수집하기-심화.html#cb203-10"></a>  <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code</span>
-<span id="cb203-11"><a href="금융-데이터-수집하기-심화.html#cb203-11"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="금융-데이터-수집하기-심화.html#cb201-1"></a>corp_code =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;00126380,00413046,00190321&#39;</span>)</span>
+<span id="cb201-2"><a href="금융-데이터-수집하기-심화.html#cb201-2"></a>bsns_year =<span class="st"> &#39;2019&#39;</span></span>
+<span id="cb201-3"><a href="금융-데이터-수집하기-심화.html#cb201-3"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
+<span id="cb201-4"><a href="금융-데이터-수집하기-심화.html#cb201-4"></a></span>
+<span id="cb201-5"><a href="금융-데이터-수집하기-심화.html#cb201-5"></a>url_multiple =<span class="st"> </span><span class="kw">paste0</span>(</span>
+<span id="cb201-6"><a href="금융-데이터-수집하기-심화.html#cb201-6"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/fnlttMultiAcnt.json?crtfc_key=&#39;</span>,</span>
+<span id="cb201-7"><a href="금융-데이터-수집하기-심화.html#cb201-7"></a>  dart_api, </span>
+<span id="cb201-8"><a href="금융-데이터-수집하기-심화.html#cb201-8"></a>  <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code,</span>
+<span id="cb201-9"><a href="금융-데이터-수집하기-심화.html#cb201-9"></a>  <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
+<span id="cb201-10"><a href="금융-데이터-수집하기-심화.html#cb201-10"></a>  <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code</span>
+<span id="cb201-11"><a href="금융-데이터-수집하기-심화.html#cb201-11"></a>  )</span></code></pre></div>
 <p>먼저 corp에 원하는 기업들의 고유번호를 나열해주며, url 중 [fnlttSinglAcnt]을 [fnlttMultiAcnt]로 수정합니다.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="금융-데이터-수집하기-심화.html#cb204-1"></a>fs_data_multiple =<span class="st"> </span><span class="kw">fromJSON</span>(url_multiple) </span>
-<span id="cb204-2"><a href="금융-데이터-수집하기-심화.html#cb204-2"></a>fs_data_multiple =<span class="st"> </span>fs_data_multiple[[<span class="st">&#39;list&#39;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="금융-데이터-수집하기-심화.html#cb202-1"></a>fs_data_multiple =<span class="st"> </span><span class="kw">fromJSON</span>(url_multiple) </span>
+<span id="cb202-2"><a href="금융-데이터-수집하기-심화.html#cb202-2"></a>fs_data_multiple =<span class="st"> </span>fs_data_multiple[[<span class="st">&#39;list&#39;</span>]]</span></code></pre></div>
 <p>3개 기업의 주요계정이 하나의 데이터 프레임으로 다운로드 됩니다. 마지막으로 각 회사별로 데이터를 나눠주도록 하겠습니다.</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="금융-데이터-수집하기-심화.html#cb205-1"></a>fs_data_list =<span class="st"> </span>fs_data_multiple <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">split</span>(<span class="dt">f =</span> .<span class="op">$</span>corp_code)</span>
-<span id="cb205-2"><a href="금융-데이터-수집하기-심화.html#cb205-2"></a></span>
-<span id="cb205-3"><a href="금융-데이터-수집하기-심화.html#cb205-3"></a><span class="kw">lapply</span>(fs_data_list, head, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="금융-데이터-수집하기-심화.html#cb203-1"></a>fs_data_list =<span class="st"> </span>fs_data_multiple <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">split</span>(<span class="dt">f =</span> .<span class="op">$</span>corp_code)</span>
+<span id="cb203-2"><a href="금융-데이터-수집하기-심화.html#cb203-2"></a></span>
+<span id="cb203-3"><a href="금융-데이터-수집하기-심화.html#cb203-3"></a><span class="kw">lapply</span>(fs_data_list, head, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## $`00126380`
 ##         rcept_no reprt_code bsns_year corp_code
 ## 1 20200330003851      11011      2019  00126380
@@ -1620,22 +1623,22 @@ reprt_code
 <p>단일회사의 전체 재무제표 데이터 역시 다운로드 받을 수 있으며 개발가이드는 다음과 같습니다.</p>
 <p><a href="https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&amp;apiId=2019020" class="uri">https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS003&amp;apiId=2019020</a></p>
 <p>예제로써 삼성전자의 2019년 사업보고서에 나와있는 전체 재무제표를 다운로드 받도록 하겠습니다.</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="금융-데이터-수집하기-심화.html#cb207-1"></a>corp_code =<span class="st"> &#39;00126380&#39;</span></span>
-<span id="cb207-2"><a href="금융-데이터-수집하기-심화.html#cb207-2"></a>bsns_year =<span class="st"> </span><span class="dv">2019</span></span>
-<span id="cb207-3"><a href="금융-데이터-수집하기-심화.html#cb207-3"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
-<span id="cb207-4"><a href="금융-데이터-수집하기-심화.html#cb207-4"></a></span>
-<span id="cb207-5"><a href="금융-데이터-수집하기-심화.html#cb207-5"></a>url_fs_all =<span class="st"> </span><span class="kw">paste0</span>(</span>
-<span id="cb207-6"><a href="금융-데이터-수집하기-심화.html#cb207-6"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=&#39;</span>,</span>
-<span id="cb207-7"><a href="금융-데이터-수집하기-심화.html#cb207-7"></a>   dart_api, </span>
-<span id="cb207-8"><a href="금융-데이터-수집하기-심화.html#cb207-8"></a>   <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code,</span>
-<span id="cb207-9"><a href="금융-데이터-수집하기-심화.html#cb207-9"></a>   <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
-<span id="cb207-10"><a href="금융-데이터-수집하기-심화.html#cb207-10"></a>   <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code,<span class="st">&#39;&amp;fs_div=CFS&#39;</span></span>
-<span id="cb207-11"><a href="금융-데이터-수집하기-심화.html#cb207-11"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="금융-데이터-수집하기-심화.html#cb205-1"></a>corp_code =<span class="st"> &#39;00126380&#39;</span></span>
+<span id="cb205-2"><a href="금융-데이터-수집하기-심화.html#cb205-2"></a>bsns_year =<span class="st"> </span><span class="dv">2019</span></span>
+<span id="cb205-3"><a href="금융-데이터-수집하기-심화.html#cb205-3"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
+<span id="cb205-4"><a href="금융-데이터-수집하기-심화.html#cb205-4"></a></span>
+<span id="cb205-5"><a href="금융-데이터-수집하기-심화.html#cb205-5"></a>url_fs_all =<span class="st"> </span><span class="kw">paste0</span>(</span>
+<span id="cb205-6"><a href="금융-데이터-수집하기-심화.html#cb205-6"></a>  <span class="st">&#39;https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=&#39;</span>,</span>
+<span id="cb205-7"><a href="금융-데이터-수집하기-심화.html#cb205-7"></a>   dart_api, </span>
+<span id="cb205-8"><a href="금융-데이터-수집하기-심화.html#cb205-8"></a>   <span class="st">&#39;&amp;corp_code=&#39;</span>, corp_code,</span>
+<span id="cb205-9"><a href="금융-데이터-수집하기-심화.html#cb205-9"></a>   <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
+<span id="cb205-10"><a href="금융-데이터-수집하기-심화.html#cb205-10"></a>   <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code,<span class="st">&#39;&amp;fs_div=CFS&#39;</span></span>
+<span id="cb205-11"><a href="금융-데이터-수집하기-심화.html#cb205-11"></a>  )</span></code></pre></div>
 <p>역시나 앞선 예제들과 거의 동일화며, url의 <strong>api/</strong> 뒷 부분을 [fnlttSinglAcntAll.json] 으로 변경해주도록 합니다. 연결재무제표와 일반재무제표를 구분하는 fs_div 인자는 연결재무제표를 의미하는 CFS로 선택해줍니다.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="금융-데이터-수집하기-심화.html#cb208-1"></a>fs_data_all =<span class="st"> </span><span class="kw">fromJSON</span>(url_fs_all) </span>
-<span id="cb208-2"><a href="금융-데이터-수집하기-심화.html#cb208-2"></a>fs_data_all =<span class="st"> </span>fs_data_all[[<span class="st">&#39;list&#39;</span>]]</span>
-<span id="cb208-3"><a href="금융-데이터-수집하기-심화.html#cb208-3"></a></span>
-<span id="cb208-4"><a href="금융-데이터-수집하기-심화.html#cb208-4"></a><span class="kw">head</span>(fs_data_all)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="금융-데이터-수집하기-심화.html#cb206-1"></a>fs_data_all =<span class="st"> </span><span class="kw">fromJSON</span>(url_fs_all) </span>
+<span id="cb206-2"><a href="금융-데이터-수집하기-심화.html#cb206-2"></a>fs_data_all =<span class="st"> </span>fs_data_all[[<span class="st">&#39;list&#39;</span>]]</span>
+<span id="cb206-3"><a href="금융-데이터-수집하기-심화.html#cb206-3"></a></span>
+<span id="cb206-4"><a href="금융-데이터-수집하기-심화.html#cb206-4"></a><span class="kw">head</span>(fs_data_all)</span></code></pre></div>
 <pre><code>##         rcept_no reprt_code bsns_year corp_code sj_div
 ## 1 20200330003851      11011      2019  00126380     BS
 ## 2 20200330003851      11011      2019  00126380     BS
@@ -1679,15 +1682,15 @@ reprt_code
 ## 5     제 49 기                    5              &lt;NA&gt;
 ## 6     제 49 기                    6              &lt;NA&gt;</code></pre>
 <p>총 210개의 재무제표 항목이 다운로드 됩니다. 이 중 thstrm_nm와 thstrm_amount는 당기(금년), frmtrm_nm과 frmtrm_amount는 전기, bfefrmtrm_nm과 bfefrmtrm_amount는 전전기를 의미합니다. 따라서 해당 열을 통해 최근 3년 재무제표 만을 선택할 수도 있습니다.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="금융-데이터-수집하기-심화.html#cb210-1"></a>yr_count =<span class="st"> </span><span class="kw">str_detect</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;trm_amount&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>()</span>
-<span id="cb210-2"><a href="금융-데이터-수집하기-심화.html#cb210-2"></a>yr_name =<span class="st"> </span><span class="kw">seq</span>(bsns_year, (bsns_year <span class="op">-</span><span class="st"> </span>yr_count <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb210-3"><a href="금융-데이터-수집하기-심화.html#cb210-3"></a></span>
-<span id="cb210-4"><a href="금융-데이터-수집하기-심화.html#cb210-4"></a>fs_data_all =<span class="st"> </span>fs_data_all[, <span class="kw">c</span>(<span class="st">&#39;corp_code&#39;</span>, <span class="st">&#39;sj_nm&#39;</span>, <span class="st">&#39;account_nm&#39;</span>, <span class="st">&#39;account_detail&#39;</span>)] <span class="op">%&gt;%</span></span>
-<span id="cb210-5"><a href="금융-데이터-수집하기-심화.html#cb210-5"></a><span class="st">  </span><span class="kw">cbind</span>(fs_data_all[, <span class="kw">str_which</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;trm_amount&#39;</span>)])</span>
-<span id="cb210-6"><a href="금융-데이터-수집하기-심화.html#cb210-6"></a></span>
-<span id="cb210-7"><a href="금융-데이터-수집하기-심화.html#cb210-7"></a><span class="kw">colnames</span>(fs_data_all)[<span class="kw">str_which</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;amount&#39;</span>)] =<span class="st"> </span>yr_name</span>
-<span id="cb210-8"><a href="금융-데이터-수집하기-심화.html#cb210-8"></a></span>
-<span id="cb210-9"><a href="금융-데이터-수집하기-심화.html#cb210-9"></a><span class="kw">head</span>(fs_data_all)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="금융-데이터-수집하기-심화.html#cb208-1"></a>yr_count =<span class="st"> </span><span class="kw">str_detect</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;trm_amount&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>()</span>
+<span id="cb208-2"><a href="금융-데이터-수집하기-심화.html#cb208-2"></a>yr_name =<span class="st"> </span><span class="kw">seq</span>(bsns_year, (bsns_year <span class="op">-</span><span class="st"> </span>yr_count <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb208-3"><a href="금융-데이터-수집하기-심화.html#cb208-3"></a></span>
+<span id="cb208-4"><a href="금융-데이터-수집하기-심화.html#cb208-4"></a>fs_data_all =<span class="st"> </span>fs_data_all[, <span class="kw">c</span>(<span class="st">&#39;corp_code&#39;</span>, <span class="st">&#39;sj_nm&#39;</span>, <span class="st">&#39;account_nm&#39;</span>, <span class="st">&#39;account_detail&#39;</span>)] <span class="op">%&gt;%</span></span>
+<span id="cb208-5"><a href="금융-데이터-수집하기-심화.html#cb208-5"></a><span class="st">  </span><span class="kw">cbind</span>(fs_data_all[, <span class="kw">str_which</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;trm_amount&#39;</span>)])</span>
+<span id="cb208-6"><a href="금융-데이터-수집하기-심화.html#cb208-6"></a></span>
+<span id="cb208-7"><a href="금융-데이터-수집하기-심화.html#cb208-7"></a><span class="kw">colnames</span>(fs_data_all)[<span class="kw">str_which</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;amount&#39;</span>)] =<span class="st"> </span>yr_name</span>
+<span id="cb208-8"><a href="금융-데이터-수집하기-심화.html#cb208-8"></a></span>
+<span id="cb208-9"><a href="금융-데이터-수집하기-심화.html#cb208-9"></a><span class="kw">head</span>(fs_data_all)</span></code></pre></div>
 <pre><code>##   corp_code      sj_nm                    account_nm
 ## 1  00126380 재무상태표                      유동자산
 ## 2  00126380 재무상태표              현금및현금성자산
@@ -1718,90 +1721,90 @@ reprt_code
 <div id="전-종목-전체-재무제표-데이터-수집하기" class="section level4">
 <h4><span class="header-section-number">6.3.6.1</span> 전 종목 전체 재무제표 데이터 수집하기</h4>
 <p>for loop 구문을 이용해 고유번호에 해당하는 corp_code 부분만 변경해주면 전 종목의 API를 통해 재무제표 데이터를 손쉽게 수집할 수도 있습니다. 단, 일부 종목(대부분 금융주)의 경우 API로 파일이 제공되지 않습니다.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="금융-데이터-수집하기-심화.html#cb212-1"></a><span class="kw">library</span>(stringr)</span>
-<span id="cb212-2"><a href="금융-데이터-수집하기-심화.html#cb212-2"></a></span>
-<span id="cb212-3"><a href="금융-데이터-수집하기-심화.html#cb212-3"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb212-4"><a href="금융-데이터-수집하기-심화.html#cb212-4"></a>corp_list =<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&#39;data/corp_list.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb212-5"><a href="금융-데이터-수집하기-심화.html#cb212-5"></a></span>
-<span id="cb212-6"><a href="금융-데이터-수집하기-심화.html#cb212-6"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
-<span id="cb212-7"><a href="금융-데이터-수집하기-심화.html#cb212-7"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
-<span id="cb212-8"><a href="금융-데이터-수집하기-심화.html#cb212-8"></a></span>
-<span id="cb212-9"><a href="금융-데이터-수집하기-심화.html#cb212-9"></a>corp_list<span class="op">$</span><span class="st">&#39;code&#39;</span> =</span>
-<span id="cb212-10"><a href="금융-데이터-수집하기-심화.html#cb212-10"></a><span class="st">  </span><span class="kw">str_pad</span>(corp_list<span class="op">$</span><span class="st">&#39;code&#39;</span>, <span class="dv">8</span>, <span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
-<span id="cb212-11"><a href="금융-데이터-수집하기-심화.html#cb212-11"></a></span>
-<span id="cb212-12"><a href="금융-데이터-수집하기-심화.html#cb212-12"></a>corp_list<span class="op">$</span><span class="st">&#39;stock&#39;</span> =</span>
-<span id="cb212-13"><a href="금융-데이터-수집하기-심화.html#cb212-13"></a><span class="st">  </span><span class="kw">str_pad</span>(corp_list<span class="op">$</span><span class="st">&#39;stock&#39;</span>, <span class="dv">6</span>, <span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
-<span id="cb212-14"><a href="금융-데이터-수집하기-심화.html#cb212-14"></a></span>
-<span id="cb212-15"><a href="금융-데이터-수집하기-심화.html#cb212-15"></a>ticker_list =<span class="st"> </span>KOR_ticker <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(corp_list, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;종목코드&#39;</span> =<span class="st"> &#39;stock&#39;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb212-16"><a href="금융-데이터-수집하기-심화.html#cb212-16"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">&#39;종목코드&#39;</span>, <span class="st">&#39;종목명&#39;</span>, <span class="st">&#39;code&#39;</span>)</span>
-<span id="cb212-17"><a href="금융-데이터-수집하기-심화.html#cb212-17"></a></span>
-<span id="cb212-18"><a href="금융-데이터-수집하기-심화.html#cb212-18"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/dart_fs&#39;</span>), <span class="ot">FALSE</span>, <span class="kw">dir.create</span>(<span class="st">&#39;data/dart_fs&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="금융-데이터-수집하기-심화.html#cb210-1"></a><span class="kw">library</span>(stringr)</span>
+<span id="cb210-2"><a href="금융-데이터-수집하기-심화.html#cb210-2"></a></span>
+<span id="cb210-3"><a href="금융-데이터-수집하기-심화.html#cb210-3"></a>KOR_ticker =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/KOR_ticker.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb210-4"><a href="금융-데이터-수집하기-심화.html#cb210-4"></a>corp_list =<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&#39;data/corp_list.csv&#39;</span>, <span class="dt">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb210-5"><a href="금융-데이터-수집하기-심화.html#cb210-5"></a></span>
+<span id="cb210-6"><a href="금융-데이터-수집하기-심화.html#cb210-6"></a>KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span> =</span>
+<span id="cb210-7"><a href="금융-데이터-수집하기-심화.html#cb210-7"></a><span class="st">  </span><span class="kw">str_pad</span>(KOR_ticker<span class="op">$</span><span class="st">&#39;종목코드&#39;</span>, <span class="dv">6</span>, <span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
+<span id="cb210-8"><a href="금융-데이터-수집하기-심화.html#cb210-8"></a></span>
+<span id="cb210-9"><a href="금융-데이터-수집하기-심화.html#cb210-9"></a>corp_list<span class="op">$</span><span class="st">&#39;code&#39;</span> =</span>
+<span id="cb210-10"><a href="금융-데이터-수집하기-심화.html#cb210-10"></a><span class="st">  </span><span class="kw">str_pad</span>(corp_list<span class="op">$</span><span class="st">&#39;code&#39;</span>, <span class="dv">8</span>, <span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
+<span id="cb210-11"><a href="금융-데이터-수집하기-심화.html#cb210-11"></a></span>
+<span id="cb210-12"><a href="금융-데이터-수집하기-심화.html#cb210-12"></a>corp_list<span class="op">$</span><span class="st">&#39;stock&#39;</span> =</span>
+<span id="cb210-13"><a href="금융-데이터-수집하기-심화.html#cb210-13"></a><span class="st">  </span><span class="kw">str_pad</span>(corp_list<span class="op">$</span><span class="st">&#39;stock&#39;</span>, <span class="dv">6</span>, <span class="dt">side =</span> <span class="kw">c</span>(<span class="st">&#39;left&#39;</span>), <span class="dt">pad =</span> <span class="st">&#39;0&#39;</span>)</span>
+<span id="cb210-14"><a href="금융-데이터-수집하기-심화.html#cb210-14"></a></span>
+<span id="cb210-15"><a href="금융-데이터-수집하기-심화.html#cb210-15"></a>ticker_list =<span class="st"> </span>KOR_ticker <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(corp_list, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;종목코드&#39;</span> =<span class="st"> &#39;stock&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb210-16"><a href="금융-데이터-수집하기-심화.html#cb210-16"></a><span class="st">  </span><span class="kw">select</span>(<span class="st">&#39;종목코드&#39;</span>, <span class="st">&#39;종목명&#39;</span>, <span class="st">&#39;code&#39;</span>)</span>
+<span id="cb210-17"><a href="금융-데이터-수집하기-심화.html#cb210-17"></a></span>
+<span id="cb210-18"><a href="금융-데이터-수집하기-심화.html#cb210-18"></a><span class="kw">ifelse</span>(<span class="kw">dir.exists</span>(<span class="st">&#39;data/dart_fs&#39;</span>), <span class="ot">FALSE</span>, <span class="kw">dir.create</span>(<span class="st">&#39;data/dart_fs&#39;</span>))</span></code></pre></div>
 <p>먼저 거래소에서 받은 티커 파일과 API를 통해 받은 고유번호 파일을 불러온 후, <code>str_pad()</code> 함수를 통해 0을 채워주며, 고유번호의 경우 8자리로 구성되어 있습니다. 그 후 dart_fs 폴더를 생성해 줍니다.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="금융-데이터-수집하기-심화.html#cb213-1"></a>bsns_year =<span class="st"> </span><span class="dv">2019</span></span>
-<span id="cb213-2"><a href="금융-데이터-수집하기-심화.html#cb213-2"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
-<span id="cb213-3"><a href="금융-데이터-수집하기-심화.html#cb213-3"></a></span>
-<span id="cb213-4"><a href="금융-데이터-수집하기-심화.html#cb213-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="kw">nrow</span>(ticker_list) ) {</span>
-<span id="cb213-5"><a href="금융-데이터-수집하기-심화.html#cb213-5"></a>  </span>
-<span id="cb213-6"><a href="금융-데이터-수집하기-심화.html#cb213-6"></a>  data_fs =<span class="st"> </span><span class="kw">c</span>()</span>
-<span id="cb213-7"><a href="금융-데이터-수집하기-심화.html#cb213-7"></a>  name =<span class="st"> </span>ticker_list<span class="op">$</span>code[i]</span>
-<span id="cb213-8"><a href="금융-데이터-수집하기-심화.html#cb213-8"></a>  </span>
-<span id="cb213-9"><a href="금융-데이터-수집하기-심화.html#cb213-9"></a>  <span class="co"># 오류 발생 시 이를 무시하고 다음 루프로 진행</span></span>
-<span id="cb213-10"><a href="금융-데이터-수집하기-심화.html#cb213-10"></a>  </span>
-<span id="cb213-11"><a href="금융-데이터-수집하기-심화.html#cb213-11"></a>  <span class="kw">tryCatch</span>({</span>
-<span id="cb213-12"><a href="금융-데이터-수집하기-심화.html#cb213-12"></a>    </span>
-<span id="cb213-13"><a href="금융-데이터-수집하기-심화.html#cb213-13"></a>    <span class="co"># url 생성</span></span>
-<span id="cb213-14"><a href="금융-데이터-수집하기-심화.html#cb213-14"></a>    url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=&#39;</span>,</span>
-<span id="cb213-15"><a href="금융-데이터-수집하기-심화.html#cb213-15"></a>       dart_api, </span>
-<span id="cb213-16"><a href="금융-데이터-수집하기-심화.html#cb213-16"></a>       <span class="st">&#39;&amp;corp_code=&#39;</span>, name,</span>
-<span id="cb213-17"><a href="금융-데이터-수집하기-심화.html#cb213-17"></a>       <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
-<span id="cb213-18"><a href="금융-데이터-수집하기-심화.html#cb213-18"></a>       <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code,<span class="st">&#39;&amp;fs_div=CFS&#39;</span></span>
-<span id="cb213-19"><a href="금융-데이터-수집하기-심화.html#cb213-19"></a>       )</span>
-<span id="cb213-20"><a href="금융-데이터-수집하기-심화.html#cb213-20"></a>    </span>
-<span id="cb213-21"><a href="금융-데이터-수집하기-심화.html#cb213-21"></a>    <span class="co"># JSON 다운로드</span></span>
-<span id="cb213-22"><a href="금융-데이터-수집하기-심화.html#cb213-22"></a>    fs_data_all =<span class="st"> </span><span class="kw">fromJSON</span>(url) </span>
-<span id="cb213-23"><a href="금융-데이터-수집하기-심화.html#cb213-23"></a>    fs_data_all =<span class="st"> </span>fs_data_all[[<span class="st">&#39;list&#39;</span>]]</span>
-<span id="cb213-24"><a href="금융-데이터-수집하기-심화.html#cb213-24"></a>    </span>
-<span id="cb213-25"><a href="금융-데이터-수집하기-심화.html#cb213-25"></a>    <span class="co"># 만일 연결재무제표 없어서 NULL 반환시</span></span>
-<span id="cb213-26"><a href="금융-데이터-수집하기-심화.html#cb213-26"></a>    <span class="co"># reprt_code를 OFS 즉 재무제표 다운로드</span></span>
-<span id="cb213-27"><a href="금융-데이터-수집하기-심화.html#cb213-27"></a>    <span class="cf">if</span> (<span class="kw">is.null</span>(fs_data_all)) {</span>
-<span id="cb213-28"><a href="금융-데이터-수집하기-심화.html#cb213-28"></a>      </span>
-<span id="cb213-29"><a href="금융-데이터-수집하기-심화.html#cb213-29"></a>      url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=&#39;</span>,</span>
-<span id="cb213-30"><a href="금융-데이터-수집하기-심화.html#cb213-30"></a>       dart_api, </span>
-<span id="cb213-31"><a href="금융-데이터-수집하기-심화.html#cb213-31"></a>       <span class="st">&#39;&amp;corp_code=&#39;</span>, name,</span>
-<span id="cb213-32"><a href="금융-데이터-수집하기-심화.html#cb213-32"></a>       <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
-<span id="cb213-33"><a href="금융-데이터-수집하기-심화.html#cb213-33"></a>       <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code,<span class="st">&#39;&amp;fs_div=OFS&#39;</span></span>
-<span id="cb213-34"><a href="금융-데이터-수집하기-심화.html#cb213-34"></a>       )</span>
-<span id="cb213-35"><a href="금융-데이터-수집하기-심화.html#cb213-35"></a>      </span>
-<span id="cb213-36"><a href="금융-데이터-수집하기-심화.html#cb213-36"></a>      fs_data_all =<span class="st"> </span><span class="kw">fromJSON</span>(url) </span>
-<span id="cb213-37"><a href="금융-데이터-수집하기-심화.html#cb213-37"></a>      fs_data_all =<span class="st"> </span>fs_data_all[[<span class="st">&#39;list&#39;</span>]]</span>
-<span id="cb213-38"><a href="금융-데이터-수집하기-심화.html#cb213-38"></a>      </span>
-<span id="cb213-39"><a href="금융-데이터-수집하기-심화.html#cb213-39"></a>    }</span>
-<span id="cb213-40"><a href="금융-데이터-수집하기-심화.html#cb213-40"></a>    </span>
-<span id="cb213-41"><a href="금융-데이터-수집하기-심화.html#cb213-41"></a></span>
-<span id="cb213-42"><a href="금융-데이터-수집하기-심화.html#cb213-42"></a>    <span class="co"># 데이터 선택 후 열이름을 연도로 변경</span></span>
-<span id="cb213-43"><a href="금융-데이터-수집하기-심화.html#cb213-43"></a>    yr_count =<span class="st"> </span><span class="kw">str_detect</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;trm_amount&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>()</span>
-<span id="cb213-44"><a href="금융-데이터-수집하기-심화.html#cb213-44"></a>    yr_name =<span class="st"> </span><span class="kw">seq</span>(bsns_year, (bsns_year <span class="op">-</span><span class="st"> </span>yr_count <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
-<span id="cb213-45"><a href="금융-데이터-수집하기-심화.html#cb213-45"></a>    </span>
-<span id="cb213-46"><a href="금융-데이터-수집하기-심화.html#cb213-46"></a>    fs_data_all =<span class="st"> </span>fs_data_all[, <span class="kw">c</span>(<span class="st">&#39;corp_code&#39;</span>, <span class="st">&#39;sj_nm&#39;</span>, <span class="st">&#39;account_nm&#39;</span>, <span class="st">&#39;account_detail&#39;</span>)] <span class="op">%&gt;%</span></span>
-<span id="cb213-47"><a href="금융-데이터-수집하기-심화.html#cb213-47"></a><span class="st">      </span><span class="kw">cbind</span>(fs_data_all[, <span class="kw">str_which</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;trm_amount&#39;</span>)])</span>
-<span id="cb213-48"><a href="금융-데이터-수집하기-심화.html#cb213-48"></a>    </span>
-<span id="cb213-49"><a href="금융-데이터-수집하기-심화.html#cb213-49"></a>    <span class="kw">colnames</span>(fs_data_all)[<span class="kw">str_which</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;amount&#39;</span>)] =<span class="st"> </span>yr_name</span>
-<span id="cb213-50"><a href="금융-데이터-수집하기-심화.html#cb213-50"></a>    </span>
-<span id="cb213-51"><a href="금융-데이터-수집하기-심화.html#cb213-51"></a>  }, <span class="dt">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb213-52"><a href="금융-데이터-수집하기-심화.html#cb213-52"></a>    </span>
-<span id="cb213-53"><a href="금융-데이터-수집하기-심화.html#cb213-53"></a>    <span class="co"># 오류 발생시 해당 종목명을 출력하고 다음 루프로 이동</span></span>
-<span id="cb213-54"><a href="금융-데이터-수집하기-심화.html#cb213-54"></a>    data_fs &lt;&lt;-<span class="st"> </span><span class="ot">NA</span></span>
-<span id="cb213-55"><a href="금융-데이터-수집하기-심화.html#cb213-55"></a>    <span class="kw">warning</span>(<span class="kw">paste0</span>(<span class="st">&quot;Error in Ticker: &quot;</span>, name))</span>
-<span id="cb213-56"><a href="금융-데이터-수집하기-심화.html#cb213-56"></a>  })</span>
-<span id="cb213-57"><a href="금융-데이터-수집하기-심화.html#cb213-57"></a>  </span>
-<span id="cb213-58"><a href="금융-데이터-수집하기-심화.html#cb213-58"></a>  <span class="co"># 다운로드 받은 파일을 생성한 각각의 폴더 내 csv 파일로 저장</span></span>
-<span id="cb213-59"><a href="금융-데이터-수집하기-심화.html#cb213-59"></a>  </span>
-<span id="cb213-60"><a href="금융-데이터-수집하기-심화.html#cb213-60"></a>  <span class="co"># 재무제표 저장</span></span>
-<span id="cb213-61"><a href="금융-데이터-수집하기-심화.html#cb213-61"></a>  <span class="kw">write.csv</span>(fs_data_all, <span class="kw">paste0</span>(<span class="st">&#39;data/dart_fs/&#39;</span>, ticker_list<span class="op">$</span>종목코드[i], <span class="st">&#39;_fs_dart.csv&#39;</span>))</span>
-<span id="cb213-62"><a href="금융-데이터-수집하기-심화.html#cb213-62"></a>  </span>
-<span id="cb213-63"><a href="금융-데이터-수집하기-심화.html#cb213-63"></a>  <span class="co"># 2초간 타임슬립 적용</span></span>
-<span id="cb213-64"><a href="금융-데이터-수집하기-심화.html#cb213-64"></a>  <span class="kw">Sys.sleep</span>(<span class="dv">2</span>)</span>
-<span id="cb213-65"><a href="금융-데이터-수집하기-심화.html#cb213-65"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="금융-데이터-수집하기-심화.html#cb211-1"></a>bsns_year =<span class="st"> </span><span class="dv">2019</span></span>
+<span id="cb211-2"><a href="금융-데이터-수집하기-심화.html#cb211-2"></a>reprt_code =<span class="st"> &#39;11011&#39;</span></span>
+<span id="cb211-3"><a href="금융-데이터-수집하기-심화.html#cb211-3"></a></span>
+<span id="cb211-4"><a href="금융-데이터-수집하기-심화.html#cb211-4"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="kw">nrow</span>(ticker_list) ) {</span>
+<span id="cb211-5"><a href="금융-데이터-수집하기-심화.html#cb211-5"></a>  </span>
+<span id="cb211-6"><a href="금융-데이터-수집하기-심화.html#cb211-6"></a>  data_fs =<span class="st"> </span><span class="kw">c</span>()</span>
+<span id="cb211-7"><a href="금융-데이터-수집하기-심화.html#cb211-7"></a>  name =<span class="st"> </span>ticker_list<span class="op">$</span>code[i]</span>
+<span id="cb211-8"><a href="금융-데이터-수집하기-심화.html#cb211-8"></a>  </span>
+<span id="cb211-9"><a href="금융-데이터-수집하기-심화.html#cb211-9"></a>  <span class="co"># 오류 발생 시 이를 무시하고 다음 루프로 진행</span></span>
+<span id="cb211-10"><a href="금융-데이터-수집하기-심화.html#cb211-10"></a>  </span>
+<span id="cb211-11"><a href="금융-데이터-수집하기-심화.html#cb211-11"></a>  <span class="kw">tryCatch</span>({</span>
+<span id="cb211-12"><a href="금융-데이터-수집하기-심화.html#cb211-12"></a>    </span>
+<span id="cb211-13"><a href="금융-데이터-수집하기-심화.html#cb211-13"></a>    <span class="co"># url 생성</span></span>
+<span id="cb211-14"><a href="금융-데이터-수집하기-심화.html#cb211-14"></a>    url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=&#39;</span>,</span>
+<span id="cb211-15"><a href="금융-데이터-수집하기-심화.html#cb211-15"></a>       dart_api, </span>
+<span id="cb211-16"><a href="금융-데이터-수집하기-심화.html#cb211-16"></a>       <span class="st">&#39;&amp;corp_code=&#39;</span>, name,</span>
+<span id="cb211-17"><a href="금융-데이터-수집하기-심화.html#cb211-17"></a>       <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
+<span id="cb211-18"><a href="금융-데이터-수집하기-심화.html#cb211-18"></a>       <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code,<span class="st">&#39;&amp;fs_div=CFS&#39;</span></span>
+<span id="cb211-19"><a href="금융-데이터-수집하기-심화.html#cb211-19"></a>       )</span>
+<span id="cb211-20"><a href="금융-데이터-수집하기-심화.html#cb211-20"></a>    </span>
+<span id="cb211-21"><a href="금융-데이터-수집하기-심화.html#cb211-21"></a>    <span class="co"># JSON 다운로드</span></span>
+<span id="cb211-22"><a href="금융-데이터-수집하기-심화.html#cb211-22"></a>    fs_data_all =<span class="st"> </span><span class="kw">fromJSON</span>(url) </span>
+<span id="cb211-23"><a href="금융-데이터-수집하기-심화.html#cb211-23"></a>    fs_data_all =<span class="st"> </span>fs_data_all[[<span class="st">&#39;list&#39;</span>]]</span>
+<span id="cb211-24"><a href="금융-데이터-수집하기-심화.html#cb211-24"></a>    </span>
+<span id="cb211-25"><a href="금융-데이터-수집하기-심화.html#cb211-25"></a>    <span class="co"># 만일 연결재무제표 없어서 NULL 반환시</span></span>
+<span id="cb211-26"><a href="금융-데이터-수집하기-심화.html#cb211-26"></a>    <span class="co"># reprt_code를 OFS 즉 재무제표 다운로드</span></span>
+<span id="cb211-27"><a href="금융-데이터-수집하기-심화.html#cb211-27"></a>    <span class="cf">if</span> (<span class="kw">is.null</span>(fs_data_all)) {</span>
+<span id="cb211-28"><a href="금융-데이터-수집하기-심화.html#cb211-28"></a>      </span>
+<span id="cb211-29"><a href="금융-데이터-수집하기-심화.html#cb211-29"></a>      url =<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&#39;https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json?crtfc_key=&#39;</span>,</span>
+<span id="cb211-30"><a href="금융-데이터-수집하기-심화.html#cb211-30"></a>       dart_api, </span>
+<span id="cb211-31"><a href="금융-데이터-수집하기-심화.html#cb211-31"></a>       <span class="st">&#39;&amp;corp_code=&#39;</span>, name,</span>
+<span id="cb211-32"><a href="금융-데이터-수집하기-심화.html#cb211-32"></a>       <span class="st">&#39;&amp;bsns_year=&#39;</span>, bsns_year,</span>
+<span id="cb211-33"><a href="금융-데이터-수집하기-심화.html#cb211-33"></a>       <span class="st">&#39;&amp;reprt_code=&#39;</span>, reprt_code,<span class="st">&#39;&amp;fs_div=OFS&#39;</span></span>
+<span id="cb211-34"><a href="금융-데이터-수집하기-심화.html#cb211-34"></a>       )</span>
+<span id="cb211-35"><a href="금융-데이터-수집하기-심화.html#cb211-35"></a>      </span>
+<span id="cb211-36"><a href="금융-데이터-수집하기-심화.html#cb211-36"></a>      fs_data_all =<span class="st"> </span><span class="kw">fromJSON</span>(url) </span>
+<span id="cb211-37"><a href="금융-데이터-수집하기-심화.html#cb211-37"></a>      fs_data_all =<span class="st"> </span>fs_data_all[[<span class="st">&#39;list&#39;</span>]]</span>
+<span id="cb211-38"><a href="금융-데이터-수집하기-심화.html#cb211-38"></a>      </span>
+<span id="cb211-39"><a href="금융-데이터-수집하기-심화.html#cb211-39"></a>    }</span>
+<span id="cb211-40"><a href="금융-데이터-수집하기-심화.html#cb211-40"></a>    </span>
+<span id="cb211-41"><a href="금융-데이터-수집하기-심화.html#cb211-41"></a></span>
+<span id="cb211-42"><a href="금융-데이터-수집하기-심화.html#cb211-42"></a>    <span class="co"># 데이터 선택 후 열이름을 연도로 변경</span></span>
+<span id="cb211-43"><a href="금융-데이터-수집하기-심화.html#cb211-43"></a>    yr_count =<span class="st"> </span><span class="kw">str_detect</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;trm_amount&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>()</span>
+<span id="cb211-44"><a href="금융-데이터-수집하기-심화.html#cb211-44"></a>    yr_name =<span class="st"> </span><span class="kw">seq</span>(bsns_year, (bsns_year <span class="op">-</span><span class="st"> </span>yr_count <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb211-45"><a href="금융-데이터-수집하기-심화.html#cb211-45"></a>    </span>
+<span id="cb211-46"><a href="금융-데이터-수집하기-심화.html#cb211-46"></a>    fs_data_all =<span class="st"> </span>fs_data_all[, <span class="kw">c</span>(<span class="st">&#39;corp_code&#39;</span>, <span class="st">&#39;sj_nm&#39;</span>, <span class="st">&#39;account_nm&#39;</span>, <span class="st">&#39;account_detail&#39;</span>)] <span class="op">%&gt;%</span></span>
+<span id="cb211-47"><a href="금융-데이터-수집하기-심화.html#cb211-47"></a><span class="st">      </span><span class="kw">cbind</span>(fs_data_all[, <span class="kw">str_which</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;trm_amount&#39;</span>)])</span>
+<span id="cb211-48"><a href="금융-데이터-수집하기-심화.html#cb211-48"></a>    </span>
+<span id="cb211-49"><a href="금융-데이터-수집하기-심화.html#cb211-49"></a>    <span class="kw">colnames</span>(fs_data_all)[<span class="kw">str_which</span>(<span class="kw">colnames</span>(fs_data_all), <span class="st">&#39;amount&#39;</span>)] =<span class="st"> </span>yr_name</span>
+<span id="cb211-50"><a href="금융-데이터-수집하기-심화.html#cb211-50"></a>    </span>
+<span id="cb211-51"><a href="금융-데이터-수집하기-심화.html#cb211-51"></a>  }, <span class="dt">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb211-52"><a href="금융-데이터-수집하기-심화.html#cb211-52"></a>    </span>
+<span id="cb211-53"><a href="금융-데이터-수집하기-심화.html#cb211-53"></a>    <span class="co"># 오류 발생시 해당 종목명을 출력하고 다음 루프로 이동</span></span>
+<span id="cb211-54"><a href="금융-데이터-수집하기-심화.html#cb211-54"></a>    data_fs &lt;&lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb211-55"><a href="금융-데이터-수집하기-심화.html#cb211-55"></a>    <span class="kw">warning</span>(<span class="kw">paste0</span>(<span class="st">&quot;Error in Ticker: &quot;</span>, name))</span>
+<span id="cb211-56"><a href="금융-데이터-수집하기-심화.html#cb211-56"></a>  })</span>
+<span id="cb211-57"><a href="금융-데이터-수집하기-심화.html#cb211-57"></a>  </span>
+<span id="cb211-58"><a href="금융-데이터-수집하기-심화.html#cb211-58"></a>  <span class="co"># 다운로드 받은 파일을 생성한 각각의 폴더 내 csv 파일로 저장</span></span>
+<span id="cb211-59"><a href="금융-데이터-수집하기-심화.html#cb211-59"></a>  </span>
+<span id="cb211-60"><a href="금융-데이터-수집하기-심화.html#cb211-60"></a>  <span class="co"># 재무제표 저장</span></span>
+<span id="cb211-61"><a href="금융-데이터-수집하기-심화.html#cb211-61"></a>  <span class="kw">write.csv</span>(fs_data_all, <span class="kw">paste0</span>(<span class="st">&#39;data/dart_fs/&#39;</span>, ticker_list<span class="op">$</span>종목코드[i], <span class="st">&#39;_fs_dart.csv&#39;</span>))</span>
+<span id="cb211-62"><a href="금융-데이터-수집하기-심화.html#cb211-62"></a>  </span>
+<span id="cb211-63"><a href="금융-데이터-수집하기-심화.html#cb211-63"></a>  <span class="co"># 2초간 타임슬립 적용</span></span>
+<span id="cb211-64"><a href="금융-데이터-수집하기-심화.html#cb211-64"></a>  <span class="kw">Sys.sleep</span>(<span class="dv">2</span>)</span>
+<span id="cb211-65"><a href="금융-데이터-수집하기-심화.html#cb211-65"></a>}</span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>for loop 구문을 이용해 고유번호에 해당하는 값을 변경합니다.</li>
 <li>일부 종목의 경우 연결재무제표가 아닌 재무제표를 업로드 하는 경우가 있으며, <code>if (is.null(fs_data_all))</code> 부분을 통해 연결재무제표가 없을 경우 fs_div를 OFS로 변경하여 재무제표를 다운로드 받습니다.</li>
@@ -1818,9 +1821,8 @@ reprt_code
 <hr />
 <ol start="14">
 <li id="fn14"><p><a href="https://finance.naver.com/item/fchart.nhn?code=005930" class="uri">https://finance.naver.com/item/fchart.nhn?code=005930</a><a href="금융-데이터-수집하기-심화.html#fnref14" class="footnote-back">↩︎</a></p></li>
-<li id="fn15"><p>플래쉬가 차단되어 화면이 나오지 않는 경우, 주소창의 왼쪽 상단에 위치한 자물쇠 버튼을 클릭한 다음, Flash를 허용으로 바꾼 후 새로고침을 누르면 차트가 나오게 됩니다.<a href="금융-데이터-수집하기-심화.html#fnref15" class="footnote-back">↩︎</a></p></li>
-<li id="fn16"><p><a href="http://comp.fnguide.com/" class="uri">http://comp.fnguide.com/</a><a href="금융-데이터-수집하기-심화.html#fnref16" class="footnote-back">↩︎</a></p></li>
-<li id="fn17"><p>분모에 사용되는 재무데이터의 구체적인 항목과 발행주식수를 계산하는 방법의 차이로 인해 여러 업체에서 제공하는 가치지표와 다소 차이가 발생할 수 있습니다.<a href="금융-데이터-수집하기-심화.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p><a href="http://comp.fnguide.com/" class="uri">http://comp.fnguide.com/</a><a href="금융-데이터-수집하기-심화.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>분모에 사용되는 재무데이터의 구체적인 항목과 발행주식수를 계산하는 방법의 차이로 인해 여러 업체에서 제공하는 가치지표와 다소 차이가 발생할 수 있습니다.<a href="금융-데이터-수집하기-심화.html#fnref16" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>

@@ -10,23 +10,23 @@
 
 ### 개별종목 주가 크롤링
 
-먼저 네이버 금융에서 특정종목(예: 삼성전자)의 [차트] 탭^[https://finance.naver.com/item/fchart.nhn?code=005930]을 선택합니다.^[플래쉬가 차단되어 화면이 나오지 않는 경우, 주소창의 왼쪽 상단에 위치한 자물쇠 버튼을 클릭한 다음, Flash를 허용으로 바꾼 후 새로고침을 누르면 차트가 나오게 됩니다.] 해당 차트는 주가 데이터를 받아 그래프를 그려주는 형태입니다. 따라서 해당 데이터가 어디에서 오는지 알기 위해 개발자 도구 화면을 이용합니다.
+먼저 네이버 금융에서 특정종목(예: 삼성전자)의 [차트] 탭^[https://finance.naver.com/item/fchart.nhn?code=005930]을 선택합니다. 해당 차트는 주가 데이터를 받아 그래프를 그려주는 형태입니다. 따라서 해당 데이터가 어디에서 오는지 알기 위해 개발자 도구 화면을 이용합니다.
 
 <div class="figure" style="text-align: center">
 <img src="images/crawl_practice_price2.png" alt="네이버금융 차트의 통신기록" width="70%" />
 <p class="caption">(\#fig:unnamed-chunk-1)네이버금융 차트의 통신기록</p>
 </div>
 
-화면을 연 상태에서 [일봉] 탭을 선택하면 sise.nhn, schedule.nhn, notice.nhn 총 세 가지 항목이 생성됩니다. 이 중 sise.nhn 항목의 Request URL이 주가 데이터를 요청하는 주소입니다. 해당 URL에 접속해보겠습니다.
+화면을 연 상태에서 [일] 탭을 선택하면 나오는 항목 중 가장 상단의 항목의 Request URL이 주가 데이터를 요청하는 주소입니다. 해당 URL에 접속해보겠습니다.
 
 <div class="figure" style="text-align: center">
 <img src="images/crawl_practice_price3.png" alt="주가 데이터 페이지" width="70%" />
 <p class="caption">(\#fig:unnamed-chunk-2)주가 데이터 페이지</p>
 </div>
 
-각 날짜별로 시가, 고가, 저가, 종가, 거래량이 있으며, 주가는 모두 수정주가 기준입니다. 또한 해당 데이터가 item 태그 내 data 속성에 위치하고 있습니다.
+각 날짜별로 시가, 고가, 저가, 종가, 거래량, 외국인소지율이 있으며, 주가는 모두 수정주가 기준입니다. 
 
-URL에서 symbol= 뒤에 6자리 티커만 변경하면 해당 종목의 주가 데이터가 있는 페이지로 이동할 수 있으며, 우리가 원하는 모든 종목의 주가 데이터를 크롤링할 수 있습니다.
+URL에서 symbol= 뒤에 6자리 티커만 변경하면 해당 종목의 주가 데이터가 있는 페이지로 이동할 수 있으며, 이를 통해 우리가 원하는 모든 종목의 주가 데이터를 크롤링할 수 있습니다. 또한 startTime= 에는 시작일자를, endTime= 에는 종료일자를 입력하여 원하는 기간 만큼의 데이터를 받을 수도 있습니다. 
 
 
 ```r
@@ -71,7 +71,7 @@ print(price)
 
 ```
 ##            [,1]
-## 2021-01-19   NA
+## 2021-01-24   NA
 ```
 
 1. data 폴더 내에 KOR_price 폴더를 생성합니다.
@@ -83,92 +83,88 @@ print(price)
 ```r
 library(httr)
 library(rvest)
+library(lubridate)
+library(stringr)
+library(readr)
 
-url = paste0(
-  'https://fchart.stock.naver.com/sise.nhn?symbol=',
-  name,'&timeframe=day&count=500&requestType=0')
+from = (Sys.Date() - years(3)) %>% str_remove_all('-')
+to = Sys.Date() %>% str_remove_all('-')
+
+url = paste0('https://fchart.stock.naver.com/siseJson.nhn?symbol=', name,
+             '&requestType=1&startTime=', from, '&endTime=', to, '&timeframe=day')
+
 data = GET(url)
-data_html = read_html(data, encoding = 'EUC-KR') %>%
-  html_nodes('item') %>%
-  html_attr('data') 
+data_html = data %>% read_html %>%
+  html_text() %>%
+  read_csv()
 
-print(head(data_html))
+print(data_html)
 ```
 
 ```
-## [1] "20190110|40000|40150|39600|39800|14731699"
-## [2] "20190111|40350|40550|39950|40500|11661063"
-## [3] "20190114|40450|40700|39850|40050|11984996"
-## [4] "20190115|40050|41100|39850|41100|11492756"
-## [5] "20190116|41150|41450|40700|41450|8491595" 
-## [6] "20190117|41700|42100|41450|41950|11736903"
+## # A tibble: 1,479 x 8
+##    `[['날짜'` `'시가'` `'고가'` `'저가'` `'종가'`
+##    <chr>         <dbl>    <dbl>    <dbl>    <dbl>
+##  1  <NA>            NA       NA       NA       NA
+##  2  <NA>            NA       NA       NA       NA
+##  3  <NA>            NA       NA       NA       NA
+##  4 "[\"20180…    48860    49700    48560    49340
+##  5  <NA>            NA       NA       NA       NA
+##  6 "[\"20180…    49220    50360    49160    50260
+##  7  <NA>            NA       NA       NA       NA
+##  8 "[\"20180…    50500    50780    49840    50780
+##  9  <NA>            NA       NA       NA       NA
+## 10 "[\"20180…    51200    51480    50900    51220
+## # … with 1,469 more rows, and 3 more variables:
+## #   `'거래량'` <dbl>, `'외국인소진율']` <chr>, X8 <lgl>
 ```
 
+1. 먼저 시작일과 종료일에 해당하는 날짜를 입력합니다. `Sys.Date()`를 통해 오늘 날짜를 불러온 후, 시작일은 `years()` 함수를 이용해 3년을 빼줍니다. (원하는 기간 만큼을 빼주면 됩니다) 그 후 `str_remove_all()` 함수를 이용해 **-** 부분을 제거해 yyyymmdd 형식을 만들어 줍니다.
 1. `paste0()` 함수를 이용해 원하는 종목의 url을 생성합니다. url 중 티커에 해당하는 6자리 부분만 위에서 입력한 name으로 설정해주면 됩니다.
 2. `GET()` 함수를 통해 페이지의 데이터를 불러옵니다.
 3. `read_html()` 함수를 통해 HTML 정보를 읽어옵니다.
-4. `html_nodes()`와 `html_attr()` 함수를 통해 item 태그 및 data 속성의 데이터를 추출합니다.
+4. `html_text()` 함수를 통해 텍스트 데이터만을 추출합니다.
+5. `read_csv()` 함수로 csv 형태의 데이터를 불러옵니다.
 
-결과적으로 날짜 및 주가, 거래량 데이터가 추출됩니다. 해당 데이터는 |으로 구분되어 있으며, 이를 테이블 형태로 바꿀 필요가 있습니다.
-
-
-```r
-library(readr)
-
-price = read_delim(data_html, delim = '|')
-print(head(price))
-```
-
-```
-## # A tibble: 6 x 6
-##   `20190110` `40000` `40150` `39600` `39800` `14731699`
-##        <dbl>   <dbl>   <dbl>   <dbl>   <dbl>      <dbl>
-## 1   20190111   40350   40550   39950   40500   11661063
-## 2   20190114   40450   40700   39850   40050   11984996
-## 3   20190115   40050   41100   39850   41100   11492756
-## 4   20190116   41150   41450   40700   41450    8491595
-## 5   20190117   41700   42100   41450   41950   11736903
-## 6   20190118   42000   42400   41950   42300   11029256
-```
-
-readr 패키지의 `read_delim()` 함수를 쓰면 구분자로 이루어진 데이터를 테이블로 쉽게 변경할 수 있습니다. 데이터를 확인해보면 테이블 형태로 변경되었으며 각 열은 날짜, 시가, 고가, 저가, 종가, 거래량을 의미합니다. 이 중 우리가 필요한 날짜와 종가를 선택한 후 데이터 클렌징을 해줍니다.
+결과적으로 날짜 및 주가, 거래량, 외국인소진율 데이터가 추출됩니다. 우리에게 필요한 날짜와 종가에 해당하는 열만 선택하고, 클렌징 작업을 해주도록 하겠습니다.
 
 
 ```r
-library(lubridate)
 library(timetk)
 
-price = price[c(1, 5)] 
-price = data.frame(price)
-colnames(price) = c('Date', 'Price')
-price[, 1] = ymd(price[, 1])
+price = data_html[c(1, 5)]
+colnames(price) = (c('Date', 'Price'))
+price = na.omit(price)
+price$Date = parse_number(price$Date)
+price$Date = ymd(price$Date)
 price = tk_xts(price, date_var = Date)
- 
+
 print(tail(price))
 ```
 
 ```
 ##            Price
-## 2021-01-12 90600
-## 2021-01-13 89700
-## 2021-01-14 89700
 ## 2021-01-15 88000
 ## 2021-01-18 85000
-## 2021-01-19 86900
+## 2021-01-19 87000
+## 2021-01-20 87200
+## 2021-01-21 88100
+## 2021-01-22 86800
 ```
 
 1. 날짜에 해당하는 첫 번째 열과, 종가에 해당하는 다섯 번째 열만 선택해 저장합니다.
-2. 티블 형태의 데이터를 데이터 프레임 형태로 변경합니다.
-3. 열 이름을 Date와 Price로 변경합니다.
-4. lubridate 패키지의 `ymd()` 함수를 이용하면 yyyymmdd 형태가 yyyy-mm-dd로 변경되며 데이터 형태 또한 Date 타입으로 변경됩니다.
-5. `timetk` 패키지의 `tk_xts()` 함수를 이용해 시계열 형태로 변경하며, 인덱스는 Date 열을 설정합니다. 형태를 변경한 후 해당 열은 자동으로 삭제됩니다.
+2. 열 이름을 Date와 Price로 변경합니다.
+3. `na.omit()` 함수를 통해 NA 데이터를 삭제해줍니다.
+4. Date 열에서 숫자만을 추출하기 위해 readr 패키지의 `parse_number()` 함수를 적용합니다. 해당 함수는 문자형 데이터에서 콤마와 같은 불필요한 문자를 제거한 후 숫자형 데이터로 변경해줍니다.
+5. lubridate 패키지의 `ymd()` 함수를 이용하면 yyyymmdd 형태가 yyyy-mm-dd로 변경되며 데이터 형태 또한 Date 타입으로 변경됩니다.
+6. `timetk` 패키지의 `tk_xts()` 함수를 이용해 시계열 형태로 변경하며, 인덱스는 Date 열을 설정합니다. 형태를 변경한 후 해당 열은 자동으로 삭제됩니다.
 
 데이터를 확인해보면 우리에게 필요한 형태로 정리되었습니다.
 
 
 ```r
-write.csv(price, paste0('data/KOR_price/', name,
-                        '_price.csv'))
+write.csv(data.frame(price),
+          paste0('data/KOR_price/', name, '_price.csv'))
 ```
 
 마지막으로 해당 데이터를 data 폴더의 KOR_price 폴더 내에 티커_price.csv 이름으로 저장합니다.
@@ -185,6 +181,7 @@ library(stringr)
 library(xts)
 library(lubridate)
 library(readr)
+library(timetk)
 
 KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
 print(KOR_ticker$'종목코드'[1])
@@ -199,31 +196,29 @@ for(i in 1 : nrow(KOR_ticker) ) {
   price = xts(NA, order.by = Sys.Date()) # 빈 시계열 데이터 생성
   name = KOR_ticker$'종목코드'[i] # 티커 부분 선택
   
+  from = (Sys.Date() - years(3)) %>% str_remove_all('-') # 시작일
+  to = Sys.Date() %>% str_remove_all('-') # 종료일
+  
   # 오류 발생 시 이를 무시하고 다음 루프로 진행
   tryCatch({
     # url 생성
-    url = paste0(
-      'https://fchart.stock.naver.com/sise.nhn?symbol='
-      ,name,'&timeframe=day&count=500&requestType=0')
+    url = paste0('https://fchart.stock.naver.com/siseJson.nhn?symbol=', name,
+                 '&requestType=1&startTime=', from, '&endTime=', to, '&timeframe=day')
     
     # 이 후 과정은 위와 동일함
     # 데이터 다운로드
     data = GET(url)
-    data_html = read_html(data, encoding = 'EUC-KR') %>%
-      html_nodes("item") %>%
-      html_attr("data") 
-    
-    # 데이터 나누기
-    price = read_delim(data_html, delim = '|')
+    data_html = data %>% read_html %>%
+      html_text() %>%
+      read_csv()
     
     # 필요한 열만 선택 후 클렌징
-    price = price[c(1, 5)] 
-    price = data.frame(price)
-    colnames(price) = c('Date', 'Price')
-    price[, 1] = ymd(price[, 1])
-    
-    rownames(price) = price[, 1]
-    price[, 1] = NULL
+    price = data_html[c(1, 5)]
+    colnames(price) = (c('Date', 'Price'))
+    price = na.omit(price)
+    price$Date = parse_number(price$Date)
+    price$Date = ymd(price$Date)
+    price = tk_xts(price, date_var = Date)
     
   }, error = function(e) {
     
@@ -232,8 +227,8 @@ for(i in 1 : nrow(KOR_ticker) ) {
   })
   
   # 다운로드 받은 파일을 생성한 폴더 내 csv 파일로 저장
-  write.csv(price, paste0('data/KOR_price/', name,
-                          '_price.csv'))
+  write.csv(data.frame(price),
+            paste0('data/KOR_price/', name, '_price.csv'))
   
   # 타임슬립 적용
   Sys.sleep(2)
@@ -489,7 +484,7 @@ data 폴더의 KOR_fs 폴더 내에 티커_fs.csv 이름으로 저장합니다.
 위에서 구한 재무제표 데이터를 이용해 가치지표를 계산할 수 있습니다. 흔히 사용되는 가치지표는 **PER, PBR, PCR, PSR**이며 분자는 주가, 분모는 재무제표 데이터가 사용됩니다.
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-17)가치지표의 종류</caption>
+<caption>(\#tab:unnamed-chunk-16)가치지표의 종류</caption>
  <thead>
   <tr>
    <th style="text-align:center;"> 순서 </th>
@@ -554,7 +549,7 @@ print(value_index)
 
 <div class="figure" style="text-align: center">
 <img src="images/crawl_practice_comp_price.png" alt="Company Guide 스냅샷 화면" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-19)Company Guide 스냅샷 화면</p>
+<p class="caption">(\#fig:unnamed-chunk-18)Company Guide 스냅샷 화면</p>
 </div>
 
 주가추이 부분에 우리가 원하는 현재 주가가 있습니다. 해당 데이터의 Xpath는 다음과 같습니다.
@@ -589,12 +584,12 @@ print(price)
 ```
 
 ```
-## [1] 85000
+## [1] 86800
 ```
 
 1. url을 입력한 후, `GET()` 함수를 이용해 데이터를 불러오며, 역시나 user_agent를 추가해 줍니다.
 2. `read_html()` 함수를 이용해 HTML 데이터를 불러온 후 `html_node()` 함수에 앞서 구한 Xpath를 입력해 해당 지점의 데이터를 추출합니다.
-3. `html_text()` 함수를 통해 텍스트 데이터만을 추출하며, readr 패키지의 `parse_number()` 함수를 적용합니다. 해당 함수는 문자형 데이터에서 콤마와 같은 불필요한 문자를 제거한 후 숫자형 데이터로 변경해줍니다.
+3. `html_text()` 함수를 통해 텍스트 데이터만을 추출하며, readr 패키지의 `parse_number()` 함수를 적용합니다. 
 
 가치지표를 계산하려면 발행주식수 역시 필요합니다. 예를 들어 PER를 계산하는 방법은 다음과 같습니다.
 
@@ -664,7 +659,7 @@ print(data_value)
 
 ```
 ##    PER    PBR    PCR    PSR 
-## 23.596  1.930 11.181  2.202
+## 24.096  1.971 11.418  2.249
 ```
 
 분자에는 현재 주가를 입력하며, 분모에는 재무 데이터를 보통주 발행주식수로 나눈 값을 입력합니다. 단, 주가는 원 단위, 재무 데이터는 억 원 단위이므로, 둘 사이에 단위를 동일하게 맞춰주기 위해 분모에 억을 곱합니다. 또한 가치지표가 음수인 경우는 NA로 변경해줍니다.
@@ -830,14 +825,14 @@ DART(Data Analysis, Retrieval and Transfer System)는 금융감독원 전자공�
 
 <div class="figure" style="text-align: center">
 <img src="images/dart_api_key.png" alt="OpenAPI 인증키 신청" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-28)OpenAPI 인증키 신청</p>
+<p class="caption">(\#fig:unnamed-chunk-27)OpenAPI 인증키 신청</p>
 </div>
 
 계정을 생성하고 이메일을 통해 이용자 등록을 한 후 로그인을 합니다. 그 후 [오픈API 이용현황]을 살펴보면 **API Key** 부분에 발급받은 Key가 있으며, 금일 몇번의 API를 요청했는지가 일일이용현황에 나옵니다. 하루 총 10,000번까지 데이터를 요청할 수 있습니다.
 
 <div class="figure" style="text-align: center">
 <img src="images/dart_api_status.png" alt="OpenAPI 이용현황" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-29)OpenAPI 이용현황</p>
+<p class="caption">(\#fig:unnamed-chunk-28)OpenAPI 이용현황</p>
 </div>
 
 다음으로 발급받은 API Key를 **.Renviron** 파일에 추가하도록 합니다. 해당 파일에는 여러 패스워드를 추가해 안전하게 관리할 수 있습니다.
@@ -882,7 +877,7 @@ print(codezip_data)
 
 ```
 ## Response [https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=b1a630e527b0e5ff5bd58ed81b49825017fa80b8]
-##   Date: 2021-01-19 02:23
+##   Date: 2021-01-24 14:25
 ##   Status: 200
 ##   Content-Type: application/x-msdownload
 ##   Size: 1.4 MB
@@ -924,7 +919,7 @@ print(nm)
 
 ```
 ##           Name   Length Date
-## 1 CORPCODE.xml 16074227 <NA>
+## 1 CORPCODE.xml 16083121 <NA>
 ```
 
 1. `tempfile()` 함수 통해 빈 .zip 파일을 만듭니다.
@@ -996,7 +991,7 @@ nrow(corp_list)
 ```
 
 ```
-## [1] 83376
+## [1] 83421
 ```
 
 ```r
@@ -1013,7 +1008,7 @@ head(corp_list)
 ## 6 00179984                       연방건설산업
 ```
 
-종목수를 확인해보면 83376 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.
+종목수를 확인해보면 83421 개가 확인되며, 이 중 stock 열이 빈 종목은 거래소에 상장되지 않은 종목입니다. 따라서 해당 데이터는 삭제하여 거래소 상장 종목만을 남긴 후, csv 파일로 저장하도록 합니다.
 
 
 ```r
@@ -1034,14 +1029,14 @@ https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&apiId=2019001
 
 <div class="figure" style="text-align: center">
 <img src="images/dart_api_input.png" alt="OpenAPI 요청 인자 예시" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-39)OpenAPI 요청 인자 예시</p>
+<p class="caption">(\#fig:unnamed-chunk-38)OpenAPI 요청 인자 예시</p>
 </div>
 
 페이지 하단에서 인자를 입력 후 [검색]을 누르면 각 인자에 맞게 생성된 url과 그 결과를 볼 수 있습니다.
 
 <div class="figure" style="text-align: center">
 <img src="images/dart_api_exam.png" alt="OpenAPI 테스트 예시" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-40)OpenAPI 테스트 예시</p>
+<p class="caption">(\#fig:unnamed-chunk-39)OpenAPI 테스트 예시</p>
 </div>
 
 먼저 시작일과 종료일을 토대로 최근 공시 100건에 해당하는 url을 생성하도록 하겠습니다. 
@@ -1070,26 +1065,26 @@ head(notice_data)
 
 ```
 ##   corp_code    corp_name stock_code corp_cls
-## 1  00159795     한국카본     017960        Y
-## 2  00542898     하이소닉     106080        K
-## 3  00160588         한화     000880        Y
-## 4  01142075         핑거                   E
-## 5  00138321 신한금융투자     008670        E
-## 6  01142075         핑거                   E
-##                                report_nm       rcept_no
-## 1       주식등의대량보유상황보고서(일반) 20210119000046
-## 2       주식등의대량보유상황보고서(약식) 20210119000044
-## 3 타법인주식및출자증권취득결정(자율공시) 20210119800139
-## 4                   [기재정정]투자설명서 20210119000043
-## 5                     증권발행실적보고서 20210119000042
-## 6     [발행조건확정]증권신고서(지분증권) 20210119000041
-##         flr_nm rcept_dt rm
-## 1       조문수 20210119   
-## 2       최영호 20210119   
-## 3         한화 20210119 유
-## 4         핑거 20210119   
-## 5 신한금융투자 20210119   
-## 6         핑거 20210119
+## 1  00128971     대림건설     001880        Y
+## 2  00689418 지와이커머스     111820        K
+## 3  00138057     써니전자     004770        Y
+## 4  00128971     대림건설     001880        Y
+## 5  00809517     아이엠텍     226350        K
+## 6  00128971     대림건설     001880        Y
+##                                      report_nm
+## 1 최대주주등소유주식변동신고서(최대주주변경시)
+## 2                 타법인주식및출자증권취득결정
+## 3                     주권관련사채권의취득결정
+## 4                                 최대주주변경
+## 5           [기재정정]주요사항보고서(감자결정)
+## 6             [기재정정]단일판매ㆍ공급계약체결
+##         rcept_no       flr_nm rcept_dt rm
+## 1 20210122800734     대림건설 20210122 유
+## 2 20210122900732 지와이커머스 20210122 코
+## 3 20210122800730     써니전자 20210122 유
+## 4 20210122800709     대림건설 20210122 유
+## 5 20210122000535     아이엠텍 20210122   
+## 6 20210122800708     대림건설 20210122 유
 ```
 
 `fromJSON()` 함수를 통해 JSON 데이터를 받은 후 list를 확인해보면 우리가 원하는 공시정보, 즉 일주일 전부터 100건의 공시 정보가 다운로드 되어 있습니다.
@@ -1130,19 +1125,19 @@ head(notice_data_ss)
 ## 5  00126380  삼성전자     005930        Y
 ## 6  00126380  삼성전자     005930        Y
 ##                                  report_nm
-## 1   임원ㆍ주요주주특정증권등소유상황보고서
-## 2             최대주주등소유주식변동신고서
-## 3             기업설명회(IR)개최(안내공시)
-## 4 연결재무제표기준영업(잠정)실적(공정공시)
-## 5   임원ㆍ주요주주특정증권등소유상황보고서
+## 1                       횡령ㆍ배임사실확인
+## 2   임원ㆍ주요주주특정증권등소유상황보고서
+## 3             최대주주등소유주식변동신고서
+## 4             기업설명회(IR)개최(안내공시)
+## 5 연결재무제표기준영업(잠정)실적(공정공시)
 ## 6   임원ㆍ주요주주특정증권등소유상황보고서
 ##         rcept_no       flr_nm rcept_dt rm
-## 1 20210111000382       안규리 20210111   
-## 2 20210108800652     삼성전자 20210108 유
-## 3 20210108800573     삼성전자 20210108 유
-## 4 20210108800029     삼성전자 20210108 유
-## 5 20210107000257 국민연금공단 20210107   
-## 6 20210105000430       이상훈 20210105
+## 1 20210120800650     삼성전자 20210120 유
+## 2 20210111000382       안규리 20210111   
+## 3 20210108800652     삼성전자 20210108 유
+## 4 20210108800573     삼성전자 20210108 유
+## 5 20210108800029     삼성전자 20210108 유
+## 6 20210107000257 국민연금공단 20210107
 ```
 
 역시나 JSON 형태로 손쉽게 공시정보를 다운로드 받을 수 있습니다. 이 중 rcept_no는 공시번호에 해당하며, 해당 데이터를 이용해 공시에 해당하는 url에 접속을 할 수도 있습니다.
@@ -1158,7 +1153,7 @@ print(notice_dart_url)
 ```
 
 ```
-## [1] "http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20210111000382"
+## [1] "http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20210120800650"
 ```
 
 dart 홈페이지의 공시에 해당하는 url과 첫번째 공시에 해당하는 공시번호를 합쳐주도록 합니다.
@@ -1169,7 +1164,7 @@ dart 홈페이지의 공시에 해당하는 url과 첫번째 공시에 해당하
 
 <div class="figure" style="text-align: center">
 <img src="images/dart_api_web.png" alt="공시 정보의 확인" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-47)공시 정보의 확인</p>
+<p class="caption">(\#fig:unnamed-chunk-46)공시 정보의 확인</p>
 </div>
 
 ### 사업보고서 주요 정보
@@ -1186,7 +1181,7 @@ url 생성에 필요한 요청 인자는 다음과 같습니다.
 
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:unnamed-chunk-48)배당에 관한 사항 주요 인자</caption>
+<caption>(\#tab:unnamed-chunk-47)배당에 관한 사항 주요 인자</caption>
  <thead>
   <tr>
    <th style="text-align:left;"> 키 </th>
@@ -1360,7 +1355,7 @@ head(fs_data_single)
 
 <div class="figure" style="text-align: center">
 <img src="images/dart_single_result.png" alt="단일회사 주요계정 응답 결과" width="70%" />
-<p class="caption">(\#fig:unnamed-chunk-53)단일회사 주요계정 응답 결과</p>
+<p class="caption">(\#fig:unnamed-chunk-52)단일회사 주요계정 응답 결과</p>
 </div>
 
 이번에는 url을 수정하여 여러 회사의 주요계정을 한번에 받도록 하겠으며, 그 예로써 삼성전자, 셀트리온, KT의 데이터를 다운로드 받도록 합니다.

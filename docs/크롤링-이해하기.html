@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2021-01-17" />
+<meta name="date" content="2021-01-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -525,26 +525,26 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>위 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장됩니다. 이처럼 개발자 도구 화면을 통해 내가 추출하고자 하는 데이터가 HTML 중 어디에 위치하고 있는지 먼저 확인하면 어렵지 않게 해당 데이터를 읽어올 수 있습니다.</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="크롤링-이해하기.html#cb61-1"></a><span class="kw">print</span>(data_title)</span></code></pre></div>
-<pre><code>##  [1] &quot;거래소, 시장정보포털 &#39;KRX 정보데&quot;    
-##  [2] &quot;거래소, 상장사 ESG 정보공개 가이&quot;    
-##  [3] &quot;美 바이든 정부 공식 출범…韓 조정 &quot;   
-##  [4] &quot;금감원, 삼성증권 종합검사 이르면 1&quot;  
-##  [5] &quot;포모증후군?, 증시 변동성 높아져도.&quot;  
-##  [6] &quot;3년간 공매도 수익 9170억…개미 &quot;      
-##  [7] &quot;엠씨넥스에 대한 기대감이 솔솔 높아지&quot;
-##  [8] &quot;바이든 정부 공식 출범…지수 상승 부&quot;  
-##  [9] &quot;대작 줄줄이 개봉...CGV 웃을 수&quot;      
-## [10] &quot;[fn마켓워치] 변동성 커진 두산인프&quot;   
-## [11] &quot;거래소, `KRX 정보데이터시스템` &quot;     
-## [12] &quot;거래소, `ESG 정보공개 가이던스`&quot;     
-## [13] &quot;한국거래소, 시장정보포털 &#39;KRX정보&quot;   
-## [14] &quot;컴투스, 신작 줄줄이 출시…‘백년전쟁&quot;  
-## [15] &quot;&#39;ESG 정보공개 가이던스&#39; 제정…온&quot;     
-## [16] &quot;한국거래소, ESG 투자 활성화 속도&quot;    
-## [17] &quot;증권·파생상품시장 정보 한 눈에...&quot;   
-## [18] &quot;뜨거운 증시만큼 달궈진 IPO 시장 &quot;    
-## [19] &quot;한국거래소 &#39;ESG 정보공개 가이던스&quot;   
-## [20] &quot;주식 정보 여기서 다 본다…거래소, &quot;</code></pre>
+<pre><code>##  [1] &quot;버티느냐 마느냐... 2주새 30% &quot;      
+##  [2] &quot;“태어났더니 금수저”... 돌도 안된&quot;   
+##  [3] &quot;10억 계좌 40%, 1000만원 계&quot;         
+##  [4] &quot;\&quot;96층에 사람있어요\&quot;…삼성전자 &#39;게&quot; 
+##  [5] &quot;이번주 실적시즌…4분기 실적보다 &#39;이&quot; 
+##  [6] &quot;지금 사면 100% 수익?...&#39;빚투&quot;       
+##  [7] &quot;430억 등치고 호화 생활한 회장님 &quot;   
+##  [8] &quot;\&quot;인튜이티브 서지컬, 코로나19 장기&quot; 
+##  [9] &quot;총수 공백으로 빠진 주가, 여전히 완&quot; 
+## [10] &quot;[해외주식 톺아보기]전기차, 비야디(&quot; 
+## [11] &quot;\&quot;세종공업, 주요 고객사의 수소차 라&quot;
+## [12] &quot;법원, 현대차증권 `파킹거래` 인정…&quot;  
+## [13] &quot;[표] 주요국 증시 주간 동향&quot;         
+## [14] &quot;상장사 10세 이하 &#39;金수저&#39; 주주 &quot;    
+## [15] &quot;세 회사로 쪼갠 대림산업…DL·DL이&quot;    
+## [16] &quot;새해 22% 오른 LG…목표주가 15&quot;       
+## [17] &quot;[표] 주간 주요 증시 지표&quot;           
+## [18] &quot;LG에너지솔루션, 그룹 재편에 IPO&quot;    
+## [19] &quot;\&quot;지니언스, 국내 네트워크 접근제어 &quot;
+## [20] &quot;[단독]1,200만 가입자 발판삼아·&quot;</code></pre>
 </div>
 <div id="기업공시채널에서-오늘의-공시-불러오기" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
@@ -643,12 +643,27 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <span id="cb66-20"><a href="크롤링-이해하기.html#cb66-20"></a></span>
 <span id="cb66-21"><a href="크롤링-이해하기.html#cb66-21"></a><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;Korean&quot;</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="크롤링-이해하기.html#cb67-1"></a><span class="kw">print</span>(<span class="kw">head</span>(data))</span></code></pre></div>
-<pre><code>##      NA                 NA
-## 1 16:22 케이티스카이라이프
-##                                    NA
-## 1 [정정]기업설명회(IR) 개최(안내공시)
-##                   NA                             NA
-## 1 케이티스카이라이프 공시차트\r\n\t\t\t\t\t주가차트</code></pre>
+<pre><code>##      NA           NA
+## 1 18:24          KMH
+## 2 18:19 대한그린파워
+## 3 18:19 대한그린파워
+## 4 18:17 이더블유케이
+## 5 18:08             
+## 6 18:08             
+##                                                         NA
+## 1                     소송등의제기(전환사채발행금지가처분)
+## 2                     증권 발행결과(자율공시)(제31회차 CB)
+## 3 전환사채(해외전환사채포함)발행후만기전사채취득(제28회차)
+## 4                              전환사채권발행결정(제4회차)
+## 5                         자기주식매매신청내역(코스닥시장)
+## 6                                 대량매매내역(코스닥시장)
+##               NA                             NA
+## 1   케이엠에이치 공시차트\r\n\t\t\t\t\t주가차트
+## 2   퍼시픽바이오 공시차트\r\n\t\t\t\t\t주가차트
+## 3   퍼시픽바이오 공시차트\r\n\t\t\t\t\t주가차트
+## 4   이더블유케이 공시차트\r\n\t\t\t\t\t주가차트
+## 5 코스닥시장본부                               
+## 6 코스닥시장본부</code></pre>
 </div>
 <div id="네이버-금융에서-주식티커-크롤링" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> 네이버 금융에서 주식티커 크롤링</h3>
@@ -748,52 +763,38 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>저장된 테이블 내용을 확인하면 다음과 같습니다.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="크롤링-이해하기.html#cb78-1"></a><span class="kw">print</span>(<span class="kw">head</span>(table))</span></code></pre></div>
-<pre><code>##    N           종목명  현재가 전일비 등락률 액면가
-## 1 NA                                              
-## 2  1         삼성전자  88,000  1,700 -1.90%    100
-## 3  2       SK하이닉스 127,500  3,000 -2.30%  5,000
-## 4  3           LG화학 979,000 31,000 -3.07%  5,000
-## 5  4       삼성전자우  77,600  1,200 -1.52%    100
-## 6  5 삼성바이오로직스 804,000 12,000 -1.47%  2,500
-##    시가총액 상장주식수 외국인비율     거래량    PER
-## 1                              NA              &lt;NA&gt;
-## 2 5,253,409  5,969,783      55.57 33,117,980  24.03
-## 3   928,203    728,002      50.20  4,763,450  32.34
-## 4   691,099     70,592      43.59    442,295  91.47
-## 5   638,560    822,887      80.52  3,116,433  21.19
-## 6   531,967     66,165      10.40    136,954 149.69
-##    ROE 토론실
-## 1 &lt;NA&gt;     NA
-## 2 8.69     NA
-## 3 4.25     NA
-## 4 1.84     NA
-## 5  N/A     NA
-## 6 4.77     NA</code></pre>
+<pre><code>##    N     종목명  현재가 전일비 등락률 액면가  시가총액
+## 1 NA                                                  
+## 2  1   삼성전자  86,800  1,300 -1.48%    100 5,181,771
+## 3  2 SK하이닉스 128,500  3,000 -2.28%  5,000   935,483
+## 4  3     LG화학 975,000 13,000 -1.32%  5,000   688,275
+## 5  4 삼성전자우  77,600      0  0.00%    100   638,560
+## 6  5      NAVER 343,500 21,000 +6.51%    100   564,245
+##   상장주식수 외국인비율     거래량   PER   ROE 토론실
+## 1                    NA             &lt;NA&gt;  &lt;NA&gt;     NA
+## 2  5,969,783      55.49 30,430,330 23.70  8.69     NA
+## 3    728,002      50.16  3,914,900 32.60  4.25     NA
+## 4     70,592      43.70    385,932 91.10  1.84     NA
+## 5    822,887      80.26  3,006,672 21.19   N/A     NA
+## 6    164,263      56.80  3,258,379 68.39 10.56     NA</code></pre>
 <p>이 중 마지막 열인 토론실은 필요 없는 열이며, 첫 번째 행과 같이 아무런 정보가 없는 행도 있습니다. 이를 다음과 같이 정리해줍니다.</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="크롤링-이해하기.html#cb80-1"></a>table[, <span class="kw">ncol</span>(table)] =<span class="st"> </span><span class="ot">NULL</span></span>
 <span id="cb80-2"><a href="크롤링-이해하기.html#cb80-2"></a>table =<span class="st"> </span><span class="kw">na.omit</span>(table)</span>
 <span id="cb80-3"><a href="크롤링-이해하기.html#cb80-3"></a><span class="kw">print</span>(<span class="kw">head</span>(table))</span></code></pre></div>
-<pre><code>##    N           종목명  현재가 전일비 등락률 액면가
-## 2  1         삼성전자  88,000  1,700 -1.90%    100
-## 3  2       SK하이닉스 127,500  3,000 -2.30%  5,000
-## 4  3           LG화학 979,000 31,000 -3.07%  5,000
-## 5  4       삼성전자우  77,600  1,200 -1.52%    100
-## 6  5 삼성바이오로직스 804,000 12,000 -1.47%  2,500
-## 10 6           현대차 240,000 10,500 -4.19%  5,000
-##     시가총액 상장주식수 외국인비율     거래량    PER
-## 2  5,253,409  5,969,783      55.57 33,117,980  24.03
-## 3    928,203    728,002      50.20  4,763,450  32.34
-## 4    691,099     70,592      43.59    442,295  91.47
-## 5    638,560    822,887      80.52  3,116,433  21.19
-## 6    531,967     66,165      10.40    136,954 149.69
-## 10   512,804    213,668      30.95  3,863,728  57.35
-##     ROE
-## 2  8.69
-## 3  4.25
-## 4  1.84
-## 5   N/A
-## 6  4.77
-## 10 4.32</code></pre>
+<pre><code>##    N     종목명  현재가 전일비 등락률 액면가  시가총액
+## 2  1   삼성전자  86,800  1,300 -1.48%    100 5,181,771
+## 3  2 SK하이닉스 128,500  3,000 -2.28%  5,000   935,483
+## 4  3     LG화학 975,000 13,000 -1.32%  5,000   688,275
+## 5  4 삼성전자우  77,600      0  0.00%    100   638,560
+## 6  5      NAVER 343,500 21,000 +6.51%    100   564,245
+## 10 6     현대차 257,000  7,500 -2.84%  5,000   549,127
+##    상장주식수 외국인비율     거래량   PER   ROE
+## 2   5,969,783      55.49 30,430,330 23.70  8.69
+## 3     728,002      50.16  3,914,900 32.60  4.25
+## 4      70,592      43.70    385,932 91.10  1.84
+## 5     822,887      80.26  3,006,672 21.19   N/A
+## 6     164,263      56.80  3,258,379 68.39 10.56
+## 10    213,668      31.29  2,071,264 61.41  4.32</code></pre>
 <p>이제 필요한 정보는 6자리 티커입니다. 티커 역시 개발자 도구 화면을 통해 tbody → td → a 태그의 href 속성에 위치하고 있음을 알고 있습니다. 티커를 추출하는 코드는 다음과 같습니다.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="크롤링-이해하기.html#cb82-1"></a>symbol =<span class="st"> </span><span class="kw">read_html</span>(down_table, <span class="dt">encoding =</span> <span class="st">&#39;EUC-KR&#39;</span>) <span class="op">%&gt;%</span></span>
 <span id="cb82-2"><a href="크롤링-이해하기.html#cb82-2"></a><span class="st">  </span><span class="kw">html_nodes</span>(., <span class="st">&#39;tbody&#39;</span>) <span class="op">%&gt;%</span></span>
@@ -810,8 +811,8 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 ##  [6] &quot;/item/board.nhn?code=051910&quot;
 ##  [7] &quot;/item/main.nhn?code=005935&quot; 
 ##  [8] &quot;/item/board.nhn?code=005935&quot;
-##  [9] &quot;/item/main.nhn?code=207940&quot; 
-## [10] &quot;/item/board.nhn?code=207940&quot;</code></pre>
+##  [9] &quot;/item/main.nhn?code=035420&quot; 
+## [10] &quot;/item/board.nhn?code=035420&quot;</code></pre>
 <ol style="list-style-type: decimal">
 <li><code>read_html()</code> 함수를 통해 HTML 정보를 읽어오며, 인코딩은 EUC-KR로 설정합니다.</li>
 <li><code>html_nodes()</code> 함수를 통해 tbody 태그 정보를 불러옵니다.</li>
@@ -834,14 +835,14 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 ##                    &quot;051910&quot;                    &quot;051910&quot; 
 ##  /item/main.nhn?code=005935 /item/board.nhn?code=005935 
 ##                    &quot;005935&quot;                    &quot;005935&quot; 
-##  /item/main.nhn?code=207940 /item/board.nhn?code=207940 
-##                    &quot;207940&quot;                    &quot;207940&quot;</code></pre>
+##  /item/main.nhn?code=035420 /item/board.nhn?code=035420 
+##                    &quot;035420&quot;                    &quot;035420&quot;</code></pre>
 <p><code>sapply()</code> 함수를 통해 symbol 변수의 내용들에 <code>function()</code>을 적용하며, <code>stringr</code> 패키지의 <code>str_sub()</code> 함수를 이용해 마지막6자리 글자만 추출합니다.</p>
 <p>결과를 살펴보면 티커에 해당하는 마지막 6글자만 추출되지만 동일한 내용이 두 번 연속해 추출됩니다. 이는 main.nhn?code=에 해당하는 부분은 종목명에 설정된 링크, board.nhn?code=에 해당하는 부분은 토론실에 설정된 링크이기 때문입니다.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="크롤링-이해하기.html#cb86-1"></a>symbol =<span class="st"> </span><span class="kw">unique</span>(symbol)</span>
 <span id="cb86-2"><a href="크롤링-이해하기.html#cb86-2"></a><span class="kw">print</span>(<span class="kw">head</span>(symbol, <span class="dv">10</span>))</span></code></pre></div>
-<pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;051910&quot; &quot;005935&quot; &quot;207940&quot;
-##  [6] &quot;005380&quot; &quot;006400&quot; &quot;035420&quot; &quot;068270&quot; &quot;035720&quot;</code></pre>
+<pre><code>##  [1] &quot;005930&quot; &quot;000660&quot; &quot;051910&quot; &quot;005935&quot; &quot;035420&quot;
+##  [6] &quot;005380&quot; &quot;006400&quot; &quot;207940&quot; &quot;068270&quot; &quot;035720&quot;</code></pre>
 <p><code>unique()</code> 함수를 이용해 중복되는 티커를 제거하면 우리가 원하는 티커 부분만 깔끔하게 정리됩니다. 해당 내용을 위에서 구한 테이블에 입력한 후 데이터를 다듬는 과정은 다음과 같습니다.</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="크롤링-이해하기.html#cb88-1"></a>table<span class="op">$</span>N =<span class="st"> </span>symbol</span>
 <span id="cb88-2"><a href="크롤링-이해하기.html#cb88-2"></a><span class="kw">colnames</span>(table)[<span class="dv">1</span>] =<span class="st"> &#39;종목코드&#39;</span></span>

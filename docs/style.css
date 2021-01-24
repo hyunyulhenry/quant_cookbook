@@ -39,7 +39,7 @@ pre code {
     z-index: 1;
     width: 300px;
     color: #FFFFFF;
-      background: #4b6cb4;
+      background: #00a679;
       border-right: 1px solid rgba(0,0,0,.15);
   }
 
@@ -60,7 +60,7 @@ pre code {
   border-radius: 10px 10px 10px 10px;
   color: #FFFFFF;
     font-weight: bold;
-  background: rgba(0,173,238,.35);
+  background: rgba(67,94,82,.35);
   text-decoration: none;
 }
 
@@ -69,6 +69,6 @@ pre code {
   border-radius: 10px 10px 10px 10px;
   font-weight: bold;
   color: #FFFFFF;
-    background: rgba(0,173,238,.40);
+    background: rgba(67, 94, 82,.40);
   text-decoration: none;
 }
