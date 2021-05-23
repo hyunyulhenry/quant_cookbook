@@ -84,7 +84,7 @@ data_market = data_market %>%
 head(names(data_market), 15)
 ```
 
-`rename()` 함수는 열 이름을 바꾸는 함수로서, `rename(tbl, new_name, old_name)` 형태로 입력합니다. 위의 경우 **배당수익률** 열 이름이 **배당수익률(%)**로 변경되었습니다.
+`rename()` 함수는 열 이름을 바꾸는 함수로서, `rename(tbl, new_name = old_name)` 형태로 입력합니다. 위의 경우 **배당수익률** 열 이름이 **배당수익률(%)**로 변경되었습니다.
 
 ### distinct(): 고유한 값 확인
 
@@ -191,8 +191,8 @@ data_market %>%
   head(5)
 
 data_market %>%
-  mutate(PBR_rank = row_number(desc(ROE))) %>%
-  select(`종목명`, ROE, PBR_rank) %>%
+  mutate(ROE_rank = row_number(desc(ROE))) %>%
+  select(`종목명`, ROE, ROE_rank) %>%
   arrange(desc(ROE)) %>%
   head(5)
 ```
@@ -526,6 +526,7 @@ data_market %>%
 ```
 
 해당 결과를 파이프 오퍼레이터(`%>%`)를 이용하여 `ggplot()` 함수와 연결해줍니다.
+
 4. x축과 y축을 설정한 후 색상과 라벨을 섹터로 지정해주면 각 섹터별로 색상이 다른 산점도가 그려집니다.
 5. `geom_text()` 함수를 통해 앞에서 라벨로 지정한 섹터 정보들을 출력해줍니다.
 6. `theme()` 함수를 통해 다양한 테마를 지정합니다. legend.position 인자로 범례를 하단에 배치했으며, legend.title 인자로 범례의 제목을 삭제했습니다.
@@ -643,7 +644,7 @@ plotly 패키지는 R뿐만 아니라 Python, MATLAB, Julia 등 여러 프로그
 
 또한 해당 패키지는 최근 샤이니에서도 많이 사용되고 있습니다. 따라서 샤이니를 이용한 웹페이지 제작을 생각하고 있는 분이라면, 원래의 함수 실행 방법도 알아두는 것이 좋습니다.
 
-```{r eval = FALSE}
+```{r}
 prices %>%
   fortify.zoo %>%
   plot_ly(x= ~Index, y = ~SPY.Close ) %>%

@@ -1,7 +1,6 @@
 # 크롤링을 위한 기본 지식
 
-프로그래밍에 익숙한 분들도 크롤링은 생소한 경우가 많습니다. 기본적인 프로그래밍에 관한 책과 강의가 굉장히 많지만 크롤링을 다루는 자료는 접하기 힘들기 때문입니다. 크롤링은 기계적인 단계가 많기 때문에 조금만 연습해도 활용할 수 있는 기술입니다. 그러나 복잡한 웹페이지나 데이터 내용을 수집하려면 인코딩, 통신 구조에 대한 지
-식이 필요할 때가 있습니다.
+프로그래밍에 익숙한 분들도 크롤링은 생소한 경우가 많습니다. 기본적인 프로그래밍에 관한 책과 강의가 굉장히 많지만 크롤링을 다루는 자료는 접하기 힘들기 때문입니다. 크롤링은 기계적인 단계가 많기 때문에 조금만 연습해도 활용할 수 있는 기술입니다. 그러나 복잡한 웹페이지나 데이터 내용을 수집하려면 인코딩, 통신 구조에 대한 지식이 필요할 때가 있습니다.
 
 이 CHAPTER에서는 크롤링을 하기 위해 사전에 알고 있으면 도움이 되는 인코딩, 웹의 동작 방식, HTML과 CSS에 대해 알아보겠습니다. 그리고 실제 크롤링 시 유용한 파이프 오퍼레이터와 오류에 대한 예외처리도 알아보겠습니다.
 
@@ -36,13 +35,13 @@ knitr::include_graphics('images/encoding_ratio.jpg')
 
 만일 CP949 인코딩을 그대로 사용하면 미리 저장되었던 한글 스크립트가 깨져 나오는 일이 발생할 수 있습니다. 이를 방지하기 위해 그림 \@ref(fig:utf1)과 같이 기본 인코딩을 UTF-8로 변경해주는 것이 좋습니다. R Studio의 [Tools → Global Options] 메뉴에서 [Code → Saving] 항목 중 [Default text encodings] 항목을 통해 기본 인코딩을 UTF-8로 변경합니다.
 
-```{r utf1, fig.cap='인코딩 변경', fig.align='center', out.width = "100%", echo = FALSE}
+```{r utf1, fig.cap='인코딩 변경', fig.align='center', echo = FALSE}
 knitr::include_graphics('images/utf_encoding_1.png')
 ```
 
 해당 방법으로도 해결되지 않는다면 그림 \@ref(fig:utf2)와 같이 [File → Reopen with Encoding] 메뉴에서 [UTF-8] 항목을 선택하고 [Set as default encoding for source files] 항목을 선택한 후 [OK]를 클릭합니다. UTF-8로 인코딩이 설정된 후 파일을 다시 엽니다.
 
-```{r utf2, fig.cap='인코딩 변경 후 재시작', fig.align='center', out.width = "100%", echo = FALSE}
+```{r utf2, fig.cap='인코딩 변경 후 재시작', fig.align='center', echo = FALSE}
 knitr::include_graphics('images/utf_encoding_2.png')
 ```
 
@@ -115,7 +114,7 @@ knitr::kable(
 
 HTML은 크게 메타 데이터를 나타내는 head와 본문을 나타내는 body로 나누어집니다. head에서 title은 웹페이지에서 나타나는 제목을 나타내며 body 내에는 본문에 들어갈 각종 내용들이 포함되어 있습니다.
 
-```{css}
+```{css eval = FALSE}
 <html>
 <head>
 <title>Page Title</title>
@@ -128,7 +127,7 @@ HTML은 크게 메타 데이터를 나타내는 head와 본문을 나타내는 b
 </html>
 ```
 
-```{r fig.cap='HTML 기본 구조', fig.align='center', echo = FALSE}
+```{r fig.cap='HTML 기본 구조', fig.align='center', echo = FALSE , out.width = '50%'}
 knitr::include_graphics('images/html_1.png')
 ```
 
@@ -140,13 +139,13 @@ HTML 코드는 태그와 속성, 내용으로 이루어져 있습니다. 크롤�
 knitr::include_graphics('images/html_2.png')
 ```
 
-꺾쇠(<>)로 감싸져 있는 부분을 태그라고 하며, 여는 태그 <>가 있으면 반드시 이를 닫는 태그인 </>가 쌍으로 있어야 합니다. 속성은 해당 태그에 대한 추가적인 정보를 제공해주는 것으로, 뒤에 속성값이 따라와야 합니다. 내용은 우리가 눈으로 보는 텍스트 부분을 의미합니다. 앞의 HTML 코드는 문단을 나타내는 \<p\> 그, 정렬을 나타내는 align 속성과 center를 통해 가운데 정렬을 지정하며, 내용에는 ‘퀀트 투자 Cookbook’을 나타내고, \</p\> 태그를 통해 태그를 마쳤습니다.
+꺾쇠(<>)로 감싸져 있는 부분을 태그라고 하며, 여는 태그 <>가 있으면 반드시 이를 닫는 태그인 </>가 쌍으로 있어야 합니다. 속성은 해당 태그에 대한 추가적인 정보를 제공해주는 것으로, 뒤에 속성값이 따라와야 합니다. 내용은 우리가 눈으로 보는 텍스트 부분을 의미합니다. 앞의 HTML 코드는 문단을 나타내는 \<p\>, 정렬을 나타내는 align 속성과 center를 통해 가운데 정렬을 지정하며, 내용에는 ‘퀀트 투자 Cookbook’을 나타내고, \</p\> 태그를 통해 태그를 마쳤습니다.
 
 ### h 태그와 p 태그
 
 h 태그는 폰트의 크기를 나타내는 태그이며, p 태그는 문단을 나타내는 태그입니다. 이를 사용한 간단한 예제는 다음과 같습니다. h 태그의 숫자가 작을수록 텍스트 크기는 커지는 것이 확인되며, 숫자는 1에서 6까지 지원됩니다. p 태그를 사용하면 각각의 문단이 만들어지는 것이 확인됩니다.
 
-```{css}
+```{css eval = FALSE}
 <html>
 <body>
 
@@ -161,7 +160,7 @@ h 태그는 폰트의 크기를 나타내는 태그이며, p 태그는 문단을
 </html>
 ```
 
-```{r fig.cap='h 태그와 p 태그 예제', fig.align='center', echo = FALSE}
+```{r fig.cap='h 태그와 p 태그 예제', fig.align='center', echo = FALSE, out.width = '50%'}
 knitr::include_graphics('images/html_3.png')
 ```
 
@@ -169,7 +168,7 @@ knitr::include_graphics('images/html_3.png')
 
 ul과 ol 태그는 리스트(글머리 기호)를 만들 때 사용됩니다. ul은 순서가 없는 리스트(unordered list), ol은 순서가 있는 리스트(ordered list)를 만듭니다.
 
-```{css}
+```{css eval = FALSE}
 <html>
 <body>
 
@@ -192,7 +191,7 @@ ul과 ol 태그는 리스트(글머리 기호)를 만들 때 사용됩니다. ul
 </html>
 ```
 
-```{r fig.cap='리스트 관련 태그 예제', fig.align='center', echo = FALSE}
+```{r fig.cap='리스트 관련 태그 예제', fig.align='center', echo = FALSE, out.width = '50%'}
 knitr::include_graphics('images/html_4.png')
 ```
 
@@ -202,7 +201,7 @@ ul 태그로 감싼 부분은 글머리 기호가 순서가 없는 •으로 표
 
 table 태그는 표를 만드는 태그입니다.  
 
-```{css}
+```{css eval = FALSE}
 <html>
 <body>
 
@@ -240,17 +239,17 @@ table 태그는 표를 만드는 태그입니다.
 </html>
 ```
 
-```{r fig.cap='table 태그 예제', fig.align='center', echo = FALSE}
+```{r fig.cap='table 태그 예제', fig.align='center', echo = FALSE, out.width = '50%'}
 knitr::include_graphics('images/html_5.png')
 ```
 
 table 태그 내의 tr 태그는 각 행을 의미합니다. 각 셀의 구분은 th 혹은 td 태그를 통해 구분할 수 있습니다. th 태그는 진하게 표현되므로 주로 테이블의 제목에 사용되고, td 태그는 테이블의 내용에 사용됩니다.
 
-### a 태그와 src 태그 및 속성
+### a 태그와 img 태그 및 속성
 
-a 태그와 src 태그는 다른 태그와는 다르게, 혼자 쓰이기보다는 속성과 결합해 사용됩니다. a 태그는 href 속성과 결합해 다른 페이지의 링크를 걸 수 있습니다. src 태그는 img 속성과 결합해 이미지를 불러옵니다.
+a 태그와 img 태그는 다른 태그와는 다르게, 혼자 쓰이기보다는 속성과 결합해 사용됩니다. a 태그는 href 속성과 결합해 다른 페이지의 링크를 걸 수 있습니다. img 태그는 src 속성과 결합해 이미지를 불러옵니다.
 
-```{css}
+```{css eval = FALSE}
 <html>
 <body>
 
@@ -272,7 +271,7 @@ width="180",height="140">
 </html>
 ```
 
-```{r fig.cap='a 태그와 src 태그 예제', fig.align='center', echo = FALSE}
+```{r fig.cap='a 태그와 src 태그 예제', fig.align='center', echo = FALSE, out.width = '100%'}
 knitr::include_graphics('images/html_6.png')
 ```
 
@@ -282,7 +281,7 @@ a 태그 뒤 href 속성의 속성값으로 연결하려는 웹페이지 주소�
 
 div 태그는 화면의 전체적인 틀(레이아웃)을 만들 때 주로 사용하는 태그입니다. 단독으로도 사용될 수 있으며, 꾸밈을 담당하는 style 속성과 결합되어 사용되기도 합니다.
 
-```{css}
+```{css eval = FALSE}
 <html>
 <body>
 
@@ -305,7 +304,7 @@ div 태그는 화면의 전체적인 틀(레이아웃)을 만들 때 주로 사�
 </html>
 ```
 
-```{r fig.cap='div 태그 예제', fig.align='center', echo = FALSE}
+```{r fig.cap='div 태그 예제', fig.align='center', echo = FALSE, out.width = '50%'}
 knitr::include_graphics('images/html_7.png')
 ```
 
@@ -315,7 +314,7 @@ div 태그를 통해 총 세 개의 레이아웃으로 나누어진 것을 알 �
 
 CSS는 앞서 설명했듯이 웹페이지를 꾸며주는 역할을 합니다. head에서 각 태그에 CSS 효과를 입력하면 본문의 모든 해당 태그에 CSS 효과가 적용됩니다. 이처럼 웹페이지를 꾸미기 위해 특정 요소에 접근하는 것을 셀렉터(Selector)라고 합니다.
 
-```{css}
+```{css eval = FALSE}
 <html>
 <head>
 <style>
@@ -333,7 +332,7 @@ h4   {color: blue;}
 </html>
 ```
 
-```{r fig.cap='css 예제', fig.align='center', echo = FALSE}
+```{r fig.cap='css 예제', fig.align='center', echo = FALSE, out.width = '50%'}
 knitr::include_graphics('images/html_8.png')
 ```
 
@@ -343,7 +342,7 @@ head 태그 사이에 여러 태그에 대한 CSS 효과가 정의되었습니�
 
 CSS를 이용하면 본문의 모든 태그에 효과가 적용되므로, 특정한 요소(Element)에만 동일한 효과를 적용할 수 없습니다. 클래스 속성을 이용하면 동일한 이름을 가진 클래스에는 동일한 효과가 적용됩니다.
 
-```{css}
+```{css eval = FALSE}
 <html>
 <style>
 .index {
@@ -379,7 +378,7 @@ heavily weighted towards information technology companies</p>
 </html>
 ```
 
-```{r fig.cap='class 예제', fig.align='center', echo = FALSE}
+```{r fig.cap='class 예제', fig.align='center', echo = FALSE, out.width = '100%'}
 knitr::include_graphics('images/html_9.png')
 ```
 
@@ -387,7 +386,7 @@ knitr::include_graphics('images/html_9.png')
 
 id 또한 이와 비슷한 역할을 하며, HTML 내에서 여러 개의 클래스가 정의될 수 있는 반면, id는 단 하나만 사용하기를 권장합니다.
 
-```{css}
+```{css eval = FALSE}
 <html>
 <head>
 <style>
@@ -410,7 +409,7 @@ id 또한 이와 비슷한 역할을 하며, HTML 내에서 여러 개의 클래
 </html>
 ```
 
-```{r fig.cap='id 예제', fig.align='center', echo = FALSE}
+```{r fig.cap='id 예제', fig.align='center', echo = FALSE, out.width = '50%'}
 knitr::include_graphics('images/html_10.png')
 ```
 

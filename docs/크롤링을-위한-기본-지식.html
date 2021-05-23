@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 크롤링을 위한 기본 지식 | R을 이용한 퀀트 투자 포트폴리오 만들기</title>
-  <meta name="description" content="Chapter 2 크롤링을 위한 기본 지식 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <title>Chapter 2 크롤링을 위한 기본 지식 | R을 이용한 퀀트 투자 포트폴리오 만들기(개정판)</title>
+  <meta name="description" content="Chapter 2 크롤링을 위한 기본 지식 | R을 이용한 퀀트 투자 포트폴리오 만들기(개정판)" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 크롤링을 위한 기본 지식 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
+  <meta property="og:title" content="Chapter 2 크롤링을 위한 기본 지식 | R을 이용한 퀀트 투자 포트폴리오 만들기(개정판)" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hyunyulhenry/quant_cookbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 크롤링을 위한 기본 지식 | R을 이용한 퀀트 투자 포트폴리오 만들기" />
+  <meta name="twitter:title" content="Chapter 2 크롤링을 위한 기본 지식 | R을 이용한 퀀트 투자 포트폴리오 만들기(개정판)" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="이현열" />
 
 
-<meta name="date" content="2021-01-24" />
+<meta name="date" content="2021-05-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   
 <link rel="prev" href="퀀트-투자의-심장-데이터와-프로그래밍.html"/>
 <link rel="next" href="api를-이용한-데이터-수집.html"/>
-<script src="libs/jquery-3.5.0/jquery.min.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,10 +51,11 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/dygraphs-1.1.1/shapes.js"></script>
@@ -102,29 +104,29 @@
 <script src="libs/highcharts-8.1.2/custom/reset.js"></script>
 <script src="libs/highcharts-8.1.2/modules/boost.js"></script>
 <script src="libs/highchart-binding-0.8.2/highchart.js"></script>
-<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -144,7 +146,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -177,6 +179,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -193,7 +218,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#지은이-소개"><i class="fa fa-check"></i>지은이 소개</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#머리말"><i class="fa fa-check"></i>머리말</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#이-책의-구성"><i class="fa fa-check"></i>이 책의 구성</a></li>
@@ -203,28 +229,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#종목과-관련된-유의사항"><i class="fa fa-check"></i>종목과 관련된 유의사항</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#세션정보"><i class="fa fa-check"></i>세션정보</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a><ul>
+<li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#데이터-구하기"><i class="fa fa-check"></i><b>1.1</b> 데이터 구하기</a></li>
 <li class="chapter" data-level="1.2" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#퀀트-투자와-프로그래밍"><i class="fa fa-check"></i><b>1.2</b> 퀀트 투자와 프로그래밍</a></li>
 <li class="chapter" data-level="1.3" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#r-프로그램"><i class="fa fa-check"></i><b>1.3</b> R 프로그램</a></li>
 <li class="chapter" data-level="1.4" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html#퀀트-투자에-유용한-r-패키지"><i class="fa fa-check"></i><b>1.4</b> 퀀트 투자에 유용한 R 패키지</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a><ul>
-<li class="chapter" data-level="2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인코딩의-이해와-r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a><ul>
+<li class="chapter" data-level="2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html"><i class="fa fa-check"></i><b>2</b> 크롤링을 위한 기본 지식</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인코딩의-이해와-r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1</b> 인코딩의 이해와 R에서 UTF-8 설정하기</a>
+<ul>
 <li class="chapter" data-level="2.1.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#인간과-컴퓨터-간-번역의-시작-ascii"><i class="fa fa-check"></i><b>2.1.1</b> 인간과 컴퓨터 간 번역의 시작, ASCII</a></li>
 <li class="chapter" data-level="2.1.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#한글-인코딩-방식의-종류"><i class="fa fa-check"></i><b>2.1.2</b> 한글 인코딩 방식의 종류</a></li>
 <li class="chapter" data-level="2.1.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#r에서-utf-8-설정하기"><i class="fa fa-check"></i><b>2.1.3</b> R에서 UTF-8 설정하기</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#웹의-동작-방식"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a><ul>
+<li class="chapter" data-level="2.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#웹의-동작-방식"><i class="fa fa-check"></i><b>2.2</b> 웹의 동작 방식</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#http"><i class="fa fa-check"></i><b>2.2.1</b> HTTP</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html과-css"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS</a><ul>
+<li class="chapter" data-level="2.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html과-css"><i class="fa fa-check"></i><b>2.3</b> HTML과 CSS</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#html-기본-구조"><i class="fa fa-check"></i><b>2.3.1</b> HTML 기본 구조</a></li>
 <li class="chapter" data-level="2.3.2" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#태그와-속성"><i class="fa fa-check"></i><b>2.3.2</b> 태그와 속성</a></li>
 <li class="chapter" data-level="2.3.3" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#h-태그와-p-태그"><i class="fa fa-check"></i><b>2.3.3</b> h 태그와 p 태그</a></li>
 <li class="chapter" data-level="2.3.4" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#리스트를-나타내는-ul-태그와-ol-태그"><i class="fa fa-check"></i><b>2.3.4</b> 리스트를 나타내는 ul 태그와 ol 태그</a></li>
 <li class="chapter" data-level="2.3.5" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#table-태그"><i class="fa fa-check"></i><b>2.3.5</b> table 태그</a></li>
-<li class="chapter" data-level="2.3.6" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#a-태그와-src-태그-및-속성"><i class="fa fa-check"></i><b>2.3.6</b> a 태그와 src 태그 및 속성</a></li>
+<li class="chapter" data-level="2.3.6" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#a-태그와-img-태그-및-속성"><i class="fa fa-check"></i><b>2.3.6</b> a 태그와 img 태그 및 속성</a></li>
 <li class="chapter" data-level="2.3.7" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#div-태그"><i class="fa fa-check"></i><b>2.3.7</b> div 태그</a></li>
 <li class="chapter" data-level="2.3.8" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#css"><i class="fa fa-check"></i><b>2.3.8</b> CSS</a></li>
 <li class="chapter" data-level="2.3.9" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#클래스와-id"><i class="fa fa-check"></i><b>2.3.9</b> 클래스와 id</a></li>
@@ -232,27 +263,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#파이프-오퍼레이터"><i class="fa fa-check"></i><b>2.4</b> 파이프 오퍼레이터(<code>%&gt;%</code>)</a></li>
 <li class="chapter" data-level="2.5" data-path="크롤링을-위한-기본-지식.html"><a href="크롤링을-위한-기본-지식.html#오류에-대한-예외처리"><i class="fa fa-check"></i><b>2.5</b> 오류에 대한 예외처리</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a><ul>
+<li class="chapter" data-level="3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html"><i class="fa fa-check"></i><b>3</b> API를 이용한 데이터 수집</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#api를-이용한-quandl-데이터-다운로드"><i class="fa fa-check"></i><b>3.1</b> API를 이용한 Quandl 데이터 다운로드</a></li>
-<li class="chapter" data-level="3.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#getsymbols-함수를-이용한-api-다운로드"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a><ul>
+<li class="chapter" data-level="3.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#getsymbols-함수를-이용한-api-다운로드"><i class="fa fa-check"></i><b>3.2</b> <code>getSymbols()</code> 함수를 이용한 API 다운로드</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#주가-다운로드"><i class="fa fa-check"></i><b>3.2.1</b> 주가 다운로드</a></li>
 <li class="chapter" data-level="3.2.2" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#국내-종목-주가-다운로드"><i class="fa fa-check"></i><b>3.2.2</b> 국내 종목 주가 다운로드</a></li>
 <li class="chapter" data-level="3.2.3" data-path="api를-이용한-데이터-수집.html"><a href="api를-이용한-데이터-수집.html#fred-데이터-다운로드"><i class="fa fa-check"></i><b>3.2.3</b> FRED 데이터 다운로드</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a><ul>
-<li class="chapter" data-level="4.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get과-post-방식-이해하기"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a><ul>
+<li class="chapter" data-level="4" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html"><i class="fa fa-check"></i><b>4</b> 크롤링 이해하기</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get과-post-방식-이해하기"><i class="fa fa-check"></i><b>4.1</b> GET과 POST 방식 이해하기</a>
+<ul>
 <li class="chapter" data-level="4.1.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#get-방식"><i class="fa fa-check"></i><b>4.1.1</b> GET 방식</a></li>
 <li class="chapter" data-level="4.1.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#post-방식"><i class="fa fa-check"></i><b>4.1.2</b> POST 방식</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#크롤링-예제"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a><ul>
+<li class="chapter" data-level="4.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#크롤링-예제"><i class="fa fa-check"></i><b>4.2</b> 크롤링 예제</a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#금융-속보-크롤링"><i class="fa fa-check"></i><b>4.2.1</b> 금융 속보 크롤링</a></li>
 <li class="chapter" data-level="4.2.2" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#기업공시채널에서-오늘의-공시-불러오기"><i class="fa fa-check"></i><b>4.2.2</b> 기업공시채널에서 오늘의 공시 불러오기</a></li>
 <li class="chapter" data-level="4.2.3" data-path="크롤링-이해하기.html"><a href="크롤링-이해하기.html#네이버-금융에서-주식티커-크롤링"><i class="fa fa-check"></i><b>4.2.3</b> 네이버 금융에서 주식티커 크롤링</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a><ul>
-<li class="chapter" data-level="5.1" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#한국거래소의-산업별-현황-및-개별지표-크롤링"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a><ul>
+<li class="chapter" data-level="5" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html"><i class="fa fa-check"></i><b>5</b> 금융 데이터 수집하기 (기본)</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#한국거래소의-산업별-현황-및-개별지표-크롤링"><i class="fa fa-check"></i><b>5.1</b> 한국거래소의 산업별 현황 및 개별지표 크롤링</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#업종분류-현황-크롤링"><i class="fa fa-check"></i><b>5.1.1</b> 업종분류 현황 크롤링</a></li>
 <li class="chapter" data-level="5.1.2" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#개별종목-지표-크롤링"><i class="fa fa-check"></i><b>5.1.2</b> 개별종목 지표 크롤링</a></li>
 <li class="chapter" data-level="5.1.3" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#최근-영업일-기준-데이터-받기"><i class="fa fa-check"></i><b>5.1.3</b> 최근 영업일 기준 데이터 받기</a></li>
@@ -260,17 +298,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="금융-데이터-수집하기-기본.html"><a href="금융-데이터-수집하기-기본.html#wics-기준-섹터정보-크롤링"><i class="fa fa-check"></i><b>5.2</b> WICS 기준 섹터정보 크롤링</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a><ul>
-<li class="chapter" data-level="6.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#수정주가-크롤링"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a><ul>
+<li class="chapter" data-level="6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html"><i class="fa fa-check"></i><b>6</b> 금융 데이터 수집하기 (심화)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#수정주가-크롤링"><i class="fa fa-check"></i><b>6.1</b> 수정주가 크롤링</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#개별종목-주가-크롤링"><i class="fa fa-check"></i><b>6.1.1</b> 개별종목 주가 크롤링</a></li>
 <li class="chapter" data-level="6.1.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-주가-크롤링"><i class="fa fa-check"></i><b>6.1.2</b> 전 종목 주가 크롤링</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-및-가치지표-크롤링"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a><ul>
+<li class="chapter" data-level="6.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-및-가치지표-크롤링"><i class="fa fa-check"></i><b>6.2</b> 재무제표 및 가치지표 크롤링</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#재무제표-다운로드"><i class="fa fa-check"></i><b>6.2.1</b> 재무제표 다운로드</a></li>
 <li class="chapter" data-level="6.2.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#가치지표-계산하기"><i class="fa fa-check"></i><b>6.2.2</b> 가치지표 계산하기</a></li>
 <li class="chapter" data-level="6.2.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#전-종목-재무제표-및-가치지표-다운로드"><i class="fa fa-check"></i><b>6.2.3</b> 전 종목 재무제표 및 가치지표 다운로드</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#dart의-open-api를-이용한-데이터-수집하기"><i class="fa fa-check"></i><b>6.3</b> DART의 Open API를 이용한 데이터 수집하기</a><ul>
+<li class="chapter" data-level="6.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#dart의-open-api를-이용한-데이터-수집하기"><i class="fa fa-check"></i><b>6.3</b> DART의 Open API를 이용한 데이터 수집하기</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#api-key발급-및-추가하기"><i class="fa fa-check"></i><b>6.3.1</b> API Key발급 및 추가하기</a></li>
 <li class="chapter" data-level="6.3.2" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#고유번호-다운로드"><i class="fa fa-check"></i><b>6.3.2</b> 고유번호 다운로드</a></li>
 <li class="chapter" data-level="6.3.3" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#공시검색"><i class="fa fa-check"></i><b>6.3.3</b> 공시검색</a></li>
@@ -279,13 +321,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.6" data-path="금융-데이터-수집하기-심화.html"><a href="금융-데이터-수집하기-심화.html#단일회사-전체-재무제표"><i class="fa fa-check"></i><b>6.3.6</b> 단일회사 전체 재무제표</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a><ul>
+<li class="chapter" data-level="7" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html"><i class="fa fa-check"></i><b>7</b> 데이터 정리하기</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#주가-정리하기"><i class="fa fa-check"></i><b>7.1</b> 주가 정리하기</a></li>
 <li class="chapter" data-level="7.2" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#재무제표-정리하기"><i class="fa fa-check"></i><b>7.2</b> 재무제표 정리하기</a></li>
 <li class="chapter" data-level="7.3" data-path="데이터-정리하기.html"><a href="데이터-정리하기.html#가치지표-정리하기"><i class="fa fa-check"></i><b>7.3</b> 가치지표 정리하기</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a><ul>
-<li class="chapter" data-level="8.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-데이터-분석"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a><ul>
+<li class="chapter" data-level="8" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html"><i class="fa fa-check"></i><b>8</b> 데이터 분석 및 시각화하기</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-데이터-분석"><i class="fa fa-check"></i><b>8.1</b> 종목정보 데이터 분석</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>8.1.1</b> <code>*_join</code>: 데이터 합치기</a></li>
 <li class="chapter" data-level="8.1.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#glimpse-데이터-구조-확인하기"><i class="fa fa-check"></i><b>8.1.2</b> <code>glimpse()</code>: 데이터 구조 확인하기</a></li>
 <li class="chapter" data-level="8.1.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#rename-열-이름-바꾸기"><i class="fa fa-check"></i><b>8.1.3</b> <code>rename()</code>: 열 이름 바꾸기</a></li>
@@ -299,7 +344,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.11" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#ntile-분위수-계산"><i class="fa fa-check"></i><b>8.1.11</b> <code>ntile()</code>: 분위수 계산</a></li>
 <li class="chapter" data-level="8.1.12" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#group_by-그룹별로-데이터를-묶기"><i class="fa fa-check"></i><b>8.1.12</b> <code>group_by()</code>: 그룹별로 데이터를 묶기</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#ggplot-기초"><i class="fa fa-check"></i><b>8.2</b> <code>ggplot()</code> 기초</a><ul>
+<li class="chapter" data-level="8.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#ggplot-기초"><i class="fa fa-check"></i><b>8.2</b> <code>ggplot()</code> 기초</a>
+<ul>
 <li class="chapter" data-level="8.2.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#diamonds-데이터셋"><i class="fa fa-check"></i><b>8.2.1</b> diamonds 데이터셋</a></li>
 <li class="chapter" data-level="8.2.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#data-aesthetics-geometrics"><i class="fa fa-check"></i><b>8.2.2</b> Data, Aesthetics, Geometrics</a></li>
 <li class="chapter" data-level="8.2.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#facets"><i class="fa fa-check"></i><b>8.2.3</b> Facets</a></li>
@@ -307,57 +353,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.5" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#coordinates"><i class="fa fa-check"></i><b>8.2.5</b> Coordinates</a></li>
 <li class="chapter" data-level="8.2.6" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#theme"><i class="fa fa-check"></i><b>8.2.6</b> Theme</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-시각화"><i class="fa fa-check"></i><b>8.3</b> 종목정보 시각화</a><ul>
+<li class="chapter" data-level="8.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#종목정보-시각화"><i class="fa fa-check"></i><b>8.3</b> 종목정보 시각화</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_point-산점도-나타내기"><i class="fa fa-check"></i><b>8.3.1</b> <code>geom_point()</code>: 산점도 나타내기</a></li>
 <li class="chapter" data-level="8.3.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_histogram-히스토그램-나타내기"><i class="fa fa-check"></i><b>8.3.2</b> <code>geom_histogram()</code>: 히스토그램 나타내기</a></li>
 <li class="chapter" data-level="8.3.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_boxplot-박스-플롯-나타내기"><i class="fa fa-check"></i><b>8.3.3</b> <code>geom_boxplot()</code>: 박스 플롯 나타내기</a></li>
 <li class="chapter" data-level="8.3.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#dplyr과-ggplot을-연결하여-사용하기"><i class="fa fa-check"></i><b>8.3.4</b> <code>dplyr</code>과 <code>ggplot</code>을 연결하여 사용하기</a></li>
 <li class="chapter" data-level="8.3.5" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#geom_bar-막대-그래프-나타내기"><i class="fa fa-check"></i><b>8.3.5</b> <code>geom_bar()</code>: 막대 그래프 나타내기</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-및-수익률-시각화"><i class="fa fa-check"></i><b>8.4</b> 주가 및 수익률 시각화</a><ul>
+<li class="chapter" data-level="8.4" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-및-수익률-시각화"><i class="fa fa-check"></i><b>8.4</b> 주가 및 수익률 시각화</a>
+<ul>
 <li class="chapter" data-level="8.4.1" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#주가-그래프-나타내기"><i class="fa fa-check"></i><b>8.4.1</b> 주가 그래프 나타내기</a></li>
 <li class="chapter" data-level="8.4.2" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#인터랙티브-그래프-나타내기"><i class="fa fa-check"></i><b>8.4.2</b> 인터랙티브 그래프 나타내기</a></li>
 <li class="chapter" data-level="8.4.3" data-path="데이터-분석-및-시각화하기.html"><a href="데이터-분석-및-시각화하기.html#연도별-수익률-나타내기"><i class="fa fa-check"></i><b>8.4.3</b> 연도별 수익률 나타내기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a><ul>
-<li class="chapter" data-level="9.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-이해하기"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a><ul>
+<li class="chapter" data-level="9" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html"><i class="fa fa-check"></i><b>9</b> 퀀트 전략을 이용한 종목선정 (기본)</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-이해하기"><i class="fa fa-check"></i><b>9.1</b> 베타 이해하기</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-계산하기"><i class="fa fa-check"></i><b>9.1.1</b> 베타 계산하기</a></li>
 <li class="chapter" data-level="9.1.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#베타-시각화"><i class="fa fa-check"></i><b>9.1.2</b> 베타 시각화</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-전략"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a><ul>
+<li class="chapter" data-level="9.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-전략"><i class="fa fa-check"></i><b>9.2</b> 저변동성 전략</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-포트폴리오-구하기-일간-기준"><i class="fa fa-check"></i><b>9.2.1</b> 저변동성 포트폴리오 구하기: 일간 기준</a></li>
 <li class="chapter" data-level="9.2.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#저변동성-포트폴리오-구하기-주간-기준"><i class="fa fa-check"></i><b>9.2.2</b> 저변동성 포트폴리오 구하기: 주간 기준</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-전략"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a><ul>
+<li class="chapter" data-level="9.3" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-전략"><i class="fa fa-check"></i><b>9.3</b> 모멘텀 전략</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-포트폴리오-구하기-12개월-모멘텀"><i class="fa fa-check"></i><b>9.3.1</b> 모멘텀 포트폴리오 구하기: 12개월 모멘텀</a></li>
 <li class="chapter" data-level="9.3.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#모멘텀-포트폴리오-구하기-위험조정-수익률"><i class="fa fa-check"></i><b>9.3.2</b> 모멘텀 포트폴리오 구하기: 위험조정 수익률</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-전략"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a><ul>
+<li class="chapter" data-level="9.4" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-전략"><i class="fa fa-check"></i><b>9.4</b> 밸류 전략</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#밸류-포트폴리오-구하기-저pbr"><i class="fa fa-check"></i><b>9.4.1</b> 밸류 포트폴리오 구하기: 저PBR</a></li>
 <li class="chapter" data-level="9.4.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#각-지표-결합하기"><i class="fa fa-check"></i><b>9.4.2</b> 각 지표 결합하기</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#퀄리티-전략"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a><ul>
+<li class="chapter" data-level="9.5" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#퀄리티-전략"><i class="fa fa-check"></i><b>9.5</b> 퀄리티 전략</a>
+<ul>
 <li class="chapter" data-level="9.5.1" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#f-score"><i class="fa fa-check"></i><b>9.5.1</b> F-Score</a></li>
 <li class="chapter" data-level="9.5.2" data-path="퀀트-전략을-이용한-종목선정-기본.html"><a href="퀀트-전략을-이용한-종목선정-기본.html#각-지표를-결합하기"><i class="fa fa-check"></i><b>9.5.2</b> 각 지표를 결합하기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a><ul>
+<li class="chapter" data-level="10" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html"><i class="fa fa-check"></i><b>10</b> 퀀트 전략을 이용한 종목선정 (심화)</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#섹터-중립-포트폴리오"><i class="fa fa-check"></i><b>10.1</b> 섹터 중립 포트폴리오</a></li>
-<li class="chapter" data-level="10.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a><ul>
+<li class="chapter" data-level="10.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식"><i class="fa fa-check"></i><b>10.2</b> 마법공식</a>
+<ul>
 <li class="chapter" data-level="10.2.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#퀄리티와-밸류-간의-관계"><i class="fa fa-check"></i><b>10.2.1</b> 퀄리티와 밸류 간의 관계</a></li>
 <li class="chapter" data-level="10.2.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식-이해하기"><i class="fa fa-check"></i><b>10.2.2</b> 마법공식 이해하기</a></li>
 <li class="chapter" data-level="10.2.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#마법공식-구성하기"><i class="fa fa-check"></i><b>10.2.3</b> 마법공식 구성하기</a></li>
 </ul></li>
-<li class="chapter" data-level="10.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#이상치-데이터-제거-및-팩터의-결합"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a><ul>
+<li class="chapter" data-level="10.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#이상치-데이터-제거-및-팩터의-결합"><i class="fa fa-check"></i><b>10.3</b> 이상치 데이터 제거 및 팩터의 결합</a>
+<ul>
 <li class="chapter" data-level="10.3.1" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#트림trim-이상치-데이터-삭제"><i class="fa fa-check"></i><b>10.3.1</b> 트림(Trim): 이상치 데이터 삭제</a></li>
 <li class="chapter" data-level="10.3.2" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#윈저라이징winsorizing-이상치-데이터-대체"><i class="fa fa-check"></i><b>10.3.2</b> 윈저라이징(Winsorizing): 이상치 데이터 대체</a></li>
 <li class="chapter" data-level="10.3.3" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#팩터의-결합-방법"><i class="fa fa-check"></i><b>10.3.3</b> 팩터의 결합 방법</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="퀀트-전략을-이용한-종목선정-심화.html"><a href="퀀트-전략을-이용한-종목선정-심화.html#멀티팩터-포트폴리오"><i class="fa fa-check"></i><b>10.4</b> 멀티팩터 포트폴리오</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a><ul>
-<li class="chapter" data-level="11.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소분산-포트폴리오"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a><ul>
+<li class="chapter" data-level="11" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html"><i class="fa fa-check"></i><b>11</b> 포트폴리오 구성</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소분산-포트폴리오"><i class="fa fa-check"></i><b>11.1</b> 최소분산 포트폴리오</a>
+<ul>
 <li class="chapter" data-level="11.1.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#slsqp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.1</b> <code>slsqp()</code> 함수를 이용한 최적화</a></li>
 <li class="chapter" data-level="11.1.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#solve.qp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.2</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
 <li class="chapter" data-level="11.1.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#optimalportfolio-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.1.3</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
@@ -365,25 +424,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.5" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소-및-최대-투자비중-제약조건"><i class="fa fa-check"></i><b>11.1.5</b> 최소 및 최대 투자비중 제약조건</a></li>
 <li class="chapter" data-level="11.1.6" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#각-자산별-제약조건의-추가"><i class="fa fa-check"></i><b>11.1.6</b> 각 자산별 제약조건의 추가</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최대분산효과-포트폴리오"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a><ul>
+<li class="chapter" data-level="11.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최대분산효과-포트폴리오"><i class="fa fa-check"></i><b>11.2</b> 최대분산효과 포트폴리오</a>
+<ul>
 <li class="chapter" data-level="11.2.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#solve.qp-함수를-이용한-최적화-1"><i class="fa fa-check"></i><b>11.2.1</b> <code>solve.QP()</code> 함수를 이용한 최적화</a></li>
 <li class="chapter" data-level="11.2.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#optimalportfolio-함수를-이용한-최적화-1"><i class="fa fa-check"></i><b>11.2.2</b> <code>optimalPortfolio()</code> 함수를 이용한 최적화</a></li>
 <li class="chapter" data-level="11.2.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#최소-및-최대-투자비중-제약조건-1"><i class="fa fa-check"></i><b>11.2.3</b> 최소 및 최대 투자비중 제약조건</a></li>
 <li class="chapter" data-level="11.2.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#각-자산-별-제약조건의-추가"><i class="fa fa-check"></i><b>11.2.4</b> 각 자산 별 제약조건의 추가</a></li>
 </ul></li>
-<li class="chapter" data-level="11.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험균형-포트폴리오"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a><ul>
+<li class="chapter" data-level="11.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험균형-포트폴리오"><i class="fa fa-check"></i><b>11.3</b> 위험균형 포트폴리오</a>
+<ul>
 <li class="chapter" data-level="11.3.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#주식-60와-채권-40-포트폴리오의-위험기여도"><i class="fa fa-check"></i><b>11.3.1</b> 주식 60%와 채권 40% 포트폴리오의 위험기여도</a></li>
 <li class="chapter" data-level="11.3.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#rp-함수를-이용한-최적화"><i class="fa fa-check"></i><b>11.3.2</b> <code>rp()</code> 함수를 이용한 최적화</a></li>
 <li class="chapter" data-level="11.3.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#위험예산-포트폴리오"><i class="fa fa-check"></i><b>11.3.3</b> 위험예산 포트폴리오</a></li>
 </ul></li>
-<li class="chapter" data-level="11.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#인덱스-포트폴리오-구성하기"><i class="fa fa-check"></i><b>11.4</b> 인덱스 포트폴리오 구성하기</a><ul>
+<li class="chapter" data-level="11.4" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#인덱스-포트폴리오-구성하기"><i class="fa fa-check"></i><b>11.4</b> 인덱스 포트폴리오 구성하기</a>
+<ul>
 <li class="chapter" data-level="11.4.1" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#시가총액비중-계산하기"><i class="fa fa-check"></i><b>11.4.1</b> 시가총액비중 계산하기</a></li>
 <li class="chapter" data-level="11.4.2" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#인덱스-포트폴리오-복제하기"><i class="fa fa-check"></i><b>11.4.2</b> 인덱스 포트폴리오 복제하기</a></li>
 <li class="chapter" data-level="11.4.3" data-path="포트폴리오-구성.html"><a href="포트폴리오-구성.html#팩터를-이용한-인핸스드-포트폴리오-구성하기"><i class="fa fa-check"></i><b>11.4.3</b> 팩터를 이용한 인핸스드 포트폴리오 구성하기</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a><ul>
-<li class="chapter" data-level="12.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#return.portfolio-함수"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a><ul>
+<li class="chapter" data-level="12" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html"><i class="fa fa-check"></i><b>12</b> 포트폴리오 백테스트</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#return.portfolio-함수"><i class="fa fa-check"></i><b>12.1</b> <code>Return.Portfolio()</code> 함수</a>
+<ul>
 <li class="chapter" data-level="12.1.1" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#인자-목록-살펴보기"><i class="fa fa-check"></i><b>12.1.1</b> 인자 목록 살펴보기</a></li>
 <li class="chapter" data-level="12.1.2" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#출력값-살펴보기"><i class="fa fa-check"></i><b>12.1.2</b> 출력값 살펴보기</a></li>
 </ul></li>
@@ -391,8 +455,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.3" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#시점-선택-전략-백테스트"><i class="fa fa-check"></i><b>12.3</b> 시점 선택 전략 백테스트</a></li>
 <li class="chapter" data-level="12.4" data-path="포트폴리오-백테스트.html"><a href="포트폴리오-백테스트.html#동적-자산배분-백테스트"><i class="fa fa-check"></i><b>12.4</b> 동적 자산배분 백테스트</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a><ul>
-<li class="chapter" data-level="13.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#결과-측정-지표"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a><ul>
+<li class="chapter" data-level="13" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html"><i class="fa fa-check"></i><b>13</b> 성과 및 위험 평가</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#결과-측정-지표"><i class="fa fa-check"></i><b>13.1</b> 결과 측정 지표</a>
+<ul>
 <li class="chapter" data-level="13.1.1" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#수익률-및-변동성"><i class="fa fa-check"></i><b>13.1.1</b> 수익률 및 변동성</a></li>
 <li class="chapter" data-level="13.1.2" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#낙폭과-최대낙폭"><i class="fa fa-check"></i><b>13.1.2</b> 낙폭과 최대낙폭</a></li>
 <li class="chapter" data-level="13.1.3" data-path="성과-및-위험-평가.html"><a href="성과-및-위험-평가.html#연도별-수익률"><i class="fa fa-check"></i><b>13.1.3</b> 연도별 수익률</a></li>
@@ -402,7 +468,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
-<li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
+<li><a href="http://www.yes24.com/Product/Goods/97163849" target="blank">책 구입하러 가기</a></li>
 
 </ul>
 
@@ -413,7 +479,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기(개정판)</a>
           </h1>
         </div>
 
@@ -421,95 +487,116 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="크롤링을-위한-기본-지식" class="section level1">
+<div id="크롤링을-위한-기본-지식" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> 크롤링을 위한 기본 지식</h1>
-<p>프로그래밍에 익숙한 분들도 크롤링은 생소한 경우가 많습니다. 기본적인 프로그래밍에 관한 책과 강의가 굉장히 많지만 크롤링을 다루는 자료는 접하기 힘들기 때문입니다. 크롤링은 기계적인 단계가 많기 때문에 조금만 연습해도 활용할 수 있는 기술입니다. 그러나 복잡한 웹페이지나 데이터 내용을 수집하려면 인코딩, 통신 구조에 대한 지
-식이 필요할 때가 있습니다.</p>
+<p>프로그래밍에 익숙한 분들도 크롤링은 생소한 경우가 많습니다. 기본적인 프로그래밍에 관한 책과 강의가 굉장히 많지만 크롤링을 다루는 자료는 접하기 힘들기 때문입니다. 크롤링은 기계적인 단계가 많기 때문에 조금만 연습해도 활용할 수 있는 기술입니다. 그러나 복잡한 웹페이지나 데이터 내용을 수집하려면 인코딩, 통신 구조에 대한 지식이 필요할 때가 있습니다.</p>
 <p>이 CHAPTER에서는 크롤링을 하기 위해 사전에 알고 있으면 도움이 되는 인코딩, 웹의 동작 방식, HTML과 CSS에 대해 알아보겠습니다. 그리고 실제 크롤링 시 유용한 파이프 오퍼레이터와 오류에 대한 예외처리도 알아보겠습니다.</p>
-<div id="인코딩의-이해와-r에서-utf-8-설정하기" class="section level2">
+<div id="인코딩의-이해와-r에서-utf-8-설정하기" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> 인코딩의 이해와 R에서 UTF-8 설정하기</h2>
-<div id="인간과-컴퓨터-간-번역의-시작-ascii" class="section level3">
+<div id="인간과-컴퓨터-간-번역의-시작-ascii" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> 인간과 컴퓨터 간 번역의 시작, ASCII</h3>
 <p>R에서 스크립트를 한글로 작성해 저장한 후 이를 다시 불러올 때, 혹은 한글로 된 데이터를 크롤링하면 오류가 뜨거나 읽을 수 없는 문자로 나타나는 경우가 종종 있습니다. 이는 한글 인코딩 때문에 발생하는 문제이며, 이러한 현상을 흔히 ‘인코딩이 깨졌다’라고 표현합니다. 인코딩이란 사람이 사용하는 언어를 컴퓨터가 사용하는 0과 1로
 변환하는 과정을 말하며, 이와 반대의 과정을 디코딩이라고 합니다.</p>
 <p>이렇듯 사람과 컴퓨터 간의 언어를 번역하기 위해 최초로 사용된 방식이 아스키(ASCII: American Standard Code for Information Interchange)입니다. 0부터 127까지 총 128개 바이트에 알파벳과 숫자, 자주 사용되는 특수문자 값을 부여하고, 문자가 입력되면 이에 대응되는 바이트가 저장됩니다. 그러나 아스키의 ‘American’이라는 이름에서 알 수 있듯이 이는 영어의 알파벳이 아닌 다른 문자를 표현하는 데 한계가 있으며, 이를 보완하기 위한 여러 방법이 나오게 되었습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="images/ascii_code.jpg" alt="아스키 코드 표" width="70%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="images/ascii_code.jpg" alt="아스키 코드 표" width="100%" />
 <p class="caption">
-그림 1.3: 아스키 코드 표
+그림 2.1: 아스키 코드 표
 </p>
 </div>
 </div>
-<div id="한글-인코딩-방식의-종류" class="section level3">
+<div id="한글-인코딩-방식의-종류" class="section level3" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> 한글 인코딩 방식의 종류</h3>
 <p>인코딩에 대한 전문적인 내용은 이 책의 범위를 넘어가며, 크롤링을 위해서는 한글을 인코딩하는 데 쓰이는 EUC-KR과 CP949, UTF-8 정도만 이해해도 충분합니다. 만일 ‘알’이라는 단어를 인코딩한다면 어떤 방법이 있을까요? 먼저 ‘알’이라는 문자 자체에 해당하는 코드를 부여해 나타내는 방법이 있습니다. 아니면 이를 구성하는 모음과 자음을 나누어 ㅇ, ㅏ, ㄹ 각각에 해당하는 코드를 부여하고 이를 조합할 수도 있습니다. 전자와 같이 완성된 문자 자체로 나타내는 방법을 완성형, 후자와 같이 각 자모로 나타내는 방법을 조합형이라고 합니다.</p>
 <p>한글 인코딩 중 완성형으로 가장 대표적인 방법은 EUC-KR입니다. EUC-KR은 현대 한글에서 많이 쓰이는 문자 2,350개에 번호를 붙인 방법입니다. 그러나 2,350개 문자로 모든 한글 자모의 조합을 표현하기 부족해, 이를 보완하고자 마이크로소프트가 도입한 방법이 CP949입니다. CP949는 11,720개 한글 문자에 번호를 붙인 방법으로 기존 EUC-KR보다 나타낼 수 있는 한글의 개수가 훨씬 많아졌습니다. 윈도우의 경우 기본 인코딩이 CP949로 되어 있습니다.</p>
 <p>조합형의 대표적 방법인 UTF-8은 모음과 자음 각각에 코드를 부여한 후 조합해 한글을 나타냅니다. 조합형은 한글뿐만 아니라 다양한 언어에 적용할 수 있다는 장점이 있어 전 세계 웹페이지의 대부분이 UTF-8로 만들어지고 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="images/encoding_ratio.jpg" alt="웹페이지에서 사용되는 인코딩 비율" width="70%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<img src="images/encoding_ratio.jpg" alt="웹페이지에서 사용되는 인코딩 비율" width="100%" />
 <p class="caption">
-그림 2.1: 웹페이지에서 사용되는 인코딩 비율
+그림 2.2: 웹페이지에서 사용되는 인코딩 비율
 </p>
 </div>
 </div>
-<div id="r에서-utf-8-설정하기" class="section level3">
+<div id="r에서-utf-8-설정하기" class="section level3" number="2.1.3">
 <h3><span class="header-section-number">2.1.3</span> R에서 UTF-8 설정하기</h3>
 <p>윈도우에서는 기본 인코딩이 CP949로 이루어져 있으며, 일부 국내 웹사이트는 EUC-KR로 인코딩이 된 경우도 있습니다. 반면 R의 여러 함수는 인코딩이 UTF-8로 이루어져 있어, 인코딩 방식의 차이로 인해 스크립트 작성 및 크롤링 과정에서 오류가 발생하는 경우가 종종 있습니다.</p>
-<p>만일 CP949 인코딩을 그대로 사용하면 미리 저장되었던 한글 스크립트가 깨져 나오는 일이 발생할 수 있습니다. 이를 방지하기 위해 그림 <a href="크롤링을-위한-기본-지식.html#fig:utf1">2.2</a>과 같이 기본 인코딩을 UTF-8로 변경해주는 것이 좋습니다. R Studio의 [Tools → Global Options] 메뉴에서 [Code → Saving] 항목 중 [Default text encodings] 항목을 통해 기본 인코딩을 UTF-8로 변경합니다.</p>
+<p>만일 CP949 인코딩을 그대로 사용하면 미리 저장되었던 한글 스크립트가 깨져 나오는 일이 발생할 수 있습니다. 이를 방지하기 위해 그림 <a href="크롤링을-위한-기본-지식.html#fig:utf1">2.3</a>과 같이 기본 인코딩을 UTF-8로 변경해주는 것이 좋습니다. R Studio의 [Tools → Global Options] 메뉴에서 [Code → Saving] 항목 중 [Default text encodings] 항목을 통해 기본 인코딩을 UTF-8로 변경합니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:utf1"></span>
 <img src="images/utf_encoding_1.png" alt="인코딩 변경" width="100%" />
 <p class="caption">
-그림 2.2: 인코딩 변경
+그림 2.3: 인코딩 변경
 </p>
 </div>
-<p>해당 방법으로도 해결되지 않는다면 그림 <a href="크롤링을-위한-기본-지식.html#fig:utf2">2.3</a>와 같이 [File → Reopen with Encoding] 메뉴에서 [UTF-8] 항목을 선택하고 [Set as default encoding for source files] 항목을 선택한 후 [OK]를 클릭합니다. UTF-8로 인코딩이 설정된 후 파일을 다시 엽니다.</p>
+<p>해당 방법으로도 해결되지 않는다면 그림 <a href="크롤링을-위한-기본-지식.html#fig:utf2">2.4</a>와 같이 [File → Reopen with Encoding] 메뉴에서 [UTF-8] 항목을 선택하고 [Set as default encoding for source files] 항목을 선택한 후 [OK]를 클릭합니다. UTF-8로 인코딩이 설정된 후 파일을 다시 엽니다.</p>
 <div class="figure" style="text-align: center"><span id="fig:utf2"></span>
 <img src="images/utf_encoding_2.png" alt="인코딩 변경 후 재시작" width="100%" />
 <p class="caption">
-그림 2.3: 인코딩 변경 후 재시작
+그림 2.4: 인코딩 변경 후 재시작
 </p>
 </div>
 </div>
 </div>
-<div id="웹의-동작-방식" class="section level2">
+<div id="웹의-동작-방식" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> 웹의 동작 방식</h2>
 <p>크롤링은 웹사이트의 정보를 수집하는 과정입니다. 따라서 웹이 어떻게 동작하는지 이해할 필요가 있습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="images/web_str.png" alt="웹 환경 구조" width="70%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="images/web_str.png" alt="웹 환경 구조" width="100%" />
 <p class="caption">
-그림 2.4: 웹 환경 구조
+그림 2.5: 웹 환경 구조
 </p>
 </div>
 <p>먼저 클라이언트란 여러분의 데스크톱이나 휴대폰과 같은 장치와 크롬이나 파이어폭스와 같은 소프트웨어를 의미합니다. 서버는 웹사이트와 앱을 저장하는 컴퓨터를 의미합니다. 클라이언트가 특정 정보를 요구하는 과정을 ‘요청’이라고 하며, 서버가 해당 정보를 제공하는 과정을 ‘응답’이라고 합니다. 그러나 클라이언트와 서버가 연결되어 있지 않다면 둘 사이에 정보를 주고받을 수 없으며, 이를 연결하는 공간이 바로 인터넷입니다. 또한 건물에도 고유의 주소가 있는 것처럼, 각 서버에도 고유의 주소가 있는데 이것이 인터넷 주소 혹은 URL입니다.</p>
 <p>여러분이 네이버에서 경제 기사를 클릭하는 경우를 생각해봅시다. 클라이언트는 사용자인 여러분이고, 서버는 네이버이며, URL은 www.naver.com이 됩니다. 경제 기사를 클릭하는 과정이 요청이며, 클릭 후 해당 페이지를 보여주는 과정이 응답입니다.</p>
-<div id="http" class="section level3">
+<div id="http" class="section level3" number="2.2.1">
 <h3><span class="header-section-number">2.2.1</span> HTTP</h3>
 <p>클라이언트가 각기 다른 방법으로 데이터를 요청한다면, 서버는 해당 요청을 알아듣지 못할 것입니다. 이를 방지하기 위해 규정된 약속이나 표준에 맞추어 데이터를 요청해야 합니다. 이러한 약속을 HTTP(HyperText Transfer Protocol)라고 합니다.</p>
 <p>클라이언트가 서버에게 요청의 목적이나 종류를 알리는 방법을 HTTP 요청 방식(HTTP Request Method)이라고 합니다. HTTP 요청 방식은 크게 표 <a href="크롤링을-위한-기본-지식.html#tab:http">2.1</a>와 같이 GET, POST, PUT, DELETE라는 네 가지로 나눌 수 있지만 크롤링에는 GET과 POST 방식이 대부분 사용되므로 이 두 가지만 알아도 충분합니다. GET 방식과 POST 방식의 차이 및 크롤링 방법은 CHAPTER 4에서 자세하게 다루겠습니다.</p>
-<table>
-<caption><span id="tab:http">표 2.1: </span>HTTP 요청 방식과 설명</caption>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:http">표 2.1: </span>HTTP 요청 방식과 설명
+</caption>
 <thead>
-<tr class="header">
-<th align="center">요청방식</th>
-<th align="center">주소</th>
+<tr>
+<th style="text-align:center;">
+요청방식
+</th>
+<th style="text-align:center;">
+주소
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="center">GET</td>
-<td align="center">특정 정보 조회</td>
+<tr>
+<td style="text-align:center;">
+GET
+</td>
+<td style="text-align:center;">
+특정 정보 조회
+</td>
 </tr>
-<tr class="even">
-<td align="center">POST</td>
-<td align="center">새로운 정보 등록</td>
+<tr>
+<td style="text-align:center;">
+POST
+</td>
+<td style="text-align:center;">
+새로운 정보 등록
+</td>
 </tr>
-<tr class="odd">
-<td align="center">PUT</td>
-<td align="center">기존 특정 정보 갱신</td>
+<tr>
+<td style="text-align:center;">
+PUT
+</td>
+<td style="text-align:center;">
+기존 특정 정보 갱신
+</td>
 </tr>
-<tr class="even">
-<td align="center">DELETE</td>
-<td align="center">기존 특정 정보 삭제</td>
+<tr>
+<td style="text-align:center;">
+DELETE
+</td>
+<td style="text-align:center;">
+기존 특정 정보 삭제
+</td>
 </tr>
 </tbody>
 </table>
@@ -518,7 +605,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>HTTP 상태 코드는 100번대부터 500번대까지 있으며, 성공적으로 응답을 받을 시 200번 코드를 받게 됩니다. 각 코드에 대한 내용은 HTTP 상태 코드를 검색하면 확인할 수 있으며, 크롤링 과정에서 오류가 발생할 시 해당 코드를 통해 어떤 부분에서 오류가 발생했는지 확인이 가능합니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-4">표 2.2: </span>HTTP 상태 코드 그룹 별 내용
+<span id="tab:unnamed-chunk-13">표 2.2: </span>HTTP 상태 코드 그룹 별 내용
 </caption>
 <thead>
 <tr>
@@ -593,499 +680,297 @@ Server Error (서버 오류)
 </table>
 </div>
 </div>
-<div id="html과-css" class="section level2">
+<div id="html과-css" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> HTML과 CSS</h2>
 <p>클라이언트와 서버가 데이터를 주고받을 때는 디자인이라는 개념이 필요하지 않습니다. 그러나 응답받은 정보를 사람이 확인하려면 보기 편한 방식으로 바꾸어줄 필요가 있는데 웹페이지가 그러한 역할을 합니다. 웹페이지의 제목, 단락, 목록 등 레이아웃을
 잡아주는 데 쓰이는 대표적인 마크업 언어가 HTML(HyperText Markup Language)입니다. HTML을 통해 잡혀진 뼈대에 글자의 색상이나 폰트, 배경색, 배치 등 화면을 꾸며주는 역할을 하는 것이 CSS(Cascading Style Sheets)입니다.</p>
 <p>우리의 목적은 웹페이지를 만드는 것이 아니므로 HTML과 CSS에 대해 자세히 알 필요는 없습니다. 그러나 크롤링하고자 하는 데이터가 웹페이지의 어떤 태그 내에 위치하고 있는지, 어떻게 크롤링하면 될지 파악하기 위해서는 HTML과 CSS에 대한 기본적인 지식은 알아야 합니다.</p>
 <p>메모장에서 HTML 코드를 입력한 후 ‘파일명.html’로 저장하면 해당 코드가 웹페이지에서 어떻게 나타나는지 확인할 수 있습니다.</p>
-<div id="html-기본-구조" class="section level3">
+<div id="html-기본-구조" class="section level3" number="2.3.1">
 <h3><span class="header-section-number">2.3.1</span> HTML 기본 구조</h3>
 <p>HTML은 크게 메타 데이터를 나타내는 head와 본문을 나타내는 body로 나누어집니다. head에서 title은 웹페이지에서 나타나는 제목을 나타내며 body 내에는 본문에 들어갈 각종 내용들이 포함되어 있습니다.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="크롤링을-위한-기본-지식.html#cb3-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb3-2"><a href="크롤링을-위한-기본-지식.html#cb3-2"></a>&lt;head<span class="op">&gt;</span></span>
-<span id="cb3-3"><a href="크롤링을-위한-기본-지식.html#cb3-3"></a>&lt;title<span class="op">&gt;</span>Page Title&lt;/title<span class="op">&gt;</span></span>
-<span id="cb3-4"><a href="크롤링을-위한-기본-지식.html#cb3-4"></a>&lt;/head<span class="op">&gt;</span></span>
-<span id="cb3-5"><a href="크롤링을-위한-기본-지식.html#cb3-5"></a></span>
-<span id="cb3-6"><a href="크롤링을-위한-기본-지식.html#cb3-6"></a>&lt;body<span class="op">&gt;</span></span>
-<span id="cb3-7"><a href="크롤링을-위한-기본-지식.html#cb3-7"></a>&lt;h2<span class="op">&gt;</span> This is page heading &lt;/h2<span class="op">&gt;</span></span>
-<span id="cb3-8"><a href="크롤링을-위한-기본-지식.html#cb3-8"></a>&lt;p<span class="op">&gt;</span> THis is first paragraph text &lt;/p<span class="op">&gt;</span></span>
-<span id="cb3-9"><a href="크롤링을-위한-기본-지식.html#cb3-9"></a>&lt;/body<span class="op">&gt;</span></span>
-<span id="cb3-10"><a href="크롤링을-위한-기본-지식.html#cb3-10"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<head>
-<title>Page Title</title>
-</head>
-
-<body>
-<h2> This is page heading </h2>
-<p> THis is first paragraph text </p>
-</body>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
-<img src="images/html_1.png" alt="HTML 기본 구조" width="70%" />
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="크롤링을-위한-기본-지식.html#cb3-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb3-2"><a href="크롤링을-위한-기본-지식.html#cb3-2" aria-hidden="true" tabindex="-1"></a>&lt;head<span class="op">&gt;</span></span>
+<span id="cb3-3"><a href="크롤링을-위한-기본-지식.html#cb3-3" aria-hidden="true" tabindex="-1"></a>&lt;title<span class="op">&gt;</span>Page Title&lt;/title<span class="op">&gt;</span></span>
+<span id="cb3-4"><a href="크롤링을-위한-기본-지식.html#cb3-4" aria-hidden="true" tabindex="-1"></a>&lt;/head<span class="op">&gt;</span></span>
+<span id="cb3-5"><a href="크롤링을-위한-기본-지식.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="크롤링을-위한-기본-지식.html#cb3-6" aria-hidden="true" tabindex="-1"></a>&lt;body<span class="op">&gt;</span></span>
+<span id="cb3-7"><a href="크롤링을-위한-기본-지식.html#cb3-7" aria-hidden="true" tabindex="-1"></a>&lt;h2<span class="op">&gt;</span> This is page heading &lt;/h2<span class="op">&gt;</span></span>
+<span id="cb3-8"><a href="크롤링을-위한-기본-지식.html#cb3-8" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span> THis is first paragraph text &lt;/p<span class="op">&gt;</span></span>
+<span id="cb3-9"><a href="크롤링을-위한-기본-지식.html#cb3-9" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
+<span id="cb3-10"><a href="크롤링을-위한-기본-지식.html#cb3-10" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="images/html_1.png" alt="HTML 기본 구조" width="50%" />
 <p class="caption">
-그림 2.5: HTML 기본 구조
+그림 2.6: HTML 기본 구조
 </p>
 </div>
 </div>
-<div id="태그와-속성" class="section level3">
+<div id="태그와-속성" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> 태그와 속성</h3>
 <p>HTML 코드는 태그와 속성, 내용으로 이루어져 있습니다. 크롤링한 데이터에서 특정 태그의 데이터만을 찾는 방법, 특정 속성의 데이터만을 찾는 방법, 뽑은 자료에서 내용만을 찾는 방법 등 내용을 찾는 방법이 모두 다르기 때문에 태그와 속성에 대해 좀 더 자세히 살펴보겠습니다.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
-<img src="images/html_2.png" alt="HTML 구성 요소 분석" width="70%" />
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
+<img src="images/html_2.png" alt="HTML 구성 요소 분석" width="100%" />
 <p class="caption">
-그림 2.6: HTML 구성 요소 분석
+그림 2.7: HTML 구성 요소 분석
 </p>
 </div>
-<p>꺾쇠(&lt;&gt;)로 감싸져 있는 부분을 태그라고 하며, 여는 태그 &lt;&gt;가 있으면 반드시 이를 닫는 태그인 &lt;/&gt;가 쌍으로 있어야 합니다. 속성은 해당 태그에 대한 추가적인 정보를 제공해주는 것으로, 뒤에 속성값이 따라와야 합니다. 내용은 우리가 눈으로 보는 텍스트 부분을 의미합니다. 앞의 HTML 코드는 문단을 나타내는 &lt;p&gt; 그, 정렬을 나타내는 align 속성과 center를 통해 가운데 정렬을 지정하며, 내용에는 ‘퀀트 투자 Cookbook’을 나타내고, &lt;/p&gt; 태그를 통해 태그를 마쳤습니다.</p>
+<p>꺾쇠(&lt;&gt;)로 감싸져 있는 부분을 태그라고 하며, 여는 태그 &lt;&gt;가 있으면 반드시 이를 닫는 태그인 &lt;/&gt;가 쌍으로 있어야 합니다. 속성은 해당 태그에 대한 추가적인 정보를 제공해주는 것으로, 뒤에 속성값이 따라와야 합니다. 내용은 우리가 눈으로 보는 텍스트 부분을 의미합니다. 앞의 HTML 코드는 문단을 나타내는 &lt;p&gt;, 정렬을 나타내는 align 속성과 center를 통해 가운데 정렬을 지정하며, 내용에는 ‘퀀트 투자 Cookbook’을 나타내고, &lt;/p&gt; 태그를 통해 태그를 마쳤습니다.</p>
 </div>
-<div id="h-태그와-p-태그" class="section level3">
+<div id="h-태그와-p-태그" class="section level3" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> h 태그와 p 태그</h3>
 <p>h 태그는 폰트의 크기를 나타내는 태그이며, p 태그는 문단을 나타내는 태그입니다. 이를 사용한 간단한 예제는 다음과 같습니다. h 태그의 숫자가 작을수록 텍스트 크기는 커지는 것이 확인되며, 숫자는 1에서 6까지 지원됩니다. p 태그를 사용하면 각각의 문단이 만들어지는 것이 확인됩니다.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb4-1"><a href="크롤링을-위한-기본-지식.html#cb4-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb4-2"><a href="크롤링을-위한-기본-지식.html#cb4-2"></a>&lt;body<span class="op">&gt;</span></span>
-<span id="cb4-3"><a href="크롤링을-위한-기본-지식.html#cb4-3"></a></span>
-<span id="cb4-4"><a href="크롤링을-위한-기본-지식.html#cb4-4"></a>&lt;h1<span class="op">&gt;</span>Page heading<span class="in">: size</span> 1&lt;/h1<span class="op">&gt;</span></span>
-<span id="cb4-5"><a href="크롤링을-위한-기본-지식.html#cb4-5"></a>&lt;h2<span class="op">&gt;</span>Page heading<span class="in">: size</span> 2&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb4-6"><a href="크롤링을-위한-기본-지식.html#cb4-6"></a>&lt;h3<span class="op">&gt;</span>Page heading<span class="in">: size</span> 3&lt;/h3<span class="op">&gt;</span></span>
-<span id="cb4-7"><a href="크롤링을-위한-기본-지식.html#cb4-7"></a></span>
-<span id="cb4-8"><a href="크롤링을-위한-기본-지식.html#cb4-8"></a>&lt;p<span class="op">&gt;</span>Quant Cookbook&lt;/p<span class="op">&gt;</span></span>
-<span id="cb4-9"><a href="크롤링을-위한-기본-지식.html#cb4-9"></a>&lt;p<span class="op">&gt;</span>By Henry&lt;/p<span class="op">&gt;</span></span>
-<span id="cb4-10"><a href="크롤링을-위한-기본-지식.html#cb4-10"></a></span>
-<span id="cb4-11"><a href="크롤링을-위한-기본-지식.html#cb4-11"></a>&lt;/body<span class="op">&gt;</span></span>
-<span id="cb4-12"><a href="크롤링을-위한-기본-지식.html#cb4-12"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<body>
-
-<h1>Page heading: size 1</h1>
-<h2>Page heading: size 2</h2>
-<h3>Page heading: size 3</h3>
-
-<p>Quant Cookbook</p>
-<p>By Henry</p>
-
-</body>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-9"></span>
-<img src="images/html_3.png" alt="h 태그와 p 태그 예제" width="70%" />
+<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb4-1"><a href="크롤링을-위한-기본-지식.html#cb4-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb4-2"><a href="크롤링을-위한-기본-지식.html#cb4-2" aria-hidden="true" tabindex="-1"></a>&lt;body<span class="op">&gt;</span></span>
+<span id="cb4-3"><a href="크롤링을-위한-기본-지식.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="크롤링을-위한-기본-지식.html#cb4-4" aria-hidden="true" tabindex="-1"></a>&lt;h1<span class="op">&gt;</span>Page heading<span class="in">: size</span> 1&lt;/h1<span class="op">&gt;</span></span>
+<span id="cb4-5"><a href="크롤링을-위한-기본-지식.html#cb4-5" aria-hidden="true" tabindex="-1"></a>&lt;h2<span class="op">&gt;</span>Page heading<span class="in">: size</span> 2&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb4-6"><a href="크롤링을-위한-기본-지식.html#cb4-6" aria-hidden="true" tabindex="-1"></a>&lt;h3<span class="op">&gt;</span>Page heading<span class="in">: size</span> 3&lt;/h3<span class="op">&gt;</span></span>
+<span id="cb4-7"><a href="크롤링을-위한-기본-지식.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="크롤링을-위한-기본-지식.html#cb4-8" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span>Quant Cookbook&lt;/p<span class="op">&gt;</span></span>
+<span id="cb4-9"><a href="크롤링을-위한-기본-지식.html#cb4-9" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span>By Henry&lt;/p<span class="op">&gt;</span></span>
+<span id="cb4-10"><a href="크롤링을-위한-기본-지식.html#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="크롤링을-위한-기본-지식.html#cb4-11" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
+<span id="cb4-12"><a href="크롤링을-위한-기본-지식.html#cb4-12" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
+<img src="images/html_3.png" alt="h 태그와 p 태그 예제" width="50%" />
 <p class="caption">
-그림 2.7: h 태그와 p 태그 예제
+그림 2.8: h 태그와 p 태그 예제
 </p>
 </div>
 </div>
-<div id="리스트를-나타내는-ul-태그와-ol-태그" class="section level3">
+<div id="리스트를-나타내는-ul-태그와-ol-태그" class="section level3" number="2.3.4">
 <h3><span class="header-section-number">2.3.4</span> 리스트를 나타내는 ul 태그와 ol 태그</h3>
 <p>ul과 ol 태그는 리스트(글머리 기호)를 만들 때 사용됩니다. ul은 순서가 없는 리스트(unordered list), ol은 순서가 있는 리스트(ordered list)를 만듭니다.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb5-1"><a href="크롤링을-위한-기본-지식.html#cb5-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb5-2"><a href="크롤링을-위한-기본-지식.html#cb5-2"></a>&lt;body<span class="op">&gt;</span></span>
-<span id="cb5-3"><a href="크롤링을-위한-기본-지식.html#cb5-3"></a></span>
-<span id="cb5-4"><a href="크롤링을-위한-기본-지식.html#cb5-4"></a>&lt;h2<span class="op">&gt;</span> Unordered List&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb5-5"><a href="크롤링을-위한-기본-지식.html#cb5-5"></a>&lt;ul<span class="op">&gt;</span></span>
-<span id="cb5-6"><a href="크롤링을-위한-기본-지식.html#cb5-6"></a>  &lt;li<span class="op">&gt;</span>Price&lt;/li<span class="op">&gt;</span></span>
-<span id="cb5-7"><a href="크롤링을-위한-기본-지식.html#cb5-7"></a>  &lt;li<span class="op">&gt;</span>Financial Statement&lt;/li<span class="op">&gt;</span></span>
-<span id="cb5-8"><a href="크롤링을-위한-기본-지식.html#cb5-8"></a>  &lt;li<span class="op">&gt;</span>Sentiment&lt;/li<span class="op">&gt;</span></span>
-<span id="cb5-9"><a href="크롤링을-위한-기본-지식.html#cb5-9"></a>&lt;/ul<span class="op">&gt;</span>  </span>
-<span id="cb5-10"><a href="크롤링을-위한-기본-지식.html#cb5-10"></a></span>
-<span id="cb5-11"><a href="크롤링을-위한-기본-지식.html#cb5-11"></a>&lt;h2<span class="op">&gt;</span> Ordered List&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb5-12"><a href="크롤링을-위한-기본-지식.html#cb5-12"></a>&lt;ol<span class="op">&gt;</span></span>
-<span id="cb5-13"><a href="크롤링을-위한-기본-지식.html#cb5-13"></a>  &lt;li<span class="op">&gt;</span>Import&lt;/li<span class="op">&gt;</span></span>
-<span id="cb5-14"><a href="크롤링을-위한-기본-지식.html#cb5-14"></a>  &lt;li<span class="op">&gt;</span>Tidy&lt;/li<span class="op">&gt;</span></span>
-<span id="cb5-15"><a href="크롤링을-위한-기본-지식.html#cb5-15"></a>  &lt;li<span class="op">&gt;</span>Understand&lt;/li<span class="op">&gt;</span></span>
-<span id="cb5-16"><a href="크롤링을-위한-기본-지식.html#cb5-16"></a>  &lt;li<span class="op">&gt;</span>Communicate&lt;/li<span class="op">&gt;</span></span>
-<span id="cb5-17"><a href="크롤링을-위한-기본-지식.html#cb5-17"></a> &lt;/ol<span class="op">&gt;</span> </span>
-<span id="cb5-18"><a href="크롤링을-위한-기본-지식.html#cb5-18"></a></span>
-<span id="cb5-19"><a href="크롤링을-위한-기본-지식.html#cb5-19"></a>&lt;/body<span class="op">&gt;</span></span>
-<span id="cb5-20"><a href="크롤링을-위한-기본-지식.html#cb5-20"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<body>
-
-<h2> Unordered List</h2>
-<ul>
-  <li>Price</li>
-  <li>Financial Statement</li>
-  <li>Sentiment</li>
-</ul>  
-
-<h2> Ordered List</h2>
-<ol>
-  <li>Import</li>
-  <li>Tidy</li>
-  <li>Understand</li>
-  <li>Communicate</li>
- </ol> 
-
-</body>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
-<img src="images/html_4.png" alt="리스트 관련 태그 예제" width="70%" />
+<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb5-1"><a href="크롤링을-위한-기본-지식.html#cb5-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb5-2"><a href="크롤링을-위한-기본-지식.html#cb5-2" aria-hidden="true" tabindex="-1"></a>&lt;body<span class="op">&gt;</span></span>
+<span id="cb5-3"><a href="크롤링을-위한-기본-지식.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="크롤링을-위한-기본-지식.html#cb5-4" aria-hidden="true" tabindex="-1"></a>&lt;h2<span class="op">&gt;</span> Unordered List&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb5-5"><a href="크롤링을-위한-기본-지식.html#cb5-5" aria-hidden="true" tabindex="-1"></a>&lt;ul<span class="op">&gt;</span></span>
+<span id="cb5-6"><a href="크롤링을-위한-기본-지식.html#cb5-6" aria-hidden="true" tabindex="-1"></a>  &lt;li<span class="op">&gt;</span>Price&lt;/li<span class="op">&gt;</span></span>
+<span id="cb5-7"><a href="크롤링을-위한-기본-지식.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  &lt;li<span class="op">&gt;</span>Financial Statement&lt;/li<span class="op">&gt;</span></span>
+<span id="cb5-8"><a href="크롤링을-위한-기본-지식.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  &lt;li<span class="op">&gt;</span>Sentiment&lt;/li<span class="op">&gt;</span></span>
+<span id="cb5-9"><a href="크롤링을-위한-기본-지식.html#cb5-9" aria-hidden="true" tabindex="-1"></a>&lt;/ul<span class="op">&gt;</span>  </span>
+<span id="cb5-10"><a href="크롤링을-위한-기본-지식.html#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="크롤링을-위한-기본-지식.html#cb5-11" aria-hidden="true" tabindex="-1"></a>&lt;h2<span class="op">&gt;</span> Ordered List&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb5-12"><a href="크롤링을-위한-기본-지식.html#cb5-12" aria-hidden="true" tabindex="-1"></a>&lt;ol<span class="op">&gt;</span></span>
+<span id="cb5-13"><a href="크롤링을-위한-기본-지식.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  &lt;li<span class="op">&gt;</span>Import&lt;/li<span class="op">&gt;</span></span>
+<span id="cb5-14"><a href="크롤링을-위한-기본-지식.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  &lt;li<span class="op">&gt;</span>Tidy&lt;/li<span class="op">&gt;</span></span>
+<span id="cb5-15"><a href="크롤링을-위한-기본-지식.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  &lt;li<span class="op">&gt;</span>Understand&lt;/li<span class="op">&gt;</span></span>
+<span id="cb5-16"><a href="크롤링을-위한-기본-지식.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  &lt;li<span class="op">&gt;</span>Communicate&lt;/li<span class="op">&gt;</span></span>
+<span id="cb5-17"><a href="크롤링을-위한-기본-지식.html#cb5-17" aria-hidden="true" tabindex="-1"></a> &lt;/ol<span class="op">&gt;</span> </span>
+<span id="cb5-18"><a href="크롤링을-위한-기본-지식.html#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="크롤링을-위한-기본-지식.html#cb5-19" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
+<span id="cb5-20"><a href="크롤링을-위한-기본-지식.html#cb5-20" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
+<img src="images/html_4.png" alt="리스트 관련 태그 예제" width="50%" />
 <p class="caption">
-그림 2.8: 리스트 관련 태그 예제
+그림 2.9: 리스트 관련 태그 예제
 </p>
 </div>
 <p>ul 태그로 감싼 부분은 글머리 기호가 순서가 없는 •으로 표현되며, ol 태그로 감싼 부분은 숫자가 순서대로 표현됩니다. 각각의 리스트는 li를 통해 생성됩니다.</p>
 </div>
-<div id="table-태그" class="section level3">
+<div id="table-태그" class="section level3" number="2.3.5">
 <h3><span class="header-section-number">2.3.5</span> table 태그</h3>
 <p>table 태그는 표를 만드는 태그입니다.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb6-1"><a href="크롤링을-위한-기본-지식.html#cb6-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb6-2"><a href="크롤링을-위한-기본-지식.html#cb6-2"></a>&lt;body<span class="op">&gt;</span></span>
-<span id="cb6-3"><a href="크롤링을-위한-기본-지식.html#cb6-3"></a></span>
-<span id="cb6-4"><a href="크롤링을-위한-기본-지식.html#cb6-4"></a>&lt;h2<span class="op">&gt;</span>Major Stock Indices and US ETF&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb6-5"><a href="크롤링을-위한-기본-지식.html#cb6-5"></a></span>
-<span id="cb6-6"><a href="크롤링을-위한-기본-지식.html#cb6-6"></a>&lt;table<span class="op">&gt;</span></span>
-<span id="cb6-7"><a href="크롤링을-위한-기본-지식.html#cb6-7"></a>  &lt;tr<span class="op">&gt;</span></span>
-<span id="cb6-8"><a href="크롤링을-위한-기본-지식.html#cb6-8"></a>    &lt;th<span class="op">&gt;</span>Country&lt;/th<span class="op">&gt;</span></span>
-<span id="cb6-9"><a href="크롤링을-위한-기본-지식.html#cb6-9"></a>    &lt;th<span class="op">&gt;</span>Index&lt;/th<span class="op">&gt;</span></span>
-<span id="cb6-10"><a href="크롤링을-위한-기본-지식.html#cb6-10"></a>    &lt;th<span class="op">&gt;</span>ETF&lt;/th<span class="op">&gt;</span></span>
-<span id="cb6-11"><a href="크롤링을-위한-기본-지식.html#cb6-11"></a>  &lt;/tr<span class="op">&gt;</span></span>
-<span id="cb6-12"><a href="크롤링을-위한-기본-지식.html#cb6-12"></a>  &lt;tr<span class="op">&gt;</span></span>
-<span id="cb6-13"><a href="크롤링을-위한-기본-지식.html#cb6-13"></a>    &lt;td<span class="op">&gt;</span>US&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-14"><a href="크롤링을-위한-기본-지식.html#cb6-14"></a>    &lt;td<span class="op">&gt;</span>S&amp;P 500&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-15"><a href="크롤링을-위한-기본-지식.html#cb6-15"></a>    &lt;td<span class="op">&gt;</span>IVV&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-16"><a href="크롤링을-위한-기본-지식.html#cb6-16"></a>  &lt;/tr<span class="op">&gt;</span></span>
-<span id="cb6-17"><a href="크롤링을-위한-기본-지식.html#cb6-17"></a>  &lt;tr<span class="op">&gt;</span></span>
-<span id="cb6-18"><a href="크롤링을-위한-기본-지식.html#cb6-18"></a>    &lt;td<span class="op">&gt;</span>Europe&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-19"><a href="크롤링을-위한-기본-지식.html#cb6-19"></a>    &lt;td<span class="op">&gt;</span>Euro Stoxx 50&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-20"><a href="크롤링을-위한-기본-지식.html#cb6-20"></a>    &lt;td<span class="op">&gt;</span>IEV&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-21"><a href="크롤링을-위한-기본-지식.html#cb6-21"></a>  &lt;/tr<span class="op">&gt;</span></span>
-<span id="cb6-22"><a href="크롤링을-위한-기본-지식.html#cb6-22"></a>  &lt;tr<span class="op">&gt;</span></span>
-<span id="cb6-23"><a href="크롤링을-위한-기본-지식.html#cb6-23"></a>    &lt;td<span class="op">&gt;</span>Japan&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-24"><a href="크롤링을-위한-기본-지식.html#cb6-24"></a>    &lt;td<span class="op">&gt;</span>Nikkei 225&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-25"><a href="크롤링을-위한-기본-지식.html#cb6-25"></a>    &lt;td<span class="op">&gt;</span>EWJ&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-26"><a href="크롤링을-위한-기본-지식.html#cb6-26"></a>  &lt;/tr<span class="op">&gt;</span></span>
-<span id="cb6-27"><a href="크롤링을-위한-기본-지식.html#cb6-27"></a>  &lt;tr<span class="op">&gt;</span></span>
-<span id="cb6-28"><a href="크롤링을-위한-기본-지식.html#cb6-28"></a>    &lt;td<span class="op">&gt;</span>Korea&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-29"><a href="크롤링을-위한-기본-지식.html#cb6-29"></a>    &lt;td<span class="op">&gt;</span>KOSPI 200&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-30"><a href="크롤링을-위한-기본-지식.html#cb6-30"></a>    &lt;td<span class="op">&gt;</span>EWY&lt;/td<span class="op">&gt;</span></span>
-<span id="cb6-31"><a href="크롤링을-위한-기본-지식.html#cb6-31"></a>  &lt;/tr<span class="op">&gt;</span></span>
-<span id="cb6-32"><a href="크롤링을-위한-기본-지식.html#cb6-32"></a>&lt;/table<span class="op">&gt;</span></span>
-<span id="cb6-33"><a href="크롤링을-위한-기본-지식.html#cb6-33"></a></span>
-<span id="cb6-34"><a href="크롤링을-위한-기본-지식.html#cb6-34"></a>&lt;/body<span class="op">&gt;</span></span>
-<span id="cb6-35"><a href="크롤링을-위한-기본-지식.html#cb6-35"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<body>
-
-<h2>Major Stock Indices and US ETF</h2>
-
-<table>
-  <tr>
-    <th>Country</th>
-    <th>Index</th>
-    <th>ETF</th>
-  </tr>
-  <tr>
-    <td>US</td>
-    <td>S&P 500</td>
-    <td>IVV</td>
-  </tr>
-  <tr>
-    <td>Europe</td>
-    <td>Euro Stoxx 50</td>
-    <td>IEV</td>
-  </tr>
-  <tr>
-    <td>Japan</td>
-    <td>Nikkei 225</td>
-    <td>EWJ</td>
-  </tr>
-  <tr>
-    <td>Korea</td>
-    <td>KOSPI 200</td>
-    <td>EWY</td>
-  </tr>
-</table>
-
-</body>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
-<img src="images/html_5.png" alt="table 태그 예제" width="70%" />
+<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb6-1"><a href="크롤링을-위한-기본-지식.html#cb6-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb6-2"><a href="크롤링을-위한-기본-지식.html#cb6-2" aria-hidden="true" tabindex="-1"></a>&lt;body<span class="op">&gt;</span></span>
+<span id="cb6-3"><a href="크롤링을-위한-기본-지식.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="크롤링을-위한-기본-지식.html#cb6-4" aria-hidden="true" tabindex="-1"></a>&lt;h2<span class="op">&gt;</span>Major Stock Indices and US ETF&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb6-5"><a href="크롤링을-위한-기본-지식.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="크롤링을-위한-기본-지식.html#cb6-6" aria-hidden="true" tabindex="-1"></a>&lt;table<span class="op">&gt;</span></span>
+<span id="cb6-7"><a href="크롤링을-위한-기본-지식.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  &lt;tr<span class="op">&gt;</span></span>
+<span id="cb6-8"><a href="크롤링을-위한-기본-지식.html#cb6-8" aria-hidden="true" tabindex="-1"></a>    &lt;th<span class="op">&gt;</span>Country&lt;/th<span class="op">&gt;</span></span>
+<span id="cb6-9"><a href="크롤링을-위한-기본-지식.html#cb6-9" aria-hidden="true" tabindex="-1"></a>    &lt;th<span class="op">&gt;</span>Index&lt;/th<span class="op">&gt;</span></span>
+<span id="cb6-10"><a href="크롤링을-위한-기본-지식.html#cb6-10" aria-hidden="true" tabindex="-1"></a>    &lt;th<span class="op">&gt;</span>ETF&lt;/th<span class="op">&gt;</span></span>
+<span id="cb6-11"><a href="크롤링을-위한-기본-지식.html#cb6-11" aria-hidden="true" tabindex="-1"></a>  &lt;/tr<span class="op">&gt;</span></span>
+<span id="cb6-12"><a href="크롤링을-위한-기본-지식.html#cb6-12" aria-hidden="true" tabindex="-1"></a>  &lt;tr<span class="op">&gt;</span></span>
+<span id="cb6-13"><a href="크롤링을-위한-기본-지식.html#cb6-13" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>US&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-14"><a href="크롤링을-위한-기본-지식.html#cb6-14" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>S&amp;P 500&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-15"><a href="크롤링을-위한-기본-지식.html#cb6-15" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>IVV&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-16"><a href="크롤링을-위한-기본-지식.html#cb6-16" aria-hidden="true" tabindex="-1"></a>  &lt;/tr<span class="op">&gt;</span></span>
+<span id="cb6-17"><a href="크롤링을-위한-기본-지식.html#cb6-17" aria-hidden="true" tabindex="-1"></a>  &lt;tr<span class="op">&gt;</span></span>
+<span id="cb6-18"><a href="크롤링을-위한-기본-지식.html#cb6-18" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>Europe&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-19"><a href="크롤링을-위한-기본-지식.html#cb6-19" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>Euro Stoxx 50&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-20"><a href="크롤링을-위한-기본-지식.html#cb6-20" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>IEV&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-21"><a href="크롤링을-위한-기본-지식.html#cb6-21" aria-hidden="true" tabindex="-1"></a>  &lt;/tr<span class="op">&gt;</span></span>
+<span id="cb6-22"><a href="크롤링을-위한-기본-지식.html#cb6-22" aria-hidden="true" tabindex="-1"></a>  &lt;tr<span class="op">&gt;</span></span>
+<span id="cb6-23"><a href="크롤링을-위한-기본-지식.html#cb6-23" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>Japan&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-24"><a href="크롤링을-위한-기본-지식.html#cb6-24" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>Nikkei 225&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-25"><a href="크롤링을-위한-기본-지식.html#cb6-25" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>EWJ&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-26"><a href="크롤링을-위한-기본-지식.html#cb6-26" aria-hidden="true" tabindex="-1"></a>  &lt;/tr<span class="op">&gt;</span></span>
+<span id="cb6-27"><a href="크롤링을-위한-기본-지식.html#cb6-27" aria-hidden="true" tabindex="-1"></a>  &lt;tr<span class="op">&gt;</span></span>
+<span id="cb6-28"><a href="크롤링을-위한-기본-지식.html#cb6-28" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>Korea&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-29"><a href="크롤링을-위한-기본-지식.html#cb6-29" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>KOSPI 200&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-30"><a href="크롤링을-위한-기본-지식.html#cb6-30" aria-hidden="true" tabindex="-1"></a>    &lt;td<span class="op">&gt;</span>EWY&lt;/td<span class="op">&gt;</span></span>
+<span id="cb6-31"><a href="크롤링을-위한-기본-지식.html#cb6-31" aria-hidden="true" tabindex="-1"></a>  &lt;/tr<span class="op">&gt;</span></span>
+<span id="cb6-32"><a href="크롤링을-위한-기본-지식.html#cb6-32" aria-hidden="true" tabindex="-1"></a>&lt;/table<span class="op">&gt;</span></span>
+<span id="cb6-33"><a href="크롤링을-위한-기본-지식.html#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="크롤링을-위한-기본-지식.html#cb6-34" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
+<span id="cb6-35"><a href="크롤링을-위한-기본-지식.html#cb6-35" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
+<img src="images/html_5.png" alt="table 태그 예제" width="50%" />
 <p class="caption">
-그림 2.9: table 태그 예제
+그림 2.10: table 태그 예제
 </p>
 </div>
 <p>table 태그 내의 tr 태그는 각 행을 의미합니다. 각 셀의 구분은 th 혹은 td 태그를 통해 구분할 수 있습니다. th 태그는 진하게 표현되므로 주로 테이블의 제목에 사용되고, td 태그는 테이블의 내용에 사용됩니다.</p>
 </div>
-<div id="a-태그와-src-태그-및-속성" class="section level3">
-<h3><span class="header-section-number">2.3.6</span> a 태그와 src 태그 및 속성</h3>
-<p>a 태그와 src 태그는 다른 태그와는 다르게, 혼자 쓰이기보다는 속성과 결합해 사용됩니다. a 태그는 href 속성과 결합해 다른 페이지의 링크를 걸 수 있습니다. src 태그는 img 속성과 결합해 이미지를 불러옵니다.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="크롤링을-위한-기본-지식.html#cb7-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb7-2"><a href="크롤링을-위한-기본-지식.html#cb7-2"></a>&lt;body<span class="op">&gt;</span></span>
-<span id="cb7-3"><a href="크롤링을-위한-기본-지식.html#cb7-3"></a></span>
-<span id="cb7-4"><a href="크롤링을-위한-기본-지식.html#cb7-4"></a>&lt;h2<span class="op">&gt;</span>a tag &amp; href attribute&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb7-5"><a href="크롤링을-위한-기본-지식.html#cb7-5"></a>&lt;p<span class="op">&gt;</span>HTML links are defined with the a tag<span class="fu">.</span></span>
-<span id="cb7-6"><a href="크롤링을-위한-기본-지식.html#cb7-6"></a>The link address is specified in the href attribute<span class="in">:&lt;/p</span><span class="op">&gt;</span></span>
-<span id="cb7-7"><a href="크롤링을-위한-기본-지식.html#cb7-7"></a></span>
-<span id="cb7-8"><a href="크롤링을-위한-기본-지식.html#cb7-8"></a>&lt;a href=&quot;https<span class="in">://henryquant</span><span class="fu">.blogspot.com</span>/&quot;<span class="op">&gt;</span>Henry&#39;s Quantopia&lt;/a<span class="op">&gt;</span></span>
-<span id="cb7-9"><a href="크롤링을-위한-기본-지식.html#cb7-9"></a></span>
-<span id="cb7-10"><a href="크롤링을-위한-기본-지식.html#cb7-10"></a>&lt;h2<span class="op">&gt;</span>img tag &amp; src attribute&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb7-11"><a href="크롤링을-위한-기본-지식.html#cb7-11"></a>&lt;p<span class="op">&gt;</span>HTML images are defined with the img tag<span class="op">,</span></span>
-<span id="cb7-12"><a href="크롤링을-위한-기본-지식.html#cb7-12"></a>and the filename of the image source is</span>
-<span id="cb7-13"><a href="크롤링을-위한-기본-지식.html#cb7-13"></a>specified in the src attribute<span class="in">:&lt;/p</span><span class="op">&gt;</span></span>
-<span id="cb7-14"><a href="크롤링을-위한-기본-지식.html#cb7-14"></a></span>
-<span id="cb7-15"><a href="크롤링을-위한-기본-지식.html#cb7-15"></a>&lt;img src=&quot;https<span class="in">://cran</span><span class="fu">.r-project.org</span>/Rlogo<span class="fu">.svg</span>&quot;<span class="op">,</span></span>
-<span id="cb7-16"><a href="크롤링을-위한-기본-지식.html#cb7-16"></a>width=&quot;180&quot;<span class="op">,</span>height=&quot;140&quot;<span class="op">&gt;</span></span>
-<span id="cb7-17"><a href="크롤링을-위한-기본-지식.html#cb7-17"></a></span>
-<span id="cb7-18"><a href="크롤링을-위한-기본-지식.html#cb7-18"></a>&lt;/body<span class="op">&gt;</span></span>
-<span id="cb7-19"><a href="크롤링을-위한-기본-지식.html#cb7-19"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<body>
-
-<h2>a tag & href attribute</h2>
-<p>HTML links are defined with the a tag.
-The link address is specified in the href attribute:</p>
-
-<a href="https://henryquant.blogspot.com/">Henry's Quantopia</a>
-
-<h2>img tag & src attribute</h2>
-<p>HTML images are defined with the img tag,
-and the filename of the image source is
-specified in the src attribute:</p>
-
-<img src="https://cran.r-project.org/Rlogo.svg",
-width="180",height="140">
-
-</body>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
-<img src="images/html_6.png" alt="a 태그와 src 태그 예제" width="70%" />
+<div id="a-태그와-img-태그-및-속성" class="section level3" number="2.3.6">
+<h3><span class="header-section-number">2.3.6</span> a 태그와 img 태그 및 속성</h3>
+<p>a 태그와 img 태그는 다른 태그와는 다르게, 혼자 쓰이기보다는 속성과 결합해 사용됩니다. a 태그는 href 속성과 결합해 다른 페이지의 링크를 걸 수 있습니다. img 태그는 src 속성과 결합해 이미지를 불러옵니다.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="크롤링을-위한-기본-지식.html#cb7-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb7-2"><a href="크롤링을-위한-기본-지식.html#cb7-2" aria-hidden="true" tabindex="-1"></a>&lt;body<span class="op">&gt;</span></span>
+<span id="cb7-3"><a href="크롤링을-위한-기본-지식.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="크롤링을-위한-기본-지식.html#cb7-4" aria-hidden="true" tabindex="-1"></a>&lt;h2<span class="op">&gt;</span>a tag &amp; href attribute&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb7-5"><a href="크롤링을-위한-기본-지식.html#cb7-5" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span>HTML links are defined with the a tag<span class="fu">.</span></span>
+<span id="cb7-6"><a href="크롤링을-위한-기본-지식.html#cb7-6" aria-hidden="true" tabindex="-1"></a>The link address is specified in the href attribute<span class="in">:&lt;/p</span><span class="op">&gt;</span></span>
+<span id="cb7-7"><a href="크롤링을-위한-기본-지식.html#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="크롤링을-위한-기본-지식.html#cb7-8" aria-hidden="true" tabindex="-1"></a>&lt;a href=&quot;https<span class="in">://henryquant</span><span class="fu">.blogspot.com</span>/&quot;<span class="op">&gt;</span>Henry&#39;s Quantopia&lt;/a<span class="op">&gt;</span></span>
+<span id="cb7-9"><a href="크롤링을-위한-기본-지식.html#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="크롤링을-위한-기본-지식.html#cb7-10" aria-hidden="true" tabindex="-1"></a>&lt;h2<span class="op">&gt;</span>img tag &amp; src attribute&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb7-11"><a href="크롤링을-위한-기본-지식.html#cb7-11" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span>HTML images are defined with the img tag<span class="op">,</span></span>
+<span id="cb7-12"><a href="크롤링을-위한-기본-지식.html#cb7-12" aria-hidden="true" tabindex="-1"></a>and the filename of the image source is</span>
+<span id="cb7-13"><a href="크롤링을-위한-기본-지식.html#cb7-13" aria-hidden="true" tabindex="-1"></a>specified in the src attribute<span class="in">:&lt;/p</span><span class="op">&gt;</span></span>
+<span id="cb7-14"><a href="크롤링을-위한-기본-지식.html#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="크롤링을-위한-기본-지식.html#cb7-15" aria-hidden="true" tabindex="-1"></a>&lt;img src=&quot;https<span class="in">://cran</span><span class="fu">.r-project.org</span>/Rlogo<span class="fu">.svg</span>&quot;<span class="op">,</span></span>
+<span id="cb7-16"><a href="크롤링을-위한-기본-지식.html#cb7-16" aria-hidden="true" tabindex="-1"></a>width=&quot;180&quot;<span class="op">,</span>height=&quot;140&quot;<span class="op">&gt;</span></span>
+<span id="cb7-17"><a href="크롤링을-위한-기본-지식.html#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="크롤링을-위한-기본-지식.html#cb7-18" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
+<span id="cb7-19"><a href="크롤링을-위한-기본-지식.html#cb7-19" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
+<img src="images/html_6.png" alt="a 태그와 src 태그 예제" width="100%" />
 <p class="caption">
-그림 2.10: a 태그와 src 태그 예제
+그림 2.11: a 태그와 src 태그 예제
 </p>
 </div>
 <p>a 태그 뒤 href 속성의 속성값으로 연결하려는 웹페이지 주소를 입력한 후 내용을 입력하면, 내용 텍스트에 웹페이지의 링크가 추가됩니다. img 태그 뒤 src 속성의 속성값에는 불러오려는 이미지 주소를 입력하며, width 속성과 height 속성을 통해 이미지의 가로세로 길이를 조절할 수도 있습니다. 페이지 내에서 링크된 주소를 모두 찾거나, 모든 이미지를 저장하려고 할 때 속성값을 찾으면 손쉽게 원하는 작업을 할 수 있습니다.</p>
 </div>
-<div id="div-태그" class="section level3">
+<div id="div-태그" class="section level3" number="2.3.7">
 <h3><span class="header-section-number">2.3.7</span> div 태그</h3>
 <p>div 태그는 화면의 전체적인 틀(레이아웃)을 만들 때 주로 사용하는 태그입니다. 단독으로도 사용될 수 있으며, 꾸밈을 담당하는 style 속성과 결합되어 사용되기도 합니다.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb8-1"><a href="크롤링을-위한-기본-지식.html#cb8-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb8-2"><a href="크롤링을-위한-기본-지식.html#cb8-2"></a>&lt;body<span class="op">&gt;</span></span>
-<span id="cb8-3"><a href="크롤링을-위한-기본-지식.html#cb8-3"></a></span>
-<span id="cb8-4"><a href="크롤링을-위한-기본-지식.html#cb8-4"></a>&lt;div style=&quot;background-color<span class="in">:black</span>;color<span class="in">:white</span>&quot;<span class="op">&gt;</span></span>
-<span id="cb8-5"><a href="크롤링을-위한-기본-지식.html#cb8-5"></a>  &lt;h5<span class="op">&gt;</span>First Div&lt;/h5<span class="op">&gt;</span></span>
-<span id="cb8-6"><a href="크롤링을-위한-기본-지식.html#cb8-6"></a>  &lt;p<span class="op">&gt;</span>Black backgrond<span class="op">,</span> White Color&lt;/p<span class="op">&gt;</span></span>
-<span id="cb8-7"><a href="크롤링을-위한-기본-지식.html#cb8-7"></a>&lt;/div<span class="op">&gt;</span> </span>
-<span id="cb8-8"><a href="크롤링을-위한-기본-지식.html#cb8-8"></a></span>
-<span id="cb8-9"><a href="크롤링을-위한-기본-지식.html#cb8-9"></a>&lt;div style=&quot;background-color<span class="in">:yellow</span>;color<span class="in">:red</span>&quot;<span class="op">&gt;</span></span>
-<span id="cb8-10"><a href="크롤링을-위한-기본-지식.html#cb8-10"></a>  &lt;h5<span class="op">&gt;</span>Second Div&lt;/h5<span class="op">&gt;</span></span>
-<span id="cb8-11"><a href="크롤링을-위한-기본-지식.html#cb8-11"></a>  &lt;p<span class="op">&gt;</span>Yellow backgrond<span class="op">,</span> Red Color&lt;/p<span class="op">&gt;</span></span>
-<span id="cb8-12"><a href="크롤링을-위한-기본-지식.html#cb8-12"></a>&lt;/div<span class="op">&gt;</span> </span>
-<span id="cb8-13"><a href="크롤링을-위한-기본-지식.html#cb8-13"></a></span>
-<span id="cb8-14"><a href="크롤링을-위한-기본-지식.html#cb8-14"></a>&lt;div style=&quot;background-color<span class="in">:blue</span>;color<span class="in">:grey</span>&quot;<span class="op">&gt;</span></span>
-<span id="cb8-15"><a href="크롤링을-위한-기본-지식.html#cb8-15"></a>  &lt;h5<span class="op">&gt;</span>Second Div&lt;/h5<span class="op">&gt;</span></span>
-<span id="cb8-16"><a href="크롤링을-위한-기본-지식.html#cb8-16"></a>  &lt;p<span class="op">&gt;</span>Blue backgrond<span class="op">,</span> Grey Color&lt;/p<span class="op">&gt;</span></span>
-<span id="cb8-17"><a href="크롤링을-위한-기본-지식.html#cb8-17"></a>&lt;/div<span class="op">&gt;</span> </span>
-<span id="cb8-18"><a href="크롤링을-위한-기본-지식.html#cb8-18"></a></span>
-<span id="cb8-19"><a href="크롤링을-위한-기본-지식.html#cb8-19"></a>&lt;/body<span class="op">&gt;</span></span>
-<span id="cb8-20"><a href="크롤링을-위한-기본-지식.html#cb8-20"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<body>
-
-<div style="background-color:black;color:white">
-  <h5>First Div</h5>
-  <p>Black backgrond, White Color</p>
-</div> 
-
-<div style="background-color:yellow;color:red">
-  <h5>Second Div</h5>
-  <p>Yellow backgrond, Red Color</p>
-</div> 
-
-<div style="background-color:blue;color:grey">
-  <h5>Second Div</h5>
-  <p>Blue backgrond, Grey Color</p>
-</div> 
-
-</body>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-17"></span>
-<img src="images/html_7.png" alt="div 태그 예제" width="70%" />
+<div class="sourceCode" id="cb8"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb8-1"><a href="크롤링을-위한-기본-지식.html#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb8-2"><a href="크롤링을-위한-기본-지식.html#cb8-2" aria-hidden="true" tabindex="-1"></a>&lt;body<span class="op">&gt;</span></span>
+<span id="cb8-3"><a href="크롤링을-위한-기본-지식.html#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="크롤링을-위한-기본-지식.html#cb8-4" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color<span class="in">:black</span>;color<span class="in">:white</span>&quot;<span class="op">&gt;</span></span>
+<span id="cb8-5"><a href="크롤링을-위한-기본-지식.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  &lt;h5<span class="op">&gt;</span>First Div&lt;/h5<span class="op">&gt;</span></span>
+<span id="cb8-6"><a href="크롤링을-위한-기본-지식.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  &lt;p<span class="op">&gt;</span>Black backgrond<span class="op">,</span> White Color&lt;/p<span class="op">&gt;</span></span>
+<span id="cb8-7"><a href="크롤링을-위한-기본-지식.html#cb8-7" aria-hidden="true" tabindex="-1"></a>&lt;/div<span class="op">&gt;</span> </span>
+<span id="cb8-8"><a href="크롤링을-위한-기본-지식.html#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="크롤링을-위한-기본-지식.html#cb8-9" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color<span class="in">:yellow</span>;color<span class="in">:red</span>&quot;<span class="op">&gt;</span></span>
+<span id="cb8-10"><a href="크롤링을-위한-기본-지식.html#cb8-10" aria-hidden="true" tabindex="-1"></a>  &lt;h5<span class="op">&gt;</span>Second Div&lt;/h5<span class="op">&gt;</span></span>
+<span id="cb8-11"><a href="크롤링을-위한-기본-지식.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  &lt;p<span class="op">&gt;</span>Yellow backgrond<span class="op">,</span> Red Color&lt;/p<span class="op">&gt;</span></span>
+<span id="cb8-12"><a href="크롤링을-위한-기본-지식.html#cb8-12" aria-hidden="true" tabindex="-1"></a>&lt;/div<span class="op">&gt;</span> </span>
+<span id="cb8-13"><a href="크롤링을-위한-기본-지식.html#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="크롤링을-위한-기본-지식.html#cb8-14" aria-hidden="true" tabindex="-1"></a>&lt;div style=&quot;background-color<span class="in">:blue</span>;color<span class="in">:grey</span>&quot;<span class="op">&gt;</span></span>
+<span id="cb8-15"><a href="크롤링을-위한-기본-지식.html#cb8-15" aria-hidden="true" tabindex="-1"></a>  &lt;h5<span class="op">&gt;</span>Second Div&lt;/h5<span class="op">&gt;</span></span>
+<span id="cb8-16"><a href="크롤링을-위한-기본-지식.html#cb8-16" aria-hidden="true" tabindex="-1"></a>  &lt;p<span class="op">&gt;</span>Blue backgrond<span class="op">,</span> Grey Color&lt;/p<span class="op">&gt;</span></span>
+<span id="cb8-17"><a href="크롤링을-위한-기본-지식.html#cb8-17" aria-hidden="true" tabindex="-1"></a>&lt;/div<span class="op">&gt;</span> </span>
+<span id="cb8-18"><a href="크롤링을-위한-기본-지식.html#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="크롤링을-위한-기본-지식.html#cb8-19" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
+<span id="cb8-20"><a href="크롤링을-위한-기본-지식.html#cb8-20" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
+<img src="images/html_7.png" alt="div 태그 예제" width="50%" />
 <p class="caption">
-그림 2.11: div 태그 예제
+그림 2.12: div 태그 예제
 </p>
 </div>
 <p>div 태그를 통해 총 세 개의 레이아웃으로 나누어진 것을 알 수 있습니다. style 속성 중 background-color는 배경 색상을, color는 글자 색상을 의미하며, 각 레이아웃마다 다른 스타일이 적용되었습니다.</p>
 </div>
-<div id="css" class="section level3">
+<div id="css" class="section level3" number="2.3.8">
 <h3><span class="header-section-number">2.3.8</span> CSS</h3>
 <p>CSS는 앞서 설명했듯이 웹페이지를 꾸며주는 역할을 합니다. head에서 각 태그에 CSS 효과를 입력하면 본문의 모든 해당 태그에 CSS 효과가 적용됩니다. 이처럼 웹페이지를 꾸미기 위해 특정 요소에 접근하는 것을 셀렉터(Selector)라고 합니다.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb9-1"><a href="크롤링을-위한-기본-지식.html#cb9-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb9-2"><a href="크롤링을-위한-기본-지식.html#cb9-2"></a>&lt;head<span class="op">&gt;</span></span>
-<span id="cb9-3"><a href="크롤링을-위한-기본-지식.html#cb9-3"></a>&lt;style<span class="op">&gt;</span></span>
-<span id="cb9-4"><a href="크롤링을-위한-기본-지식.html#cb9-4"></a>body {<span class="kw">background-color</span>: <span class="cn">powderblue</span><span class="op">;</span>}</span>
-<span id="cb9-5"><a href="크롤링을-위한-기본-지식.html#cb9-5"></a>h4   {<span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span>}</span>
-<span id="cb9-6"><a href="크롤링을-위한-기본-지식.html#cb9-6"></a>&lt;/style<span class="op">&gt;</span></span>
-<span id="cb9-7"><a href="크롤링을-위한-기본-지식.html#cb9-7"></a>&lt;/head<span class="op">&gt;</span></span>
-<span id="cb9-8"><a href="크롤링을-위한-기본-지식.html#cb9-8"></a>&lt;body<span class="op">&gt;</span></span>
-<span id="cb9-9"><a href="크롤링을-위한-기본-지식.html#cb9-9"></a></span>
-<span id="cb9-10"><a href="크롤링을-위한-기본-지식.html#cb9-10"></a>&lt;h4<span class="op">&gt;</span>This is a heading&lt;/h4<span class="op">&gt;</span></span>
-<span id="cb9-11"><a href="크롤링을-위한-기본-지식.html#cb9-11"></a>&lt;p<span class="op">&gt;</span>This is a first paragraph<span class="fu">.</span>&lt;/p<span class="op">&gt;</span></span>
-<span id="cb9-12"><a href="크롤링을-위한-기본-지식.html#cb9-12"></a>&lt;p<span class="op">&gt;</span>This is a second paragraph<span class="fu">.</span>&lt;/p<span class="op">&gt;</span></span>
-<span id="cb9-13"><a href="크롤링을-위한-기본-지식.html#cb9-13"></a></span>
-<span id="cb9-14"><a href="크롤링을-위한-기본-지식.html#cb9-14"></a>&lt;/body<span class="op">&gt;</span></span>
-<span id="cb9-15"><a href="크롤링을-위한-기본-지식.html#cb9-15"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<head>
-<style>
-body {background-color: powderblue;}
-h4   {color: blue;}
-</style>
-</head>
-<body>
-
-<h4>This is a heading</h4>
-<p>This is a first paragraph.</p>
-<p>This is a second paragraph.</p>
-
-</body>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
-<img src="images/html_8.png" alt="css 예제" width="70%" />
+<div class="sourceCode" id="cb9"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb9-1"><a href="크롤링을-위한-기본-지식.html#cb9-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb9-2"><a href="크롤링을-위한-기본-지식.html#cb9-2" aria-hidden="true" tabindex="-1"></a>&lt;head<span class="op">&gt;</span></span>
+<span id="cb9-3"><a href="크롤링을-위한-기본-지식.html#cb9-3" aria-hidden="true" tabindex="-1"></a>&lt;style<span class="op">&gt;</span></span>
+<span id="cb9-4"><a href="크롤링을-위한-기본-지식.html#cb9-4" aria-hidden="true" tabindex="-1"></a>body {<span class="kw">background-color</span>: <span class="cn">powderblue</span><span class="op">;</span>}</span>
+<span id="cb9-5"><a href="크롤링을-위한-기본-지식.html#cb9-5" aria-hidden="true" tabindex="-1"></a>h4   {<span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span>}</span>
+<span id="cb9-6"><a href="크롤링을-위한-기본-지식.html#cb9-6" aria-hidden="true" tabindex="-1"></a>&lt;/style<span class="op">&gt;</span></span>
+<span id="cb9-7"><a href="크롤링을-위한-기본-지식.html#cb9-7" aria-hidden="true" tabindex="-1"></a>&lt;/head<span class="op">&gt;</span></span>
+<span id="cb9-8"><a href="크롤링을-위한-기본-지식.html#cb9-8" aria-hidden="true" tabindex="-1"></a>&lt;body<span class="op">&gt;</span></span>
+<span id="cb9-9"><a href="크롤링을-위한-기본-지식.html#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="크롤링을-위한-기본-지식.html#cb9-10" aria-hidden="true" tabindex="-1"></a>&lt;h4<span class="op">&gt;</span>This is a heading&lt;/h4<span class="op">&gt;</span></span>
+<span id="cb9-11"><a href="크롤링을-위한-기본-지식.html#cb9-11" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span>This is a first paragraph<span class="fu">.&lt;</span>/p<span class="op">&gt;</span></span>
+<span id="cb9-12"><a href="크롤링을-위한-기본-지식.html#cb9-12" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span>This is a second paragraph<span class="fu">.&lt;</span>/p<span class="op">&gt;</span></span>
+<span id="cb9-13"><a href="크롤링을-위한-기본-지식.html#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="크롤링을-위한-기본-지식.html#cb9-14" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
+<span id="cb9-15"><a href="크롤링을-위한-기본-지식.html#cb9-15" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
+<img src="images/html_8.png" alt="css 예제" width="50%" />
 <p class="caption">
-그림 2.12: css 예제
+그림 2.13: css 예제
 </p>
 </div>
 <p>head 태그 사이에 여러 태그에 대한 CSS 효과가 정의되었습니다. 먼저 body의 전체 배경 색상을 powderblue로 설정했으며, h4 태그의 글자 색상은 파란색(blue)으로 설정했습니다. body 태그 내에서 style에 태그를 주지 않더라도, CSS 효과가 모두 적용되었음이 확인됩니다.</p>
 </div>
-<div id="클래스와-id" class="section level3">
+<div id="클래스와-id" class="section level3" number="2.3.9">
 <h3><span class="header-section-number">2.3.9</span> 클래스와 id</h3>
 <p>CSS를 이용하면 본문의 모든 태그에 효과가 적용되므로, 특정한 요소(Element)에만 동일한 효과를 적용할 수 없습니다. 클래스 속성을 이용하면 동일한 이름을 가진 클래스에는 동일한 효과가 적용됩니다.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb10-1"><a href="크롤링을-위한-기본-지식.html#cb10-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb10-2"><a href="크롤링을-위한-기본-지식.html#cb10-2"></a>&lt;style<span class="op">&gt;</span></span>
-<span id="cb10-3"><a href="크롤링을-위한-기본-지식.html#cb10-3"></a><span class="fu">.index</span> {</span>
-<span id="cb10-4"><a href="크롤링을-위한-기본-지식.html#cb10-4"></a>  <span class="kw">background-color</span>: <span class="cn">tomato</span><span class="op">;</span></span>
-<span id="cb10-5"><a href="크롤링을-위한-기본-지식.html#cb10-5"></a><span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
-<span id="cb10-6"><a href="크롤링을-위한-기본-지식.html#cb10-6"></a><span class="kw">padding</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb10-7"><a href="크롤링을-위한-기본-지식.html#cb10-7"></a>} </span>
-<span id="cb10-8"><a href="크롤링을-위한-기본-지식.html#cb10-8"></a><span class="fu">.desc</span> {</span>
-<span id="cb10-9"><a href="크롤링을-위한-기본-지식.html#cb10-9"></a>  <span class="kw">background-color</span>: <span class="cn">moccasin</span><span class="op">;</span></span>
-<span id="cb10-10"><a href="크롤링을-위한-기본-지식.html#cb10-10"></a>  <span class="kw">color</span>: <span class="cn">black</span><span class="op">;</span></span>
-<span id="cb10-11"><a href="크롤링을-위한-기본-지식.html#cb10-11"></a>  <span class="kw">padding</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb10-12"><a href="크롤링을-위한-기본-지식.html#cb10-12"></a>} </span>
-<span id="cb10-13"><a href="크롤링을-위한-기본-지식.html#cb10-13"></a>&lt;/style<span class="op">&gt;</span></span>
-<span id="cb10-14"><a href="크롤링을-위한-기본-지식.html#cb10-14"></a></span>
-<span id="cb10-15"><a href="크롤링을-위한-기본-지식.html#cb10-15"></a>&lt;div<span class="op">&gt;</span></span>
-<span id="cb10-16"><a href="크롤링을-위한-기본-지식.html#cb10-16"></a>&lt;h2 class=&quot;index&quot;<span class="op">&gt;</span>S&amp;P 500&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb10-17"><a href="크롤링을-위한-기본-지식.html#cb10-17"></a>&lt;p class=&quot;desc&quot;<span class="op">&gt;</span> Market capitalizations of 500 large companies</span>
-<span id="cb10-18"><a href="크롤링을-위한-기본-지식.html#cb10-18"></a>having common stock listed on the NYSE<span class="op">,</span> NASDAQ<span class="op">,</span></span>
-<span id="cb10-19"><a href="크롤링을-위한-기본-지식.html#cb10-19"></a>or the Cboe BZX Exchange&lt;/p<span class="op">&gt;</span></span>
-<span id="cb10-20"><a href="크롤링을-위한-기본-지식.html#cb10-20"></a>&lt;/div<span class="op">&gt;</span></span>
-<span id="cb10-21"><a href="크롤링을-위한-기본-지식.html#cb10-21"></a></span>
-<span id="cb10-22"><a href="크롤링을-위한-기본-지식.html#cb10-22"></a>&lt;div<span class="op">&gt;</span></span>
-<span id="cb10-23"><a href="크롤링을-위한-기본-지식.html#cb10-23"></a>&lt;h2<span class="op">&gt;</span>Dow Jones Industrial Average&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb10-24"><a href="크롤링을-위한-기본-지식.html#cb10-24"></a>&lt;p<span class="op">&gt;</span>Value of 30 large<span class="op">,</span> publicly owned companies</span>
-<span id="cb10-25"><a href="크롤링을-위한-기본-지식.html#cb10-25"></a>based in the United States&lt;/p<span class="op">&gt;</span></span>
-<span id="cb10-26"><a href="크롤링을-위한-기본-지식.html#cb10-26"></a>&lt;/div<span class="op">&gt;</span></span>
-<span id="cb10-27"><a href="크롤링을-위한-기본-지식.html#cb10-27"></a></span>
-<span id="cb10-28"><a href="크롤링을-위한-기본-지식.html#cb10-28"></a>&lt;div<span class="op">&gt;</span></span>
-<span id="cb10-29"><a href="크롤링을-위한-기본-지식.html#cb10-29"></a>&lt;h2 class=&quot;index&quot;<span class="op">&gt;</span>NASDAQ Composite&lt;/h2<span class="op">&gt;</span></span>
-<span id="cb10-30"><a href="크롤링을-위한-기본-지식.html#cb10-30"></a>&lt;p class=&quot;desc&quot;<span class="op">&gt;</span>The composition of the NASDAQ Composite is</span>
-<span id="cb10-31"><a href="크롤링을-위한-기본-지식.html#cb10-31"></a>heavily weighted towards information technology companies&lt;/p<span class="op">&gt;</span></span>
-<span id="cb10-32"><a href="크롤링을-위한-기본-지식.html#cb10-32"></a>&lt;div<span class="op">&gt;</span></span>
-<span id="cb10-33"><a href="크롤링을-위한-기본-지식.html#cb10-33"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<style>
-.index {
-  background-color: tomato;
-color: white;
-padding: 10px;
-} 
-.desc {
-  background-color: moccasin;
-  color: black;
-  padding: 10px;
-} 
-</style>
-
-<div>
-<h2 class="index">S&P 500</h2>
-<p class="desc"> Market capitalizations of 500 large companies
-having common stock listed on the NYSE, NASDAQ,
-or the Cboe BZX Exchange</p>
-</div>
-
-<div>
-<h2>Dow Jones Industrial Average</h2>
-<p>Value of 30 large, publicly owned companies
-based in the United States</p>
-</div>
-
-<div>
-<h2 class="index">NASDAQ Composite</h2>
-<p class="desc">The composition of the NASDAQ Composite is
-heavily weighted towards information technology companies</p>
-<div>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
-<img src="images/html_9.png" alt="class 예제" width="70%" />
+<div class="sourceCode" id="cb10"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb10-1"><a href="크롤링을-위한-기본-지식.html#cb10-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb10-2"><a href="크롤링을-위한-기본-지식.html#cb10-2" aria-hidden="true" tabindex="-1"></a>&lt;style<span class="op">&gt;</span></span>
+<span id="cb10-3"><a href="크롤링을-위한-기본-지식.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">.index</span> {</span>
+<span id="cb10-4"><a href="크롤링을-위한-기본-지식.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span>: <span class="cn">tomato</span><span class="op">;</span></span>
+<span id="cb10-5"><a href="크롤링을-위한-기본-지식.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></span>
+<span id="cb10-6"><a href="크롤링을-위한-기본-지식.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">padding</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb10-7"><a href="크롤링을-위한-기본-지식.html#cb10-7" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb10-8"><a href="크롤링을-위한-기본-지식.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">.desc</span> {</span>
+<span id="cb10-9"><a href="크롤링을-위한-기본-지식.html#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span>: <span class="cn">moccasin</span><span class="op">;</span></span>
+<span id="cb10-10"><a href="크롤링을-위한-기본-지식.html#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="cn">black</span><span class="op">;</span></span>
+<span id="cb10-11"><a href="크롤링을-위한-기본-지식.html#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb10-12"><a href="크롤링을-위한-기본-지식.html#cb10-12" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb10-13"><a href="크롤링을-위한-기본-지식.html#cb10-13" aria-hidden="true" tabindex="-1"></a>&lt;/style<span class="op">&gt;</span></span>
+<span id="cb10-14"><a href="크롤링을-위한-기본-지식.html#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="크롤링을-위한-기본-지식.html#cb10-15" aria-hidden="true" tabindex="-1"></a>&lt;div<span class="op">&gt;</span></span>
+<span id="cb10-16"><a href="크롤링을-위한-기본-지식.html#cb10-16" aria-hidden="true" tabindex="-1"></a>&lt;h2 class=&quot;index&quot;<span class="op">&gt;</span>S&amp;P 500&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb10-17"><a href="크롤링을-위한-기본-지식.html#cb10-17" aria-hidden="true" tabindex="-1"></a>&lt;p class=&quot;desc&quot;<span class="op">&gt;</span> Market capitalizations of 500 large companies</span>
+<span id="cb10-18"><a href="크롤링을-위한-기본-지식.html#cb10-18" aria-hidden="true" tabindex="-1"></a>having common stock listed on the NYSE<span class="op">,</span> NASDAQ<span class="op">,</span></span>
+<span id="cb10-19"><a href="크롤링을-위한-기본-지식.html#cb10-19" aria-hidden="true" tabindex="-1"></a>or the Cboe BZX Exchange&lt;/p<span class="op">&gt;</span></span>
+<span id="cb10-20"><a href="크롤링을-위한-기본-지식.html#cb10-20" aria-hidden="true" tabindex="-1"></a>&lt;/div<span class="op">&gt;</span></span>
+<span id="cb10-21"><a href="크롤링을-위한-기본-지식.html#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="크롤링을-위한-기본-지식.html#cb10-22" aria-hidden="true" tabindex="-1"></a>&lt;div<span class="op">&gt;</span></span>
+<span id="cb10-23"><a href="크롤링을-위한-기본-지식.html#cb10-23" aria-hidden="true" tabindex="-1"></a>&lt;h2<span class="op">&gt;</span>Dow Jones Industrial Average&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb10-24"><a href="크롤링을-위한-기본-지식.html#cb10-24" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span>Value of 30 large<span class="op">,</span> publicly owned companies</span>
+<span id="cb10-25"><a href="크롤링을-위한-기본-지식.html#cb10-25" aria-hidden="true" tabindex="-1"></a>based in the United States&lt;/p<span class="op">&gt;</span></span>
+<span id="cb10-26"><a href="크롤링을-위한-기본-지식.html#cb10-26" aria-hidden="true" tabindex="-1"></a>&lt;/div<span class="op">&gt;</span></span>
+<span id="cb10-27"><a href="크롤링을-위한-기본-지식.html#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="크롤링을-위한-기본-지식.html#cb10-28" aria-hidden="true" tabindex="-1"></a>&lt;div<span class="op">&gt;</span></span>
+<span id="cb10-29"><a href="크롤링을-위한-기본-지식.html#cb10-29" aria-hidden="true" tabindex="-1"></a>&lt;h2 class=&quot;index&quot;<span class="op">&gt;</span>NASDAQ Composite&lt;/h2<span class="op">&gt;</span></span>
+<span id="cb10-30"><a href="크롤링을-위한-기본-지식.html#cb10-30" aria-hidden="true" tabindex="-1"></a>&lt;p class=&quot;desc&quot;<span class="op">&gt;</span>The composition of the NASDAQ Composite is</span>
+<span id="cb10-31"><a href="크롤링을-위한-기본-지식.html#cb10-31" aria-hidden="true" tabindex="-1"></a>heavily weighted towards information technology companies&lt;/p<span class="op">&gt;</span></span>
+<span id="cb10-32"><a href="크롤링을-위한-기본-지식.html#cb10-32" aria-hidden="true" tabindex="-1"></a>&lt;div<span class="op">&gt;</span></span>
+<span id="cb10-33"><a href="크롤링을-위한-기본-지식.html#cb10-33" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-30"></span>
+<img src="images/html_9.png" alt="class 예제" width="100%" />
 <p class="caption">
-그림 2.13: class 예제
+그림 2.14: class 예제
 </p>
 </div>
 <p>셀렉터를 클래스에 적용할 때는 클래스명 앞에 마침표(.)를 붙여 표현합니다. 위 예제에서 index 클래스는 배경 색상이 tomato, 글자 색상은 흰색, 여백은 10px로 정의되었습니다. desc 클래스는 배경 색상이 moccasin, 글자 색상은 검은색, 여백은 10px로 정의되었습니다. 본문의 첫 번째(S&amp;P 500)와 세 번째(NASDAQ Composite) 레이아웃의 h2 태그 뒤에는 index 클래스를, p 태그 뒤에는 desc 클래스를 속성으로 입력했습니다. 따라서 해당 레이아웃에만 CSS 효과가 적용되며, 클래스 값이 없는 두 번째 레이아웃에는 효과가 적용되지 않습니다.</p>
 <p>id 또한 이와 비슷한 역할을 하며, HTML 내에서 여러 개의 클래스가 정의될 수 있는 반면, id는 단 하나만 사용하기를 권장합니다.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb11-1"><a href="크롤링을-위한-기본-지식.html#cb11-1"></a>&lt;html<span class="op">&gt;</span></span>
-<span id="cb11-2"><a href="크롤링을-위한-기본-지식.html#cb11-2"></a>&lt;head<span class="op">&gt;</span></span>
-<span id="cb11-3"><a href="크롤링을-위한-기본-지식.html#cb11-3"></a>&lt;style<span class="op">&gt;</span></span>
-<span id="cb11-4"><a href="크롤링을-위한-기본-지식.html#cb11-4"></a></span>
-<span id="cb11-5"><a href="크롤링을-위한-기본-지식.html#cb11-5"></a><span class="co">/* Style the element with the id &quot;myHeader&quot; */</span></span>
-<span id="cb11-6"><a href="크롤링을-위한-기본-지식.html#cb11-6"></a><span class="pp">#myHeader</span> {</span>
-<span id="cb11-7"><a href="크롤링을-위한-기본-지식.html#cb11-7"></a>  <span class="kw">background-color</span>: <span class="cn">lightblue</span><span class="op">;</span></span>
-<span id="cb11-8"><a href="크롤링을-위한-기본-지식.html#cb11-8"></a>  <span class="kw">color</span>: <span class="cn">black</span><span class="op">;</span></span>
-<span id="cb11-9"><a href="크롤링을-위한-기본-지식.html#cb11-9"></a>  <span class="kw">padding</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
-<span id="cb11-10"><a href="크롤링을-위한-기본-지식.html#cb11-10"></a>  <span class="kw">text-align</span>: <span class="dv">center</span><span class="op">;</span></span>
-<span id="cb11-11"><a href="크롤링을-위한-기본-지식.html#cb11-11"></a>}</span>
-<span id="cb11-12"><a href="크롤링을-위한-기본-지식.html#cb11-12"></a>&lt;/style<span class="op">&gt;</span></span>
-<span id="cb11-13"><a href="크롤링을-위한-기본-지식.html#cb11-13"></a>&lt;/head<span class="op">&gt;</span></span>
-<span id="cb11-14"><a href="크롤링을-위한-기본-지식.html#cb11-14"></a>&lt;body<span class="op">&gt;</span></span>
-<span id="cb11-15"><a href="크롤링을-위한-기본-지식.html#cb11-15"></a></span>
-<span id="cb11-16"><a href="크롤링을-위한-기본-지식.html#cb11-16"></a>&lt;!-- A unique element --<span class="op">&gt;</span></span>
-<span id="cb11-17"><a href="크롤링을-위한-기본-지식.html#cb11-17"></a>&lt;h1 id=&quot;myHeader&quot;<span class="op">&gt;</span>My Header&lt;/h1<span class="op">&gt;</span></span>
-<span id="cb11-18"><a href="크롤링을-위한-기본-지식.html#cb11-18"></a></span>
-<span id="cb11-19"><a href="크롤링을-위한-기본-지식.html#cb11-19"></a>&lt;/body<span class="op">&gt;</span></span>
-<span id="cb11-20"><a href="크롤링을-위한-기본-지식.html#cb11-20"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<style type="text/css">
-<html>
-<head>
-<style>
-
-/* Style the element with the id "myHeader" */
-#myHeader {
-  background-color: lightblue;
-  color: black;
-  padding: 15px;
-  text-align: center;
-}
-</style>
-</head>
-<body>
-
-<!-- A unique element -->
-<h1 id="myHeader">My Header</h1>
-
-</body>
-</html>
-</style>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
-<img src="images/html_10.png" alt="id 예제" width="70%" />
+<div class="sourceCode" id="cb11"><pre class="sourceCode css"><code class="sourceCode css"><span id="cb11-1"><a href="크롤링을-위한-기본-지식.html#cb11-1" aria-hidden="true" tabindex="-1"></a>&lt;html<span class="op">&gt;</span></span>
+<span id="cb11-2"><a href="크롤링을-위한-기본-지식.html#cb11-2" aria-hidden="true" tabindex="-1"></a>&lt;head<span class="op">&gt;</span></span>
+<span id="cb11-3"><a href="크롤링을-위한-기본-지식.html#cb11-3" aria-hidden="true" tabindex="-1"></a>&lt;style<span class="op">&gt;</span></span>
+<span id="cb11-4"><a href="크롤링을-위한-기본-지식.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="크롤링을-위한-기본-지식.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">/* Style the element with the id &quot;myHeader&quot; */</span></span>
+<span id="cb11-6"><a href="크롤링을-위한-기본-지식.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#myHeader</span> {</span>
+<span id="cb11-7"><a href="크롤링을-위한-기본-지식.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span>: <span class="cn">lightblue</span><span class="op">;</span></span>
+<span id="cb11-8"><a href="크롤링을-위한-기본-지식.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="cn">black</span><span class="op">;</span></span>
+<span id="cb11-9"><a href="크롤링을-위한-기본-지식.html#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span>: <span class="dv">15</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb11-10"><a href="크롤링을-위한-기본-지식.html#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">text-align</span>: <span class="dv">center</span><span class="op">;</span></span>
+<span id="cb11-11"><a href="크롤링을-위한-기본-지식.html#cb11-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-12"><a href="크롤링을-위한-기본-지식.html#cb11-12" aria-hidden="true" tabindex="-1"></a>&lt;/style<span class="op">&gt;</span></span>
+<span id="cb11-13"><a href="크롤링을-위한-기본-지식.html#cb11-13" aria-hidden="true" tabindex="-1"></a>&lt;/head<span class="op">&gt;</span></span>
+<span id="cb11-14"><a href="크롤링을-위한-기본-지식.html#cb11-14" aria-hidden="true" tabindex="-1"></a>&lt;body<span class="op">&gt;</span></span>
+<span id="cb11-15"><a href="크롤링을-위한-기본-지식.html#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="크롤링을-위한-기본-지식.html#cb11-16" aria-hidden="true" tabindex="-1"></a>&lt;!-- A unique element --<span class="op">&gt;</span></span>
+<span id="cb11-17"><a href="크롤링을-위한-기본-지식.html#cb11-17" aria-hidden="true" tabindex="-1"></a>&lt;h1 id=&quot;myHeader&quot;<span class="op">&gt;</span>My Header&lt;/h1<span class="op">&gt;</span></span>
+<span id="cb11-18"><a href="크롤링을-위한-기본-지식.html#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="크롤링을-위한-기본-지식.html#cb11-19" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
+<span id="cb11-20"><a href="크롤링을-위한-기본-지식.html#cb11-20" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-32"></span>
+<img src="images/html_10.png" alt="id 예제" width="50%" />
 <p class="caption">
-그림 2.14: id 예제
+그림 2.15: id 예제
 </p>
 </div>
 <p>셀렉터를 id에 적용할 때는 클래스명 앞에 샵(#)를 붙여 표현하며, 페이지에서 한 번만 사용된다는 점을 제외하면 클래스와 사용 방법이 거의 동일합니다. 클래스나 id 값을 통해 원하는 내용을 크롤링하는 경우도 많으므로, 각각의 이름 앞에 마침표(.)와 샵(#)
@@ -1097,7 +982,7 @@ heavily weighted towards information technology companies</p>
 </ul>
 </div>
 </div>
-<div id="파이프-오퍼레이터" class="section level2">
+<div id="파이프-오퍼레이터" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> 파이프 오퍼레이터(<code>%&gt;%</code>)</h2>
 <p>파이프 오퍼레이터는 R에서 동일한 데이터를 대상으로 연속으로 작업하게 해주는 오퍼레이터(연산자)입니다. 크롤링에 필수적인 rvest 패키지를 설치하면 자동으로 magrittr 패키지가 설치되어 파이프 오퍼레이터를 사용할 수 있습니다.</p>
 <p>흔히 프로그래밍에서 x라는 데이터를 F()라는 함수에 넣어 결괏값을 확인하고 싶으면 F(x)의 방법을 사용합니다. 예를 들어 3과 5라는 데이터 중 큰 값을 찾으려면 <code>max(3,5)</code>를 통해 확인합니다. 이를 통해 나온 결괏값을 또 다시 G()라는 함수에 넣어 결괏값을 확인하려면 비슷한 과정을 거칩니다. <code>max(3,5)</code>를 통해 나온 값의 제곱근을 구하려면 <code>result = max(3,5)</code>를 통해 첫 번째 결괏값을 저장하고, <code>sqrt(result)</code>를 통해 두 번째 결괏값을 계산합니다. 물론 <code>sqrt(max(3,5))</code>와 같은 표현법으로 한 번에 표현할 수 있습니다.</p>
@@ -1136,8 +1021,8 @@ x %&gt;% F %&gt;% G
 </tbody>
 </table>
 <p>간단한 예제를 통해 파이프 오퍼레이터의 사용법을 살펴보겠습니다. 먼저 다음과 같은 10개의 숫자가 있다고 가정합니다.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="크롤링을-위한-기본-지식.html#cb12-1"></a>x =<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.3078</span>, <span class="fl">0.2577</span>, <span class="fl">0.5523</span>, <span class="fl">0.0564</span>, <span class="fl">0.4685</span>,</span>
-<span id="cb12-2"><a href="크롤링을-위한-기본-지식.html#cb12-2"></a>      <span class="fl">0.4838</span>, <span class="fl">0.8124</span>, <span class="fl">0.3703</span>, <span class="fl">0.5466</span>, <span class="fl">0.1703</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="크롤링을-위한-기본-지식.html#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.3078</span>, <span class="fl">0.2577</span>, <span class="fl">0.5523</span>, <span class="fl">0.0564</span>, <span class="fl">0.4685</span>,</span>
+<span id="cb12-2"><a href="크롤링을-위한-기본-지식.html#cb12-2" aria-hidden="true" tabindex="-1"></a>      <span class="fl">0.4838</span>, <span class="fl">0.8124</span>, <span class="fl">0.3703</span>, <span class="fl">0.5466</span>, <span class="fl">0.1703</span>)</span></code></pre></div>
 <p>우리가 원하는 과정은 다음과 같습니다.</p>
 <ol style="list-style-type: decimal">
 <li>각 값들의 로그값을 구할 것</li>
@@ -1146,59 +1031,59 @@ x %&gt;% F %&gt;% G
 <li>소수 둘째 자리까지 반올림할 것</li>
 </ol>
 <p>입니다. 즉 <code>log()</code>, <code>diff()</code>, <code>exp()</code>, <code>round()</code>에 대한 값을 순차적으로 구하고자 합니다.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="크롤링을-위한-기본-지식.html#cb13-1"></a>x1 =<span class="st"> </span><span class="kw">log</span>(x)</span>
-<span id="cb13-2"><a href="크롤링을-위한-기본-지식.html#cb13-2"></a>x2 =<span class="st"> </span><span class="kw">diff</span>(x1)</span>
-<span id="cb13-3"><a href="크롤링을-위한-기본-지식.html#cb13-3"></a>x3 =<span class="st"> </span><span class="kw">exp</span>(x2)</span>
-<span id="cb13-4"><a href="크롤링을-위한-기본-지식.html#cb13-4"></a><span class="kw">round</span>(x3, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="크롤링을-위한-기본-지식.html#cb13-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="fu">log</span>(x)</span>
+<span id="cb13-2"><a href="크롤링을-위한-기본-지식.html#cb13-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="fu">diff</span>(x1)</span>
+<span id="cb13-3"><a href="크롤링을-위한-기본-지식.html#cb13-3" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">=</span> <span class="fu">exp</span>(x2)</span>
+<span id="cb13-4"><a href="크롤링을-위한-기본-지식.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(x3, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.84 2.14 0.10 8.31 1.03 1.68 0.46 1.48 0.31</code></pre>
 <p>첫 번째 방법은 단계별 함수의 결괏값을 변수에 저장하고 저장된 변수를 다시 불러와 함수에 넣고 계산하는 방법입니다. 전반적인 계산 과정을 확인하기에는 좋지만 매번 변수에 저장하고 불러오는 과정이 매우 비효율적이며 코드도 불필요하게 길어집니다.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="크롤링을-위한-기본-지식.html#cb15-1"></a><span class="kw">round</span>(<span class="kw">exp</span>(<span class="kw">diff</span>(<span class="kw">log</span>(x))), <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="크롤링을-위한-기본-지식.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="fu">diff</span>(<span class="fu">log</span>(x))), <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.84 2.14 0.10 8.31 1.03 1.68 0.46 1.48 0.31</code></pre>
 <p>두 번째는 괄호를 통해 감싸는 방법입니다. 앞선 방법에 비해 코드는 짧아졌지만, 계산 과정을 알아보기에는 매우 불편한 방법으로 코드가 짜여 있습니다.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="크롤링을-위한-기본-지식.html#cb17-1"></a><span class="kw">library</span>(magrittr)</span>
-<span id="cb17-2"><a href="크롤링을-위한-기본-지식.html#cb17-2"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">diff</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">exp</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(., <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="크롤링을-위한-기본-지식.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb17-2"><a href="크롤링을-위한-기본-지식.html#cb17-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">diff</span>() <span class="sc">%&gt;%</span> <span class="fu">exp</span>() <span class="sc">%&gt;%</span> <span class="fu">round</span>(., <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.84 2.14 0.10 8.31 1.03 1.68 0.46 1.48 0.31</code></pre>
 <p>마지막으로 파이프 오퍼레이터를 사용하는 방법입니다. 코드도 짧으며 계산 과정을 한눈에 파악하기도 좋습니다. 맨 왼쪽에는 원하는 변수를 입력하며, %&gt;% 뒤에는 차례대로 계산하고자 하는 함수를 입력합니다. 변수의 입력값을 ()로 비워둘 경우, 오퍼레이터의 왼쪽에 있는 값이 입력 변수가 됩니다. 반면 <code>round()</code>와 같이 입력값이 두 개 이상 필요하면 마침표(.)가 오퍼레이터의 왼쪽 값으로 입력됩니다.</p>
 <p>파이프 오퍼레이터는 크롤링뿐만 아니라 모든 코드에 사용할 수 있습니다. 이를 통해 훨씬 깔끔하면서도 데이터 처리 과정을 직관적으로 이해할 수 있습니다.</p>
 </div>
-<div id="오류에-대한-예외처리" class="section level2">
+<div id="오류에-대한-예외처리" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> 오류에 대한 예외처리</h2>
 <p>크롤링을 이용해 데이터를 수집할 때 일반적으로 <code>for loop</code> 구문을 통해 수천 종목에 해당하는 웹페이지에 접속해 해당 데이터를 읽어옵니다. 그러나 특정 종목에 해당하는 페이지가 없거나, 단기적으로 접속이 불안정할 경우 오류가 발생해 루프를 처음부터 다시 실행해야 하는 번거로움이 있습니다. <code>tryCatch()</code> 함수를 이용하면 예외처리, 즉 오류가 발생할 경우 이를 무시하고 넘어갈 수 있습니다.</p>
 <p><code>tryCatch()</code> 함수의 구조는 다음과 같습니다.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="크롤링을-위한-기본-지식.html#cb19-1"></a>result =<span class="st"> </span><span class="kw">tryCatch</span>({</span>
-<span id="cb19-2"><a href="크롤링을-위한-기본-지식.html#cb19-2"></a>  expr</span>
-<span id="cb19-3"><a href="크롤링을-위한-기본-지식.html#cb19-3"></a>}, <span class="dt">warning =</span> <span class="cf">function</span>(w) {</span>
-<span id="cb19-4"><a href="크롤링을-위한-기본-지식.html#cb19-4"></a>  warning<span class="op">-</span>handler<span class="op">-</span>code</span>
-<span id="cb19-5"><a href="크롤링을-위한-기본-지식.html#cb19-5"></a>}, <span class="dt">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb19-6"><a href="크롤링을-위한-기본-지식.html#cb19-6"></a>  error<span class="op">-</span>handler<span class="op">-</span>code</span>
-<span id="cb19-7"><a href="크롤링을-위한-기본-지식.html#cb19-7"></a>}, <span class="dt">finally =</span> {</span>
-<span id="cb19-8"><a href="크롤링을-위한-기본-지식.html#cb19-8"></a>  cleanup<span class="op">-</span>code</span>
-<span id="cb19-9"><a href="크롤링을-위한-기본-지식.html#cb19-9"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="크롤링을-위한-기본-지식.html#cb19-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> <span class="fu">tryCatch</span>({</span>
+<span id="cb19-2"><a href="크롤링을-위한-기본-지식.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  expr</span>
+<span id="cb19-3"><a href="크롤링을-위한-기본-지식.html#cb19-3" aria-hidden="true" tabindex="-1"></a>}, <span class="at">warning =</span> <span class="cf">function</span>(w) {</span>
+<span id="cb19-4"><a href="크롤링을-위한-기본-지식.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  warning<span class="sc">-</span>handler<span class="sc">-</span>code</span>
+<span id="cb19-5"><a href="크롤링을-위한-기본-지식.html#cb19-5" aria-hidden="true" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb19-6"><a href="크롤링을-위한-기본-지식.html#cb19-6" aria-hidden="true" tabindex="-1"></a>  error<span class="sc">-</span>handler<span class="sc">-</span>code</span>
+<span id="cb19-7"><a href="크롤링을-위한-기본-지식.html#cb19-7" aria-hidden="true" tabindex="-1"></a>}, <span class="at">finally =</span> {</span>
+<span id="cb19-8"><a href="크롤링을-위한-기본-지식.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  cleanup<span class="sc">-</span>code</span>
+<span id="cb19-9"><a href="크롤링을-위한-기본-지식.html#cb19-9" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>먼저 <code>expr</code>는 실행하고자 하는 코드를 의미합니다. <code>warning</code>은 경고를 나타내며, <code>warning-handler-code</code>는 경고 발생 시 실행할 구문을 의미합니다. 이와 비슷하게 <code>error</code>와 <code>error-handler-code</code>는 각각 오류와 오류 발생 시 실행할 구문을 의미합니다. <code>finally</code>는 오류의 여부와 관계 없이 무조건 수행할 구문을 의미하며, 생략할 수도 있습니다.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="크롤링을-위한-기본-지식.html#cb20-1"></a>number =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="st">&quot;4&quot;</span>,<span class="dv">5</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb20-2"><a href="크롤링을-위한-기본-지식.html#cb20-2"></a><span class="kw">str</span>(number)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:	1 obs. of  5 variables:
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="크롤링을-위한-기본-지식.html#cb20-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="st">&quot;4&quot;</span>,<span class="dv">5</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-2"><a href="크롤링을-위한-기본-지식.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(number)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    1 obs. of  5 variables:
 ##  $ X1  : num 1
 ##  $ X2  : num 2
 ##  $ X3  : num 3
 ##  $ X.4.: chr &quot;4&quot;
 ##  $ X5  : num 5</code></pre>
 <p>먼저 number 변수에는 1에서 5까지 값이 입력되어 있으며, 다른 값들은 형태가 숫자인 반면 4는 문자 형태입니다.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="크롤링을-위한-기본-지식.html#cb22-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number) {</span>
-<span id="cb22-2"><a href="크롤링을-위한-기본-지식.html#cb22-2"></a> <span class="kw">print</span>(i<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb22-3"><a href="크롤링을-위한-기본-지식.html#cb22-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="크롤링을-위한-기본-지식.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number) {</span>
+<span id="cb22-2"><a href="크롤링을-위한-기본-지식.html#cb22-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">print</span>(i<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb22-3"><a href="크롤링을-위한-기본-지식.html#cb22-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 4
 ## [1] 9</code></pre>
-<pre><code>## Error in i^2: non-numeric argument to binary operator</code></pre>
+<pre><code>## Error in i^2: 이항연산자에 수치가 아닌 인수입니다</code></pre>
 <p><code>for loop</code> 구문을 통해 순서대로 값들의 제곱을 출력하는 명령어를 실행하면 문자 4는 제곱을 할 수 없어 오류가 발생하게 됩니다. <code>tryCatch()</code> 함수를 사용하면 이처럼 오류가 발생하는 루프를 무시하고 다음 루프로 넘어갈 수 있게 됩니다.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="크롤링을-위한-기본-지식.html#cb25-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number) {</span>
-<span id="cb25-2"><a href="크롤링을-위한-기본-지식.html#cb25-2"></a>  <span class="kw">tryCatch</span>({</span>
-<span id="cb25-3"><a href="크롤링을-위한-기본-지식.html#cb25-3"></a>    <span class="kw">print</span>(i<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb25-4"><a href="크롤링을-위한-기본-지식.html#cb25-4"></a>  }, <span class="dt">error =</span> <span class="cf">function</span>(e) {</span>
-<span id="cb25-5"><a href="크롤링을-위한-기본-지식.html#cb25-5"></a>    <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&#39;Error:&#39;</span>, i))</span>
-<span id="cb25-6"><a href="크롤링을-위한-기본-지식.html#cb25-6"></a>    })</span>
-<span id="cb25-7"><a href="크롤링을-위한-기본-지식.html#cb25-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="크롤링을-위한-기본-지식.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number) {</span>
+<span id="cb25-2"><a href="크롤링을-위한-기본-지식.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tryCatch</span>({</span>
+<span id="cb25-3"><a href="크롤링을-위한-기본-지식.html#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(i<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb25-4"><a href="크롤링을-위한-기본-지식.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  }, <span class="at">error =</span> <span class="cf">function</span>(e) {</span>
+<span id="cb25-5"><a href="크롤링을-위한-기본-지식.html#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&#39;Error:&#39;</span>, i))</span>
+<span id="cb25-6"><a href="크롤링을-위한-기본-지식.html#cb25-6" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb25-7"><a href="크롤링을-위한-기본-지식.html#cb25-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 4
 ## [1] 9
@@ -1219,6 +1104,7 @@ s.setAttribute('data-timestamp', +new Date());
 })();
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
             </section>
 
           </div>
@@ -1248,6 +1134,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {

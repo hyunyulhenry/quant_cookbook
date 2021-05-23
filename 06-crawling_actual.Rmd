@@ -271,7 +271,7 @@ data_IS = data_IS[, 1:(ncol(data_IS)-2)]
 포괄손익계산서 테이블(data_IS)에는 전년동기, 전년동기(%) 열이 있는데 통일성을 위해 해당 열을 삭제합니다. 이제 테이블을 묶은 후 클렌징하겠습니다.
 
 ```{r}
-data_fs = rbind(data_IS, data_BS, data_CF)
+data_fs = rbind(data_IS, data_BS, data_CF) %>% data.frame()
 data_fs[, 1] = gsub('계산에 참여한 계정 펼치기',
                     '', data_fs[, 1])
 data_fs = data_fs[!duplicated(data_fs[, 1]), ]
@@ -280,10 +280,10 @@ rownames(data_fs) = NULL
 rownames(data_fs) = data_fs[, 1]
 data_fs[, 1] = NULL
 
-data_fs = data_fs[, substr(colnames(data_fs), 6,7) == '12']
+data_fs = data_fs[, substr(colnames(data_fs), 7, 8) == '12']
 ```
 
-1. `rbind()` 함수를 이용해 세 테이블을 행으로 묶은 후 data_fs에 저장합니다.
+1. `rbind()` 함수를 이용해 세 테이블을 행으로 묶은 후 데이터프레임 형태로 변경하여, data_fs에 저장합니다.
 2. 첫 번째 열인 계정명에는 ‘계산에 참여한 계정 펼치기’라는 글자가 들어간 항목이 있습니다. 이는 페이지 내에서 펼치기 역할을 하는 (+) 항목에 해당하며 `gsub()` 함수를 이용해 해당 글자를 삭제합니다.
 3. 중복되는 계정명이 다수 있는데 대부분 불필요한 항목입니다. `!duplicated()` 함수를 사용해 중복되지 않는 계정명만 선택합니다.
 4. 행 이름을 초기화한 후 첫 번째 열의 계정명을 행 이름으로 변경합니다. 그 후 첫 번째 열은 삭제합니다.
@@ -309,7 +309,7 @@ print(head(data_fs))
 sapply(data_fs, typeof)
 ```
 
-1. `sapply()` 함수를 이용해 각 열에 stringr 패키지의 `str_replace_allr()` 함수를 적용해 콤마(,)를 제거한 후 `as.numeric()` 함수를 통해 숫자형 데이터로 변경합니다.
+1. `sapply()` 함수를 이용해 각 열에 stringr 패키지의 `str_replace_all()` 함수를 적용해 콤마(,)를 제거한 후 `as.numeric()` 함수를 통해 숫자형 데이터로 변경합니다.
 2. `data.frame()` 함수를 이용해 데이터 프레임 형태로 만들어주며, 행 이름은 기존 내용을 그대로 유지합니다.
 
 정리된 데이터를 출력해보면 문자형이던 데이터가 숫자형으로 변경되었습니다.
@@ -462,7 +462,6 @@ data 폴더의 KOR_value 폴더 내에 티커_value.csv 이름으로 저장합�
 library(stringr)
 library(httr)
 library(rvest)
-library(stringr)
 library(readr)
 
 KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
@@ -508,7 +507,7 @@ for(i in 1 : nrow(KOR_ticker) ) {
     data_CF = data[[5]]
     
     data_IS = data_IS[, 1:(ncol(data_IS)-2)]
-    data_fs = rbind(data_IS, data_BS, data_CF)
+    data_fs = rbind(data_IS, data_BS, data_CF) %>% data.frame()
     
     # 데이터 클랜징
     data_fs[, 1] = gsub('계산에 참여한 계정 펼치기',
@@ -521,7 +520,7 @@ for(i in 1 : nrow(KOR_ticker) ) {
     
     # 12월 재무제표만 선택
     data_fs =
-      data_fs[, substr(colnames(data_fs), 6,7) == "12"]
+      data_fs[, substr(colnames(data_fs), 7, 8) == "12"]
     
     data_fs = sapply(data_fs, function(x) {
       str_replace_all(x, ',', '') %>%
@@ -678,9 +677,11 @@ print(nm)
 2. `writeBin()` 함수는 바이너리 형태의 파일을 저장하는 함수이며,  `content()`를 통해 첨부 파일 내용을 raw 형태로 저장합니다. 파일명은 위에서 만든 tf로 합니다.
 3. `unzip()` 함수를 통해 zip 내 파일 리스트를 확인합니다.
 
-zip 파일 내에는 CORPCODE.xml 파일이 있으며, `read_xml()` 함수를 통해 이를 불러오도록 합니다. 
+zip 파일 내에는 CORPCODE.xml 파일이 있으며, xml2 패키지의 `read_xml()` 함수를 통해 이를 불러오도록 합니다. 
 
 ```{r}
+library(xml2)
+
 code_data = read_xml(unzip(tf, nm$Name))
 print(code_data)
 ```

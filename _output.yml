@@ -7,7 +7,7 @@ bookdown::gitbook:
       before: |
         <li><a href="./">R을 이용한 퀀트 투자 포트폴리오 만들기</a></li>
       after: |
-        <li><a href="http://henryquant.blogspot.com/" target="blank">Henry's Quantopia</a></li>
+        <li><a href="http://www.yes24.com/Product/Goods/97163849" target="blank">책 구입하러 가기</a></li>
     edit: null
     download: no
     split_bib: no

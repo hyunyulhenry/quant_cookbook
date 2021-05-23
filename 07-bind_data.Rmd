@@ -3,7 +3,6 @@
 ```{r echo = FALSE, warning = FALSE, message = FALSE}
 library(magrittr)
 library(dplyr)
-
 KOR_ticker = read.csv('data/KOR_ticker.csv', row.names = 1)
 ```
 
@@ -182,7 +181,7 @@ for (i in 1 : length(fs_item)) {
 names(fs_list) = fs_item
 ```
 
-위 과정을 거치면 fs_list에 총 `r length(fs_item)`리스트가 생성됩니다. 각 리스트에는 해당 재무 항목에 대한 전 종목의 연도별 데이터가 정리되어 있습니다.
+위 과정을 거치면 fs_list에 총 `r length(fs_item)`개 리스트가 생성됩니다. 각 리스트에는 해당 재무 항목에 대한 전 종목의 연도별 데이터가 정리되어 있습니다.
 
 ```{r eval = FALSE} 
 saveRDS(fs_list, 'data/KOR_fs.Rds')

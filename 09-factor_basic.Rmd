@@ -418,9 +418,9 @@ rank_value = KOR_value %>%
 
 cor(rank_value, use = 'complete.obs') %>%
   round(., 2) %>%
-  corrplot(method = 'color', type = 'upper',
+  corrplot(method = 'color', type = 'lower',
            addCoef.col = 'black', number.cex = 1,
-           tl.cex = 0.6, tl.srt=45, tl.col = 'black',
+           tl.cex = 1, tl.srt = 0, tl.col = 'black',
            col = colorRampPalette(
              c('blue', 'white', 'red'))(200),
            mar=c(0,0,0.5,0))
@@ -666,9 +666,9 @@ rank_quality = quality_profit %>%
 
 cor(rank_quality, use = 'complete.obs') %>%
   round(., 2) %>%
-  corrplot(method = 'color', type = 'upper',
+  corrplot(method = 'color', type = 'lower',
            addCoef.col = 'black', number.cex = 1,
-           tl.cex = 0.6, tl.srt = 45, tl.col = 'black',
+           tl.cex = 1, tl.srt = 0, tl.col = 'black',
            col =
              colorRampPalette(c('blue', 'white', 'red'))(200),
            mar=c(0,0,0.5,0))

@@ -1,7 +1,7 @@
 set.seed(123)
 
 knitr::opts_chunk$set(
-  out.width = "70%",
+  out.width = "100%",
   fig.align = 'center',
   fig.width = 6,
   fig.asp = 0.618,  # 1 / phi

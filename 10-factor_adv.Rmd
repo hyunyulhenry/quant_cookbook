@@ -511,13 +511,12 @@ cbind(factor_quality, factor_value, factor_mom) %>%
   setNames(c('Quality', 'Value', 'Momentum')) %>%
   cor(use = 'complete.obs') %>%
   round(., 2) %>%
-  corrplot(method = 'color', type = 'upper',
+  corrplot(method = 'color', type = 'lower',
            addCoef.col = 'black', number.cex = 1,
-           tl.cex = 0.6, tl.srt = 45, tl.col = 'black',
+           tl.cex = 1, tl.srt = 0, tl.col = 'black',
            col =
              colorRampPalette(c('blue', 'white', 'red'))(200),
            mar=c(0,0,0.5,0))
-
 ```
 
 퀄리티, 밸류, 모멘텀 팩터 간의 랭크의 서로 간 상관관계가 매우 낮으며, 여러 팩터를 동시에 고려함으로서 분산효과를 기대할 수 있습니다.
@@ -544,37 +543,46 @@ invest_qvm = rank(factor_qvm) <= 30
 ```{r warning = FALSE, message = FALSE}
 library(tidyr)
 
-quality_profit[invest_qvm, ] %>%
-  gather() %>%
-  ggplot(aes(x = value)) +
-  geom_histogram() +
+cbind(quality_profit, invest_qvm) %>%
+  gather(key, value, -invest_qvm) %>%
+  mutate(value = ifelse(percent_rank(value) > 0.95, NA, value),
+         value = ifelse(percent_rank(value) < 0.05, NA, value)) %>%
+  ggplot(aes(x = value, fill = invest_qvm)) +
+  geom_histogram(aes(y = ..density..), bins = 30) +
   facet_wrap(. ~ key, scale = 'free', ncol = 1) +
-  xlab(NULL)
+  theme(legend.position = "bottom") +
+  xlab('') + ylab('')
 ```
 
-먼저 선택된 종목의 퀄리티 지표별 분포를 살펴보겠습니다. 대부분 종목의 수익성이 높음이 확인됩니다.
+먼저 선택된 종목(TRUE)과 그렇지 않은 종목(FALSE)의 퀄리티 지표별 분포를 살펴보겠으며, 극단치로 인해 히스토그램이 제대로 표현되지 않는 문제를 방지하기 위해 위해서 상하위 1%를 넘는 데이터는 삭제(트림)해주도록 합니다. 선택된 종목은 대부분 수익성이 높음이 확인됩니다.
 
 ```{r warning = FALSE, message = FALSE}
-KOR_value[invest_qvm, ] %>%
-  gather() %>%
-  ggplot(aes(x = value)) +
-  geom_histogram() +
+cbind(KOR_value, invest_qvm) %>%
+  gather(key, value, -invest_qvm) %>%
+  mutate(value = ifelse(percent_rank(value) > 0.95, NA, value),
+         value = ifelse(percent_rank(value) < 0.05, NA, value)) %>%
+  ggplot(aes(x = value, fill = invest_qvm)) +
+  geom_histogram(aes(y = ..density..), bins = 30) +
   facet_wrap(. ~ key, scale = 'free', ncol = 1) +
-  xlab(NULL)
+  theme(legend.position = "bottom") +
+  xlab('') + ylab('')
 ```
 
-이번에는 선택된 종목의 가치지표별 분포입니다. 대부분 종목의 값이 낮아 밸류 종목임이 확인됩니다.
+이번에는 선택된 종목의 가치지표별 분포입니다. 선택된 종목은 대부분 값이 낮아 밸류 종목임이 확인됩니다.
 
 ```{r warning = FALSE, message = FALSE}
-ret_bind[invest_qvm, ] %>%
-  gather() %>%
-  ggplot(aes(x = value)) +
-  geom_histogram() +
+cbind(ret_bind, invest_qvm) %>%
+  gather(key, value, -invest_qvm) %>%
+  mutate(value = ifelse(percent_rank(value) > 0.95, NA, value),
+         value = ifelse(percent_rank(value) < 0.05, NA, value)) %>%
+  ggplot(aes(x = value, fill = invest_qvm)) +
+  geom_histogram(aes(y = ..density..), bins = 30) +
   facet_wrap(. ~ key, scale = 'free', ncol = 1) +
-  xlab(NULL)
+  theme(legend.position = "bottom") +
+  xlab('') + ylab('')
 ```
 
-마지막으로 각 종목들의 기간별 수익률 분포입니다. 역시나 대부분의 종목들이 높은 수익률을 보입니다.
+마지막으로 각 종목들의 기간별 수익률 분포입니다. 역시나 선택된 종목은 대부분 높은 수익률을 보입니다.
 
 ```{r}
 KOR_ticker[invest_qvm, ] %>%
