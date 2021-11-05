@@ -268,7 +268,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.9.1" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#tidyr-패키지를-이용한-데이터-모양-바꾸기"><i class="fa fa-check"></i><b>0.9.1</b> <code>tidyr</code> 패키지를 이용한 데이터 모양 바꾸기</a></li>
 <li class="chapter" data-level="0.9.2" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#dplyr-패키지를-이용한-데이터-변형하기"><i class="fa fa-check"></i><b>0.9.2</b> <code>dplyr</code> 패키지를 이용한 데이터 변형하기</a></li>
-<li class="chapter" data-level="0.9.3" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>0.9.3</b> <code>*_join()</code>: 데이터 합치기</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a>
@@ -537,7 +536,7 @@ div.csl-indent {
 <div id="get과-post-방식-이해하기" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> GET과 POST 방식 이해하기</h2>
 <p>우리가 인터넷에 접속해 서버에 파일을 요청하면, 서버는 이에 해당하는 파일을 우리에게 보내줍니다. 크롬과 같은 웹 브라우저는 이러한 과정을 사람이 수행하기 편하고 시각적으로 보기 편하도록 만들어진 것이며, 인터넷 주소는 서버의 주소를 기억하기 쉽게 만든 것입니다. 우리가 서버에 데이터를 요청하는 형태는 다양하지만 크롤링에서는 주로 GET과 POST 방식을 사용합니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-220"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-219"></span>
 <img src="images/crawl_flow.png" alt="클라이언트와 서버 간의 요청/응답 과정" width="100%" />
 <p class="caption">
 그림 4.1: 클라이언트와 서버 간의 요청/응답 과정
@@ -548,7 +547,7 @@ div.csl-indent {
 <p>GET 방식은 인터넷 주소를 기준으로 이에 해당하는 데이터나 파일을 요청하는 것입니다. 주로 클라이언트가 요청하는 쿼리를 앰퍼샌드(&amp;) 혹은 물음표(?) 형식으로 결합해 서버에 전달합니다.</p>
 <p>한경컨센서스<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>에 접속한 후 상단 탭에서 [기업] 탭을 선택하면, 주소 끝부분에
 ?skinType=business가 추가되며 이에 해당하는 페이지의 내용을 보여줍니다. 즉, 해당 페이지는 GET 방식을 사용하고 있으며 입력 종류는 skinType, 이에 해당하는 [기업] 탭의 입력값은 business임을 알 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-221"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-220"></span>
 <img src="images/crawl_hk.png" alt="한경 컨센서스 기업 REPORT 페이지" width="100%" />
 <p class="caption">
 그림 4.2: 한경 컨센서스 기업 REPORT 페이지
@@ -558,7 +557,7 @@ div.csl-indent {
 이 변경되는 것을 알 수 있습니다.</p>
 <p>다시 [기업] 탭을 선택한 후 다음 페이지를 확인하기 위해 하단의 [2]를 클릭합니다. 기존 주소인 ?skinType=business 뒤에 추가로 sdate와 edate, now_page 쿼리가 추가됩니다. sdate는 검색 기간의 시작시점, edate는 검색 기간의 종료시점, now_
 page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입력해도 이에 해당하는 페이지의 데이터를 보여줍니다. 이처럼 GET 방식으로 데이터를 요청하면 웹페이지 주소를 수정해 원하는 종류의 데이터를 받아올 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-222"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-221"></span>
 <img src="images/crawl_hk2.png" alt="쿼리 추가로 인한 url의 변경" width="100%" />
 <p class="caption">
 그림 4.3: 쿼리 추가로 인한 url의 변경
@@ -570,7 +569,7 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <p>POST 방식은 사용자가 필요한 값을 추가해서 요청하는 방법입니다. GET 방식과 달리 클라이언트가 요청하는 쿼리를 body에 넣어서 전송하므로 요청 내역을 직접 볼 수 없습니다.</p>
 <p>한국거래소 상장공시시스템<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>에 접속해 [전체메뉴보기]를 클릭하고 [상장법인상세정보] 중
 [상장종목현황]을 선택합니다. 웹페이지 주소가 바뀌며, 상장종목현황이 나타납니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-223"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-222"></span>
 <img src="images/crawl_corp_list.png" alt="상장공시시스템의 상장종목현황 메뉴" width="100%" />
 <p class="caption">
 그림 4.4: 상장공시시스템의 상장종목현황 메뉴
@@ -578,14 +577,14 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </div>
 <p>이번엔 조회일자를 [2017-12-28]로 선택한 후 [검색]을 클릭합니다. 페이지의 내용은 선택일 기준으로 변경되었지만, 주소는 변경되지 않고 그대로 남아 있습니다. GET 방식에서는 선택 항목에 따라 웹페이지 주소가 변경되었지만, POST 방식을 사용해 서버에 데이터를 요청하는 해당 웹사이트는 그렇지 않은 것을 알 수 있습니다.</p>
 <p>POST 방식의 데이터 요청 과정을 살펴보려면 개발자 도구를 이용해야 하며, 크롬에서는 [F12]키를 눌러 개발자 도구 화면을 열 수 있습니다. 개발자 도구 화면에서 다시 한번 [검색]을 클릭해봅니다. [Network] 탭을 클릭하면, [검색]을 클릭함과 동시에 브라우저와 서버 간의 통신 과정을 살펴볼 수 있습니다. 이 중 listedIssueStatus.do라는 항목이 POST 형태임을 알 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-224"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-223"></span>
 <img src="images/crawl_corp_list_2.png" alt="크롬 개발자도구의 Network 화면" width="100%" />
 <p class="caption">
 그림 4.5: 크롬 개발자도구의 Network 화면
 </p>
 </div>
 <p>해당 메뉴를 클릭하면 통신 과정을 좀 더 자세히 알 수 있습니다. 가장 하단의 Form Data에는 서버에 데이터를 요청하는 내역이 있습니다. method에는 readListIssueStatus, selDate에는 2017-12-28이라는 값이 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-225"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-224"></span>
 <img src="images/crawl_corp_list_3.png" alt="POST 방식의 서버 요청 내역" width="100%" />
 <p class="caption">
 그림 4.6: POST 방식의 서버 요청 내역
@@ -602,7 +601,7 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 <p>크롤링의 간단한 예제로 금융 속보의 제목을 추출해보겠습니다. 먼저 네이버 금융에
 접속한 후 [뉴스 → 실시간 속보]<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>를 선택합니다. 이 중 뉴스의 제목에 해당하는 텍스트만 추출하고자 합니다.</p>
 <p>뉴스 제목 부분에 마우스 커서를 올려둔 후 마우스 오른쪽 버튼을 클릭하고 [검사]를 선택하면 개발자 도구 화면이 나타납니다. 여기서 해당 글자가 HTML 내에서 어떤 부분에 위치하는지 확인할 수 있습니다. 해당 제목은 dl 태그 → dd 태그의 articleSubject 클래스 → a 태그 중 title 속성에 위치하고 있습니다. 태그와 속성의 차이가 이해되지 않은 분은 CHAPTER 2를 다시 살펴보기 바랍니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-226"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-225"></span>
 <img src="images/crawl_naver_news.png" alt="실시간 속보의 제목 부분 html" width="100%" />
 <p class="caption">
 그림 4.7: 실시간 속보의 제목 부분 html
@@ -633,31 +632,31 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ol>
 <p>위 과정을 거쳐 data_title에는 실시간 속보의 제목만이 저장됩니다. 이처럼 개발자 도구 화면을 통해 내가 추출하고자 하는 데이터가 HTML 중 어디에 위치하고 있는지 먼저 확인하면 어렵지 않게 해당 데이터를 읽어올 수 있습니다.</p>
 <div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="크롤링-이해하기.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data_title)</span></code></pre></div>
-<pre><code>##  [1] &quot;한국지역난방공사, \&quot;2050년까지 탄&quot;   
-##  [2] &quot;웹젠, 3Q 영업익 163.3억원… &quot;        
-##  [3] &quot;\&quot;호재가 없다\&quot;…코스피, 기관 매도세&quot;
-##  [4] &quot;돌아온 외인, 살아나는 연말 랠리 기&quot;  
-##  [5] &quot;[시황] 코스피, 기관 &#39;팔자&#39;에 하&quot;     
-##  [6] &quot;[마감시황]코스피, 기관 매도에 하락&quot;  
-##  [7] &quot;코스피, 美 테이퍼링 개시 속 기관 &quot;   
-##  [8] &quot;코스피, 코스닥 하락 마감&quot;            
-##  [9] &quot;코스피 하락 마감&quot;                    
-## [10] &quot;코스피, 코스닥 하락 마감&quot;            
-## [11] &quot;원·달러 환율 상승, 코스닥 하락 마&quot;  
-## [12] &quot;하락 마감한 코스피&quot;                  
-## [13] &quot;코스닥 소폭 하락&quot;                    
-## [14] &quot;하락 마감한 코스피&quot;                  
-## [15] &quot;하락 마감한 코스피&quot;                  
-## [16] &quot;[핫스탁]BGF·F&amp;F·액션스퀘어(종&quot;     
-## [17] &quot;[특징주] 상장 3일째 카카오페이, &quot;    
-## [18] &quot;\&quot;내 가수, 못 본 만큼 더 보고 싶&quot;    
-## [19] &quot;[특징주] 홍준표 대선경선 패배 소식&quot;  
-## [20] &quot;(영상)2025년 차세대 배터리 상용&quot;</code></pre>
+<pre><code>##  [1] &quot;혈우병을 이긴 CAM 전문가, 두 종&quot;      
+##  [2] &quot;엑손모빌부터 &#39;천슬라&#39;까지…석유의 대&quot; 
+##  [3] &quot;[마감시황] 에코프로, 호실적에 10&quot;     
+##  [4] &quot;롯데케미칼 3분기 영업이익 2천883&quot;     
+##  [5] &quot;당분간 박스권 횡보, 종목별 차별화…&quot;  
+##  [6] &quot;신고가 50만원 육박했는데....\&quot;목&quot;     
+##  [7] &quot;거래소, &#39;2021 글로벌 ETP 컨&quot;          
+##  [8] &quot;FSN, 전방위 블록체인 신사업 다각&quot;     
+##  [9] &quot;[마감시황] 기관 &#39;팔자&#39;에 하락한 &quot;     
+## [10] &quot;한국거래소, 9일 ‘글로벌 ETP 컨&quot;      
+## [11] &quot;거래소, 9일 글로벌 ETP 컨퍼런스&quot;      
+## [12] &quot;코넥스, 109개 종목 거래…거래대금&quot;    
+## [13] &quot;센코, 3000억원 규모 공장 증설·&quot;      
+## [14] &quot;[증시이슈] 카카오페이, 장중 상승폭&quot;   
+## [15] &quot;단타 개미였던 이재명의 투자론 \&quot;우량&quot; 
+## [16] &quot;삼성증권, 3분기 영업익 3627억…&quot;      
+## [17] &quot;국민의힘 대선후보 테마주 롤러코스터…&quot;
+## [18] &quot;롯데케미칼, 3분기 영업익 2883억&quot;      
+## [19] &quot;인터파크, 3Q 영업손실 72억원… &quot;      
+## [20] &quot;LGU+ 11년 만에 분기 최대 실적&quot;</code></pre>
 </div>
 <div id="기업공시채널에서-오늘의-공시-불러오기" class="section level3" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> 기업공시채널에서 오늘의 공시 불러오기</h3>
 <p>한국거래소 상장공시시스템에 접속한 후 [오늘의 공시 → 전체 → 더보기]를 선택해 전체 공시내용을 확인할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-231"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-230"></span>
 <img src="images/crawl_kind.png" alt="오늘의공시 확인하기" width="100%" />
 <p class="caption">
 그림 4.8: 오늘의공시 확인하기
@@ -665,7 +664,7 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </div>
 <p>해당 페이지에서 날짜를 변경하면 페이지의 내용은 해당일의 공시로 변경되지만 URL은 변경되지 않습니다. 이처럼 POST 방식은 요청하는 데이터에 대한 쿼리가 body의 형태를 통해 전송되므로, 개발자 도구 화면을 통해 해당 쿼리에 대한 내용을 확인해야 합니다.</p>
 <p>개발자 도구 화면을 연 상태에서 조회일자를 [2018-12-28]로 선택한 후 [검색]을 클릭하고 [Network] 탭의 todaydisclosure.do 항목을 살펴보면 Form Data를 통해 서버에 데이터를 요청하는 내역을 확인할 수 있습니다. 여러 항목 중 selDate 부분이 우리가 선택한 일자로 설정되어 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-232"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-231"></span>
 <img src="images/crawl_kind_post.png" alt="POST 방식의 데이터 요청" width="100%" />
 <p class="caption">
 그림 4.9: POST 방식의 데이터 요청
@@ -758,21 +757,21 @@ page는 현재 페이지를 의미하며, 원하는 데이터를 수기로 입�
 </ul>
 <p>또한 종목명을 클릭해 이동하는 페이지의 URL을 확인해보면, 끝 6자리가 각 종목의 거래소 티커임도 확인이 됩니다.</p>
 <p>티커 정리를 위해 HTML에서 확인해야 할 부분은 총 두 가지입니다. 먼저 하단의 페이지 내비게이션을 통해 코스피와 코스닥 시가총액에 해당하는 페이지가 각각 몇 번째 페이지까지 있는지 알아야 합니다. 아래와 같은 항목 중 [맨뒤]에 해당하는 페이지가 가장 마지막 페이지입니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-237"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-236"></span>
 <img src="images/crawl_page_navi.png" alt="페이지 네비게이션" width="100%" />
 <p class="caption">
 그림 4.10: 페이지 네비게이션
 </p>
 </div>
 <p>[맨뒤]에 마우스 커서를 올려두고 마우스 오른쪽 버튼을 클릭한 후 [검사]를 선택하면 개발자 도구 화면이 열립니다. 여기서 해당 글자가 HTML 내에서 어떤 부분에 위치하는지 확인할 수 있습니다. 해당 링크는 pgRR 클래스 → a 태그 중 href 속성에 위치하며, page= 뒷부분의 숫자에 위치하는 페이지로 링크가 걸려 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-238"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-237"></span>
 <img src="images/crawl_page_navi2.png" alt="HTML 내 페이지 네비게이션 부분" width="100%" />
 <p class="caption">
 그림 4.11: HTML 내 페이지 네비게이션 부분
 </p>
 </div>
 <p>종목명 링크에 해당하는 주소 중 끝 6자리는 티커에 해당합니다. 따라서 각 링크들의 주소를 알아야 할 필요도 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-239"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-238"></span>
 <img src="images/crawl_naver_corp.png" alt="네이버 금융 시가총액 페이지" width="100%" />
 <p class="caption">
 그림 4.12: 네이버 금융 시가총액 페이지

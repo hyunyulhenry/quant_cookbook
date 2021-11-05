@@ -268,7 +268,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.9.1" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#tidyr-패키지를-이용한-데이터-모양-바꾸기"><i class="fa fa-check"></i><b>0.9.1</b> <code>tidyr</code> 패키지를 이용한 데이터 모양 바꾸기</a></li>
 <li class="chapter" data-level="0.9.2" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#dplyr-패키지를-이용한-데이터-변형하기"><i class="fa fa-check"></i><b>0.9.2</b> <code>dplyr</code> 패키지를 이용한 데이터 변형하기</a></li>
-<li class="chapter" data-level="0.9.3" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>0.9.3</b> <code>*_join()</code>: 데이터 합치기</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a>
@@ -569,7 +568,7 @@ div.csl-indent {
 <span id="cb721-9"><a href="포트폴리오-구성.html#cb721-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span></span>
 <span id="cb721-10"><a href="포트폴리오-구성.html#cb721-10" aria-hidden="true" tabindex="-1"></a>             <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),</span>
 <span id="cb721-11"><a href="포트폴리오-구성.html#cb721-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-479-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-478-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>각 ETF의 수익률 간 상관관계를 살펴보면 같은 자산군 내에서는 강한 상관관계를 보이며, 주식과 채권 간에는 매우 낮은 상관관계를 보입니다. 또한 주식과 리츠 간에도 꽤 높은 상관관계를 보입니다.</p>
 <p>포트폴리오 최적화에는 분산-공분산 행렬이 대부분 사용되며, 이는 <code>cov()</code> 함수를 통해 손쉽게 계산할 수 있습니다.</p>
 <div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb722-1"><a href="포트폴리오-구성.html#cb722-1" aria-hidden="true" tabindex="-1"></a>covmat <span class="ot">=</span> <span class="fu">cov</span>(rets)</span></code></pre></div>
@@ -586,7 +585,7 @@ div.csl-indent {
 <p>R에서 가장 손쉽게 최적화 작업을 수행하는 방법은 nloptr 패키지의 <code>slsqp()</code> 함수를 이용하는 것입니다. slsqp() 함수는 순차적 이차 계획(Sequential Quadratic Programming)을 이용해 해를 찾으며, 목적함수와 제약조건은 다음과 같습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-481">표 11.1: </span><code>slsqp()</code> 함수 목적함수와 제약조건
+<span id="tab:unnamed-chunk-480">표 11.1: </span><code>slsqp()</code> 함수 목적함수와 제약조건
 </caption>
 <thead>
 <tr>
@@ -708,8 +707,8 @@ heq
 <span id="cb727-6"><a href="포트폴리오-구성.html#cb727-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">heq =</span> heq.objective)</span>
 <span id="cb727-7"><a href="포트폴리오-구성.html#cb727-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb727-8"><a href="포트폴리오-구성.html#cb727-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>par)</span></code></pre></div>
-<pre><code>##  [1]  1.399e-01 -3.427e-17  1.927e-03  5.527e-19  1.795e-17  7.927e-01
-##  [7] -1.024e-17  1.564e-19  9.325e-18  6.546e-02</code></pre>
+<pre><code>##  [1]  1.399e-01  2.286e-17  1.927e-03 -2.680e-18 -7.572e-18  7.927e-01
+##  [7] -9.728e-18  5.278e-18 -3.423e-18  6.546e-02</code></pre>
 <div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb729-1"><a href="포트폴리오-구성.html#cb729-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>value)</span></code></pre></div>
 <pre><code>## [1] 0.000009739</code></pre>
 <p>위에서 만들어진 함수들을 바탕으로 최적화 작업을 실행합니다. 초기값인 x0에는 먼저 동일한 비중들을 입력합니다. 예제에서는 종목이 10개 이므로, x0값에는 <code>rep(0.1, 10)</code> 인 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1을 입력합니다. 최소화하고자 하는 목적함수 fn에는 위에서 구성한 objective 함수를 입력합니다. 부등위 제약조건과 등위 제약조건에도 각각 위에서 구성한 hin.objective와 heq.objective 함수를 입력합니다.</p>
@@ -880,8 +879,8 @@ meq
 <span id="cb735-2"><a href="포트폴리오-구성.html#cb735-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> <span class="fu">solve.QP</span>(Dmat, dvec, Amat, bvec, meq)</span>
 <span id="cb735-3"><a href="포트폴리오-구성.html#cb735-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb735-4"><a href="포트폴리오-구성.html#cb735-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>solution)</span></code></pre></div>
-<pre><code>##  [1]  1.399e-01  3.160e-18  1.927e-03  9.277e-20  1.102e-17  7.927e-01
-##  [7] -4.938e-18  5.254e-20  0.000e+00  6.546e-02</code></pre>
+<pre><code>##  [1]  1.399e-01 -2.302e-18  1.927e-03  4.940e-18  8.449e-18  7.927e-01
+##  [7]  2.133e-18 -1.184e-18  0.000e+00  6.546e-02</code></pre>
 <div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="포트폴리오-구성.html#cb737-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>value)</span></code></pre></div>
 <pre><code>## [1] 0.000004869</code></pre>
 <p>위에 입력된 내역들을 <code>solve.QP()</code> 함수에 넣어 최적화 값을 찾아줍니다. 결과 중 $solution은 최적화된 지점의 해, 즉 최소분산 포트폴리오를 구성하는 자산들의 투자비중을 의미합니다. $value는 $solution에서 산출된 값을 목적함수에 입력했을때 나오는 결괏값으로서, 포트폴리오의 분산을 의미합니다.</p>
@@ -1016,7 +1015,7 @@ user
 <p>아래 표는 <code>slsqp()</code>, <code>solve.QP()</code>, <code>optimalPortfolio()</code>를 이용하여 구한 값들의 비교입니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-494">표 11.6: </span>최적화 결과 비교
+<span id="tab:unnamed-chunk-493">표 11.6: </span>최적화 결과 비교
 </caption>
 <thead>
 <tr>
@@ -1170,7 +1169,7 @@ optimalPortfolio
 <span id="cb744-5"><a href="포트폴리오-구성.html#cb744-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y =</span> w_1)) <span class="sc">+</span></span>
 <span id="cb744-6"><a href="포트폴리오-구성.html#cb744-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb744-7"><a href="포트폴리오-구성.html#cb744-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="cn">NULL</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-495-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-494-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>이처럼 변동성이 가장 낮은 종목에 대부분의 비중이 투자되는 구석해(Corner Solution) 문제를 해결하기 위해 각 자산의 최소 및 최대 투자비중 제약조건을 추가해 줄 필요가 있습니다.</p>
 </div>
 <div id="최소-및-최대-투자비중-제약조건" class="section level3" number="11.1.5">
@@ -1226,7 +1225,7 @@ optimalPortfolio
 <p>constraint 부분에 롱온리 제약조건에 해당하는 lo 대신 직접 제약값들을 입력할 수 있는 user를 입력하며, LB에는 최소 투자비중 벡터를, UB에는 최대 투자비중 벡터를 입력합니다. 따라서 원하는 제약조건 내에서 결괏값이 계산됩니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-499">표 11.7: </span>최소 및 최대 비중제약 조건 후 결과 비교
+<span id="tab:unnamed-chunk-498">표 11.7: </span>최소 및 최대 비중제약 조건 후 결과 비교
 </caption>
 <thead>
 <tr>
@@ -1380,7 +1379,7 @@ optimalPortfolio
 <span id="cb751-5"><a href="포트폴리오-구성.html#cb751-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>), <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
 <span id="cb751-6"><a href="포트폴리오-구성.html#cb751-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fl">0.20</span>), <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
 <span id="cb751-7"><a href="포트폴리오-구성.html#cb751-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="cn">NULL</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-500-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-499-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="각-자산별-제약조건의-추가" class="section level3" number="11.1.6">
 <h3><span class="header-section-number">11.1.6</span> 각 자산별 제약조건의 추가</h3>
@@ -1689,7 +1688,7 @@ c(1, rep(0, 10))
 <span id="cb755-6"><a href="포트폴리오-구성.html#cb755-6" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb755-7"><a href="포트폴리오-구성.html#cb755-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(w)</span></code></pre></div>
 <pre><code>##    SPY    IEV    EWJ    EEM    TLT    IEF    IYR    RWX    GLD    DBC 
-## 15.600  1.615  5.280  0.000 26.374 37.692  3.277  0.000  7.774 12.512</code></pre>
+## 15.600  1.615  5.280  0.000 26.375 37.690  3.277  0.000  7.775 12.512</code></pre>
 <p>입력된 목적함수와 제약조건들을 바탕으로 <code>solve.QP()</code> 함수를 통해 최적화를 수행한 후 최대분산효과를 만족하는 해를 구해보면, 비중의 합이 1을 초과하게 됩니다. <span class="math inline">\(w_i = \frac{w_i}{\sum_{i=1}^nw_i}\)</span>를 통해 비중의 합이 1이 되도록 표준화를 해줍니다.</p>
 <div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb757-1"><a href="포트폴리오-구성.html#cb757-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">=</span> (w <span class="sc">/</span> <span class="fu">sum</span>(w)) <span class="sc">%&gt;%</span></span>
 <span id="cb757-2"><a href="포트폴리오-구성.html#cb757-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(., <span class="dv">4</span>)</span>
@@ -1704,7 +1703,7 @@ c(1, rep(0, 10))
 <span id="cb759-4"><a href="포트폴리오-구성.html#cb759-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb759-5"><a href="포트폴리오-구성.html#cb759-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb759-6"><a href="포트폴리오-구성.html#cb759-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="cn">NULL</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-505-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-504-1.png" width="50%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="optimalportfolio-함수를-이용한-최적화-1" class="section level3" number="11.2.2">
 <h3><span class="header-section-number">11.2.2</span> <code>optimalPortfolio()</code> 함수를 이용한 최적화</h3>
@@ -1824,7 +1823,7 @@ ub(w_1 + w_2 + \dots + w_{10}) - w_{10}
 <span id="cb764-5"><a href="포트폴리오-구성.html#cb764-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>), <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
 <span id="cb764-6"><a href="포트폴리오-구성.html#cb764-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fl">0.20</span>), <span class="at">color =</span> <span class="st">&#39;red&#39;</span>) <span class="sc">+</span></span>
 <span id="cb764-7"><a href="포트폴리오-구성.html#cb764-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="cn">NULL</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-508-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-507-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="각-자산-별-제약조건의-추가" class="section level3" number="11.2.4">
 <h3><span class="header-section-number">11.2.4</span> 각 자산 별 제약조건의 추가</h3>
@@ -2362,7 +2361,7 @@ C
 <span id="cb781-6"><a href="포트폴리오-구성.html#cb781-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;종목명&#39;</span>) <span class="sc">+</span></span>
 <span id="cb781-7"><a href="포트폴리오-구성.html#cb781-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&#39;시가총액비중(%)&#39;</span>) <span class="sc">+</span></span>
 <span id="cb781-8"><a href="포트폴리오-구성.html#cb781-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-519-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-518-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><code>ggplot()</code> 함수를 이용해 시각화를 해주도록 하며, <code>reorder()</code>를 통해 시가총액비중으로 <span class="math inline">\(x\)</span>축을 정리합니다.</li>
 <li><code>geom_point()</code> 함수를 통해 산점도를 나타냅니다.</li>
@@ -2378,7 +2377,7 @@ C
 <span id="cb782-6"><a href="포트폴리오-구성.html#cb782-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
 <span id="cb782-7"><a href="포트폴리오-구성.html#cb782-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> KOSPI200[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="sc">+</span></span>
 <span id="cb782-8"><a href="포트폴리오-구성.html#cb782-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-520-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-519-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <ol style="list-style-type: decimal">
 <li><code>scale_y_log10()</code> 함수를 통해 <span class="math inline">\(y\)</span>축을 로그값으로 스케일링 하였습니다.</li>
 <li><code>scale_x_discrete()</code> 함수를 통해 <span class="math inline">\(x\)</span>축에 일부 종목만을 표현하였습니다.</li>
@@ -2469,7 +2468,7 @@ C
 <span id="cb795-9"><a href="포트폴리오-구성.html#cb795-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> KOSPI200[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="sc">+</span></span>
 <span id="cb795-10"><a href="포트폴리오-구성.html#cb795-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
 <span id="cb795-11"><a href="포트폴리오-구성.html#cb795-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-527-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-526-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>검은색 점은 인덱스 내 시가총액비중이며, 붉은색 엑스표시는 5bp씩 더하거나 뺀 투자비중입니다. 약간씩의 베팅만 했으므로 기초지수와 크게 차이가 없습니다.</p>
 <div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="포트폴리오-구성.html#cb796-1" aria-hidden="true" tabindex="-1"></a>KOSPI200_mod <span class="ot">=</span> KOSPI200 <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(PBR)</span>
 <span id="cb796-2"><a href="포트폴리오-구성.html#cb796-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2483,13 +2482,13 @@ C
 <span id="cb796-10"><a href="포트폴리오-구성.html#cb796-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>. <span class="sc">*</span> <span class="dv">10000</span>, <span class="at">name =</span> <span class="st">&quot;PBR&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb796-11"><a href="포트폴리오-구성.html#cb796-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> KOSPI200_mod[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">10</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="sc">+</span></span>
 <span id="cb796-12"><a href="포트폴리오-구성.html#cb796-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-528-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-527-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>PBR 기준 오름차순을 한 후 그림을 그려보면, PBR이 낮은 종목에는 비중이 추가되며 PBR이 높은 종목에는 비중이 감소되는 것이 쉽게 확인됩니다.</p>
 </div>
 <div id="팩터에-대한-전체-종목의-틸트" class="section level4" number="11.4.3.2">
 <h4><span class="header-section-number">11.4.3.2</span> 팩터에 대한 전체 종목의 틸트</h4>
 <p>위 방법의 경우 상위 종목과 하위 종목에 동일한 비중을 더하거나 빼주었습니다. 그러나 팩터가 강한 종목의 경우 더욱 많은 비중을 더하고, 팩터가 약한 종목의 경우 더욱 많은 비중을 빼는 등 훨씬 적극적으로 포트폴리오를 구성할 수도 있습니다. 이를 위해서는 먼저 확률밀도함수와 누적분포함수를 이해해야 합니다.</p>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-529-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-528-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>파란색 선은 확률밀도함수로써, 각 <span class="math inline">\(x\)</span>축에 대한 확률값을 나타냅니다. 빨간색 선은 누적분포함수로써, 각 <span class="math inline">\(x\)</span>축이 오른쪽으로 이동함에 따른 분포의 누적확률을 계산합니다. 확률의 합은 1이므로 가장 오른쪽은 1의 값을 가지게 됩니다.</p>
 <p>이를 <a href="퀀트-전략을-이용한-종목선정-심화.html#팩터의-결합-방법">팩터의 결합 방법</a>에서 계산한 Z-Score에 응용할 수도 있으며, 이 과정은 표 <a href="포트폴리오-구성.html#tab:cdfexam">11.16</a>에 나와있습니다.</p>
 <table class="table table-striped table-hover table-condensed table" style="margin-left: auto; margin-right: auto; font-size: 8px; margin-left: auto; margin-right: auto;">
@@ -2726,7 +2725,7 @@ E
 <span id="cb802-9"><a href="포트폴리오-구성.html#cb802-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> KOSPI200[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="sc">+</span></span>
 <span id="cb802-10"><a href="포트폴리오-구성.html#cb802-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
 <span id="cb802-11"><a href="포트폴리오-구성.html#cb802-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-532-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-531-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>검은색 점은 인덱스 내 시가총액비중이며, 붉은색 엑스표시는 새롭게 구한 투자비중입니다. 단순이 동일한 비중을 더하거나 빼는것 보다 비중 차이의 폭이 훨씬 크며, 이는 전체 포트폴리오가 팩터에 노출된 정도가 크다는 것을 의미합니다.</p>
 <p>그러나 실무에서는 이러한 차이가 지나치게 벌어지는 것을 방지하기 위한 제약이 있습니다. 그 예로써 종목당 시가총액비중과 투자비중의 차이가 50bp 이상이 되지 않는 제약이 있는 경우를 생각해봅시다. (제약을 더 크게 설정할 수록, 지수 대비 베팅의 크기가 커집니다.)</p>
 <div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="포트폴리오-구성.html#cb803-1" aria-hidden="true" tabindex="-1"></a>KOSPI200_tilt <span class="sc">%&gt;%</span></span>
@@ -2739,7 +2738,7 @@ E
 <span id="cb803-8"><a href="포트폴리오-구성.html#cb803-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> KOSPI200[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="sc">+</span></span>
 <span id="cb803-9"><a href="포트폴리오-구성.html#cb803-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
 <span id="cb803-10"><a href="포트폴리오-구성.html#cb803-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-533-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-532-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>시가총액이 큰 종목의 경우 허용치인 50bp를 넘어가는 경우가 다수 존재합니다. 이를 방지하기 위해 비중에 제약조건을 두어야 합니다. 예를 들어 삼성전자의 경우 둘 간의 비중의 차이가 -0.0117 로 지나치게 크므로 [시가총액비중 - 50bp] 가 투자되도록 변경해 줍니다. 타 종목 역시 이와 동일하게 제약조건을 추가해 줍니다.</p>
 <div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="포트폴리오-구성.html#cb804-1" aria-hidden="true" tabindex="-1"></a>KOSPI200_tilt <span class="ot">=</span> KOSPI200_tilt <span class="sc">%&gt;%</span></span>
 <span id="cb804-2"><a href="포트폴리오-구성.html#cb804-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_at</span>(<span class="fu">vars</span>(투자비중), <span class="fu">list</span>(<span class="sc">~</span><span class="fu">ifelse</span>(차이 <span class="sc">&lt;</span> <span class="sc">-</span><span class="fl">0.005</span>, 시가총액비중 <span class="sc">-</span> <span class="fl">0.005</span>, 투자비중))) <span class="sc">%&gt;%</span></span>
@@ -2787,7 +2786,7 @@ E
 <span id="cb808-8"><a href="포트폴리오-구성.html#cb808-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> KOSPI200[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="sc">+</span></span>
 <span id="cb808-9"><a href="포트폴리오-구성.html#cb808-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
 <span id="cb808-10"><a href="포트폴리오-구성.html#cb808-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-536-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-535-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>모든 종목이 제약조건 내에 들어오게 되었습니다.</p>
 <div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="포트폴리오-구성.html#cb809-1" aria-hidden="true" tabindex="-1"></a>KOSPI200 <span class="sc">%&gt;%</span> </span>
 <span id="cb809-2"><a href="포트폴리오-구성.html#cb809-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(종목명, <span class="sc">-</span>시가총액비중), <span class="at">y =</span> 시가총액비중)) <span class="sc">+</span></span>
@@ -2800,7 +2799,7 @@ E
 <span id="cb809-9"><a href="포트폴리오-구성.html#cb809-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> KOSPI200[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="sc">+</span></span>
 <span id="cb809-10"><a href="포트폴리오-구성.html#cb809-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
 <span id="cb809-11"><a href="포트폴리오-구성.html#cb809-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-537-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-536-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>제약조건으로 인해 기초지수와의 차이가 줄어들었지만, 기존 단순가감법 보다는 적극적으로 베팅이 되었습니다.</p>
 <div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="포트폴리오-구성.html#cb810-1" aria-hidden="true" tabindex="-1"></a>KOSPI200_tilt_mod <span class="ot">=</span> KOSPI200_tilt <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(PBR)</span>
 <span id="cb810-2"><a href="포트폴리오-구성.html#cb810-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2814,7 +2813,7 @@ E
 <span id="cb810-10"><a href="포트폴리오-구성.html#cb810-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>. <span class="sc">*</span> <span class="dv">2000</span>, <span class="at">name =</span> <span class="st">&quot;PBR&quot;</span>)) <span class="sc">+</span></span>
 <span id="cb810-11"><a href="포트폴리오-구성.html#cb810-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> KOSPI200_mod[<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">10</span>), <span class="st">&#39;종목명&#39;</span>]) <span class="sc">+</span></span>
 <span id="cb810-12"><a href="포트폴리오-구성.html#cb810-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-538-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-537-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>PBR에 따른 비중의 차이 역시 단순 가감법보다 훨씬 증가했습니다. 실무에서는 단순히 PBR처럼 하나의 지표만 살펴보기 보다는 앞서 살펴본 멀티팩터를 이용해 비중을 틸트하기도 하며, 좀 더 다양한 제약조건을 추가하기도 합니다.</p>
 
 </div>

@@ -268,7 +268,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.9.1" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#tidyr-패키지를-이용한-데이터-모양-바꾸기"><i class="fa fa-check"></i><b>0.9.1</b> <code>tidyr</code> 패키지를 이용한 데이터 모양 바꾸기</a></li>
 <li class="chapter" data-level="0.9.2" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#dplyr-패키지를-이용한-데이터-변형하기"><i class="fa fa-check"></i><b>0.9.2</b> <code>dplyr</code> 패키지를 이용한 데이터 변형하기</a></li>
-<li class="chapter" data-level="0.9.3" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>0.9.3</b> <code>*_join()</code>: 데이터 합치기</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a>
@@ -578,7 +577,7 @@ div.csl-indent {
 <span id="cb688-11"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb688-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb688-12"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb688-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
 <span id="cb688-13"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb688-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-450-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-449-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><code>group_by()</code> 함수를 이용해 12개월 기준 모멘텀 포트폴리오 종목들의 섹터별 종목수를 계산해준 후 <code>ggplot()</code> 함수를 이용해 이를 그림으로 나타냅니다. 그림에서 알 수 있듯이 특정 섹터에 대부분의 종목이 몰려 있습니다.</p>
 <p>따라서 여러 종목으로 포트폴리오를 구성했지만, 이를 분해해보면 특정 섹터에 쏠림이 심하다는 것을 알 수 있습니다. 이러한 섹터 쏠림 현상을 제거한 <strong>섹터 중립 포트폴리오</strong>를 구성해보겠습니다.</p>
 <div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb689-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb689-1" aria-hidden="true" tabindex="-1"></a>sector_neutral <span class="ot">=</span> data_market <span class="sc">%&gt;%</span></span>
@@ -613,7 +612,7 @@ div.csl-indent {
 <span id="cb690-14"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb690-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="cb690-15"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb690-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
 <span id="cb690-16"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb690-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-452-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-451-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>정규화된 값의 랭킹이 높은 상위 30종목을 선택하며, 내림차순을 위해 마이너스(-)를 붙여줍니다. 해당 포트폴리오의 섹터별 구성종목을 확인해보면, 단순하게 포트폴리오를 구성한 것에 대비하여 여러 섹터에 종목이 분산되어 있습니다.</p>
 <p>이처럼 <code>group_by()</code> 함수를 통해 손쉽게 그룹별 중립화를 할 수 있으며, 글로벌 투자를 하는 경우에는 지역, 국가, 섹터별로도 중립화된 포트폴리오를 구성하기도 합니다.</p>
 </div>
@@ -659,7 +658,7 @@ div.csl-indent {
 <span id="cb693-6"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb693-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> quantile_pbr, <span class="at">y =</span> mean_gpa)) <span class="sc">+</span></span>
 <span id="cb693-7"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb693-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb693-8"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb693-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;PBR&#39;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&#39;GPA&#39;</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-454-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-453-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>이번에는 PBR의 분위수별 GPA 평균값을 구하겠습니다.</p>
 <ol style="list-style-type: decimal">
 <li><code>ntile()</code> 함수를 이용해 PBR을 5분위수로 나누어줍니다.</li>
@@ -670,7 +669,7 @@ div.csl-indent {
 </ol>
 <p>그림에서 알 수 있듯이 PBR이 낮을수록 GPA도 낮으며, 즉 가치주일수록 우량성은 떨어집니다. 반면에 PBR이 높을수록 GPA도 높으며, 이는 주식의 가격이 비쌀수록 우량성도 높다는 뜻입니다.</p>
 <p>이를 이용해 밸류 팩터와 퀄리티 팩터 간의 관계를 나타내면 다음과 같습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-455"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-454"></span>
 <img src="images/tableqv.png" alt="밸류 팩터와 퀄리티 팩터간의 관계" width="50%" />
 <p class="caption">
 그림 10.1: 밸류 팩터와 퀄리티 팩터간의 관계
@@ -685,7 +684,7 @@ div.csl-indent {
 <p>해당 전략은 국내 투자자들에게도 많이 사랑받는 전략이지만 두 지표를 계산하기 위한 데이터를 수집하기 어려워 많은 투자자들이 이율 대신 PER를 사용하고, 투하자본 수익률 대신 ROE를 사용합니다. 그러나 우리가 수집한 데이터를 통해 충분히 원래의 마법공식을 구현할 수 있습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-456">표 10.1: </span>마법공식의 구성 요소
+<span id="tab:unnamed-chunk-455">표 10.1: </span>마법공식의 구성 요소
 </caption>
 <thead>
 <tr>
@@ -856,7 +855,7 @@ PER \times Earnings &amp; = \frac{Price}{Earnings/Shares} \times Earnings \\
 <div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb700-1" aria-hidden="true" tabindex="-1"></a>KOR_value <span class="sc">%&gt;%</span></span>
 <span id="cb700-2"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb700-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PBR)) <span class="sc">+</span></span>
 <span id="cb700-3"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb700-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-460-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-459-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>국내 종목들의 PBR 히스토그램을 그려보면 오른쪽으로 꼬리가 매우 긴 분포를 보이고 있습니다. 이는 PBR이 무려 1825.45인 이상치 데이터가 있기 때문입니다. 이처럼 모든 팩터 지표에는 극단치 데이터가 있기 마련이며, 이를 처리하는 방법을 알아보겠습니다.</p>
 <div id="트림trim-이상치-데이터-삭제" class="section level3" number="10.3.1">
 <h3><span class="header-section-number">10.3.1</span> 트림(Trim): 이상치 데이터 삭제</h3>
@@ -871,7 +870,7 @@ PER \times Earnings &amp; = \frac{Price}{Earnings/Shares} \times Earnings \\
 <span id="cb701-8"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb701-8" aria-hidden="true" tabindex="-1"></a>value_trim <span class="sc">%&gt;%</span></span>
 <span id="cb701-9"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb701-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PBR)) <span class="sc">+</span></span>
 <span id="cb701-10"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb701-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-461-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-460-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><code>percent_rank()</code> 함수를 통해 백분위를 구한 후 상하위 1%에 해당하는 데이터들은 NA로 변경했습니다. 결과적으로 지나치게 PBR이 낮은 종목과 높은 종목은 제거되어 x축의 스케일이 많이 줄어든 모습입니다.</p>
 <p>평균이나 분산같이 통곗값을 구하는 과정에서는 이상치 데이터를 제거하는 것이 바람직할 수 있습니다. 그러나 팩터를 이용해 포트폴리오를 구하는 과정에서 해당 방법은 잘 사용되지 않습니다. 데이터의 손실이 발생하게 되며, 제거된 종목 중 정말로 좋은 종목이 있을 수도 있기 때문입니다.</p>
 </div>
@@ -888,7 +887,7 @@ PER \times Earnings &amp; = \frac{Price}{Earnings/Shares} \times Earnings \\
 <span id="cb702-8"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb702-8" aria-hidden="true" tabindex="-1"></a>value_winsor <span class="sc">%&gt;%</span></span>
 <span id="cb702-9"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb702-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> PBR)) <span class="sc">+</span></span>
 <span id="cb702-10"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb702-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.1</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-462-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-461-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>역시나 <code>percent_rank()</code> 함수를 통해 백분위를 구한 후 해당 범위를 초과할 경우 각각 상하위 1% 데이터로 변형해줍니다. 그림을 살펴보면 x축 양 끝부분의 막대가 길어진 것을 확인할 수 있습니다.</p>
 </div>
 <div id="팩터의-결합-방법" class="section level3" number="10.3.3">
@@ -902,7 +901,7 @@ PER \times Earnings &amp; = \frac{Price}{Earnings/Shares} \times Earnings \\
 <span id="cb703-6"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb703-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
 <span id="cb703-7"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb703-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb703-8"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb703-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(. <span class="sc">~</span> key)  </span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-463-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-462-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>앞의 그림은 각 밸류 지표의 랭킹을 구한 후 히스토그램으로 나타낸 것입니다. 랭킹을 구하는 것의 가장 큰 장점은 극단치로 인한 효과가 사라진다는 점과 균등한 분포를 가진다는 점입니다.</p>
 <p>그러나 각 지표의 x축을 보면 최댓값이 서로 다릅니다. 이는 지표별 결측치로 인해 유효 데이터의 개수가 달라 나타나는 현상이며, 서로 다른 범위의 분포를 단순히 합치는 것은 좋은 방법이 아닙니다. 예를 들어 A, B, C, D 팩터에 각각 비중을 40%, 30%, 20%, 10% 부여해 포트폴리오를 구성한다고 가정해봅시다. 각 랭킹은 분포의 범위가 다르므로, 랭킹과 비중의 가중평균을 통해 포트폴리오를 구성하면 왜곡된 결과를 발생시킵니다.</p>
 <p>이러한 문제를 해결하는 가장 좋은 방법은 랭킹을 구한 후 이를 Z-Score로 정규화하는 것입니다.</p>
@@ -913,7 +912,7 @@ PER \times Earnings &amp; = \frac{Price}{Earnings/Shares} \times Earnings \\
 <span id="cb704-5"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb704-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
 <span id="cb704-6"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb704-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
 <span id="cb704-7"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb704-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(. <span class="sc">~</span> key)  </span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-464-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-463-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p><code>min_rank()</code> 함수를 통해 랭킹을 구한 후, <code>scale()</code> 함수를 통해 정규화를 해주었습니다. 기본적으로 랭킹의 분포가 가진 극단치 효과가 사라지는 점과 균등 분포의 장점을 유지하고 있으며, 분포의 범위 역시 거의 동일하게 바뀌었습니다.</p>
 <p>이처럼 여러 팩터를 결합해 포트폴리오를 구성하고자 하는 경우, 먼저 각 팩터(지표)별 랭킹을 정규화한 뒤 더해야 왜곡 효과가 제거되어 안정적입니다.</p>
 <p><span class="math display">\[\begin{equation*} 
@@ -967,7 +966,7 @@ Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Ra
 <span id="cb706-22"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb706-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb706-23"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb706-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">.</span><span class="st">`</span>)) <span class="sc">+</span></span>
 <span id="cb706-24"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb706-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-466-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-465-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>첫 번째로 퀄리티 지표를 계산해줍니다. 코드는 앞에서 살펴본 것과 거의 비슷하며, 자기자본이익률, 매출총이익, 영업활동현금흐름을 계산해줍니다. 그 후 <code>mutate_all()</code> 함수를 통해 랭킹을 구한 후 다시 표준화하며, 내림차순으로 정리하기 위해 랭킹 부분에 <code>desc()</code>를 붙여줍니다.</p>
 <p><code>rowSums()</code> 함수를 통해 계산된 Z-Score를 종목별로 합쳐줍니다. Z-Score의 히스토그램을 살펴보면 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.</p>
 <div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb707-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb707-1" aria-hidden="true" tabindex="-1"></a>factor_value <span class="ot">=</span> KOR_value <span class="sc">%&gt;%</span></span>
@@ -979,7 +978,7 @@ Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Ra
 <span id="cb707-7"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb707-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb707-8"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb707-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">.</span><span class="st">`</span>)) <span class="sc">+</span></span>
 <span id="cb707-9"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb707-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-467-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-466-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>두 번째로 밸류 지표를 계산해줍니다. 밸류 지표는 이미 테이블 형태로 들어와 있으며, 랭킹과 표준화를 거쳐 합을 구해줍니다. 역시나 이상치가 없이 중앙에 데이터가 많이 분포되어 있습니다.</p>
 <div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb708-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb708-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(PerformanceAnalytics)</span>
 <span id="cb708-2"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb708-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -1001,7 +1000,7 @@ Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Ra
 <span id="cb708-18"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb708-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb708-19"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb708-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">.</span><span class="st">`</span>)) <span class="sc">+</span></span>
 <span id="cb708-20"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb708-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-468-1.png" width="50%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-467-1.png" width="50%" style="display: block; margin: auto;" /></p>
 <p>마지막으로 모멘텀 지표를 계산해줍니다. 최근 60일, 120일, 252일 주가를 통해 3개월, 6개월, 12개월 수익률을 구해준 후 <code>cbind()</code> 함수를 통해 열로 묶어줍니다. 그 후 내림차순 기준 랭킹과 표준화를 거쳐 합을 구합니다.</p>
 <div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb709-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
 <span id="cb709-2"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb709-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1016,7 +1015,7 @@ Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Ra
 <span id="cb709-11"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb709-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span></span>
 <span id="cb709-12"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb709-12" aria-hidden="true" tabindex="-1"></a>             <span class="fu">colorRampPalette</span>(<span class="fu">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;white&#39;</span>, <span class="st">&#39;red&#39;</span>))(<span class="dv">200</span>),</span>
 <span id="cb709-13"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb709-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">0</span>))</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-469-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-468-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>퀄리티, 밸류, 모멘텀 팩터 간의 랭크의 서로 간 상관관계가 매우 낮으며, 여러 팩터를 동시에 고려함으로서 분산효과를 기대할 수 있습니다.</p>
 <div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb710-1" aria-hidden="true" tabindex="-1"></a>factor_qvm <span class="ot">=</span></span>
 <span id="cb710-2"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb710-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(factor_quality, factor_value, factor_mom) <span class="sc">%&gt;%</span></span>
@@ -1042,7 +1041,7 @@ Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Ra
 <span id="cb711-9"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb711-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(. <span class="sc">~</span> key, <span class="at">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb711-10"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb711-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
 <span id="cb711-11"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb711-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;&#39;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&#39;&#39;</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-471-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-470-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>먼저 선택된 종목(TRUE)과 그렇지 않은 종목(FALSE)의 퀄리티 지표별 분포를 살펴보겠으며, 극단치로 인해 히스토그램이 제대로 표현되지 않는 문제를 방지하기 위해 위해서 상하위 1%를 넘는 데이터는 삭제(트림)해주도록 합니다. 선택된 종목은 대부분 수익성이 높음이 확인됩니다.</p>
 <div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb712-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb712-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(KOR_value, invest_qvm) <span class="sc">%&gt;%</span></span>
 <span id="cb712-2"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb712-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(key, value, <span class="sc">-</span>invest_qvm) <span class="sc">%&gt;%</span></span>
@@ -1053,7 +1052,7 @@ Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Ra
 <span id="cb712-7"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb712-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(. <span class="sc">~</span> key, <span class="at">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb712-8"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb712-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
 <span id="cb712-9"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb712-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;&#39;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&#39;&#39;</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-472-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-471-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>이번에는 선택된 종목의 가치지표별 분포입니다. 선택된 종목은 대부분 값이 낮아 밸류 종목임이 확인됩니다.</p>
 <div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb713-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb713-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(ret_bind, invest_qvm) <span class="sc">%&gt;%</span></span>
 <span id="cb713-2"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb713-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(key, value, <span class="sc">-</span>invest_qvm) <span class="sc">%&gt;%</span></span>
@@ -1064,7 +1063,7 @@ Z - Score(Rank(Factor\,A)) + Z - Score(Rank(Factor\,B)) +\,\dots\,+ Z - Score(Ra
 <span id="cb713-7"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb713-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(. <span class="sc">~</span> key, <span class="at">scale =</span> <span class="st">&#39;free&#39;</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb713-8"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb713-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
 <span id="cb713-9"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb713-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&#39;&#39;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&#39;&#39;</span>)</span></code></pre></div>
-<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-473-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="Quant-cookbook_files/figure-html/unnamed-chunk-472-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>마지막으로 각 종목들의 기간별 수익률 분포입니다. 역시나 선택된 종목은 대부분 높은 수익률을 보입니다.</p>
 <div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb714-1" aria-hidden="true" tabindex="-1"></a>KOR_ticker[invest_qvm, ] <span class="sc">%&gt;%</span></span>
 <span id="cb714-2"><a href="퀀트-전략을-이용한-종목선정-심화.html#cb714-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">&#39;종목코드&#39;</span>, <span class="st">&#39;종목명&#39;</span>) <span class="sc">%&gt;%</span></span>

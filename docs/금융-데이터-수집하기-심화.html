@@ -268,7 +268,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.9.1" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#tidyr-패키지를-이용한-데이터-모양-바꾸기"><i class="fa fa-check"></i><b>0.9.1</b> <code>tidyr</code> 패키지를 이용한 데이터 모양 바꾸기</a></li>
 <li class="chapter" data-level="0.9.2" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#dplyr-패키지를-이용한-데이터-변형하기"><i class="fa fa-check"></i><b>0.9.2</b> <code>dplyr</code> 패키지를 이용한 데이터 변형하기</a></li>
-<li class="chapter" data-level="0.9.3" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>0.9.3</b> <code>*_join()</code>: 데이터 합치기</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a>
@@ -539,7 +538,7 @@ div.csl-indent {
 <div id="개별종목-주가-크롤링" class="section level3" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> 개별종목 주가 크롤링</h3>
 <p>먼저 네이버 금융에서 특정종목(예: 삼성전자)의 [차트] 탭<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>을 선택합니다. 해당 차트는 주가 데이터를 받아 그래프를 그려주는 형태입니다. 따라서 해당 데이터가 어디에서 오는지 알기 위해 개발자 도구 화면을 이용합니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-286"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-285"></span>
 <img src="images/crawl_practice_price2.png" alt="네이버금융 차트의 통신기록" width="100%" />
 <p class="caption">
 그림 6.1: 네이버금융 차트의 통신기록
@@ -547,7 +546,7 @@ div.csl-indent {
 </div>
 <p>화면을 연 상태에서 [일] 탭을 선택하면 나오는 항목 중 가장 상단 항목의 Request URL이 주가 데이터를 요청하는 주소입니다. 해당 URL에 접속해보겠습니다.</p>
 <pre><code>URL: https://fchart.stock.naver.com/siseJson.nhn?symbol=005930&amp;requestType=1&amp;startTime=20191117&amp;endTime=20210124&amp;timeframe=day</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-287"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-286"></span>
 <img src="images/crawl_practice_price3.png" alt="주가 데이터 페이지" width="100%" />
 <p class="caption">
 그림 6.2: 주가 데이터 페이지
@@ -941,7 +940,7 @@ div.csl-indent {
 <p>위에서 구한 재무제표 데이터를 이용해 가치지표를 계산할 수 있습니다. 흔히 사용되는 가치지표는 <strong>PER, PBR, PCR, PSR</strong>이며 분자는 주가, 분모는 재무제표 데이터가 사용됩니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-301">표 6.2: </span>가치지표의 종류
+<span id="tab:unnamed-chunk-300">표 6.2: </span>가치지표의 종류
 </caption>
 <thead>
 <tr>
@@ -1008,7 +1007,7 @@ Sales (매출액)
 <p>다음으로 분자 부분에 해당하는 현재 주가를 수집해야 합니다. 이 역시 Company Guide 접속 화면에서 구할 수 있습니다. 불필요한 부분을 제거한 URL은 다음과 같습니다.</p>
 <p><strong><a href="http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&amp;gicode=A005930" class="uri">http://comp.fnguide.com/SVO2/ASP/SVD_main.asp?pGB=1&amp;gicode=A005930</a></strong></p>
 <p>위의 주소 역시 A 뒤의 6자리 티커만 변경하면 해당 종목의 스냅샷 페이지로 이동하게 됩니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-303"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-302"></span>
 <img src="images/crawl_practice_comp_price.png" alt="Company Guide 스냅샷 화면" width="100%" />
 <p class="caption">
 그림 6.3: Company Guide 스냅샷 화면
@@ -1226,14 +1225,14 @@ Sales (매출액)
 <div id="api-key발급-및-추가하기" class="section level3" number="6.3.1">
 <h3><span class="header-section-number">6.3.1</span> API Key발급 및 추가하기</h3>
 <p>먼저 <a href="https://opendart.fss.or.kr/에" class="uri">https://opendart.fss.or.kr/에</a> 접속한 후 [인증키 신청/관리] → [인증키 신청]을 통해 API Key를 발급 받습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-312"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-311"></span>
 <img src="images/dart_api_key.png" alt="OpenAPI 인증키 신청" width="100%" />
 <p class="caption">
 그림 6.4: OpenAPI 인증키 신청
 </p>
 </div>
 <p>계정을 생성하고 이메일을 통해 이용자 등록을 한 후 로그인을 합니다. 그 후 [오픈API 이용현황]을 살펴보면 <strong>API Key</strong> 부분에 발급받은 Key가 있으며, 금일 몇번의 API를 요청했는지가 일일이용현황에 나옵니다. 하루 총 10,000번까지 데이터를 요청할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-313"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-312"></span>
 <img src="images/dart_api_status.png" alt="OpenAPI 이용현황" width="100%" />
 <p class="caption">
 그림 6.5: OpenAPI 이용현황
@@ -1260,7 +1259,7 @@ Sales (매출액)
 <span id="cb496-7"><a href="금융-데이터-수집하기-심화.html#cb496-7" aria-hidden="true" tabindex="-1"></a>codezip_data <span class="ot">=</span> <span class="fu">GET</span>(codezip_url)</span>
 <span id="cb496-8"><a href="금융-데이터-수집하기-심화.html#cb496-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(codezip_data)</span></code></pre></div>
 <pre><code>## Response [https://opendart.fss.or.kr/api/corpCode.xml?crtfc_key=b1a630e527b0e5ff5bd58ed81b49825017fa80b8]
-##   Date: 2021-11-05 07:07
+##   Date: 2021-11-05 07:43
 ##   Status: 200
 ##   Content-Type: application/x-msdownload
 ##   Size: 1.5 MB
@@ -1361,14 +1360,14 @@ Sales (매출액)
 <p>먼저 공시검색 API에 대한 이해를 위해 전체 종목의 공시를 수집하도록 하며, 해당 개발가이드는 아래 페이지에 나와 있습니다.</p>
 <p><a href="https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&amp;apiId=2019001" class="uri">https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS001&amp;apiId=2019001</a></p>
 <p>각종 요청인자를 통해 url을 생성 후 전송하여, 요청에 맞는 데이터를 받을 수 있습니다. 공시 검색에 해당하는 인자는 다음과 같습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-323"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-322"></span>
 <img src="images/dart_api_input.png" alt="OpenAPI 요청 인자 예시" width="100%" />
 <p class="caption">
 그림 6.6: OpenAPI 요청 인자 예시
 </p>
 </div>
 <p>페이지 하단에서 인자를 입력 후 [검색]을 누르면 각 인자에 맞게 생성된 url과 그 결과를 볼 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-324"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-323"></span>
 <img src="images/dart_api_exam.png" alt="OpenAPI 테스트 예시" width="100%" />
 <p class="caption">
 그림 6.7: OpenAPI 테스트 예시
@@ -1388,20 +1387,27 @@ Sales (매출액)
 <span id="cb512-2"><a href="금융-데이터-수집하기-심화.html#cb512-2" aria-hidden="true" tabindex="-1"></a>notice_data <span class="ot">=</span> notice_data[[<span class="st">&#39;list&#39;</span>]]</span>
 <span id="cb512-3"><a href="금융-데이터-수집하기-심화.html#cb512-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb512-4"><a href="금융-데이터-수집하기-심화.html#cb512-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(notice_data)</span></code></pre></div>
-<pre><code>##   corp_code    corp_name stock_code corp_cls                        report_nm
-## 1  00447928     네오티스     085910        K                   전환청구권행사
-## 2  00535481     에스와이     109610        K 주식등의대량보유상황보고서(일반)
-## 3  00303192     디에이피     066900        K 주식등의대량보유상황보고서(일반)
-## 4  00138321 신한금융투자     008670        E               증권발행실적보고서
-## 5  00158909     하나은행     004940        E               증권발행실적보고서
-## 6  00453929   메디포스트     078160        K         영업(잠정)실적(공정공시)
-##         rcept_no       flr_nm rcept_dt rm
-## 1 20211105900532     네오티스 20211105 코
-## 2 20211105000317       홍영돈 20211105   
-## 3 20211105000316     대명화학 20211105   
-## 4 20211105000315 신한금융투자 20211105   
-## 5 20211105000314     하나은행 20211105   
-## 6 20211105900508   메디포스트 20211105 코</code></pre>
+<pre><code>##   corp_code    corp_name stock_code corp_cls
+## 1  00111722 미래에셋증권     006800        Y
+## 2  00356361       LG화학     051910        Y
+## 3  00232821 클라우드에어     036170        K
+## 4  00363510       얍엑스     060230        K
+## 5  00186452   릭스솔루션     029480        K
+## 6  00107613 이수페타시스     007660        Y
+##                                report_nm       rcept_no       flr_nm rcept_dt
+## 1                     증권발행실적보고서 20211105000388 미래에셋증권 20211105
+## 2           기업설명회(IR)개최(안내공시) 20211105800629       LG화학 20211105
+## 3 임원ㆍ주요주주특정증권등소유상황보고서 20211105000385     케이앤커 20211105
+## 4             [기재정정]주주총회소집결의 20211105900534       얍엑스 20211105
+## 5       주식등의대량보유상황보고서(약식) 20211105000383   에스엘파워 20211105
+## 6                     증권발행실적보고서 20211105000382 이수페타시스 20211105
+##   rm
+## 1   
+## 2 유
+## 3   
+## 4 코
+## 5   
+## 6</code></pre>
 <p><code>fromJSON()</code> 함수를 통해 JSON 데이터를 받은 후 list를 확인해보면 우리가 원하는 공시정보, 즉 일주일 전부터 100건의 공시 정보가 다운로드 되어 있습니다.</p>
 </div>
 <div id="특정-기업의-공시-검색" class="section level4" number="6.3.3.2">
@@ -1451,7 +1457,7 @@ Sales (매출액)
 <pre><code>## [1] &quot;http://dart.fss.or.kr/dsaf001/main.do?rcpNo=20211103000100&quot;</code></pre>
 <p>dart 홈페이지의 공시에 해당하는 url과 첫번째 공시에 해당하는 공시번호를 합쳐주도록 합니다.</p>
 <p>위 url에 접속하여 해당 공시를 좀 더 자세하게 확인할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-331"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-330"></span>
 <img src="images/dart_api_web.png" alt="공시 정보의 확인" width="100%" />
 <p class="caption">
 그림 6.8: 공시 정보의 확인
@@ -1468,7 +1474,7 @@ Sales (매출액)
 <p>url 생성에 필요한 요청 인자는 다음과 같습니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-332">표 6.3: </span>배당에 관한 사항 주요 인자
+<span id="tab:unnamed-chunk-331">표 6.3: </span>배당에 관한 사항 주요 인자
 </caption>
 <thead>
 <tr>
@@ -1629,7 +1635,7 @@ reprt_code
 ## 5  20,085,548,000,000   9
 ## 6  87,260,662,000,000  11</code></pre>
 <p>연결재무제표와 재무상태표에 해당하는 주요 내용이 수집되었으며, 각 열에 해당하는 내용은 페이지의 개발가이드의 [응답 결과]에서 확인할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-337"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-336"></span>
 <img src="images/dart_single_result.png" alt="단일회사 주요계정 응답 결과" width="100%" />
 <p class="caption">
 그림 6.9: 단일회사 주요계정 응답 결과

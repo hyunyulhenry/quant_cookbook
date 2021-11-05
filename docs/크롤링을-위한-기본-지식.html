@@ -268,7 +268,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.9.1" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#tidyr-패키지를-이용한-데이터-모양-바꾸기"><i class="fa fa-check"></i><b>0.9.1</b> <code>tidyr</code> 패키지를 이용한 데이터 모양 바꾸기</a></li>
 <li class="chapter" data-level="0.9.2" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#dplyr-패키지를-이용한-데이터-변형하기"><i class="fa fa-check"></i><b>0.9.2</b> <code>dplyr</code> 패키지를 이용한 데이터 변형하기</a></li>
-<li class="chapter" data-level="0.9.3" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>0.9.3</b> <code>*_join()</code>: 데이터 합치기</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a>
@@ -540,7 +539,7 @@ div.csl-indent {
 <p>R에서 스크립트를 한글로 작성해 저장한 후 이를 다시 불러올 때, 혹은 한글로 된 데이터를 크롤링하면 오류가 뜨거나 읽을 수 없는 문자로 나타나는 경우가 종종 있습니다. 이는 한글 인코딩 때문에 발생하는 문제이며, 이러한 현상을 흔히 ‘인코딩이 깨졌다’라고 표현합니다. 인코딩이란 사람이 사용하는 언어를 컴퓨터가 사용하는 0과 1로
 변환하는 과정을 말하며, 이와 반대의 과정을 디코딩이라고 합니다.</p>
 <p>이렇듯 사람과 컴퓨터 간의 언어를 번역하기 위해 최초로 사용된 방식이 아스키(ASCII: American Standard Code for Information Interchange)입니다. 0부터 127까지 총 128개 바이트에 알파벳과 숫자, 자주 사용되는 특수문자 값을 부여하고, 문자가 입력되면 이에 대응되는 바이트가 저장됩니다. 그러나 아스키의 ‘American’이라는 이름에서 알 수 있듯이 이는 영어의 알파벳이 아닌 다른 문자를 표현하는 데 한계가 있으며, 이를 보완하기 위한 여러 방법이 나오게 되었습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-175"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-174"></span>
 <img src="images/ascii_code.jpg" alt="아스키 코드 표" width="100%" />
 <p class="caption">
 그림 2.1: 아스키 코드 표
@@ -552,7 +551,7 @@ div.csl-indent {
 <p>인코딩에 대한 전문적인 내용은 이 책의 범위를 넘어가며, 크롤링을 위해서는 한글을 인코딩하는 데 쓰이는 EUC-KR과 CP949, UTF-8 정도만 이해해도 충분합니다. 만일 ‘알’이라는 단어를 인코딩한다면 어떤 방법이 있을까요? 먼저 ‘알’이라는 문자 자체에 해당하는 코드를 부여해 나타내는 방법이 있습니다. 아니면 이를 구성하는 모음과 자음을 나누어 ㅇ, ㅏ, ㄹ 각각에 해당하는 코드를 부여하고 이를 조합할 수도 있습니다. 전자와 같이 완성된 문자 자체로 나타내는 방법을 완성형, 후자와 같이 각 자모로 나타내는 방법을 조합형이라고 합니다.</p>
 <p>한글 인코딩 중 완성형으로 가장 대표적인 방법은 EUC-KR입니다. EUC-KR은 현대 한글에서 많이 쓰이는 문자 2,350개에 번호를 붙인 방법입니다. 그러나 2,350개 문자로 모든 한글 자모의 조합을 표현하기 부족해, 이를 보완하고자 마이크로소프트가 도입한 방법이 CP949입니다. CP949는 11,720개 한글 문자에 번호를 붙인 방법으로 기존 EUC-KR보다 나타낼 수 있는 한글의 개수가 훨씬 많아졌습니다. 윈도우의 경우 기본 인코딩이 CP949로 되어 있습니다.</p>
 <p>조합형의 대표적 방법인 UTF-8은 모음과 자음 각각에 코드를 부여한 후 조합해 한글을 나타냅니다. 조합형은 한글뿐만 아니라 다양한 언어에 적용할 수 있다는 장점이 있어 전 세계 웹페이지의 대부분이 UTF-8로 만들어지고 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-176"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-175"></span>
 <img src="images/encoding_ratio.jpg" alt="웹페이지에서 사용되는 인코딩 비율" width="100%" />
 <p class="caption">
 그림 2.2: 웹페이지에서 사용되는 인코딩 비율
@@ -581,7 +580,7 @@ div.csl-indent {
 <div id="웹의-동작-방식" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> 웹의 동작 방식</h2>
 <p>크롤링은 웹사이트의 정보를 수집하는 과정입니다. 따라서 웹이 어떻게 동작하는지 이해할 필요가 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-177"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-176"></span>
 <img src="images/web_str.png" alt="웹 환경 구조" width="100%" />
 <p class="caption">
 그림 2.5: 웹 환경 구조
@@ -647,7 +646,7 @@ DELETE
 <p>HTTP 상태 코드는 100번대부터 500번대까지 있으며, 성공적으로 응답을 받을 시 200번 코드를 받게 됩니다. 각 코드에 대한 내용은 HTTP 상태 코드를 검색하면 확인할 수 있으며, 크롤링 과정에서 오류가 발생할 시 해당 코드를 통해 어떤 부분에서 오류가 발생했는지 확인이 가능합니다.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-178">표 2.2: </span>HTTP 상태 코드 그룹 별 내용
+<span id="tab:unnamed-chunk-177">표 2.2: </span>HTTP 상태 코드 그룹 별 내용
 </caption>
 <thead>
 <tr>
@@ -741,7 +740,7 @@ Server Error (서버 오류)
 <span id="cb326-8"><a href="크롤링을-위한-기본-지식.html#cb326-8" aria-hidden="true" tabindex="-1"></a>&lt;p<span class="op">&gt;</span> THis is first paragraph text &lt;/p<span class="op">&gt;</span></span>
 <span id="cb326-9"><a href="크롤링을-위한-기본-지식.html#cb326-9" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
 <span id="cb326-10"><a href="크롤링을-위한-기본-지식.html#cb326-10" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-180"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-179"></span>
 <img src="images/html_1.png" alt="HTML 기본 구조" width="50%" />
 <p class="caption">
 그림 2.6: HTML 기본 구조
@@ -751,7 +750,7 @@ Server Error (서버 오류)
 <div id="태그와-속성" class="section level3" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> 태그와 속성</h3>
 <p>HTML 코드는 태그와 속성, 내용으로 이루어져 있습니다. 크롤링한 데이터에서 특정 태그의 데이터만을 찾는 방법, 특정 속성의 데이터만을 찾는 방법, 뽑은 자료에서 내용만을 찾는 방법 등 내용을 찾는 방법이 모두 다르기 때문에 태그와 속성에 대해 좀 더 자세히 살펴보겠습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-181"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-180"></span>
 <img src="images/html_2.png" alt="HTML 구성 요소 분석" width="100%" />
 <p class="caption">
 그림 2.7: HTML 구성 요소 분석
@@ -774,7 +773,7 @@ Server Error (서버 오류)
 <span id="cb327-10"><a href="크롤링을-위한-기본-지식.html#cb327-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb327-11"><a href="크롤링을-위한-기본-지식.html#cb327-11" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
 <span id="cb327-12"><a href="크롤링을-위한-기본-지식.html#cb327-12" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-183"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-182"></span>
 <img src="images/html_3.png" alt="h 태그와 p 태그 예제" width="50%" />
 <p class="caption">
 그림 2.8: h 태그와 p 태그 예제
@@ -804,7 +803,7 @@ Server Error (서버 오류)
 <span id="cb328-18"><a href="크롤링을-위한-기본-지식.html#cb328-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb328-19"><a href="크롤링을-위한-기본-지식.html#cb328-19" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
 <span id="cb328-20"><a href="크롤링을-위한-기본-지식.html#cb328-20" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-185"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-184"></span>
 <img src="images/html_4.png" alt="리스트 관련 태그 예제" width="50%" />
 <p class="caption">
 그림 2.9: 리스트 관련 태그 예제
@@ -850,7 +849,7 @@ Server Error (서버 오류)
 <span id="cb329-33"><a href="크롤링을-위한-기본-지식.html#cb329-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb329-34"><a href="크롤링을-위한-기본-지식.html#cb329-34" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
 <span id="cb329-35"><a href="크롤링을-위한-기본-지식.html#cb329-35" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-187"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-186"></span>
 <img src="images/html_5.png" alt="table 태그 예제" width="50%" />
 <p class="caption">
 그림 2.10: table 태그 예제
@@ -880,7 +879,7 @@ Server Error (서버 오류)
 <span id="cb330-17"><a href="크롤링을-위한-기본-지식.html#cb330-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb330-18"><a href="크롤링을-위한-기본-지식.html#cb330-18" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
 <span id="cb330-19"><a href="크롤링을-위한-기본-지식.html#cb330-19" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-189"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-188"></span>
 <img src="images/html_6.png" alt="a 태그와 src 태그 예제" width="100%" />
 <p class="caption">
 그림 2.11: a 태그와 src 태그 예제
@@ -911,7 +910,7 @@ Server Error (서버 오류)
 <span id="cb331-18"><a href="크롤링을-위한-기본-지식.html#cb331-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb331-19"><a href="크롤링을-위한-기본-지식.html#cb331-19" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
 <span id="cb331-20"><a href="크롤링을-위한-기본-지식.html#cb331-20" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-191"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-190"></span>
 <img src="images/html_7.png" alt="div 태그 예제" width="50%" />
 <p class="caption">
 그림 2.12: div 태그 예제
@@ -937,7 +936,7 @@ Server Error (서버 오류)
 <span id="cb332-13"><a href="크롤링을-위한-기본-지식.html#cb332-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb332-14"><a href="크롤링을-위한-기본-지식.html#cb332-14" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
 <span id="cb332-15"><a href="크롤링을-위한-기본-지식.html#cb332-15" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-193"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-192"></span>
 <img src="images/html_8.png" alt="css 예제" width="50%" />
 <p class="caption">
 그림 2.13: css 예제
@@ -981,7 +980,7 @@ Server Error (서버 오류)
 <span id="cb333-31"><a href="크롤링을-위한-기본-지식.html#cb333-31" aria-hidden="true" tabindex="-1"></a>heavily weighted towards information technology companies&lt;/p<span class="op">&gt;</span></span>
 <span id="cb333-32"><a href="크롤링을-위한-기본-지식.html#cb333-32" aria-hidden="true" tabindex="-1"></a>&lt;div<span class="op">&gt;</span></span>
 <span id="cb333-33"><a href="크롤링을-위한-기본-지식.html#cb333-33" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-195"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-194"></span>
 <img src="images/html_9.png" alt="class 예제" width="100%" />
 <p class="caption">
 그림 2.14: class 예제
@@ -1009,7 +1008,7 @@ Server Error (서버 오류)
 <span id="cb334-18"><a href="크롤링을-위한-기본-지식.html#cb334-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb334-19"><a href="크롤링을-위한-기본-지식.html#cb334-19" aria-hidden="true" tabindex="-1"></a>&lt;/body<span class="op">&gt;</span></span>
 <span id="cb334-20"><a href="크롤링을-위한-기본-지식.html#cb334-20" aria-hidden="true" tabindex="-1"></a>&lt;/html<span class="op">&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-197"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-196"></span>
 <img src="images/html_10.png" alt="id 예제" width="50%" />
 <p class="caption">
 그림 2.15: id 예제

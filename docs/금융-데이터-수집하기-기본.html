@@ -268,7 +268,6 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.9.1" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#tidyr-패키지를-이용한-데이터-모양-바꾸기"><i class="fa fa-check"></i><b>0.9.1</b> <code>tidyr</code> 패키지를 이용한 데이터 모양 바꾸기</a></li>
 <li class="chapter" data-level="0.9.2" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#dplyr-패키지를-이용한-데이터-변형하기"><i class="fa fa-check"></i><b>0.9.2</b> <code>dplyr</code> 패키지를 이용한 데이터 변형하기</a></li>
-<li class="chapter" data-level="0.9.3" data-path="r-기초-배우기.html"><a href="r-기초-배우기.html#join-데이터-합치기"><i class="fa fa-check"></i><b>0.9.3</b> <code>*_join()</code>: 데이터 합치기</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="퀀트-투자의-심장-데이터와-프로그래밍.html"><a href="퀀트-투자의-심장-데이터와-프로그래밍.html"><i class="fa fa-check"></i><b>1</b> 퀀트 투자의 심장: 데이터와 프로그래밍</a>
@@ -549,7 +548,7 @@ div.csl-indent {
 <li><p>부여받은 OTP를 <strong><a href="http://data.krx.co.kr/" class="uri">http://data.krx.co.kr/</a></strong>에 제출하면 이에 해당하는 데이터(download.cmd)를 다운로드하게 됩니다.</p></li>
 </ol>
 <p>먼저 1번 단계를 살펴보겠습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-255"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-254"></span>
 <img src="images/crawl_practice_krx_sector.png" alt="OTP 생성 부분" width="100%" />
 <p class="caption">
 그림 5.1: OTP 생성 부분
@@ -557,7 +556,7 @@ div.csl-indent {
 </div>
 <p>General 항목의 Request URL의 앞부분이 원하는 항목을 제출할 주소입니다. Form Data에는 우리가 원하는 항목들이 적혀 있습니다. 이를 통해 POST 방식으로 데이터를 요청함을 알 수 있습니다.</p>
 <p>다음으로 2번 단계를 살펴보겠습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-256"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-255"></span>
 <img src="images/crawl_practice_krx_sector2.png" alt="OTP 제출 부분" width="100%" />
 <p class="caption">
 그림 5.2: OTP 제출 부분
@@ -647,7 +646,7 @@ div.csl-indent {
 <div id="개별종목-지표-크롤링" class="section level3" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> 개별종목 지표 크롤링</h3>
 <p>개별종목 데이터를 크롤링하는 방법은 위와 매우 유사하며, 요청하는 쿼리 값에만 차이가 있습니다. 개발자 도구 화면을 열고 [CSV] 버튼을 클릭해 어떠한 쿼리를 요청하는지 확인합니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-263"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-262"></span>
 <img src="images/crawl_practice_krx_ind.png" alt="개별지표 OTP 생성 부분" width="100%" />
 <p class="caption">
 그림 5.3: 개별지표 OTP 생성 부분
@@ -700,14 +699,14 @@ div.csl-indent {
 <h3><span class="header-section-number">5.1.3</span> 최근 영업일 기준 데이터 받기</h3>
 <p>위 예제의 쿼리 항목 중 date와 schdate 부분을 원하는 일자로 입력하면(예: 20190104) 해당일의 데이터를 다운로드할 수 있으며, 전 영업일 날짜를 입력하면 가장 최근의 데이터를 받을 수 있습니다. 그러나 매번 해당 항목을 입력하기는 번거로우므로 자동으로 반영되게 할 필요가 있습니다.</p>
 <p>네이버 금융의 [국내증시 → 증시자금동향]에는 이전 2영업일에 해당하는 날짜가 있으며, 자동으로 날짜가 업데이트되어 편리합니다. 따라서 해당 부분을 크롤링해 쿼리 항목에 사용할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-267"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-266"></span>
 <img src="images/crawl_practice_recentdate.png" alt="최근 영업일 부분" width="100%" />
 <p class="caption">
 그림 5.4: 최근 영업일 부분
 </p>
 </div>
 <p>크롤링하고자 하는 데이터가 하나거나 소수일때는 HTML 구조를 모두 분해한 후 데이터를 추출하는 것보다 Xpath를 이용하는 것이 훨씬 효율적입니다. Xpath란 XML 중 특정 값의 태그나 속성을 찾기 쉽게 만든 주소라 생각하면 됩니다. 예를 들어 R 프로그램이 저장된 곳을 윈도우 탐색기를 이용해 이용하면 C:\Program Files\R\R-3.4.2 형태의 주소를 보이는데 이것은 윈도우의 path 문법입니다. XML 역시 이와 동일한 개념의 Xpath가 있습니다. 웹페이지에서 Xpath를 찾는 법은 다음과 같습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-268"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-267"></span>
 <img src="images/crawl_practice_xpath.png" alt="Xpath 복사하기" width="100%" />
 <p class="caption">
 그림 5.5: Xpath 복사하기
@@ -965,7 +964,7 @@ div.csl-indent {
 <h2><span class="header-section-number">5.2</span> WICS 기준 섹터정보 크롤링</h2>
 <p>일반적으로 주식의 섹터를 나누는 기준은 MSCI와 S&amp;P가 개발한 GICS<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>를 가장 많이 사용합니다. 국내 종목의 GICS 기준 정보 역시 한국거래소에서 제공하고 있으나, 이는 독점적 지적재산으로 명시했기에 사용하는 데 무리가 있습니다. 그러나 지수제공업체인 와이즈인덱스<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>에서는 GICS와 비슷한 WICS 산업분류를 발표하고 있습니다. WICS를 크롤링해 필요한 정보를 수집해보겠습니다.</p>
 <p>먼저 웹페이지에 접속해 [Index → WISE SECTOR INDEX → WICS → 에너지]를 클릭합니다. 그 후 [Components] 탭을 클릭하면 해당 섹터의 구성종목을 확인할 수 있습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-280"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-279"></span>
 <img src="images/crawl_practice_wics.png" alt="WICS 기준 구성종목" width="100%" />
 <p class="caption">
 그림 5.6: WICS 기준 구성종목
@@ -986,7 +985,7 @@ div.csl-indent {
 <li>sec_cd=G10: 섹터 코드를 나타냅니다.</li>
 </ol>
 <p>이번엔 위 주소의 페이지를 열어보겠습니다.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-281"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-280"></span>
 <img src="images/crawl_practice_wics3.png" alt="WICS 데이터 페이지" width="100%" />
 <p class="caption">
 그림 5.8: WICS 데이터 페이지
