@@ -14,6 +14,7 @@ before_chapter_script: "_common.R"
 
 rmd_files: [
   "index.Rmd",
+  "rbasic.Rmd",
   "01-data_programming.Rmd",
   "02-information.Rmd",
   "03-api.Rmd",

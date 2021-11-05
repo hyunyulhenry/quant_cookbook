@@ -67,7 +67,7 @@ knitr::include_graphics('images/tiobe_index.png')
 source('package_trend.R')
 ```
 
-```{r echo = FALSE, message = FALSE}
+```{r echo = FALSE, eval = FALSE, message = FALSE}
 library(ggplot2)
 library(magrittr)
 

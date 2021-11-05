@@ -26,9 +26,13 @@ knitr::include_graphics('images/cover_2nd.jpg')
 
 <div style="background-color:#F7F7F7;padding: 20px 20px 20px 20px">
 
-**패스트캠퍼스에서 본 책의 내용을 바탕으로 강의가 진행중이니, 수강을 원하시는 분은 참조하시기 바랍니다. [강의 링크](https://bit.ly/2WMwLpF)**
+**제로베이스 본 책의 내용을 바탕으로 강의가 진행중이니, 수강을 원하시는 분은 참조하시기 바랍니다.**
+
+<a href="https://zero-base.co.kr/category_fin_camp/Quant_1book"  target="_blank"><img src = "images/zero_banner.png" alt = "강의 바로가기"></a>
 
 책 발간 이후 업데이트 내용은 다음과 같습니다.
+
+- 2021년 11월 5일: R을 사용하지 모르는 분들을 위해 [R 기초 배우기] 항목을 추가했습니다.
 
 - 2021년 5월 22일: 크롤링 관련 패키지가 업데이트 되면서, 테이블이 데이터프레임 형태가 아닌 티블 형태로 다운로드 됩니다. 이에 따라 6장 [재무제표 및 가치지표 크롤링] 부분을 수정하였습니다.
 
@@ -163,7 +167,7 @@ API를 통한 데이터 수집과 `getSymbols()` 함수의 사용 방법에 대�
 
 이 외에도 퀀트 투자 혹은 R을 이용한 투자 활용법 등의 내용은 저자의 블로그에 많은글들이 있으니 참조하기 바랍니다.
 
-- Henry’s Quantopia: http://henryquant.blogspot.com
+- Henry’s Quantopia: https://blog.naver.com/leebisu
 
 ## 종목과 관련된 유의사항 {-}
 
