@@ -1559,7 +1559,7 @@ flights %>% arrange(desc(dep_delay)) %>% head()
 
 정렬하고자 하는 열에 `desc()` 함수를 추가할 경우, 오름차순이 아닌 내림차순으로 정렬됩니다.
 
-### `*_join()`: 데이터 합치기
+#### `*_join()`: 데이터 합치기
 
 여러 테이블을 하나로 합치기 위해 `*_join()` 함수를 이용합니다. 합치는 방법은 그림 \@ref(fig:joinimg2)과 표 \@ref(tab:joindesc2) 같이 크게 네가지 종류가 있습니다.
 
@@ -1640,32 +1640,4 @@ flights_sml %>%
 
 ```
 https://dplyr.tidyverse.org/reference/across.html
-```
-
-#### `dplyr` 패키지의 함수와 SQL 구문 비교
-
-아래의 표는 `dplyr` 패키지의 함수와 SQL 구문을 비교한 표입니다. 이름부터 비슷한 것이 많으며 사용법 자체도 유사하기에, 둘 중 하나가 익숙하면 나머지도 자연스럽게 익숙해집니다.
-
-```{r echo = FALSE}
-tribble(
-  ~ '작업', ~ 'dplyr', ~ 'SQL',
-  '행 선택',  'df %>% <br> filter(x > n)', 'SELECT * <br>  FROM df <br> where x > n',
-  '정렬', 'df %>% <br>arrange(x)', 'SELECT * <br> FROM df <br> ORDER BY x',
-  '선택', 'df %>% <br> select(x)', 'SELECT x <br> FROM df',
-  '열 생성', 'df %>% <br> mutate(y = f(x))', 'SELECT f(x) as y <br> FROM df',
-  '요약 통계량 계산', 'df %>% <br> summarize(min(x))', 'SELECT min(x) <br> FROM df',
-  '유일값', 'df %>% <br> distinct(x)', 'SELECT DISTINCT(x) <br> FROM df',
-  '그룹', 'df %>% <br> group_by(x) %>% <br> summarize(n())',
-          'SELECT count(*) <br> FROM df <br> GROUP BY x',
-  '레프트 조인', 'a %>% <br> left_join(b, by = "x")', 'SELECT *<br>  FROM a JOIN y<br>  on a.x=b.x'
-) %>%
-  knitr::kable(
-  booktabs = TRUE,
-  align = "l",
-  caption = 'join 함수의 종류',
-  ormat = "html",
-  escape = FALSE
-) %>%
-  kableExtra::kable_styling(latex_options = c("striped", "hold_position"))
-  
 ```

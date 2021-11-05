@@ -330,3 +330,13 @@ return.portfolio-함수
 연도별-수익률
 승률-및-롤링-윈도우-값
 팩터-회귀분석-및-테이블로-나타내기
+fig:unnamed-chunk-2
+fig:unnamed-chunk-3
+fig:unnamed-chunk-4
+tab:unnamed-chunk-50
+tab:unnamed-chunk-51
+fig:unnamed-chunk-93
+fig:unnamed-chunk-94
+fig:unnamed-chunk-95
+tab:unnamed-chunk-130
+fig:unnamed-chunk-135
