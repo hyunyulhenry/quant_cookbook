@@ -16,7 +16,7 @@ github-repo: hyunyulhenry/quant_cookbook
 
 # Welcome {-}
 
-```{r echo = FALSE}
+```{r echo = FALSE, out.width = '50%'}
 knitr::include_graphics('images/cover_2nd.jpg')
 ```
 
