@@ -32,7 +32,11 @@ knitr::include_graphics('images/cover_2nd.jpg')
 
 책 발간 이후 업데이트 내용은 다음과 같습니다.
 
+- 2021년 12월 14일: 4장 [크롤링 이해하기]의 크롤링 예제 중 [기업공시채널에서 오늘의 공시 불러오기]에서 POST 부분의 url이 기존 *https://dev-kind.krx.co.kr/disclosure/todaydisclosure.do* 에서 *https://kind.krx.co.kr/disclosure/todaydisclosure.do* 로 변경되었습니다.
+
 - 2021년 11월 5일: R을 사용하지 모르는 분들을 위해 [R 기초 배우기] 항목을 추가했습니다.
+
+- <span style="color: red;">**2021년 11월 1일: 개정판 2쇄에 아래 내용이 모두 적용되었습니다.**</span>
 
 - 2021년 5월 22일: 크롤링 관련 패키지가 업데이트 되면서, 테이블이 데이터프레임 형태가 아닌 티블 형태로 다운로드 됩니다. 이에 따라 6장 [재무제표 및 가치지표 크롤링] 부분을 수정하였습니다.
 

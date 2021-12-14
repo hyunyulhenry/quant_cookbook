@@ -142,7 +142,7 @@ library(rvest)
 
 Sys.setlocale("LC_ALL", "English")
 
-url = 'https://dev-kind.krx.co.kr/disclosure/todaydisclosure.do'
+url = 'https://kind.krx.co.kr/disclosure/todaydisclosure.do'
 data = POST(url, body = 
               list(
                 method = 'searchTodayDisclosureSub',
@@ -182,7 +182,7 @@ POST 형식의 경우 body에 들어가는 쿼리 내용을 바꾸어 원하는 
 ```{r results="hide"}
 Sys.setlocale("LC_ALL", "English")
 
-url = 'https://dev-kind.krx.co.kr/disclosure/todaydisclosure.do'
+url = 'https://kind.krx.co.kr/disclosure/todaydisclosure.do'
 data = POST(url, body =
               list(
                 method = 'searchTodayDisclosureSub',
@@ -193,7 +193,7 @@ data = POST(url, body =
                 forward = 'todaydisclosure_sub',
                 chose = 'S',
                 todayFlag = 'Y',
-                selDate = '2020-09-18'
+                selDate = '2021-12-13'
                 ))
 
 data = read_html(data) %>%
